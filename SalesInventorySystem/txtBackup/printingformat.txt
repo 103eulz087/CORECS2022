@@ -1,0 +1,590 @@
+using DevExpress.XtraGrid.Views.Grid;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace SalesInventorySystem
+{
+    class Printing
+    {
+        public string txtorder;
+        
+       
+        public void printReceipt(string transcode,string ordercode,string total,string vatablesale,string vatexemptsale,string vat,string cash,string change,DataGridView gridview)
+        {
+          
+            String details = "";
+          
+            string filepath = "C:\\POSTransaction\\DailySales";
+            //details = "" + (Char)27 + (Char)112 + (Char)0 + (Char)25 + (Char)250 + "";
+            details = "" + (Char)27 + (Char)112 + (Char)0 + (Char)25 + "";
+            details += HelperFunction.PrintCenterText("SPIRE BUSINESS SOLUTIONS") + Environment.NewLine;
+            details += HelperFunction.PrintCenterText(Branch.getBranchAddress(Login.assignedBranch)) + Environment.NewLine;
+            details += HelperFunction.PrintCenterText("VAT REG TIN: 221-413-885-000") + Environment.NewLine;
+            details += HelperFunction.PrintCenterText("PRMT#: xxxxxxxxx-xxxxxxx-xxxxxxx") + Environment.NewLine;
+            details += HelperFunction.PrintCenterText("MIN#: xxxxxxxxx   S/N: 000000000") + Environment.NewLine + Environment.NewLine;
+
+            string petsa = DateTime.Now.ToShortDateString();
+            string oras = DateTime.Now.ToShortTimeString();
+           // details += HelperFunction.PrintRightToLeft(petsa, oras) + Environment.NewLine;
+            details += HelperFunction.PrintLeftRigthText(petsa, oras) + Environment.NewLine;
+            string trans = "Trans #: " + transcode;
+            string orderr = "Order #: " + ordercode;
+            details += HelperFunction.PrintLeftRigthText(trans, orderr) + Environment.NewLine + Environment.NewLine; 
+
+            for (int i = 0; i <= gridview.RowCount-1; i++)
+            {
+                details += HelperFunction.PrintLeftText(gridview.Rows[i].Cells["Particulars"].Value.ToString()) + Environment.NewLine;
+                string a = "  - " + gridview.Rows[i].Cells["Qty"].Value + " Kg" + " x"+ gridview.Rows[i].Cells["UnitPrice"].Value;
+                string b = " "+gridview.Rows[i].Cells["Amount"].Value;
+                details += HelperFunction.PrintLeftRigthText(a, b) + Environment.NewLine;
+            }
+            details += Environment.NewLine;
+
+            Label totalLabel = new Label();
+            totalLabel.Text = HelperFunction.PrintLeftText("TOTAL");
+            totalLabel.Font = new System.Drawing.Font("Tahoma", 10, System.Drawing.FontStyle.Bold);
+
+            Label totalChange = new Label();
+            totalChange.Text = HelperFunction.PrintLeftText("CHANGE");
+            totalChange.Font = new System.Drawing.Font("Tahoma", 10,System.Drawing.FontStyle.Bold);
+
+            string a1 = totalLabel.Text;
+            string a2 = totalChange.Text;
+            
+            details += HelperFunction.PrintRightToMiddle(totalLabel.Text, total) + Environment.NewLine;
+            details += HelperFunction.PrintLeftRigthText("CASH", cash) + Environment.NewLine;
+            details += HelperFunction.PrintRightToMiddle(a2, change) + Environment.NewLine ;
+            details += HelperFunction.createDottedLine() + Environment.NewLine;
+            //----------------------------------------------------------------------------------------------------
+            details += HelperFunction.PrintLeftRigthText("VAT Exempt Sales", vatexemptsale) + Environment.NewLine;
+            details += HelperFunction.PrintLeftRigthText("VATable Sales", vatablesale) + Environment.NewLine;
+            details += HelperFunction.PrintLeftRigthText("VAT Zero-Rated Sales", "0.00") + Environment.NewLine;
+            //details += HelperFunction.PrintRightToLeft("VAT", "0.00") + Environment.NewLine + Environment.NewLine;
+            details += HelperFunction.PrintLeftRigthText("VAT", vat) + Environment.NewLine + Environment.NewLine;
+
+            details +=  HelperFunction.PrintLeftText("Customer: "+PointOfSale.custname) + Environment.NewLine;
+            details +=  HelperFunction.PrintLeftText("Cashier: "+Login.Fullname) + Environment.NewLine + Environment.NewLine;
+
+            details +=  HelperFunction.PrintLeftText("SOLD TO : ___________________") + Environment.NewLine;
+            details +=  HelperFunction.PrintLeftText("ADDRESS : ___________________") + Environment.NewLine;
+            details += HelperFunction.PrintLeftText("TIN #   : ___________________") + Environment.NewLine + Environment.NewLine + Environment.NewLine;
+
+            details += HelperFunction.PrintCenterText("SPIRE IT SOLUTIONS INC.") + Environment.NewLine;
+            details += HelperFunction.PrintCenterText("3720 Woodland Heights Banawa Cebu City") + Environment.NewLine;
+            details += HelperFunction.PrintCenterText("VAT REG TIN: 221-413-885-000") + Environment.NewLine;
+            details += HelperFunction.PrintCenterText("D.Issue: 01/01/2016 Valid 12/12/2016") + Environment.NewLine;
+            details += HelperFunction.PrintCenterText("ACCR#: XXX-XXXXXXXX-XXXXXXXXX") + Environment.NewLine;
+            details += HelperFunction.PrintCenterText("THIS IS NOT AN OFFICIAL RECEIPT") + Environment.NewLine + Environment.NewLine;
+            details += HelperFunction.PrintCenterText("Thank You and Please Come Again!");
+            details += HelperFunction.LastPagePaper();
+
+
+         //   details += HelperFunction.PrintCenterText("THANK YOU CUM AGAIN") + Environment.NewLine + Environment.NewLine + Environment.NewLine + Environment.NewLine + Environment.NewLine;
+            //HelperFunction.LastPagePaper();
+            //string strrs = "" + (char)27 + "i";
+            //details += strrs;
+
+        //    details += Environment.NewLine + Environment.NewLine + Environment.NewLine;
+
+            if (!Directory.Exists(filepath))
+            {
+                Directory.CreateDirectory(filepath);
+            }
+            //StreamWriter writer = new StreamWriter(filepath + @"\rea.txt");
+            txtorder = "\\" + PointOfSale.refno + ".txt";
+            //txtorder = "\\10009.txt";
+            string filetoprint = filepath + txtorder;
+            StreamWriter writer = new StreamWriter(filepath + txtorder);
+            writer.Write(details);
+            writer.Close();
+
+            printTextFile(filetoprint);
+        }
+
+        public void printVoidSales(string transcode, string ordercode, string vatablesale, string vatexemptsale, string vat, DataGridView gridview)
+        {
+
+            String details = "";
+            string filepath = "C:\\POSTransaction\\VoidSales";
+            details = "" + (Char)27 + (Char)112 + (Char)0 + (Char)25 + "";
+            details += HelperFunction.PrintCenterText("SPIRE BUSINESS SOLUTIONS") + Environment.NewLine;
+            details += HelperFunction.PrintCenterText(Branch.getBranchAddress(Login.assignedBranch)) + Environment.NewLine;
+            details += HelperFunction.PrintCenterText("VAT REG TIN: 221-413-885-000") + Environment.NewLine;
+            details += HelperFunction.PrintCenterText("PRMT#: xxxxxxxxx-xxxxxxx-xxxxxxx") + Environment.NewLine;
+            details += HelperFunction.PrintCenterText("MIN#: xxxxxxxxx   S/N: 000000000") + Environment.NewLine + Environment.NewLine;
+
+            string petsa = DateTime.Now.ToShortDateString();
+            string oras = DateTime.Now.ToShortTimeString();
+
+            details += HelperFunction.PrintLeftRigthText(petsa, oras) + Environment.NewLine + Environment.NewLine;
+            string trans = "Trans #: " + transcode;
+            string orderr = "Order #: " + ordercode;
+            
+            for (int i = 0; i <= gridview.RowCount - 1; i++)
+            {
+                //details += HelperFunction.PrintLeftText(gridview.Rows[i].Cells["Particulars"].Value.ToString()) + Environment.NewLine;
+              //  string qty = gridview.Rows[i].Cells["Qty"].Value.ToString();
+                string a = gridview.Rows[i].Cells["QtySold"].Value + " Kg" + " x" + gridview.Rows[i].Cells["SellingPrice"].Value;
+                string b = gridview.Rows[i].Cells["TotalAmount"].Value.ToString();
+
+                details += HelperFunction.PrintLeftText(a) + Environment.NewLine;
+                details += HelperFunction.PrintLeftRigthText(gridview.Rows[i].Cells["Description"].Value.ToString(),b) + Environment.NewLine;
+                details += HelperFunction.PrintCenterText("VOID") + Environment.NewLine;
+            }
+
+            details += Environment.NewLine;
+
+            Label totalChange = new Label();
+            totalChange.Text = HelperFunction.PrintLeftText("CASH");
+            totalChange.Font = new System.Drawing.Font("Tahoma", 10, System.Drawing.FontStyle.Bold);
+
+            string a2 = totalChange.Text;
+
+            //details += HelperFunction.PrintRightToMiddle(totalLabel.Text, total) + Environment.NewLine;
+            details += HelperFunction.createDottedLine() + Environment.NewLine;
+            //----------------------------------------------------------------------------------------------------
+            //details += HelperFunction.PrintLeftRigthText("VAT Exempt Sales", total) + Environment.NewLine;
+            details += HelperFunction.PrintLeftRigthText("VATable Sale", vatablesale) + Environment.NewLine;
+            details += HelperFunction.PrintLeftRigthText("VAT Exempt Sale", vatexemptsale) + Environment.NewLine;
+            details += HelperFunction.PrintLeftRigthText("VAT", vat) + Environment.NewLine + Environment.NewLine;
+
+            details += HelperFunction.PrintLeftRigthText("O.R No.", orderr) + Environment.NewLine;
+            details += HelperFunction.PrintCenterText(Login.Fullname) + Environment.NewLine;
+            
+            details += HelperFunction.PrintLeftText("Customer Name: ") + Environment.NewLine;
+            details += HelperFunction.PrintLeftText("Address: ") + Environment.NewLine;
+            details += HelperFunction.PrintLeftText("Business Style: ") + Environment.NewLine;
+            details += HelperFunction.PrintLeftText("TIN: ") + Environment.NewLine;
+            details += HelperFunction.PrintLeftText("Signature:_________________ ") + Environment.NewLine;
+
+            details += HelperFunction.PrintCenterText("SPIRE IT SOLUTIONS INC.") + Environment.NewLine;
+            details += HelperFunction.PrintCenterText("3720 Woodland Heights Banawa Cebu City") + Environment.NewLine;
+            details += HelperFunction.PrintCenterText("VAT REG TIN: 221-413-885-000") + Environment.NewLine;
+            details += HelperFunction.PrintCenterText("D.Issue: 01/01/2016 Valid 12/12/2016") + Environment.NewLine;
+            details += HelperFunction.PrintCenterText("ACCR#: XXX-XXXXXXXX-XXXXXXXXX") + Environment.NewLine;
+            details += HelperFunction.PrintCenterText("THIS IS NOT AN OFFICIAL RECEIPT") + Environment.NewLine + Environment.NewLine;
+            details += HelperFunction.PrintCenterText("Thank You and Please Come Again!");
+            details += HelperFunction.LastPagePaper();
+
+            if (!Directory.Exists(filepath))
+            {
+                Directory.CreateDirectory(filepath);
+            }
+            //StreamWriter writer = new StreamWriter(filepath + @"\rea.txt");
+            txtorder = "\\" + ordercode + ".txt";
+            //txtorder = "\\10009.txt";
+            string filetoprint = filepath + txtorder;
+            StreamWriter writer = new StreamWriter(filepath + txtorder);
+            writer.Write(details);
+            writer.Close();
+
+            printTextFile(filetoprint);
+        }
+
+        public void printRefundSales(string transcode, string ordercode, string vatablesale, string vatexemptsale, string vat, DataGridView gridview)
+        {
+
+            String details = "";
+            string filepath = "C:\\POSTransaction\\RefundSales";
+            details = "" + (Char)27 + (Char)112 + (Char)0 + (Char)25 + "";
+            details += HelperFunction.PrintCenterText("SPIRE BUSINESS SOLUTIONS") + Environment.NewLine;
+            details += HelperFunction.PrintCenterText(Branch.getBranchAddress(Login.assignedBranch)) + Environment.NewLine;
+            details += HelperFunction.PrintCenterText("VAT REG TIN: 221-413-885-000") + Environment.NewLine;
+            details += HelperFunction.PrintCenterText("PRMT#: xxxxxxxxx-xxxxxxx-xxxxxxx") + Environment.NewLine;
+            details += HelperFunction.PrintCenterText("MIN#: xxxxxxxxx   S/N: 000000000") + Environment.NewLine + Environment.NewLine;
+
+            string petsa = DateTime.Now.ToShortDateString();
+            string oras = DateTime.Now.ToShortTimeString();
+
+            details += HelperFunction.PrintLeftRigthText(petsa, oras) + Environment.NewLine + Environment.NewLine;
+            string trans = "Trans #: " + transcode;
+            string orderr = "Order #: " + ordercode;
+
+            for (int i = 0; i <= gridview.RowCount - 1; i++)
+            {
+                //details += HelperFunction.PrintLeftText(gridview.Rows[i].Cells["Particulars"].Value.ToString()) + Environment.NewLine;
+                //  string qty = gridview.Rows[i].Cells["Qty"].Value.ToString();
+                string a = gridview.Rows[i].Cells["QtySold"].Value + " Kg" + " x" + gridview.Rows[i].Cells["SellingPrice"].Value;
+                string b = gridview.Rows[i].Cells["TotalAmount"].Value.ToString();
+
+                details += HelperFunction.PrintLeftText(a) + Environment.NewLine;
+                details += HelperFunction.PrintLeftRigthText(gridview.Rows[i].Cells["Description"].Value.ToString(), b) + Environment.NewLine;
+                details += HelperFunction.PrintCenterText("REFUND") + Environment.NewLine;
+            }
+
+            details += Environment.NewLine;
+
+            Label totalChange = new Label();
+            totalChange.Text = HelperFunction.PrintLeftText("CASH");
+            totalChange.Font = new System.Drawing.Font("Tahoma", 10, System.Drawing.FontStyle.Bold);
+
+            string a2 = totalChange.Text;
+
+            //details += HelperFunction.PrintRightToMiddle(totalLabel.Text, total) + Environment.NewLine;
+            details += HelperFunction.createDottedLine() + Environment.NewLine;
+            //----------------------------------------------------------------------------------------------------
+            //details += HelperFunction.PrintLeftRigthText("VAT Exempt Sales", total) + Environment.NewLine;
+            details += HelperFunction.PrintLeftRigthText("VATable Sale", vatablesale) + Environment.NewLine;
+            details += HelperFunction.PrintLeftRigthText("VAT Exempt Sale", vatexemptsale) + Environment.NewLine;
+            details += HelperFunction.PrintLeftRigthText("VAT", vat) + Environment.NewLine + Environment.NewLine;
+
+            details += HelperFunction.PrintLeftRigthText("O.R No.", orderr) + Environment.NewLine;
+            details += HelperFunction.PrintCenterText(Login.Fullname) + Environment.NewLine;
+
+            details += HelperFunction.PrintLeftText("Customer Name: ") + Environment.NewLine;
+            details += HelperFunction.PrintLeftText("Address: ") + Environment.NewLine;
+            details += HelperFunction.PrintLeftText("Business Style: ") + Environment.NewLine;
+            details += HelperFunction.PrintLeftText("TIN: ") + Environment.NewLine;
+            details += HelperFunction.PrintLeftText("Signature:_________________ ") + Environment.NewLine;
+
+            details += HelperFunction.PrintCenterText("SPIRE IT SOLUTIONS INC.") + Environment.NewLine;
+            details += HelperFunction.PrintCenterText("3720 Woodland Heights Banawa Cebu City") + Environment.NewLine;
+            details += HelperFunction.PrintCenterText("VAT REG TIN: 221-413-885-000") + Environment.NewLine;
+            details += HelperFunction.PrintCenterText("D.Issue: 01/01/2016 Valid 12/12/2016") + Environment.NewLine;
+            details += HelperFunction.PrintCenterText("ACCR#: XXX-XXXXXXXX-XXXXXXXXX") + Environment.NewLine;
+            details += HelperFunction.PrintCenterText("THIS IS NOT AN OFFICIAL RECEIPT") + Environment.NewLine + Environment.NewLine;
+            details += HelperFunction.PrintCenterText("Thank You and Please Come Again!");
+            details += HelperFunction.LastPagePaper();
+
+            if (!Directory.Exists(filepath))
+            {
+                Directory.CreateDirectory(filepath);
+            }
+            //StreamWriter writer = new StreamWriter(filepath + @"\rea.txt");
+            txtorder = "\\" + ordercode + ".txt";
+            //txtorder = "\\10009.txt";
+            string filetoprint = filepath + txtorder;
+            StreamWriter writer = new StreamWriter(filepath + txtorder);
+            writer.Write(details);
+            writer.Close();
+
+            printTextFile(filetoprint);
+        }
+
+        public void printReceiptDailySales(string transcode, string ordercode, string total, string cash, string change, DataGridView gridview)
+        {
+
+            String details = "";
+            string filepath = "C:\\POSTransaction\\DailySales";
+            details = "" + (Char)27 + (Char)112 + (Char)0 + (Char)25 + "";
+            details += HelperFunction.PrintCenterText("SPIRE BUSINESS SOLUTIONS") + Environment.NewLine;
+            details += HelperFunction.PrintCenterText(Branch.getBranchAddress(Login.assignedBranch)) + Environment.NewLine;
+            details += HelperFunction.PrintCenterText("VAT REG TIN: 221-413-885-000") + Environment.NewLine;
+            details += HelperFunction.PrintCenterText("PRMT#: xxxxxxxxx-xxxxxxx-xxxxxxx") + Environment.NewLine;
+            details += HelperFunction.PrintCenterText("MIN#: xxxxxxxxx   S/N: 000000000") + Environment.NewLine + Environment.NewLine;
+
+            string petsa = DateTime.Now.ToShortDateString();
+            string oras = DateTime.Now.ToShortTimeString();
+            
+            details += HelperFunction.PrintLeftRigthText(petsa, oras) + Environment.NewLine;
+            string trans = "Trans #: " + transcode;
+            string orderr = "Order #: " + ordercode;
+            details += HelperFunction.PrintLeftRigthText(trans, orderr) + Environment.NewLine + Environment.NewLine;
+           
+            for (int i = 0; i <= gridview.RowCount - 1; i++)
+            {
+                details += HelperFunction.PrintLeftText(gridview.Rows[i].Cells["Particulars"].Value.ToString()) + Environment.NewLine;
+                string a = "  - " + gridview.Rows[i].Cells["Qty"].Value + " Kg" + " x" + gridview.Rows[i].Cells["UnitPrice"].Value;
+                string b = " " + gridview.Rows[i].Cells["Amount"].Value;
+                details += HelperFunction.PrintLeftRigthText(a, b) + Environment.NewLine;
+            }
+
+            details += Environment.NewLine;
+           
+            Label totalLabel = new Label();
+            totalLabel.Text = HelperFunction.PrintLeftText("TOTAL");
+            totalLabel.Font = new System.Drawing.Font("Tahoma", 10, System.Drawing.FontStyle.Bold);
+
+            Label totalChange = new Label();
+            totalChange.Text = HelperFunction.PrintLeftText("CHANGE");
+            totalChange.Font = new System.Drawing.Font("Tahoma", 10, System.Drawing.FontStyle.Bold);
+
+            string a1 = totalLabel.Text;
+            string a2 = totalChange.Text;
+
+            details += HelperFunction.PrintRightToMiddle(totalLabel.Text, total) + Environment.NewLine;
+            details += HelperFunction.PrintLeftRigthText("CASH", cash) + Environment.NewLine;
+            details += HelperFunction.PrintRightToMiddle(a2, change) + Environment.NewLine;
+            details += HelperFunction.createDottedLine() + Environment.NewLine;
+            //----------------------------------------------------------------------------------------------------
+            details += HelperFunction.PrintLeftRigthText("VAT Exempt Sales", total) + Environment.NewLine;
+            details += HelperFunction.PrintLeftRigthText("VATable Sales", "0.00") + Environment.NewLine;
+            details += HelperFunction.PrintLeftRigthText("VAT Zero-Rated Sales", "0.00") + Environment.NewLine;
+            details += HelperFunction.PrintLeftRigthText("VAT", "0.00") + Environment.NewLine + Environment.NewLine;
+
+            details += HelperFunction.PrintLeftText("Customer: Eulz Avancena") + Environment.NewLine;
+            details += HelperFunction.PrintLeftText("Cashier: Paulo Pascual") + Environment.NewLine + Environment.NewLine;
+
+            details += HelperFunction.PrintLeftText("SOLD TO : ___________________") + Environment.NewLine;
+            details += HelperFunction.PrintLeftText("ADDRESS : ___________________") + Environment.NewLine;
+            details += HelperFunction.PrintLeftText("TIN #   : ___________________") + Environment.NewLine + Environment.NewLine + Environment.NewLine;
+
+            details += HelperFunction.PrintCenterText("SPIRE IT SOLUTIONS INC.") + Environment.NewLine;
+            details += HelperFunction.PrintCenterText("3720 Woodland Heights Banawa Cebu City") + Environment.NewLine;
+            details += HelperFunction.PrintCenterText("VAT REG TIN: 221-413-885-000") + Environment.NewLine;
+            details += HelperFunction.PrintCenterText("D.Issue: 01/01/2016 Valid 12/12/2016") + Environment.NewLine;
+            details += HelperFunction.PrintCenterText("ACCR#: XXX-XXXXXXXX-XXXXXXXXX") + Environment.NewLine;
+            details += HelperFunction.PrintCenterText("THIS IS NOT AN OFFICIAL RECEIPT") + Environment.NewLine + Environment.NewLine;
+            details += HelperFunction.PrintCenterText("Thank You and Please Come Again!");
+            details += HelperFunction.LastPagePaper();
+
+            if (!Directory.Exists(filepath))
+            {
+                Directory.CreateDirectory(filepath);
+            }
+            //StreamWriter writer = new StreamWriter(filepath + @"\rea.txt");
+            txtorder = "\\" + PointOfSale.refno + ".txt";
+            //txtorder = "\\10009.txt";
+            string filetoprint = filepath + txtorder;
+            StreamWriter writer = new StreamWriter(filepath + txtorder);
+            writer.Write(details);
+            writer.Close();
+
+            printTextFile(filetoprint);
+        }
+
+        public void printXReadReportGroupSales(string totalkilos, string totalamount, DataGridView gridview,string date1,string date2)
+        {
+
+            String details = "";
+            string filepath = "C:\\POSTransaction\\GroupSales";
+            details = "" + (Char)27 + (Char)112 + (Char)0 + (Char)25 + "";
+            details += HelperFunction.PrintCenterText("SPIRE BUSINESS SOLUTIONS") + Environment.NewLine;
+            details += HelperFunction.PrintCenterText(Branch.getBranchAddress(Login.assignedBranch)) + Environment.NewLine;
+            details += HelperFunction.PrintCenterText("VAT REG TIN: 221-413-885-000") + Environment.NewLine;
+            details += HelperFunction.PrintCenterText("PRMT#: xxxxxxxxx-xxxxxxx-xxxxxxx") + Environment.NewLine;
+            details += HelperFunction.PrintCenterText("MIN#: xxxxxxxxx   S/N: 000000000") + Environment.NewLine + Environment.NewLine;
+            details += HelperFunction.PrintLeftText("X-Read Report ")+ date1 +" -> "+ date2 + Environment.NewLine;
+            details += HelperFunction.PrintLeftText("Group Sales") + Environment.NewLine;
+            details += HelperFunction.createDottedLine() + Environment.NewLine;
+            string petsa = DateTime.Now.ToShortDateString();
+            string oras = DateTime.Now.ToShortTimeString();
+
+            details += HelperFunction.PrintLeftRigthText(petsa, oras) + Environment.NewLine;
+            //string trans = "Trans #: " + transcode;
+            //string orderr = "Order #: " + ordercode;
+            //details += HelperFunction.PrintLeftRigthText(trans, orderr) + Environment.NewLine + Environment.NewLine;
+           string mark = gridview.Rows[gridview.CurrentCellAddress.Y].Cells["Description"].Value.ToString();
+            for (int i = 0; i <= gridview.RowCount - 1; i++)
+            {
+                details += HelperFunction.PrintLeftText(gridview.Rows[i].Cells["Description"].Value.ToString()) + Environment.NewLine;
+                string a = "  - " + gridview.Rows[i].Cells["TotalKilos"].Value + " Kg";    
+                string b = " " + gridview.Rows[i].Cells["TotalAmount"].Value;
+                double b1 = Convert.ToDouble(gridview.Rows[i].Cells["TotalAmount"].Value);
+                details += HelperFunction.PrintLeftRigthText(a, b1.ToString()) + Environment.NewLine;
+            }
+
+            details += Environment.NewLine;
+            details += HelperFunction.createDottedLine() + Environment.NewLine;
+            //details += HelperFunction.PrinttoRight("1000.00");
+            Label totalLabel = new Label();
+            totalLabel.Text = HelperFunction.PrintLeftText("TOTAL");
+            totalLabel.Font = new System.Drawing.Font("Tahoma", 10, System.Drawing.FontStyle.Bold);
+
+            string a1 = totalLabel.Text;
+         
+            details += HelperFunction.PrintLeftText(totalLabel.Text) + Environment.NewLine;
+
+            details += HelperFunction.PrintLeftRigthText(totalkilos, totalamount) + Environment.NewLine;
+            details += HelperFunction.createDottedLine() + Environment.NewLine;
+            
+            //----------------------------------------------------------------------------------------------------
+            //    If (Not System.IO.Directory.Exists(salefilelocation)) Then
+            //    System.IO.Directory.CreateDirectory(salefilelocation)
+            //End If
+
+            //If System.IO.File.Exists(salefilelocation & "\" & batchcode & ".txt") = True Then
+            //    System.IO.File.Delete(salefilelocation & "\" & batchcode & ".txt")
+            //End If
+
+            if (!Directory.Exists(filepath))
+            {
+                Directory.CreateDirectory(filepath);
+            }
+            DateTime dt = DateTime.Now;
+            txtorder = "\\" + String.Format("{0:MM-dd-yyyy}", dt) + ".txt";
+            string filetoprint = filepath + txtorder;
+            StreamWriter writer = new StreamWriter(filepath + txtorder);
+            writer.Write(details);
+            writer.Close();
+
+            printTextFile(filetoprint);
+        }
+
+        public void printXReadReportFullTransactionSales(string totalvat, string totalamount, DataGridView gridview, string date1, string date2)
+        {
+
+            String details = "";
+            string filepath = "C:\\POSTransaction\\FullTransaction\\"+Login.assignedBranch+"\\"+Login.Fullname;
+            details = "" + (Char)27 + (Char)112 + (Char)0 + (Char)25 + "";
+            details += HelperFunction.PrintCenterText("SPIRE BUSINESS SOLUTIONS") + Environment.NewLine;
+            details += HelperFunction.PrintCenterText(Branch.getBranchAddress(Login.assignedBranch)) + Environment.NewLine;
+            details += HelperFunction.PrintCenterText("VAT REG TIN: 221-413-885-000") + Environment.NewLine;
+            details += HelperFunction.PrintCenterText("PRMT#: xxxxxxxxx-xxxxxxx-xxxxxxx") + Environment.NewLine;
+            details += HelperFunction.PrintCenterText("MIN#: xxxxxxxxx   S/N: 000000000") + Environment.NewLine + Environment.NewLine;
+            details += HelperFunction.PrintLeftText("X-Read Report ") + date1 + " -> " + date2 + Environment.NewLine;
+            details += HelperFunction.PrintLeftText("Auto Full Transaction") + Environment.NewLine;
+            details += HelperFunction.createDottedLine() + Environment.NewLine;
+            string petsa = DateTime.Now.ToShortDateString();
+            string oras = DateTime.Now.ToShortTimeString();
+
+            //details += HelperFunction.PrintLeftRigthText(petsa, oras) + Environment.NewLine;
+            //string trans = "Trans #: " + transcode;
+            //string orderr = "Order #: " + ordercode;
+            //details += HelperFunction.PrintLeftRigthText(trans, orderr) + Environment.NewLine + Environment.NewLine;
+            //string mark = gridview.Rows[gridview.CurrentCellAddress.Y].Cells["Description"].Value.ToString();
+            string strLabel = "";
+            double amount = 0.0;
+            for (int i = 0; i <= gridview.RowCount - 1; i++)
+            {  
+                string vattype = gridview.Rows[i].Cells["isVat"].Value.ToString();
+                if (Convert.ToBoolean(vattype) == true)
+                {
+                    amount = Math.Round(Convert.ToDouble(gridview.Rows[i].Cells["TotalAmount"].Value.ToString()),2);
+                    strLabel = "Vatable Sale";
+                }
+                else
+                {
+                    amount = Math.Round(Convert.ToDouble(gridview.Rows[i].Cells["TotalAmount"].Value.ToString()),2);
+                    strLabel = "Vat Exempt Sale";
+                }
+                details += HelperFunction.PrintLeftRigthText(strLabel, amount.ToString()) + Environment.NewLine;
+            }
+
+            details += Environment.NewLine;
+            details += HelperFunction.createDottedLine() + Environment.NewLine;
+            //   details += HelperFunction.PrinttoRight("1000.00");
+
+            double totalcashamount = 0.0;
+            details += HelperFunction.PrintLeftRigthText("TOTAL", totalamount) + Environment.NewLine;
+            details += HelperFunction.createDottedLine() + Environment.NewLine;
+            details += HelperFunction.PrintLeftRigthText("12% VAT", totalvat) + Environment.NewLine;
+            details += HelperFunction.createDottedLine() + Environment.NewLine;
+            details += HelperFunction.PrintLeftRigthText("TAX TOTAL", totalvat) + Environment.NewLine;
+            details += HelperFunction.createDottedLine() + Environment.NewLine;
+            details += HelperFunction.PrintLeftText("SALES TOTAL") + Environment.NewLine;
+            details += HelperFunction.PrintLeftText("CASH") + Environment.NewLine;
+            totalcashamount = Convert.ToDouble(totalvat) + Convert.ToDouble(totalamount);
+            details += HelperFunction.PrintLeftRigthText("805", totalcashamount.ToString()) + Environment.NewLine;
+            //----------------------------------------------------------------------------------------------------
+            //    If (Not System.IO.Directory.Exists(salefilelocation)) Then
+            //    System.IO.Directory.CreateDirectory(salefilelocation)
+            //End If
+
+            //If System.IO.File.Exists(salefilelocation & "\" & batchcode & ".txt") = True Then
+            //    System.IO.File.Delete(salefilelocation & "\" & batchcode & ".txt")
+            //End If
+
+            if (!Directory.Exists(filepath))
+            {
+                Directory.CreateDirectory(filepath);
+            }
+            DateTime dt = DateTime.Now;
+            txtorder = "\\" + String.Format("{0:MM-dd-yyyy}", dt) + ".txt";
+            string filetoprint = filepath + txtorder;
+            StreamWriter writer = new StreamWriter(filepath + txtorder);
+            writer.Write(details);
+            writer.Close();
+
+            printTextFile(filetoprint);
+        }
+
+        public void printXReadReportRefundSales(string totalvat, string totalamount, DataGridView gridview, string date1, string date2)
+        {
+
+            String details = "";
+            string filepath = "C:\\POSTransaction\\Refund\\" + Login.assignedBranch + "\\" + Login.Fullname;
+            details = "" + (Char)27 + (Char)112 + (Char)0 + (Char)25 + "";
+            details += HelperFunction.PrintCenterText("SPIRE BUSINESS SOLUTIONS") + Environment.NewLine;
+            details += HelperFunction.PrintCenterText(Branch.getBranchAddress(Login.assignedBranch)) + Environment.NewLine;
+            details += HelperFunction.PrintCenterText("VAT REG TIN: 221-413-885-000") + Environment.NewLine;
+            details += HelperFunction.PrintCenterText("PRMT#: xxxxxxxxx-xxxxxxx-xxxxxxx") + Environment.NewLine;
+            details += HelperFunction.PrintCenterText("MIN#: xxxxxxxxx   S/N: 000000000") + Environment.NewLine + Environment.NewLine;
+            details += HelperFunction.PrintLeftText("X-Read Report ") + date1 + " -> " + date2 + Environment.NewLine;
+           // details += HelperFunction.PrintLeftText("Auto Full Transaction") + Environment.NewLine;
+            details += HelperFunction.createDottedLine() + Environment.NewLine;
+            string petsa = DateTime.Now.ToShortDateString();
+            string oras = DateTime.Now.ToShortTimeString();
+
+            //details += HelperFunction.PrintLeftRigthText(petsa, oras) + Environment.NewLine;
+            //string trans = "Trans #: " + transcode;
+            //string orderr = "Order #: " + ordercode;
+            //details += HelperFunction.PrintLeftRigthText(trans, orderr) + Environment.NewLine + Environment.NewLine;
+            //string mark = gridview.Rows[gridview.CurrentCellAddress.Y].Cells["Description"].Value.ToString();
+
+            for (int i = 0; i <= gridview.RowCount - 1; i++)
+            {
+                //details += HelperFunction.PrintLeftText(gridview.Rows[i].Cells["Description"].Value.ToString()) + Environment.NewLine;
+                // string vatable = "  - " + gridview.Rows[i].Cells["TotalKilos"].Value + " Kg";
+                string vatexempt = " " + gridview.Rows[i].Cells["TotalAmount"].Value;
+                string vardesc = gridview.Rows[i].Cells["TotalAmount"].Value.ToString();
+                string vattype = gridview.Rows[i].Cells["isVat"].Value.ToString();
+                //details += HelperFunction.PrintLeftRigthText("Vatable Sale", vatable) + Environment.NewLine;
+                details += HelperFunction.PrintLeftRigthText(vattype, vatexempt) + Environment.NewLine;
+            }
+
+            details += Environment.NewLine;
+            details += HelperFunction.createDottedLine() + Environment.NewLine;
+            //   details += HelperFunction.PrinttoRight("1000.00");
+
+            double totalcashamount = 0.0;
+            details += HelperFunction.PrintLeftRigthText("TOTAL", totalamount) + Environment.NewLine;
+            details += HelperFunction.createDottedLine() + Environment.NewLine;
+            details += HelperFunction.PrintLeftRigthText("12% VAT", totalvat) + Environment.NewLine;
+            details += HelperFunction.createDottedLine() + Environment.NewLine;
+            details += HelperFunction.PrintLeftRigthText("TAX TOTAL", totalvat) + Environment.NewLine;
+            details += HelperFunction.createDottedLine() + Environment.NewLine;
+            details += HelperFunction.PrintLeftText("SALES TOTAL") + Environment.NewLine;
+            details += HelperFunction.PrintLeftText("CASH") + Environment.NewLine;
+            totalcashamount = Convert.ToDouble(totalvat) + Convert.ToDouble(totalamount);
+            details += HelperFunction.PrintLeftRigthText("805", totalcashamount.ToString()) + Environment.NewLine;
+            //----------------------------------------------------------------------------------------------------
+            //    If (Not System.IO.Directory.Exists(salefilelocation)) Then
+            //    System.IO.Directory.CreateDirectory(salefilelocation)
+            //End If
+
+            //If System.IO.File.Exists(salefilelocation & "\" & batchcode & ".txt") = True Then
+            //    System.IO.File.Delete(salefilelocation & "\" & batchcode & ".txt")
+            //End If
+
+            if (!Directory.Exists(filepath))
+            {
+                Directory.CreateDirectory(filepath);
+            }
+            DateTime dt = DateTime.Now;
+            txtorder = "\\" + String.Format("{0:MM-dd-yyyy}", dt) + ".txt";
+            string filetoprint = filepath + txtorder;
+            StreamWriter writer = new StreamWriter(filepath + txtorder);
+            writer.Write(details);
+            writer.Close();
+
+            printTextFile(filetoprint);
+        }
+
+        public void rePrintReceipt(string orderno)
+        {
+            string filepath = "C:\\POSTransaction\\Refund\\" + Login.assignedBranch + "\\" + Login.Fullname;
+        }
+
+        public void printTextFile(string location)
+        {
+            if (location != "")
+            {
+                //string command = "/C print /d:LPT1: '"+location+"'\\mafi.txt";
+                string command = "/C print /d:LPT1: " + location + " ";
+                ProcessStartInfo apps = new System.Diagnostics.ProcessStartInfo("cmd.exe", command);
+                // Process myprocesses = new Process();
+                apps.WindowStyle = ProcessWindowStyle.Hidden;
+                Process myprocesses = Process.Start(apps);
+                myprocesses.WaitForExit();
+                myprocesses.Close();
+            }
+        }
+    }
+}
