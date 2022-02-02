@@ -2817,6 +2817,12 @@
     <Compile Include="zzzDemozzz\MainDemo.Designer.cs">
       <DependentUpon>MainDemo.cs</DependentUpon>
     </Compile>
+    <Compile Include="zzzDemozzz\TestLoan.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="zzzDemozzz\TestLoan.Designer.cs">
+      <DependentUpon>TestLoan.cs</DependentUpon>
+    </Compile>
     <Compile Include="zzzDemozzz\TicketSweepstakes.cs">
       <SubType>Component</SubType>
     </Compile>
