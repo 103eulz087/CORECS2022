@@ -4105,6 +4105,9 @@
     <EmbeddedResource Include="zzzDemozzz\MainDemo.resx">
       <DependentUpon>MainDemo.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="zzzDemozzz\TestLoan.resx">
+      <DependentUpon>TestLoan.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="zzzDemozzz\TicketSweepstakes.resx">
       <DependentUpon>TicketSweepstakes.cs</DependentUpon>
     </EmbeddedResource>
