@@ -139,7 +139,8 @@ namespace SalesInventorySystem.HOFormsDevEx
             Main main = new Main();
             BarItem mcurrentitem;
             adminTools_checklist.Items.Clear();
-            foreach (RibbonPage currentPage in main.ribbonControl.Pages)
+     
+            foreach (RibbonPage currentPage in main.Ribbon.Pages)
             {
                 foreach (RibbonPageGroup currentgroup in currentPage.Groups)
                 {

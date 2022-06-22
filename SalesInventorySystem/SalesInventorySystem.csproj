@@ -144,6 +144,8 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="DevExpress.DataAccess.v19.2, Version=19.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.ExpressApp.v19.2, Version=19.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.ExpressApp.Win.v19.2, Version=19.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.PivotGrid.v19.2.Core, Version=19.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <Private>True</Private>
     </Reference>
@@ -1944,6 +1946,12 @@
     <Compile Include="MainBranch.Designer.cs">
       <DependentUpon>MainBranch.cs</DependentUpon>
     </Compile>
+    <Compile Include="MainRibbonForm1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainRibbonForm1.Designer.cs">
+      <DependentUpon>MainRibbonForm1.cs</DependentUpon>
+    </Compile>
     <Compile Include="MasterDetailGrid.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -2721,6 +2729,18 @@
     <Compile Include="RibbonForm1.Designer.cs">
       <DependentUpon>RibbonForm1.cs</DependentUpon>
     </Compile>
+    <Compile Include="RibbonForm2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RibbonForm2.Designer.cs">
+      <DependentUpon>RibbonForm2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SampleForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SampleForm.Designer.cs">
+      <DependentUpon>SampleForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="SampleReports.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -2804,6 +2824,12 @@
     </Compile>
     <Compile Include="WaitForm1.Designer.cs">
       <DependentUpon>WaitForm1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="XtraUserControl1.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="XtraUserControl1.Designer.cs">
+      <DependentUpon>XtraUserControl1.cs</DependentUpon>
     </Compile>
     <Compile Include="zzzDemozzz\DemoAddLoan.cs">
       <SubType>Form</SubType>
@@ -3644,6 +3670,9 @@
     <EmbeddedResource Include="MainBranch.resx">
       <DependentUpon>MainBranch.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="MainRibbonForm1.resx">
+      <DependentUpon>MainRibbonForm1.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MasterDetailGrid.resx">
       <DependentUpon>MasterDetailGrid.cs</DependentUpon>
     </EmbeddedResource>
@@ -4057,6 +4086,12 @@
     <EmbeddedResource Include="RibbonForm1.resx">
       <DependentUpon>RibbonForm1.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="RibbonForm2.resx">
+      <DependentUpon>RibbonForm2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SampleForm.resx">
+      <DependentUpon>SampleForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="SampleReports.resx">
       <DependentUpon>SampleReports.cs</DependentUpon>
     </EmbeddedResource>
@@ -4098,6 +4133,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="WaitForm1.resx">
       <DependentUpon>WaitForm1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="XtraUserControl1.resx">
+      <DependentUpon>XtraUserControl1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="zzzDemozzz\DemoAddLoan.resx">
       <DependentUpon>DemoAddLoan.cs</DependentUpon>

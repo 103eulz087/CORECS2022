@@ -10357,7 +10357,7 @@
 </value>
   </data>
   <metadata name="popupMenu1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>834, 17</value>
+    <value>307, 17</value>
   </metadata>
   <data name="btnBatchmode.ImageOptions.LargeImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -11792,7 +11792,7 @@
 </value>
   </data>
   <metadata name="popupMenu2.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>983, 17</value>
+    <value>503, 17</value>
   </metadata>
   <data name="barButtonItem7.ImageOptions.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -12229,7 +12229,7 @@
 </value>
   </data>
   <metadata name="popupMenuAcctgSettings.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>1132, 17</value>
+    <value>699, 17</value>
   </metadata>
   <data name="btnAcctgSettings.ImageOptions.LargeImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -12278,7 +12278,7 @@
 </value>
   </data>
   <metadata name="popupMenuCosting.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 60</value>
+    <value>1015, 17</value>
   </metadata>
   <data name="btnServicesCost.ImageOptions.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -12715,7 +12715,7 @@
 </value>
   </data>
   <metadata name="popupMenuARReports.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>210, 60</value>
+    <value>1273, 17</value>
   </metadata>
   <data name="btnARPayments.ImageOptions.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -13035,7 +13035,7 @@
 </value>
   </data>
   <metadata name="popupMenuBIRSalesReport.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>423, 60</value>
+    <value>1558, 17</value>
   </metadata>
   <data name="btnPointOFSale.ImageOptions.LargeImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -13545,16 +13545,16 @@
 </value>
   </data>
   <metadata name="barAndDockingController1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>462, 17</value>
+    <value>17, 69</value>
   </metadata>
   <metadata name="xtraTabbedMdiManager1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>233, 17</value>
+    <value>339, 69</value>
   </metadata>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>142</value>
   </metadata>
   <metadata name="notifyIcon1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>701, 17</value>
+    <value>647, 69</value>
   </metadata>
   <data name="barButtonItem103.ImageOptions.LargeImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

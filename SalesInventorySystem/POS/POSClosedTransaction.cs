@@ -351,8 +351,39 @@ namespace SalesInventorySystem
                 XtraMessageBox.Show(ex.Message.ToString());
             }
         }
+        void sendMailNotificationGrouptItemSales(DataGridView gridview)
+        {
+            try
+            {
+                cashiertranscode = txtcashiertransno.Text;
+                string subject = "", body = "";
+                string transactionbegin = Database.getSingleQuery("SalesTransactionSummary", "CashierTransNo='" + txtcashiertransno.Text + "' AND BranchCode='" + Login.assignedBranch + "' ", "TransactionBegin");
 
-       void nextcashbegintextchanged()
+                
+                body += "======================== <br/>";
+                body += "<b>GROUP ITEM SALES REPORT</b> <br/>";
+                body += "======================== <br/>";
+                body += "<table border='1' cellpadding='1' cellspacing='1'><tr><th>ProductName</th><th>Time</th><th>TotalQtySold</th><th>TotalAmount</th></tr>";
+                for (int i = 0; i <= gridview.RowCount - 1; i++)
+                { 
+                    string petsa = gridview.Rows[i].Cells["Description"].Value.ToString(); 
+                    string qty = gridview.Rows[i].Cells["QtySold"].Value.ToString();
+                    string totalamount = gridview.Rows[i].Cells["TotalAmount"].Value.ToString(); 
+                    body += "<tr><td>" + petsa + "</td><td>" + qty + "</td><td>" + HelperFunction.numericFormat(Convert.ToDouble(totalamount)) + "</td></tr>";
+                }
+                body += "</table>";
+                body += "<b><i><font color='red'>Please dont reply this is a system generated report.</font></b></i>" + "<br/><br/>";// Environment.NewLine + Environment.NewLine;
+
+                subject = "POS Close Transaction Report [" + Branch.getBranchName(Login.assignedBranch) + "]";
+                Classes.EmailSetup mailsetup = new Classes.EmailSetup();
+                mailsetup.setupEmailParam(subject, body, false);
+            }
+            catch (Exception ex)
+            {
+                XtraMessageBox.Show(ex.Message.ToString());
+            }
+        }
+        void nextcashbegintextchanged()
         {
             double cashremit = 0.0;
             cashremit = Convert.ToDouble(txtActualCashOnHand.Text) - Convert.ToDouble(txtNextcashBeginning.Text);

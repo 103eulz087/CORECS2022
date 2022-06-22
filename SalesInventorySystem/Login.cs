@@ -96,7 +96,7 @@ namespace SalesInventorySystem
             //********RYAN VIAJEDOR*****************************************************************************
             try
             {
-                int server_version = GetCTRVersion().Result;
+                int server_version = -1;// GetCTRVersion().Result;
                 int client_version = Convert.ToInt32(file["Version"]);
                 if (server_version != -1 && client_version < server_version)
                 {
@@ -171,7 +171,7 @@ namespace SalesInventorySystem
         {
             SqlConnection con = Database.getConnection();
             con.Open();
-            SqlCommand com = new SqlCommand("Select Password from Users where UserID = '" + txtuserid.Text + "'", con);
+            SqlCommand com = new SqlCommand("Select TOP(1) Password from Users where UserID = '" + txtuserid.Text + "'", con);
             SqlDataReader reader = com.ExecuteReader();
             try
             {
@@ -293,7 +293,8 @@ namespace SalesInventorySystem
         {   
             SqlConnection con = Database.getConnection();
             con.Open();
-            SqlCommand com = new SqlCommand("Select * from dbo.Users where UserID= '" + txtuserid.Text + "' and Password = '" + password + "'", con);
+            //SqlCommand com = new SqlCommand("Select TOP(1) UserID,Password from dbo.UserMenuAccess where UserID= '" + txtuserid.Text + "' and Password = '" + password + "'", con);
+            SqlCommand com = new SqlCommand($"Select TOP(1) * from dbo.Users where UserID='{txtuserid.Text}' and Password='{password}'", con);
             //SqlCommand com = new SqlCommand("Select * from UserMenuAccess2 where UserID= '"+txtuserid.Text+"'  ", con);
             SqlDataReader reader = com.ExecuteReader();
 
@@ -302,7 +303,7 @@ namespace SalesInventorySystem
             {
 
                 //string company = Database.getSingleQuery("CompanyProfile", "CompanyName <> ''", "CompanyName");
-                bool isUserExists = Database.checkifExist($"SELECT TOP(1) UserID FROM dbo.Users WHERE UserID='{txtuserid.Text}'");
+                bool isUserExists = Database.checkifExist($"SELECT TOP(1) UserID FROM dbo.Users WHERE UserID='{txtuserid.Text}' ");
                 user = txtuserid.Text;
                 if (reader != null)
                 {
