@@ -144,7 +144,7 @@ namespace SalesInventorySystem
                     }
                     //check if item exist in customer table
                     // bool prodexist = Database.checkifExist("SELECT * FROM Customers WHERE ItemCode = '" + itemcode + "' AND CustomerID='" + custid + "' ");// Database.getSingleQuery("Customers","ItemCode = '"+Classes.Product.getProductCode(txtprodname.Text,prodcatcode)+"',"sdd");
-                    bool prodexist = Database.checkifExist("SELECT ProductCode FROM view_custprodsettings WHERE ProductCode = '" + itemcode + "' AND CustID='" + custid + "' ");// Database.getSingleQuery("Customers","ItemCode = '"+Classes.Product.getProductCode(txtprodname.Text,prodcatcode)+"',"sdd");
+                    bool prodexist = Database.checkifExist("SELECT TOP(1) ProductCode FROM view_custprodsettings WHERE ProductCode = '" + itemcode + "' AND CustID='" + custid + "' ");// Database.getSingleQuery("Customers","ItemCode = '"+Classes.Product.getProductCode(txtprodname.Text,prodcatcode)+"',"sdd");
 
                     //reamrks = Database.getSingleQuery("Customers", "ItemCode = '" + itemcode + "' AND CustomerID='" + custid + "' ", "Remarks");
                     //specialprice = Database.getSingleQuery("Customers", "ItemCode = '" + itemcode + "' AND CustomerID='" + custid + "' ", "SpecialPriceAmount");
@@ -709,7 +709,7 @@ namespace SalesInventorySystem
             else
             {
                 int count = 0;
-                bool checkifexists = Database.checkifExist("SELECT top 1 PONumber FROM PurchaseOrderDetails WHERE PONumber='" + textEdit1.Text + "' AND ProductName='" + txtpname.Text.Trim() + "'");
+                bool checkifexists = Database.checkifExist("SELECT TOP(1) PONumber FROM PurchaseOrderDetails WHERE PONumber='" + textEdit1.Text + "' AND ProductName='" + txtpname.Text.Trim() + "'");
 
                 for (int i = 0; i <= gridView1.RowCount - 1; i++)
                 {

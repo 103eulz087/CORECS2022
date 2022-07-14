@@ -357,6 +357,7 @@ namespace SalesInventorySystem.POS
                 XtraMessageBox.Show("Select one checkbox");
                 return;
             }
+            bool isHRI = Database.checkifExist($"SELECT TOP(1) isEnableInvoicePrinting FROM dbo.POSType WHERE isEnableInvoicePrinting=1");
             foreach (int j in ChkedRow)
             {
                 //str = "Update BatchSalesDetails SET isVoid='1',VoidBy='"+Login.isglobalUserID+ "',isErrorCorrect=1,Status='RETURNED' where SequenceNumber='" + dataGridView1.Rows[j].Cells["SequenceNumber"].Value + "'";
@@ -365,21 +366,24 @@ namespace SalesInventorySystem.POS
                     "AND ReferenceNo='" + HelperFunction.sequencePadding1(txtorderno.Text, 18) +"' " +
                     "AND BranchCode='"+txtbranch.Text+"' " +
                     "AND MachineUsed='"+Environment.MachineName+"' ";
-               Database.ExecuteQuery($"INSERT INTO dbo.CreditMemoHRI VALUES('{Login.assignedBranch}'" +
-                    $",'{HelperFunction.sequencePadding1(txtorderno.Text, 18) }'" +
-                    $",'{dataGridView1.Rows[j].Cells["SequenceNumber"].Value }'" +
-                    $",'{dataGridView1.Rows[j].Cells["ProductCode"].Value.ToString()}'" +
-                    $",'{dataGridView1.Rows[j].Cells["Description"].Value.ToString()}'" +
-                    $",'{dataGridView1.Rows[j].Cells["SellingPrice"].Value.ToString()}'" +
-                    $",'{dataGridView1.Rows[j].Cells["QtySold"].Value}'" +
-                    $",'{dataGridView1.Rows[j].Cells["SubTotal"].Value}'" +
-                    $",'{dataGridView1.Rows[j].Cells["TotalAmount"].Value}'" +
-                    $",'{dataGridView1.Rows[j].Cells["isVat"].Value}'" +
-                    $",'0'" +
-                    $",'0'" +
-                    $",'0'" +
-                    $",'DESKTOP-QVEJE6D'" +
-                    $",'{DateTime.Now.ToString()}','{Login.Fullname}')");
+                if (isHRI)
+                {
+                    Database.ExecuteQuery($"INSERT INTO dbo.CreditMemoHRI VALUES('{Login.assignedBranch}'" +
+                         $",'{HelperFunction.sequencePadding1(txtorderno.Text, 18) }'" +
+                         $",'{dataGridView1.Rows[j].Cells["SequenceNumber"].Value }'" +
+                         $",'{dataGridView1.Rows[j].Cells["ProductCode"].Value.ToString()}'" +
+                         $",'{dataGridView1.Rows[j].Cells["Description"].Value.ToString()}'" +
+                         $",'{dataGridView1.Rows[j].Cells["SellingPrice"].Value.ToString()}'" +
+                         $",'{dataGridView1.Rows[j].Cells["QtySold"].Value}'" +
+                         $",'{dataGridView1.Rows[j].Cells["SubTotal"].Value}'" +
+                         $",'{dataGridView1.Rows[j].Cells["TotalAmount"].Value}'" +
+                         $",'{dataGridView1.Rows[j].Cells["isVat"].Value}'" +
+                         $",'0'" +
+                         $",'0'" +
+                         $",'0'" +
+                         $",'DESKTOP-QVEJE6D'" +
+                         $",'{DateTime.Now.ToString()}','{Login.Fullname}')");
+                }
 
                 try
                 {

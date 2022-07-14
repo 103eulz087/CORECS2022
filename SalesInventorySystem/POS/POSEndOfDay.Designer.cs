@@ -184,10 +184,10 @@
             // 
             // gridControlTransactionCash
             // 
-            this.gridControlTransactionCash.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gridControlTransactionCash.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2);
             this.gridControlTransactionCash.Location = new System.Drawing.Point(12, 327);
             this.gridControlTransactionCash.MainView = this.gridViewTransactionCash;
-            this.gridControlTransactionCash.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gridControlTransactionCash.Margin = new System.Windows.Forms.Padding(2);
             this.gridControlTransactionCash.Name = "gridControlTransactionCash";
             this.gridControlTransactionCash.Size = new System.Drawing.Size(300, 163);
             this.gridControlTransactionCash.TabIndex = 123637;
@@ -202,10 +202,10 @@
             // 
             // gridControlBatchSalesDetails
             // 
-            this.gridControlBatchSalesDetails.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gridControlBatchSalesDetails.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2);
             this.gridControlBatchSalesDetails.Location = new System.Drawing.Point(640, 416);
             this.gridControlBatchSalesDetails.MainView = this.gridViewBatchSalesDetails;
-            this.gridControlBatchSalesDetails.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gridControlBatchSalesDetails.Margin = new System.Windows.Forms.Padding(2);
             this.gridControlBatchSalesDetails.Name = "gridControlBatchSalesDetails";
             this.gridControlBatchSalesDetails.Size = new System.Drawing.Size(300, 106);
             this.gridControlBatchSalesDetails.TabIndex = 123638;
@@ -220,10 +220,10 @@
             // 
             // gridControlBatchSalesSummary
             // 
-            this.gridControlBatchSalesSummary.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gridControlBatchSalesSummary.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2);
             this.gridControlBatchSalesSummary.Location = new System.Drawing.Point(316, 486);
             this.gridControlBatchSalesSummary.MainView = this.gridViewBatchSalesSummary;
-            this.gridControlBatchSalesSummary.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gridControlBatchSalesSummary.Margin = new System.Windows.Forms.Padding(2);
             this.gridControlBatchSalesSummary.Name = "gridControlBatchSalesSummary";
             this.gridControlBatchSalesSummary.Size = new System.Drawing.Size(300, 115);
             this.gridControlBatchSalesSummary.TabIndex = 123639;
@@ -238,10 +238,10 @@
             // 
             // gridControlSalesTransactionSummary
             // 
-            this.gridControlSalesTransactionSummary.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gridControlSalesTransactionSummary.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2);
             this.gridControlSalesTransactionSummary.Location = new System.Drawing.Point(14, 495);
             this.gridControlSalesTransactionSummary.MainView = this.gridViewSalesTransactionSummary;
-            this.gridControlSalesTransactionSummary.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gridControlSalesTransactionSummary.Margin = new System.Windows.Forms.Padding(2);
             this.gridControlSalesTransactionSummary.Name = "gridControlSalesTransactionSummary";
             this.gridControlSalesTransactionSummary.Size = new System.Drawing.Size(300, 115);
             this.gridControlSalesTransactionSummary.TabIndex = 123640;
@@ -256,10 +256,10 @@
             // 
             // gridControlSalesDiscount
             // 
-            this.gridControlSalesDiscount.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gridControlSalesDiscount.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2);
             this.gridControlSalesDiscount.Location = new System.Drawing.Point(324, 240);
             this.gridControlSalesDiscount.MainView = this.gridViewSalesDiscount;
-            this.gridControlSalesDiscount.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gridControlSalesDiscount.Margin = new System.Windows.Forms.Padding(2);
             this.gridControlSalesDiscount.Name = "gridControlSalesDiscount";
             this.gridControlSalesDiscount.Size = new System.Drawing.Size(300, 115);
             this.gridControlSalesDiscount.TabIndex = 123641;
@@ -274,10 +274,10 @@
             // 
             // gridControlZReading
             // 
-            this.gridControlZReading.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gridControlZReading.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2);
             this.gridControlZReading.Location = new System.Drawing.Point(628, 297);
             this.gridControlZReading.MainView = this.gridViewZReading;
-            this.gridControlZReading.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gridControlZReading.Margin = new System.Windows.Forms.Padding(2);
             this.gridControlZReading.Name = "gridControlZReading";
             this.gridControlZReading.Size = new System.Drawing.Size(300, 115);
             this.gridControlZReading.TabIndex = 123642;
@@ -292,10 +292,10 @@
             // 
             // gridControlPOSCreditcard
             // 
-            this.gridControlPOSCreditcard.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gridControlPOSCreditcard.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2);
             this.gridControlPOSCreditcard.Location = new System.Drawing.Point(324, 359);
             this.gridControlPOSCreditcard.MainView = this.gridViewPOSCreditcard;
-            this.gridControlPOSCreditcard.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gridControlPOSCreditcard.Margin = new System.Windows.Forms.Padding(2);
             this.gridControlPOSCreditcard.Name = "gridControlPOSCreditcard";
             this.gridControlPOSCreditcard.Size = new System.Drawing.Size(300, 115);
             this.gridControlPOSCreditcard.TabIndex = 123643;
@@ -310,10 +310,10 @@
             // 
             // gridControlPOSReturn
             // 
-            this.gridControlPOSReturn.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gridControlPOSReturn.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2);
             this.gridControlPOSReturn.Location = new System.Drawing.Point(933, 10);
             this.gridControlPOSReturn.MainView = this.gridViewPOSReturn;
-            this.gridControlPOSReturn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gridControlPOSReturn.Margin = new System.Windows.Forms.Padding(2);
             this.gridControlPOSReturn.Name = "gridControlPOSReturn";
             this.gridControlPOSReturn.Size = new System.Drawing.Size(300, 115);
             this.gridControlPOSReturn.TabIndex = 123644;
@@ -328,10 +328,10 @@
             // 
             // gridControlSalesDenom
             // 
-            this.gridControlSalesDenom.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gridControlSalesDenom.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2);
             this.gridControlSalesDenom.Location = new System.Drawing.Point(933, 129);
             this.gridControlSalesDenom.MainView = this.gridViewSalesDenom;
-            this.gridControlSalesDenom.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gridControlSalesDenom.Margin = new System.Windows.Forms.Padding(2);
             this.gridControlSalesDenom.Name = "gridControlSalesDenom";
             this.gridControlSalesDenom.Size = new System.Drawing.Size(300, 115);
             this.gridControlSalesDenom.TabIndex = 123645;
@@ -346,10 +346,10 @@
             // 
             // gridControlPOSTransaction
             // 
-            this.gridControlPOSTransaction.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gridControlPOSTransaction.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2);
             this.gridControlPOSTransaction.Location = new System.Drawing.Point(933, 249);
             this.gridControlPOSTransaction.MainView = this.gridViewPOSTransaction;
-            this.gridControlPOSTransaction.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gridControlPOSTransaction.Margin = new System.Windows.Forms.Padding(2);
             this.gridControlPOSTransaction.Name = "gridControlPOSTransaction";
             this.gridControlPOSTransaction.Size = new System.Drawing.Size(300, 115);
             this.gridControlPOSTransaction.TabIndex = 123646;
@@ -364,10 +364,10 @@
             // 
             // gridControlPOSEOD
             // 
-            this.gridControlPOSEOD.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gridControlPOSEOD.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2);
             this.gridControlPOSEOD.Location = new System.Drawing.Point(933, 368);
             this.gridControlPOSEOD.MainView = this.gridViewPOSEOD;
-            this.gridControlPOSEOD.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gridControlPOSEOD.Margin = new System.Windows.Forms.Padding(2);
             this.gridControlPOSEOD.Name = "gridControlPOSEOD";
             this.gridControlPOSEOD.Size = new System.Drawing.Size(300, 115);
             this.gridControlPOSEOD.TabIndex = 123647;
@@ -385,10 +385,10 @@
             this.grouppendingtran.Controls.Add(this.gridControl1);
             this.grouppendingtran.Dock = System.Windows.Forms.DockStyle.Fill;
             this.grouppendingtran.Location = new System.Drawing.Point(0, 0);
-            this.grouppendingtran.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.grouppendingtran.Margin = new System.Windows.Forms.Padding(2);
             this.grouppendingtran.Name = "grouppendingtran";
-            this.grouppendingtran.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.grouppendingtran.Size = new System.Drawing.Size(0, 184);
+            this.grouppendingtran.Padding = new System.Windows.Forms.Padding(2);
+            this.grouppendingtran.Size = new System.Drawing.Size(0, 180);
             this.grouppendingtran.TabIndex = 123656;
             this.grouppendingtran.TabStop = false;
             this.grouppendingtran.Text = "There are Cashier Transactions that not yet Closed.";
@@ -403,7 +403,7 @@
             this.gridControl1.MainView = this.gridView1;
             this.gridControl1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.gridControl1.Name = "gridControl1";
-            this.gridControl1.Size = new System.Drawing.Size(0, 167);
+            this.gridControl1.Size = new System.Drawing.Size(0, 163);
             this.gridControl1.TabIndex = 1;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
@@ -436,9 +436,9 @@
             this.panel1.Controls.Add(this.progressBarControl1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(310, 184);
+            this.panel1.Size = new System.Drawing.Size(310, 180);
             this.panel1.TabIndex = 123657;
             // 
             // gridControl2
@@ -484,9 +484,9 @@
             this.panel2.Controls.Add(this.grouppendingtran);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(310, 0);
-            this.panel2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel2.Margin = new System.Windows.Forms.Padding(2);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(0, 184);
+            this.panel2.Size = new System.Drawing.Size(0, 180);
             this.panel2.TabIndex = 123658;
             // 
             // POSEndOfDay
@@ -494,7 +494,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(309, 184);
+            this.ClientSize = new System.Drawing.Size(308, 180);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.gridControlPOSEOD);
@@ -509,7 +509,7 @@
             this.Controls.Add(this.gridControlBatchSalesDetails);
             this.Controls.Add(this.gridControlTransactionCash);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "POSEndOfDay";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "END OF DAY PROCESS";

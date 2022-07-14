@@ -2951,7 +2951,7 @@ namespace SalesInventorySystem
         {
             foreach (Form form in Application.OpenForms)
             {
-                if (form.GetType() == typeof(POS.POSInventoryIN))
+                if (form.GetType() == typeof(POS.POSInventoryOut))
                 {
                     form.Activate();
                     return;
