@@ -46,11 +46,11 @@ namespace SalesInventorySystem.HOFormsDevEx
             Database.display("SELECT CAST(TransactionDate as date) as TransactionDate" +
                     //",CAST(TransactionDate as date) as TransactionDate" +
                     //",TransCode" +
-                    ",Particulars" +
+                    ",Description" +
                     ",Debit" +
                     ",Credit " +
                     //",InvoiceNo " +
-                "FROM ClientLedger " +
+                "FROM dbo.ClientLedger " +
                 "WHERE AccountID='" + txtacctid.Text + "' " +
                 "AND CAST(TransactionDate as date) >= '" + datefromledge.Text + "' " +
                 "and CAST(TransactionDate as date)<= '" + datetoledge.Text + "' ", gridControl2, gridView2);

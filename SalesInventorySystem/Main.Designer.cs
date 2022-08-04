@@ -2172,6 +2172,7 @@
             this.btnReturnOrders.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("btnReturnOrders.ImageOptions.LargeImage")));
             this.btnReturnOrders.Name = "btnReturnOrders";
             this.btnReturnOrders.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+            this.btnReturnOrders.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnReturnOrders_ItemClick);
             // 
             // btnCloseSalesTransaction
             // 
@@ -2924,7 +2925,7 @@
             this.Ribbon = this.ribbonControl;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.StatusBar = this.ribbonStatusBar;
-            this.Text = "ITCORE-CORE CS ver 6.0.7";
+            this.Text = "ITCORE-CORE CS ver 6.0.8";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Main_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Main_FormClosed);

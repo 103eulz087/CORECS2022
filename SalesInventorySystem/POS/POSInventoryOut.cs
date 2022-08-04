@@ -89,43 +89,43 @@ namespace SalesInventorySystem.POS
                 "WHERE a.BranchCode='"+Login.assignedBranch+"'", txtproduct,"Description","Description");
         }
 
-        void uploadInventory()
-        {
-            SqlConnection con = Database.getConnection();
-            con.Open();
-            try
-            {
-                string query = "sp_UploadInventoryIN";
-                SqlCommand com = new SqlCommand(query, con);
-                com.Parameters.AddWithValue("@parmid", txtbatchid.Text);
-                com.Parameters.AddWithValue("@parmbranchcode", txtbrcode.Text);
-                com.CommandType = CommandType.StoredProcedure;
-                com.CommandText = query;
-                com.ExecuteNonQuery();
-            }
-            catch (SqlException ex)
-            {
-                XtraMessageBox.Show(ex.Message.ToString());
-            }
-            finally
-            {
-                con.Close();
-            }
-        }
+        //void uploadInventory()
+        //{
+        //    SqlConnection con = Database.getConnection();
+        //    con.Open();
+        //    try
+        //    {
+        //        string query = "sp_UploadInventoryIN";
+        //        SqlCommand com = new SqlCommand(query, con);
+        //        com.Parameters.AddWithValue("@parmid", txtbatchid.Text);
+        //        com.Parameters.AddWithValue("@parmbranchcode", txtbrcode.Text);
+        //        com.CommandType = CommandType.StoredProcedure;
+        //        com.CommandText = query;
+        //        com.ExecuteNonQuery();
+        //    }
+        //    catch (SqlException ex)
+        //    {
+        //        XtraMessageBox.Show(ex.Message.ToString());
+        //    }
+        //    finally
+        //    {
+        //        con.Close();
+        //    }
+        //}
 
         private void simpleButton1_Click(object sender, EventArgs e)
         {
-            if(gridView2.RowCount == 0 || String.IsNullOrEmpty(txtbatchid.Text))
-            {
-                XtraMessageBox.Show("No Items to Upload!...");
-                return;
-            }
-            else
-            {
-                uploadInventory();
-                XtraMessageBox.Show("Success");
-                this.Dispose();
-            }
+            //if(gridView2.RowCount == 0 || String.IsNullOrEmpty(txtbatchid.Text))
+            //{
+            //    XtraMessageBox.Show("No Items to Upload!...");
+            //    return;
+            //}
+            //else
+            //{
+            //    uploadInventory();
+            //    XtraMessageBox.Show("Success");
+            //    this.Dispose();
+            //}
         }
 
         private void btnnew_Click(object sender, EventArgs e)

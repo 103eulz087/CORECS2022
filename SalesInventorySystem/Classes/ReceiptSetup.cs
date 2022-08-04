@@ -92,7 +92,8 @@ namespace SalesInventorySystem.Classes
             try
             {
                
-                var row = Database.getMultipleQuery("POSInfoDetails", "BranchCode='" + branchcode + "' " +
+                var row = Database.getMultipleQuery("POSInfoDetails", "BranchCode <> ' ' " +
+                //var row = Database.getMultipleQuery("POSInfoDetails", "BranchCode='" + branchcode + "' " +
                     "AND MachineUsed='" + machinename + "' ", "BusinessName" +
                    ",BusinessAddress   " +
                    ",TINNo   " +
@@ -198,7 +199,7 @@ namespace SalesInventorySystem.Classes
             details += HelperFunction.PrintLeftText("TIN: " + tin) + Environment.NewLine;
             details += HelperFunction.PrintLeftText("Business Style : " + businesstype) + Environment.NewLine + Environment.NewLine;
             return details;
-        }public static string doHeaderDetailsX(string ordercode, string terminalno, string name, string address, string tin, string businesstype)
+        }public static string doHeaderDetailsX(string ordercode, string terminalno, string name, string address, string tin, string businesstype,string dateBuy,string timeBuy)
         {
             String details = "";
             string cashier = "CASHIER : " + Login.Fullname;
@@ -210,7 +211,10 @@ namespace SalesInventorySystem.Classes
             //details += HelperFunction.PrintLeftRigthText(orderr, trans) + Environment.NewLine;
             string petsa = DateTime.Now.ToShortDateString();
             string oras = DateTime.Now.ToShortTimeString();
-            string fulldate1 = petsa + ' ' + oras;
+            //string petsa = DateTime.Now.ToShortDateString();
+            //string oras = DateTime.Now.ToShortTimeString();
+            string fulldate1 = dateBuy;
+            //string fulldate1 = dateBuy + ' ' + timeBuy;
 
             if (String.IsNullOrEmpty(name))
             {

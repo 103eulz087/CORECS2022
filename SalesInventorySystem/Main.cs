@@ -2949,16 +2949,28 @@ namespace SalesInventorySystem
 
         private void barBtnStockOutItems_ItemClick(object sender, ItemClickEventArgs e)
         {
+            //foreach (Form form in Application.OpenForms)
+            //{
+            //    if (form.GetType() == typeof(POS.POSInventoryOut))
+            //    {
+            //        form.Activate();
+            //        return;
+            //    }
+            //}
+            //POS.POSInventoryOut pcusatfsmr = new POS.POSInventoryOut();
+            //pcusatfsmr.Show();
             foreach (Form form in Application.OpenForms)
             {
-                if (form.GetType() == typeof(POS.POSInventoryOut))
+                if (form.GetType() == typeof(HOFormsDevEx.InventoryOut))
                 {
                     form.Activate();
                     return;
                 }
             }
-            POS.POSInventoryOut pcusatfsmr = new POS.POSInventoryOut();
+            HOFormsDevEx.InventoryOut pcusatfsmr = new HOFormsDevEx.InventoryOut();
             pcusatfsmr.Show();
+
+
         }
 
         private void btnInventoryPerBranch_ItemClick(object sender, ItemClickEventArgs e)
@@ -3002,6 +3014,21 @@ namespace SalesInventorySystem
                 }
             }
             HOFormsDevEx.ViewZeroInventory viewgeninv = new HOFormsDevEx.ViewZeroInventory();
+            viewgeninv.MdiParent = this;
+            viewgeninv.Show();
+        }
+
+        private void btnReturnOrders_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            foreach (Form form in Application.OpenForms)
+            {
+                if (form.GetType() == typeof(Reporting.BadOrderReport))
+                {
+                    form.Activate();
+                    return;
+                }
+            }
+            Reporting.BadOrderReport viewgeninv = new Reporting.BadOrderReport();
             viewgeninv.MdiParent = this;
             viewgeninv.Show();
         }

@@ -252,7 +252,7 @@ namespace SalesInventorySystem.POS
                 details += Classes.ReceiptSetup.doHeader(Login.assignedBranch, Environment.MachineName);
                 details += Classes.ReceiptSetup.doTitle("SALES INVOICE");
 
-                details += Classes.ReceiptSetup.doHeaderDetailsX(referenceNo, " ", " ", " ", " ", " ");
+                details += Classes.ReceiptSetup.doHeaderDetailsX(referenceNo, " ", " ", " ", " ", " "," ","");
                 details += HelperFunction.createDottedLine() + Environment.NewLine;
                 foreach (DataRow row in receipt)
                 {

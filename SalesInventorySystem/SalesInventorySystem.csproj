@@ -601,6 +601,12 @@
     <Compile Include="Connection.Designer.cs">
       <DependentUpon>Connection.cs</DependentUpon>
     </Compile>
+    <Compile Include="DevExReportTemplate\BadOrder.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DevExReportTemplate\BadOrder.Designer.cs">
+      <DependentUpon>BadOrder.cs</DependentUpon>
+    </Compile>
     <Compile Include="DevExReportTemplate\CheckVoucher.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -1164,6 +1170,12 @@
     </Compile>
     <Compile Include="HOFormsDevEx\InventoryCostSearchProduct.Designer.cs">
       <DependentUpon>InventoryCostSearchProduct.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HOFormsDevEx\InventoryOut.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HOFormsDevEx\InventoryOut.Designer.cs">
+      <DependentUpon>InventoryOut.cs</DependentUpon>
     </Compile>
     <Compile Include="HOFormsDevEx\InventoryQtyAdjustmentDevEx.cs">
       <SubType>Form</SubType>
@@ -2542,6 +2554,12 @@
     <Compile Include="Reporting\ARPayments.Designer.cs">
       <DependentUpon>ARPayments.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reporting\BadOrderReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reporting\BadOrderReport.Designer.cs">
+      <DependentUpon>BadOrderReport.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reporting\BatchProcessMasterDevEx.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -2997,6 +3015,9 @@
     <EmbeddedResource Include="Connection.resx">
       <DependentUpon>Connection.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="DevExReportTemplate\BadOrder.resx">
+      <DependentUpon>BadOrder.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="DevExReportTemplate\CheckVoucher.resx">
       <DependentUpon>CheckVoucher.cs</DependentUpon>
     </EmbeddedResource>
@@ -3275,6 +3296,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="HOFormsDevEx\InventoryCostSearchProduct.resx">
       <DependentUpon>InventoryCostSearchProduct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HOFormsDevEx\InventoryOut.resx">
+      <DependentUpon>InventoryOut.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="HOFormsDevEx\InventoryQtyAdjustmentDevEx.resx">
       <DependentUpon>InventoryQtyAdjustmentDevEx.cs</DependentUpon>
@@ -3979,6 +4003,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reporting\ARPayments.resx">
       <DependentUpon>ARPayments.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reporting\BadOrderReport.resx">
+      <DependentUpon>BadOrderReport.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reporting\BatchProcessMasterDevEx.resx">
       <DependentUpon>BatchProcessMasterDevEx.cs</DependentUpon>
