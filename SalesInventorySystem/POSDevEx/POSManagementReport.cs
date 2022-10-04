@@ -294,7 +294,8 @@ namespace SalesInventorySystem.POSDevEx
 
         private void gridControl1_MouseUp(object sender, MouseEventArgs e)
         {
-            
+            //if (e.Button == MouseButtons.Right)
+            //    contextMenuStrip1.Show(gridControl1, e.Location);
         }
 
         private void gridControl4_MouseUp(object sender, MouseEventArgs e)
@@ -305,7 +306,7 @@ namespace SalesInventorySystem.POSDevEx
 
         private void printToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (gridView11.RowCount <= 0 || gridView11.RowCount <= 0)
+            if (gridView11.RowCount <= 0 || gridView1.RowCount <= 0)
             {
                 XtraMessageBox.Show("Please Generate Reports First!...");
                 return;
@@ -313,16 +314,16 @@ namespace SalesInventorySystem.POSDevEx
             else if (gridView11.RowCount > 0 && comboBoxEdit1.Text == "XREAD")
             {
                 printFinancialReport(txtbranch.Text
-                    , gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "DateOpen").ToString()
-                    , gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "MachineUsed").ToString()
-                    , gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "UserID").ToString());
+                    , gridView11.GetRowCellValue(gridView11.FocusedRowHandle, "DateOpen").ToString()
+                    , gridView11.GetRowCellValue(gridView11.FocusedRowHandle, "MachineUsed").ToString()
+                    , gridView11.GetRowCellValue(gridView11.FocusedRowHandle, "UserID").ToString());
                 XtraMessageBox.Show("XREAD Successfully Reprint!...");
             }
             else if (gridView11.RowCount > 0 && comboBoxEdit1.Text == "ZREAD")
             {
                 PrintZRead(txtbranch.Text
-                    , gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "DateExecute").ToString()
-                    , gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "MachineUsed").ToString());
+                    , gridView11.GetRowCellValue(gridView11.FocusedRowHandle, "DateExecute").ToString()
+                    , gridView11.GetRowCellValue(gridView11.FocusedRowHandle, "MachineUsed").ToString());
                 XtraMessageBox.Show("ZREAD Successfully Reprint!...");
             }
             //else if (gridView1.RowCount > 0 && comboBoxEdit1.Text == "BACKUPDATA")
@@ -364,7 +365,7 @@ namespace SalesInventorySystem.POSDevEx
                 //    ",No25c" +
                 //    ",Total25c" +
                 //    ",");
-                var rowz = Database.getMultipleQuery("SalesTransactionSummary", "BranchCode='" + branch + "' " +
+                var rowz = Database.getMultipleQuery("SalesTransactionSummary2", "BranchCode='" + branch + "' " +
                     "and DateOpen='" + date + "'" +
                     "and MachineUsed = '" + machine + "' " +
                     "AND UserID='" + cashier + "' "
@@ -475,11 +476,17 @@ namespace SalesInventorySystem.POSDevEx
                 //string No25c = row["No25c"].ToString();
                 //string Total25c = row["Total25c"].ToString();
 
-                DateTime dt = DateTime.Now;
+                //DateTime dt = Convert.ToDateTime(dateex);
+                //String details = "";
+                //string filepath = "";
+
+                //filepath = "C:\\ProgramFlies\\EndOfDay\\" + bcode + "\\" + terminal + "\\" + dt.ToString("yyyyMMdd") + "\\";
+
+                DateTime dt = Convert.ToDateTime(date);// DateTime.Now;
                 String details = "";
                 string transdate = Database.getSingleResultSet("SELECT dbo.func_ConvertDateTimeToChar('DATE','" + date + "')");
 
-                string filepath = "C:\\POSTransaction\\FinancialReport\\" + branch + "\\" + transdate + "\\" + UserID + "\\";
+                string filepath = "C:\\POSTransaction\\FinancialReport\\" + branch + "\\" + dt.ToString("yyyyMMdd") + "\\" + UserID + "\\";
 
                 details = "" + (Char)27 + (Char)112 + (Char)0 + (Char)25 + "";
 
@@ -635,7 +642,7 @@ namespace SalesInventorySystem.POSDevEx
                 Printing printfile = new Printing();
                 printfile.printTextFile(filetoprint);
             }
-            catch (SqlException ex)
+            catch (Exception ex)
             {
                 XtraMessageBox.Show(ex.Message.ToString());
             }
@@ -959,6 +966,59 @@ namespace SalesInventorySystem.POSDevEx
         private void txtbrcodemgmtdata_EditValueChanged(object sender, EventArgs e)
         {
             Database.displaySearchlookupEdit("SELECT BranchCode,MachineUsed FROM POSInfoDetails WHERE BranchCode='" + txtbrcodemgmtdata.Text + "'", txtmanageddatapermachine, "MachineUsed", "MachineUsed");
+        }
+
+        private void rad1_CheckedChanged(object sender, EventArgs e)
+        {
+            radChanged();
+        }
+        void radChanged()
+        {
+            if (rad1.Checked == true)
+            {
+                txtbranch.Enabled = true;
+                txtmachine.Enabled = false;
+                txtcashier.Enabled = false;
+
+            }
+            else if (rad2.Checked == true)
+            {
+                txtbranch.Enabled = true;
+                txtmachine.Enabled = true;
+                txtcashier.Enabled = false;
+            }
+            else if (rad3.Checked == true)
+            {
+                txtbranch.Enabled = true;
+                txtmachine.Enabled = true;
+                txtcashier.Enabled = true;
+            }
+        }
+
+        private void rad2_CheckedChanged(object sender, EventArgs e)
+        {
+            radChanged();
+        }
+
+        private void rad3_CheckedChanged(object sender, EventArgs e)
+        {
+            radChanged();
+        }
+
+        private void txtmachine_EditValueChanged(object sender, EventArgs e)
+        {
+            if (rad3.Checked == true)
+            {
+                ////txtcashier.Enabled = true;
+                Database.displaySearchlookupEdit("SELECT distinct BranchCode,MachineUsed,ProcessedBy " +
+                    "FROM dbo.POSSalesSummary " +
+                    "WHERE BranchCode='" + txtbranch.Text + "' ", txtcashier, "ProcessedBy", "ProcessedBy");
+            }
+        }
+
+        private void gridControl1_Click(object sender, EventArgs e)
+        {
+
         }
 
         Double computeTotalVAT()

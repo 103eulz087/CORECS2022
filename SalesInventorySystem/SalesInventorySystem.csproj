@@ -564,6 +564,12 @@
       <DependentUpon>CIFMain.cs</DependentUpon>
     </Compile>
     <Compile Include="Classes\AutoUpdater.cs" />
+    <Compile Include="Classes\BadOrder.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Classes\BadOrder.Designer.cs">
+      <DependentUpon>BadOrder.cs</DependentUpon>
+    </Compile>
     <Compile Include="Classes\BarcodeSettings.cs" />
     <Compile Include="Classes\Branch.cs" />
     <Compile Include="Classes\ClientAccount.cs" />
@@ -601,11 +607,11 @@
     <Compile Include="Connection.Designer.cs">
       <DependentUpon>Connection.cs</DependentUpon>
     </Compile>
-    <Compile Include="DevExReportTemplate\BadOrder.cs">
+    <Compile Include="DevExReportTemplate\BadOrderDetails.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="DevExReportTemplate\BadOrder.Designer.cs">
-      <DependentUpon>BadOrder.cs</DependentUpon>
+    <Compile Include="DevExReportTemplate\BadOrderDetails.Designer.cs">
+      <DependentUpon>BadOrderDetails.cs</DependentUpon>
     </Compile>
     <Compile Include="DevExReportTemplate\CheckVoucher.cs">
       <SubType>Component</SubType>
@@ -714,6 +720,12 @@
     </Compile>
     <Compile Include="DevExReportTemplate\StatementOfAccount.Designer.cs">
       <DependentUpon>StatementOfAccount.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DevExReportTemplate\StockOutRep.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DevExReportTemplate\StockOutRep.Designer.cs">
+      <DependentUpon>StockOutRep.cs</DependentUpon>
     </Compile>
     <Compile Include="DevExReportTemplate\StockOrderRep.cs">
       <SubType>Component</SubType>
@@ -1422,6 +1434,12 @@
     </Compile>
     <Compile Include="HOFormsDevEx\ViewNonTradeOrdersDevEx.Designer.cs">
       <DependentUpon>ViewNonTradeOrdersDevEx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HOFormsDevEx\ViewStockOutRequest.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HOFormsDevEx\ViewStockOutRequest.Designer.cs">
+      <DependentUpon>ViewStockOutRequest.cs</DependentUpon>
     </Compile>
     <Compile Include="HOFormsDevEx\ViewZeroInventory.cs">
       <SubType>Form</SubType>
@@ -2138,6 +2156,12 @@
     <Compile Include="POSDevEx\POSSettingsDevEx.Designer.cs">
       <DependentUpon>POSSettingsDevEx.cs</DependentUpon>
     </Compile>
+    <Compile Include="POSDevEx\POSShowCreditDetails.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="POSDevEx\POSShowCreditDetails.Designer.cs">
+      <DependentUpon>POSShowCreditDetails.cs</DependentUpon>
+    </Compile>
     <Compile Include="POSDevEx\POSXReadReportDevEx.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -2559,6 +2583,12 @@
     </Compile>
     <Compile Include="Reporting\BadOrderReport.Designer.cs">
       <DependentUpon>BadOrderReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reporting\BadOrderReportDetails.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reporting\BadOrderReportDetails.Designer.cs">
+      <DependentUpon>BadOrderReportDetails.cs</DependentUpon>
     </Compile>
     <Compile Include="Reporting\BatchProcessMasterDevEx.cs">
       <SubType>Form</SubType>
@@ -3012,11 +3042,14 @@
     <EmbeddedResource Include="CIF\CIFMain.resx">
       <DependentUpon>CIFMain.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Classes\BadOrder.resx">
+      <DependentUpon>BadOrder.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Connection.resx">
       <DependentUpon>Connection.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="DevExReportTemplate\BadOrder.resx">
-      <DependentUpon>BadOrder.cs</DependentUpon>
+    <EmbeddedResource Include="DevExReportTemplate\BadOrderDetails.resx">
+      <DependentUpon>BadOrderDetails.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DevExReportTemplate\CheckVoucher.resx">
       <DependentUpon>CheckVoucher.cs</DependentUpon>
@@ -3071,6 +3104,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DevExReportTemplate\StatementOfAccount.resx">
       <DependentUpon>StatementOfAccount.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DevExReportTemplate\StockOutRep.resx">
+      <DependentUpon>StockOutRep.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DevExReportTemplate\StockOrderRep.resx">
       <DependentUpon>StockOrderRep.cs</DependentUpon>
@@ -3419,6 +3455,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="HOFormsDevEx\ViewNonTradeOrdersDevEx.resx">
       <DependentUpon>ViewNonTradeOrdersDevEx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HOFormsDevEx\ViewStockOutRequest.resx">
+      <DependentUpon>ViewStockOutRequest.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="HOFormsDevEx\ViewZeroInventory.resx">
       <DependentUpon>ViewZeroInventory.cs</DependentUpon>
@@ -3789,6 +3828,9 @@
     <EmbeddedResource Include="POSDevEx\POSSettingsDevEx.resx">
       <DependentUpon>POSSettingsDevEx.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="POSDevEx\POSShowCreditDetails.resx">
+      <DependentUpon>POSShowCreditDetails.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="POSDevEx\POSXReadReportDevEx.resx">
       <DependentUpon>POSXReadReportDevEx.cs</DependentUpon>
     </EmbeddedResource>
@@ -4006,6 +4048,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reporting\BadOrderReport.resx">
       <DependentUpon>BadOrderReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reporting\BadOrderReportDetails.resx">
+      <DependentUpon>BadOrderReportDetails.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reporting\BatchProcessMasterDevEx.resx">
       <DependentUpon>BatchProcessMasterDevEx.cs</DependentUpon>

@@ -16,7 +16,7 @@ namespace SalesInventorySystem.HOFormsDevEx
 {
     public partial class InventoryOut : DevExpress.XtraEditors.XtraForm
     {
-        object pcode, desc, barcode, isvat,cost, totalcost;
+        object pcode, desc, barcode, isvat, cost;
         public InventoryOut()
         {
             InitializeComponent();
@@ -28,17 +28,18 @@ namespace SalesInventorySystem.HOFormsDevEx
                 "VALUES('" + txtbatchid.Text + "'" +
                 $",'{txtbrcode.Text}'" +
                 $",'{txtdatein.Text}'" +
-                $",'{pcode}'" +
-                $",'{desc}'" +
-                $",'{barcode}'" +
+                $",'{pcode.ToString()}'" +
+                $",'{desc.ToString()}'" +
+                $",'{barcode.ToString()}'" +
                 $",'{txtqty.Text}'" +
-                $",'{cost}'" +
-                $",'{totalcost}'" +
-                $",'{isvat}'" +
+                $",'{cost.ToString()}'" +
+                $",'0'" +
+                $",'{isvat.ToString()}'" +
                 $",'0'" +
                 $",'{DateTime.Now.ToShortDateString()}'" +
                 $",'{Login.isglobalUserID}')", "Succesfully Added");
             //doFIFO();
+            
         }
 
         void doFIFO()
@@ -89,6 +90,7 @@ namespace SalesInventorySystem.HOFormsDevEx
                 SqlCommand com = new SqlCommand(sp, con);
                 com.Parameters.AddWithValue("@parmbatchid", txtbatchid.Text);
                 com.Parameters.AddWithValue("@parmbrcode", txtbrcode.Text);
+                com.Parameters.AddWithValue("@parmcategory", txtcategory.Text);
                 com.Parameters.AddWithValue("@parmremarks", txtremarks.Text);
                 com.CommandType = CommandType.StoredProcedure;
                 com.CommandTimeout = 3600;
@@ -115,7 +117,6 @@ namespace SalesInventorySystem.HOFormsDevEx
 
         private void POSInventoryIN_Load(object sender, EventArgs e)
         {
-
             loadData();
         }
 
@@ -129,6 +130,7 @@ namespace SalesInventorySystem.HOFormsDevEx
                 "INNER JOIN Inventory as c " +
                 "ON a.ProductCode=c.Product AND a.BranchCode=c.Branch " +
                 "WHERE a.BranchCode='" + Login.assignedBranch + "' and c.Available > 0 ", txtproduct, "Description", "Description");
+            Database.displayComboBoxItems("SELECT Description FROM dbo.StockOutCategory", "Description", txtcategory);
         }
 
         //void uploadInventory()
@@ -201,8 +203,6 @@ namespace SalesInventorySystem.HOFormsDevEx
             }
             else
             {
-
-
                 //var row = Database.getMultipleQuery("ReportHeaderSettings", "ReportName='StockOrderRep' ", "Heading,ImageWidth,ImageHeight,Caption1,Caption2");
 
                 //string companyname = row["Heading"].ToString();
@@ -265,6 +265,18 @@ namespace SalesInventorySystem.HOFormsDevEx
             txtbrcode.Enabled = true;
         }
 
+        private void gridControl1_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+                contextMenuStrip1.Show(gridControl1,e.Location);
+        }
+
+        private void cancelLineToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Database.ExecuteQuery($"DELETE FROM dbo.StockOutDetails WHERE BranchCode='{txtbrcode.Text}' AND ID='{txtbatchid.Text}' AND ProductCode='{pcode}'", "Successfully Deleted");
+            display();
+        }
+
         private void simpleButton1_Click_1(object sender, EventArgs e)
         {
             //POSInventoryINRecovertBatchID posinvin = new POSInventoryINRecovertBatchID();
@@ -308,7 +320,7 @@ namespace SalesInventorySystem.HOFormsDevEx
                 }
                 else
                 {
-                    //Database.ExecuteQuery($"UPDATE StockOutDetails set isDone=1 WHERE ID='{txtbatchid.Text}'");
+                    Database.ExecuteQuery($"UPDATE StockOutDetails set isDone=1 WHERE ID='{txtbatchid.Text}'");
                     doFIFO();
                     doStockOutSummary();
                     XtraMessageBox.Show("Success");

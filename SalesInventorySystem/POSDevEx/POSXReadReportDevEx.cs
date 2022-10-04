@@ -1094,6 +1094,59 @@ namespace SalesInventorySystem.POSDevEx
             XtraMessageBox.Show("Export Success");
         }
 
+        private void showCreditDetailsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            POSShowCreditDetails sowxcr = new POSShowCreditDetails();
+            sowxcr.Show();
+            if (comboBoxEdit1.Text == "XREAD" )
+            {
+                sowxcr.gridControl1.BeginUpdate();
+                sowxcr.gridView1.GroupSummary.Clear();
+                sowxcr.gridView1.Columns.Clear();
+                sowxcr.gridControl1.DataSource = null;
+                
+                Database.display($"SELECT * " +
+                    $"FROM dbo.vw_POSCreditCardTransactions " +
+                    $"WHERE TransactionCode='{gridView1.GetRowCellValue(gridView1.FocusedRowHandle,"CashierTransNo").ToString()}' " +
+                    $"And BranchCode='{gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "BranchCode").ToString()}' " +
+                    $"And MachineUsed='{gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "MachineUsed").ToString()}'",sowxcr.gridControl1,sowxcr.gridView1);
+                GridView view = sowxcr.gridControl1.FocusedView as GridView;
+                view.SortInfo.ClearAndAddRange(new GridColumnSortInfo[] {
+                 new GridColumnSortInfo(view.Columns["CCBank"],DevExpress.Data.ColumnSortOrder.Ascending)
+                }, 1);
+                view.ExpandAllGroups();
+
+                Classes.DevXGridViewSettings.ShowFooterTotal(sowxcr.gridView1, "Amount");
+                sowxcr.gridView1.BestFitColumns();
+                sowxcr.gridControl1.EndUpdate();
+               
+            }
+            else if (comboBoxEdit1.Text == "ZREAD")
+            {
+                string dateexecute = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "DateExecute").ToString();
+                //string endsi = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "EndingSINo").ToString();
+                sowxcr.gridControl1.BeginUpdate();
+                sowxcr.gridView1.GroupSummary.Clear();
+                sowxcr.gridView1.Columns.Clear();
+                sowxcr.gridControl1.DataSource = null;
+                Database.display($"SELECT * " +
+                    $"FROM dbo.vw_POSCreditCardTransactions " +
+                    $"WHERE DateAdded= '{dateexecute}'  " +
+                    $"And BranchCode='{gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "BranchCode").ToString()}' " +
+                    $"And MachineUsed='{gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "MachineUsed").ToString()}'", sowxcr.gridControl1, sowxcr.gridView1);
+                GridView view = sowxcr.gridControl1.FocusedView as GridView;
+                view.SortInfo.ClearAndAddRange(new GridColumnSortInfo[] {
+                 new GridColumnSortInfo(view.Columns["CCBank"],DevExpress.Data.ColumnSortOrder.Ascending)
+                }, 1);
+                view.ExpandAllGroups();
+
+                Classes.DevXGridViewSettings.ShowFooterTotal(sowxcr.gridView1, "Amount");
+                sowxcr.gridView1.BestFitColumns();
+                sowxcr.gridControl1.EndUpdate();
+                //sowxcr.ShowDialog(this);
+            }
+        }
+
         void execute(string reportcategory)
         {
             bool ispermachine = false, ispercashier = false;

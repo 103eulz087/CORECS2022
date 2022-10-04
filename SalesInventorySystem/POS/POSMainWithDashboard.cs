@@ -813,7 +813,7 @@ namespace SalesInventorySystem.POS
                 }
                 else
                 {
-                    query = "sp_AddSalesInvoice";
+                    query = "sp_AddSalesInvoiceResto";
                 }
 
                 string productcode = Database.getSingleQuery("Products", " Description='"+ selectedProductName +"' " +

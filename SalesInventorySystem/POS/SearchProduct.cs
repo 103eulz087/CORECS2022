@@ -79,7 +79,10 @@ namespace SalesInventorySystem
 
         private void display()
         {
-            Database.displayLocalGrid("SELECT ProductCode,Description,Barcode,FORMAT(SellingPrice,'N', 'en-us') as SellingPrice,FORMAT(Price1,'N', 'en-us') as Price1,FORMAT(Price2,'N', 'en-us') as Price2,FORMAT(Price3,'N', 'en-us') as Price3,FORMAT(Price4,'N', 'en-us') as Price4 FROM Products WHERE BranchCode='" + Login.assignedBranch + "' ORDER BY Description", dataGridView1);
+            Database.displayLocalGrid("SELECT ProductCode,Description,Barcode,FORMAT(SellingPrice,'N', 'en-us') as SellingPrice,FORMAT(Price1,'N', 'en-us') as Price1,FORMAT(Price2,'N', 'en-us') as Price2,FORMAT(Price3,'N', 'en-us') as Price3,FORMAT(Price4,'N', 'en-us') as Price4 " +
+                "FROM Products " +
+                "WHERE BranchCode='" + Login.assignedBranch + "' " +
+                "ORDER BY Description", dataGridView1);
         }
 
         private void dataGridView1_KeyDown(object sender, KeyEventArgs e)

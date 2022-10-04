@@ -323,7 +323,7 @@ namespace SalesInventorySystem.POS
                 }
                 else if (radmerchant.Checked.Equals(true))
                 {
-                    paymenttype = merchantpaytype;// "Merchant";
+                    paymenttype = "Merchant";// merchantpaytype;// 
                     customercode = "";
                     customercode = POSPaytoMerchant.merchantname;
 

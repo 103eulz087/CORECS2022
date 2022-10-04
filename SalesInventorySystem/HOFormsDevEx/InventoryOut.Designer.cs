@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.txtbrcode = new DevExpress.XtraEditors.SearchLookUpEdit();
             this.searchLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -39,6 +40,8 @@
             this.labelControl6 = new DevExpress.XtraEditors.LabelControl();
             this.txtbatchid = new DevExpress.XtraEditors.TextEdit();
             this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
+            this.txtremarks = new System.Windows.Forms.RichTextBox();
+            this.labelControl5 = new DevExpress.XtraEditors.LabelControl();
             this.btnconfirm = new DevExpress.XtraEditors.SimpleButton();
             this.btnrecover = new DevExpress.XtraEditors.SimpleButton();
             this.txtavailable = new DevExpress.XtraEditors.SpinEdit();
@@ -56,8 +59,11 @@
             this.advBandedGridView1 = new DevExpress.XtraGrid.Views.BandedGrid.AdvBandedGridView();
             this.gridBand1 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
             this.gridView3 = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.labelControl5 = new DevExpress.XtraEditors.LabelControl();
-            this.txtremarks = new System.Windows.Forms.RichTextBox();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.cancelLineToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.labelControl8 = new DevExpress.XtraEditors.LabelControl();
+            this.txtcategory = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.txtbrcode.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtproduct.Properties)).BeginInit();
@@ -76,6 +82,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.bandedGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.advBandedGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView3)).BeginInit();
+            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // labelControl1
@@ -197,6 +204,8 @@
             // 
             // groupControl1
             // 
+            this.groupControl1.Controls.Add(this.txtcategory);
+            this.groupControl1.Controls.Add(this.labelControl8);
             this.groupControl1.Controls.Add(this.txtremarks);
             this.groupControl1.Controls.Add(this.labelControl5);
             this.groupControl1.Controls.Add(this.btnconfirm);
@@ -221,12 +230,31 @@
             this.groupControl1.Location = new System.Drawing.Point(0, 0);
             this.groupControl1.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.groupControl1.Name = "groupControl1";
-            this.groupControl1.Size = new System.Drawing.Size(2080, 523);
+            this.groupControl1.Size = new System.Drawing.Size(2080, 573);
             this.groupControl1.TabIndex = 12;
+            // 
+            // txtremarks
+            // 
+            this.txtremarks.Location = new System.Drawing.Point(165, 386);
+            this.txtremarks.Name = "txtremarks";
+            this.txtremarks.Size = new System.Drawing.Size(553, 96);
+            this.txtremarks.TabIndex = 77;
+            this.txtremarks.Text = "";
+            // 
+            // labelControl5
+            // 
+            this.labelControl5.Appearance.Font = new System.Drawing.Font("Tahoma", 9.8F);
+            this.labelControl5.Appearance.Options.UseFont = true;
+            this.labelControl5.Location = new System.Drawing.Point(25, 425);
+            this.labelControl5.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.labelControl5.Name = "labelControl5";
+            this.labelControl5.Size = new System.Drawing.Size(94, 28);
+            this.labelControl5.TabIndex = 76;
+            this.labelControl5.Text = "Remarks:";
             // 
             // btnconfirm
             // 
-            this.btnconfirm.Location = new System.Drawing.Point(414, 459);
+            this.btnconfirm.Location = new System.Drawing.Point(414, 509);
             this.btnconfirm.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
             this.btnconfirm.Name = "btnconfirm";
             this.btnconfirm.Size = new System.Drawing.Size(155, 46);
@@ -236,7 +264,7 @@
             // 
             // btnrecover
             // 
-            this.btnrecover.Location = new System.Drawing.Point(737, 459);
+            this.btnrecover.Location = new System.Drawing.Point(737, 509);
             this.btnrecover.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
             this.btnrecover.Name = "btnrecover";
             this.btnrecover.Size = new System.Drawing.Size(155, 46);
@@ -251,7 +279,7 @@
             0,
             0,
             0});
-            this.txtavailable.Location = new System.Drawing.Point(165, 242);
+            this.txtavailable.Location = new System.Drawing.Point(165, 292);
             this.txtavailable.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.txtavailable.Name = "txtavailable";
             this.txtavailable.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 9.8F);
@@ -266,7 +294,7 @@
             // 
             this.labelControl3.Appearance.Font = new System.Drawing.Font("Tahoma", 9.8F);
             this.labelControl3.Appearance.Options.UseFont = true;
-            this.labelControl3.Location = new System.Drawing.Point(25, 246);
+            this.labelControl3.Location = new System.Drawing.Point(25, 296);
             this.labelControl3.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.labelControl3.Name = "labelControl3";
             this.labelControl3.Size = new System.Drawing.Size(97, 28);
@@ -287,7 +315,7 @@
             // btnnew
             // 
             this.btnnew.ImageOptions.Image = global::SalesInventorySystem.Properties.Resources.New_16x16__5_;
-            this.btnnew.Location = new System.Drawing.Point(165, 459);
+            this.btnnew.Location = new System.Drawing.Point(165, 509);
             this.btnnew.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
             this.btnnew.Name = "btnnew";
             this.btnnew.Size = new System.Drawing.Size(100, 46);
@@ -302,7 +330,7 @@
             0,
             0,
             0});
-            this.txtqty.Location = new System.Drawing.Point(165, 289);
+            this.txtqty.Location = new System.Drawing.Point(165, 339);
             this.txtqty.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.txtqty.Name = "txtqty";
             this.txtqty.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 9.8F);
@@ -316,7 +344,7 @@
             // 
             this.labelControl7.Appearance.Font = new System.Drawing.Font("Tahoma", 9.8F);
             this.labelControl7.Appearance.Options.UseFont = true;
-            this.labelControl7.Location = new System.Drawing.Point(25, 295);
+            this.labelControl7.Location = new System.Drawing.Point(25, 345);
             this.labelControl7.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.labelControl7.Name = "labelControl7";
             this.labelControl7.Size = new System.Drawing.Size(94, 28);
@@ -327,7 +355,7 @@
             // btncancel
             // 
             this.btncancel.ImageOptions.Image = global::SalesInventorySystem.Properties.Resources.Cancel_16x16__2_;
-            this.btncancel.Location = new System.Drawing.Point(579, 459);
+            this.btncancel.Location = new System.Drawing.Point(579, 509);
             this.btncancel.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
             this.btncancel.Name = "btncancel";
             this.btncancel.Size = new System.Drawing.Size(148, 46);
@@ -338,7 +366,7 @@
             // btnadd
             // 
             this.btnadd.ImageOptions.Image = global::SalesInventorySystem.Properties.Resources.Add_16x16__2_;
-            this.btnadd.Location = new System.Drawing.Point(273, 459);
+            this.btnadd.Location = new System.Drawing.Point(273, 509);
             this.btnadd.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
             this.btnadd.Name = "btnadd";
             this.btnadd.Size = new System.Drawing.Size(131, 46);
@@ -350,10 +378,10 @@
             // 
             this.groupControl2.Controls.Add(this.gridControl1);
             this.groupControl2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupControl2.Location = new System.Drawing.Point(0, 523);
+            this.groupControl2.Location = new System.Drawing.Point(0, 573);
             this.groupControl2.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.groupControl2.Name = "groupControl2";
-            this.groupControl2.Size = new System.Drawing.Size(2080, 629);
+            this.groupControl2.Size = new System.Drawing.Size(2080, 579);
             this.groupControl2.TabIndex = 13;
             // 
             // gridControl1
@@ -364,13 +392,14 @@
             this.gridControl1.MainView = this.gridView2;
             this.gridControl1.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
             this.gridControl1.Name = "gridControl1";
-            this.gridControl1.Size = new System.Drawing.Size(2074, 587);
+            this.gridControl1.Size = new System.Drawing.Size(2074, 537);
             this.gridControl1.TabIndex = 5;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView2,
             this.bandedGridView1,
             this.advBandedGridView1,
             this.gridView3});
+            this.gridControl1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.gridControl1_MouseUp);
             // 
             // gridView2
             // 
@@ -420,24 +449,46 @@
             this.gridView3.GridControl = this.gridControl1;
             this.gridView3.Name = "gridView3";
             // 
-            // labelControl5
+            // contextMenuStrip1
             // 
-            this.labelControl5.Appearance.Font = new System.Drawing.Font("Tahoma", 9.8F);
-            this.labelControl5.Appearance.Options.UseFont = true;
-            this.labelControl5.Location = new System.Drawing.Point(25, 375);
-            this.labelControl5.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
-            this.labelControl5.Name = "labelControl5";
-            this.labelControl5.Size = new System.Drawing.Size(94, 28);
-            this.labelControl5.TabIndex = 76;
-            this.labelControl5.Text = "Remarks:";
+            this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(28, 28);
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cancelLineToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(193, 38);
             // 
-            // txtremarks
+            // cancelLineToolStripMenuItem
             // 
-            this.txtremarks.Location = new System.Drawing.Point(165, 336);
-            this.txtremarks.Name = "txtremarks";
-            this.txtremarks.Size = new System.Drawing.Size(553, 96);
-            this.txtremarks.TabIndex = 77;
-            this.txtremarks.Text = "";
+            this.cancelLineToolStripMenuItem.Name = "cancelLineToolStripMenuItem";
+            this.cancelLineToolStripMenuItem.Size = new System.Drawing.Size(192, 34);
+            this.cancelLineToolStripMenuItem.Text = "Cancel Line";
+            this.cancelLineToolStripMenuItem.Click += new System.EventHandler(this.cancelLineToolStripMenuItem_Click);
+            // 
+            // contextMenuStrip2
+            // 
+            this.contextMenuStrip2.ImageScalingSize = new System.Drawing.Size(28, 28);
+            this.contextMenuStrip2.Name = "contextMenuStrip2";
+            this.contextMenuStrip2.Size = new System.Drawing.Size(61, 4);
+            // 
+            // labelControl8
+            // 
+            this.labelControl8.Appearance.Font = new System.Drawing.Font("Tahoma", 9.8F);
+            this.labelControl8.Appearance.Options.UseFont = true;
+            this.labelControl8.Location = new System.Drawing.Point(25, 244);
+            this.labelControl8.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.labelControl8.Name = "labelControl8";
+            this.labelControl8.Size = new System.Drawing.Size(98, 28);
+            this.labelControl8.TabIndex = 78;
+            this.labelControl8.Text = "Category:";
+            // 
+            // txtcategory
+            // 
+            this.txtcategory.Font = new System.Drawing.Font("Tahoma", 11.14286F);
+            this.txtcategory.FormattingEnabled = true;
+            this.txtcategory.Location = new System.Drawing.Point(165, 244);
+            this.txtcategory.Name = "txtcategory";
+            this.txtcategory.Size = new System.Drawing.Size(309, 39);
+            this.txtcategory.TabIndex = 79;
             // 
             // InventoryOut
             // 
@@ -470,6 +521,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.bandedGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.advBandedGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView3)).EndInit();
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -506,5 +558,10 @@
         private DevExpress.XtraEditors.SimpleButton btnconfirm;
         private DevExpress.XtraEditors.LabelControl labelControl5;
         public System.Windows.Forms.RichTextBox txtremarks;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip2;
+        private System.Windows.Forms.ToolStripMenuItem cancelLineToolStripMenuItem;
+        private System.Windows.Forms.ComboBox txtcategory;
+        private DevExpress.XtraEditors.LabelControl labelControl8;
     }
 }

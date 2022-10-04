@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.gridControl1 = new DevExpress.XtraGrid.GridControl();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -42,9 +43,8 @@
             this.dateFrom = new DevExpress.XtraEditors.DateEdit();
             this.txtbranch = new DevExpress.XtraEditors.SearchLookUpEdit();
             this.searchLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.txtbatchid = new DevExpress.XtraEditors.SearchLookUpEdit();
-            this.gridView2 = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.labelControl4 = new DevExpress.XtraEditors.LabelControl();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.showDetailsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
@@ -56,19 +56,18 @@
             ((System.ComponentModel.ISupportInitialize)(this.dateFrom.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtbranch.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtbatchid.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView2)).BeginInit();
+            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.gridControl1);
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox2.Location = new System.Drawing.Point(0, 204);
+            this.groupBox2.Location = new System.Drawing.Point(0, 153);
             this.groupBox2.Margin = new System.Windows.Forms.Padding(6);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(6);
-            this.groupBox2.Size = new System.Drawing.Size(2072, 978);
+            this.groupBox2.Size = new System.Drawing.Size(2072, 1029);
             this.groupBox2.TabIndex = 13;
             this.groupBox2.TabStop = false;
             // 
@@ -80,10 +79,11 @@
             this.gridControl1.MainView = this.gridView1;
             this.gridControl1.Margin = new System.Windows.Forms.Padding(6);
             this.gridControl1.Name = "gridControl1";
-            this.gridControl1.Size = new System.Drawing.Size(2060, 943);
+            this.gridControl1.Size = new System.Drawing.Size(2060, 994);
             this.gridControl1.TabIndex = 1;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
+            this.gridControl1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.gridControl1_MouseUp);
             // 
             // gridView1
             // 
@@ -113,8 +113,6 @@
             // 
             // groupControl1
             // 
-            this.groupControl1.Controls.Add(this.labelControl4);
-            this.groupControl1.Controls.Add(this.txtbatchid);
             this.groupControl1.Controls.Add(this.btnexport);
             this.groupControl1.Controls.Add(this.btnprint);
             this.groupControl1.Controls.Add(this.btnadd);
@@ -128,17 +126,17 @@
             this.groupControl1.Location = new System.Drawing.Point(0, 0);
             this.groupControl1.Margin = new System.Windows.Forms.Padding(6);
             this.groupControl1.Name = "groupControl1";
-            this.groupControl1.Size = new System.Drawing.Size(2072, 204);
+            this.groupControl1.Size = new System.Drawing.Size(2072, 153);
             this.groupControl1.TabIndex = 14;
             // 
             // btnexport
             // 
             this.btnexport.ImageOptions.Image = global::SalesInventorySystem.Properties.Resources.ExportToExcel_32x32;
             this.btnexport.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnexport.Location = new System.Drawing.Point(1036, 92);
+            this.btnexport.Location = new System.Drawing.Point(1038, 60);
             this.btnexport.Margin = new System.Windows.Forms.Padding(6);
             this.btnexport.Name = "btnexport";
-            this.btnexport.Size = new System.Drawing.Size(231, 93);
+            this.btnexport.Size = new System.Drawing.Size(231, 77);
             this.btnexport.TabIndex = 81;
             this.btnexport.Text = "Export to Excel";
             this.btnexport.Click += new System.EventHandler(this.btnexport_Click);
@@ -147,10 +145,10 @@
             // 
             this.btnprint.ImageOptions.Image = global::SalesInventorySystem.Properties.Resources.Print_32x32__2_;
             this.btnprint.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnprint.Location = new System.Drawing.Point(793, 93);
+            this.btnprint.Location = new System.Drawing.Point(795, 61);
             this.btnprint.Margin = new System.Windows.Forms.Padding(6);
             this.btnprint.Name = "btnprint";
-            this.btnprint.Size = new System.Drawing.Size(231, 93);
+            this.btnprint.Size = new System.Drawing.Size(231, 77);
             this.btnprint.TabIndex = 80;
             this.btnprint.Text = "Print";
             this.btnprint.Click += new System.EventHandler(this.btnprint_Click);
@@ -159,10 +157,10 @@
             // 
             this.btnadd.ImageOptions.Image = global::SalesInventorySystem.Properties.Resources.GenerateData_32x32;
             this.btnadd.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnadd.Location = new System.Drawing.Point(550, 93);
+            this.btnadd.Location = new System.Drawing.Point(552, 61);
             this.btnadd.Margin = new System.Windows.Forms.Padding(6);
             this.btnadd.Name = "btnadd";
-            this.btnadd.Size = new System.Drawing.Size(231, 93);
+            this.btnadd.Size = new System.Drawing.Size(231, 77);
             this.btnadd.TabIndex = 79;
             this.btnadd.Text = "Add (Enter)";
             this.btnadd.Click += new System.EventHandler(this.btnadd_Click);
@@ -250,37 +248,20 @@
             this.searchLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = false;
             this.searchLookUpEdit1View.OptionsView.ShowGroupPanel = false;
             // 
-            // txtbatchid
+            // contextMenuStrip1
             // 
-            this.txtbatchid.Location = new System.Drawing.Point(109, 150);
-            this.txtbatchid.Margin = new System.Windows.Forms.Padding(6);
-            this.txtbatchid.Name = "txtbatchid";
-            this.txtbatchid.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.txtbatchid.Properties.NullText = "";
-            this.txtbatchid.Properties.PopupView = this.gridView2;
-            this.txtbatchid.Size = new System.Drawing.Size(429, 36);
-            this.txtbatchid.TabIndex = 82;
+            this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(28, 28);
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.showDetailsToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(271, 76);
             // 
-            // gridView2
+            // showDetailsToolStripMenuItem
             // 
-            this.gridView2.DetailHeight = 525;
-            this.gridView2.FixedLineWidth = 3;
-            this.gridView2.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
-            this.gridView2.Name = "gridView2";
-            this.gridView2.OptionsSelection.EnableAppearanceFocusedCell = false;
-            this.gridView2.OptionsView.ShowGroupPanel = false;
-            // 
-            // labelControl4
-            // 
-            this.labelControl4.Appearance.Font = new System.Drawing.Font("Tahoma", 9.25F);
-            this.labelControl4.Appearance.Options.UseFont = true;
-            this.labelControl4.Location = new System.Drawing.Point(20, 153);
-            this.labelControl4.Margin = new System.Windows.Forms.Padding(6);
-            this.labelControl4.Name = "labelControl4";
-            this.labelControl4.Size = new System.Drawing.Size(85, 27);
-            this.labelControl4.TabIndex = 83;
-            this.labelControl4.Text = "Batch #:";
+            this.showDetailsToolStripMenuItem.Name = "showDetailsToolStripMenuItem";
+            this.showDetailsToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.showDetailsToolStripMenuItem.Text = "Show Details";
+            this.showDetailsToolStripMenuItem.Click += new System.EventHandler(this.showDetailsToolStripMenuItem_Click);
             // 
             // BadOrderReport
             // 
@@ -304,8 +285,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dateFrom.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtbranch.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtbatchid.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView2)).EndInit();
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -326,8 +306,7 @@
         private DevExpress.XtraGrid.Views.Grid.GridView searchLookUpEdit1View;
         private DevExpress.XtraEditors.SimpleButton btnprint;
         private DevExpress.XtraEditors.SimpleButton btnexport;
-        private DevExpress.XtraEditors.SearchLookUpEdit txtbatchid;
-        private DevExpress.XtraGrid.Views.Grid.GridView gridView2;
-        private DevExpress.XtraEditors.LabelControl labelControl4;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem showDetailsToolStripMenuItem;
     }
 }
