@@ -31,7 +31,7 @@ namespace SalesInventorySystem.Reporting
 
         void print()
         {
-              
+            //string vatablesales, vatexemptsales, vatamount, addvat;
             string remarks = Database.getSingleQuery($"SELECT TOP(1) Remarks FROM dbo.TransactionChargeSales WHERE ReferenceNo='{txtpono.Text}' AND BranchCode='{Login.assignedBranch}'","Remarks");
             bool isOnetimeDiscount = Database.checkifExist($"SELECT TOP(1) OrderNo FROM dbo.SalesDiscount WHERE OrderNo='{txtpono.Text}' and isErrorCorrect=0 and BranchCode='{Login.assignedBranch}'");
             string controlno = "";
@@ -74,6 +74,8 @@ namespace SalesInventorySystem.Reporting
 
             xct.xrlblvatablesales.Text = String.Format("{0:0,0.00}", Convert.ToDouble(txtvatablesale.Text));
             xct.xrlblvatexemptsales.Text = String.Format("{0:0,0.00}", Convert.ToDouble(txtvatexemptsale.Text));
+            //zero rated
+            xct.xrlblzeroratedsales.Text = String.Format("{0:0,0.00}", Convert.ToDouble(txtzeroratedsale.Text));
             xct.xrlblvatamount.Text = String.Format("{0:0,0.00}", Convert.ToDouble(txtvatamount.Text));
             xct.xrlbltotalsales.Text = String.Format("{0:0,0.00}", Convert.ToDouble(txttotalsales.Text));
             xct.xrlbllessvat.Text = String.Format("{0:0,0.00}", Convert.ToDouble(txtlessvat.Text));
@@ -86,6 +88,8 @@ namespace SalesInventorySystem.Reporting
             xct.Bands[BandKind.Detail].Font = new System.Drawing.Font("Tahoma", 10);
             ReportPrintTool report = new ReportPrintTool(xct);
             report.ShowRibbonPreviewDialog();
+
+          
         }
      
         private void groupBox1_Enter(object sender, EventArgs e)

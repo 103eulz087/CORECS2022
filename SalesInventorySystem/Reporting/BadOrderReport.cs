@@ -120,6 +120,7 @@ namespace SalesInventorySystem.Reporting
             BadOrderReportDetails rep = new BadOrderReportDetails();
             Database.display($"SELECT * FROM [dbo].[view_StockOutDetails] WHERE ID='{gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "BatchID").ToString()}' ", rep.gridControl1, rep.gridView1);
             BadOrderReportDetails.brcode = txtbranch.Text;
+            BadOrderReportDetails.dateencode = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "DateAdded").ToString();
             BadOrderReportDetails.reportype = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "Category").ToString();
             BadOrderReportDetails.batchid = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "BatchID").ToString();
             rep.ShowDialog(this);

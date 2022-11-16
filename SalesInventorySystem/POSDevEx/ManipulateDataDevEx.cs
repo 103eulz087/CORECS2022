@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using DevExpress.XtraEditors;
 using System.Threading;
 using System.Data.SqlClient;
+using DevExpress.XtraGrid.Views.Grid;
 
 namespace SalesInventorySystem.POSDevEx
 {
@@ -163,6 +164,40 @@ namespace SalesInventorySystem.POSDevEx
             //    gridView3.SetRowCellValue(i, "NewQty", newqty);
             //    gridView3.SetRowCellValue(i, "NewTotalAmount", newtotal);
             //}
+        }
+
+        private void gridView3_RowCellStyle(object sender, DevExpress.XtraGrid.Views.Grid.RowCellStyleEventArgs e)
+        {
+            //if (e.Column.FieldName == "TotalItem")
+            //{
+            //    if (Convert.ToDouble(e.CellValue) == 1)
+            //    {
+            //        e.Appearance.ForeColor = Color.Red;
+            //    }
+            //}
+           
+        }
+
+        private void gridView3_RowStyle(object sender, DevExpress.XtraGrid.Views.Grid.RowStyleEventArgs e)
+        {
+            GridView view = sender as GridView;
+            if (e.RowHandle >= 0)
+            {
+                string totalitems = view.GetRowCellDisplayText(e.RowHandle, view.Columns["TotalItems"]);
+                string totalvatableitems = view.GetRowCellDisplayText(e.RowHandle, view.Columns["TotalVatableItems"]);
+                if (totalitems == "1")
+                {
+                    // e.Appearance.Font = new Font(e.Appearance.Font, FontStyle.Bold);
+                    e.Appearance.BackColor = Color.Salmon;
+                    e.Appearance.BackColor2 = Color.SeaShell;
+                }
+                if (totalitems != "1" && totalvatableitems == "0")
+                {
+                    //   e.Appearance.Font = new Font(e.Appearance.Font, FontStyle.Bold);
+                    e.Appearance.BackColor = Color.LightCyan;
+                    e.Appearance.BackColor2 = Color.LightBlue;
+                }
+            }
         }
 
         private void timer1_Tick(object sender, EventArgs e)

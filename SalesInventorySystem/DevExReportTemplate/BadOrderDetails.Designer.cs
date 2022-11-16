@@ -42,9 +42,7 @@
             this.xrLabel7 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel5 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel6 = new DevExpress.XtraReports.UI.XRLabel();
-            this.xrdateto = new DevExpress.XtraReports.UI.XRLabel();
             this.xrdatefrom = new DevExpress.XtraReports.UI.XRLabel();
-            this.xrLabel4 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel3 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel2 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrbranchname = new DevExpress.XtraReports.UI.XRLabel();
@@ -133,9 +131,7 @@
             this.xrLabel7,
             this.xrLabel5,
             this.xrLabel6,
-            this.xrdateto,
             this.xrdatefrom,
-            this.xrLabel4,
             this.xrLabel3,
             this.xrLabel2,
             this.xrbranchname});
@@ -189,22 +185,10 @@
             this.xrLabel6.Text = "HEAD OFFICE";
             this.xrLabel6.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
             // 
-            // xrdateto
-            // 
-            this.xrdateto.Font = new System.Drawing.Font("Tahoma", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.xrdateto.LocationFloat = new DevExpress.Utils.PointFloat(295.2379F, 46.00002F);
-            this.xrdateto.Name = "xrdateto";
-            this.xrdateto.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
-            this.xrdateto.SizeF = new System.Drawing.SizeF(86.0119F, 23F);
-            this.xrdateto.StylePriority.UseFont = false;
-            this.xrdateto.StylePriority.UseTextAlignment = false;
-            this.xrdateto.Text = "12/12/2022";
-            this.xrdateto.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
-            // 
             // xrdatefrom
             // 
             this.xrdatefrom.Font = new System.Drawing.Font("Tahoma", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.xrdatefrom.LocationFloat = new DevExpress.Utils.PointFloat(145.9821F, 46.00002F);
+            this.xrdatefrom.LocationFloat = new DevExpress.Utils.PointFloat(97.9166F, 46.00002F);
             this.xrdatefrom.Name = "xrdatefrom";
             this.xrdatefrom.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
             this.xrdatefrom.SizeF = new System.Drawing.SizeF(86.0119F, 23F);
@@ -213,28 +197,16 @@
             this.xrdatefrom.Text = "12/12/2022";
             this.xrdatefrom.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
             // 
-            // xrLabel4
-            // 
-            this.xrLabel4.Font = new System.Drawing.Font("Tahoma", 9.25F, System.Drawing.FontStyle.Bold);
-            this.xrLabel4.LocationFloat = new DevExpress.Utils.PointFloat(231.9939F, 46.00002F);
-            this.xrLabel4.Name = "xrLabel4";
-            this.xrLabel4.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
-            this.xrLabel4.SizeF = new System.Drawing.SizeF(63.24397F, 23F);
-            this.xrLabel4.StylePriority.UseFont = false;
-            this.xrLabel4.StylePriority.UseTextAlignment = false;
-            this.xrLabel4.Text = "Date To:";
-            this.xrLabel4.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
-            // 
             // xrLabel3
             // 
             this.xrLabel3.Font = new System.Drawing.Font("Tahoma", 9.25F, System.Drawing.FontStyle.Bold);
             this.xrLabel3.LocationFloat = new DevExpress.Utils.PointFloat(0F, 46.00002F);
             this.xrLabel3.Name = "xrLabel3";
             this.xrLabel3.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
-            this.xrLabel3.SizeF = new System.Drawing.SizeF(145.9821F, 23F);
+            this.xrLabel3.SizeF = new System.Drawing.SizeF(97.9166F, 23F);
             this.xrLabel3.StylePriority.UseFont = false;
             this.xrLabel3.StylePriority.UseTextAlignment = false;
-            this.xrLabel3.Text = "Date Processed From:";
+            this.xrLabel3.Text = "Date Encode:";
             this.xrLabel3.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
             // 
             // xrLabel2
@@ -373,8 +345,6 @@
         private DevExpress.XtraReports.UI.XRLabel xrLabel2;
         public DevExpress.XtraReports.UI.XRLabel xrbranchname;
         private DevExpress.XtraReports.UI.XRLabel xrLabel3;
-        private DevExpress.XtraReports.UI.XRLabel xrLabel4;
-        public DevExpress.XtraReports.UI.XRLabel xrdateto;
         public DevExpress.XtraReports.UI.XRLabel xrdatefrom;
         private DevExpress.XtraReports.UI.ReportFooterBand ReportFooter;
         public DevExpress.XtraReports.UI.XRLabel xrLabel13;

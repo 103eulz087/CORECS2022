@@ -134,6 +134,54 @@ namespace SalesInventorySystem.Classes
             }
             return details;
         }
+        public static string doHeaderB2(string branchcode, string machinename)
+        {
+            String details = "";
+            try
+            {
+               
+                var row = Database.getMultipleQuery("POSInfoDetails", $"BranchCode = '{branchcode}' " +
+                //var row = Database.getMultipleQuery("POSInfoDetails", "BranchCode='" + branchcode + "' " +
+                    "AND MachineUsed='" + machinename + "' ", "BusinessName" +
+                   ",BusinessAddress   " +
+                   ",TINNo   " +
+                   ",MachineUsed       " +
+                   ",AccreditationNo   " +
+                   ",DateIssued        " +
+                   ",SerialNo          " +
+                   ",RegTransactionNo  " +
+                   ",DateApplication   " +
+                   ",PermitNumber      " +
+                   ",MINNo             " +
+                   ",DatePermitStart   " +
+                   ",DatePermitEnd     ");
+
+                string tradename = row["BusinessName"].ToString();
+                string posname = row["MachineUsed"].ToString();
+                string compaddress1 = row["BusinessAddress"].ToString();
+                //string compaddress2 = row["Address2"].ToString();
+                string comptinno = row["TINNo"].ToString();
+                string compminno = row["MINNo"].ToString();
+                string compbirpermitno = row["PermitNumber"].ToString();
+                string compserialno = row["SerialNo"].ToString();
+
+
+
+                string tinno = "TIN:" + comptinno;
+                string sn = "S/N:" + compserialno;
+                details += HelperFunction.PrintCenterText(tradename) + Environment.NewLine;
+                details += HelperFunction.PrintCenterText(compaddress1) + Environment.NewLine;
+                //details += HelperFunction.PrintCenterText(compaddress2) + Environment.NewLine;
+                details += HelperFunction.PrintCenterText("TIN: " + comptinno) + Environment.NewLine; 
+                details += HelperFunction.PrintCenterText(sn) + Environment.NewLine;
+                details += HelperFunction.PrintCenterText("MIN: " + compminno) + Environment.NewLine + Environment.NewLine;
+            }
+            catch(Exception ex)
+            {
+                XtraMessageBox.Show(ex.Message.ToString());
+            }
+            return details;
+        }
 
         public static string doHeaderDetails(string ordercode, string transcode, string terminalno)
         {
@@ -199,13 +247,15 @@ namespace SalesInventorySystem.Classes
             details += HelperFunction.PrintLeftText("TIN: " + tin) + Environment.NewLine;
             details += HelperFunction.PrintLeftText("Business Style : " + businesstype) + Environment.NewLine + Environment.NewLine;
             return details;
-        }public static string doHeaderDetailsX(string ordercode, string terminalno, string name, string address, string tin, string businesstype,string dateBuy,string timeBuy)
+        }public static string doHeaderDetailsX(string cashiername,string ordercode, string terminalno, string name, string address, string tin, string businesstype,string dateBuy,string timeBuy)
         {
             String details = "";
-            string cashier = "CASHIER : " + Login.Fullname;
+            string cashier = "CASHIER : " + cashiername;// Login.Fullname;
             string custno = "CUST #: " + PointOfSale.custcode;
             details += HelperFunction.PrintLeftRigthText(cashier, custno) + Environment.NewLine;
-            details += HelperFunction.PrintLeftText("SI No.: " + ordercode) + Environment.NewLine; 
+            
+            details += HelperFunction.PrintLeftText("SI No.: " + ordercode) + Environment.NewLine;
+            //details += HelperFunction.PrintLeftText("Tran#: "+ custno) + Environment.NewLine;
             //string trans = "TRAN#: " + transcode;
             //string orderr = "SI No: " + ordercode;
             //details += HelperFunction.PrintLeftRigthText(orderr, trans) + Environment.NewLine;
@@ -236,7 +286,7 @@ namespace SalesInventorySystem.Classes
             DateTime dt = DateTime.Now;
             string format = "dd-MMM-yyyy ddd hh:mm:ss tt";
             //string fulldate = String.Format("{dd-MMM-yyyy ddd hh:mm:ss tt}", dt);
-            details += HelperFunction.PrintLeftText("Date:" + dt.ToString(format)) + Environment.NewLine + Environment.NewLine;
+            details += HelperFunction.PrintLeftText("Date:" + Convert.ToDateTime(dateBuy).ToString(format)) + Environment.NewLine + Environment.NewLine;
             // details += HelperFunction.PrintLeftText("v896 Terminal#: " + terminalno) + Environment.NewLine;
             details += HelperFunction.PrintLeftText("NAME : " + name) + Environment.NewLine;
             details += HelperFunction.PrintLeftText("ADDRESS : " + address) + Environment.NewLine;

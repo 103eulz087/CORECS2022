@@ -557,6 +557,7 @@ namespace SalesInventorySystem.POS
             custterm = row["Term"].ToString();
             TinNo = row["TinNo"].ToString();
 
+
             Reporting.SalesInvoiceDexEx viewdet = new Reporting.SalesInvoiceDexEx();
 
 
@@ -569,7 +570,7 @@ namespace SalesInventorySystem.POS
             viewdet.txtterm.Text = custterm;
             viewdet.txtcusttin.Text = TinNo;
 
-            double vatablesales = 0.0, vatexemptsale = 0.0, vatamount = 0.0, totalsales = 0.0, lessvat = 0.0, netofvat = 0.0, amountdue = 0.0, addvat = 0.0, vatsales = 0.0, totalamountdue = 0.0;
+            double vatablesales = 0.0, vatexemptsale = 0.0, zeroratedsale = 0.0,vatamount = 0.0, totalsales = 0.0, lessvat = 0.0, netofvat = 0.0, amountdue = 0.0, addvat = 0.0, vatsales = 0.0, totalamountdue = 0.0;
             for (int i = 0; i <= viewdet.gridView4.RowCount - 1; i++)
             {
                 if (Convert.ToBoolean(viewdet.gridView4.GetRowCellValue(i, "isVat").ToString()) == true)
@@ -581,21 +582,40 @@ namespace SalesInventorySystem.POS
                     vatexemptsale += Convert.ToDouble(viewdet.gridView4.GetRowCellValue(i, "Amount").ToString());
                 }
             }
-
+            bool isZeroRated = Database.checkifExist($"SELECT TOP(1) * FROM dbo.BatchSalesSummary WHERE ReferenceNo='{lblorderno.Text}' AND BranchCode='{Login.assignedBranch}' AND ZeroRatedSale<>0");
             bool isOnetimeDiscount = Database.checkifExist($"SELECT TOP(1) OrderNo FROM dbo.SalesDiscount WHERE OrderNo='{lblorderno.Text}' and isErrorCorrect=0");
-            if(!isOnetimeDiscount)
+            if(!isOnetimeDiscount) 
             {
-                vatsales = Math.Round(vatablesales / 1.12, 2);
-                vatamount = Math.Round(vatsales * 0.12, 2);
-                totalsales = Math.Round(vatablesales + vatexemptsale, 2);
-                lessvat = vatamount;
-                netofvat = totalsales - vatamount;
-                amountdue = netofvat;
-                addvat = vatamount;
-                totalamountdue = totalsales;
+                if (!isZeroRated) //exists
+                {
+                    vatsales = Math.Round(vatablesales / 1.12, 2);
+                    vatamount = Math.Round(vatsales * 0.12, 2);
+                    totalsales = Math.Round(vatablesales + vatexemptsale, 2);
+                    lessvat = vatamount;
+                    netofvat = totalsales - vatamount;
+                    amountdue = netofvat;
+                    addvat = vatamount;
+                    totalamountdue = totalsales;
+                }
+                else
+                {
+                    vatsales = 0;
+                    vatamount = 0;
+                   
+                    totalsales = Math.Round(vatablesales + vatexemptsale, 2);
+                    zeroratedsale = totalsales;
+
+                    lessvat = 0;
+                    netofvat = 0;
+                    amountdue = totalsales;
+                    addvat = 0;
+                    totalamountdue = totalsales;
+                }
 
                 viewdet.txtvatablesale.Text = vatsales.ToString();
                 viewdet.txtvatexemptsale.Text = vatexemptsale.ToString();
+                //zero rated
+                viewdet.txtzeroratedsale.Text = zeroratedsale.ToString();
                 viewdet.txtvatamount.Text = vatamount.ToString();
                 viewdet.txttotalsales.Text = totalsales.ToString();
                 viewdet.txtlessvat.Text = lessvat.ToString();
@@ -605,19 +625,38 @@ namespace SalesInventorySystem.POS
                 viewdet.txttotalamountdue.Text = totalamountdue.ToString();
                 viewdet.ShowDialog(this);
             }
-            else
+            else //SNIOR PWD REGULAR
             {
                 string netOfVatAfterNonOneTimeDisc = Database.getSingleResultSet("SELECT dbo.func_getNetOfVatInNonDiscountedItems('" + Login.assignedBranch + "','" + lblorderno.Text + "')");
                 string netofvatafteronetimedisc = Database.getSingleResultSet("SELECT dbo.func_getNetOfVatInDiscountedItems('" + Login.assignedBranch + "','" + lblorderno.Text + "')");
                 double lessscdisc = 0.0, netofscdisc = 0.0, netofnonscdisc = 0.0;//,  totaltotal = 0.0;
-                netofnonscdisc = Convert.ToDouble(netOfVatAfterNonOneTimeDisc); //netOfVatAfterNonOneTimeDisc
-                lessvat = Math.Round(Convert.ToDouble(netofvatafteronetimedisc) * 0.12, 2); //netofvatafteronetimedisc
-                netofvat = Math.Round(Convert.ToDouble(netofvatafteronetimedisc), 2);
-                lessscdisc = Math.Round(netofvat * Convert.ToDouble(0.12), 2);
-                netofscdisc = Math.Round(netofvat - lessscdisc, 2);
-                amountdue = Math.Round(netofscdisc + addvat, 2); ; //totaltotal = Math.Round(netofscdisc + addvat, 2);
-                addvat = Math.Round(netofscdisc * .12, 2);
-                totalamountdue = Convert.ToDouble(netamountpayable);
+
+                if (!isZeroRated) //exists
+                {
+                    netofnonscdisc = Convert.ToDouble(netOfVatAfterNonOneTimeDisc); //netOfVatAfterNonOneTimeDisc
+                    lessvat = Math.Round(Convert.ToDouble(netofvatafteronetimedisc) * 0.12, 2); //netofvatafteronetimedisc
+                    netofvat = Math.Round(Convert.ToDouble(netofvatafteronetimedisc), 2);
+                    lessscdisc = Math.Round(netofvat * Convert.ToDouble(0.12), 2);
+                    netofscdisc = Math.Round(netofvat - lessscdisc, 2);
+                    amountdue = Math.Round(netofscdisc + addvat, 2); ; //totaltotal = Math.Round(netofscdisc + addvat, 2);
+                    addvat = Math.Round(netofscdisc * .12, 2);
+                    totalamountdue = Convert.ToDouble(netamountpayable);
+                }
+                else
+                {
+                    vatsales = 0;
+                    vatamount = 0;
+
+                    totalsales = Math.Round(vatablesales + vatexemptsale, 2);
+                    zeroratedsale = totalsales;
+
+                    lessvat = 0;
+                    netofvat = 0;
+                    amountdue = totalsales;
+                    addvat = 0;
+                    totalamountdue = totalsales;
+                }
+              
 
 
                 double totalvatableSales = netofscdisc + netofnonscdisc; //**
@@ -634,6 +673,7 @@ namespace SalesInventorySystem.POS
                 viewdet.txtvatablesale.Text = totalvatableSales.ToString();
                 viewdet.txtvatexemptsale.Text = vatexemptsale.ToString();
                 //zero rated sale
+                viewdet.txtzeroratedsale.Text = zeroratedsale.ToString();
                 viewdet.txtvatamount.Text = totalVatInputSale.ToString();
                 viewdet.txttotalsales.Text = Math.Round(vatablesales,2).ToString();//totalsales.ToString();
                 viewdet.txtlessvat.Text = lessvat.ToString();

@@ -39,6 +39,7 @@
             this.gridControl1 = new DevExpress.XtraGrid.GridControl();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
+            this.simpleButton8 = new DevExpress.XtraEditors.SimpleButton();
             this.txtcashier = new DevExpress.XtraEditors.SearchLookUpEdit();
             this.gridView9 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.labelControl26 = new DevExpress.XtraEditors.LabelControl();
@@ -310,6 +311,7 @@
             // 
             this.groupControl1.Appearance.Font = new System.Drawing.Font("Arial", 9.25F);
             this.groupControl1.Appearance.Options.UseFont = true;
+            this.groupControl1.Controls.Add(this.simpleButton8);
             this.groupControl1.Controls.Add(this.txtcashier);
             this.groupControl1.Controls.Add(this.labelControl26);
             this.groupControl1.Controls.Add(this.rad3);
@@ -336,6 +338,19 @@
             this.groupControl1.Size = new System.Drawing.Size(2198, 377);
             this.groupControl1.TabIndex = 0;
             this.groupControl1.Paint += new System.Windows.Forms.PaintEventHandler(this.groupControl1_Paint);
+            // 
+            // simpleButton8
+            // 
+            this.simpleButton8.Appearance.Font = new System.Drawing.Font("Arial", 10.25F);
+            this.simpleButton8.Appearance.Options.UseFont = true;
+            this.simpleButton8.ImageOptions.Image = global::SalesInventorySystem.Properties.Resources.Show_32x32__2_;
+            this.simpleButton8.Location = new System.Drawing.Point(801, 260);
+            this.simpleButton8.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.simpleButton8.Name = "simpleButton8";
+            this.simpleButton8.Size = new System.Drawing.Size(281, 95);
+            this.simpleButton8.TabIndex = 43;
+            this.simpleButton8.Text = "Generate E-Journal";
+            this.simpleButton8.Click += new System.EventHandler(this.simpleButton8_Click);
             // 
             // txtcashier
             // 
@@ -442,7 +457,7 @@
             this.simpleButton7.Appearance.Options.UseFont = true;
             this.simpleButton7.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("simpleButton7.ImageOptions.Image")));
             this.simpleButton7.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.simpleButton7.Location = new System.Drawing.Point(1049, 260);
+            this.simpleButton7.Location = new System.Drawing.Point(1338, 260);
             this.simpleButton7.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.simpleButton7.Name = "simpleButton7";
             this.simpleButton7.Size = new System.Drawing.Size(198, 95);
@@ -491,7 +506,7 @@
             this.simpleButton6.Appearance.Options.UseFont = true;
             this.simpleButton6.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("simpleButton6.ImageOptions.Image")));
             this.simpleButton6.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.simpleButton6.Location = new System.Drawing.Point(801, 260);
+            this.simpleButton6.Location = new System.Drawing.Point(1090, 260);
             this.simpleButton6.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.simpleButton6.Name = "simpleButton6";
             this.simpleButton6.Size = new System.Drawing.Size(238, 95);
@@ -1653,5 +1668,6 @@
         private DevExpress.XtraEditors.SearchLookUpEdit txtcashier;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView9;
         private DevExpress.XtraEditors.LabelControl labelControl26;
+        private DevExpress.XtraEditors.SimpleButton simpleButton8;
     }
 }
