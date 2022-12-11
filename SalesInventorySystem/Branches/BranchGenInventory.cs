@@ -35,12 +35,15 @@ namespace SalesInventorySystem.Branches
             {
                 if (radioButton1.Checked == true) //DETAILED
                 {
-                    Database.display("SELECT * FROM view_BranchInventoryDetails WHERE BranchCode='" + brcode + "'", gridControl1, gridView1);
+                   // Database.display("SELECT * FROM view_BranchInventoryDetails WHERE BranchCode='" + brcode + "'", gridControl1, gridView1);
+                    Database.display($"SELECT * FROM func_view_BranchInventoryDetails('{Login.assignedBranch}') ", gridControl1, gridView1);
 
                 }
                 else if (radioButton2.Checked == true) //SUMMARY
                 {
-                    Database.display("SELECT * FROM view_BranchInventory WHERE BranchCode='" + brcode + "'", gridControl1, gridView1);
+                    // Database.display("SELECT * FROM view_BranchInventory WHERE BranchCode='" + brcode + "'", gridControl1, gridView1);
+                    Database.display($"SELECT * FROM func_view_BranchInventory('{Login.assignedBranch}') ", gridControl1, gridView1);
+
                 }
             }
             catch (SqlException sex2)

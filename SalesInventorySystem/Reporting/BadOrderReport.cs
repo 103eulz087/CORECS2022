@@ -118,7 +118,7 @@ namespace SalesInventorySystem.Reporting
         private void showDetailsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             BadOrderReportDetails rep = new BadOrderReportDetails();
-            Database.display($"SELECT * FROM [dbo].[view_StockOutDetails] WHERE ID='{gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "BatchID").ToString()}' ", rep.gridControl1, rep.gridView1);
+            Database.display($"SELECT * FROM [dbo].[view_StockOutDetails] WHERE ID='{gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "BatchID").ToString()}' AND BranchCode='{gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "BranchCode").ToString()}' ", rep.gridControl1, rep.gridView1);
             BadOrderReportDetails.brcode = txtbranch.Text;
             BadOrderReportDetails.dateencode = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "DateAdded").ToString();
             BadOrderReportDetails.reportype = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "Category").ToString();

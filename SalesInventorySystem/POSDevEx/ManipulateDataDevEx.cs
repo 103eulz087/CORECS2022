@@ -216,7 +216,6 @@ namespace SalesInventorySystem.POSDevEx
                     //gridctr = Convert.ToInt32(gridView3.GetRowCellValue(i, "Ctr").ToString());
                     //gridView3.SetRowCellValue(gridctr, "NewTotalAmount", 0);
                     total += Convert.ToDouble(gridView3.GetRowCellValue(i, "TotalAmount").ToString());
-                    
                 }
                 if (Convert.ToInt32(gridView3.GetRowCellValue(i,"Ctr").ToString()) <= Convert.ToInt32(txtcttrto.Text))
                 {
@@ -227,8 +226,7 @@ namespace SalesInventorySystem.POSDevEx
                     
                 }
             }
-            txtcalcres.Text = total.ToString();
-            
+            txtcalcres.Text = total.ToString();            
         }
     }
 }

@@ -40,6 +40,8 @@
             this.labelControl6 = new DevExpress.XtraEditors.LabelControl();
             this.txtbatchid = new DevExpress.XtraEditors.TextEdit();
             this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
+            this.txtcategory = new System.Windows.Forms.ComboBox();
+            this.labelControl8 = new DevExpress.XtraEditors.LabelControl();
             this.txtremarks = new System.Windows.Forms.RichTextBox();
             this.labelControl5 = new DevExpress.XtraEditors.LabelControl();
             this.btnconfirm = new DevExpress.XtraEditors.SimpleButton();
@@ -62,8 +64,6 @@
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cancelLineToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.labelControl8 = new DevExpress.XtraEditors.LabelControl();
-            this.txtcategory = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.txtbrcode.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtproduct.Properties)).BeginInit();
@@ -232,6 +232,26 @@
             this.groupControl1.Name = "groupControl1";
             this.groupControl1.Size = new System.Drawing.Size(2080, 573);
             this.groupControl1.TabIndex = 12;
+            // 
+            // txtcategory
+            // 
+            this.txtcategory.Font = new System.Drawing.Font("Tahoma", 11.14286F);
+            this.txtcategory.FormattingEnabled = true;
+            this.txtcategory.Location = new System.Drawing.Point(165, 244);
+            this.txtcategory.Name = "txtcategory";
+            this.txtcategory.Size = new System.Drawing.Size(309, 39);
+            this.txtcategory.TabIndex = 79;
+            // 
+            // labelControl8
+            // 
+            this.labelControl8.Appearance.Font = new System.Drawing.Font("Tahoma", 9.8F);
+            this.labelControl8.Appearance.Options.UseFont = true;
+            this.labelControl8.Location = new System.Drawing.Point(25, 244);
+            this.labelControl8.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.labelControl8.Name = "labelControl8";
+            this.labelControl8.Size = new System.Drawing.Size(98, 28);
+            this.labelControl8.TabIndex = 78;
+            this.labelControl8.Text = "Category:";
             // 
             // txtremarks
             // 
@@ -469,26 +489,6 @@
             this.contextMenuStrip2.ImageScalingSize = new System.Drawing.Size(28, 28);
             this.contextMenuStrip2.Name = "contextMenuStrip2";
             this.contextMenuStrip2.Size = new System.Drawing.Size(61, 4);
-            // 
-            // labelControl8
-            // 
-            this.labelControl8.Appearance.Font = new System.Drawing.Font("Tahoma", 9.8F);
-            this.labelControl8.Appearance.Options.UseFont = true;
-            this.labelControl8.Location = new System.Drawing.Point(25, 244);
-            this.labelControl8.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
-            this.labelControl8.Name = "labelControl8";
-            this.labelControl8.Size = new System.Drawing.Size(98, 28);
-            this.labelControl8.TabIndex = 78;
-            this.labelControl8.Text = "Category:";
-            // 
-            // txtcategory
-            // 
-            this.txtcategory.Font = new System.Drawing.Font("Tahoma", 11.14286F);
-            this.txtcategory.FormattingEnabled = true;
-            this.txtcategory.Location = new System.Drawing.Point(165, 244);
-            this.txtcategory.Name = "txtcategory";
-            this.txtcategory.Size = new System.Drawing.Size(309, 39);
-            this.txtcategory.TabIndex = 79;
             // 
             // InventoryOut
             // 

@@ -34,7 +34,7 @@ namespace SalesInventorySystem.HOFormsDevEx
             else
             {
                 chckapplytoall.Visible = true;
-                Database.displayComboBoxItems("SELECT TOP(1) BranchCode,BranchName FROM dbo.Branches", "BranchName", comboBox1);
+                Database.displayComboBoxItems("SELECT BranchCode,BranchName FROM dbo.Branches", "BranchName", comboBox1);
             }
             //HelperFunction.DisableTextFields(this);
             disableFields();
@@ -505,9 +505,9 @@ namespace SalesInventorySystem.HOFormsDevEx
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //string brcode = "";
-            //brcode = Branch.getBranchCode(comboBox1.Text);
-            //Database.display("SELECT * FROM view_Products WHERE BranchCode='" + brcode + "'", gridControl1,gridView1);
+            string brcode = "";
+            brcode = Branch.getBranchCode(comboBox1.Text);
+            Database.display("SELECT * FROM view_Products WHERE BranchCode='" + brcode + "'", gridControl1, gridView1);
         }
 
         private void txtprodcat_Click(object sender, EventArgs e)
