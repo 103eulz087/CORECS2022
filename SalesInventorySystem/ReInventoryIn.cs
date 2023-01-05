@@ -440,25 +440,55 @@ namespace SalesInventorySystem
         //}
         void searchProductItems()
         {
+            //try
+            //{
+            //    SearchProduct searchprod = new SearchProduct();
+            //    searchprod.ShowDialog(this);
+            //    if (SearchProduct.isUsedSearchForm == true) //isUsedSearchForm indicator ni cya sa searchproduct form kng nigamit ba cya og searchform
+            //    {
+            //        isusedsearchform = true; //is isusedsearchform is a local variable declare in this class
+            //        if (SearchProduct.havebarcode == true) //kng pag select nya kay naay barcode
+            //        {
+            //            txtbarcodescanning.Text = SearchProduct.barcode; // 
+            //            isusedbarcode = true;
+            //            SearchProduct.isUsedSearchForm = false;
+            //        }
+            //        else //kung pag select nya sa item sa search product kay wlaay barcode
+            //        {
+            //            //txtbarcodescanning.Text = SearchProduct.prodcode.Substring(0, 2) + SearchProduct.prodcode + SearchProduct.qty.Replace(".", "");
+            //            txtbarcodescanning.Text = SearchProduct.prodcode + SearchProduct.qty.Replace(".", "");
+            //            isusedbarcode = false;
+            //            SearchProduct.isUsedSearchForm = false;
+            //        }
+            //        //SearchProduct.isUsedSearchForm = false; public static bool ispriceused=false,isusedbarcode=false;
+            //        //ispriceused = SearchProduct.priceused;
+            //        searchprod.Dispose();
+            //        txtbarcodescanning.Focus();
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+            //    XtraMessageBox.Show(ex.Message.ToString());
+            //}
             try
             {
-                SearchProduct searchprod = new SearchProduct();
+                SearchProductItems searchprod = new SearchProductItems();
                 searchprod.ShowDialog(this);
-                if (SearchProduct.isUsedSearchForm == true) //isUsedSearchForm indicator ni cya sa searchproduct form kng nigamit ba cya og searchform
+                if (SearchProductItems.isUsedSearchForm == true) //isUsedSearchForm indicator ni cya sa searchproduct form kng nigamit ba cya og searchform
                 {
                     isusedsearchform = true; //is isusedsearchform is a local variable declare in this class
-                    if (SearchProduct.havebarcode == true) //kng pag select nya kay naay barcode
+                    if (SearchProductItems.havebarcode == true) //kng pag select nya kay naay barcode
                     {
-                        txtbarcodescanning.Text = SearchProduct.barcode; // 
+                        txtbarcodescanning.Text = SearchProductItems.barcode; // 
                         isusedbarcode = true;
-                        SearchProduct.isUsedSearchForm = false;
+                        SearchProductItems.isUsedSearchForm = false;
                     }
                     else //kung pag select nya sa item sa search product kay wlaay barcode
                     {
                         //txtbarcodescanning.Text = SearchProduct.prodcode.Substring(0, 2) + SearchProduct.prodcode + SearchProduct.qty.Replace(".", "");
-                        txtbarcodescanning.Text = SearchProduct.prodcode + SearchProduct.qty.Replace(".", "");
+                        txtbarcodescanning.Text = SearchProductItems.prodcode + SearchProductItems.qty.Replace(".", "");
                         isusedbarcode = false;
-                        SearchProduct.isUsedSearchForm = false;
+                        SearchProductItems.isUsedSearchForm = false;
                     }
                     //SearchProduct.isUsedSearchForm = false; public static bool ispriceused=false,isusedbarcode=false;
                     //ispriceused = SearchProduct.priceused;
@@ -485,7 +515,7 @@ namespace SalesInventorySystem
                 pcode = txtbarcodescanning.Text.Substring(0, 5).Trim();
                 qty = SearchProduct.qty; //"1";
             }
-            else if (isusedsearchform == false)
+            else if (isusedsearchform == false) //Barcode field ang gigamit
             {
                 if(txtbarcodescanning.Text.Length < 19)
                 { 
@@ -497,30 +527,30 @@ namespace SalesInventorySystem
                     qty = "1";
                 }
                 //CUSTOMIZED BARCODE -- NO STANDARD BARCODE IS EQUAL TO 19 FIGURES
-                else if (txtbarcodescanning.Text.Length == 19) //tens 11111 10015 10123 0001 --10.123 kilos
-                {
-                    pcode = txtbarcodescanning.Text.Substring(5, 5);
-                    qty1 = txtbarcodescanning.Text.Substring(10, 2); //1001512345
-                    qty2 = txtbarcodescanning.Text.Substring(12, 3);
-                    qty = qty1 + "." + qty2;
-                    barcode = txtbarcodescanning.Text.Trim();
-                }
-                else if (txtbarcodescanning.Text.Length == 20) //hundred 11111 10015 100123 0001 --100.123 kilos
-                {
-                    pcode = txtbarcodescanning.Text.Substring(5, 5);
-                    qty1 = txtbarcodescanning.Text.Substring(10, 3); //10015100345
-                    qty2 = txtbarcodescanning.Text.Substring(13, 3);
-                    qty = qty1 + "." + qty2;
-                    barcode = txtbarcodescanning.Text.Trim();
-                }
-                else if (txtbarcodescanning.Text.Length == 21) //thousand  11111 10015 1000123 0001 --1000.123 kilos
-                {
-                    pcode = txtbarcodescanning.Text.Substring(5, 5);
-                    qty1 = txtbarcodescanning.Text.Substring(10, 4); //10015100345
-                    qty2 = txtbarcodescanning.Text.Substring(14, 3);
-                    qty = qty1 + "." + qty2;
-                    barcode = txtbarcodescanning.Text.Trim();
-                }
+                //else if (txtbarcodescanning.Text.Length == 19) //tens 11111 10015 10123 0001 --10.123 kilos
+                //{
+                //    pcode = txtbarcodescanning.Text.Substring(5, 5);
+                //    qty1 = txtbarcodescanning.Text.Substring(10, 2); //1001512345
+                //    qty2 = txtbarcodescanning.Text.Substring(12, 3);
+                //    qty = qty1 + "." + qty2;
+                //    barcode = txtbarcodescanning.Text.Trim();
+                //}
+                //else if (txtbarcodescanning.Text.Length == 20) //hundred 11111 10015 100123 0001 --100.123 kilos
+                //{
+                //    pcode = txtbarcodescanning.Text.Substring(5, 5);
+                //    qty1 = txtbarcodescanning.Text.Substring(10, 3); //10015100345
+                //    qty2 = txtbarcodescanning.Text.Substring(13, 3);
+                //    qty = qty1 + "." + qty2;
+                //    barcode = txtbarcodescanning.Text.Trim();
+                //}
+                //else if (txtbarcodescanning.Text.Length == 21) //thousand  11111 10015 1000123 0001 --1000.123 kilos
+                //{
+                //    pcode = txtbarcodescanning.Text.Substring(5, 5);
+                //    qty1 = txtbarcodescanning.Text.Substring(10, 4); //10015100345
+                //    qty2 = txtbarcodescanning.Text.Substring(14, 3);
+                //    qty = qty1 + "." + qty2;
+                //    barcode = txtbarcodescanning.Text.Trim();
+                //}
                 validproductcode = Database.checkifExist("SELECT ProductCode FROM Products WHERE ProductCode='" + pcode + "'");
                 if(!validproductcode)
                 {

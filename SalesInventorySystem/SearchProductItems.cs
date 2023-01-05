@@ -66,7 +66,7 @@ namespace SalesInventorySystem
         }
         private void display()
         {
-            Database.displayLocalGrid("SELECT ProductCode,Description,Barcode FROM Products WHERE BranchCode='" + Login.assignedBranch + "' ORDER BY Description", dataGridView1);
+            Database.displayLocalGrid("SELECT TOP(100) ProductCode,Description,Barcode FROM Products WHERE BranchCode='" + Login.assignedBranch + "' ORDER BY Description", dataGridView1);
         }
 
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)

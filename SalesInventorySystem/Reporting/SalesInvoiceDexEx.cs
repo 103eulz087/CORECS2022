@@ -56,6 +56,7 @@ namespace SalesInventorySystem.Reporting
             xct.xraddress.Text = txtcustaddress.Text;
             xct.xrbusinessstyle.Text = remarks;
             xct.xrtin.Text = txtcusttin.Text;
+
             string term = "", trm = "";
             term = txtterm.Text;
             if (term == "0")

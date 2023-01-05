@@ -149,7 +149,7 @@ namespace SalesInventorySystem
                     if (conLink=="1")
                     {
                         tableName = linkedServerName+"."+Database.getDBName()+".dbo.Products";
-                        Database.displayLocalGrid("SELECT TOP 100 BranchCode" +
+                        Database.displayLocalGrid("SELECT TOP(100) BranchCode" +
                        ",ProductCode" +
                        ",Description" +
                        ",Barcode" +

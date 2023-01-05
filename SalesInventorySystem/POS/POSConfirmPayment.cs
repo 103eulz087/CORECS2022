@@ -34,7 +34,7 @@ namespace SalesInventorySystem.POS
         {
             if (radmerchant.Checked.Equals(true))  //MERCHANT
             {
-
+                Database.ExecuteQuery("UPDATE dbo.POSType SET isEnableInvoicePrinting=0");
                 txtamounttender.Text = txtamountpayable.Text;
                 transno = lbltranscode.Text;
                 orderno = lblorderno.Text;
@@ -60,11 +60,19 @@ namespace SalesInventorySystem.POS
             }
         }
 
+        private void radcash_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radcash.Checked.Equals(true))  //CHARGE TO ACCOUNT
+            {
+                Database.ExecuteQuery("UPDATE dbo.POSType SET isEnableInvoicePrinting=0");
+            }
+        }
+
         private void radwallet_CheckedChanged(object sender, EventArgs e)
         {
             if (radwallet.Checked.Equals(true))  //WALLET
             {
-
+                Database.ExecuteQuery("UPDATE dbo.POSType SET isEnableInvoicePrinting=0");
                 netamountpayable = txtamountpayable.Text;
                 POS.POSCashWalletTapper pasd = new POSCashWalletTapper();
                 pasd.ShowDialog(this);
@@ -90,7 +98,7 @@ namespace SalesInventorySystem.POS
         {
             if (radcharge.Checked.Equals(true))  //CHARGE TO ACCOUNT
             {
-
+                Database.ExecuteQuery("UPDATE dbo.POSType SET isEnableInvoicePrinting=1");
                 POSChargeToClient poschrge = new POSChargeToClient();
                 poschrge.txtorderno.Text = lblorderno.Text;
                 poschrge.txtamount.Text = txtamountpayable.Text;
@@ -117,10 +125,10 @@ namespace SalesInventorySystem.POS
 
         private void radcc_CheckedChanged(object sender, EventArgs e)
         {
-
+            
             if (radcc.Checked.Equals(true)) //CREDIT CARD
             {
-
+                Database.ExecuteQuery("UPDATE dbo.POSType SET isEnableInvoicePrinting=0");
                 txtamounttender.Text = txtamountpayable.Text;
                 transno = lbltranscode.Text;
                 orderno = lblorderno.Text;
@@ -591,13 +599,14 @@ namespace SalesInventorySystem.POS
                     vatsales = Math.Round(vatablesales / 1.12, 2);
                     vatamount = Math.Round(vatsales * 0.12, 2);
                     totalsales = Math.Round(vatablesales + vatexemptsale, 2);
+
                     lessvat = vatamount;
                     netofvat = totalsales - vatamount;
                     amountdue = netofvat;
                     addvat = vatamount;
                     totalamountdue = totalsales;
                 }
-                else
+                else //ZERO RATED SALES
                 {
                     vatsales = 0;
                     vatamount = 0;
@@ -609,7 +618,7 @@ namespace SalesInventorySystem.POS
                     netofvat = 0;
                     amountdue = totalsales;
                     addvat = 0;
-                    totalamountdue = totalsales;
+                    totalamountdue = Math.Round(totalsales/1.12,2);
                 }
 
                 viewdet.txtvatablesale.Text = vatsales.ToString();

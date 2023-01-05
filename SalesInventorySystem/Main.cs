@@ -1200,26 +1200,27 @@ namespace SalesInventorySystem
             //}
             //InventoryIN pcusatfsmr = new InventoryIN();
             //pcusatfsmr.Show();
-            //foreach (Form form in Application.OpenForms)
-            //{
-            //    if (form.GetType() == typeof(ReInventoryIn))
-            //    {
-            //        form.Activate();
-            //        return;
-            //    }
-            //}
-            //ReInventoryIn pcusatfsmr = new ReInventoryIn();
-            //pcusatfsmr.Show();
             foreach (Form form in Application.OpenForms)
             {
-                if (form.GetType() == typeof(POS.POSInventoryIN))
+                if (form.GetType() == typeof(ReInventoryIn))
                 {
                     form.Activate();
                     return;
                 }
             }
-            POS.POSInventoryIN pcusatfsmr = new POS.POSInventoryIN();
+            ReInventoryIn pcusatfsmr = new ReInventoryIn();
             pcusatfsmr.Show();
+            //FOR FOR BUILTIN INVENTORY IN
+            //foreach (Form form in Application.OpenForms)
+            //{
+            //    if (form.GetType() == typeof(POS.POSInventoryIN))
+            //    {
+            //        form.Activate();
+            //        return;
+            //    }
+            //}
+            //POS.POSInventoryIN pcusatfsmr = new POS.POSInventoryIN();
+            //pcusatfsmr.Show();
         }
 
         private void barButtonItem55_ItemClick(object sender, ItemClickEventArgs e)
