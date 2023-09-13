@@ -1093,6 +1093,12 @@
     <Compile Include="HOFormsDevEx\DepartmentsDevEx.Designer.cs">
       <DependentUpon>DepartmentsDevEx.cs</DependentUpon>
     </Compile>
+    <Compile Include="HOFormsDevEx\EditExpenseDevEx.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HOFormsDevEx\EditExpenseDevEx.Designer.cs">
+      <DependentUpon>EditExpenseDevEx.cs</DependentUpon>
+    </Compile>
     <Compile Include="HOFormsDevEx\EditOrderDetailsDevEx.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1410,6 +1416,18 @@
     </Compile>
     <Compile Include="HOFormsDevEx\ViewDepreciationSchedule.Designer.cs">
       <DependentUpon>ViewDepreciationSchedule.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HOFormsDevEx\ViewExpenseDetailsDevEx.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HOFormsDevEx\ViewExpenseDetailsDevEx.Designer.cs">
+      <DependentUpon>ViewExpenseDetailsDevEx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HOFormsDevEx\ViewExpenseDevEx.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HOFormsDevEx\ViewExpenseDevEx.Designer.cs">
+      <DependentUpon>ViewExpenseDevEx.cs</DependentUpon>
     </Compile>
     <Compile Include="HOFormsDevEx\ViewGeneralnventory.cs">
       <SubType>Form</SubType>
@@ -3288,6 +3306,9 @@
     <EmbeddedResource Include="HOFormsDevEx\DepartmentsDevEx.resx">
       <DependentUpon>DepartmentsDevEx.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="HOFormsDevEx\EditExpenseDevEx.resx">
+      <DependentUpon>EditExpenseDevEx.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="HOFormsDevEx\EditOrderDetailsDevEx.resx">
       <DependentUpon>EditOrderDetailsDevEx.cs</DependentUpon>
     </EmbeddedResource>
@@ -3443,6 +3464,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="HOFormsDevEx\ViewDepreciationSchedule.resx">
       <DependentUpon>ViewDepreciationSchedule.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HOFormsDevEx\ViewExpenseDetailsDevEx.resx">
+      <DependentUpon>ViewExpenseDetailsDevEx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HOFormsDevEx\ViewExpenseDevEx.resx">
+      <DependentUpon>ViewExpenseDevEx.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="HOFormsDevEx\ViewGeneralnventory.resx">
       <DependentUpon>ViewGeneralnventory.cs</DependentUpon>

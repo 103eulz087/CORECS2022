@@ -387,7 +387,7 @@ namespace SalesInventorySystem
             //    ",'"+txtvatexadj.Text+"' )");
 
 
-            Database.ExecuteQuery("INSERT INTO POSTransaction VALUES ('"+Login.assignedBranch+"'" +
+            Database.ExecuteQuery("INSERT INTO dbo.POSTransaction VALUES ('"+Login.assignedBranch+"'" +
                 ", '"+txttransactionno.Text+"' " +
                 ", '"+Environment.MachineName.ToString()+"' " +
                 ", '"+ discounttype + "' " +

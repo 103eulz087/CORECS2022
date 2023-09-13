@@ -22,10 +22,11 @@ namespace SalesInventorySystem.HOFormsDevEx
 
         double getBalance()
         {
-            double total = 0.0;
-            double purchasetotal = Database.getTotalSummation2("APACCOUNTS","SupplierID='"+ Classes.Suppliers.getSupplierID(searchLookUpEdit1.Text) + "' AND PayStatus <> 'FULLYPAID' ","Balance");
-            double expensetotal = Database.getTotalSummation2("ExpenseMaster","SupplierID='"+ Classes.Suppliers.getSupplierID(searchLookUpEdit1.Text) + "' AND Status <> 'FULLYPAID' AND isErrorCorrect=0 ", "Balance");
-            total = purchasetotal + expensetotal;
+            double total = 0.0, purchasetotal=0.0;
+            //double purchasetotal = Database.getTotalSummation2("APACCOUNTS","SupplierID='"+ Classes.Suppliers.getSupplierID(searchLookUpEdit1.Text) + "' AND PayStatus <> 'FULLYPAID' ","Balance");
+            //double expensetotal = Database.getTotalSummation2("ExpenseMaster","SupplierID='"+ Classes.Suppliers.getSupplierID(searchLookUpEdit1.Text) + "' AND Status <> 'FULLYPAID' AND isErrorCorrect=0 ", "Balance");
+            string expensetotal = Database.getSingleQuery("SELECT TOP(1) AccountBalance FROM dbo.SupplierAccounts WHERE SupplierID='" + Classes.Suppliers.getSupplierID(searchLookUpEdit1.Text) + "' ", "AccountBalance");
+            total = purchasetotal + Convert.ToDouble(expensetotal);
             return Math.Round(total, 2);
         }
 
@@ -71,10 +72,14 @@ namespace SalesInventorySystem.HOFormsDevEx
         }
         void loadExpenses()
         {
+            //    if (checkBox4.Checked == true)
+            //        Database.display("SELECT TRN_SEQ_NO,BranchCode,ReferenceNumber,InvoiceNo,ExpenseName,ExpenseDate,Amount,Remarks,Status,Balance,AmountPaid,EWTAmount,DiscountAmount,OffsetAmount,isErrorCorrect FROM ExpenseMaster WHERE SupplierID='" + txtacctid.Text + "' ", gridControl4, gridView4);
+            //    else
+            //        Database.display("SELECT TRN_SEQ_NO,BranchCode,ReferenceNumber,InvoiceNo,ExpenseName,ExpenseDate,Amount,Remarks,Status,Balance,AmountPaid,EWTAmount,DiscountAmount,OffsetAmount,isErrorCorrect FROM ExpenseMaster WHERE SupplierID='" + txtacctid.Text + "' AND CAST(ExpenseDate as Date) >= '" + expdatefrom.Text + "' and CAST(ExpenseDate as date)<= '" + expdateto.Text + "' ", gridControl4, gridView4);
             if (checkBox4.Checked == true)
-                Database.display("SELECT TRN_SEQ_NO,BranchCode,ReferenceNumber,InvoiceNo,ExpenseName,ExpenseDate,Amount,Remarks,Status,Balance,AmountPaid,EWTAmount,DiscountAmount,OffsetAmount,isErrorCorrect FROM ExpenseMaster WHERE SupplierID='" + txtacctid.Text + "' ", gridControl4, gridView4);
+                Database.display("SELECT * FROM ExpenseSummary WHERE SupplierID='" + txtacctid.Text + "' ", gridControl4, gridView4);
             else
-                Database.display("SELECT TRN_SEQ_NO,BranchCode,ReferenceNumber,InvoiceNo,ExpenseName,ExpenseDate,Amount,Remarks,Status,Balance,AmountPaid,EWTAmount,DiscountAmount,OffsetAmount,isErrorCorrect FROM ExpenseMaster WHERE SupplierID='" + txtacctid.Text + "' AND CAST(ExpenseDate as Date) >= '" + expdatefrom.Text + "' and CAST(ExpenseDate as date)<= '" + expdateto.Text + "' ", gridControl4, gridView4);
+                Database.display("SELECT * FROM ExpenseSummary WHERE SupplierID='" + txtacctid.Text + "' AND CAST(ExpenseDate as Date) >= '" + expdatefrom.Text + "' and CAST(ExpenseDate as date)<= '" + expdateto.Text + "' ", gridControl4, gridView4);
 
         }
 

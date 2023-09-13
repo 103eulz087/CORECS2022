@@ -94,6 +94,15 @@ namespace SalesInventorySystem.POS
             }
         }
 
+        void checkZeroRated()
+        {
+            if (PointOfSale.iszeroratedsale == true)
+            {
+                string zeroratedsales = Database.getSingleResultSet("SELECT dbo.func_getZeroRatedSales('" + Login.assignedBranch + "','" + lblorderno.Text + "')");
+            }
+
+        }
+
         private void radcharge_CheckedChanged(object sender, EventArgs e)
         {
             if (radcharge.Checked.Equals(true))  //CHARGE TO ACCOUNT
@@ -307,7 +316,7 @@ namespace SalesInventorySystem.POS
         bool haveOneTimeDiscount()
         {
             bool ok = false;
-            ok = Database.checkifExist("SELECT TOP 1 OrderNo FROM SalesDiscount WHERE OrderNo='" + lblorderno.Text + "' and isErrorCorrect=0");
+            ok = Database.checkifExist("SELECT TOP 1 OrderNo FROM dbo.SalesDiscount WHERE OrderNo='" + lblorderno.Text + "' and isErrorCorrect=0");
             return ok;
         }
         void ExecutePayment()
@@ -326,7 +335,7 @@ namespace SalesInventorySystem.POS
                     paymenttype = "Credit";
                     invno = txtinvoiceno.Text;
                     //update as of 04142020
-                    Database.ExecuteQuery("INSERT INTO POSCreditCardTransactions VALUES('" + lbltranscode.Text + "','" + lblorderno.Text + "','" + Login.assignedBranch + "','" + DateTime.Now.ToString() + "','" + POSPaymentDetails.creditcardname + "','" + POSPaymentDetails.creditcardnum + "','" + POSPaymentDetails.creditcardtype + "','" + POSPaymentDetails.creditcardexpirydate + "','" + POSPaymentDetails.creditcardbankname + "','" + POSPaymentDetails.creditcardmerchant + "','" + POSPaymentDetails.creditcardrefno + "','" + txtamountpayable.Text + "','0','" + DateTime.Now.ToString() + "',' ','" + Login.Fullname + "','" + GlobalVariables.computerName + "')");
+                    Database.ExecuteQuery("INSERT INTO dbo.POSCreditCardTransactions VALUES('" + lbltranscode.Text + "','" + lblorderno.Text + "','" + Login.assignedBranch + "','" + DateTime.Now.ToString() + "','" + POSPaymentDetails.creditcardname + "','" + POSPaymentDetails.creditcardnum + "','" + POSPaymentDetails.creditcardtype + "','" + POSPaymentDetails.creditcardexpirydate + "','" + POSPaymentDetails.creditcardbankname + "','" + POSPaymentDetails.creditcardmerchant + "','" + POSPaymentDetails.creditcardrefno + "','" + txtamountpayable.Text + "','0','" + DateTime.Now.ToString() + "',' ','" + Login.Fullname + "','" + GlobalVariables.computerName + "')");
                     //update as of 04142020
                 }
                 else if (radmerchant.Checked.Equals(true))
@@ -431,7 +440,7 @@ namespace SalesInventorySystem.POS
 
                     execute();
                     //after execute of SP check if the Status of BatchSalesSummary is Equal to SOLD
-                    bool checkIfSold = Database.checkifExist($"SELECT TOP(1) ReferenceNo FROM BatchSalesSummary " +
+                    bool checkIfSold = Database.checkifExist($"SELECT TOP(1) ReferenceNo FROM dbo.BatchSalesSummary " +
                         $"WHERE BranchCode='{Login.assignedBranch}' " +
                         $"AND MachineUsed='{Environment.MachineName}' " +
                         $"AND ReferenceNo='{lblorderno.Text}' " +

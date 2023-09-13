@@ -49,22 +49,22 @@
             this.groupBox2.Controls.Add(this.gridControl1);
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox2.Location = new System.Drawing.Point(0, 0);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(6, 7, 6, 7);
-            this.groupBox2.Size = new System.Drawing.Size(2782, 1445);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.groupBox2.Size = new System.Drawing.Size(2568, 1245);
             this.groupBox2.TabIndex = 8;
             this.groupBox2.TabStop = false;
             // 
             // gridControl1
             // 
             this.gridControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridControl1.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
-            this.gridControl1.Location = new System.Drawing.Point(6, 36);
+            this.gridControl1.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.gridControl1.Location = new System.Drawing.Point(6, 32);
             this.gridControl1.MainView = this.gridView1;
-            this.gridControl1.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.gridControl1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.gridControl1.Name = "gridControl1";
-            this.gridControl1.Size = new System.Drawing.Size(2770, 1402);
+            this.gridControl1.Size = new System.Drawing.Size(2556, 1207);
             this.gridControl1.TabIndex = 0;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
@@ -89,8 +89,8 @@
             this.gridView1.AppearancePrint.GroupRow.Options.UseFont = true;
             this.gridView1.AppearancePrint.Row.Options.UseTextOptions = true;
             this.gridView1.AppearancePrint.Row.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridView1.DetailHeight = 781;
-            this.gridView1.FixedLineWidth = 4;
+            this.gridView1.DetailHeight = 673;
+            this.gridView1.FixedLineWidth = 3;
             this.gridView1.GridControl = this.gridControl1;
             this.gridView1.Name = "gridView1";
             this.gridView1.OptionsBehavior.Editable = false;
@@ -109,11 +109,11 @@
             this.groupBox1.Controls.Add(this.txtpono);
             this.groupBox1.Controls.Add(this.richTextBox1);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.groupBox1.Location = new System.Drawing.Point(0, 1445);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.groupBox1.Location = new System.Drawing.Point(0, 1245);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(6, 7, 6, 7);
-            this.groupBox1.Size = new System.Drawing.Size(2782, 112);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.groupBox1.Size = new System.Drawing.Size(2568, 97);
             this.groupBox1.TabIndex = 7;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Remarks";
@@ -121,10 +121,10 @@
             // simpleButton10
             // 
             this.simpleButton10.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("simpleButton10.ImageOptions.Image")));
-            this.simpleButton10.Location = new System.Drawing.Point(1640, 38);
-            this.simpleButton10.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.simpleButton10.Location = new System.Drawing.Point(1514, 33);
+            this.simpleButton10.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.simpleButton10.Name = "simpleButton10";
-            this.simpleButton10.Size = new System.Drawing.Size(214, 58);
+            this.simpleButton10.Size = new System.Drawing.Size(198, 50);
             this.simpleButton10.TabIndex = 79;
             this.simpleButton10.Text = "Print STS";
             this.simpleButton10.Click += new System.EventHandler(this.simpleButton10_Click);
@@ -132,10 +132,10 @@
             // simpleButton9
             // 
             this.simpleButton9.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("simpleButton9.ImageOptions.Image")));
-            this.simpleButton9.Location = new System.Drawing.Point(1465, 38);
-            this.simpleButton9.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.simpleButton9.Location = new System.Drawing.Point(1352, 33);
+            this.simpleButton9.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.simpleButton9.Name = "simpleButton9";
-            this.simpleButton9.Size = new System.Drawing.Size(162, 58);
+            this.simpleButton9.Size = new System.Drawing.Size(150, 50);
             this.simpleButton9.TabIndex = 78;
             this.simpleButton9.Text = "Reject";
             this.simpleButton9.Click += new System.EventHandler(this.simpleButton9_Click);
@@ -143,41 +143,41 @@
             // btnadd
             // 
             this.btnadd.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnadd.ImageOptions.Image")));
-            this.btnadd.Location = new System.Drawing.Point(1259, 38);
-            this.btnadd.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.btnadd.Location = new System.Drawing.Point(1162, 33);
+            this.btnadd.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.btnadd.Name = "btnadd";
-            this.btnadd.Size = new System.Drawing.Size(193, 58);
+            this.btnadd.Size = new System.Drawing.Size(178, 50);
             this.btnadd.TabIndex = 77;
             this.btnadd.Text = "Approve";
             this.btnadd.Click += new System.EventHandler(this.btnadd_Click);
             // 
             // txtpono
             // 
-            this.txtpono.Location = new System.Drawing.Point(1991, 38);
-            this.txtpono.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.txtpono.Location = new System.Drawing.Point(1838, 33);
+            this.txtpono.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.txtpono.Name = "txtpono";
-            this.txtpono.Size = new System.Drawing.Size(80, 36);
+            this.txtpono.Size = new System.Drawing.Size(74, 33);
             this.txtpono.TabIndex = 5;
             this.txtpono.Visible = false;
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(26, 38);
-            this.richTextBox1.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.richTextBox1.Location = new System.Drawing.Point(24, 33);
+            this.richTextBox1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(1215, 55);
+            this.richTextBox1.Size = new System.Drawing.Size(1122, 48);
             this.richTextBox1.TabIndex = 0;
             this.richTextBox1.Text = "";
             // 
             // STSForApprovalDetails
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 29F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(2782, 1557);
+            this.ClientSize = new System.Drawing.Size(2568, 1342);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.IconOptions.Icon = ((System.Drawing.Icon)(resources.GetObject("STSForApprovalDetails.IconOptions.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.Name = "STSForApprovalDetails";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "STSForApprovalDetails";

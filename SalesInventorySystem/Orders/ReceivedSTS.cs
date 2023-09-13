@@ -83,7 +83,7 @@ namespace SalesInventorySystem.Orders
         void checker2()
         {
             bool exist = false;
-            exist = Database.checkifExist("SELECT TOP 1 PONumber FROM DeliveryDetails WHERE PONumber='" + gridViewMyReq.GetRowCellValue(gridViewMyReq.FocusedRowHandle, "PONumber").ToString() + "' ");
+            exist = Database.checkifExist("SELECT TOP(1) PONumber FROM DeliveryDetails WHERE PONumber='" + gridViewMyReq.GetRowCellValue(gridViewMyReq.FocusedRowHandle, "PONumber").ToString() + "' ");
             if (gridViewMyReq.GetRowCellValue(gridViewMyReq.FocusedRowHandle, "Status").ToString() == "FOR APPROVAL" || (gridViewMyReq.GetRowCellValue(gridViewMyReq.FocusedRowHandle, "Status").ToString() == "APPROVED" && exist==false))
             {
 

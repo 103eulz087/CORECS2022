@@ -361,7 +361,7 @@ namespace SalesInventorySystem.POS
             foreach (int j in ChkedRow)
             {
                 //str = "Update BatchSalesDetails SET isVoid='1',VoidBy='"+Login.isglobalUserID+ "',isErrorCorrect=1,Status='RETURNED' where SequenceNumber='" + dataGridView1.Rows[j].Cells["SequenceNumber"].Value + "'";
-                str = "Update BatchSalesDetails SET isPosted=1,isErrorCorrect=1,VoidBy='"+ user + "' " +
+                str = "Update BatchSalesDetails SET isPosted=1,isErrorCorrect=1,VoidBy='" + user + "' " +
                     "WHERE SequenceNumber='" + dataGridView1.Rows[j].Cells["SequenceNumber"].Value + "' " +
                     "AND ReferenceNo='" + HelperFunction.sequencePadding1(txtorderno.Text, 18) +"' " +
                     "AND BranchCode='"+txtbranch.Text+"' " +
@@ -381,7 +381,7 @@ namespace SalesInventorySystem.POS
                          $",'0'" +
                          $",'0'" +
                          $",'0'" +
-                         $",'DESKTOP-QVEJE6D'" +
+                         $",'{Environment.MachineName.ToString()}'" +
                          $",'{DateTime.Now.ToString()}','{Login.Fullname}')");
                 }
 

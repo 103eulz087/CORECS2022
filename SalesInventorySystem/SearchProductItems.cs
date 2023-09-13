@@ -21,7 +21,7 @@ namespace SalesInventorySystem
 
         private void dataGridView1_KeyDown(object sender, KeyEventArgs e)
         {
-
+            havebarcode = true;
             if (e.KeyCode == Keys.Enter)
             {
                 int col = dataGridView1.CurrentCell.ColumnIndex;
@@ -49,7 +49,11 @@ namespace SalesInventorySystem
         {
             if (e.KeyCode == Keys.Enter)
             {
-                Database.displayLocalGrid("SELECT ProductCode,Description,Barcode FROM Products WHERE Description like '%" + textBox1.Text + "%' and BranchCode='" + Login.assignedBranch + "' ORDER BY Description", dataGridView1);
+                Database.displayLocalGrid("SELECT ProductCode,Description,Barcode " +
+                    "FROM Products " +
+                    "WHERE Description like '%" + textBox1.Text + "%' OR Barcode like '%"+textBox1.Text+"%' " +
+                    "and BranchCode='" + Login.assignedBranch + "' " +
+                    "ORDER BY Description", dataGridView1);
                 dataGridView1.Focus();
             }
         }
@@ -66,7 +70,10 @@ namespace SalesInventorySystem
         }
         private void display()
         {
-            Database.displayLocalGrid("SELECT TOP(100) ProductCode,Description,Barcode FROM Products WHERE BranchCode='" + Login.assignedBranch + "' ORDER BY Description", dataGridView1);
+            Database.displayLocalGrid("SELECT TOP(100) ProductCode,Description,Barcode " +
+                "FROM Products " +
+                "WHERE BranchCode='" + Login.assignedBranch + "' " +
+                "ORDER BY Description", dataGridView1);
         }
 
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)

@@ -23,7 +23,7 @@ namespace SalesInventorySystem.POS
 
         void addInventory()
         {
-            Database.ExecuteQuery("INSERT INTO TempInventoryIN (ID,BranchCode,DateReceived,ExpiryDate,ProductCode,Description,Barcode,Cost,Quantity,isVat,isDone,DateEncode,EncodeBy) " +
+            Database.ExecuteQuery("INSERT INTO dbo.TempInventoryIN (ID,BranchCode,DateReceived,ExpiryDate,ProductCode,Description,Barcode,Cost,Quantity,isVat,isDone,DateEncode,EncodeBy) " +
                 "VALUES('" + txtbatchid.Text + "'" +
                 $",'{txtbrcode.Text}'" +
                 $",'{txtdatein.Text}'" +
@@ -117,7 +117,7 @@ namespace SalesInventorySystem.POS
             //    txtbatchid.Text=POSInventoryINRecovertBatchID.ID;
             //    posinvin.Dispose();
             //}
-            bool check = Database.checkifExist("SELECT TOP(1) ID FROM TempInventoryIN WHERE isDone=0");
+            bool check = Database.checkifExist("SELECT TOP(1) ID FROM dbo.TempInventoryIN WHERE isDone=0");
             if (!check)//true
             {
                 XtraMessageBox.Show("No Items to Recover");
@@ -126,14 +126,14 @@ namespace SalesInventorySystem.POS
             else
             {
                 POS.POSUnUploadInv posinv = new POSUnUploadInv();
-                Database.display("SELECT distinct ID FROM TempInventoryIN WHERE isDone=0", posinv.gridControl1, posinv.gridView2);
+                Database.display("SELECT distinct ID FROM dbo.TempInventoryIN WHERE isDone=0", posinv.gridControl1, posinv.gridView2);
                 posinv.ShowDialog(this);
                 if (POS.POSUnUploadInv.isdone == true)
                 {
                     //retrieve
                     txtbatchid.Text = POS.POSUnUploadInv.invID;
                     btnnew.Enabled = false;
-                    Database.display("SELECT * FROM TempInventoryIN WHERE ID='" + txtbatchid.Text + "' ", gridControl1, gridView2);
+                    Database.display("SELECT * FROM dbo.TempInventoryIN WHERE ID='" + txtbatchid.Text + "' ", gridControl1, gridView2);
                     POS.POSUnUploadInv.isdone = false;
                     posinv.Dispose();
                 }
@@ -142,7 +142,7 @@ namespace SalesInventorySystem.POS
 
         private void btncancel_Click(object sender, EventArgs e)
         {
-            Database.ExecuteQuery("DELETE FROM TempInventoryIN WHERE ID='" + gridView2.GetRowCellValue(gridView2.FocusedRowHandle, "ID").ToString() + "' " +
+            Database.ExecuteQuery("DELETE FROM dbo.TempInventoryIN WHERE ID='" + gridView2.GetRowCellValue(gridView2.FocusedRowHandle, "ID").ToString() + "' " +
                 "AND BranchCode='" + gridView2.GetRowCellValue(gridView2.FocusedRowHandle, "BranchCode").ToString() + "' " +
                 "AND ProductCode='" + gridView2.GetRowCellValue(gridView2.FocusedRowHandle, "ProductCode").ToString() + "' " +
                 "AND Quantity='" + gridView2.GetRowCellValue(gridView2.FocusedRowHandle, "Quantity").ToString() + "' " +

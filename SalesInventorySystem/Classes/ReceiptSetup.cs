@@ -116,7 +116,7 @@ namespace SalesInventorySystem.Classes
                 string compminno = row["MINNo"].ToString();
                 string compbirpermitno = row["PermitNumber"].ToString();
                 string compserialno = row["SerialNo"].ToString();
-
+           
 
 
                 string tinno = "TIN:" + comptinno;

@@ -180,24 +180,24 @@ namespace SalesInventorySystem.POSDevEx
 
         private void gridView3_RowStyle(object sender, DevExpress.XtraGrid.Views.Grid.RowStyleEventArgs e)
         {
-            GridView view = sender as GridView;
-            if (e.RowHandle >= 0)
-            {
-                string totalitems = view.GetRowCellDisplayText(e.RowHandle, view.Columns["TotalItems"]);
-                string totalvatableitems = view.GetRowCellDisplayText(e.RowHandle, view.Columns["TotalVatableItems"]);
-                if (totalitems == "1")
-                {
-                    // e.Appearance.Font = new Font(e.Appearance.Font, FontStyle.Bold);
-                    e.Appearance.BackColor = Color.Salmon;
-                    e.Appearance.BackColor2 = Color.SeaShell;
-                }
-                if (totalitems != "1" && totalvatableitems == "0")
-                {
-                    //   e.Appearance.Font = new Font(e.Appearance.Font, FontStyle.Bold);
-                    e.Appearance.BackColor = Color.LightCyan;
-                    e.Appearance.BackColor2 = Color.LightBlue;
-                }
-            }
+            //GridView view = sender as GridView;
+            //if (e.RowHandle >= 0)
+            //{
+            //    string totalitems = view.GetRowCellDisplayText(e.RowHandle, view.Columns["TotalItems"]);
+            //    string totalvatableitems = view.GetRowCellDisplayText(e.RowHandle, view.Columns["TotalVatableItems"]);
+            //    if (totalitems == "1")
+            //    {
+            //        // e.Appearance.Font = new Font(e.Appearance.Font, FontStyle.Bold);
+            //        e.Appearance.BackColor = Color.Salmon;
+            //        e.Appearance.BackColor2 = Color.SeaShell;
+            //    }
+            //    if (totalitems != "1" && totalvatableitems == "0")
+            //    {
+            //        //   e.Appearance.Font = new Font(e.Appearance.Font, FontStyle.Bold);
+            //        e.Appearance.BackColor = Color.LightCyan;
+            //        e.Appearance.BackColor2 = Color.LightBlue;
+            //    }
+            //}
         }
 
         private void timer1_Tick(object sender, EventArgs e)

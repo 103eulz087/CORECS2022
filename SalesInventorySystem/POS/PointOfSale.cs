@@ -1261,14 +1261,14 @@ namespace SalesInventorySystem
             }
         }
 
-        private void btnhold_Click(object sender, EventArgs e)
+        void holdTransaction()
         {
             bool isPendingTran = Database.checkifExist("SELECT TOP(1) Status FROM dbo.BatchSalesSummary WHERE Status='Pending' " +
-             "AND BranchCode='" + Login.assignedBranch + "' " +
-             "AND MachineUsed='" + Environment.MachineName + "' " +
-             "AND ReferenceNo='" + txtOrderNo.Text + "' " +
-             //"AND isHold='0' " +
-             "AND CashierTransNo='" + lblTransactionIDCashier.Text + "' ");
+            "AND BranchCode='" + Login.assignedBranch + "' " +
+            "AND MachineUsed='" + Environment.MachineName + "' " +
+            "AND ReferenceNo='" + txtOrderNo.Text + "' " +
+            //"AND isHold='0' " +
+            "AND CashierTransNo='" + lblTransactionIDCashier.Text + "' ");
 
             if (MydataGridView1.RowCount > 0 && isPendingTran == true)
             {
@@ -1297,9 +1297,48 @@ namespace SalesInventorySystem
             }
         }
 
+        private void btnhold_Click(object sender, EventArgs e)
+        {
+            
+            //bool isoverride = false;
+            //isoverride = Database.checkifExist("SELECT isnull(isOverride,0) FROM dbo.POSFunctions WHERE FunctionName='HOLDTRAN' AND isOverride=1");
+            //if (!isoverride)
+            //{
+            //    holdTransaction();
+            //}
+            //else
+            //{
+            //    AuthorizedConfirmationFrm authfrm = new AuthorizedConfirmationFrm();
+            //    authfrm.ShowDialog(this);
+            //    if (AuthorizedConfirmationFrm.isconfirmedLogin == true)
+            //    {
+            //        holdTransaction();
+            //        AuthorizedConfirmationFrm.isconfirmedLogin = false;
+            //        authfrm.Dispose();
+            //    }
+            //}
+        }
+
         private void Onhold_Click(object sender, EventArgs e)
         {
-            OnHoldTransaction();
+            
+            //bool isoverride = false;
+            //isoverride = Database.checkifExist("SELECT isnull(isOverride,0) FROM dbo.POSFunctions WHERE FunctionName='RECOVERTRAN' AND isOverride=1");
+            //if (!isoverride)
+            //{
+            //    OnHoldTransaction();
+            //}
+            //else
+            //{
+            //    AuthorizedConfirmationFrm authfrm = new AuthorizedConfirmationFrm();
+            //    authfrm.ShowDialog(this);
+            //    if (AuthorizedConfirmationFrm.isconfirmedLogin == true)
+            //    {
+            //        OnHoldTransaction();
+            //        AuthorizedConfirmationFrm.isconfirmedLogin = false;
+            //        authfrm.Dispose();
+            //    }
+            //}
         }
 
         void poschar_FormClosed(object sender, FormClosedEventArgs e)
@@ -1328,7 +1367,7 @@ namespace SalesInventorySystem
         private void btnreprint_Click(object sender, EventArgs e)
         {
             bool isoverride = false;
-            isoverride = Database.checkifExist("SELECT isnull(isOverride,0) FROM POSFunctions WHERE FunctionName='REPRINT' AND isOverride=1");
+            isoverride = Database.checkifExist("SELECT isnull(isOverride,0) FROM dbo.POSFunctions WHERE FunctionName='REPRINT' AND isOverride=1");
             if (!isoverride)
             {
                 _refno = txtOrderNo.Text;
@@ -1568,24 +1607,26 @@ namespace SalesInventorySystem
 
                     vatadj = getVatAdjustment();
 
+                    if (iszeroratedsale == true)
+                    {
+                        string zeroratedsales = Database.getSingleResultSet("SELECT dbo.func_getZeroRatedSales('" + Login.assignedBranch + "','" + txtOrderNo.Text + "')");
+                        subtotal = Convert.ToDouble(zeroratedsales);
+                        netdue = subtotal; //TOTAL DUE - ONE TIME DISCOUNT
+                    }
+                    else
+                    {
+                        subtotal = computeTotalAmount();
+                        totaldue = Convert.ToDouble(lblTotalAmount.Text) - totaldiscounts; //lbltotal is already deducted by per item discount
+                        netdue = totaldue - vatadj; //TOTAL DUE - ONE TIME DISCOUNT
+                                                    //netdue = totaldue - totaldiscount; //TOTAL DUE - ONE TIME DISCOUNT
+                    }
                     subtotal = computeTotalAmount();
-                    totaldue = Convert.ToDouble(lblTotalAmount.Text)- totaldiscounts; //lbltotal is already deducted by per item discount
+                    totaldue = Convert.ToDouble(lblTotalAmount.Text) - totaldiscounts; //lbltotal is already deducted by per item discount
                     netdue = totaldue - vatadj; //TOTAL DUE - ONE TIME DISCOUNT
-                    //netdue = totaldue - totaldiscount; //TOTAL DUE - ONE TIME DISCOUNT
-
+                                                //netdue = totaldue - totaldiscount; //TOTAL DUE - ONE TIME DISCOUNT
                     posconfirm.txtamountpayable.Text = netdue.ToString();
                     posconfirm.txtamountpayableb4onetimediscount.Text = subtotal.ToString();// totaldue.ToString(); //TOTAL DUE
                     posconfirm.txtorigamountpayable.Text = computeTotalAmountWithDiscount().ToString();
-                    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                    ///
-                    //double overalltotaldiscount = 0.0;
-                    //overalltotaldiscount = totaldiscount;// + Convert.ToDouble(lblperitemdiscountamount.Text);
-                    //posconfirm.txtdiscount.Text = overalltotaldiscount.ToString();//DISCOUNT FIELD
-                    //posconfirm.txttotaldiscountamount.Text = overalltotaldiscount.ToString();
-                    //amountpayable = Convert.ToDouble(lblTotalAmount.Text) - overalltotaldiscount;
-                    //posconfirm.txtamountpayableb4onetimediscount.Text = lblTotalAmount.Text; //TOTAL DUE
-                    //posconfirm.txtamountpayable.Text = amountpayable.ToString();//lblTotalAmount.Text; //NET DUE NAH
-                    //posconfirm.txtorigamountpayable.Text = computeTotalAmountWithDiscount().ToString();//lblTotalAmount.Text;
 
                     posconfirm.lblvatsale.Text = lblvatsale.Text;
                     posconfirm.lblvatexempt.Text = lblvatexemptsale.Text;

@@ -168,34 +168,43 @@ namespace SalesInventorySystem.HOFormsDevEx
                 if (radioButtonExpense.Checked == true) { status = "EXPENSE"; }
                 if (checkforliquidation.Checked == true) { forliquidation = true; }
                 double totalamount = 0.0, amountpaid = 0.0;
-                amountpaid = Convert.ToDouble(gridViewMaster.GetRowCellValue(gridViewMaster.FocusedRowHandle, "AmountPaid").ToString());
+                if (status == "PURCHASE")
+                {
+                    amountpaid = Convert.ToDouble(gridViewMaster.GetRowCellValue(gridViewMaster.FocusedRowHandle, "AmountPaid").ToString());
+                }
 
                 for (int i = 0; i <= gridViewMaster.RowCount - 1; i++)
                 {
                     if (gridViewMaster.GetRowCellValue(i, "Pay").ToString() == "True")
                     //if (Convert.ToBoolean(gridViewMaster.GetRowCellValue(i, "Pay").ToString()) == true)
                     {
-
-                        totalamount += Convert.ToDouble(gridViewMaster.GetRowCellValue(i, "AmountPaid").ToString());
-                        //reference of APPaymentDetails is InvoiceNumber and SequenceNumber
-                        //PAYMENT METHOD = INVOICE PAYMENT
-                        if (Convert.ToDouble(gridViewMaster.GetRowCellValue(i, "AmountPaid").ToString()) > 0)
+                        if (status == "PURCHASE")
                         {
-                            Database.ExecuteQuery("INSERT INTO APPaymentDetails VALUES('" + lastvoucherid + "','" + txtsupplierid.Text + "','" + referenceno + "','" + gridViewMaster.GetRowCellValue(i, "BranchCode").ToString() + "','" + gridViewMaster.GetRowCellValue(i, "InvoiceNo").ToString() + "','" + gridViewMaster.GetRowCellValue(i, "InvoiceDate").ToString() + "','" + gridViewMaster.GetRowCellValue(i, "AmountPaid").ToString() + "','INVOICE PAYMENT','" + status + "','"+ vouchertype + "',' ',' ',' ','" + gridViewMaster.GetRowCellValue(i, "SequenceNumber").ToString() + "')");
+                            totalamount += Convert.ToDouble(gridViewMaster.GetRowCellValue(i, "AmountPaid").ToString());
+                            //reference of APPaymentDetails is InvoiceNumber and SequenceNumber
+                            //PAYMENT METHOD = INVOICE PAYMENT
+                            if (Convert.ToDouble(gridViewMaster.GetRowCellValue(i, "AmountPaid").ToString()) > 0)
+                            {
+                                Database.ExecuteQuery("INSERT INTO APPaymentDetails VALUES('" + lastvoucherid + "','" + txtsupplierid.Text + "','" + referenceno + "','" + gridViewMaster.GetRowCellValue(i, "BranchCode").ToString() + "','" + gridViewMaster.GetRowCellValue(i, "InvoiceNo").ToString() + "','" + gridViewMaster.GetRowCellValue(i, "InvoiceDate").ToString() + "','" + gridViewMaster.GetRowCellValue(i, "AmountPaid").ToString() + "','INVOICE PAYMENT','" + status + "','" + vouchertype + "',' ',' ',' ','" + gridViewMaster.GetRowCellValue(i, "SequenceNumber").ToString() + "')");
+                            }
+                            if (Convert.ToDouble(gridViewMaster.GetRowCellValue(i, "EWTAmount").ToString()) > 0)
+                            {
+                                Database.ExecuteQuery("INSERT INTO APPaymentDetails VALUES('" + lastvoucherid + "','" + txtsupplierid.Text + "','" + referenceno + "','" + gridViewMaster.GetRowCellValue(i, "BranchCode").ToString() + "','" + gridViewMaster.GetRowCellValue(i, "InvoiceNo").ToString() + "','" + gridViewMaster.GetRowCellValue(i, "InvoiceDate").ToString() + "','" + gridViewMaster.GetRowCellValue(i, "EWTAmount").ToString() + "','EWT','" + status + "','" + vouchertype + "',' ',' ',' ','" + gridViewMaster.GetRowCellValue(i, "SequenceNumber").ToString() + "')");
+                            }
+                            //PAYMENT METHOD = DISCOUNT
+                            if (Convert.ToDouble(gridViewMaster.GetRowCellValue(i, "DiscountAmount").ToString()) > 0)
+                            {
+                                Database.ExecuteQuery("INSERT INTO APPaymentDetails VALUES('" + lastvoucherid + "','" + txtsupplierid.Text + "','" + referenceno + "','" + gridViewMaster.GetRowCellValue(i, "BranchCode").ToString() + "','" + gridViewMaster.GetRowCellValue(i, "InvoiceNo").ToString() + "','" + gridViewMaster.GetRowCellValue(i, "InvoiceDate").ToString() + "','" + gridViewMaster.GetRowCellValue(i, "DiscountAmount").ToString() + "','DISCOUNT','" + status + "','" + vouchertype + "',' ',' ',' ','" + gridViewMaster.GetRowCellValue(i, "SequenceNumber").ToString() + "')");
+                            }
+                            //PAYMENT METHOD = OFFSET
+                            if (Convert.ToDouble(gridViewMaster.GetRowCellValue(i, "ReturnAllowances").ToString()) > 0)
+                            {
+                                Database.ExecuteQuery("INSERT INTO APPaymentDetails VALUES('" + lastvoucherid + "','" + txtsupplierid.Text + "','" + referenceno + "','" + gridViewMaster.GetRowCellValue(i, "BranchCode").ToString() + "','" + gridViewMaster.GetRowCellValue(i, "InvoiceNo").ToString() + "','" + gridViewMaster.GetRowCellValue(i, "InvoiceDate").ToString() + "','" + gridViewMaster.GetRowCellValue(i, "ReturnAllowances").ToString() + "','RETURNALLOWANCES','" + status + "','" + vouchertype + "',' ',' ',' ','" + gridViewMaster.GetRowCellValue(i, "SequenceNumber").ToString() + "')");
+                            }
                         }
-                        if (Convert.ToDouble(gridViewMaster.GetRowCellValue(i, "EWTAmount").ToString()) > 0)
+                        else if(status == "EXPENSE")
                         {
-                            Database.ExecuteQuery("INSERT INTO APPaymentDetails VALUES('" + lastvoucherid + "','" + txtsupplierid.Text + "','" + referenceno + "','" + gridViewMaster.GetRowCellValue(i, "BranchCode").ToString() + "','" + gridViewMaster.GetRowCellValue(i, "InvoiceNo").ToString() + "','" + gridViewMaster.GetRowCellValue(i, "InvoiceDate").ToString() + "','" + gridViewMaster.GetRowCellValue(i, "EWTAmount").ToString() + "','EWT','" + status + "','" + vouchertype + "',' ',' ',' ','" + gridViewMaster.GetRowCellValue(i, "SequenceNumber").ToString() + "')");
-                        }
-                        //PAYMENT METHOD = DISCOUNT
-                        if (Convert.ToDouble(gridViewMaster.GetRowCellValue(i, "DiscountAmount").ToString()) > 0)
-                        {
-                            Database.ExecuteQuery("INSERT INTO APPaymentDetails VALUES('" + lastvoucherid + "','" + txtsupplierid.Text + "','" + referenceno + "','" + gridViewMaster.GetRowCellValue(i, "BranchCode").ToString() + "','" + gridViewMaster.GetRowCellValue(i, "InvoiceNo").ToString() + "','" + gridViewMaster.GetRowCellValue(i, "InvoiceDate").ToString() + "','" + gridViewMaster.GetRowCellValue(i, "DiscountAmount").ToString() + "','DISCOUNT','" + status + "','" + vouchertype + "',' ',' ',' ','" + gridViewMaster.GetRowCellValue(i, "SequenceNumber").ToString() + "')");
-                        }
-                        //PAYMENT METHOD = OFFSET
-                        if (Convert.ToDouble(gridViewMaster.GetRowCellValue(i, "ReturnAllowances").ToString()) > 0)
-                        {
-                            Database.ExecuteQuery("INSERT INTO APPaymentDetails VALUES('" + lastvoucherid + "','" + txtsupplierid.Text + "','" + referenceno + "','" + gridViewMaster.GetRowCellValue(i, "BranchCode").ToString() + "','" + gridViewMaster.GetRowCellValue(i, "InvoiceNo").ToString() + "','" + gridViewMaster.GetRowCellValue(i, "InvoiceDate").ToString() + "','" + gridViewMaster.GetRowCellValue(i, "ReturnAllowances").ToString() + "','RETURNALLOWANCES','" + status + "','" + vouchertype + "',' ',' ',' ','" + gridViewMaster.GetRowCellValue(i, "SequenceNumber").ToString() + "')");
+                            Database.ExecuteQuery("INSERT INTO APPaymentDetails VALUES('" + lastvoucherid + "','" + txtsupplierid.Text + "','" + referenceno + "','" + gridViewMaster.GetRowCellValue(i, "BranchCode").ToString() + "','" + gridViewMaster.GetRowCellValue(i, "InvoiceNo").ToString() + "','" + gridViewMaster.GetRowCellValue(i, "InvoiceDate").ToString() + "','" + Convert.ToDouble(gridViewMaster.GetRowCellValue(i, "ActualCost").ToString()) + "','"+ gridViewMaster.GetRowCellValue(i, "Description").ToString() + "','" + status + "','" + vouchertype + "',' ',' ',' ','" + gridViewMaster.GetRowCellValue(i, "SequenceNumber").ToString() + "')");
                         }
                     }
                 }
@@ -296,81 +305,104 @@ namespace SalesInventorySystem.HOFormsDevEx
         private void gridViewMaster_CellValueChanged(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
         {
             double balance = 0.0, amountpaid = 0.0, diff = 0.0, discountamount = 0.0, ewt = 0.0,  netbal = 0.0, cleanbal = 0.0, actualcost = 0.0; //, discountamount = 0.0, offsetamount = 0.0;
-            //ewt = Convert.ToDouble(gridViewMaster.GetRowCellValue(gridViewMaster.FocusedRowHandle, "EWT").ToString());
-            discountamount = Convert.ToDouble(gridViewMaster.GetRowCellValue(gridViewMaster.FocusedRowHandle, "DiscountAmount").ToString());
-            actualcost = Convert.ToDouble(gridViewMaster.GetRowCellValue(gridViewMaster.FocusedRowHandle, "ActualCost").ToString());
-            balance = Convert.ToDouble(gridViewMaster.GetRowCellValue(gridViewMaster.FocusedRowHandle, "Balance").ToString());
-            amountpaid = Convert.ToDouble(gridViewMaster.GetRowCellValue(gridViewMaster.FocusedRowHandle, "AmountPaid").ToString());
-            double discountAndAmountpaid = 0.0;
-            discountAndAmountpaid = discountamount + amountpaid;
-            diff = balance - amountpaid;
-            //ewtamount = ewt * balance;
-            netbal = amountpaid + ewt + discountamount;
-            cleanbal = actualcost - ewt - discountamount;
-
-            //if (e.Column.FieldName == "Discount")
-            //{
-            //    gridViewMaster.SetRowCellValue(gridViewMaster.FocusedRowHandle, "Balance", Math.Round(actualbalance, 2).ToString());
-            //}
-
-            //if (e.Column.FieldName == "EWTAmount")
-            //{
-
-            //    gridViewMaster.SetRowCellValue(gridViewMaster.FocusedRowHandle, "Balance", Math.Round(cleanbal, 2).ToString());
-            //}
-            //if (e.Column.FieldName == "AmountPaid")
-            //{
-            //    gridViewMaster.SetRowCellValue(gridViewMaster.FocusedRowHandle, "Variance", Math.Round(diff, 2).ToString());
-            //}
-            //if (e.Column.FieldName == "DiscountAmount")
-            //{
-            //    gridViewMaster.SetRowCellValue(gridViewMaster.FocusedRowHandle, "Balance", Math.Round(cleanbal, 2).ToString());
-            //}
-
-            //if (e.Column.FieldName == "Pay")
-            //{
-
-            //if ((string)e.Value == "True")
-            if (e.Value == "True")
+                                                                                                                                                  //ewt = Convert.ToDouble(gridViewMaster.GetRowCellValue(gridViewMaster.FocusedRowHandle, "EWT").ToString());
+            if (radioButtonPurchase.Checked == true)
             {
-                //gridViewMaster.SetRowCellValue(gridViewMaster.FocusedRowHandle, "AmountPaid", gridViewMaster.GetRowCellValue(gridViewMaster.FocusedRowHandle, "Balance").ToString());
-                HOFormsDevEx.SupplierAddPaymentDevEx asdds = new SupplierAddPaymentDevEx();
-                asdds.txtshipno.Text = gridViewMaster.GetRowCellValue(gridViewMaster.FocusedRowHandle, "ShipmentNo").ToString();
-                asdds.txtinvoiceno.Text = gridViewMaster.GetRowCellValue(gridViewMaster.FocusedRowHandle, "InvoiceNo").ToString();
-                asdds.txtinvoicedate.Text = gridViewMaster.GetRowCellValue(gridViewMaster.FocusedRowHandle, "InvoiceDate").ToString();
-                asdds.txtactualcost.Text = gridViewMaster.GetRowCellValue(gridViewMaster.FocusedRowHandle, "ActualCost").ToString();
-                asdds.txtbalance.Text = gridViewMaster.GetRowCellValue(gridViewMaster.FocusedRowHandle, "Balance").ToString();
-                asdds.groupControl1.Text = txtsupplierid.Text + "-" + txtsuppliername.Text;
-                asdds.ShowDialog(this);
-                if (HOFormsDevEx.SupplierAddPaymentDevEx.isdone == true)
+                discountamount = Convert.ToDouble(gridViewMaster.GetRowCellValue(gridViewMaster.FocusedRowHandle, "DiscountAmount").ToString());
+                actualcost = Convert.ToDouble(gridViewMaster.GetRowCellValue(gridViewMaster.FocusedRowHandle, "ActualCost").ToString());
+                balance = Convert.ToDouble(gridViewMaster.GetRowCellValue(gridViewMaster.FocusedRowHandle, "Balance").ToString());
+                amountpaid = Convert.ToDouble(gridViewMaster.GetRowCellValue(gridViewMaster.FocusedRowHandle, "AmountPaid").ToString());
+                double discountAndAmountpaid = 0.0;
+                discountAndAmountpaid = discountamount + amountpaid;
+                diff = balance - amountpaid;
+                //ewtamount = ewt * balance;
+                netbal = amountpaid + ewt + discountamount;
+                cleanbal = actualcost - ewt - discountamount;
+
+
+
+                //if (e.Column.FieldName == "Discount")
+                //{
+                //    gridViewMaster.SetRowCellValue(gridViewMaster.FocusedRowHandle, "Balance", Math.Round(actualbalance, 2).ToString());
+                //}
+
+                //if (e.Column.FieldName == "EWTAmount")
+                //{
+
+                //    gridViewMaster.SetRowCellValue(gridViewMaster.FocusedRowHandle, "Balance", Math.Round(cleanbal, 2).ToString());
+                //}
+                //if (e.Column.FieldName == "AmountPaid")
+                //{
+                //    gridViewMaster.SetRowCellValue(gridViewMaster.FocusedRowHandle, "Variance", Math.Round(diff, 2).ToString());
+                //}
+                //if (e.Column.FieldName == "DiscountAmount")
+                //{
+                //    gridViewMaster.SetRowCellValue(gridViewMaster.FocusedRowHandle, "Balance", Math.Round(cleanbal, 2).ToString());
+                //}
+
+                //if (e.Column.FieldName == "Pay")
+                //{
+
+                //if ((string)e.Value == "True")
+                if (e.Value == "True")
                 {
-                    gridViewMaster.SetRowCellValue(gridViewMaster.FocusedRowHandle, "AmountPaid", HOFormsDevEx.SupplierAddPaymentDevEx.amountpaid);
-                    gridViewMaster.SetRowCellValue(gridViewMaster.FocusedRowHandle, "DiscountAmount", HOFormsDevEx.SupplierAddPaymentDevEx.discount);
-                    gridViewMaster.SetRowCellValue(gridViewMaster.FocusedRowHandle, "EWTAmount", HOFormsDevEx.SupplierAddPaymentDevEx.ewt);
-                    gridViewMaster.SetRowCellValue(gridViewMaster.FocusedRowHandle, "ReturnAllowances", HOFormsDevEx.SupplierAddPaymentDevEx.offset);
-                    //gridViewMaster.SetRowCellValue(gridViewMaster.FocusedRowHandle, "OffsetAmount", HOFormsDevEx.SupplierAddPaymentDevEx.offset);
-                    HOFormsDevEx.SupplierAddPaymentDevEx.isdone = false;
-                    asdds.Dispose();
+                    //gridViewMaster.SetRowCellValue(gridViewMaster.FocusedRowHandle, "AmountPaid", gridViewMaster.GetRowCellValue(gridViewMaster.FocusedRowHandle, "Balance").ToString());
+                    HOFormsDevEx.SupplierAddPaymentDevEx asdds = new SupplierAddPaymentDevEx();
+                    asdds.txtshipno.Text = gridViewMaster.GetRowCellValue(gridViewMaster.FocusedRowHandle, "ShipmentNo").ToString();
+                    asdds.txtinvoiceno.Text = gridViewMaster.GetRowCellValue(gridViewMaster.FocusedRowHandle, "InvoiceNo").ToString();
+                    asdds.txtinvoicedate.Text = gridViewMaster.GetRowCellValue(gridViewMaster.FocusedRowHandle, "InvoiceDate").ToString();
+                    asdds.txtactualcost.Text = gridViewMaster.GetRowCellValue(gridViewMaster.FocusedRowHandle, "ActualCost").ToString();
+                    asdds.txtbalance.Text = gridViewMaster.GetRowCellValue(gridViewMaster.FocusedRowHandle, "Balance").ToString();
+                    asdds.groupControl1.Text = txtsupplierid.Text + "-" + txtsuppliername.Text;
+                    asdds.ShowDialog(this);
+                    if (HOFormsDevEx.SupplierAddPaymentDevEx.isdone == true)
+                    {
+                        gridViewMaster.SetRowCellValue(gridViewMaster.FocusedRowHandle, "AmountPaid", HOFormsDevEx.SupplierAddPaymentDevEx.amountpaid);
+                        gridViewMaster.SetRowCellValue(gridViewMaster.FocusedRowHandle, "DiscountAmount", HOFormsDevEx.SupplierAddPaymentDevEx.discount);
+                        gridViewMaster.SetRowCellValue(gridViewMaster.FocusedRowHandle, "EWTAmount", HOFormsDevEx.SupplierAddPaymentDevEx.ewt);
+                        gridViewMaster.SetRowCellValue(gridViewMaster.FocusedRowHandle, "ReturnAllowances", HOFormsDevEx.SupplierAddPaymentDevEx.offset);
+                        //gridViewMaster.SetRowCellValue(gridViewMaster.FocusedRowHandle, "OffsetAmount", HOFormsDevEx.SupplierAddPaymentDevEx.offset);
+                        HOFormsDevEx.SupplierAddPaymentDevEx.isdone = false;
+                        asdds.Dispose();
+                    }
                 }
-            }
-            //else if ((string)e.Value == "False")
-            else if (e.Value == "False")
-            {
-                gridViewMaster.SetRowCellValue(gridViewMaster.FocusedRowHandle, "AmountPaid", "0");
-            }
-            //}
-
-            double totalamount = 0.0;
-            for (int i = 0; i <= gridViewMaster.RowCount - 1; i++)
-            {
-                if (gridViewMaster.GetRowCellValue(i, "Pay").ToString() == "True")
+                else if (e.Value == "False")
                 {
-                    totalamount += Convert.ToDouble(gridViewMaster.GetRowCellValue(i, "AmountPaid").ToString());
+                    gridViewMaster.SetRowCellValue(gridViewMaster.FocusedRowHandle, "AmountPaid", "0");
                 }
+
+                double totalamount = 0.0;
+                for (int i = 0; i <= gridViewMaster.RowCount - 1; i++)
+                {
+                    if (gridViewMaster.GetRowCellValue(i, "Pay").ToString() == "True")
+                    {
+                        totalamount += Convert.ToDouble(gridViewMaster.GetRowCellValue(i, "AmountPaid").ToString());
+                    }
+                }
+
+                txtamounttopay.Text = totalamount.ToString();
+
             }
-
-
-            txtamounttopay.Text = totalamount.ToString();
+            else //RADIO BUTTON EXPENSE SELECTED
+            {
+                double totalamount2 = 0.0;
+                if (e.Value == "True")
+                {
+                    for (int i = 0; i <= gridViewMaster.RowCount - 1; i++)
+                    {
+                        if (gridViewMaster.GetRowCellValue(i, "Pay").ToString() == "True")
+                        {
+                            totalamount2 += Convert.ToDouble(gridViewMaster.GetRowCellValue(i, "ActualCost").ToString());
+                        }
+                    }
+                    
+                }
+                else if (e.Value == "False")
+                {
+                    totalamount2 = 0;
+                }
+                txtamounttopay.Text = totalamount2.ToString();
+            }
         }
 
         private void gridViewMaster_CustomRowCellEdit(object sender, DevExpress.XtraGrid.Views.Grid.CustomRowCellEditEventArgs e)
@@ -393,46 +425,49 @@ namespace SalesInventorySystem.HOFormsDevEx
         private void gridViewMaster_RowCellStyle(object sender, DevExpress.XtraGrid.Views.Grid.RowCellStyleEventArgs e)
         {
             GridView view = (GridView)sender;
-            if (e.Column.FieldName == "Balance")
+            if (radioButtonPurchase.Checked == true)
             {
-                e.Appearance.ForeColor = Color.Red;
-            }
-            if (e.Column.FieldName == "AmountPaid")
-            {
-                e.Appearance.BackColor = Color.LightYellow;
-            }
-            if (e.Column.FieldName == "DiscountAmount")
-            {
-                e.Appearance.BackColor = Color.LightYellow;
-            }
-            //if (e.Column.FieldName == "OffsetAmount")
-            if (e.Column.FieldName == "ReturnAllowances")
-            {
-                e.Appearance.BackColor = Color.LightYellow;
-            }
-            if (e.Column.FieldName == "Pay")
-            {
-                e.Appearance.BackColor = Color.LightYellow;
-            }
-            //if (e.Column.FieldName == "VarianceType")
-            //{
-            //    e.Appearance.BackColor = Color.LightCoral;
-            //}
-            //if (e.Column.FieldName == "GLCode")
-            //{
-            //    e.Appearance.BackColor = Color.LightCyan;
-            //}
-            //if (e.Column.FieldName == "OffsetDebitGLCode")
-            //{
-            //    e.Appearance.BackColor = Color.LightYellow;
-            //} 
-            //if (e.Column.FieldName == "OffsetCreditGLCode")
-            //{
-            //    e.Appearance.BackColor = Color.LightYellow;
-            //}
-            if (e.Column.FieldName == "EWTAmount")
-            {
-                e.Appearance.BackColor = Color.LightYellow;
+                if (e.Column.FieldName == "Balance")
+                {
+                    e.Appearance.ForeColor = Color.Red;
+                }
+                if (e.Column.FieldName == "AmountPaid")
+                {
+                    e.Appearance.BackColor = Color.LightYellow;
+                }
+                if (e.Column.FieldName == "DiscountAmount")
+                {
+                    e.Appearance.BackColor = Color.LightYellow;
+                }
+                //if (e.Column.FieldName == "OffsetAmount")
+                if (e.Column.FieldName == "ReturnAllowances")
+                {
+                    e.Appearance.BackColor = Color.LightYellow;
+                }
+                if (e.Column.FieldName == "Pay")
+                {
+                    e.Appearance.BackColor = Color.LightYellow;
+                }
+                //if (e.Column.FieldName == "VarianceType")
+                //{
+                //    e.Appearance.BackColor = Color.LightCoral;
+                //}
+                //if (e.Column.FieldName == "GLCode")
+                //{
+                //    e.Appearance.BackColor = Color.LightCyan;
+                //}
+                //if (e.Column.FieldName == "OffsetDebitGLCode")
+                //{
+                //    e.Appearance.BackColor = Color.LightYellow;
+                //} 
+                //if (e.Column.FieldName == "OffsetCreditGLCode")
+                //{
+                //    e.Appearance.BackColor = Color.LightYellow;
+                //}
+                if (e.Column.FieldName == "EWTAmount")
+                {
+                    e.Appearance.BackColor = Color.LightYellow;
+                }
             }
         }
         //USED TO EDIT CELL 
@@ -446,21 +481,24 @@ namespace SalesInventorySystem.HOFormsDevEx
         private void btnextract_Click(object sender, EventArgs e)
         {
             populate();
+           
             gridViewMaster.Columns[0].Visible = false;
+            Classes.DevXGridViewSettings.ShowFooterTotal(gridViewMaster, "ActualCost");
             //if (radioButtonExpense.Checked == true)
             //{
             //    //gridViewMaster.Columns["EWTAmount"].Visible = false;
             //    gridViewMaster.Columns["DiscountAmount"].Visible = false;
             //}
-          
-
-            Classes.DevXGridViewSettings.ShowFooterTotal(gridViewMaster, "AmountPaid");
-            Classes.DevXGridViewSettings.ShowFooterTotal(gridViewMaster, "ActualCost");
-            //Classes.DevXGridViewSettings.ShowFooterTotal(gridViewMaster, "Balance");
-            Classes.DevXGridViewSettings.ShowFooterTotal(gridViewMaster, "DiscountAmount");
-            Classes.DevXGridViewSettings.ShowFooterTotal(gridViewMaster, "EWTAmount");
-            Classes.DevXGridViewSettings.ShowFooterTotal(gridViewMaster, "ReturnAllowances");
-            //Classes.DevXGridViewSettings.ShowFooterTotal(gridViewMaster, "OffsetAmount");
+            if (radioButtonPurchase.Checked == true)
+            {
+                Classes.DevXGridViewSettings.ShowFooterTotal(gridViewMaster, "AmountPaid");
+                Classes.DevXGridViewSettings.ShowFooterTotal(gridViewMaster, "ActualCost");
+                //Classes.DevXGridViewSettings.ShowFooterTotal(gridViewMaster, "Balance");
+                Classes.DevXGridViewSettings.ShowFooterTotal(gridViewMaster, "DiscountAmount");
+                Classes.DevXGridViewSettings.ShowFooterTotal(gridViewMaster, "EWTAmount");
+                Classes.DevXGridViewSettings.ShowFooterTotal(gridViewMaster, "ReturnAllowances");
+                //Classes.DevXGridViewSettings.ShowFooterTotal(gridViewMaster, "OffsetAmount");
+            }
         }
 
         void printVoucher()
@@ -502,15 +540,15 @@ namespace SalesInventorySystem.HOFormsDevEx
                 //string str = Classes.CurrencyConversion.ConvertToWords(txtamounttopay.Text);
                 string str = Classes.DecimalToWordExtension.ToWords(Convert.ToDecimal(txtamounttopay.Text));
 
-                gridViewMaster.Columns["Balance"].Visible = false;
+                //gridViewMaster.Columns["Balance"].Visible = false;
                 gridViewMaster.Columns["BranchCode"].Visible = false;
                 //gridViewMaster.Columns["Description"].Visible = false;
                 //gridViewMaster.Columns["Type"].Visible = false;
-                gridViewMaster.Columns["Pay"].Visible = false;
+                //gridViewMaster.Columns["Pay"].Visible = false;
                 //gridViewMaster.Columns["OffsetAmount"].Visible = false;
                 //gridViewMaster.Columns["OffsetDebitGLCode"].Visible = false;
                 //gridViewMaster.Columns["OffsetCreditGLCode"].Visible = false;
-                gridViewMaster.Columns["Variance"].Visible = false;
+                //gridViewMaster.Columns["Variance"].Visible = false;
 
                 //gridViewMaster.Columns["HpyAmount"].Visible = false;
                 //gridViewMaster.Columns["DiscountGLCode"].Visible = false;
@@ -610,6 +648,14 @@ namespace SalesInventorySystem.HOFormsDevEx
                 }
                 else
                 {
+                    
+                    for(int i=0;i<=gridViewMaster.RowCount-1;i++)
+                    {
+                        if(gridViewMaster.GetRowCellValue(i,"Pay").ToString()=="")
+                        {
+                            clearUncheckPayStatus();
+                        }
+                    }
                     printVoucher();
                 }
             }
@@ -642,30 +688,37 @@ namespace SalesInventorySystem.HOFormsDevEx
             string invoiceno = gridViewMaster.GetRowCellValue(gridViewMaster.FocusedRowHandle, "InvoiceNo").ToString();
             if(radioButtonExpense.Checked == true && gridViewMaster.RowCount > 0)
             {
-                bool checkifNotYetProcessed = Database.checkifExist("SELECT TOP 1 InvoiceNo " +
-                "FROM ExpenseMaster " +
+                //bool checkifNotYetProcessed = Database.checkifExist("SELECT TOP(1) InvoiceNo " +
+                //"FROM dbo.ExpenseMaster " +
+                //"WHERE InvoiceNo='" + invoiceno + "' " +
+                //"AND SupplierID='" + txtsupplierid.Text + "' " +
+                //"AND ReferenceNumber='" + refno + "' " +
+                //"AND AmountPaid=0 " +
+                //"AND Status='UNPAID' " +
+                //"AND isErrorCorrect=0 ");
+                bool checkifNotYetProcessed = Database.checkifExist("SELECT TOP(1) InvoiceNo " +
+                "FROM dbo.ExpenseSummary " +
                 "WHERE InvoiceNo='" + invoiceno + "' " +
                 "AND SupplierID='" + txtsupplierid.Text + "' " +
                 "AND ReferenceNumber='" + refno + "' " +
-                "AND AmountPaid=0 " +
-                "AND Status='UNPAID' " +
-                "AND isErrorCorrect=0 ");
+                "AND Status='APPROVED' ");
+                
                 if (checkifNotYetProcessed)
                 {
                     bool confirm = HelperFunction.ConfirmDialog("Are you sure you want to Execute as ErrorCorrect this Transaction? ", "Confirm Error Correct");
                     if (confirm)
                     {
-                        Database.ExecuteQuery("UPDATE ExpenseMaster SET isErrorCorrect=1 " +
-                        "WHERE ReferenceNumber='" + refno + "' " +
-                        "AND InvoiceNo='" + invoiceno + "' " +
-                        "AND SupplierID='" + txtsupplierid.Text + "' ");
-                        Database.ExecuteQuery("UPDATE TicketMaster SET BranchCode=BranchCode+'X' " +
-                            "WHERE ReferenceNumber='" + refno + "' " +
-                            "AND ReferenceKey='" + invoiceno + "' " +
-                            "AND OWNER='" + txtsuppliername.Text + "' ");
-                        Database.ExecuteQuery("UPDATE TicketDetails SET BranchCode=BranchCode+'X' " +
-                            "WHERE ReferenceNumber='" + refno + "' " +
-                            "AND ReferenceKey='" + invoiceno + "' ", "Error Correct Successfully Executed");
+                        //Database.ExecuteQuery("UPDATE dbo.ExpenseMaster SET isErrorCorrect=1 " +
+                        //"WHERE ReferenceNumber='" + refno + "' " +
+                        //"AND InvoiceNo='" + invoiceno + "' " +
+                        //"AND SupplierID='" + txtsupplierid.Text + "' ");
+                        //Database.ExecuteQuery("UPDATE dbo.TicketMaster SET BranchCode=BranchCode+'X' " +
+                        //    "WHERE ReferenceNumber='" + refno + "' " +
+                        //    "AND ReferenceKey='" + invoiceno + "' " +
+                        //    "AND OWNER='" + txtsuppliername.Text + "' ");
+                        //Database.ExecuteQuery("UPDATE dbo.TicketDetails SET BranchCode=BranchCode+'X' " +
+                        //    "WHERE ReferenceNumber='" + refno + "' " +
+                        //    "AND ReferenceKey='" + invoiceno + "' ", "Error Correct Successfully Executed");
                     }
                     else
                     {
@@ -687,17 +740,18 @@ namespace SalesInventorySystem.HOFormsDevEx
                 contextMenuStrip1.Show(gridControlMaster, e.Location);
         }
 
-        private void btnfilter_Click(object sender, EventArgs e)
+        void clearUncheckPayStatus()
         {
             for (int i = 0; i <= gridViewMaster.RowCount - 1; i++)
             {
-                if (gridViewMaster.GetRowCellValue(i, "Pay").ToString() == "NONE")
+                //string sss = gridViewMaster.GetRowCellValue(i, "Pay").ToString();
+                if (gridViewMaster.GetRowCellValue(i, "Pay").ToString() == "NONE" || gridViewMaster.GetRowCellValue(i, "Pay").ToString() == "")
                 {
                     gridViewMaster.DeleteRow(i);
 
                     for (int j = 0; j <= gridViewMaster.RowCount - 1; j++)
                     {
-                        if (gridViewMaster.GetRowCellValue(j, "Pay").ToString() == "NONE")
+                        if (gridViewMaster.GetRowCellValue(j, "Pay").ToString() == "NONE" || gridViewMaster.GetRowCellValue(j, "Pay").ToString() == "")
                         {
                             gridViewMaster.DeleteRow(j);
                         }
@@ -705,7 +759,11 @@ namespace SalesInventorySystem.HOFormsDevEx
 
                 }
             }
-            
+        }
+
+        private void btnfilter_Click(object sender, EventArgs e)
+        {
+            clearUncheckPayStatus();
         }
     }
 }

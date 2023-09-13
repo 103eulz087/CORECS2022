@@ -18,7 +18,13 @@ namespace SalesInventorySystem.HOFormsDevEx
 
         private void btnupdate_Click(object sender, EventArgs e)
         {
-            Database.ExecuteQuery($"UPDATE APACCOUNTS SET ActualCost='{txtactualcost.Text}',Balance='{txtbalance.Text}',PayStatus='UNPAID' WHERE ShipmentNo='{txtshipno.Text}' AND InvoiceNo='{txtinvoiceno.Text}'  AND SupplierID='{groupControl1.Text}' ","Succesfully Updated");
+            Database.ExecuteQuery($"UPDATE APACCOUNTS SET " +
+                $"ActualCost='{txtactualcost.Text}', " +
+                $"Balance='{txtbalance.Text}', " +
+                $"PayStatus='UNPAID' " +
+                $"WHERE ShipmentNo='{txtshipno.Text}' " +
+                $"AND InvoiceNo='{txtinvoiceno.Text}' " +
+                $"AND SupplierID='{groupControl1.Text}' ","Succesfully Updated");
             isdone = true;
             this.Close();
         }

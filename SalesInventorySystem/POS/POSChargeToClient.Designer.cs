@@ -59,7 +59,7 @@
             this.labelControl1.Appearance.Options.UseFont = true;
             this.labelControl1.Appearance.Options.UseForeColor = true;
             this.labelControl1.Location = new System.Drawing.Point(31, 18);
-            this.labelControl1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.labelControl1.Margin = new System.Windows.Forms.Padding(4);
             this.labelControl1.Name = "labelControl1";
             this.labelControl1.Size = new System.Drawing.Size(212, 38);
             this.labelControl1.TabIndex = 0;
@@ -68,7 +68,7 @@
             // txtcust
             // 
             this.txtcust.Location = new System.Drawing.Point(273, 18);
-            this.txtcust.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtcust.Margin = new System.Windows.Forms.Padding(4);
             this.txtcust.Name = "txtcust";
             this.txtcust.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 12.25F);
             this.txtcust.Properties.Appearance.Options.UseFont = true;
@@ -96,7 +96,7 @@
             this.labelControl2.Appearance.Options.UseFont = true;
             this.labelControl2.Appearance.Options.UseForeColor = true;
             this.labelControl2.Location = new System.Drawing.Point(63, 196);
-            this.labelControl2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.labelControl2.Margin = new System.Windows.Forms.Padding(4);
             this.labelControl2.Name = "labelControl2";
             this.labelControl2.Size = new System.Drawing.Size(182, 38);
             this.labelControl2.TabIndex = 2;
@@ -110,7 +110,7 @@
             0,
             0});
             this.txtamount.Location = new System.Drawing.Point(273, 195);
-            this.txtamount.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtamount.Margin = new System.Windows.Forms.Padding(4);
             this.txtamount.Name = "txtamount";
             this.txtamount.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 12.8F);
             this.txtamount.Properties.Appearance.Options.UseFont = true;
@@ -127,7 +127,7 @@
             this.labelControl3.Appearance.Options.UseFont = true;
             this.labelControl3.Appearance.Options.UseForeColor = true;
             this.labelControl3.Location = new System.Drawing.Point(128, 373);
-            this.labelControl3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.labelControl3.Margin = new System.Windows.Forms.Padding(4);
             this.labelControl3.Name = "labelControl3";
             this.labelControl3.Size = new System.Drawing.Size(116, 38);
             this.labelControl3.TabIndex = 4;
@@ -136,7 +136,7 @@
             // txtremarks
             // 
             this.txtremarks.Location = new System.Drawing.Point(273, 315);
-            this.txtremarks.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtremarks.Margin = new System.Windows.Forms.Padding(4);
             this.txtremarks.Name = "txtremarks";
             this.txtremarks.Size = new System.Drawing.Size(462, 178);
             this.txtremarks.TabIndex = 5;
@@ -149,7 +149,7 @@
             this.labelControl4.Appearance.Options.UseFont = true;
             this.labelControl4.Appearance.Options.UseForeColor = true;
             this.labelControl4.Location = new System.Drawing.Point(121, 137);
-            this.labelControl4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.labelControl4.Margin = new System.Windows.Forms.Padding(4);
             this.labelControl4.Name = "labelControl4";
             this.labelControl4.Size = new System.Drawing.Size(122, 38);
             this.labelControl4.TabIndex = 7;
@@ -158,7 +158,7 @@
             // txtinvoiceno
             // 
             this.txtinvoiceno.Location = new System.Drawing.Point(273, 135);
-            this.txtinvoiceno.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtinvoiceno.Margin = new System.Windows.Forms.Padding(4);
             this.txtinvoiceno.Name = "txtinvoiceno";
             this.txtinvoiceno.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 12.8F);
             this.txtinvoiceno.Properties.Appearance.Options.UseFont = true;
@@ -172,7 +172,7 @@
             this.labelControl5.Appearance.Options.UseFont = true;
             this.labelControl5.Appearance.Options.UseForeColor = true;
             this.labelControl5.Location = new System.Drawing.Point(139, 76);
-            this.labelControl5.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.labelControl5.Margin = new System.Windows.Forms.Padding(4);
             this.labelControl5.Name = "labelControl5";
             this.labelControl5.Size = new System.Drawing.Size(105, 38);
             this.labelControl5.TabIndex = 9;
@@ -182,7 +182,7 @@
             // 
             this.txtorderno.EditValue = "000000000000000000";
             this.txtorderno.Location = new System.Drawing.Point(273, 75);
-            this.txtorderno.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtorderno.Margin = new System.Windows.Forms.Padding(4);
             this.txtorderno.Name = "txtorderno";
             this.txtorderno.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 12.8F);
             this.txtorderno.Properties.Appearance.Options.UseFont = true;
@@ -198,7 +198,7 @@
             0,
             0});
             this.txtdiscountamnt.Location = new System.Drawing.Point(273, 255);
-            this.txtdiscountamnt.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtdiscountamnt.Margin = new System.Windows.Forms.Padding(4);
             this.txtdiscountamnt.Name = "txtdiscountamnt";
             this.txtdiscountamnt.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 12.8F);
             this.txtdiscountamnt.Properties.Appearance.Options.UseFont = true;
@@ -215,7 +215,7 @@
             this.labelControl6.Appearance.Options.UseFont = true;
             this.labelControl6.Appearance.Options.UseForeColor = true;
             this.labelControl6.Location = new System.Drawing.Point(16, 257);
-            this.labelControl6.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.labelControl6.Margin = new System.Windows.Forms.Padding(4);
             this.labelControl6.Name = "labelControl6";
             this.labelControl6.Size = new System.Drawing.Size(229, 38);
             this.labelControl6.TabIndex = 11;
@@ -224,7 +224,7 @@
             // btnClose
             // 
             this.btnClose.Location = new System.Drawing.Point(561, 504);
-            this.btnClose.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnClose.Margin = new System.Windows.Forms.Padding(4);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(176, 69);
             this.btnClose.TabIndex = 13;
@@ -235,7 +235,7 @@
             // 
             this.btnsubmit.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnsubmit.ImageOptions.Image")));
             this.btnsubmit.Location = new System.Drawing.Point(377, 504);
-            this.btnsubmit.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnsubmit.Margin = new System.Windows.Forms.Padding(4);
             this.btnsubmit.Name = "btnsubmit";
             this.btnsubmit.Size = new System.Drawing.Size(176, 69);
             this.btnsubmit.TabIndex = 6;

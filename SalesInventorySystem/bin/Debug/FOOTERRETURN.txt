@@ -5,11 +5,11 @@
         Guadalupe Cebu City 6000
             Accd#: 1234567890
          Date Issued: 11/13/2019
-         Valid Until: 7/16/2020
-             PTU No.: 89798
-         Date Issued: 7/10/2020
-         Valid Until: 7/16/2020
-    This serves as your SALES INVOICE
+          Valid Until: 7/7/2023
+             PTU No.: 321321
+          Date Issued: 7/7/2023
+          Valid Until: 7/7/2023
+  This serves as your OFFICIAL RECEIPT
     THIS DOCUMENT SHALL BE VALID FOR
      FIVE (5) YEARS FROM DATE OF THE
              PERMIT TO USE.

@@ -142,9 +142,9 @@
             this.groupControl2.Controls.Add(this.xtraTabControl1);
             this.groupControl2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupControl2.Location = new System.Drawing.Point(0, 200);
-            this.groupControl2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupControl2.Margin = new System.Windows.Forms.Padding(2);
             this.groupControl2.Name = "groupControl2";
-            this.groupControl2.Size = new System.Drawing.Size(1726, 792);
+            this.groupControl2.Size = new System.Drawing.Size(1967, 890);
             this.groupControl2.TabIndex = 434;
             this.groupControl2.Text = "Supplier Transactions";
             // 
@@ -157,7 +157,7 @@
             this.xtraTabControl1.Margin = new System.Windows.Forms.Padding(3, 6, 3, 6);
             this.xtraTabControl1.Name = "xtraTabControl1";
             this.xtraTabControl1.SelectedTabPage = this.tabPageLedger;
-            this.xtraTabControl1.Size = new System.Drawing.Size(1720, 750);
+            this.xtraTabControl1.Size = new System.Drawing.Size(1961, 848);
             this.xtraTabControl1.TabIndex = 1;
             this.xtraTabControl1.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
             this.tabPageLedger,
@@ -172,7 +172,7 @@
             this.tabPageLedger.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("tabPageLedger.ImageOptions.Image")));
             this.tabPageLedger.Margin = new System.Windows.Forms.Padding(3, 6, 3, 6);
             this.tabPageLedger.Name = "tabPageLedger";
-            this.tabPageLedger.Size = new System.Drawing.Size(1716, 702);
+            this.tabPageLedger.Size = new System.Drawing.Size(1957, 800);
             this.tabPageLedger.Text = "Ledger";
             // 
             // groupBox4
@@ -183,7 +183,7 @@
             this.groupBox4.Margin = new System.Windows.Forms.Padding(3, 6, 3, 6);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Padding = new System.Windows.Forms.Padding(3, 6, 3, 6);
-            this.groupBox4.Size = new System.Drawing.Size(1716, 619);
+            this.groupBox4.Size = new System.Drawing.Size(1957, 717);
             this.groupBox4.TabIndex = 12;
             this.groupBox4.TabStop = false;
             // 
@@ -195,7 +195,7 @@
             this.gridControl2.MainView = this.gridView2;
             this.gridControl2.Margin = new System.Windows.Forms.Padding(3, 6, 3, 6);
             this.gridControl2.Name = "gridControl2";
-            this.gridControl2.Size = new System.Drawing.Size(1710, 584);
+            this.gridControl2.Size = new System.Drawing.Size(1951, 682);
             this.gridControl2.TabIndex = 5;
             this.gridControl2.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView2});
@@ -236,7 +236,7 @@
             this.groupBox3.Margin = new System.Windows.Forms.Padding(3, 6, 3, 6);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Padding = new System.Windows.Forms.Padding(3, 6, 3, 6);
-            this.groupBox3.Size = new System.Drawing.Size(1716, 83);
+            this.groupBox3.Size = new System.Drawing.Size(1957, 83);
             this.groupBox3.TabIndex = 11;
             this.groupBox3.TabStop = false;
             // 
@@ -298,7 +298,7 @@
             this.tabPagePurchases.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("tabPagePurchases.ImageOptions.Image")));
             this.tabPagePurchases.Margin = new System.Windows.Forms.Padding(3, 6, 3, 6);
             this.tabPagePurchases.Name = "tabPagePurchases";
-            this.tabPagePurchases.Size = new System.Drawing.Size(1716, 702);
+            this.tabPagePurchases.Size = new System.Drawing.Size(1957, 800);
             this.tabPagePurchases.Text = "Purchases";
             // 
             // groupBox5
@@ -309,7 +309,7 @@
             this.groupBox5.Margin = new System.Windows.Forms.Padding(3, 6, 3, 6);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Padding = new System.Windows.Forms.Padding(3, 6, 3, 6);
-            this.groupBox5.Size = new System.Drawing.Size(1716, 619);
+            this.groupBox5.Size = new System.Drawing.Size(1957, 717);
             this.groupBox5.TabIndex = 14;
             this.groupBox5.TabStop = false;
             // 
@@ -321,7 +321,7 @@
             this.gridControl1.MainView = this.gridView1;
             this.gridControl1.Margin = new System.Windows.Forms.Padding(3, 6, 3, 6);
             this.gridControl1.Name = "gridControl1";
-            this.gridControl1.Size = new System.Drawing.Size(1710, 584);
+            this.gridControl1.Size = new System.Drawing.Size(1951, 682);
             this.gridControl1.TabIndex = 5;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
@@ -363,7 +363,7 @@
             this.groupBox6.Margin = new System.Windows.Forms.Padding(3, 6, 3, 6);
             this.groupBox6.Name = "groupBox6";
             this.groupBox6.Padding = new System.Windows.Forms.Padding(3, 6, 3, 6);
-            this.groupBox6.Size = new System.Drawing.Size(1716, 83);
+            this.groupBox6.Size = new System.Drawing.Size(1957, 83);
             this.groupBox6.TabIndex = 13;
             this.groupBox6.TabStop = false;
             // 
@@ -437,7 +437,7 @@
             this.tabPagePayments.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("tabPagePayments.ImageOptions.Image")));
             this.tabPagePayments.Margin = new System.Windows.Forms.Padding(3, 6, 3, 6);
             this.tabPagePayments.Name = "tabPagePayments";
-            this.tabPagePayments.Size = new System.Drawing.Size(1716, 702);
+            this.tabPagePayments.Size = new System.Drawing.Size(1957, 800);
             this.tabPagePayments.Text = "Payments";
             // 
             // groupBox7
@@ -448,7 +448,7 @@
             this.groupBox7.Margin = new System.Windows.Forms.Padding(3, 6, 3, 6);
             this.groupBox7.Name = "groupBox7";
             this.groupBox7.Padding = new System.Windows.Forms.Padding(3, 6, 3, 6);
-            this.groupBox7.Size = new System.Drawing.Size(1716, 619);
+            this.groupBox7.Size = new System.Drawing.Size(1957, 717);
             this.groupBox7.TabIndex = 14;
             this.groupBox7.TabStop = false;
             // 
@@ -460,7 +460,7 @@
             this.gridControl3.MainView = this.gridView3;
             this.gridControl3.Margin = new System.Windows.Forms.Padding(3, 6, 3, 6);
             this.gridControl3.Name = "gridControl3";
-            this.gridControl3.Size = new System.Drawing.Size(1710, 584);
+            this.gridControl3.Size = new System.Drawing.Size(1951, 682);
             this.gridControl3.TabIndex = 5;
             this.gridControl3.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView3});
@@ -502,7 +502,7 @@
             this.groupBox8.Margin = new System.Windows.Forms.Padding(3, 6, 3, 6);
             this.groupBox8.Name = "groupBox8";
             this.groupBox8.Padding = new System.Windows.Forms.Padding(3, 6, 3, 6);
-            this.groupBox8.Size = new System.Drawing.Size(1716, 83);
+            this.groupBox8.Size = new System.Drawing.Size(1957, 83);
             this.groupBox8.TabIndex = 13;
             this.groupBox8.TabStop = false;
             // 
@@ -578,7 +578,7 @@
             this.tabPageExpenses.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("tabPageExpenses.ImageOptions.Image")));
             this.tabPageExpenses.Margin = new System.Windows.Forms.Padding(3, 6, 3, 6);
             this.tabPageExpenses.Name = "tabPageExpenses";
-            this.tabPageExpenses.Size = new System.Drawing.Size(1716, 702);
+            this.tabPageExpenses.Size = new System.Drawing.Size(1957, 800);
             this.tabPageExpenses.Text = "Expenses";
             // 
             // groupBox9
@@ -589,7 +589,7 @@
             this.groupBox9.Margin = new System.Windows.Forms.Padding(3, 6, 3, 6);
             this.groupBox9.Name = "groupBox9";
             this.groupBox9.Padding = new System.Windows.Forms.Padding(3, 6, 3, 6);
-            this.groupBox9.Size = new System.Drawing.Size(1716, 619);
+            this.groupBox9.Size = new System.Drawing.Size(1957, 717);
             this.groupBox9.TabIndex = 14;
             this.groupBox9.TabStop = false;
             // 
@@ -601,7 +601,7 @@
             this.gridControl4.MainView = this.gridView4;
             this.gridControl4.Margin = new System.Windows.Forms.Padding(3, 6, 3, 6);
             this.gridControl4.Name = "gridControl4";
-            this.gridControl4.Size = new System.Drawing.Size(1710, 584);
+            this.gridControl4.Size = new System.Drawing.Size(1951, 682);
             this.gridControl4.TabIndex = 5;
             this.gridControl4.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView4});
@@ -645,7 +645,7 @@
             this.groupBox10.Margin = new System.Windows.Forms.Padding(3, 6, 3, 6);
             this.groupBox10.Name = "groupBox10";
             this.groupBox10.Padding = new System.Windows.Forms.Padding(3, 6, 3, 6);
-            this.groupBox10.Size = new System.Drawing.Size(1716, 83);
+            this.groupBox10.Size = new System.Drawing.Size(1957, 83);
             this.groupBox10.TabIndex = 13;
             this.groupBox10.TabStop = false;
             // 
@@ -729,9 +729,9 @@
             this.groupControl1.Controls.Add(this.txtmvmtdate);
             this.groupControl1.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupControl1.Location = new System.Drawing.Point(0, 0);
-            this.groupControl1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupControl1.Margin = new System.Windows.Forms.Padding(2);
             this.groupControl1.Name = "groupControl1";
-            this.groupControl1.Size = new System.Drawing.Size(1726, 200);
+            this.groupControl1.Size = new System.Drawing.Size(1967, 200);
             this.groupControl1.TabIndex = 433;
             this.groupControl1.Text = "Supplier Info";
             // 
@@ -973,7 +973,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 23F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1726, 992);
+            this.ClientSize = new System.Drawing.Size(1967, 1090);
             this.Controls.Add(this.groupControl2);
             this.Controls.Add(this.groupControl1);
             this.Margin = new System.Windows.Forms.Padding(3, 6, 3, 6);

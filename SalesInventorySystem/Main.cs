@@ -1200,27 +1200,27 @@ namespace SalesInventorySystem
             //}
             //InventoryIN pcusatfsmr = new InventoryIN();
             //pcusatfsmr.Show();
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form.GetType() == typeof(ReInventoryIn))
-                {
-                    form.Activate();
-                    return;
-                }
-            }
-            ReInventoryIn pcusatfsmr = new ReInventoryIn();
-            pcusatfsmr.Show();
-            //FOR FOR BUILTIN INVENTORY IN
             //foreach (Form form in Application.OpenForms)
             //{
-            //    if (form.GetType() == typeof(POS.POSInventoryIN))
+            //    if (form.GetType() == typeof(ReInventoryIn))
             //    {
             //        form.Activate();
             //        return;
             //    }
             //}
-            //POS.POSInventoryIN pcusatfsmr = new POS.POSInventoryIN();
+            //ReInventoryIn pcusatfsmr = new ReInventoryIn();
             //pcusatfsmr.Show();
+            //FOR FOR BUILTIN INVENTORY IN
+            foreach (Form form in Application.OpenForms)
+            {
+                if (form.GetType() == typeof(POS.POSInventoryIN))
+                {
+                    form.Activate();
+                    return;
+                }
+            }
+            POS.POSInventoryIN pcusatfsmr = new POS.POSInventoryIN();
+            pcusatfsmr.Show();
         }
 
         private void barButtonItem55_ItemClick(object sender, ItemClickEventArgs e)
@@ -2670,7 +2670,7 @@ namespace SalesInventorySystem
         {
             string charDate = Database.getSingleResultSet("SELECT dbo.func_ConvertDateTimeToChar('DATE','" + DateTime.Now.ToShortDateString() + "')");
 
-            bool isPOSDetailsExists = Database.checkifExist("SELECT TOP(1) BranchCode FROM POSInfoDetails WHERE MachineUsed='" + Environment.MachineName + "'");
+            bool isPOSDetailsExists = Database.checkifExist("SELECT TOP(1) BranchCode FROM dbo.POSInfoDetails WHERE MachineUsed='" + Environment.MachineName + "'");
 
             //check if END OF DAY Transaction is already Executed, IF True, cashiers cannot login anymore.
             bool isExists = Database.checkifExist("SELECT TOP(1) MachineUsed " +
@@ -3034,6 +3034,37 @@ namespace SalesInventorySystem
             viewgeninv.Show();
         }
 
+        private void btnViewExpense_ItemClick(object sender, ItemClickEventArgs e)
+        {
+
+            foreach (Form form in Application.OpenForms)
+            {
+                if (form.GetType() == typeof(HOFormsDevEx.ViewExpenseDevEx))
+                {
+                    form.Activate();
+                    return;
+                }
+            }
+            HOFormsDevEx.ViewExpenseDevEx viewexpense = new HOFormsDevEx.ViewExpenseDevEx();
+            viewexpense.MdiParent = this;
+            viewexpense.Show();
+        }
+
+        private void barButtonItem32_ItemClick_1(object sender, ItemClickEventArgs e)
+        {
+            foreach (Form form in Application.OpenForms)
+            {
+                if (form.GetType() == typeof(Reporting.BIR.POSSalesReportSummary))
+                {
+                    form.Activate();
+                    return;
+                }
+            }
+            Reporting.BIR.POSSalesReportSummary pfoap = new Reporting.BIR.POSSalesReportSummary("B");
+            pfoap.MdiParent = this;
+            pfoap.Show();
+        }
+
         private void Main_FormClosing(object sender, FormClosingEventArgs e)
         {
             //bool confirm = HelperFunction.ConfirmDialog("Are you want to close the Main Window?", "Close Main Window");
@@ -3357,7 +3388,7 @@ namespace SalesInventorySystem
                     return;
                 }
             }
-            Reporting.BIR.POSSalesReportSummary pfoap = new Reporting.BIR.POSSalesReportSummary();
+            Reporting.BIR.POSSalesReportSummary pfoap = new Reporting.BIR.POSSalesReportSummary("A");
             pfoap.MdiParent = this;
             pfoap.Show();
         }

@@ -28,7 +28,7 @@ namespace SalesInventorySystem.POSDevEx
         }
         void populateBranch()
         {
-            Database.displaySearchlookupEdit("SELECT BranchCode,BranchName FROM Branches", txtbranch, "BranchCode", "BranchCode");
+            Database.displaySearchlookupEdit("SELECT BranchCode,BranchName FROM Branches ORDER BY BranchCode", txtbranch, "BranchCode", "BranchCode");
             Database.displaySearchlookupEdit("SELECT BranchCode,BranchName FROM Branches", txtbrcodemgmtdata, "BranchCode", "BranchCode");
             Database.displaySearchlookupEdit("SELECT BranchCode,BranchName FROM Branches", txtbranchVAT, "BranchCode", "BranchCode");
             Database.displaySearchlookupEdit("SELECT BranchCode,MachineUsed FROM POSInfoDetails WHERE BranchCode='" + txtbranch.Text + "'", txtmanageddatapermachine, "MachineUsed", "MachineUsed");
@@ -120,8 +120,9 @@ namespace SalesInventorySystem.POSDevEx
 
         private void txtbranch_EditValueChanged(object sender, EventArgs e)
         {
-            Database.displaySearchlookupEdit("SELECT BranchCode,MachineUsed FROM POSInfoDetails WHERE BranchCode='" + txtbranch.Text + "'", txtmachine, "MachineUsed", "MachineUsed");
-            Database.displaySearchlookupEdit("SELECT BranchCode,MachineUsed FROM POSInfoDetails WHERE BranchCode='" + txtbranch.Text + "'", txtmachineVAT, "MachineUsed", "MachineUsed");
+            Database.displaySearchlookupEdit("SELECT BranchCode,MachineUsed FROM dbo.POSInfoDetails WHERE BranchCode='" + txtbranch.Text + "'", txtmachine, "MachineUsed", "MachineUsed");
+            //Database.displaySearchlookupEdit($"SELECT distinct BranchCode,MachineUsed FROM dbo.SalesTransactionSummary WHERE BranchCode='{txtbranch.Text}' and CAST(TransDate as date) between '{txtsalesdatefrom.Text}' and '{txtsalesdateto.Text}' ", txtmachine, "MachineUsed", "MachineUsed");
+            Database.displaySearchlookupEdit("SELECT BranchCode,MachineUsed FROM dbo.POSInfoDetails WHERE BranchCode='" + txtbranch.Text + "'", txtmachineVAT, "MachineUsed", "MachineUsed");
         }
 
         void executeA(string reportcategory)
@@ -1012,7 +1013,7 @@ namespace SalesInventorySystem.POSDevEx
                 ////txtcashier.Enabled = true;
                 Database.displaySearchlookupEdit("SELECT distinct BranchCode,MachineUsed,ProcessedBy " +
                     "FROM dbo.POSSalesSummary " +
-                    "WHERE BranchCode='" + txtbranch.Text + "' ", txtcashier, "ProcessedBy", "ProcessedBy");
+                    "WHERE BranchCode='" + txtbranch.Text + "' AND MachineUsed='" + txtmachine.Text + "' AND DateOrder between '"+txtsalesdatefrom.Text+"' AND '"+txtsalesdateto.Text+"' ", txtcashier, "ProcessedBy", "ProcessedBy");
             }
         }
 
@@ -1196,11 +1197,11 @@ namespace SalesInventorySystem.POSDevEx
                 double lessvat = 0.0, netofvat = 0.0, lessscdisc = 0.0, netofscdisc = 0.0, netofnonscdisc = 0.0, addvat = 0.0, totaltotal = 0.0;
                 netofnonscdisc = Convert.ToDouble(netofvatindinonscitems);
                 //netofnonscdisc = Convert.ToDouble(netofvatindinonscitems);
-                string aaa = Database.getSingleQuery($"SELECT TOP(1) * FROM dbo.SalesDiscount WHERE OrderNo='{referenceNo}'", "DiscountAmount");
-                string bbb = Database.getSingleQuery($"SELECT TOP(1) * FROM dbo.SalesDiscount WHERE OrderNo='{referenceNo}'", "DiscountType");
-                string ccc = Database.getSingleQuery($"SELECT TOP(1) * FROM dbo.SalesDiscount WHERE OrderNo='{referenceNo}'", "DiscName");
-                string ddd = Database.getSingleQuery($"SELECT TOP(1) * FROM dbo.SalesDiscount WHERE OrderNo='{referenceNo}'", "DiscIDNo");
-                string eee = Database.getSingleQuery($"SELECT TOP(1) * FROM dbo.SalesDiscount WHERE OrderNo='{referenceNo}'", "DiscountPercentage");
+                string aaa = Database.getSingleQuery($"SELECT TOP(1) DiscountAmount FROM dbo.SalesDiscount WHERE OrderNo='{referenceNo}'", "DiscountAmount");
+                string bbb = Database.getSingleQuery($"SELECT TOP(1) DiscountType FROM dbo.SalesDiscount WHERE OrderNo='{referenceNo}'", "DiscountType");
+                string ccc = Database.getSingleQuery($"SELECT TOP(1) DiscName FROM dbo.SalesDiscount WHERE OrderNo='{referenceNo}'", "DiscName");
+                string ddd = Database.getSingleQuery($"SELECT TOP(1) DiscIDNo FROM dbo.SalesDiscount WHERE OrderNo='{referenceNo}'", "DiscIDNo");
+                string eee = Database.getSingleQuery($"SELECT TOP(1) DiscountPercentage FROM dbo.SalesDiscount WHERE OrderNo='{referenceNo}'", "DiscountPercentage");
                 if (aaa == "") { aaa = "0"; }
                 if (bbb == "") { bbb = ""; }
                 if (ccc == "") { ccc = ""; }
@@ -1309,22 +1310,25 @@ namespace SalesInventorySystem.POSDevEx
 
                 }
                 //----------------------------------------------------------------------------------------------------------------
-                string NewAmountTender = "";
-                double NewChange = 0.0;
-                NewAmountTender=Database.getSingleResultSet($"SELECT dbo.func_setTenderAmount('{globalamountdue}')");
+                //string NewAmountTender = "";
+                //double NewChange = 0.0;
+                //NewAmountTender=Database.getSingleResultSet($"SELECT dbo.func_setTenderAmount('{globalamountdue}')");
                 if (paytype == "Credit")
                 {
-                    details += HelperFunction.PrintLeftRigthText("TENDERED:", NewAmountTender) + Environment.NewLine + Environment.NewLine;
-                    //details += HelperFunction.PrintLeftRigthText("TENDERED:", amounttender) + Environment.NewLine + Environment.NewLine;
-                    NewChange = Convert.ToDouble(NewAmountTender) - globalamountdue;
+                    //wla sa gamita kay dd2 na gigamit sa sp ang amount tender manipulation
+                    //notUsed details += HelperFunction.PrintLeftRigthText("TENDERED:", NewAmountTender) + Environment.NewLine + Environment.NewLine;
+                    details += HelperFunction.PrintLeftRigthText("TENDERED:", amounttender) + Environment.NewLine + Environment.NewLine;
+                    //NewChange = Convert.ToDouble(NewAmountTender) - globalamountdue;
                     details += HelperFunction.PrintLeftRigthText("CHANGE  :", "0.00") + Environment.NewLine + Environment.NewLine;
                 }
-                //details += HelperFunction.PrintLeftRigthText("TENDERED:", amounttender) + Environment.NewLine;
-                details += HelperFunction.PrintLeftRigthText("TENDERED:", NewAmountTender) + Environment.NewLine;
-                NewChange = Math.Round(Convert.ToDouble(NewAmountTender) - globalamountdue,2);
-                details += HelperFunction.PrintLeftRigthText("CHANGE  :", NewChange.ToString()) + Environment.NewLine + Environment.NewLine;
-                //details += HelperFunction.PrintLeftRigthText("CHANGE  :", amountchange) + Environment.NewLine + Environment.NewLine;
-
+                else
+                {
+                    details += HelperFunction.PrintLeftRigthText("TENDERED:", amounttender) + Environment.NewLine;
+                    //details += HelperFunction.PrintLeftRigthText("TENDERED:", NewAmountTender) + Environment.NewLine;
+                    //notUsed NewChange = Math.Round(Convert.ToDouble(NewAmountTender) - globalamountdue,2);
+                    //details += HelperFunction.PrintLeftRigthText("CHANGE  :", NewChange.ToString()) + Environment.NewLine + Environment.NewLine;
+                    details += HelperFunction.PrintLeftRigthText("CHANGE  :", amountchange) + Environment.NewLine + Environment.NewLine;
+                }
 
                 double totalvatableSales = netofscdisc + netofnonscdisc;
                 double totalVatInputSale = 0.0;
@@ -1376,6 +1380,15 @@ namespace SalesInventorySystem.POSDevEx
         {
             receiptWithNoDiscount2(txtsalesdatefrom.Text, txtbranch.Text, txtmachine.Text,txtcashier.Text);
             XtraMessageBox.Show("SUCCESS");
+        }
+
+        private void simpleButton6_Click(object sender, EventArgs e)
+        {
+            string filepath = "C:\\MyFiles\\";
+            string filename = txtbranch.Text + "_" + reportype + "_" + txtsalesdatefrom.Text.Replace("/", "-") + "_ZX2.xls";
+            string file = filepath + filename;
+            gridControl4.ExportToXls(file);
+            XtraMessageBox.Show("Export Success");
         }
 
         Double computeTotalVAT()
