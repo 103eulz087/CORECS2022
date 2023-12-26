@@ -58,21 +58,21 @@ namespace SalesInventorySystem.HOForms
             if (e.KeyCode == Keys.Enter)
             {
                 
-                if(HOConversion.isConversion==true && txtbox.Text != "ADDORDER")
+                if(HOConversionPOS.isConversion==true && txtbox.Text != "ADDORDER")
                 {
-                    Database.displayLocalGrid("SELECT ProductCategoryCode as Code,ProductCode as Product,Description FROM Products WHERE BranchCode='888' and Description like '%" + textBox1.Text + "%' ORDER BY Description ASC ", dataGridView1);
+                    Database.displayLocalGrid("SELECT ProductCategoryCode,ProductCode ,Description FROM dbo.Products WHERE BranchCode='" + Login.assignedBranch + "' and Description like '%" + textBox1.Text + "%' ORDER BY Description ASC ", dataGridView1);
                     dataGridView1.Focus();
                 }
-                else if (HOConversion.isConversion == false && txtbox.Text != "ADDORDER")
+                else if (HOConversionPOS.isConversion == false && txtbox.Text != "ADDORDER")
                 {
-                    Database.displayLocalGrid("SELECT * FROM view_CommissaryInventory WHERE Description like '%" + textBox1.Text + "%' ORDER BY Description ASC ", dataGridView1);
+                    Database.displayLocalGrid("SELECT ProductCode,Description,ProductCategoryCode FROM dbo.Products WHERE Description like '%" + textBox1.Text + "%' ORDER BY Description ASC ", dataGridView1);
                     dataGridView1.Focus();
                 }
                 if (txtbox.Text == "ADDORDER")
                 {
                     
                     Database.displayLocalGrid("SELECT top 50 ProductCategoryCode as Code,ProductCode as Product,Description,Barcode " +
-                        "FROM Products WHERE BranchCode='888' " +
+                        "FROM Products WHERE BranchCode='"+Login.assignedBranch+"' " +
                         "and (Description like '%" + textBox1.Text + "%' OR Barcode like '%" + textBox1.Text + "%' ) " +
                         "ORDER BY Description ASC ", dataGridView1);
                     dataGridView1.Focus();
@@ -97,9 +97,9 @@ namespace SalesInventorySystem.HOForms
                 if (e.KeyCode == Keys.Enter)
                 {
                     prodname = dataGridView1.Rows[cord].Cells["Description"].Value.ToString();
-                    prodcode = dataGridView1.Rows[cord].Cells["Product"].Value.ToString();
-                    prodcatcode = dataGridView1.Rows[cord].Cells["Code"].Value.ToString();
-                    barcode = dataGridView1.Rows[cord].Cells["Barcode"].Value.ToString();
+                    prodcode = dataGridView1.Rows[cord].Cells["ProductCode"].Value.ToString();
+                    prodcatcode = dataGridView1.Rows[cord].Cells["ProductCategoryCode"].Value.ToString();
+                    barcode = "";
                     isdone = true;
                     this.Close();
                 }

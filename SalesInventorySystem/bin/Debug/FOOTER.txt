@@ -5,10 +5,10 @@
         Guadalupe Cebu City 6000
             Accd#: 1234567890
          Date Issued: 11/13/2019
-          Valid Until: 7/7/2023
-             PTU No.: 321321
-          Date Issued: 7/7/2023
-          Valid Until: 7/7/2023
+         Valid Until: 9/19/2025
+           PTU No.: 1234567890
+         Date Issued: 9/19/2023
+         Valid Until: 9/19/2025
   This serves as your OFFICIAL RECEIPT
      THIS RECEIPT SHALL BE VALID FOR
      FIVE (5) YEARS FROM DATE OF THE

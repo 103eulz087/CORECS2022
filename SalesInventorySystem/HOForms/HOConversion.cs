@@ -30,19 +30,13 @@ namespace SalesInventorySystem
         private void HOConversion_Load(object sender, EventArgs e)
         {
 
-            //int addition = 1;
-            //int refnumber = Convert.ToInt32(getRefNumber()) + addition;
+           
 
             txtrefcode.Text = IDGenerator.getIDNumberSP("sp_GetConversionNumber", "conversionnumber");
             displayProdCat();
             loadcomb();
 
-            //RepositoryItemSpinEdit editor = new RepositoryItemSpinEdit();
-            //editor.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
-            //editor.Mask.EditMask = "#####0.0;";
-            //editor.Mask.UseMaskAsDisplayFormat = true;
-            //discount = gridView2.GetRowCellValue(gridView3.FocusedRowHandle, "TotalAmount").ToString();
-            //gridView2.Columns["TotalCost"].Summary.Add(DevExpress.Data.SummaryItemType.Sum, "TotalCost", "{0:n2}");
+           
 
         }
 
@@ -53,7 +47,7 @@ namespace SalesInventorySystem
 
             table = new DataTable();
             
-          //  table.Columns.Add("#");
+      
             table.Columns.Add("SourceProductCode");
             table.Columns.Add("ProductCode");
             table.Columns.Add("Description");
@@ -61,7 +55,7 @@ namespace SalesInventorySystem
             if(radioButton2.Checked==true)  //Many to One
             {
                 table.Columns.Add("SourceQty");
-               // table.Columns.Add("SourceCost");
+        
             }
            
             table.Columns.Add("Quantity");
@@ -84,12 +78,12 @@ namespace SalesInventorySystem
 
         void loadcomb()
         {
-            Database.displayComboBoxItems("SELECT Description FROM Products WHERE BranchCode='888' AND ProductCategoryCode='"+Classes.Product.getProductCategoryCode(txtprodcatcon.Text)+"' ORDER BY Description ASC", "Description",comboBox1);
+            Database.displayComboBoxItems("SELECT Description FROM dbo.Products WHERE BranchCode='888' AND ProductCategoryCode='"+Classes.Product.getProductCategoryCode(txtprodcatcon.Text)+"' ORDER BY Description ASC", "Description",comboBox1);
         }
 
         private void add()
         {
-            //string qty1 = HOForms.ConversionQty.conversionqty;
+          
             qty = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "Available").ToString();
                 DataRow newRow = table.NewRow();
                 newRow["#"] = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "SequenceNumber").ToString();
@@ -105,14 +99,6 @@ namespace SalesInventorySystem
         private void simpleButton1_Click(object sender, EventArgs e)
         {
             qty = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "Available").ToString();
-           // HOForms.ConversionQty qtyss = new HOForms.ConversionQty();
-            //qtyss.ShowDialog(this);
-            //if (HOForms.ConversionQty.isDone == true)
-            //{
-            //    add();
-            //    HOForms.ConversionQty.isDone = false;
-            //    qtyss.Dispose();
-            //}
         }
 
         private void gridView1_KeyDown(object sender, KeyEventArgs e)
@@ -188,10 +174,10 @@ namespace SalesInventorySystem
             {
                 double sourceTotalAmount = 0.0, sourceTotalAmount2 = 0.0;
                 string sourceSeqNum = "0";
-                //string sourceSeqNum = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "SequenceNumber").ToString();
+                
                 string sourceProd = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "Product").ToString();
                 string sourceDesc = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "Description").ToString();
-                //  string sourceCost = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "Cost").ToString();
+               
                 string sourceCost = "0";
                 string sourceAvailable = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "Available").ToString();
                 
@@ -285,14 +271,9 @@ namespace SalesInventorySystem
                     }
                     else //MANY TO ONE
                     {
-                        //sourceSeqNum1 = gridView3.GetRowCellValue(i, "#").ToString();
                         sourceSeqNum1 = "222";
-
                         sourceAvailableGrid2 = gridView3.GetRowCellValue(i, "SourceQty").ToString(); //ang original quantity sa product nga e convert
-                        //sourceTotalAmount2 = Convert.ToDouble(gridView3.GetRowCellValue(i, "SourceCost").ToString()) * Convert.ToDouble(sourceAvailableGrid2);
                         sourceTotalAmount2 = 0 * Convert.ToDouble(sourceAvailableGrid2);
-                        //percentagePerPart2 = Convert.ToDouble(gridView3.GetRowCellValue(i, "Quantity").ToString()) / Convert.ToDouble(sourceAvailableGrid2);
-                        //percentagePerPart2 = Convert.ToDouble(gridView3.GetRowCellValue(i, "ActualQty").ToString()) / Convert.ToDouble(sourceAvailableGrid2);
                         percentagePerPart2 = Convert.ToDouble(gridView3.GetRowCellValue(i, "Quantity").ToString()) / Convert.ToDouble(sourceAvailableGrid2);
                         sourceAmountPerPart = percentagePerPart * sourceTotalAmount;
                         sourceAmountPerPart2 = percentagePerPart2 * sourceTotalAmount2;
@@ -300,7 +281,6 @@ namespace SalesInventorySystem
                         totalSourceQuantity += Convert.ToDouble(sourceAvailableGrid2);
 
                         conversionType = "ManyToOne";
-                        // Database.ExecuteQuery("INSERT INTO ConversionDetails VALUES('" + Login.assignedBranch + "','" + txtrefcode.Text + "','"+ sourceSeqNum1 + "','" + sourceProd1 + "','" + sourceDesc1 + "','" + sourceAvailableGrid2 + "','" + gridView3.GetRowCellValue(i, "SourceCost").ToString() + "','" + getProductCode() + "','" + comboBox1.Text + "','" + gridView3.GetRowCellValue(i, "ActualQty").ToString() + "','" + gridView3.GetRowCellValue(i, "ActualQty").ToString() + "','" + gridView3.GetRowCellValue(i, "SourceCost").ToString() + "','" + percentagePerPart2 + "','" + sourceAmountPerPart2 + "','" + gridView3.GetRowCellValue(i, "Barcode").ToString() + "')");
                         Database.ExecuteQuery("INSERT INTO TempConversionDetails VALUES('" + Login.assignedBranch + "','" + txtrefcode.Text + "','" + sourceSeqNum1 + "','" + sourceProd1 + "','" + sourceDesc1 + "','" + sourceAvailableGrid2 + "','0',0,'" + txtprodcode.Text + "','" + comboBox1.Text + "','" + gridView3.GetRowCellValue(i, "Quantity").ToString() + "','" + txtactualqty.Text + "','0','" + percentagePerPart2 + "',0,0,'" + sourceAmountPerPart2 + "','" + gridView3.GetRowCellValue(i, "Barcode").ToString() + "')");
 
 
@@ -457,8 +437,6 @@ namespace SalesInventorySystem
                 
             }
             addEntry();
-           
-            //save();
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -486,7 +464,7 @@ namespace SalesInventorySystem
 
         void addItemEntry()
         {
-            //gridControl3.BeginUpdate();
+           
             try
             {
                 bool isNotExist = false;
@@ -497,7 +475,7 @@ namespace SalesInventorySystem
                 }
                 
                
-             //   string qty1 = HOForms.ConversionQty.conversionqty;
+            
                 DataRow newRow = table.NewRow();
                 newRow["SourceProductCode"] = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "Product").ToString();
                 newRow["ProductCode"] = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "Product").ToString();
@@ -560,7 +538,7 @@ namespace SalesInventorySystem
             }
             finally
             {
-            //    gridControl1.EndUpdate();
+         
             }
         }
 
@@ -597,8 +575,7 @@ namespace SalesInventorySystem
                 displayGrid();
                 clearfields();
                 panel2.Visible = true;
-                //gridView3.Columns["ActualQty"].Visible = false;
-
+                
                 labelControl18.Visible = false;
                 txtsrcqty.Visible = false;
             }
@@ -621,7 +598,7 @@ namespace SalesInventorySystem
                 displayGrid();
                 clearfields();
                 panel2.Visible = true;
-                //gridView3.Columns["ActualQty"].Visible = false;
+                
                 labelControl18.Visible = false;
                 txtsrcqty.Visible = false;
             }
@@ -674,7 +651,6 @@ namespace SalesInventorySystem
 
         private void simpleButton4_Click(object sender, EventArgs e)
         {
-            // for (int i = 0; i <= gridView3.RowCount - 1; i++)
             table.Rows.Clear();
         }
 
@@ -694,11 +670,9 @@ namespace SalesInventorySystem
                     bprint.lblxpirydate.Text = DateTime.Now.AddYears(1).ToShortDateString();
                     bprint.lblprodtype.Text = gridView3.GetRowCellValue(gridView3.FocusedRowHandle, "Description").ToString();
                     bprint.lbltotalkilos.Text = gridView3.GetRowCellValue(gridView3.FocusedRowHandle, "ActualQty").ToString();
-                    bprint.xrBarCode2.Text = gridView3.GetRowCellValue(gridView3.FocusedRowHandle, "Barcode").ToString(); ;//productcategorycode + primalcode + txtweight.Text.Remove(2, 1);
+                    bprint.xrBarCode2.Text = gridView3.GetRowCellValue(gridView3.FocusedRowHandle, "Barcode").ToString(); ;
                     ReportPrintTool report = new ReportPrintTool(bprint);
                     report.Print();
-                    //Barcode.BarcodePrintingOptions baropt = new Barcode.BarcodePrintingOptions();
-                    //baropt.ShowDialog(this);
             }
             catch (Exception ex)
             {
@@ -733,20 +707,14 @@ namespace SalesInventorySystem
             for (int i = 0; i < gridView3.RowCount; i++)
             {
                 count = gridView3.RowCount;
-             // totcost += Math.Round(Convert.ToDouble(gridView3.GetRowCellValue(i, "Cost").ToString()), 2);
                 totalqty += Math.Round(Convert.ToDouble(gridView3.GetRowCellValue(i, "Quantity").ToString()), 3);
-             // totalcostkg += Math.Round(Convert.ToDouble(gridView3.GetRowCellValue(i, "Cost").ToString()), 2) / Convert.ToDouble(count);
                 if(radioButton1.Checked==true)
                 {
                     totalactualqty += Math.Round(Convert.ToDouble(gridView3.GetRowCellValue(i, "ActualQty").ToString()), 2);
                 }
                 
             }
-            //if(radioButton1.Checked==true)
-            //{
-            //    txttotalavailableqty.Text = gridView3.GetRowCellValue(gridView3.FocusedRowHandle, "SourceQty").ToString();
-            //}
-            
+           
             txttotalcost.Text = totcost.ToString();
             txttotalcostkg.Text = totalcostkg.ToString();
             txttotal.Text = "0";
@@ -760,7 +728,7 @@ namespace SalesInventorySystem
         String sequencePadding(string str)
         {
             string isnum = "";
-            //  string str = IDGenerator.getSequenceNumber().ToString();
+            
             if (str.Length == 1)
             {
                 isnum = "000" + str;
@@ -814,7 +782,6 @@ namespace SalesInventorySystem
                 string strquantity;
                 quantity = Decimal.Parse(gridView3.GetRowCellValue(gridView3.FocusedRowHandle, "ActualQty").ToString());
                 strquantity = String.Format("{0:00.000}", quantity);
-                //string barcode = "99999" + gridView3.GetRowCellValue(gridView3.FocusedRowHandle, "ProductCode").ToString() + strquantity.Replace(".", "") + sequencePadding(gridView3.GetRowHandle(gridView3.FocusedRowHandle).ToString());
                 if (isBarcodeLong == true) //long barcode type
                 {
                     barcode = "44444"+gridView3.GetRowCellValue(gridView3.FocusedRowHandle, "ProductCode").ToString() + strquantity.Replace(".", "") + sequencePadding(gridView3.GetRowHandle(gridView3.FocusedRowHandle).ToString());
@@ -844,10 +811,8 @@ namespace SalesInventorySystem
                 }
                 decimal quantity;
                 string strquantity;
-                //quantity = Decimal.Parse(gridView3.GetRowCellValue(gridView3.FocusedRowHandle, "ActualQty").ToString());
                 quantity = Decimal.Parse(gridView3.GetRowCellValue(gridView3.FocusedRowHandle, "Quantity").ToString());
                 strquantity = String.Format("{0:00.000}", quantity);
-                //string barcode = "99999" + gridView3.GetRowCellValue(gridView3.FocusedRowHandle, "ProductCode").ToString() + strquantity.Replace(".", "") + sequencePadding(gridView3.GetRowHandle(gridView3.FocusedRowHandle).ToString());
                 if (isBarcodeLong == true) //long barcode type
                 {
                     barcode = "44444" + gridView3.GetRowCellValue(gridView3.FocusedRowHandle, "ProductCode").ToString() + strquantity.Replace(".", "") + sequencePadding(gridView3.GetRowHandle(gridView3.FocusedRowHandle).ToString());

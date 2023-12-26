@@ -72,6 +72,7 @@ namespace SalesInventorySystem
             }
             else if (keyData == Keys.Escape)
             {
+                isUsedSearchForm = false;
                 this.Dispose();
             }
             return functionReturnValue;
@@ -81,7 +82,7 @@ namespace SalesInventorySystem
         {
             Database.displayLocalGrid("SELECT ProductCode,Description,Barcode,FORMAT(SellingPrice,'N', 'en-us') as SellingPrice,FORMAT(Price1,'N', 'en-us') as Price1,FORMAT(Price2,'N', 'en-us') as Price2,FORMAT(Price3,'N', 'en-us') as Price3,FORMAT(Price4,'N', 'en-us') as Price4 " +
                 "FROM Products " +
-                "WHERE BranchCode='" + Login.assignedBranch + "' " +
+                "WHERE BranchCode='" + Login.assignedBranch + "' AND ProdType IN ('1','3') " +
                 "ORDER BY Description", dataGridView1);
         }
 
@@ -94,18 +95,18 @@ namespace SalesInventorySystem
                 
                 int cord = dataGridView1.CurrentCellAddress.Y;
                 prodcode = dataGridView1.Rows[cord].Cells["ProductCode"].Value.ToString();
-                barcode = dataGridView1.Rows[cord].Cells["Barcode"].Value.ToString();
+                //barcode = dataGridView1.Rows[cord].Cells["Barcode"].Value.ToString();
                 prodname = dataGridView1.Rows[cord].Cells["Description"].Value.ToString();
                 textBox1.Text = prodname;
 
-                if (dataGridView1.Rows[cord].Cells["Barcode"].Value == System.DBNull.Value || String.IsNullOrEmpty(barcode) || barcode == "")
-                {
-                    havebarcode = false; //no barcode
-                }
+                //if (dataGridView1.Rows[cord].Cells["Barcode"].Value == System.DBNull.Value || String.IsNullOrEmpty(barcode) || barcode == "")
+                //{
+                //    havebarcode = false; //no barcode
+                //}
                 
                 dataGridView1.CurrentCell = dataGridView1[col, row];
                 e.Handled = true;
-                //txtqty.Focus();
+             
                 POS.POSAddQty posadd = new POS.POSAddQty();
                 posadd.ShowDialog(this);
                 if(POS.POSAddQty.isdone==true)
@@ -121,24 +122,13 @@ namespace SalesInventorySystem
                 {
                     return;
                 }
-                //if (e.KeyCode == Keys.Enter)
-                //{
-                //    priceused = usedPrice();
-                //    qty = txtqty.Text.Trim();
-                //    isUsedSearchForm = true;
-                //    isdone = true;
-                //    this.Close();
-                //}
-
             }
         }
 
         private void textBox1_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
-
             {
-               
                 bool isLinkedServer = Database.checkifExist("Select isnull(isLinkedServer,0) FROM POSType WHERE isLinkedServer=1");
                 
                 if (isLinkedServer) //if they used linkedserver
@@ -160,7 +150,8 @@ namespace SalesInventorySystem
                        ",Price4" +
                        //",Price5 " +
                        " FROM "+ tableName + " " +
-                       "WHERE Description like '%" + textBox1.Text + "%' " +
+                       "WHERE Description like '%" + textBox1.Text + "%'  " +
+                       "AND ProdType IN ('1','3') " +
                        "and BranchCode='" + Login.assignedBranch + "' " +
                        "or Barcode like '%" + textBox1.Text + "%' " +
                        "and BranchCode='" + Login.assignedBranch + "' ORDER BY Description", dataGridView1);
@@ -179,7 +170,7 @@ namespace SalesInventorySystem
                    ",Price4" +
                    //",Price5 " +
                     " FROM " + tableName + " " +
-                   "WHERE Description like '%" + textBox1.Text + "%' " +
+                   "WHERE Description like '%" + textBox1.Text + "%'  AND ProdType IN ('1','3') " +
                    "and BranchCode='" + Login.assignedBranch + "' " +
                    "or Barcode like '%" + textBox1.Text + "%' " +
                    "and BranchCode='" + Login.assignedBranch + "' ORDER BY Description", dataGridView1);
@@ -198,9 +189,9 @@ namespace SalesInventorySystem
                   ",Price4" +
                   //",Price5 " +
                    " FROM Products " +
-                  "WHERE Description like '%" + textBox1.Text + "%' " +
+                  "WHERE Description like '%" + textBox1.Text + "%'  AND ProdType IN ('1','3') " +
                   "and BranchCode='" + Login.assignedBranch + "' " +
-                  "or Barcode like '%" + textBox1.Text + "%' " +
+                  //"or Barcode like '%" + textBox1.Text + "%' " +
                   "and BranchCode='" + Login.assignedBranch + "' ORDER BY Description", dataGridView1);
                 }
                

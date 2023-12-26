@@ -56,12 +56,12 @@
             // gridControl1
             // 
             this.gridControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridControl1.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.gridControl1.Location = new System.Drawing.Point(2, 25);
+            this.gridControl1.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            this.gridControl1.Location = new System.Drawing.Point(3, 45);
             this.gridControl1.MainView = this.gridView1;
-            this.gridControl1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.gridControl1.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
             this.gridControl1.Name = "gridControl1";
-            this.gridControl1.Size = new System.Drawing.Size(1457, 779);
+            this.gridControl1.Size = new System.Drawing.Size(2499, 1212);
             this.gridControl1.TabIndex = 1;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
@@ -73,7 +73,8 @@
             this.gridView1.Appearance.HeaderPanel.Options.UseFont = true;
             this.gridView1.Appearance.Row.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gridView1.Appearance.Row.Options.UseFont = true;
-            this.gridView1.DetailHeight = 431;
+            this.gridView1.DetailHeight = 673;
+            this.gridView1.FixedLineWidth = 3;
             this.gridView1.GridControl = this.gridControl1;
             this.gridView1.Name = "gridView1";
             this.gridView1.OptionsBehavior.Editable = false;
@@ -92,18 +93,18 @@
             this.groupControl1.Controls.Add(this.radsum);
             this.groupControl1.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupControl1.Location = new System.Drawing.Point(0, 0);
-            this.groupControl1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.groupControl1.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
             this.groupControl1.Name = "groupControl1";
-            this.groupControl1.Size = new System.Drawing.Size(1461, 116);
+            this.groupControl1.Size = new System.Drawing.Size(2505, 181);
             this.groupControl1.TabIndex = 2;
             // 
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(350, 75);
-            this.checkBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.checkBox1.Location = new System.Drawing.Point(600, 117);
+            this.checkBox1.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
             this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(97, 21);
+            this.checkBox1.Size = new System.Drawing.Size(148, 29);
             this.checkBox1.TabIndex = 4;
             this.checkBox1.Text = "Per Branch";
             this.checkBox1.UseVisualStyleBackColor = true;
@@ -112,8 +113,8 @@
             // txtbrcode
             // 
             this.txtbrcode.Enabled = false;
-            this.txtbrcode.Location = new System.Drawing.Point(142, 71);
-            this.txtbrcode.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtbrcode.Location = new System.Drawing.Point(243, 111);
+            this.txtbrcode.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
             this.txtbrcode.Name = "txtbrcode";
             this.txtbrcode.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 9.25F);
             this.txtbrcode.Properties.Appearance.Options.UseFont = true;
@@ -121,12 +122,14 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.txtbrcode.Properties.NullText = "";
             this.txtbrcode.Properties.PopupView = this.searchLookUpEdit1View;
-            this.txtbrcode.Size = new System.Drawing.Size(199, 24);
+            this.txtbrcode.Size = new System.Drawing.Size(341, 44);
             this.txtbrcode.TabIndex = 3;
             this.txtbrcode.EditValueChanged += new System.EventHandler(this.txtbrcode_EditValueChanged);
             // 
             // searchLookUpEdit1View
             // 
+            this.searchLookUpEdit1View.DetailHeight = 547;
+            this.searchLookUpEdit1View.FixedLineWidth = 3;
             this.searchLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
             this.searchLookUpEdit1View.Name = "searchLookUpEdit1View";
             this.searchLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = false;
@@ -136,10 +139,10 @@
             // 
             this.labelControl1.Appearance.Font = new System.Drawing.Font("Tahoma", 9.25F);
             this.labelControl1.Appearance.Options.UseFont = true;
-            this.labelControl1.Location = new System.Drawing.Point(33, 75);
-            this.labelControl1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.labelControl1.Location = new System.Drawing.Point(57, 117);
+            this.labelControl1.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
             this.labelControl1.Name = "labelControl1";
-            this.labelControl1.Size = new System.Drawing.Size(106, 18);
+            this.labelControl1.Size = new System.Drawing.Size(183, 30);
             this.labelControl1.TabIndex = 2;
             this.labelControl1.Text = "Filter by Branch:";
             // 
@@ -147,10 +150,10 @@
             // 
             this.raddetailed.AutoSize = true;
             this.raddetailed.Font = new System.Drawing.Font("Tahoma", 9.25F);
-            this.raddetailed.Location = new System.Drawing.Point(148, 37);
-            this.raddetailed.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.raddetailed.Location = new System.Drawing.Point(254, 58);
+            this.raddetailed.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
             this.raddetailed.Name = "raddetailed";
-            this.raddetailed.Size = new System.Drawing.Size(87, 23);
+            this.raddetailed.Size = new System.Drawing.Size(134, 34);
             this.raddetailed.TabIndex = 1;
             this.raddetailed.Text = "Detailed";
             this.raddetailed.UseVisualStyleBackColor = true;
@@ -161,10 +164,10 @@
             this.radsum.AutoSize = true;
             this.radsum.Checked = true;
             this.radsum.Font = new System.Drawing.Font("Tahoma", 9.25F);
-            this.radsum.Location = new System.Drawing.Point(33, 37);
-            this.radsum.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.radsum.Location = new System.Drawing.Point(57, 58);
+            this.radsum.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
             this.radsum.Name = "radsum";
-            this.radsum.Size = new System.Drawing.Size(98, 23);
+            this.radsum.Size = new System.Drawing.Size(148, 34);
             this.radsum.TabIndex = 0;
             this.radsum.TabStop = true;
             this.radsum.Text = "Summary";
@@ -175,10 +178,10 @@
             // 
             this.groupControl2.Controls.Add(this.gridControl1);
             this.groupControl2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupControl2.Location = new System.Drawing.Point(0, 116);
-            this.groupControl2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.groupControl2.Location = new System.Drawing.Point(0, 181);
+            this.groupControl2.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
             this.groupControl2.Name = "groupControl2";
-            this.groupControl2.Size = new System.Drawing.Size(1461, 806);
+            this.groupControl2.Size = new System.Drawing.Size(2505, 1260);
             this.groupControl2.TabIndex = 3;
             // 
             // contextMenuStrip1
@@ -188,31 +191,31 @@
             this.refreshDisplayToolStripMenuItem,
             this.showPerBoxItemsToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(212, 56);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(304, 76);
             // 
             // refreshDisplayToolStripMenuItem
             // 
             this.refreshDisplayToolStripMenuItem.Image = global::SalesInventorySystem.Properties.Resources.Refresh_16x16;
             this.refreshDisplayToolStripMenuItem.Name = "refreshDisplayToolStripMenuItem";
-            this.refreshDisplayToolStripMenuItem.Size = new System.Drawing.Size(211, 26);
+            this.refreshDisplayToolStripMenuItem.Size = new System.Drawing.Size(303, 36);
             this.refreshDisplayToolStripMenuItem.Text = "Refresh Display";
             this.refreshDisplayToolStripMenuItem.Click += new System.EventHandler(this.refreshDisplayToolStripMenuItem_Click);
             // 
             // showPerBoxItemsToolStripMenuItem
             // 
             this.showPerBoxItemsToolStripMenuItem.Name = "showPerBoxItemsToolStripMenuItem";
-            this.showPerBoxItemsToolStripMenuItem.Size = new System.Drawing.Size(211, 26);
+            this.showPerBoxItemsToolStripMenuItem.Size = new System.Drawing.Size(303, 36);
             this.showPerBoxItemsToolStripMenuItem.Text = "Show Per Box Items";
             this.showPerBoxItemsToolStripMenuItem.Click += new System.EventHandler(this.showPerBoxItemsToolStripMenuItem_Click);
             // 
             // JFCInventory
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1461, 922);
+            this.ClientSize = new System.Drawing.Size(2505, 1441);
             this.Controls.Add(this.groupControl2);
             this.Controls.Add(this.groupControl1);
-            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
             this.Name = "JFCInventory";
             this.Text = "JFCInventory";
             this.Load += new System.EventHandler(this.JFCInventory_Load);

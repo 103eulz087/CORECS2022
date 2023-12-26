@@ -53,10 +53,12 @@
             // 
             this.lbltransactionno.Appearance.Font = new System.Drawing.Font("Arial", 18.25F);
             this.lbltransactionno.Appearance.ForeColor = System.Drawing.Color.Black;
-            this.lbltransactionno.Location = new System.Drawing.Point(48, 391);
-            this.lbltransactionno.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.lbltransactionno.Appearance.Options.UseFont = true;
+            this.lbltransactionno.Appearance.Options.UseForeColor = true;
+            this.lbltransactionno.Location = new System.Drawing.Point(52, 407);
+            this.lbltransactionno.Margin = new System.Windows.Forms.Padding(7, 6, 7, 6);
             this.lbltransactionno.Name = "lbltransactionno";
-            this.lbltransactionno.Size = new System.Drawing.Size(24, 49);
+            this.lbltransactionno.Size = new System.Drawing.Size(27, 56);
             this.lbltransactionno.TabIndex = 433;
             this.lbltransactionno.Text = "#";
             this.lbltransactionno.Visible = false;
@@ -65,10 +67,10 @@
             // 
             this.lblorderno.AutoSize = true;
             this.lblorderno.Font = new System.Drawing.Font("Tahoma", 9F);
-            this.lblorderno.Location = new System.Drawing.Point(218, 35);
-            this.lblorderno.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.lblorderno.Location = new System.Drawing.Point(238, 36);
+            this.lblorderno.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
             this.lblorderno.Name = "lblorderno";
-            this.lblorderno.Size = new System.Drawing.Size(27, 25);
+            this.lblorderno.Size = new System.Drawing.Size(30, 29);
             this.lblorderno.TabIndex = 432;
             this.lblorderno.Text = "#";
             // 
@@ -76,10 +78,10 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Tahoma", 9F);
-            this.label2.Location = new System.Drawing.Point(42, 35);
-            this.label2.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.label2.Location = new System.Drawing.Point(46, 36);
+            this.label2.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(95, 25);
+            this.label2.Size = new System.Drawing.Size(107, 29);
             this.label2.TabIndex = 431;
             this.label2.Text = "Order #:";
             // 
@@ -87,10 +89,10 @@
             // 
             this.txtInvoiceNumber.Font = new System.Drawing.Font("Tahoma", 9F);
             this.txtInvoiceNumber.ForeColor = System.Drawing.Color.Black;
-            this.txtInvoiceNumber.Location = new System.Drawing.Point(589, 30);
-            this.txtInvoiceNumber.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
+            this.txtInvoiceNumber.Location = new System.Drawing.Point(643, 31);
+            this.txtInvoiceNumber.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.txtInvoiceNumber.Name = "txtInvoiceNumber";
-            this.txtInvoiceNumber.Size = new System.Drawing.Size(171, 33);
+            this.txtInvoiceNumber.Size = new System.Drawing.Size(186, 36);
             this.txtInvoiceNumber.TabIndex = 423;
             this.txtInvoiceNumber.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -99,10 +101,10 @@
             this.Label5.AutoSize = true;
             this.Label5.Font = new System.Drawing.Font("Tahoma", 9F);
             this.Label5.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.Label5.Location = new System.Drawing.Point(422, 35);
-            this.Label5.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.Label5.Location = new System.Drawing.Point(460, 36);
+            this.Label5.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
             this.Label5.Name = "Label5";
-            this.Label5.Size = new System.Drawing.Size(161, 25);
+            this.Label5.Size = new System.Drawing.Size(181, 29);
             this.Label5.TabIndex = 430;
             this.Label5.Text = "Invoice Number";
             // 
@@ -110,11 +112,11 @@
             // 
             this.txtRemarks.Font = new System.Drawing.Font("Segoe UI", 8.25F);
             this.txtRemarks.ForeColor = System.Drawing.Color.Black;
-            this.txtRemarks.Location = new System.Drawing.Point(224, 279);
-            this.txtRemarks.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
+            this.txtRemarks.Location = new System.Drawing.Point(244, 291);
+            this.txtRemarks.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.txtRemarks.Multiline = true;
             this.txtRemarks.Name = "txtRemarks";
-            this.txtRemarks.Size = new System.Drawing.Size(536, 76);
+            this.txtRemarks.Size = new System.Drawing.Size(584, 79);
             this.txtRemarks.TabIndex = 422;
             // 
             // Label4
@@ -122,10 +124,10 @@
             this.Label4.AutoSize = true;
             this.Label4.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.Label4.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.Label4.Location = new System.Drawing.Point(42, 282);
-            this.Label4.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.Label4.Location = new System.Drawing.Point(46, 294);
+            this.Label4.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
             this.Label4.Name = "Label4";
-            this.Label4.Size = new System.Drawing.Size(91, 30);
+            this.Label4.Size = new System.Drawing.Size(104, 32);
             this.Label4.TabIndex = 429;
             this.Label4.Text = "Remarks";
             // 
@@ -133,10 +135,10 @@
             // 
             this.Label3.AutoSize = true;
             this.Label3.Font = new System.Drawing.Font("Tahoma", 9F);
-            this.Label3.Location = new System.Drawing.Point(42, 175);
-            this.Label3.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.Label3.Location = new System.Drawing.Point(46, 182);
+            this.Label3.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
             this.Label3.Name = "Label3";
-            this.Label3.Size = new System.Drawing.Size(133, 25);
+            this.Label3.Size = new System.Drawing.Size(152, 29);
             this.Label3.TabIndex = 428;
             this.Label3.Text = "Guest Name:";
             // 
@@ -144,11 +146,11 @@
             // 
             this.txtClientName.Font = new System.Drawing.Font("Tahoma", 9F);
             this.txtClientName.ForeColor = System.Drawing.Color.Black;
-            this.txtClientName.Location = new System.Drawing.Point(224, 172);
-            this.txtClientName.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
+            this.txtClientName.Location = new System.Drawing.Point(244, 179);
+            this.txtClientName.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.txtClientName.Name = "txtClientName";
             this.txtClientName.ReadOnly = true;
-            this.txtClientName.Size = new System.Drawing.Size(536, 33);
+            this.txtClientName.Size = new System.Drawing.Size(584, 36);
             this.txtClientName.TabIndex = 427;
             this.txtClientName.Text = "EULZ AVANCENA";
             // 
@@ -156,10 +158,10 @@
             // 
             this.Label1.AutoSize = true;
             this.Label1.Font = new System.Drawing.Font("Tahoma", 9F);
-            this.Label1.Location = new System.Drawing.Point(42, 229);
-            this.Label1.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.Label1.Location = new System.Drawing.Point(46, 239);
+            this.Label1.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
             this.Label1.Name = "Label1";
-            this.Label1.Size = new System.Drawing.Size(145, 25);
+            this.Label1.Size = new System.Drawing.Size(163, 29);
             this.Label1.TabIndex = 426;
             this.Label1.Text = "Total Amount:";
             // 
@@ -168,10 +170,10 @@
             this.cmdConfirmPayment.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
             this.cmdConfirmPayment.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.cmdConfirmPayment.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.cmdConfirmPayment.Location = new System.Drawing.Point(427, 371);
-            this.cmdConfirmPayment.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.cmdConfirmPayment.Location = new System.Drawing.Point(466, 386);
+            this.cmdConfirmPayment.Margin = new System.Windows.Forms.Padding(7, 6, 7, 6);
             this.cmdConfirmPayment.Name = "cmdConfirmPayment";
-            this.cmdConfirmPayment.Size = new System.Drawing.Size(339, 70);
+            this.cmdConfirmPayment.Size = new System.Drawing.Size(370, 73);
             this.cmdConfirmPayment.TabIndex = 424;
             this.cmdConfirmPayment.Text = "Confirm ";
             this.cmdConfirmPayment.UseVisualStyleBackColor = false;
@@ -182,11 +184,11 @@
             this.txtTotalOnScreen.BackColor = System.Drawing.Color.Green;
             this.txtTotalOnScreen.Font = new System.Drawing.Font("Tahoma", 9F);
             this.txtTotalOnScreen.ForeColor = System.Drawing.Color.Black;
-            this.txtTotalOnScreen.Location = new System.Drawing.Point(224, 223);
-            this.txtTotalOnScreen.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
+            this.txtTotalOnScreen.Location = new System.Drawing.Point(244, 232);
+            this.txtTotalOnScreen.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.txtTotalOnScreen.Name = "txtTotalOnScreen";
             this.txtTotalOnScreen.ReadOnly = true;
-            this.txtTotalOnScreen.Size = new System.Drawing.Size(197, 33);
+            this.txtTotalOnScreen.Size = new System.Drawing.Size(215, 36);
             this.txtTotalOnScreen.TabIndex = 425;
             this.txtTotalOnScreen.Text = "0.00";
             this.txtTotalOnScreen.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -195,10 +197,10 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Tahoma", 9F);
-            this.label6.Location = new System.Drawing.Point(42, 131);
-            this.label6.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.label6.Location = new System.Drawing.Point(46, 136);
+            this.label6.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(101, 25);
+            this.label6.Size = new System.Drawing.Size(115, 29);
             this.label6.TabIndex = 435;
             this.label6.Text = "Guest ID:";
             // 
@@ -206,11 +208,11 @@
             // 
             this.txtguestid.Font = new System.Drawing.Font("Tahoma", 9F);
             this.txtguestid.ForeColor = System.Drawing.Color.Black;
-            this.txtguestid.Location = new System.Drawing.Point(224, 127);
-            this.txtguestid.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
+            this.txtguestid.Location = new System.Drawing.Point(244, 132);
+            this.txtguestid.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.txtguestid.Name = "txtguestid";
             this.txtguestid.ReadOnly = true;
-            this.txtguestid.Size = new System.Drawing.Size(536, 33);
+            this.txtguestid.Size = new System.Drawing.Size(584, 36);
             this.txtguestid.TabIndex = 434;
             this.txtguestid.Text = "EULZ AVANCENA";
             // 
@@ -218,29 +220,30 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Tahoma", 9F);
-            this.label7.Location = new System.Drawing.Point(42, 83);
-            this.label7.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.label7.Location = new System.Drawing.Point(46, 86);
+            this.label7.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(110, 25);
+            this.label7.Size = new System.Drawing.Size(126, 29);
             this.label7.TabIndex = 436;
             this.label7.Text = "Room No.:";
             // 
             // txtservices
             // 
-            this.txtservices.Location = new System.Drawing.Point(224, 78);
-            this.txtservices.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.txtservices.Location = new System.Drawing.Point(244, 81);
+            this.txtservices.Margin = new System.Windows.Forms.Padding(7, 6, 7, 6);
             this.txtservices.Name = "txtservices";
             this.txtservices.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 9.25F);
             this.txtservices.Properties.Appearance.Options.UseFont = true;
             this.txtservices.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.txtservices.Properties.NullText = "";
-            this.txtservices.Properties.View = this.searchLookUpEdit1View;
-            this.txtservices.Size = new System.Drawing.Size(539, 34);
+            this.txtservices.Properties.PopupView = this.searchLookUpEdit1View;
+            this.txtservices.Size = new System.Drawing.Size(588, 44);
             this.txtservices.TabIndex = 437;
             // 
             // searchLookUpEdit1View
             // 
+            this.searchLookUpEdit1View.DetailHeight = 365;
             this.searchLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
             this.searchLookUpEdit1View.Name = "searchLookUpEdit1View";
             this.searchLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = false;
@@ -250,9 +253,9 @@
             // 
             // POSChargeToRoom
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(787, 454);
+            this.ClientSize = new System.Drawing.Size(859, 473);
             this.Controls.Add(this.txtservices);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
@@ -269,7 +272,7 @@
             this.Controls.Add(this.Label1);
             this.Controls.Add(this.cmdConfirmPayment);
             this.Controls.Add(this.txtTotalOnScreen);
-            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.Margin = new System.Windows.Forms.Padding(7, 6, 7, 6);
             this.Name = "POSChargeToRoom";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "POSChargeToRoom";

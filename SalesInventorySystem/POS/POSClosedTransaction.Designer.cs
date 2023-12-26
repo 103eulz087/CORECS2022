@@ -223,7 +223,7 @@
             this.txtoverage.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtoverage.ForeColor = System.Drawing.Color.Black;
             this.txtoverage.Location = new System.Drawing.Point(852, 1146);
-            this.txtoverage.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.txtoverage.Margin = new System.Windows.Forms.Padding(8);
             this.txtoverage.Name = "txtoverage";
             this.txtoverage.ReadOnly = true;
             this.txtoverage.Size = new System.Drawing.Size(248, 44);
@@ -237,7 +237,7 @@
             this.txtshortage.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtshortage.ForeColor = System.Drawing.Color.Black;
             this.txtshortage.Location = new System.Drawing.Point(852, 1088);
-            this.txtshortage.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.txtshortage.Margin = new System.Windows.Forms.Padding(8);
             this.txtshortage.Name = "txtshortage";
             this.txtshortage.ReadOnly = true;
             this.txtshortage.Size = new System.Drawing.Size(248, 44);
@@ -287,7 +287,7 @@
             this.txtCashRemitted.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtCashRemitted.ForeColor = System.Drawing.Color.Black;
             this.txtCashRemitted.Location = new System.Drawing.Point(426, 152);
-            this.txtCashRemitted.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.txtCashRemitted.Margin = new System.Windows.Forms.Padding(8);
             this.txtCashRemitted.Name = "txtCashRemitted";
             this.txtCashRemitted.ReadOnly = true;
             this.txtCashRemitted.Size = new System.Drawing.Size(202, 36);
@@ -324,7 +324,7 @@
             this.txtCashVariance.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtCashVariance.ForeColor = System.Drawing.Color.Black;
             this.txtCashVariance.Location = new System.Drawing.Point(836, 1033);
-            this.txtCashVariance.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.txtCashVariance.Margin = new System.Windows.Forms.Padding(8);
             this.txtCashVariance.Name = "txtCashVariance";
             this.txtCashVariance.ReadOnly = true;
             this.txtCashVariance.Size = new System.Drawing.Size(248, 44);
@@ -361,7 +361,7 @@
             this.txtTotalCashSales.Font = new System.Drawing.Font("Tahoma", 9.25F);
             this.txtTotalCashSales.ForeColor = System.Drawing.Color.Black;
             this.txtTotalCashSales.Location = new System.Drawing.Point(342, 48);
-            this.txtTotalCashSales.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.txtTotalCashSales.Margin = new System.Windows.Forms.Padding(8);
             this.txtTotalCashSales.Name = "txtTotalCashSales";
             this.txtTotalCashSales.ReadOnly = true;
             this.txtTotalCashSales.Size = new System.Drawing.Size(144, 37);
@@ -397,7 +397,7 @@
             this.txtTotalCoins.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtTotalCoins.ForeColor = System.Drawing.Color.Black;
             this.txtTotalCoins.Location = new System.Drawing.Point(1120, 1088);
-            this.txtTotalCoins.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.txtTotalCoins.Margin = new System.Windows.Forms.Padding(8);
             this.txtTotalCoins.Name = "txtTotalCoins";
             this.txtTotalCoins.ReadOnly = true;
             this.txtTotalCoins.Size = new System.Drawing.Size(118, 44);
@@ -422,7 +422,7 @@
             this.txtTotalDiscount.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtTotalDiscount.ForeColor = System.Drawing.Color.Black;
             this.txtTotalDiscount.Location = new System.Drawing.Point(906, 558);
-            this.txtTotalDiscount.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.txtTotalDiscount.Margin = new System.Windows.Forms.Padding(8);
             this.txtTotalDiscount.Name = "txtTotalDiscount";
             this.txtTotalDiscount.ReadOnly = true;
             this.txtTotalDiscount.Size = new System.Drawing.Size(152, 35);
@@ -446,7 +446,7 @@
             this.txttransactiondate.Font = new System.Drawing.Font("Tahoma", 9.25F);
             this.txttransactiondate.ForeColor = System.Drawing.Color.Black;
             this.txttransactiondate.Location = new System.Drawing.Point(294, 29);
-            this.txttransactiondate.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.txttransactiondate.Margin = new System.Windows.Forms.Padding(8);
             this.txttransactiondate.Name = "txttransactiondate";
             this.txttransactiondate.ReadOnly = true;
             this.txttransactiondate.Size = new System.Drawing.Size(356, 37);
@@ -469,7 +469,7 @@
             this.txtnoofsolditem.Font = new System.Drawing.Font("Tahoma", 9.25F);
             this.txtnoofsolditem.ForeColor = System.Drawing.Color.Black;
             this.txtnoofsolditem.Location = new System.Drawing.Point(342, 385);
-            this.txtnoofsolditem.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.txtnoofsolditem.Margin = new System.Windows.Forms.Padding(8);
             this.txtnoofsolditem.Name = "txtnoofsolditem";
             this.txtnoofsolditem.ReadOnly = true;
             this.txtnoofsolditem.Size = new System.Drawing.Size(144, 37);
@@ -493,7 +493,7 @@
             this.txtnoofcancelleditem.Font = new System.Drawing.Font("Tahoma", 9.25F);
             this.txtnoofcancelleditem.ForeColor = System.Drawing.Color.Black;
             this.txtnoofcancelleditem.Location = new System.Drawing.Point(342, 440);
-            this.txtnoofcancelleditem.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.txtnoofcancelleditem.Margin = new System.Windows.Forms.Padding(8);
             this.txtnoofcancelleditem.Name = "txtnoofcancelleditem";
             this.txtnoofcancelleditem.ReadOnly = true;
             this.txtnoofcancelleditem.Size = new System.Drawing.Size(144, 37);
@@ -529,7 +529,7 @@
             this.txtBeginningCash.Font = new System.Drawing.Font("Tahoma", 9.25F);
             this.txtBeginningCash.ForeColor = System.Drawing.Color.Black;
             this.txtBeginningCash.Location = new System.Drawing.Point(858, 71);
-            this.txtBeginningCash.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.txtBeginningCash.Margin = new System.Windows.Forms.Padding(8);
             this.txtBeginningCash.Name = "txtBeginningCash";
             this.txtBeginningCash.ReadOnly = true;
             this.txtBeginningCash.Size = new System.Drawing.Size(194, 37);
@@ -554,7 +554,7 @@
             this.txtTotalVoidTransaction.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtTotalVoidTransaction.ForeColor = System.Drawing.Color.Black;
             this.txtTotalVoidTransaction.Location = new System.Drawing.Point(906, 500);
-            this.txtTotalVoidTransaction.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.txtTotalVoidTransaction.Margin = new System.Windows.Forms.Padding(8);
             this.txtTotalVoidTransaction.Name = "txtTotalVoidTransaction";
             this.txtTotalVoidTransaction.ReadOnly = true;
             this.txtTotalVoidTransaction.Size = new System.Drawing.Size(152, 35);
@@ -578,7 +578,7 @@
             this.txtTotalCancelledTransaction.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtTotalCancelledTransaction.ForeColor = System.Drawing.Color.Black;
             this.txtTotalCancelledTransaction.Location = new System.Drawing.Point(906, 446);
-            this.txtTotalCancelledTransaction.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.txtTotalCancelledTransaction.Margin = new System.Windows.Forms.Padding(8);
             this.txtTotalCancelledTransaction.Name = "txtTotalCancelledTransaction";
             this.txtTotalCancelledTransaction.ReadOnly = true;
             this.txtTotalCancelledTransaction.Size = new System.Drawing.Size(152, 35);
@@ -613,7 +613,7 @@
             this.txtnoofvoiditem.Font = new System.Drawing.Font("Tahoma", 9.25F);
             this.txtnoofvoiditem.ForeColor = System.Drawing.Color.Black;
             this.txtnoofvoiditem.Location = new System.Drawing.Point(342, 498);
-            this.txtnoofvoiditem.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.txtnoofvoiditem.Margin = new System.Windows.Forms.Padding(8);
             this.txtnoofvoiditem.Name = "txtnoofvoiditem";
             this.txtnoofvoiditem.ReadOnly = true;
             this.txtnoofvoiditem.Size = new System.Drawing.Size(144, 37);
@@ -627,7 +627,7 @@
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Font = new System.Drawing.Font("Tahoma", 10.25F);
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
-            this.tabControl1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabControl1.Margin = new System.Windows.Forms.Padding(4);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(1315, 1319);
@@ -659,9 +659,9 @@
             this.tabPage1.Controls.Add(this.panel1);
             this.tabPage1.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabPage1.Location = new System.Drawing.Point(8, 47);
-            this.tabPage1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPage1.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(4);
             this.tabPage1.Size = new System.Drawing.Size(1299, 1264);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Transaction Summary";
@@ -782,7 +782,7 @@
             this.MydataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.MydataGridView1.GridColor = System.Drawing.Color.White;
             this.MydataGridView1.Location = new System.Drawing.Point(606, 879);
-            this.MydataGridView1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.MydataGridView1.Margin = new System.Windows.Forms.Padding(4);
             this.MydataGridView1.MultiSelect = false;
             this.MydataGridView1.Name = "MydataGridView1";
             this.MydataGridView1.ReadOnly = true;
@@ -810,9 +810,9 @@
             this.groupBox3.Controls.Add(this.txtActualCashOnHand);
             this.groupBox3.Controls.Add(this.txtNextcashBeginning);
             this.groupBox3.Location = new System.Drawing.Point(582, 204);
-            this.groupBox3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox3.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox3.Padding = new System.Windows.Forms.Padding(4);
             this.groupBox3.Size = new System.Drawing.Size(694, 338);
             this.groupBox3.TabIndex = 123596;
             this.groupBox3.TabStop = false;
@@ -850,7 +850,7 @@
             0,
             0});
             this.txtActualCashOnHand.Location = new System.Drawing.Point(426, 54);
-            this.txtActualCashOnHand.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtActualCashOnHand.Margin = new System.Windows.Forms.Padding(4);
             this.txtActualCashOnHand.Name = "txtActualCashOnHand";
             this.txtActualCashOnHand.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtActualCashOnHand.Properties.Appearance.Options.UseFont = true;
@@ -870,7 +870,7 @@
             0});
             this.txtNextcashBeginning.Enabled = false;
             this.txtNextcashBeginning.Location = new System.Drawing.Point(426, 104);
-            this.txtNextcashBeginning.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtNextcashBeginning.Margin = new System.Windows.Forms.Padding(4);
             this.txtNextcashBeginning.Name = "txtNextcashBeginning";
             this.txtNextcashBeginning.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtNextcashBeginning.Properties.Appearance.Options.UseFont = true;
@@ -944,9 +944,9 @@
             this.groupBox2.Controls.Add(this.label12);
             this.groupBox2.Controls.Add(this.label11);
             this.groupBox2.Location = new System.Drawing.Point(1284, 205);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(4);
             this.groupBox2.Size = new System.Drawing.Size(1092, 998);
             this.groupBox2.TabIndex = 123595;
             this.groupBox2.TabStop = false;
@@ -957,7 +957,7 @@
             this.txtvatadjustment.Font = new System.Drawing.Font("Tahoma", 9.25F);
             this.txtvatadjustment.ForeColor = System.Drawing.Color.Black;
             this.txtvatadjustment.Location = new System.Drawing.Point(344, 329);
-            this.txtvatadjustment.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.txtvatadjustment.Margin = new System.Windows.Forms.Padding(8);
             this.txtvatadjustment.Name = "txtvatadjustment";
             this.txtvatadjustment.ReadOnly = true;
             this.txtvatadjustment.Size = new System.Drawing.Size(144, 37);
@@ -991,7 +991,7 @@
             this.txtnoofregdisc.Font = new System.Drawing.Font("Tahoma", 9.25F);
             this.txtnoofregdisc.ForeColor = System.Drawing.Color.Black;
             this.txtnoofregdisc.Location = new System.Drawing.Point(344, 929);
-            this.txtnoofregdisc.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.txtnoofregdisc.Margin = new System.Windows.Forms.Padding(8);
             this.txtnoofregdisc.Name = "txtnoofregdisc";
             this.txtnoofregdisc.ReadOnly = true;
             this.txtnoofregdisc.Size = new System.Drawing.Size(144, 37);
@@ -1004,7 +1004,7 @@
             this.txtendtransno.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtendtransno.ForeColor = System.Drawing.Color.Black;
             this.txtendtransno.Location = new System.Drawing.Point(902, 285);
-            this.txtendtransno.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.txtendtransno.Margin = new System.Windows.Forms.Padding(8);
             this.txtendtransno.Name = "txtendtransno";
             this.txtendtransno.ReadOnly = true;
             this.txtendtransno.Size = new System.Drawing.Size(152, 35);
@@ -1016,7 +1016,7 @@
             this.txttotalofregdisc.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txttotalofregdisc.ForeColor = System.Drawing.Color.Black;
             this.txttotalofregdisc.Location = new System.Drawing.Point(906, 933);
-            this.txttotalofregdisc.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.txttotalofregdisc.Margin = new System.Windows.Forms.Padding(8);
             this.txttotalofregdisc.Name = "txttotalofregdisc";
             this.txttotalofregdisc.ReadOnly = true;
             this.txttotalofregdisc.Size = new System.Drawing.Size(152, 35);
@@ -1029,7 +1029,7 @@
             this.txtbegtransno.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtbegtransno.ForeColor = System.Drawing.Color.Black;
             this.txtbegtransno.Location = new System.Drawing.Point(902, 225);
-            this.txtbegtransno.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.txtbegtransno.Margin = new System.Windows.Forms.Padding(8);
             this.txtbegtransno.Name = "txtbegtransno";
             this.txtbegtransno.ReadOnly = true;
             this.txtbegtransno.Size = new System.Drawing.Size(152, 35);
@@ -1085,7 +1085,7 @@
             this.txtnoofpwddisc.Font = new System.Drawing.Font("Tahoma", 9.25F);
             this.txtnoofpwddisc.ForeColor = System.Drawing.Color.Black;
             this.txtnoofpwddisc.Location = new System.Drawing.Point(344, 879);
-            this.txtnoofpwddisc.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.txtnoofpwddisc.Margin = new System.Windows.Forms.Padding(8);
             this.txtnoofpwddisc.Name = "txtnoofpwddisc";
             this.txtnoofpwddisc.ReadOnly = true;
             this.txtnoofpwddisc.Size = new System.Drawing.Size(144, 37);
@@ -1098,7 +1098,7 @@
             this.txttotalofpwddisc.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txttotalofpwddisc.ForeColor = System.Drawing.Color.Black;
             this.txttotalofpwddisc.Location = new System.Drawing.Point(906, 879);
-            this.txttotalofpwddisc.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.txttotalofpwddisc.Margin = new System.Windows.Forms.Padding(8);
             this.txttotalofpwddisc.Name = "txttotalofpwddisc";
             this.txttotalofpwddisc.ReadOnly = true;
             this.txttotalofpwddisc.Size = new System.Drawing.Size(152, 35);
@@ -1133,7 +1133,7 @@
             this.txtnoofscdisc.Font = new System.Drawing.Font("Tahoma", 9.25F);
             this.txtnoofscdisc.ForeColor = System.Drawing.Color.Black;
             this.txtnoofscdisc.Location = new System.Drawing.Point(344, 827);
-            this.txtnoofscdisc.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.txtnoofscdisc.Margin = new System.Windows.Forms.Padding(8);
             this.txtnoofscdisc.Name = "txtnoofscdisc";
             this.txtnoofscdisc.ReadOnly = true;
             this.txtnoofscdisc.Size = new System.Drawing.Size(144, 37);
@@ -1146,7 +1146,7 @@
             this.txttotalofscdisc.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txttotalofscdisc.ForeColor = System.Drawing.Color.Black;
             this.txttotalofscdisc.Location = new System.Drawing.Point(906, 827);
-            this.txttotalofscdisc.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.txttotalofscdisc.Margin = new System.Windows.Forms.Padding(8);
             this.txttotalofscdisc.Name = "txttotalofscdisc";
             this.txttotalofscdisc.ReadOnly = true;
             this.txttotalofscdisc.Size = new System.Drawing.Size(152, 35);
@@ -1170,7 +1170,7 @@
             this.txtzeroratedsale.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtzeroratedsale.ForeColor = System.Drawing.Color.Black;
             this.txtzeroratedsale.Location = new System.Drawing.Point(906, 165);
-            this.txtzeroratedsale.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.txtzeroratedsale.Margin = new System.Windows.Forms.Padding(8);
             this.txtzeroratedsale.Name = "txtzeroratedsale";
             this.txtzeroratedsale.ReadOnly = true;
             this.txtzeroratedsale.Size = new System.Drawing.Size(148, 35);
@@ -1207,7 +1207,7 @@
             0,
             0});
             this.txttotalgross.Location = new System.Drawing.Point(906, 54);
-            this.txttotalgross.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txttotalgross.Margin = new System.Windows.Forms.Padding(4);
             this.txttotalgross.Name = "txttotalgross";
             this.txttotalgross.Properties.Appearance.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txttotalgross.Properties.Appearance.Options.UseFont = true;
@@ -1221,7 +1221,7 @@
             this.txtnoofreturneditem.Font = new System.Drawing.Font("Tahoma", 9.25F);
             this.txtnoofreturneditem.ForeColor = System.Drawing.Color.Black;
             this.txtnoofreturneditem.Location = new System.Drawing.Point(342, 729);
-            this.txtnoofreturneditem.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.txtnoofreturneditem.Margin = new System.Windows.Forms.Padding(8);
             this.txtnoofreturneditem.Name = "txtnoofreturneditem";
             this.txtnoofreturneditem.ReadOnly = true;
             this.txtnoofreturneditem.Size = new System.Drawing.Size(144, 37);
@@ -1267,7 +1267,7 @@
             this.txtTotalCreditSales.Font = new System.Drawing.Font("Tahoma", 9.25F);
             this.txtTotalCreditSales.ForeColor = System.Drawing.Color.Black;
             this.txtTotalCreditSales.Location = new System.Drawing.Point(342, 104);
-            this.txtTotalCreditSales.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.txtTotalCreditSales.Margin = new System.Windows.Forms.Padding(8);
             this.txtTotalCreditSales.Name = "txtTotalCreditSales";
             this.txtTotalCreditSales.ReadOnly = true;
             this.txtTotalCreditSales.Size = new System.Drawing.Size(144, 37);
@@ -1280,7 +1280,7 @@
             this.txtTotalReturnedTransaction.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtTotalReturnedTransaction.ForeColor = System.Drawing.Color.Black;
             this.txtTotalReturnedTransaction.Location = new System.Drawing.Point(906, 730);
-            this.txtTotalReturnedTransaction.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.txtTotalReturnedTransaction.Margin = new System.Windows.Forms.Padding(8);
             this.txtTotalReturnedTransaction.Name = "txtTotalReturnedTransaction";
             this.txtTotalReturnedTransaction.ReadOnly = true;
             this.txtTotalReturnedTransaction.Size = new System.Drawing.Size(152, 35);
@@ -1304,7 +1304,7 @@
             this.txtvatamount.Font = new System.Drawing.Font("Tahoma", 9.25F);
             this.txtvatamount.ForeColor = System.Drawing.Color.Black;
             this.txtvatamount.Location = new System.Drawing.Point(342, 215);
-            this.txtvatamount.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.txtvatamount.Margin = new System.Windows.Forms.Padding(8);
             this.txtvatamount.Name = "txtvatamount";
             this.txtvatamount.ReadOnly = true;
             this.txtvatamount.Size = new System.Drawing.Size(144, 37);
@@ -1316,7 +1316,7 @@
             this.txtvatexemptsale.Font = new System.Drawing.Font("Tahoma", 9.25F);
             this.txtvatexemptsale.ForeColor = System.Drawing.Color.Black;
             this.txtvatexemptsale.Location = new System.Drawing.Point(342, 271);
-            this.txtvatexemptsale.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.txtvatexemptsale.Margin = new System.Windows.Forms.Padding(8);
             this.txtvatexemptsale.Name = "txtvatexemptsale";
             this.txtvatexemptsale.ReadOnly = true;
             this.txtvatexemptsale.Size = new System.Drawing.Size(144, 37);
@@ -1328,7 +1328,7 @@
             this.txtvatablesales.Font = new System.Drawing.Font("Tahoma", 9.25F);
             this.txtvatablesales.ForeColor = System.Drawing.Color.Black;
             this.txtvatablesales.Location = new System.Drawing.Point(342, 160);
-            this.txtvatablesales.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.txtvatablesales.Margin = new System.Windows.Forms.Padding(8);
             this.txtvatablesales.Name = "txtvatablesales";
             this.txtvatablesales.ReadOnly = true;
             this.txtvatablesales.Size = new System.Drawing.Size(144, 37);
@@ -1354,7 +1354,7 @@
             0,
             0});
             this.txtTotalNetSales.Location = new System.Drawing.Point(906, 112);
-            this.txtTotalNetSales.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtTotalNetSales.Margin = new System.Windows.Forms.Padding(4);
             this.txtTotalNetSales.Name = "txtTotalNetSales";
             this.txtTotalNetSales.Properties.Appearance.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtTotalNetSales.Properties.Appearance.Options.UseFont = true;
@@ -1380,7 +1380,7 @@
             this.txtTotalTax.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtTotalTax.ForeColor = System.Drawing.Color.Black;
             this.txtTotalTax.Location = new System.Drawing.Point(906, 673);
-            this.txtTotalTax.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.txtTotalTax.Margin = new System.Windows.Forms.Padding(8);
             this.txtTotalTax.Name = "txtTotalTax";
             this.txtTotalTax.ReadOnly = true;
             this.txtTotalTax.Size = new System.Drawing.Size(152, 35);
@@ -1393,7 +1393,7 @@
             this.txtnoofvat.Font = new System.Drawing.Font("Tahoma", 9.25F);
             this.txtnoofvat.ForeColor = System.Drawing.Color.Black;
             this.txtnoofvat.Location = new System.Drawing.Point(342, 671);
-            this.txtnoofvat.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.txtnoofvat.Margin = new System.Windows.Forms.Padding(8);
             this.txtnoofvat.Name = "txtnoofvat";
             this.txtnoofvat.ReadOnly = true;
             this.txtnoofvat.Size = new System.Drawing.Size(144, 37);
@@ -1406,7 +1406,7 @@
             this.txtnoofcharges.Font = new System.Drawing.Font("Tahoma", 9.25F);
             this.txtnoofcharges.ForeColor = System.Drawing.Color.Black;
             this.txtnoofcharges.Location = new System.Drawing.Point(342, 613);
-            this.txtnoofcharges.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.txtnoofcharges.Margin = new System.Windows.Forms.Padding(8);
             this.txtnoofcharges.Name = "txtnoofcharges";
             this.txtnoofcharges.ReadOnly = true;
             this.txtnoofcharges.Size = new System.Drawing.Size(144, 37);
@@ -1419,7 +1419,7 @@
             this.txtnoofdiscount.Font = new System.Drawing.Font("Tahoma", 9.25F);
             this.txtnoofdiscount.ForeColor = System.Drawing.Color.Black;
             this.txtnoofdiscount.Location = new System.Drawing.Point(342, 555);
-            this.txtnoofdiscount.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.txtnoofdiscount.Margin = new System.Windows.Forms.Padding(8);
             this.txtnoofdiscount.Name = "txtnoofdiscount";
             this.txtnoofdiscount.ReadOnly = true;
             this.txtnoofdiscount.Size = new System.Drawing.Size(144, 37);
@@ -1432,7 +1432,7 @@
             this.txtTotalCharges.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtTotalCharges.ForeColor = System.Drawing.Color.Black;
             this.txtTotalCharges.Location = new System.Drawing.Point(906, 615);
-            this.txtTotalCharges.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.txtTotalCharges.Margin = new System.Windows.Forms.Padding(8);
             this.txtTotalCharges.Name = "txtTotalCharges";
             this.txtTotalCharges.ReadOnly = true;
             this.txtTotalCharges.Size = new System.Drawing.Size(152, 35);
@@ -1519,9 +1519,9 @@
             this.groupBox1.Controls.Add(this.label18);
             this.groupBox1.ForeColor = System.Drawing.Color.White;
             this.groupBox1.Location = new System.Drawing.Point(30, 204);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
             this.groupBox1.Size = new System.Drawing.Size(540, 898);
             this.groupBox1.TabIndex = 123586;
             this.groupBox1.TabStop = false;
@@ -1553,7 +1553,7 @@
             this.lbl1c.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl1c.ForeColor = System.Drawing.Color.Black;
             this.lbl1c.Location = new System.Drawing.Point(300, 765);
-            this.lbl1c.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.lbl1c.Margin = new System.Windows.Forms.Padding(8);
             this.lbl1c.Name = "lbl1c";
             this.lbl1c.ReadOnly = true;
             this.lbl1c.Size = new System.Drawing.Size(194, 44);
@@ -1599,7 +1599,7 @@
             this.lbl5c.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl5c.ForeColor = System.Drawing.Color.Black;
             this.lbl5c.Location = new System.Drawing.Point(300, 704);
-            this.lbl5c.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.lbl5c.Margin = new System.Windows.Forms.Padding(8);
             this.lbl5c.Name = "lbl5c";
             this.lbl5c.ReadOnly = true;
             this.lbl5c.Size = new System.Drawing.Size(194, 44);
@@ -1762,7 +1762,7 @@
             this.lbl10c.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl10c.ForeColor = System.Drawing.Color.Black;
             this.lbl10c.Location = new System.Drawing.Point(300, 640);
-            this.lbl10c.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.lbl10c.Margin = new System.Windows.Forms.Padding(8);
             this.lbl10c.Name = "lbl10c";
             this.lbl10c.ReadOnly = true;
             this.lbl10c.Size = new System.Drawing.Size(194, 44);
@@ -1903,7 +1903,7 @@
             this.lbl1.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl1.ForeColor = System.Drawing.Color.Black;
             this.lbl1.Location = new System.Drawing.Point(300, 523);
-            this.lbl1.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.lbl1.Margin = new System.Windows.Forms.Padding(8);
             this.lbl1.Name = "lbl1";
             this.lbl1.ReadOnly = true;
             this.lbl1.Size = new System.Drawing.Size(194, 44);
@@ -1916,7 +1916,7 @@
             this.lbl5.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl5.ForeColor = System.Drawing.Color.Black;
             this.lbl5.Location = new System.Drawing.Point(300, 465);
-            this.lbl5.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.lbl5.Margin = new System.Windows.Forms.Padding(8);
             this.lbl5.Name = "lbl5";
             this.lbl5.ReadOnly = true;
             this.lbl5.Size = new System.Drawing.Size(194, 44);
@@ -1953,7 +1953,7 @@
             this.lbl25c.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl25c.ForeColor = System.Drawing.Color.Black;
             this.lbl25c.Location = new System.Drawing.Point(300, 579);
-            this.lbl25c.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.lbl25c.Margin = new System.Windows.Forms.Padding(8);
             this.lbl25c.Name = "lbl25c";
             this.lbl25c.ReadOnly = true;
             this.lbl25c.Size = new System.Drawing.Size(194, 44);
@@ -1966,7 +1966,7 @@
             this.lbl10.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl10.ForeColor = System.Drawing.Color.Black;
             this.lbl10.Location = new System.Drawing.Point(300, 408);
-            this.lbl10.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.lbl10.Margin = new System.Windows.Forms.Padding(8);
             this.lbl10.Name = "lbl10";
             this.lbl10.ReadOnly = true;
             this.lbl10.Size = new System.Drawing.Size(194, 44);
@@ -1979,7 +1979,7 @@
             this.lbl20.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl20.ForeColor = System.Drawing.Color.Black;
             this.lbl20.Location = new System.Drawing.Point(300, 350);
-            this.lbl20.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.lbl20.Margin = new System.Windows.Forms.Padding(8);
             this.lbl20.Name = "lbl20";
             this.lbl20.ReadOnly = true;
             this.lbl20.Size = new System.Drawing.Size(194, 44);
@@ -1992,7 +1992,7 @@
             this.lbl50.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl50.ForeColor = System.Drawing.Color.Black;
             this.lbl50.Location = new System.Drawing.Point(300, 292);
-            this.lbl50.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.lbl50.Margin = new System.Windows.Forms.Padding(8);
             this.lbl50.Name = "lbl50";
             this.lbl50.ReadOnly = true;
             this.lbl50.Size = new System.Drawing.Size(194, 44);
@@ -2005,7 +2005,7 @@
             this.lbl1h.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl1h.ForeColor = System.Drawing.Color.Black;
             this.lbl1h.Location = new System.Drawing.Point(300, 235);
-            this.lbl1h.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.lbl1h.Margin = new System.Windows.Forms.Padding(8);
             this.lbl1h.Name = "lbl1h";
             this.lbl1h.ReadOnly = true;
             this.lbl1h.Size = new System.Drawing.Size(194, 44);
@@ -2018,7 +2018,7 @@
             this.lbl2h.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl2h.ForeColor = System.Drawing.Color.Black;
             this.lbl2h.Location = new System.Drawing.Point(300, 177);
-            this.lbl2h.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.lbl2h.Margin = new System.Windows.Forms.Padding(8);
             this.lbl2h.Name = "lbl2h";
             this.lbl2h.ReadOnly = true;
             this.lbl2h.Size = new System.Drawing.Size(194, 44);
@@ -2031,7 +2031,7 @@
             this.lbl5h.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl5h.ForeColor = System.Drawing.Color.Black;
             this.lbl5h.Location = new System.Drawing.Point(300, 121);
-            this.lbl5h.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.lbl5h.Margin = new System.Windows.Forms.Padding(8);
             this.lbl5h.Name = "lbl5h";
             this.lbl5h.ReadOnly = true;
             this.lbl5h.Size = new System.Drawing.Size(194, 44);
@@ -2044,7 +2044,7 @@
             this.lbl1k.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl1k.ForeColor = System.Drawing.Color.Black;
             this.lbl1k.Location = new System.Drawing.Point(300, 60);
-            this.lbl1k.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.lbl1k.Margin = new System.Windows.Forms.Padding(8);
             this.lbl1k.Name = "lbl1k";
             this.lbl1k.ReadOnly = true;
             this.lbl1k.Size = new System.Drawing.Size(194, 44);
@@ -2177,7 +2177,7 @@
             this.lbldenomtotal.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbldenomtotal.ForeColor = System.Drawing.Color.Black;
             this.lbldenomtotal.Location = new System.Drawing.Point(836, 971);
-            this.lbldenomtotal.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.lbldenomtotal.Margin = new System.Windows.Forms.Padding(8);
             this.lbldenomtotal.Name = "lbldenomtotal";
             this.lbldenomtotal.ReadOnly = true;
             this.lbldenomtotal.Size = new System.Drawing.Size(248, 44);
@@ -2189,7 +2189,7 @@
             // progressBar1
             // 
             this.progressBar1.Location = new System.Drawing.Point(250, 1152);
-            this.progressBar1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.progressBar1.Margin = new System.Windows.Forms.Padding(4);
             this.progressBar1.Name = "progressBar1";
             this.progressBar1.Size = new System.Drawing.Size(244, 40);
             this.progressBar1.TabIndex = 123574;
@@ -2238,7 +2238,7 @@
             this.txtcashiername.Font = new System.Drawing.Font("Tahoma", 9.25F);
             this.txtcashiername.ForeColor = System.Drawing.Color.Black;
             this.txtcashiername.Location = new System.Drawing.Point(264, 123);
-            this.txtcashiername.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.txtcashiername.Margin = new System.Windows.Forms.Padding(8);
             this.txtcashiername.Name = "txtcashiername";
             this.txtcashiername.ReadOnly = true;
             this.txtcashiername.Size = new System.Drawing.Size(356, 37);
@@ -2261,7 +2261,7 @@
             this.txtendretno.Font = new System.Drawing.Font("Tahoma", 9.25F);
             this.txtendretno.ForeColor = System.Drawing.Color.Black;
             this.txtendretno.Location = new System.Drawing.Point(1842, 71);
-            this.txtendretno.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.txtendretno.Margin = new System.Windows.Forms.Padding(8);
             this.txtendretno.Name = "txtendretno";
             this.txtendretno.ReadOnly = true;
             this.txtendretno.Size = new System.Drawing.Size(210, 37);
@@ -2274,7 +2274,7 @@
             this.txtbegretno.Font = new System.Drawing.Font("Tahoma", 9.25F);
             this.txtbegretno.ForeColor = System.Drawing.Color.Black;
             this.txtbegretno.Location = new System.Drawing.Point(1842, 21);
-            this.txtbegretno.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.txtbegretno.Margin = new System.Windows.Forms.Padding(8);
             this.txtbegretno.Name = "txtbegretno";
             this.txtbegretno.ReadOnly = true;
             this.txtbegretno.Size = new System.Drawing.Size(210, 37);
@@ -2311,7 +2311,7 @@
             this.txtcashiertransno.Font = new System.Drawing.Font("Tahoma", 9.25F);
             this.txtcashiertransno.ForeColor = System.Drawing.Color.Black;
             this.txtcashiertransno.Location = new System.Drawing.Point(264, 71);
-            this.txtcashiertransno.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.txtcashiertransno.Margin = new System.Windows.Forms.Padding(8);
             this.txtcashiertransno.Name = "txtcashiertransno";
             this.txtcashiertransno.ReadOnly = true;
             this.txtcashiertransno.Size = new System.Drawing.Size(356, 37);
@@ -2346,7 +2346,7 @@
             this.txttransactionno.Font = new System.Drawing.Font("Tahoma", 9.25F);
             this.txttransactionno.ForeColor = System.Drawing.Color.Black;
             this.txttransactionno.Location = new System.Drawing.Point(858, 21);
-            this.txttransactionno.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.txttransactionno.Margin = new System.Windows.Forms.Padding(8);
             this.txttransactionno.Name = "txttransactionno";
             this.txttransactionno.ReadOnly = true;
             this.txttransactionno.Size = new System.Drawing.Size(194, 37);
@@ -2383,7 +2383,7 @@
             this.txtbeginninginvoice.Font = new System.Drawing.Font("Tahoma", 9.25F);
             this.txtbeginninginvoice.ForeColor = System.Drawing.Color.Black;
             this.txtbeginninginvoice.Location = new System.Drawing.Point(1288, 21);
-            this.txtbeginninginvoice.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.txtbeginninginvoice.Margin = new System.Windows.Forms.Padding(8);
             this.txtbeginninginvoice.Name = "txtbeginninginvoice";
             this.txtbeginninginvoice.ReadOnly = true;
             this.txtbeginninginvoice.Size = new System.Drawing.Size(298, 37);
@@ -2396,7 +2396,7 @@
             this.txtendingsi.Font = new System.Drawing.Font("Tahoma", 9.25F);
             this.txtendingsi.ForeColor = System.Drawing.Color.Black;
             this.txtendingsi.Location = new System.Drawing.Point(1288, 71);
-            this.txtendingsi.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.txtendingsi.Margin = new System.Windows.Forms.Padding(8);
             this.txtendingsi.Name = "txtendingsi";
             this.txtendingsi.ReadOnly = true;
             this.txtendingsi.Size = new System.Drawing.Size(298, 37);
@@ -2417,10 +2417,11 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1315, 1319);
             this.Controls.Add(this.tabControl1);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "POSClosedTransaction";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Cashiers Audit";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.POSClosedTransaction_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);

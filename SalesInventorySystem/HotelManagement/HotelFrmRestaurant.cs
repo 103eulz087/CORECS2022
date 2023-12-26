@@ -20,7 +20,7 @@ namespace SalesInventorySystem.HotelManagement
         public static string seniorcontrolno = "", seniorname = "";
         string totalamountstr = "";
         private delegate void SetTextDeleg(string text);
-        string selectedCategory = "", selectedProductName = "";
+        string selectedCategory = "", selectedProductName = "", productcategorycode = "";
         List<Button> CategoryBtns = new List<Button>();
         List<Button> ItemBtns = new List<Button>();
         DataTable table = new DataTable();
@@ -36,13 +36,13 @@ namespace SalesInventorySystem.HotelManagement
         void updateOR()
         {
             int refnumber = IDGenerator.getIDNumber("BatchSalesSummary", "BranchCode='" + Login.assignedBranch + "'", "ReferenceNo", 1); //IDGenerator.getOrderNumber();
-            txtOrderNo.Text = HelperFunction.sequencePadding1(refnumber.ToString());//refnumber.ToString();
+            txtOrderNo.Text = HelperFunction.sequencePadding1(refnumber.ToString(),18);//refnumber.ToString();
         }
         void updateTransactionNo()
         {
             //int refnumber = IDGenerator.getPOSTransactionID();
             int refnumber = IDGenerator.getIDNumber("POSTransaction", "BranchCode='" + Login.assignedBranch + "'", "TransactionNo", 1);
-            lblTransactionIDInc.Text = HelperFunction.sequencePadding(refnumber.ToString());//refnumber.ToString();
+            lblTransactionIDInc.Text = HelperFunction.sequencePadding1(refnumber.ToString(),10);//refnumber.ToString();
         }
 
         private void HotelFrmRestaurant_Load(object sender, EventArgs e)
@@ -138,7 +138,7 @@ namespace SalesInventorySystem.HotelManagement
                 "WHERE ReferenceNo='" + id + "' " +
                 "AND isVoid='0' " +
                 "AND isCancelled='0' " +
-                "and isHold='0' ", MydataGridView1);
+                "and isHold='0' ", MydataGridView1,Database.getCustomizeConnection());
             //if (raddinein.Checked == true)
             //{
             //    Database.displayLocalGrid("SELECT SequenceNumber AS ID,Description AS Particulars,FORMAT(SellingPrice,'N', 'en-us') AS UnitPrice,QtySold AS Qty,FORMAT(TotalAmount,'N', 'en-us') AS Amount,isVat FROM " + tableName + " WHERE ReferenceNo='" + id + "' AND isVoid='0' AND isCancelled='0' and isHold='0' ", MydataGridView1,Database.getCustomizeConnection());
@@ -167,9 +167,11 @@ namespace SalesInventorySystem.HotelManagement
 
         void displayCategory()
         {
-            SqlConnection con = Database.getCustomizeConnection();
+            //SqlConnection con = Database.getCustomizeConnection();
+            SqlConnection con = Database.getConnection();
             con.Open();
-            string query = "SELECT * FROM FoodCategory";
+            //string query = "SELECT * FROM FoodCategory";
+            string query = "SELECT * FROM ProductCategory";
             SqlCommand com = new SqlCommand(query, con);
             SqlDataReader reader = com.ExecuteReader();
             flowLayoutPanel1.Controls.Clear();
@@ -190,9 +192,11 @@ namespace SalesInventorySystem.HotelManagement
         }
         void displayItems()
         {
-            SqlConnection con = Database.getCustomizeConnection();
+            //SqlConnection con = Database.getCustomizeConnection();
+            SqlConnection con = Database.getConnection();
             con.Open();
-            string query = "SELECT * FROM FoodMenu WHERE MenuCategory='"+ selectedCategory + "'";
+            //string query = "SELECT * FROM FoodMenu WHERE MenuCategory='"+ selectedCategory + "'";
+            string query = "SELECT * FROM Products WHERE ProductCategoryCode='"+ selectedCategory + "'";
             SqlCommand com = new SqlCommand(query, con);
             SqlDataReader reader = com.ExecuteReader();
             flowLayoutPanel2.Controls.Clear();
@@ -214,8 +218,36 @@ namespace SalesInventorySystem.HotelManagement
         }
         private void ButtonFoodCategory_Click(System.Object sender, System.EventArgs e)
         {
+            //selectedCategory = (sender as Button).Text;
+            //displayItems();
             selectedCategory = (sender as Button).Text;
-            displayItems();
+            productcategorycode = Database.getSingleQuery("ProductCategory", "Description='" + selectedCategory + "'", "ProductCategoryID");
+            displayProducts();
+        }
+        void displayProducts()
+        {
+            SqlConnection con = Database.getConnection();
+            con.Open();
+            string query = "SELECT ProductCategoryCode,ProductCode,Description FROM Products WHERE ProductCategoryCode='" + productcategorycode + "'";
+            SqlCommand com = new SqlCommand(query, con);
+            SqlDataReader reader = com.ExecuteReader();
+            flowLayoutPanel2.Controls.Clear();
+            while (reader.Read())
+            {
+                Button btn = new Button();
+                btn.Text = reader.GetValue(2).ToString();
+
+                btn.TextAlign = ContentAlignment.MiddleCenter;
+                btn.BackColor = Color.MediumSeaGreen;
+                btn.FlatStyle = FlatStyle.Popup;
+                btn.Width = 100;
+                btn.Height = 40;
+                ItemBtns.Add(btn);
+                flowLayoutPanel2.Controls.Add(btn);
+                btn.Click += this.ButtonFoodMenu_Click;
+                // buttonname = btn.Text;
+
+            }
         }
         private void ButtonFoodMenu_Click(System.Object sender, System.EventArgs e)
         {
@@ -361,7 +393,7 @@ namespace SalesInventorySystem.HotelManagement
                 if (raddinein.Checked == true)
                 {
                     addDineInOrder();
-                    display("OrderDetailsRes", txtrefno.Text);
+                    display("OrderDetails", txtrefno.Text);
                 }
                 else
                 {
@@ -379,9 +411,10 @@ namespace SalesInventorySystem.HotelManagement
 
         private void addDineInOrder()   //ADD ITEM
         {
-            string productcode = Database.getSingleQuery("FoodMenu", " FoodMenu='" + selectedProductName + "'", "FoodCode", Database.getCustomizeConnection());
-            SqlConnection con = Database.getConnection();
-            //SqlConnection con = Database.getCustomizeConnection();
+            //string productcode = Database.getSingleQuery("FoodMenu", " FoodMenu='" + selectedProductName + "'", "FoodCode", Database.getCustomizeConnection());
+            string productcode = Database.getSingleQuery("Products", " Description='" + selectedProductName + "'", "ProductCode");
+            //SqlConnection con = Database.getConnection();
+            SqlConnection con = Database.getCustomizeConnection();
             con.Open();
             try
             {

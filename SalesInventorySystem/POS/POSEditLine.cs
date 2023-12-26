@@ -52,7 +52,17 @@ namespace SalesInventorySystem.POS
 
         private void btnsubmit_Click(object sender, EventArgs e)
         {
-            if(Convert.ToDouble(PointOfSale.uprice) != Convert.ToDouble(txtuprice.Text))
+            bool isRetail = Database.checkifExist("Select PosType FROM dbo.POSType WHERE PosType=1");
+            string price = "";
+            if (isRetail)
+            {
+                price = PointOfSale.uprice; 
+            }
+            else
+            {
+                price = POSMainRestoDashboard.uprice; 
+            }
+            if (Convert.ToDouble(price) != Convert.ToDouble(txtuprice.Text))
             {
                 AuthorizedConfirmationFrm authfrm = new AuthorizedConfirmationFrm();
                 authfrm.ShowDialog(this);
@@ -76,6 +86,21 @@ namespace SalesInventorySystem.POS
 
         void add()
         {
+            bool isRetail = Database.checkifExist("Select TOP(1) PosType FROM dbo.POSType WHERE PosType=1");
+            string orderno = "", transactionno = "", sequencenum = "";
+            if (isRetail)
+            {
+                orderno = PointOfSale.refno;
+                transactionno = PointOfSale.transcode;
+                sequencenum = PointOfSale.sequenceNum;
+            }
+            else
+            {
+                orderno = POSMainRestoDashboard.refno;
+                transactionno = POSMainRestoDashboard.transcode;
+                sequencenum = POSMainRestoDashboard.sequenceNum;
+            }
+
             bool ischeck = false;
             if (checkBox1.Checked == true)
                 ischeck = true;
@@ -89,9 +114,9 @@ namespace SalesInventorySystem.POS
                 SqlCommand com = new SqlCommand(query, con);
                 //com.Parameters.AddWithValue("@parmorderno", textEdit3.Text);
                 com.Parameters.AddWithValue("@parmbranchcode", Login.assignedBranch);
-                com.Parameters.AddWithValue("@parmorderno", PointOfSale.refno);
-                com.Parameters.AddWithValue("@parmtransid", PointOfSale.transcode);
-                com.Parameters.AddWithValue("@parmsequencenumber", PointOfSale.sequenceNum);
+                com.Parameters.AddWithValue("@parmorderno", orderno);
+                com.Parameters.AddWithValue("@parmtransid", transactionno);
+                com.Parameters.AddWithValue("@parmsequencenumber", sequencenum);
                 com.Parameters.AddWithValue("@parmprodname", txtprodname.Text);
                 com.Parameters.AddWithValue("@parmunitprice", txtuprice.Text);
                 com.Parameters.AddWithValue("@parmqty", txtqty1.Text);

@@ -96,10 +96,10 @@ namespace SalesInventorySystem.HOFormsDevEx
 
                     //}
                     Database.ExecuteQuery($"Update dbo.ExpenseDetails SET InvoiceNo='{gridView1.GetRowCellValue(i, "InvoiceNo").ToString()}'" +
-                  $",ExpenseName='{gridView1.GetRowCellValue(i, "ExpenseName").ToString()}'" +
-                  $",Amount='{gridView1.GetRowCellValue(i, "Amount").ToString()}'" +
-                  $",Remarks='{gridView1.GetRowCellValue(i, "Remarks").ToString()}' WHERE ReferenceNumber='{txtrefno.Text}' ");
-
+                                      $",ExpenseName='{gridView1.GetRowCellValue(i, "ExpenseName").ToString()}'" +
+                                      $",Amount='{gridView1.GetRowCellValue(i, "Amount").ToString()}'" +
+                                      $",Remarks='{gridView1.GetRowCellValue(i, "Remarks").ToString()}' " +
+                                      $"WHERE ReferenceNumber='{txtrefno.Text}' ");
                     total += Convert.ToDouble(gridView1.GetRowCellValue(i, "Amount").ToString());
 
                 }

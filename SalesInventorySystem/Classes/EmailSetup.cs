@@ -89,18 +89,19 @@ namespace SalesInventorySystem.Classes
                     filepath = @"C:\\ENDOFDAY_INVENTORY_REPORTS\\" + "028_1_16_2020" + ".xls";
                     Utilities.createDirectoryFolder(filepath);
                 }
-                var rowx = Database.getMultipleQuery("EmailServer", "Description <> ''", "Description,Password,SmtpClient,Port");
+                var rowx = Database.getMultipleQuery("EmailServer", "Description <> ''", "Description,Password,SmtpClient,Port,SubjectTitle");
                 string username = rowx["Description"].ToString();
                 string password =   rowx["Password"].ToString();
                 string smtp =       rowx["SmtpClient"].ToString();
                 string port =       rowx["Port"].ToString();
+                string subj =       rowx["SubjectTitle"].ToString();
                 ArrayList list_emails = new ArrayList();
                 int i = 0;
                 string email = "";
                 // string subjectEmail = "ENZO REPORT GENERATOR";
                 SqlConnection sqlConnection1 = Database.getConnection();
                 sqlConnection1.Open(); //connection to the database.
-                SqlCommand cmd_Email = new SqlCommand("Select EmailAddress from EmailAddresses", sqlConnection1);
+                SqlCommand cmd_Email = new SqlCommand("Select EmailAddress from dbo.EmailAddresses", sqlConnection1);
                 SqlDataReader read_Email = cmd_Email.ExecuteReader();
                 while (read_Email.Read())
                 {
@@ -141,7 +142,7 @@ namespace SalesInventorySystem.Classes
                 //client.Send(message);
 
 
-                msg = new MailMessage { From = new MailAddress("esatptdev@gmail.com", "EMMFC SALES REPORT", Encoding.UTF8) };
+                msg = new MailMessage { From = new MailAddress("eulzreportservices@gmail.com", subj, Encoding.UTF8) };
 
                 foreach (string email_to in list_emails)
                 {

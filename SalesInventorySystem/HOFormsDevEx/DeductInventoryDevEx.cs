@@ -32,7 +32,7 @@ namespace SalesInventorySystem.HOFormsDevEx
         private void btnAnalyze_Click(object sender, EventArgs e)
         {
             bool isAnalyze = false;
-            isAnalyze = Database.checkifExist("SELECT TOP(1) BranchCode FROM ReInventoryMonitoring WHERE BranchCode='" + Login.assignedBranch + "' and CAST(DateExecute as date)='" + txtdate.Text + "'");
+            isAnalyze = Database.checkifExist("SELECT TOP(1) BranchCode FROM dbo.ReInventoryMonitoring WHERE BranchCode='" + Login.assignedBranch + "' and CAST(DateExecute as date)='" + txtdate.Text + "'");
 
             if (String.IsNullOrEmpty(txtbranch.Text))
             {
@@ -50,7 +50,7 @@ namespace SalesInventorySystem.HOFormsDevEx
                 btnDeduct.Enabled = true;
                 if (!isAnalyze)
                 {
-                    Database.ExecuteQuery("INSERT INTO ReInventoryMonitoring VALUES('" + Login.assignedBranch + "','" + txtdate.Text + "',1,0,'" + Login.Fullname + "',' ',' ') ");
+                    Database.ExecuteQuery("INSERT INTO ReInventoryMonitoring VALUES('" + Login.assignedBranch + "','" + txtdate.Text + "',1,0,'" + Login.Fullname + "',' ','"+Environment.MachineName.ToString()+"') ");
                 }
             }
            
@@ -93,7 +93,7 @@ namespace SalesInventorySystem.HOFormsDevEx
             }
         }
 
-
+        //not used--ang doFIFO maoy gigamit na method
         void deductInventory()
         {
             progressBarControl1.Position = 0;
@@ -101,7 +101,7 @@ namespace SalesInventorySystem.HOFormsDevEx
             {
                 bool flag = false;
                 bool isAlreadyCost = false;
-                isAlreadyCost = Database.checkifExist("SELECT BranchCode FROM BatchSalesDetails WHERE isCosting=1 and BranchCode='" + Login.assignedBranch + "' and CAST(DateOrder as date)='" + txtdate.Text + "'");
+                isAlreadyCost = Database.checkifExist("SELECT BranchCode FROM dbo.BatchSalesDetails WHERE isCosting=1 and BranchCode='" + Login.assignedBranch + "' and CAST(DateOrder as date)='" + txtdate.Text + "'");
                 for (int i = 0; i <= gridView1.RowCount - 1; i++)
                 {
                     if (gridView1.GetRowCellValue(i, "Status").ToString() == "FAILED" || gridView1.GetRowCellValue(i, "Status").ToString() == "NO INVENTORY")
@@ -156,7 +156,7 @@ namespace SalesInventorySystem.HOFormsDevEx
 
                 subject = "INVENTORY END OF DAY REPORT [" + Branch.getBranchName(branchcode) + "]";
                 Classes.EmailSetup mailsetup = new Classes.EmailSetup();
-                mailsetup.setupEmailParam(subject, body, filepath);
+                mailsetup.setupEmailParam(subject, body,true);
             }
             catch (Exception ex)
             {
@@ -166,8 +166,8 @@ namespace SalesInventorySystem.HOFormsDevEx
 
         private void btnDeduct_Click(object sender, EventArgs e)
         {
-            bool check = Database.checkifExist("SELECT TOP(1) BranchCode FROM ReInventoryMonitoring " +
-                "WHERE BranchCode='" + Login.assignedBranch + "'  and CAST(DateExecute as date)='" + txtdate.Text + "'  ");
+            bool check = Database.checkifExist("SELECT TOP(1) BranchCode FROM dbo.ReInventoryMonitoring " +
+                "WHERE BranchCode='" + Login.assignedBranch + "'  and CAST(DateExecute as date)='" + txtdate.Text + "' and isAnalyze=1 ");
             var rows = Database.getMultipleQuery("ReInventoryMonitoring", "BranchCode='" + Login.assignedBranch + "' and CAST(DateExecute as date)='" + txtdate.Text + "' ", "isAnalyze,isDeducted");
             string isAnalyze = rows["isAnalyze"].ToString();
             string isDeducted = rows["isDeducted"].ToString();
@@ -189,6 +189,14 @@ namespace SalesInventorySystem.HOFormsDevEx
             else if (Convert.ToBoolean(isAnalyze) == true && Convert.ToBoolean(isDeducted) == false)
             {
                 //deductInventory();
+                for (int i = 0; i <= gridView1.RowCount - 1; i++)
+                {
+                    if (gridView1.GetRowCellValue(i, "Status").ToString() == "FAILED" || gridView1.GetRowCellValue(i, "Status").ToString() == "NO INVENTORY")
+                    {
+                        XtraMessageBox.Show("You Cant Proceed there is a Failed Inventory Status");
+                        return;
+                    }
+                }
                 doFIFO();
 
                 progressBarControl1.Position = 80;
@@ -213,6 +221,7 @@ namespace SalesInventorySystem.HOFormsDevEx
                 gridControl1.ExportToXls(file);
 
                 sendMailNotification(file, txtbranch.Text);
+                
                 progressBarControl1.Position = 90;
                 XtraMessageBox.Show("Export Success");
                 btnDeduct.Enabled = false;
@@ -374,7 +383,7 @@ namespace SalesInventorySystem.HOFormsDevEx
 
         private void DeductInventoryDevEx_Load(object sender, EventArgs e)
         {
-            Database.displaySearchlookupEdit("Select BranchCode,BranchName FROM Branches ORDER BY BranchCode", txtbranch, "BranchCode", "BranchCode");
+            Database.displaySearchlookupEdit("Select BranchCode,BranchName FROM dbo.Branches ORDER BY BranchCode", txtbranch, "BranchCode", "BranchCode");
             if (Login.assignedBranch == "888")
             {
                 txtbranch.Enabled = true;
@@ -385,6 +394,26 @@ namespace SalesInventorySystem.HOFormsDevEx
                 txtbranch.Enabled = false;
             }
                 
+        }
+
+        private void convertToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if(gridView1.GetRowCellValue(gridView1.FocusedRowHandle,"Status").ToString()=="PASSAR")
+            {
+                InventoryConversion inv = new InventoryConversion();
+                Database.display($"SELECT * " +
+                    $"FROM dbo.view_InventoryConversion " +
+                    $"WHERE ChildProductCode='{gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "ProductCode").ToString()}' " +
+                    $"and Available > 0 AND BranchCode='{txtbranch.Text}' ",inv.gridControl1,inv.gridView1);
+                inv.txtdate.Text = txtdate.Text;
+              
+                inv.txtbranch.Text = txtbranch.Text;
+                inv.ShowDialog(this);
+            }
+            else
+            {
+                XtraMessageBox.Show("No Inventory Mapping");
+            }
         }
     }
 }

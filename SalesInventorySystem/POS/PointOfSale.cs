@@ -342,28 +342,8 @@ namespace SalesInventorySystem
                     txtsku.Focus();
                     return;
                 }
-                if(isSpecialPrice.Checked==true)
-                {
-                    POS.POSSpecialPrice possprice = new POS.POSSpecialPrice();
-                    //possprice.FormClosed += new FormClosedEventHandler(possprice_FormClosed);
-                    possprice.ShowDialog(this);
-                    if (POS.POSSpecialPrice.isconfirmed == true)
-                    {
-                        insertData();
-                        
-                        isusedsearchform = false;
-                        display();
-                        txtsku.Text = "";
-                        POS.POSSpecialPrice.isconfirmed = false;
-                        possprice.Dispose();
-                        if (isDataInserted)
-                            MydataGridView1.Rows[0].Selected = true;
-                        //MydataGridView1.CurrentCell = MydataGridView1.Rows[MydataGridView1.Rows.Count - 1].Cells[1];
-                    }
-                }
                 else
                 {
-                   
                     insertData();
                     isusedsearchform = false;
                     ispriceused = "mainprice";
@@ -372,6 +352,37 @@ namespace SalesInventorySystem
                     if (isDataInserted)
                         MydataGridView1.Rows[0].Selected = true;
                 }
+                //if(isSpecialPrice.Checked==true)
+                //{
+                //    POS.POSSpecialPrice possprice = new POS.POSSpecialPrice();
+                //    //possprice.FormClosed += new FormClosedEventHandler(possprice_FormClosed);
+                //    possprice.ShowDialog(this);
+                //    if (POS.POSSpecialPrice.isconfirmed == true)
+                //    {
+                //        insertData();
+                        
+                //        isusedsearchform = false;
+                //        display();
+                //        txtsku.Text = "";
+                //        POS.POSSpecialPrice.isconfirmed = false;
+                //        possprice.Dispose();
+                //        if (isDataInserted)
+                //            MydataGridView1.Rows[0].Selected = true;
+                //        //MydataGridView1.CurrentCell = MydataGridView1.Rows[MydataGridView1.Rows.Count - 1].Cells[1];
+                //    }
+                //}
+                //else
+                //{
+                   
+                //    insertData();
+                //    isusedsearchform = false;
+                //    ispriceused = "mainprice";
+                //    display();
+                //    txtsku.Text = "";
+                //    if (isDataInserted)
+                //        MydataGridView1.Rows[0].Selected = true;
+                //}
+                
                 bool isLinkedServer = Database.checkifExist("Select isnull(isLinkedServer,0) FROM POSType WHERE isLinkedServer=1");
 
                 if (isLinkedServer) //if they used linkedserver
@@ -413,6 +424,7 @@ namespace SalesInventorySystem
         //        return;
         //    }
         //}
+
         void displayHoldTransactions(string refno,string machinename)
         {
             //Database.display("SELECT SequenceNumber AS ID,Description AS Particulars,FORMAT(UnitPrice,'N', 'en-us') AS UnitPrice,QtySold AS Qty,FORMAT(SubTotal,'N', 'en-us') AS Amount FROM BatchSalesDetails WHERE ReferenceNo='" + textEdit3.Text + "' AND isVoid='0' AND isCancelled='0' and isHold='0'", gridControl2, gridView2);
@@ -448,7 +460,7 @@ namespace SalesInventorySystem
         void display()
         {
             //Database.display("SELECT SequenceNumber AS ID,Description AS Particulars,FORMAT(UnitPrice,'N', 'en-us') AS UnitPrice,QtySold AS Qty,FORMAT(SubTotal,'N', 'en-us') AS Amount FROM BatchSalesDetails WHERE ReferenceNo='" + textEdit3.Text + "' AND isVoid='0' AND isCancelled='0' and isHold='0'", gridControl2, gridView2);
-            //Database.displayLocalGrid("SELECT SequenceNumber AS ID,Description AS Particulars,FORMAT(Sellin gPrice,'N', 'en-us') AS UnitPrice,QtySold AS Qty,FORMAT(SubTotal,'N', 'en-us') AS Amount FROM BatchSalesDetails WHERE ReferenceNo='" + textEdit3.Text + "' AND isVoid='0' AND isCancelled='0' and isHold='0' AND BranchCode='"+Login.assignedBranch+"'", MydataGridView1);
+            //Database.displayLocalGrid("SELECT SequenceNumber AS ID,Description AS Particulars,FORMAT(SellingPrice,'N', 'en-us') AS UnitPrice,QtySold AS Qty,FORMAT(SubTotal,'N', 'en-us') AS Amount FROM BatchSalesDetails WHERE ReferenceNo='" + textEdit3.Text + "' AND isVoid='0' AND isCancelled='0' and isHold='0' AND BranchCode='"+Login.assignedBranch+"'", MydataGridView1);
             Database.displayLocalGrid("SELECT SequenceNumber AS ID" +
                 ",Description AS Particulars" +
                 ",FORMAT(SellingPrice,'N', 'en-us') AS UnitPrice" +
@@ -569,18 +581,14 @@ namespace SalesInventorySystem
             //    return;
             //}
             
-            if (isusedsearchform == true && isusedbarcode == false)//kung naay barcode pag select sa form
+            if (isusedsearchform == true)//kung naay barcode pag select sa form
             {
                 productcode = prodcode;
             }
-            else if (isusedsearchform == false && isusedbarcode==false) //
-            {
-                productcode = txtsku.Text.Substring(2, 5).Trim();
-            }
-            else
-            {
-                productcode = prodcode;
-            }
+            //else
+            //{
+            //    productcode = prodcode;
+            //}
 
             bool islinkedServer = Database.checkifExist("SELECT isnull(isLinkedServer,0) FROM POSType WHERE isLinkedServer=1");
             string linkedServerName = Database.getSingleQuery("POSType", "isLinkedServer is not null", "linkedServerName"); //linkedservername
@@ -822,6 +830,7 @@ namespace SalesInventorySystem
 
         void AddDiscounts()
         {
+            string postype = Database.getSingleQuery("SELECT TOP(1) PosType FROM dbo.POSType", "PosType");
             totamount = "0";
             refno = txtOrderNo.Text;
             totamount = lblTotalAmount.Text;
@@ -830,18 +839,21 @@ namespace SalesInventorySystem
 
             totalpayment = Convert.ToDouble(lblvatsale.Text) + Convert.ToDouble(lblvatexemptsale.Text); //NOT USED
             // discountAmount = Convert.ToDouble(lblTotalAmount.Text) - Convert.ToDouble(lblvat)* (0.05);
+           
             //NOT USED
             discountAmount = (Convert.ToDouble(lblvatsale.Text) + Convert.ToDouble(lblvatexemptsale.Text)) * (0.05);// Convert.ToDouble(lblvat) * (0.05);
             cleanamount = Convert.ToDouble(lblTotalAmount.Text) - discountAmount;
-
+            //////////////////////////////////////////////////////////////////////////////////
+            
             int countitems = Database.getCountData("BatchSalesDetails", "ReferenceNo='" + txtOrderNo.Text + "' " +
                 "AND CashierTransNo='" + lblTransactionIDCashier.Text + "'" +
                 "AND isCancelled=0 AND isVoid=0 and isErrorCorrect=0 ", "SequenceNumber");
 
             AddDiscount adis = new AddDiscount();
-            adis.txtorderno.Text = txtOrderNo.Text;
-            adis.txtcashiertansno.Text = lblTransactionIDCashier.Text;
-            adis.txttransactionno.Text = lblTransactionIDInc.Text;
+            AddDiscountRestaurant adisres = new AddDiscountRestaurant();
+            
+
+
             if (countitems < 1)
             {
                 XtraMessageBox.Show("You Cant Add Discount no Items to be discounted");
@@ -849,7 +861,23 @@ namespace SalesInventorySystem
             }
             else
             {
-                adis.ShowDialog(this);
+                if (postype == "2")
+                {
+
+                    adis.txtorderno.Text = txtOrderNo.Text;
+                    adis.txtcashiertansno.Text = lblTransactionIDCashier.Text;
+                    adis.txttransactionno.Text = lblTransactionIDInc.Text;
+                    adis.ShowDialog(this);
+                }
+                else if (postype == "1")
+                {
+
+                    adisres.txtorderno.Text = txtOrderNo.Text;
+                    adisres.txtcashiertansno.Text = lblTransactionIDCashier.Text;
+                    adisres.txttransactionno.Text = lblTransactionIDInc.Text;
+                    adisres.ShowDialog(this);
+                }
+                //adis.ShowDialog(this);
 
                 //string getDiscountedItems = Database.getSingleResultSet("SELECT dbo.func_getDiscountedItems('" + Login.assignedBranch + "','" + txtOrderNo.Text + "')");
                 ////DEFAULT 5% DISCOUNT
@@ -895,28 +923,43 @@ namespace SalesInventorySystem
                 {
                     lblpwddiscount.Text = getSalesDiscount().ToString();
                 }
-                else if (AddDiscount.discounttype == "REGULAR")
-                {
-                    lblotherdiscount.Text = getSalesDiscount().ToString();
-                }
+                
                 updateTransactionNo();
                 adis.Dispose();
+            }
+            if (AddDiscountRestaurant.isdone == true)
+            {
+                double totdiscount = 0.0;
+                //totdiscount = Math.Round(Convert.ToDouble(lblTotalDiscount.Text) + getSalesDiscount(), 2);
+                totdiscount = Math.Round(getPerItemDiscount() + getSalesDiscount(), 2);
+                lblTotalDiscount.Text = totdiscount.ToString();//Convert.ToDouble(lblTotalDiscount.Text)+AddDiscount.discountamount;
+                newtotalamount = Convert.ToDouble(lblTotalAmount.Text) - Convert.ToDouble(lblTotalDiscount.Text);
+                if (AddDiscountRestaurant.discounttype == "SENIOR")
+                {
+                    lblseniordiscount.Text = getSalesDiscount().ToString();
+                }
+                else if (AddDiscountRestaurant.discounttype == "PWD")
+                {
+                    lblpwddiscount.Text = getSalesDiscount().ToString();
+                }
+                updateTransactionNo();
+                adisres.Dispose();
             }
         }
 
         private void simpleButton3_Click(object sender, EventArgs e) //F6
         {
             bool isoverride = false;
-            isoverride = Database.checkifExist("SELECT isnull(isOverride,0) FROM POSFunctions WHERE FunctionName='DISCOUNT' AND isOverride=1");
+            isoverride = Database.checkifExist("SELECT isnull(isOverride,0) FROM dbo.POSFunctions WHERE FunctionName='DISCOUNT' AND isOverride=1");
             if (!isoverride)
             {
-                bool checkifexists = Database.checkifExist("SELECT TOP 1 OrderNo FROM SalesDiscount WHERE OrderNo='" + refno + "' AND isErrorCorrect=0 ");
+                bool checkifexists = Database.checkifExist("SELECT TOP(1) OrderNo FROM dbo.SalesDiscount WHERE OrderNo='" + refno + "' AND isErrorCorrect=0 ");
                 if (checkifexists)
                 {
                     bool isExists = HelperFunction.ConfirmDialog("The System found out that you already Discount this Transaction.. Do you want to Override and make a new Discount of this Transaction?", "Confirm Transaction");
                     if (isExists) //IF YES
                     {
-                        Database.ExecuteQuery("Update SalesDiscount SET isErrorCorrect=1 WHERE OrderNo='" + refno + "' AND isErrorCorrect=0");
+                        Database.ExecuteQuery("Update dbo.SalesDiscount SET isErrorCorrect=1 WHERE OrderNo='" + refno + "' AND isErrorCorrect=0");
                         AddDiscounts();
                     }
                     else
@@ -935,13 +978,13 @@ namespace SalesInventorySystem
                 authfrm.ShowDialog(this);
                 if (AuthorizedConfirmationFrm.isconfirmedLogin == true)
                 {
-                    bool checkifexists = Database.checkifExist("SELECT TOP 1 OrderNo FROM SalesDiscount WHERE OrderNo='" + refno + "' AND isErrorCorrect=0 ");
+                    bool checkifexists = Database.checkifExist("SELECT TOP(1) OrderNo FROM dbo.SalesDiscount WHERE OrderNo='" + refno + "' AND isErrorCorrect=0 ");
                     if (checkifexists)
                     {
                         bool isExists = HelperFunction.ConfirmDialog("The System found out that you already Discount this Transaction.. Do you want to Override and make a new Discount of this Transaction?", "Confirm Transaction");
                         if (isExists) //IF YES
                         {
-                            Database.ExecuteQuery("Update SalesDiscount SET isErrorCorrect=1 WHERE OrderNo='" + refno + "' AND isErrorCorrect=0");
+                            Database.ExecuteQuery("Update dbo.SalesDiscount SET isErrorCorrect=1 WHERE OrderNo='" + refno + "' AND isErrorCorrect=0");
                             AddDiscounts();
                         }
                         else
@@ -1461,19 +1504,7 @@ namespace SalesInventorySystem
                 if (SearchProduct.isUsedSearchForm == true) //isUsedSearchForm indicator ni cya sa searchproduct form kng nigamit ba cya og searchform
                 {
                     isusedsearchform = true; //is isusedsearchform is a local variable declare in this class
-                    if (SearchProduct.havebarcode == true) //kng pag select nya kay naay barcode
-                    {
-                        txtsku.Text = SearchProduct.barcode; // 
-                        isusedbarcode = true;
-                        SearchProduct.isUsedSearchForm = false;
-                    }
-                    else //kung pag select nya sa item sa search product kay wlaay barcode
-                    {
-                        txtsku.Text = SearchProduct.prodcode;// SearchProduct.prodcode.Substring(0, 2) + SearchProduct.prodcode + SearchProduct.qty.Replace(".", "");
-                       
-                        isusedbarcode = false;
-                        SearchProduct.isUsedSearchForm = false;
-                    }
+                    txtsku.Text = SearchProduct.prodcode;
                     prodcode = "";
                     prodcode = SearchProduct.prodcode;
                     //SearchProduct.isUsedSearchForm = false;
@@ -1488,6 +1519,43 @@ namespace SalesInventorySystem
                 XtraMessageBox.Show(ex.Message.ToString());
             }
         }
+        //OLD
+        //void searchProductItems()
+        //{
+        //    try
+        //    {
+        //        SearchProduct searchprod = new SearchProduct();
+        //        searchprod.ShowDialog(this);
+        //        if (SearchProduct.isUsedSearchForm == true) //isUsedSearchForm indicator ni cya sa searchproduct form kng nigamit ba cya og searchform
+        //        {
+        //            isusedsearchform = true; //is isusedsearchform is a local variable declare in this class
+        //            if (SearchProduct.havebarcode == true) //kng pag select nya kay naay barcode
+        //            {
+        //                txtsku.Text = SearchProduct.barcode; // 
+        //                isusedbarcode = true;
+        //                SearchProduct.isUsedSearchForm = false;
+        //            }
+        //            else //kung pag select nya sa item sa search product kay wlaay barcode
+        //            {
+        //                txtsku.Text = SearchProduct.prodcode;// SearchProduct.prodcode.Substring(0, 2) + SearchProduct.prodcode + SearchProduct.qty.Replace(".", "");
+
+        //                isusedbarcode = false;
+        //                SearchProduct.isUsedSearchForm = false;
+        //            }
+        //            prodcode = "";
+        //            prodcode = SearchProduct.prodcode;
+        //            //SearchProduct.isUsedSearchForm = false;
+        //            ispriceused = SearchProduct.priceused;
+        //            searchprod.Dispose();
+        //            txtsku.Focus();
+        //            addOrder();
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        XtraMessageBox.Show(ex.Message.ToString());
+        //    }
+        //}
 
         private void txtOrderNo_KeyPress(object sender, KeyPressEventArgs e)
         {

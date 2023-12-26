@@ -1043,7 +1043,7 @@
             // 
             this.xtraTabPage3.Controls.Add(this.groupControl5);
             this.xtraTabPage3.Controls.Add(this.groupControl6);
-            this.xtraTabPage3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.xtraTabPage3.Margin = new System.Windows.Forms.Padding(4);
             this.xtraTabPage3.Name = "xtraTabPage3";
             this.xtraTabPage3.Size = new System.Drawing.Size(2340, 883);
             this.xtraTabPage3.Text = "Audit Logs";

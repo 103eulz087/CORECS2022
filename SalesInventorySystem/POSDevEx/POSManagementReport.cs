@@ -28,12 +28,11 @@ namespace SalesInventorySystem.POSDevEx
         }
         void populateBranch()
         {
-            Database.displaySearchlookupEdit("SELECT BranchCode,BranchName FROM Branches ORDER BY BranchCode", txtbranch, "BranchCode", "BranchCode");
-            Database.displaySearchlookupEdit("SELECT BranchCode,BranchName FROM Branches", txtbrcodemgmtdata, "BranchCode", "BranchCode");
-            Database.displaySearchlookupEdit("SELECT BranchCode,BranchName FROM Branches", txtbranchVAT, "BranchCode", "BranchCode");
-            Database.displaySearchlookupEdit("SELECT BranchCode,MachineUsed FROM POSInfoDetails WHERE BranchCode='" + txtbranch.Text + "'", txtmanageddatapermachine, "MachineUsed", "MachineUsed");
-            Database.displaySearchlookupEdit("SELECT BranchCode,MachineUsed FROM POSInfoDetails WHERE BranchCode='" + txtbranchVAT.Text + "'", txtmachineVAT, "MachineUsed", "MachineUsed");
-          
+            Database.displaySearchlookupEdit("SELECT BranchCode,BranchName FROM dbo.Branches ORDER BY BranchCode", txtbranch, "BranchCode", "BranchCode");
+            Database.displaySearchlookupEdit("SELECT BranchCode,BranchName FROM dbo.Branches", txtbrcodemgmtdata, "BranchCode", "BranchCode");
+            Database.displaySearchlookupEdit("SELECT BranchCode,BranchName FROM dbo.Branches", txtbranchVAT, "BranchCode", "BranchCode");
+            Database.displaySearchlookupEdit("SELECT BranchCode,MachineUsed FROM dbo.POSInfoDetails WHERE BranchCode='" + txtbranch.Text + "'", txtmanageddatapermachine, "MachineUsed", "MachineUsed");
+            Database.displaySearchlookupEdit("SELECT BranchCode,MachineUsed FROM dbo.POSInfoDetails WHERE BranchCode='" + txtbranchVAT.Text + "'", txtmachineVAT, "MachineUsed", "MachineUsed"); 
         }
 
         private void simpleButton1_Click(object sender, EventArgs e)

@@ -94,6 +94,11 @@ namespace SalesInventorySystem.POS
             }
         }
 
+        private void lblvatexempt_Click(object sender, EventArgs e)
+        {
+
+        }
+
         void checkZeroRated()
         {
             if (PointOfSale.iszeroratedsale == true)
@@ -107,7 +112,7 @@ namespace SalesInventorySystem.POS
         {
             if (radcharge.Checked.Equals(true))  //CHARGE TO ACCOUNT
             {
-                Database.ExecuteQuery("UPDATE dbo.POSType SET isEnableInvoicePrinting=1");
+                //Database.ExecuteQuery("UPDATE dbo.POSType SET isEnableInvoicePrinting=1");
                 POSChargeToClient poschrge = new POSChargeToClient();
                 poschrge.txtorderno.Text = lblorderno.Text;
                 poschrge.txtamount.Text = txtamountpayable.Text;
@@ -210,6 +215,19 @@ namespace SalesInventorySystem.POS
 
         void spSaveTransaction(string discounttype, string invoiceno)
         {
+            bool isRetail = Database.checkifExist("Select PosType FROM dbo.POSType WHERE PosType=1");
+            bool OneTimeDisc = false,ZeroRated=false;
+            if (isRetail)
+            {
+                OneTimeDisc = PointOfSale.isOnetimeDiscount;
+                ZeroRated = PointOfSale.iszeroratedsale;
+            }
+            else
+            {
+                OneTimeDisc = POSRestoDineInBilling.isOnetimeDiscount;
+                ZeroRated = POSRestoDineInBilling.iszeroratedsale;
+            }
+           
             SqlConnection con = Database.getConnection();
             con.Open();
             try
@@ -234,7 +252,7 @@ namespace SalesInventorySystem.POS
                 com.Parameters.AddWithValue("@parmdiscount", txtdiscount.Text);
                 //com.Parameters.AddWithValue("@parmseniorcontrolno", senioridno);//txtseniorcontrolno.Text);
                 //com.Parameters.AddWithValue("@parmseniorname", seniorname);//txtseniorname.Text);
-                com.Parameters.AddWithValue("@parmonetimediscount", PointOfSale.isOnetimeDiscount);//isOnetimeDiscount);
+                com.Parameters.AddWithValue("@parmonetimediscount", OneTimeDisc);//isOnetimeDiscount);
                 //com.Parameters.AddWithValue("@parmseniordiscountamount", seniordiscountamount);//seniordiscountAmount);
                 com.Parameters.AddWithValue("@parmdiscounttype", discounttype);
                 //com.Parameters.AddWithValue("@parmpwdidno", pwdIDNo);
@@ -244,7 +262,7 @@ namespace SalesInventorySystem.POS
                 com.Parameters.AddWithValue("@parmdiscname", discname);
                 com.Parameters.AddWithValue("@parmdiscamount", discamount);
 
-                com.Parameters.AddWithValue("@parmiszeroratedsale", PointOfSale.iszeroratedsale);
+                com.Parameters.AddWithValue("@parmiszeroratedsale", ZeroRated);
                 com.Parameters.AddWithValue("@parmmachinename", Environment.MachineName.ToString());
                 com.CommandType = CommandType.StoredProcedure;
                 com.CommandText = query;
@@ -335,7 +353,7 @@ namespace SalesInventorySystem.POS
                     paymenttype = "Credit";
                     invno = txtinvoiceno.Text;
                     //update as of 04142020
-                    Database.ExecuteQuery("INSERT INTO dbo.POSCreditCardTransactions VALUES('" + lbltranscode.Text + "','" + lblorderno.Text + "','" + Login.assignedBranch + "','" + DateTime.Now.ToString() + "','" + POSPaymentDetails.creditcardname + "','" + POSPaymentDetails.creditcardnum + "','" + POSPaymentDetails.creditcardtype + "','" + POSPaymentDetails.creditcardexpirydate + "','" + POSPaymentDetails.creditcardbankname + "','" + POSPaymentDetails.creditcardmerchant + "','" + POSPaymentDetails.creditcardrefno + "','" + txtamountpayable.Text + "','0','" + DateTime.Now.ToString() + "',' ','" + Login.Fullname + "','" + GlobalVariables.computerName + "')");
+                    Database.ExecuteQuery("INSERT INTO dbo.POSCreditCardTransactions VALUES('" + lbltranscode.Text + "','" + lblorderno.Text + "','" + Login.assignedBranch + "','" + DateTime.Now.ToString() + "','" + POSPaymentDetails.creditcardname + "','" + POSPaymentDetails.creditcardnum + "','" + POSPaymentDetails.creditcardtype + "','" + POSPaymentDetails.creditcardexpirydate + "','" + POSPaymentDetails.creditcardbankname + "','" + POSPaymentDetails.creditcardmerchant + "','" + POSPaymentDetails.creditcardrefno + "','" + txtamountpayable.Text + "','0','" + DateTime.Now.ToString() + "',' ','" + Login.Fullname + "','" + GlobalVariables.computerName + "','"+lblcashiertransno.Text+"')");
                     //update as of 04142020
                 }
                 else if (radmerchant.Checked.Equals(true))
@@ -347,7 +365,7 @@ namespace SalesInventorySystem.POS
                     //update as of 04142020
                     bool isClear = false;
                     if (merchantpaytype == "Credit") { isClear = false; } else { isClear = true; }
-                    Database.ExecuteQuery("INSERT INTO POSMerchantTransactions VALUES('" + Login.assignedBranch + "'" +
+                    Database.ExecuteQuery("INSERT INTO dbo.POSMerchantTransactions VALUES('" + Login.assignedBranch + "'" +
                         ",'" + DateTime.Now.ToString() + "','" + Environment.MachineName + "','" + lblorderno.Text + "','" + POSPaytoMerchant.refno + "'" +
                         ",'" + POSPaytoMerchant.merchantname + "','" + POSPaytoMerchant.vouchercode + "','" + txtamountpayable.Text + "'" +
                         ",'" + DateTime.Now.ToString() + "','" + Login.isglobalUserID + "','" + isClear + "',' ')");
@@ -401,7 +419,8 @@ namespace SalesInventorySystem.POS
                     }
                     else if (btncaller.Text == "RETAILWITHDASHBOARD")
                     {
-                        gview = POS.POSMainWithDashboard.mygridview;
+                        //gview = POS.POSMainWithDashboard.mygridview;
+                        gview = POS.POSRestoDineInBilling.mygridview;
                     }
 
                     //if (radmerchant.Checked.Equals(true))//Merchant 
@@ -561,6 +580,8 @@ namespace SalesInventorySystem.POS
                 con.Close();
             }
         }
+
+
         void printSalesInvoice()
         {
             string custkey = "", custname = "", custaddress = "", custterm = "", TinNo="";

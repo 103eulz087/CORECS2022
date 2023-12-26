@@ -29,7 +29,8 @@ namespace SalesInventorySystem.HOFormsDevEx
         void newButton()
         {
             int id = IDGenerator.getIDNumber("Customers", "CustomerKey", 1);
-            txtcustkey.Text = HelperFunction.sequencePadding1(id.ToString(), 8);
+            txtcustkey.Text = HelperFunction.sequencePadding1(id.ToString(), 6);
+            txtcustid.Text = txtcustkey.Text;
             //txtsupplierid.Text = "000"+IDGenerator.getSupplierNumber().ToString();
             simpleButton2.Enabled = false;
             addbtn.Enabled = true;
@@ -308,12 +309,33 @@ namespace SalesInventorySystem.HOFormsDevEx
 
         private void addbtn_Click(object sender, EventArgs e)
         {
-            addButton();
+            addButton(); clear(); cancelButton();
+
+
+        }
+
+        void clear()
+        {
+            txtbrcode.Text = "";
+            txtaddress.Text = "";
+            txtao.Text = "";
+            txtbdate.Text = "";
+            txtbranch.Text = "";
+            txtcontactno.Text = "";
+            txtcreditlimit.Text = "";
+            txtcustid.Text = "";
+            txtcustkey.Text = "";
+            txtcustname.Text = "";
+            txtemail.Text = "";
+            txtrfid.Text = "";
+            txtterm.Text = "";
         }
 
         private void updatebtn_Click(object sender, EventArgs e)
         {
             updateButton();
+            clear();
+            cancelButton();
         }
 
         private void groupControl1_Paint(object sender, PaintEventArgs e)

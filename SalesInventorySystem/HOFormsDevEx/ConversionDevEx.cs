@@ -396,6 +396,12 @@ namespace SalesInventorySystem.HOFormsDevEx
                 }
            
         }
+
+        private void simpleButton3_Click(object sender, EventArgs e)
+        {
+
+        }
+
         void displayGrid()
         {
             gridControlPrepare.BeginUpdate();

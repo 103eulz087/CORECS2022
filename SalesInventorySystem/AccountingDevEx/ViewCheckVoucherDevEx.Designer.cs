@@ -67,7 +67,7 @@
             this.groupControl1.Controls.Add(this.labelControl1);
             this.groupControl1.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupControl1.Location = new System.Drawing.Point(0, 0);
-            this.groupControl1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.groupControl1.Margin = new System.Windows.Forms.Padding(6);
             this.groupControl1.Name = "groupControl1";
             this.groupControl1.Size = new System.Drawing.Size(2624, 127);
             this.groupControl1.TabIndex = 0;
@@ -76,7 +76,7 @@
             // 
             this.checkBox1.AutoSize = true;
             this.checkBox1.Location = new System.Drawing.Point(964, 64);
-            this.checkBox1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.checkBox1.Margin = new System.Windows.Forms.Padding(6);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(290, 29);
             this.checkBox1.TabIndex = 462;
@@ -101,7 +101,7 @@
             // 
             this.dateto.EditValue = null;
             this.dateto.Location = new System.Drawing.Point(458, 58);
-            this.dateto.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.dateto.Margin = new System.Windows.Forms.Padding(6);
             this.dateto.Name = "dateto";
             this.dateto.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 9.25F);
             this.dateto.Properties.Appearance.Options.UseFont = true;
@@ -116,7 +116,7 @@
             // 
             this.datefrom.EditValue = null;
             this.datefrom.Location = new System.Drawing.Point(118, 58);
-            this.datefrom.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.datefrom.Margin = new System.Windows.Forms.Padding(6);
             this.datefrom.Name = "datefrom";
             this.datefrom.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 9.25F);
             this.datefrom.Properties.Appearance.Options.UseFont = true;
@@ -132,7 +132,7 @@
             this.labelControl2.Appearance.Font = new System.Drawing.Font("Tahoma", 9.25F);
             this.labelControl2.Appearance.Options.UseFont = true;
             this.labelControl2.Location = new System.Drawing.Point(408, 64);
-            this.labelControl2.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.labelControl2.Margin = new System.Windows.Forms.Padding(6);
             this.labelControl2.Name = "labelControl2";
             this.labelControl2.Size = new System.Drawing.Size(38, 30);
             this.labelControl2.TabIndex = 1;
@@ -143,7 +143,7 @@
             this.labelControl1.Appearance.Font = new System.Drawing.Font("Tahoma", 9.25F);
             this.labelControl1.Appearance.Options.UseFont = true;
             this.labelControl1.Location = new System.Drawing.Point(44, 64);
-            this.labelControl1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.labelControl1.Margin = new System.Windows.Forms.Padding(6);
             this.labelControl1.Name = "labelControl1";
             this.labelControl1.Size = new System.Drawing.Size(66, 30);
             this.labelControl1.TabIndex = 0;
@@ -154,7 +154,7 @@
             this.panelControl1.Controls.Add(this.gridControl1);
             this.panelControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelControl1.Location = new System.Drawing.Point(0, 127);
-            this.panelControl1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.panelControl1.Margin = new System.Windows.Forms.Padding(6);
             this.panelControl1.Name = "panelControl1";
             this.panelControl1.Size = new System.Drawing.Size(2624, 1314);
             this.panelControl1.TabIndex = 1;
@@ -162,10 +162,10 @@
             // gridControl1
             // 
             this.gridControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridControl1.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.gridControl1.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(6);
             this.gridControl1.Location = new System.Drawing.Point(3, 3);
             this.gridControl1.MainView = this.gridView1;
-            this.gridControl1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.gridControl1.Margin = new System.Windows.Forms.Padding(6);
             this.gridControl1.Name = "gridControl1";
             this.gridControl1.Size = new System.Drawing.Size(2618, 1308);
             this.gridControl1.TabIndex = 2;
@@ -239,7 +239,7 @@
             this.ClientSize = new System.Drawing.Size(2624, 1441);
             this.Controls.Add(this.panelControl1);
             this.Controls.Add(this.groupControl1);
-            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "ViewCheckVoucherDevEx";
             this.Text = "ViewCheckVoucherDevEx";
             this.Load += new System.EventHandler(this.ViewCheckVoucherDevEx_Load);
