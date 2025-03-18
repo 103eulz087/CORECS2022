@@ -144,6 +144,8 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="DevExpress.DataAccess.v19.2, Version=19.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.ExpressApp.v19.2, Version=19.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.ExpressApp.Win.v19.2, Version=19.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.PivotGrid.v19.2.Core, Version=19.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <Private>True</Private>
     </Reference>
@@ -562,6 +564,12 @@
       <DependentUpon>CIFMain.cs</DependentUpon>
     </Compile>
     <Compile Include="Classes\AutoUpdater.cs" />
+    <Compile Include="Classes\BadOrder.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Classes\BadOrder.Designer.cs">
+      <DependentUpon>BadOrder.cs</DependentUpon>
+    </Compile>
     <Compile Include="Classes\BarcodeSettings.cs" />
     <Compile Include="Classes\Branch.cs" />
     <Compile Include="Classes\ClientAccount.cs" />
@@ -598,6 +606,12 @@
     </Compile>
     <Compile Include="Connection.Designer.cs">
       <DependentUpon>Connection.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DevExReportTemplate\BadOrderDetails.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DevExReportTemplate\BadOrderDetails.Designer.cs">
+      <DependentUpon>BadOrderDetails.cs</DependentUpon>
     </Compile>
     <Compile Include="DevExReportTemplate\CheckVoucher.cs">
       <SubType>Component</SubType>
@@ -706,6 +720,12 @@
     </Compile>
     <Compile Include="DevExReportTemplate\StatementOfAccount.Designer.cs">
       <DependentUpon>StatementOfAccount.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DevExReportTemplate\StockOutRep.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DevExReportTemplate\StockOutRep.Designer.cs">
+      <DependentUpon>StockOutRep.cs</DependentUpon>
     </Compile>
     <Compile Include="DevExReportTemplate\StockOrderRep.cs">
       <SubType>Component</SubType>
@@ -1163,6 +1183,12 @@
     <Compile Include="HOFormsDevEx\InventoryCostSearchProduct.Designer.cs">
       <DependentUpon>InventoryCostSearchProduct.cs</DependentUpon>
     </Compile>
+    <Compile Include="HOFormsDevEx\InventoryOut.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HOFormsDevEx\InventoryOut.Designer.cs">
+      <DependentUpon>InventoryOut.cs</DependentUpon>
+    </Compile>
     <Compile Include="HOFormsDevEx\InventoryQtyAdjustmentDevEx.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1408,6 +1434,12 @@
     </Compile>
     <Compile Include="HOFormsDevEx\ViewNonTradeOrdersDevEx.Designer.cs">
       <DependentUpon>ViewNonTradeOrdersDevEx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HOFormsDevEx\ViewStockOutRequest.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HOFormsDevEx\ViewStockOutRequest.Designer.cs">
+      <DependentUpon>ViewStockOutRequest.cs</DependentUpon>
     </Compile>
     <Compile Include="HOFormsDevEx\ViewZeroInventory.cs">
       <SubType>Form</SubType>
@@ -1944,6 +1976,12 @@
     <Compile Include="MainBranch.Designer.cs">
       <DependentUpon>MainBranch.cs</DependentUpon>
     </Compile>
+    <Compile Include="MainRibbonForm1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainRibbonForm1.Designer.cs">
+      <DependentUpon>MainRibbonForm1.cs</DependentUpon>
+    </Compile>
     <Compile Include="MasterDetailGrid.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -2117,6 +2155,12 @@
     </Compile>
     <Compile Include="POSDevEx\POSSettingsDevEx.Designer.cs">
       <DependentUpon>POSSettingsDevEx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="POSDevEx\POSShowCreditDetails.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="POSDevEx\POSShowCreditDetails.Designer.cs">
+      <DependentUpon>POSShowCreditDetails.cs</DependentUpon>
     </Compile>
     <Compile Include="POSDevEx\POSXReadReportDevEx.cs">
       <SubType>Form</SubType>
@@ -2534,6 +2578,18 @@
     <Compile Include="Reporting\ARPayments.Designer.cs">
       <DependentUpon>ARPayments.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reporting\BadOrderReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reporting\BadOrderReport.Designer.cs">
+      <DependentUpon>BadOrderReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reporting\BadOrderReportDetails.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reporting\BadOrderReportDetails.Designer.cs">
+      <DependentUpon>BadOrderReportDetails.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reporting\BatchProcessMasterDevEx.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -2721,6 +2777,18 @@
     <Compile Include="RibbonForm1.Designer.cs">
       <DependentUpon>RibbonForm1.cs</DependentUpon>
     </Compile>
+    <Compile Include="RibbonForm2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RibbonForm2.Designer.cs">
+      <DependentUpon>RibbonForm2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SampleForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SampleForm.Designer.cs">
+      <DependentUpon>SampleForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="SampleReports.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -2804,6 +2872,12 @@
     </Compile>
     <Compile Include="WaitForm1.Designer.cs">
       <DependentUpon>WaitForm1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="XtraUserControl1.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="XtraUserControl1.Designer.cs">
+      <DependentUpon>XtraUserControl1.cs</DependentUpon>
     </Compile>
     <Compile Include="zzzDemozzz\DemoAddLoan.cs">
       <SubType>Form</SubType>
@@ -2968,8 +3042,14 @@
     <EmbeddedResource Include="CIF\CIFMain.resx">
       <DependentUpon>CIFMain.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Classes\BadOrder.resx">
+      <DependentUpon>BadOrder.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Connection.resx">
       <DependentUpon>Connection.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DevExReportTemplate\BadOrderDetails.resx">
+      <DependentUpon>BadOrderDetails.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DevExReportTemplate\CheckVoucher.resx">
       <DependentUpon>CheckVoucher.cs</DependentUpon>
@@ -3024,6 +3104,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DevExReportTemplate\StatementOfAccount.resx">
       <DependentUpon>StatementOfAccount.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DevExReportTemplate\StockOutRep.resx">
+      <DependentUpon>StockOutRep.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DevExReportTemplate\StockOrderRep.resx">
       <DependentUpon>StockOrderRep.cs</DependentUpon>
@@ -3250,6 +3333,9 @@
     <EmbeddedResource Include="HOFormsDevEx\InventoryCostSearchProduct.resx">
       <DependentUpon>InventoryCostSearchProduct.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="HOFormsDevEx\InventoryOut.resx">
+      <DependentUpon>InventoryOut.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="HOFormsDevEx\InventoryQtyAdjustmentDevEx.resx">
       <DependentUpon>InventoryQtyAdjustmentDevEx.cs</DependentUpon>
     </EmbeddedResource>
@@ -3369,6 +3455,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="HOFormsDevEx\ViewNonTradeOrdersDevEx.resx">
       <DependentUpon>ViewNonTradeOrdersDevEx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HOFormsDevEx\ViewStockOutRequest.resx">
+      <DependentUpon>ViewStockOutRequest.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="HOFormsDevEx\ViewZeroInventory.resx">
       <DependentUpon>ViewZeroInventory.cs</DependentUpon>
@@ -3644,6 +3733,9 @@
     <EmbeddedResource Include="MainBranch.resx">
       <DependentUpon>MainBranch.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="MainRibbonForm1.resx">
+      <DependentUpon>MainRibbonForm1.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MasterDetailGrid.resx">
       <DependentUpon>MasterDetailGrid.cs</DependentUpon>
     </EmbeddedResource>
@@ -3735,6 +3827,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="POSDevEx\POSSettingsDevEx.resx">
       <DependentUpon>POSSettingsDevEx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="POSDevEx\POSShowCreditDetails.resx">
+      <DependentUpon>POSShowCreditDetails.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="POSDevEx\POSXReadReportDevEx.resx">
       <DependentUpon>POSXReadReportDevEx.cs</DependentUpon>
@@ -3951,6 +4046,12 @@
     <EmbeddedResource Include="Reporting\ARPayments.resx">
       <DependentUpon>ARPayments.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reporting\BadOrderReport.resx">
+      <DependentUpon>BadOrderReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reporting\BadOrderReportDetails.resx">
+      <DependentUpon>BadOrderReportDetails.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reporting\BatchProcessMasterDevEx.resx">
       <DependentUpon>BatchProcessMasterDevEx.cs</DependentUpon>
     </EmbeddedResource>
@@ -4057,6 +4158,12 @@
     <EmbeddedResource Include="RibbonForm1.resx">
       <DependentUpon>RibbonForm1.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="RibbonForm2.resx">
+      <DependentUpon>RibbonForm2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SampleForm.resx">
+      <DependentUpon>SampleForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="SampleReports.resx">
       <DependentUpon>SampleReports.cs</DependentUpon>
     </EmbeddedResource>
@@ -4098,6 +4205,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="WaitForm1.resx">
       <DependentUpon>WaitForm1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="XtraUserControl1.resx">
+      <DependentUpon>XtraUserControl1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="zzzDemozzz\DemoAddLoan.resx">
       <DependentUpon>DemoAddLoan.cs</DependentUpon>

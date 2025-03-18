@@ -255,6 +255,11 @@ namespace SalesInventorySystem.Orders
             openHRIOrder();
         }
 
+        private void cancelThisOrderToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            
+        }
+
         private void tabfilter()
         {
             if (tabMain.SelectedTabPage.Equals(tabForApproval))

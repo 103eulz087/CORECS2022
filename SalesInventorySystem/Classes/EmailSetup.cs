@@ -118,7 +118,30 @@ namespace SalesInventorySystem.Classes
                 client.EnableSsl = true;
                 client.Credentials = login;
 
-                msg = new MailMessage { From = new MailAddress("eulzreportservices@gmail.com", "EMMFC SALES REPORT", Encoding.UTF8) };
+                //-------
+                //client = new SmtpClient(smtp);
+                //client.EnableSsl = true;
+                //client.UseDefaultCredentials = false;
+                //client.Credentials = new NetworkCredential(username, password);
+                //client.Host = "smtp.gmail.com";
+                //client.Port = 587;
+                //client.DeliveryMethod = SmtpDeliveryMethod.Network;
+                //-------
+
+
+                //SmtpClient client = new SmtpClient();
+                //client.Host = "smtp.gmail.com";
+                //client.Port = Convert.ToInt32(port); 
+                //client.EnableSsl = true;
+                //client.UseDefaultCredentials = false;
+                //var credentials = new System.Net.NetworkCredential(username, password);
+                //client.Credentials = credentials;
+
+                // client.UseDefaultCredentials = true;
+                //client.Send(message);
+
+
+                msg = new MailMessage { From = new MailAddress("esatptdev@gmail.com", "EMMFC SALES REPORT", Encoding.UTF8) };
 
                 foreach (string email_to in list_emails)
                 {

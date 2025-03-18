@@ -45,12 +45,12 @@ namespace SalesInventorySystem.HOFormsDevEx
         {
             Database.display("SELECT CAST(TransactionDate as date) as TransactionDate" +
                     //",CAST(TransactionDate as date) as TransactionDate" +
-                    //",TransCode" +
-                    ",Particulars" +
+                    ",TransCode" +
+                    ",Description" +
                     ",Debit" +
                     ",Credit " +
                     //",InvoiceNo " +
-                "FROM ClientLedger " +
+                "FROM dbo.ClientLedger " +
                 "WHERE AccountID='" + txtacctid.Text + "' " +
                 "AND CAST(TransactionDate as date) >= '" + datefromledge.Text + "' " +
                 "and CAST(TransactionDate as date)<= '" + datetoledge.Text + "' ", gridControl2, gridView2);
@@ -246,9 +246,9 @@ namespace SalesInventorySystem.HOFormsDevEx
             xct.xrcreditlimit.Text = creditlimit;
             xct.xramounttopay.Text = String.Format("{0:0,0.00}", getTotalCredit);
             minpay = Convert.ToDouble(txtacctbalance.Text) / 2;
-            
-            gridView2.Columns["PostingDate"].Visible = false;
-            gridView2.Columns["Description"].Visible = false;
+
+            //gridView2.Columns["PostingDate"].Visible = false;
+            //gridView2.Columns["Description"].Visible = false;
 
             Point p = new Point(50, 0);
             xct.Bands[BandKind.Detail].Controls.Add(HelperFunction.CopyGridControl(gridControl2, p));

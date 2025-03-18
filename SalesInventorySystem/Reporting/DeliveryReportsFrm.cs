@@ -119,6 +119,11 @@ namespace SalesInventorySystem.Reporting
             }
         }
 
+        private void searchLookUpEdit1_EditValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
         void showSTSDetails()
         {
             

@@ -27,6 +27,7 @@ namespace SalesInventorySystem
                 foreach (Form form in Application.OpenForms) //HotelManagement.HotelFrmMain()
                 {
                     if (form.GetType() == typeof(Login))
+                    //if (form.GetType() == typeof(Practice))
                     {
 
                         form.Activate();
@@ -44,6 +45,7 @@ namespace SalesInventorySystem
                     return;
                 }
 
+                //Application.Run(new Practice());
                 Application.Run(new Login());
                 //Application.Run(new PivotPractice());
                 //Application.Run(new Main());

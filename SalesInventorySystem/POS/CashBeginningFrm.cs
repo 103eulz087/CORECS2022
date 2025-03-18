@@ -61,7 +61,7 @@ namespace SalesInventorySystem
                
                 //int referencenumber = Convert.ToInt32(IDGenerator.getIDNumberSP("sp_GetReferenceNumber", "ReferenceNumber"));
                 string transdate = Database.getSingleResultSet("SELECT dbo.func_ConvertDateTimeToChar('DATE','" + DateTime.Now.ToString() + "')");
-                string transno = m.barStaticCashierTransNo.Caption;
+                string transno = "";// m.barStaticCashierTransNo.Caption;
 
                 //ALREADY LOGIN
                 bool isUserExistToday = Database.checkifExist("SELECT TOP(1) isOpen FROM SalesTransactionSummary WHERE BranchCode='" + Login.assignedBranch + "' " +

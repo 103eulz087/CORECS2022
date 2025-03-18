@@ -516,7 +516,7 @@
             this.btnCashierSalesCollectionSummary,
             this.barbtnInventoryMonitoring});
             this.ribbonControl.Location = new System.Drawing.Point(0, 0);
-            this.ribbonControl.Margin = new System.Windows.Forms.Padding(4, 7, 4, 7);
+            this.ribbonControl.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.ribbonControl.MaxItemId = 214;
             this.ribbonControl.Name = "ribbonControl";
             this.ribbonControl.PageHeaderItemLinks.Add(this.barStaticItem2);
@@ -533,7 +533,7 @@
             this.ribbonControl.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonControlStyle.Office2013;
             this.ribbonControl.ShowApplicationButton = DevExpress.Utils.DefaultBoolean.False;
             this.ribbonControl.ShowPageHeadersMode = DevExpress.XtraBars.Ribbon.ShowPageHeadersMode.Show;
-            this.ribbonControl.Size = new System.Drawing.Size(2633, 344);
+            this.ribbonControl.Size = new System.Drawing.Size(2090, 270);
             this.ribbonControl.StatusBar = this.ribbonStatusBar;
             this.ribbonControl.SelectedPageChanged += new System.EventHandler(this.ribbonControl_SelectedPageChanged);
             this.ribbonControl.Click += new System.EventHandler(this.ribbon_Click);
@@ -2172,6 +2172,7 @@
             this.btnReturnOrders.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("btnReturnOrders.ImageOptions.LargeImage")));
             this.btnReturnOrders.Name = "btnReturnOrders";
             this.btnReturnOrders.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+            this.btnReturnOrders.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnReturnOrders_ItemClick);
             // 
             // btnCloseSalesTransaction
             // 
@@ -2596,7 +2597,6 @@
             this.ribbonPageGroup23.ItemLinks.Add(this.btnProcessSTS);
             this.ribbonPageGroup23.ItemLinks.Add(this.btnReceivedSTS);
             this.ribbonPageGroup23.ItemLinks.Add(this.btnAddSTSCharges);
-            this.ribbonPageGroup23.ItemLinks.Add(this.barButtonItem31);
             this.ribbonPageGroup23.Name = "ribbonPageGroup23";
             this.ribbonPageGroup23.Text = "STOCK TRANSFER";
             // 
@@ -2836,11 +2836,11 @@
             this.ribbonStatusBar.ItemLinks.Add(this.barHeaderItem4);
             this.ribbonStatusBar.ItemLinks.Add(this.barStaticItem8);
             this.ribbonStatusBar.ItemLinks.Add(this.barStaticCashierTransNo);
-            this.ribbonStatusBar.Location = new System.Drawing.Point(0, 925);
-            this.ribbonStatusBar.Margin = new System.Windows.Forms.Padding(4, 7, 4, 7);
+            this.ribbonStatusBar.Location = new System.Drawing.Point(0, 955);
+            this.ribbonStatusBar.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.ribbonStatusBar.Name = "ribbonStatusBar";
             this.ribbonStatusBar.Ribbon = this.ribbonControl;
-            this.ribbonStatusBar.Size = new System.Drawing.Size(2633, 54);
+            this.ribbonStatusBar.Size = new System.Drawing.Size(2090, 42);
             // 
             // barAndDockingController1
             // 
@@ -2914,18 +2914,18 @@
             // 
             this.Appearance.BackColor = System.Drawing.SystemColors.Control;
             this.Appearance.Options.UseBackColor = true;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 29F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 23F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(2633, 979);
+            this.ClientSize = new System.Drawing.Size(2090, 997);
             this.Controls.Add(this.ribbonStatusBar);
             this.Controls.Add(this.ribbonControl);
             this.IsMdiContainer = true;
-            this.Margin = new System.Windows.Forms.Padding(4, 7, 4, 7);
+            this.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.Name = "Main";
             this.Ribbon = this.ribbonControl;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.StatusBar = this.ribbonStatusBar;
-            this.Text = "ITCORE-CORE CS ver 6.0.7";
+            this.Text = "ITCORE-CORE CS ver 6.1.0";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Main_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Main_FormClosed);

@@ -251,6 +251,21 @@ namespace SalesInventorySystem
                 details += HelperFunction.PrintLeftText("Reference No.: " + cardrefno) + Environment.NewLine;
                 details += HelperFunction.createDottedLine() + Environment.NewLine;
             }
+            if (paytype == "Merchant")
+            {
+                string ReferenceNo = "", MerchantName = "", VoucherCode = "";
+                var rox = Database.getMultipleQuery("POSMerchantTransactions", $"OrderNo='{ordercode}' ", "ReferenceNo,MerchantName,VoucherCode,Amount");
+                ReferenceNo = rox["ReferenceNo"].ToString();
+                MerchantName = rox["MerchantName"].ToString();
+                VoucherCode = rox["VoucherCode"].ToString();
+                //string last4 = Database.getSingleResultSet($"SELECT RIGHT(CCNumber,4) FROM POSCreditCardTransactions WHERE ReferenceNo='{ordercode}'");
+                details += HelperFunction.createDottedLine() + Environment.NewLine;
+                details += HelperFunction.PrintLeftText("PAYMENT TYPE: Merchant "+ MerchantName) + Environment.NewLine;
+                //details += HelperFunction.PrintLeftText("Card Number: XXXX-XXXX-XXXX-" + last4) + Environment.NewLine;
+                details += HelperFunction.PrintLeftText("VoucherCode: " + VoucherCode) + Environment.NewLine;
+                details += HelperFunction.PrintLeftText("Reference No.: " + ReferenceNo) + Environment.NewLine;
+                details += HelperFunction.createDottedLine() + Environment.NewLine;
+            }
 
             string pathfile = System.IO.File.ReadAllText(Application.StartupPath+"\\FOOTER.txt");
             details += HelperFunction.PrintCenterText(pathfile) + Environment.NewLine;

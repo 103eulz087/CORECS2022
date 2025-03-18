@@ -121,7 +121,7 @@ namespace SalesInventorySystem.POS
                     progressBarControl1.Position = 35;
                 }
 
-                if (EODEmailConfirm) { sendMailNotificationEOD(txttransactiondate.Text); }
+                if (EODEmailConfirm) { sendMailNotificationEOD(txttransactiondate.Text); sendMailNotificationEODGroupSales(); }
                 progressBarControl1.Position = 80;
                 Thread.Sleep(1000);
                 backup();
@@ -252,7 +252,7 @@ namespace SalesInventorySystem.POS
                 details += Classes.ReceiptSetup.doHeader(Login.assignedBranch, Environment.MachineName);
                 details += Classes.ReceiptSetup.doTitle("SALES INVOICE");
 
-                details += Classes.ReceiptSetup.doHeaderDetailsX(referenceNo, " ", " ", " ", " ", " ");
+                details += Classes.ReceiptSetup.doHeaderDetailsX(referenceNo, " ", " ", " ", " ", " "," ","");
                 details += HelperFunction.createDottedLine() + Environment.NewLine;
                 foreach (DataRow row in receipt)
                 {
@@ -860,6 +860,45 @@ namespace SalesInventorySystem.POS
                 body += "<b><i><font color='red'>Please dont reply this is a system generated report.</font></b></i>" + "<br/><br/>";// Environment.NewLine + Environment.NewLine;
 
                 subject = "POS END OF DAY Transaction Report [" + Branch.getBranchName(Login.assignedBranch) + "]";
+                Classes.EmailSetup mailsetup = new Classes.EmailSetup();
+                mailsetup.setupEmailParam(subject, body, false);
+            }
+            catch (Exception ex)
+            {
+                XtraMessageBox.Show(ex.Message.ToString());
+            }
+        }
+
+        void sendMailNotificationEODGroupSales()
+        {
+            try
+            {
+                Database.display($"Select Description as ProductName,SUM(QtySold) as Qty,SUM(SubTotal) as TotalAmount " +
+                    $"FROM POSSalesSummary " +
+                    $"Where BranchCode='{Login.assignedBranch}' " +
+                    $"and CAST(DateOrder as date)='{txttransactiondate.Text}' AND MachineUsed='{GlobalVariables.computerName}' " +
+                    $"GROUP BY Description Order By Description ASC", gridControl2, gridView2);
+
+                string subject = "", body = "";
+                
+
+                body += "======================== <br/>";
+                body += "<b>GROUP ITEM SALES</b><br/>";
+                body += "======================== <br/>";
+                body += "<b>Date Report: </b>" + txttransactiondate.Text + "<br/><br/>";// + Environment.NewLine + Environment.NewLine;
+                body += "<table border='1' cellpadding='1' cellspacing='1'><tr><th>ProductName</th><th>TotalQtySold</th><th>TotalAmount</th></tr>";
+                for (int i = 0; i <= gridView2.RowCount - 1; i++)
+                {
+                    string prodname = gridView2.GetRowCellValue(i,"ProductName").ToString();
+                    string qty = gridView2.GetRowCellValue(i, "Qty").ToString();
+                    string totalamount = gridView2.GetRowCellValue(i, "TotalAmount").ToString();
+                
+                    body += "<tr><td>" + prodname + "</td><td>" + qty + "</td><td>"  + HelperFunction.numericFormat(Convert.ToDouble(totalamount)) + "</td></tr>";
+                }
+                body += "</table>";
+                body += "<b><i><font color='red'>Please dont reply this is a system generated report.</font></b></i>" + "<br/><br/>";// Environment.NewLine + Environment.NewLine;
+
+                subject = "POS END OF DAY Transaction Report Group Item Sales Report [" + Branch.getBranchName(Login.assignedBranch) + "]";
                 Classes.EmailSetup mailsetup = new Classes.EmailSetup();
                 mailsetup.setupEmailParam(subject, body, false);
             }
