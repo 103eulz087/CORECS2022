@@ -171,6 +171,10 @@ namespace SalesInventorySystem.POS
                     com.Parameters["@parmtotalgrosssales"].Precision = 12;
                     com.Parameters["@parmtotalgrosssales"].Scale = 2;
 
+                    com.Parameters.Add("@parmtotalchargetoaccountsales", SqlDbType.Decimal, 12).Direction = ParameterDirection.Output;
+                    com.Parameters["@parmtotalchargetoaccountsales"].Precision = 12;
+                    com.Parameters["@parmtotalchargetoaccountsales"].Scale = 2;
+
                     com.CommandType = CommandType.StoredProcedure;
                     com.CommandText = query;
                     com.ExecuteNonQuery();
@@ -224,6 +228,7 @@ namespace SalesInventorySystem.POS
                     pocls.txtTotalCreditSales.Text = com.Parameters["@parmtotalcreditsales"].Value.ToString();
                     pocls.txtTotalNetSales.Text = com.Parameters["@parmtotalnetsales"].Value.ToString();
                     pocls.txttotalgross.Text = com.Parameters["@parmtotalgrosssales"].Value.ToString();
+                    pocls.txtchargesales.Text = com.Parameters["@parmtotalchargetoaccountsales"].Value.ToString();
 
                     Database.displayLocalGrid("select CONVERT(VARCHAR(10), DateOrder, 120) AS Date " +
                         ", DatePart(hh, DateOrder) as Hour " +

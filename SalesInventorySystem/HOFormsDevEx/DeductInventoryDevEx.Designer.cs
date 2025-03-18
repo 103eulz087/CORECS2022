@@ -303,7 +303,7 @@
             this.inventoryQtyAdjustmentToolStripMenuItem,
             this.convertToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(367, 120);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(367, 76);
             // 
             // inventoryQtyAdjustmentToolStripMenuItem
             // 

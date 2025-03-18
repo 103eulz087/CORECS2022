@@ -58,7 +58,6 @@ namespace SalesInventorySystem.POS
 
         private void POSMainRestoDashboard_Load(object sender, EventArgs e)
         {
-
             //lblTransactionID.Text = Database.getSingleQuery("SalesTransactionSummary", "UserID='" + Login.isglobalUserID + "' AND BranchCode='" + Login.assignedBranch + "' AND isOpen='1' and DateOpen='" + DateTime.Now.ToShortDateString() + "' ", "AccountCode");
             lblTransactionIDCashier.Text = Database.getSingleQuery("SalesTransactionSummary", "UserID='" + Login.isglobalUserID + "' AND BranchCode='" + Login.assignedBranch + "' AND isOpen='1' and DateOpen='" + DateTime.Now.ToShortDateString() + "' ", "CashierTransNo");
 
@@ -143,6 +142,7 @@ namespace SalesInventorySystem.POS
             MydataGridView1.Columns["ID"].Visible = false; //localgridview
             MydataGridView1.Columns["isVat"].Visible = false;
         }
+
         void display(string tableName, string id)
         {
             Database.displayLocalGrid("SELECT SequenceNumber AS ID" +
@@ -157,7 +157,7 @@ namespace SalesInventorySystem.POS
                 "AND MachineUsed='"+Environment.MachineName.ToString()+"' " +
                 "AND isVoid='0' " +
                 "AND isCancelled='0' " +
-                "and isHold='0' ", MydataGridView1, Database.getConnection());
+                "and isHold='0' ORDER BY SequenceNumber DESC", MydataGridView1, Database.getConnection());
             //if (raddinein.Checked == true)
             //{
             //    Database.displayLocalGrid("SELECT SequenceNumber AS ID,Description AS Particulars,FORMAT(SellingPrice,'N', 'en-us') AS UnitPrice,QtySold AS Qty,FORMAT(TotalAmount,'N', 'en-us') AS Amount,isVat FROM " + tableName + " WHERE ReferenceNo='" + id + "' AND isVoid='0' AND isCancelled='0' and isHold='0' ", MydataGridView1,Database.getCustomizeConnection());
@@ -215,7 +215,7 @@ namespace SalesInventorySystem.POS
             SqlConnection con = Database.getConnection();
             con.Open();
             //string query = "SELECT * FROM FoodMenu WHERE MenuCategory='"+ selectedCategory + "'";
-            string query = "SELECT * FROM Products WHERE ProductCategoryCode='" + selectedCategory + "'";
+            string query = "SELECT * FROM Products WHERE BranchCode='"+Login.assignedBranch+"' AND ProductCategoryCode='" + selectedCategory + "'";
             SqlCommand com = new SqlCommand(query, con);
             SqlDataReader reader = com.ExecuteReader();
             flowLayoutPanel2.Controls.Clear();
@@ -243,11 +243,12 @@ namespace SalesInventorySystem.POS
             productcategorycode = Database.getSingleQuery("ProductCategory", "Description='" + selectedCategory + "'", "ProductCategoryID");
             displayProducts();
         }
+
         void displayProducts()
         {
             SqlConnection con = Database.getConnection();
             con.Open();
-            string query = "SELECT ProductCategoryCode,ProductCode,Description FROM Products WHERE ProductCategoryCode='" + productcategorycode + "'";
+            string query = "SELECT ProductCategoryCode,ProductCode,Description FROM Products WHERE BranchCode='" + Login.assignedBranch + "' AND ProductCategoryCode='" + productcategorycode + "'";
             SqlCommand com = new SqlCommand(query, con);
             SqlDataReader reader = com.ExecuteReader();
             flowLayoutPanel2.Controls.Clear();
@@ -268,6 +269,7 @@ namespace SalesInventorySystem.POS
 
             }
         }
+
         private void ButtonFoodMenu_Click(System.Object sender, System.EventArgs e)
         {
             selectedProductName = (sender as Button).Text;
@@ -283,9 +285,13 @@ namespace SalesInventorySystem.POS
                     addOrder();
                 }
             }
-            //else
-            //{ addOrder(); }
-
+            else if(radtkeout.Checked==true)
+            { addOrder(); }
+            else
+            {
+                XtraMessageBox.Show("Please Select DINE-IN OR TAKEOUT");
+                return;
+            }
         }
 
         private void calcEdit1_CustomDisplayText(object sender, DevExpress.XtraEditors.Controls.CustomDisplayTextEventArgs e)
@@ -306,13 +312,87 @@ namespace SalesInventorySystem.POS
                 serialPort1.Write(Convert.ToString((char)12));
                 serialPort1.WriteLine("Total: " + totalamount);
             }
-            paymentTransaction();
+            paymentTransactionRestoEulz();
         }
         double getSalesDiscount()
         {
             double discount = 0.0;
             discount = Database.getTotalSummation2("SalesDiscount", "OrderNo='" + txtOrderNo.Text + "' and isErrorCorrect=0", "DiscountAmount");
             return Math.Round(discount, 2);
+        }
+        void paymentTransactionRestoEulz()
+        {
+            try
+            {
+                mygridview = MydataGridView1; //mygridview is a static variable declare inside the class, while MyDataGridView1 is a dataGridViewForm and set modifier to public
+
+                if (Convert.ToDouble(lblTotalItems.Text) < 1)
+                {
+                    XtraMessageBox.Show("No Transaction Entry");
+                }
+                else
+                {
+                    POS.POSConfirmPaymentResto posconfirm = new POS.POSConfirmPaymentResto();
+                    double totaldiscounts = 0.0, totaldue = 0.0, netdue = 0.0;
+                    totaldiscounts = getSalesDiscount(); //ONE TIME DISCOUNT AMOUNT + TOTAL OF PER ITEM DISCOUNT
+                    posconfirm.txtdiscount.Text = totaldiscounts.ToString();//DISCOUNT FIELD - TOTAL OF ALL DISCOUNTS
+                    posconfirm.txttotaldiscountamount.Text = totaldiscounts.ToString();//DISCOUNT FIELD - TOTAL OF ALL DISCOUNTS
+
+                    totaldue = Convert.ToDouble(lblTotalAmount.Text); //lbltotal is already deducted by per item discount
+                    netdue = totaldue - totaldiscounts; //TOTAL DUE - ONE TIME DISCOUNT
+                    posconfirm.txtamountpayable.Text = netdue.ToString();
+                    posconfirm.txtamountpayableb4onetimediscount.Text = totaldue.ToString(); //TOTAL DUE
+
+
+                    posconfirm.lblcashiertransno.Text = lblTransactionIDCashier.Text;
+                    posconfirm.lblorderno.Text = txtOrderNo.Text;
+                    posconfirm.lbltranscode.Text = lblTransactionIDCashier.Text;
+                    posconfirm.txtdiscount.Text = txtdiscount.Text;
+                    posconfirm.txtamountpayable.Text = lblTotalAmount.Text;
+                    posconfirm.txtseniorcontrolno.Text = seniorcontrolno;
+                    posconfirm.txtseniorname.Text = seniorname;
+                    posconfirm.lblvatsale.Text = lblvatsale.Text;
+                    posconfirm.lblvatexempt.Text = lblvatexemptsale.Text;
+                    posconfirm.lblvatinput.Text = lblvat.Text;
+                    posconfirm.btncaller.Text = "RESTAURANT";
+
+                    posconfirm.lbltransno.Text = lblTransactionIDInc.Text;
+
+                    posconfirm.ShowDialog(this);
+                    if (POS.POSConfirmPaymentResto.transactiondone == true)
+                    {
+                        //if (txtcomport.Text == "")
+                        //{
+                        //    XtraMessageBox.Show("Please Select COM-PORT");
+                        //}
+                        //else if (serialPort1.IsOpen && chckdisplaypool.Checked == true)
+                        //{
+                        //    serialPort1.Write(Convert.ToString((char)12));
+                        //    serialPort1.WriteLine("Tender: " + String.Format("{0:0.00}", Convert.ToDouble(posconfirm.txtamounttender.Text)));
+                        //    serialPort1.WriteLine((char)13 + "Change: " + String.Format("{0:0.00}", Convert.ToDouble(posconfirm.txtamountchange.Text)));
+                        //}
+
+                        POS.POSHistoryCaption poshiscap = new POS.POSHistoryCaption();
+                        poshiscap.txtamounttenderedcap.Text = posconfirm.txtamounttender.Text;
+                        poshiscap.txtamountchangecap.Text = posconfirm.txtamountchange.Text;
+                        poshiscap.ShowDialog(this);
+
+                        POS.POSHistoryCaption.transactiondone = false;
+                        refreshView();
+                        updateTransactionNo();
+                        updateOR();
+
+                        POS.POSConfirmPayment.transactiondone = false;
+                        posconfirm.Dispose();
+                        txtdiscount.Text = "0";
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                XtraMessageBox.Show(ex.Message.ToString());
+            }
         }
 
         void paymentTransaction()
@@ -554,32 +634,32 @@ namespace SalesInventorySystem.POS
                 com.CommandText = query;
                 com.ExecuteNonQuery();
                 //  isDataInserted = true;
-                string desc1 = com.Parameters["@parmdesc1"].Value.ToString();
-                string qty1 = com.Parameters["@parmqty2"].Value.ToString();
-                string sel1 = com.Parameters["@parmsel1"].Value.ToString();
-                string total1 = com.Parameters["@parmtotal1"].Value.ToString();
-                string currentPrice = String.Format("\u20B1{0}", total1);
-                string full = qty1 + " @ " + sel1 + " = " + total1;
-                int desclength = desc1.Length;
-                string description = "";
-                if (desclength > 20)
-                {
-                    description = desc1.Substring(0, 19);
-                }
-                else
-                {
-                    description = desc1;
-                }
-                if (txtcomport.Text == "")
-                {
-                    XtraMessageBox.Show("Please Select COM-PORT");
-                }
-                else if (serialPort1.IsOpen && chckdisplaypool.Checked == true)
-                {
-                    serialPort1.Write(Convert.ToString((char)12));
-                    serialPort1.WriteLine(description);
-                    serialPort1.WriteLine((char)13 + "Amount: " + total1);
-                }
+                //string desc1 = com.Parameters["@parmdesc1"].Value.ToString();
+                //string qty1 = com.Parameters["@parmqty2"].Value.ToString();
+                //string sel1 = com.Parameters["@parmsel1"].Value.ToString();
+                //string total1 = com.Parameters["@parmtotal1"].Value.ToString();
+                //string currentPrice = String.Format("\u20B1{0}", total1);
+                //string full = qty1 + " @ " + sel1 + " = " + total1;
+                //int desclength = desc1.Length;
+                //string description = "";
+                //if (desclength > 20)
+                //{
+                //    description = desc1.Substring(0, 19);
+                //}
+                //else
+                //{
+                //    description = desc1;
+                //}
+                //if (txtcomport.Text == "")
+                //{
+                //    XtraMessageBox.Show("Please Select COM-PORT");
+                //}
+                //else if (serialPort1.IsOpen && chckdisplaypool.Checked == true)
+                //{
+                //    serialPort1.Write(Convert.ToString((char)12));
+                //    serialPort1.WriteLine(description);
+                //    serialPort1.WriteLine((char)13 + "Amount: " + total1);
+                //}
             }
             catch (SqlException ex)
             {
@@ -659,6 +739,11 @@ namespace SalesInventorySystem.POS
                     Save();
                     raddinein.Checked = false;
                     lbltableno.Text = "";
+                    Printing printit = new Printing();
+                    //printit.ReprintReceiptRestoOneLove(lblTransactionIDInc.Text, txtOrderNo.Text, "", "", "", "", "", "", "", "", "", MydataGridView1, false, "", "", "", "", "", "", "");
+                    //printit.printReceiptRestoOneLove(lblTransactionIDInc.Text, txtOrderNo.Text, "", "", "", "", "", "", "", "", "", MydataGridView1, false, "", "", "", "", "", "", "");
+                    printit.printReceiptRestoOneLove(lblTransactionIDInc.Text, txtOrderNo.Text, "", "0", "", "", "", "", "", MydataGridView1, false, "", "", "", "", "",false);
+
                     //txtOrderNo.Text = getORNumber();
                 }
             }
@@ -741,15 +826,16 @@ namespace SalesInventorySystem.POS
                     }
                     else
                     {
-                        AuthorizedConfirmationFrm authfrm = new AuthorizedConfirmationFrm();
-                        authfrm.ShowDialog(this);
-                        if (AuthorizedConfirmationFrm.isconfirmedLogin == true)
-                        {
-                            cancelTransaction();
-                            //refreshView();
-                            AuthorizedConfirmationFrm.isconfirmedLogin = false;
-                            authfrm.Dispose();
-                        }
+                        cancelTransaction();
+                        //AuthorizedConfirmationFrm authfrm = new AuthorizedConfirmationFrm();
+                        //authfrm.ShowDialog(this);
+                        //if (AuthorizedConfirmationFrm.isconfirmedLogin == true)
+                        //{
+                        //    cancelTransaction();
+                        //    //refreshView();
+                        //    AuthorizedConfirmationFrm.isconfirmedLogin = false;
+                        //    authfrm.Dispose();
+                        //}
                     }
                     //Database.ExecuteQuery("UPDATE BatchSalesDetails SET isCancelled='1',CancelledBy='EULZ' WHERE SequenceNumber='" + gridView2.GetRowCellValue(gridView2.FocusedRowHandle, "ID").ToString() + "'", "Successfully Cancelled");
                 }
@@ -1063,6 +1149,10 @@ namespace SalesInventorySystem.POS
                 com.Parameters["@parmtotalgrosssales"].Precision = 12;
                 com.Parameters["@parmtotalgrosssales"].Scale = 2;
 
+                com.Parameters.Add("@parmtotalchargetoaccountsales", SqlDbType.Decimal, 12).Direction = ParameterDirection.Output;
+                com.Parameters["@parmtotalchargetoaccountsales"].Precision = 12;
+                com.Parameters["@parmtotalchargetoaccountsales"].Scale = 2;
+
                 com.CommandType = CommandType.StoredProcedure;
                 com.CommandText = query;
                 com.ExecuteNonQuery();
@@ -1118,6 +1208,7 @@ namespace SalesInventorySystem.POS
                 pocls.txtTotalCreditSales.Text = com.Parameters["@parmtotalcreditsales"].Value.ToString();
                 pocls.txtTotalNetSales.Text = com.Parameters["@parmtotalnetsales"].Value.ToString();
                 pocls.txttotalgross.Text = com.Parameters["@parmtotalgrosssales"].Value.ToString();
+                pocls.txtchargesales.Text = com.Parameters["@parmtotalchargetoaccountsales"].Value.ToString();
 
 
 

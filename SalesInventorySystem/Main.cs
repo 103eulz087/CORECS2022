@@ -3292,14 +3292,14 @@ namespace SalesInventorySystem
         {
             string transdate = Database.getSingleResultSet("SELECT dbo.func_ConvertDateTimeToChar('DATE','"+DateTime.Now.ToString()+"') ");
             bool isexist = Database.checkifExist("SELECT TOP(1) BranchCode " +
-                "FROM POSEODMonitoring " +
+                "FROM dbo.POSEODMonitoring " +
                 "WHERE BranchCode='" + Login.assignedBranch + "' " +
                 "AND TransactionDate='" + transdate.Trim() + "' " +
                 "and isCashBegin=1 " +
                 "and isEndOfDay=0 ");
 
             bool isoverride = false;
-            isoverride = Database.checkifExist("SELECT TOP(1) isnull(isOverride,0) FROM POSFunctions WHERE FunctionName='ENDOFDAY' AND isOverride=1");
+            isoverride = Database.checkifExist("SELECT TOP(1) isnull(isOverride,0) FROM dbo.POSFunctions WHERE FunctionName='ENDOFDAY' AND isOverride=1");
             if (!isoverride)
             {
                 if (isexist)

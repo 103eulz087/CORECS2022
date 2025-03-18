@@ -2486,6 +2486,12 @@
     <Compile Include="POS\POSRestoFinalBilling.Designer.cs">
       <DependentUpon>POSRestoFinalBilling.cs</DependentUpon>
     </Compile>
+    <Compile Include="POS\POSRestoTableLimit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="POS\POSRestoTableLimit.Designer.cs">
+      <DependentUpon>POSRestoTableLimit.cs</DependentUpon>
+    </Compile>
     <Compile Include="POS\POSRestoTableOption.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -4064,6 +4070,9 @@
     <EmbeddedResource Include="POS\POSPaytoMerchant.resx">
       <DependentUpon>POSPaytoMerchant.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="POS\POSplitBillFinal.resx">
+      <DependentUpon>POSplitBillFinal.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="POS\POSRefund.resx">
       <DependentUpon>POSRefund.cs</DependentUpon>
     </EmbeddedResource>
@@ -4081,6 +4090,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="POS\POSRestoFinalBilling.resx">
       <DependentUpon>POSRestoFinalBilling.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="POS\POSRestoTableLimit.resx">
+      <DependentUpon>POSRestoTableLimit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="POS\POSRestoTableOption.resx">
+      <DependentUpon>POSRestoTableOption.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="POS\POSScreenMirror.resx">
       <DependentUpon>POSScreenMirror.cs</DependentUpon>

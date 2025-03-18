@@ -89,7 +89,7 @@ namespace SalesInventorySystem
         {
             try
             {
-                bool CashierEmailConfirmClosedTran = Database.checkifExist("SELECT isnull(UploadPerShifting,0) FROM POSType WHERE UploadPerShifting=1");
+                bool CashierEmailConfirmClosedTran = Database.checkifExist("SELECT isnull(UploadPerShifting,0) FROM dbo.POSType WHERE UploadPerShifting=1");
                 bool ok = HelperFunction.ConfirmDialog("Are you sure you want to close your transaction?", "Close Transaction");
                 string userid = Database.getSingleQuery("SalesTransactionSummary", $"CashierTransNo='{txtcashiertransno.Text}'", "UserID");
                 if (simpleButton3.Visible == true)
@@ -254,6 +254,7 @@ namespace SalesInventorySystem
 
                 body += "<b>TOTAL CASH SALES: </b>" + txtTotalCashSales.Text + "<br/>";// Environment.NewLine;
                 body += "<b>TOTAL CREDIT SALES: </b>" + txtTotalCreditSales.Text + "<br/>";// Environment.NewLine;
+                body += "<b>TOTAL CHARGE TO ACCOUNT SALES: </b>" + txtchargesales.Text + "<br/>";// Environment.NewLine;
                 body += "<b>TOTAL NET SALES: </b>" + txtTotalNetSales.Text + "<br/><br/>";// Environment.NewLine;
 
                 body += "<b>Actual Cash On-Hand: </b>" + HelperFunction.numericFormat(Convert.ToDouble(txtActualCashOnHand.Text)) + "<br/>";// Environment.NewLine;

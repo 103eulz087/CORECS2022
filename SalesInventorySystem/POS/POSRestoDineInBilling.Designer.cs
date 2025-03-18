@@ -396,7 +396,7 @@
             // txtcustbussstyle
             // 
             this.txtcustbussstyle.Location = new System.Drawing.Point(304, 288);
-            this.txtcustbussstyle.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtcustbussstyle.Margin = new System.Windows.Forms.Padding(4);
             this.txtcustbussstyle.Name = "txtcustbussstyle";
             this.txtcustbussstyle.Properties.Appearance.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtcustbussstyle.Properties.Appearance.Options.UseFont = true;
@@ -406,7 +406,7 @@
             // txtcusttinrcpt
             // 
             this.txtcusttinrcpt.Location = new System.Drawing.Point(304, 223);
-            this.txtcusttinrcpt.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtcusttinrcpt.Margin = new System.Windows.Forms.Padding(4);
             this.txtcusttinrcpt.Name = "txtcusttinrcpt";
             this.txtcusttinrcpt.Properties.Appearance.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtcusttinrcpt.Properties.Appearance.Options.UseFont = true;
@@ -416,7 +416,7 @@
             // txtcustaddressrcpt
             // 
             this.txtcustaddressrcpt.Location = new System.Drawing.Point(304, 162);
-            this.txtcustaddressrcpt.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtcustaddressrcpt.Margin = new System.Windows.Forms.Padding(4);
             this.txtcustaddressrcpt.Name = "txtcustaddressrcpt";
             this.txtcustaddressrcpt.Properties.Appearance.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtcustaddressrcpt.Properties.Appearance.Options.UseFont = true;
@@ -426,7 +426,7 @@
             // txtcustnamercpt
             // 
             this.txtcustnamercpt.Location = new System.Drawing.Point(304, 100);
-            this.txtcustnamercpt.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtcustnamercpt.Margin = new System.Windows.Forms.Padding(4);
             this.txtcustnamercpt.Name = "txtcustnamercpt";
             this.txtcustnamercpt.Properties.Appearance.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtcustnamercpt.Properties.Appearance.Options.UseFont = true;

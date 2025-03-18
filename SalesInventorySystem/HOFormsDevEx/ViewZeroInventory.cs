@@ -32,7 +32,7 @@ namespace SalesInventorySystem.HOFormsDevEx
             }
             else
             {
-                Database.display($"Select * FROM vw_InvLessThanReorderLevel WHERE Available > 0 and Available < ReOrderLevel  and Branch='{brcode}' ", gridControl1, gridView1);
+                Database.display($"Select * FROM vw_InvLessThanReorderLevel WHERE Available > 0 and Available < ReOrderLevel  and BranchCode='{brcode}' ", gridControl1, gridView1);
             }
 
         }

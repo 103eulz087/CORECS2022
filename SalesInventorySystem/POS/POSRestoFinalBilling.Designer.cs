@@ -28,10 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.button5 = new System.Windows.Forms.Button();
             this.checkedListBoxControl1 = new DevExpress.XtraEditors.CheckedListBoxControl();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
@@ -81,6 +81,21 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.chckZeroRated = new System.Windows.Forms.CheckBox();
+            this.lblpwddiscount = new DevExpress.XtraEditors.LabelControl();
+            this.lblseniordiscount = new DevExpress.XtraEditors.LabelControl();
+            this.labelControl17 = new DevExpress.XtraEditors.LabelControl();
+            this.labelControl6 = new DevExpress.XtraEditors.LabelControl();
+            this.lblTotalDiscount = new DevExpress.XtraEditors.LabelControl();
+            this.btnSplitBill = new System.Windows.Forms.Button();
+            this.labelControl13 = new DevExpress.XtraEditors.LabelControl();
+            this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
+            this.lblTransactionIDCashier = new DevExpress.XtraEditors.LabelControl();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.lbltransno = new System.Windows.Forms.Label();
+            this.lblreferenceno = new System.Windows.Forms.Label();
+            this.lblorderno = new System.Windows.Forms.Label();
             this.chckmerge = new System.Windows.Forms.CheckBox();
             this.button19 = new System.Windows.Forms.Button();
             this.button17 = new System.Windows.Forms.Button();
@@ -90,21 +105,6 @@
             this.txtseniorname = new System.Windows.Forms.TextBox();
             this.txtseniorcontrolno = new System.Windows.Forms.TextBox();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
-            this.lbltransno = new System.Windows.Forms.Label();
-            this.lblreferenceno = new System.Windows.Forms.Label();
-            this.lblorderno = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
-            this.lblTransactionIDCashier = new DevExpress.XtraEditors.LabelControl();
-            this.btnSplitBill = new System.Windows.Forms.Button();
-            this.lblTotalDiscount = new DevExpress.XtraEditors.LabelControl();
-            this.labelControl13 = new DevExpress.XtraEditors.LabelControl();
-            this.lblpwddiscount = new DevExpress.XtraEditors.LabelControl();
-            this.lblseniordiscount = new DevExpress.XtraEditors.LabelControl();
-            this.labelControl17 = new DevExpress.XtraEditors.LabelControl();
-            this.labelControl6 = new DevExpress.XtraEditors.LabelControl();
-            this.chckZeroRated = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.checkedListBoxControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtOrderNo.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -336,8 +336,8 @@
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.AllowUserToDeleteRows = false;
             this.dataGridView1.AllowUserToResizeRows = false;
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
-            this.dataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
+            this.dataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.dataGridView1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.dataGridView1.BackgroundColor = System.Drawing.Color.White;
@@ -352,9 +352,9 @@
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
-            dataGridViewCellStyle10.Font = new System.Drawing.Font("Tahoma", 12F);
-            dataGridViewCellStyle10.ForeColor = System.Drawing.Color.Black;
-            this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Tahoma", 12F);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
+            this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridView1.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Tahoma", 12F);
             this.dataGridView1.RowTemplate.Height = 30;
             this.dataGridView1.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
@@ -836,6 +836,200 @@
             this.groupBox1.TabIndex = 104;
             this.groupBox1.TabStop = false;
             // 
+            // chckZeroRated
+            // 
+            this.chckZeroRated.AutoSize = true;
+            this.chckZeroRated.Font = new System.Drawing.Font("Tahoma", 9F);
+            this.chckZeroRated.ForeColor = System.Drawing.Color.White;
+            this.chckZeroRated.Location = new System.Drawing.Point(1290, 39);
+            this.chckZeroRated.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.chckZeroRated.Name = "chckZeroRated";
+            this.chckZeroRated.Size = new System.Drawing.Size(226, 33);
+            this.chckZeroRated.TabIndex = 121;
+            this.chckZeroRated.Text = "Zero Rated Sales";
+            this.chckZeroRated.UseVisualStyleBackColor = true;
+            // 
+            // lblpwddiscount
+            // 
+            this.lblpwddiscount.Appearance.Font = new System.Drawing.Font("Century Gothic", 12.25F);
+            this.lblpwddiscount.Appearance.ForeColor = System.Drawing.Color.Gold;
+            this.lblpwddiscount.Appearance.Options.UseFont = true;
+            this.lblpwddiscount.Appearance.Options.UseForeColor = true;
+            this.lblpwddiscount.Location = new System.Drawing.Point(1224, 82);
+            this.lblpwddiscount.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.lblpwddiscount.Name = "lblpwddiscount";
+            this.lblpwddiscount.Size = new System.Drawing.Size(18, 40);
+            this.lblpwddiscount.TabIndex = 120;
+            this.lblpwddiscount.Text = "0";
+            // 
+            // lblseniordiscount
+            // 
+            this.lblseniordiscount.Appearance.Font = new System.Drawing.Font("Century Gothic", 12.25F);
+            this.lblseniordiscount.Appearance.ForeColor = System.Drawing.Color.Gold;
+            this.lblseniordiscount.Appearance.Options.UseFont = true;
+            this.lblseniordiscount.Appearance.Options.UseForeColor = true;
+            this.lblseniordiscount.Location = new System.Drawing.Point(1224, 34);
+            this.lblseniordiscount.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.lblseniordiscount.Name = "lblseniordiscount";
+            this.lblseniordiscount.Size = new System.Drawing.Size(18, 40);
+            this.lblseniordiscount.TabIndex = 119;
+            this.lblseniordiscount.Text = "0";
+            // 
+            // labelControl17
+            // 
+            this.labelControl17.Appearance.Font = new System.Drawing.Font("Century Gothic", 12.25F);
+            this.labelControl17.Appearance.ForeColor = System.Drawing.Color.White;
+            this.labelControl17.Appearance.Options.UseFont = true;
+            this.labelControl17.Appearance.Options.UseForeColor = true;
+            this.labelControl17.Location = new System.Drawing.Point(946, 82);
+            this.labelControl17.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.labelControl17.Name = "labelControl17";
+            this.labelControl17.Size = new System.Drawing.Size(231, 40);
+            this.labelControl17.TabIndex = 118;
+            this.labelControl17.Text = "PWD Discount:";
+            // 
+            // labelControl6
+            // 
+            this.labelControl6.Appearance.Font = new System.Drawing.Font("Century Gothic", 12.25F);
+            this.labelControl6.Appearance.ForeColor = System.Drawing.Color.White;
+            this.labelControl6.Appearance.Options.UseFont = true;
+            this.labelControl6.Appearance.Options.UseForeColor = true;
+            this.labelControl6.Location = new System.Drawing.Point(946, 34);
+            this.labelControl6.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.labelControl6.Name = "labelControl6";
+            this.labelControl6.Size = new System.Drawing.Size(252, 40);
+            this.labelControl6.TabIndex = 117;
+            this.labelControl6.Text = "Senior Discount:";
+            // 
+            // lblTotalDiscount
+            // 
+            this.lblTotalDiscount.Appearance.Font = new System.Drawing.Font("Century Gothic", 12.25F);
+            this.lblTotalDiscount.Appearance.ForeColor = System.Drawing.Color.Gold;
+            this.lblTotalDiscount.Appearance.Options.UseFont = true;
+            this.lblTotalDiscount.Appearance.Options.UseForeColor = true;
+            this.lblTotalDiscount.Location = new System.Drawing.Point(1564, 82);
+            this.lblTotalDiscount.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.lblTotalDiscount.Name = "lblTotalDiscount";
+            this.lblTotalDiscount.Size = new System.Drawing.Size(18, 40);
+            this.lblTotalDiscount.TabIndex = 39;
+            this.lblTotalDiscount.Text = "0";
+            // 
+            // btnSplitBill
+            // 
+            this.btnSplitBill.BackColor = System.Drawing.Color.DodgerBlue;
+            this.btnSplitBill.Font = new System.Drawing.Font("Tahoma", 9.25F);
+            this.btnSplitBill.ForeColor = System.Drawing.Color.White;
+            this.btnSplitBill.Location = new System.Drawing.Point(1623, 37);
+            this.btnSplitBill.Margin = new System.Windows.Forms.Padding(7, 6, 7, 6);
+            this.btnSplitBill.Name = "btnSplitBill";
+            this.btnSplitBill.Size = new System.Drawing.Size(199, 88);
+            this.btnSplitBill.TabIndex = 116;
+            this.btnSplitBill.Text = "Split Bill";
+            this.btnSplitBill.UseVisualStyleBackColor = false;
+            this.btnSplitBill.Click += new System.EventHandler(this.btnSplitBill_Click);
+            // 
+            // labelControl13
+            // 
+            this.labelControl13.Appearance.Font = new System.Drawing.Font("Century Gothic", 12.25F);
+            this.labelControl13.Appearance.ForeColor = System.Drawing.Color.White;
+            this.labelControl13.Appearance.Options.UseFont = true;
+            this.labelControl13.Appearance.Options.UseForeColor = true;
+            this.labelControl13.Location = new System.Drawing.Point(1286, 82);
+            this.labelControl13.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.labelControl13.Name = "labelControl13";
+            this.labelControl13.Size = new System.Drawing.Size(230, 40);
+            this.labelControl13.TabIndex = 38;
+            this.labelControl13.Text = "Total Discount:";
+            // 
+            // labelControl1
+            // 
+            this.labelControl1.Appearance.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold);
+            this.labelControl1.Appearance.ForeColor = System.Drawing.Color.MediumSeaGreen;
+            this.labelControl1.Appearance.Options.UseFont = true;
+            this.labelControl1.Appearance.Options.UseForeColor = true;
+            this.labelControl1.Location = new System.Drawing.Point(633, 39);
+            this.labelControl1.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.labelControl1.Name = "labelControl1";
+            this.labelControl1.Size = new System.Drawing.Size(166, 38);
+            this.labelControl1.TabIndex = 114;
+            this.labelControl1.Text = "Cashier ID:";
+            // 
+            // lblTransactionIDCashier
+            // 
+            this.lblTransactionIDCashier.Appearance.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
+            this.lblTransactionIDCashier.Appearance.ForeColor = System.Drawing.Color.White;
+            this.lblTransactionIDCashier.Appearance.Options.UseFont = true;
+            this.lblTransactionIDCashier.Appearance.Options.UseForeColor = true;
+            this.lblTransactionIDCashier.Location = new System.Drawing.Point(807, 42);
+            this.lblTransactionIDCashier.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.lblTransactionIDCashier.Name = "lblTransactionIDCashier";
+            this.lblTransactionIDCashier.Size = new System.Drawing.Size(95, 37);
+            this.lblTransactionIDCashier.TabIndex = 115;
+            this.lblTransactionIDCashier.Text = "06969";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Arial", 14.25F);
+            this.label7.Location = new System.Drawing.Point(1745, -211);
+            this.label7.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(120, 43);
+            this.label7.TabIndex = 113;
+            this.label7.Text = "label7";
+            this.label7.Visible = false;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Tahoma", 10.25F, System.Drawing.FontStyle.Bold);
+            this.label8.ForeColor = System.Drawing.Color.Gold;
+            this.label8.Location = new System.Drawing.Point(844, 251);
+            this.label8.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(101, 34);
+            this.label8.TabIndex = 112;
+            this.label8.Text = "label8";
+            this.label8.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // lbltransno
+            // 
+            this.lbltransno.AutoSize = true;
+            this.lbltransno.Font = new System.Drawing.Font("Tahoma", 10.25F, System.Drawing.FontStyle.Bold);
+            this.lbltransno.ForeColor = System.Drawing.Color.Gold;
+            this.lbltransno.Location = new System.Drawing.Point(775, 315);
+            this.lbltransno.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
+            this.lbltransno.Name = "lbltransno";
+            this.lbltransno.Size = new System.Drawing.Size(157, 34);
+            this.lbltransno.TabIndex = 111;
+            this.lbltransno.Text = "lbltransno";
+            this.lbltransno.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // lblreferenceno
+            // 
+            this.lblreferenceno.AutoSize = true;
+            this.lblreferenceno.Font = new System.Drawing.Font("Arial", 14.25F);
+            this.lblreferenceno.Location = new System.Drawing.Point(1676, -199);
+            this.lblreferenceno.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
+            this.lblreferenceno.Name = "lblreferenceno";
+            this.lblreferenceno.Size = new System.Drawing.Size(257, 43);
+            this.lblreferenceno.TabIndex = 110;
+            this.lblreferenceno.Text = "lblreferenceno";
+            this.lblreferenceno.Visible = false;
+            // 
+            // lblorderno
+            // 
+            this.lblorderno.AutoSize = true;
+            this.lblorderno.Font = new System.Drawing.Font("Tahoma", 10.25F, System.Drawing.FontStyle.Bold);
+            this.lblorderno.ForeColor = System.Drawing.Color.Gold;
+            this.lblorderno.Location = new System.Drawing.Point(775, 263);
+            this.lblorderno.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
+            this.lblorderno.Name = "lblorderno";
+            this.lblorderno.Size = new System.Drawing.Size(160, 34);
+            this.lblorderno.TabIndex = 109;
+            this.lblorderno.Text = "lblorderno";
+            this.lblorderno.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
             // chckmerge
             // 
             this.chckmerge.AutoSize = true;
@@ -902,6 +1096,7 @@
             this.button16.TabIndex = 105;
             this.button16.Text = "Void";
             this.button16.UseVisualStyleBackColor = false;
+            this.button16.Click += new System.EventHandler(this.button16_Click);
             // 
             // groupBox2
             // 
@@ -959,8 +1154,8 @@
             this.dataGridView2.AllowUserToAddRows = false;
             this.dataGridView2.AllowUserToDeleteRows = false;
             this.dataGridView2.AllowUserToResizeRows = false;
-            dataGridViewCellStyle11.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
-            this.dataGridView2.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
+            this.dataGridView2.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridView2.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.dataGridView2.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.dataGridView2.BackgroundColor = System.Drawing.Color.White;
@@ -975,8 +1170,8 @@
             this.dataGridView2.ReadOnly = true;
             this.dataGridView2.RowHeadersVisible = false;
             this.dataGridView2.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
-            dataGridViewCellStyle12.Font = new System.Drawing.Font("Tahoma", 12F);
-            this.dataGridView2.RowsDefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Tahoma", 12F);
+            this.dataGridView2.RowsDefaultCellStyle = dataGridViewCellStyle4;
             this.dataGridView2.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Tahoma", 12F);
             this.dataGridView2.RowTemplate.Height = 30;
             this.dataGridView2.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
@@ -984,200 +1179,6 @@
             this.dataGridView2.Size = new System.Drawing.Size(681, 67);
             this.dataGridView2.TabIndex = 107;
             this.dataGridView2.Visible = false;
-            // 
-            // lbltransno
-            // 
-            this.lbltransno.AutoSize = true;
-            this.lbltransno.Font = new System.Drawing.Font("Tahoma", 10.25F, System.Drawing.FontStyle.Bold);
-            this.lbltransno.ForeColor = System.Drawing.Color.Gold;
-            this.lbltransno.Location = new System.Drawing.Point(775, 315);
-            this.lbltransno.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
-            this.lbltransno.Name = "lbltransno";
-            this.lbltransno.Size = new System.Drawing.Size(157, 34);
-            this.lbltransno.TabIndex = 111;
-            this.lbltransno.Text = "lbltransno";
-            this.lbltransno.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            // 
-            // lblreferenceno
-            // 
-            this.lblreferenceno.AutoSize = true;
-            this.lblreferenceno.Font = new System.Drawing.Font("Arial", 14.25F);
-            this.lblreferenceno.Location = new System.Drawing.Point(1676, -199);
-            this.lblreferenceno.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
-            this.lblreferenceno.Name = "lblreferenceno";
-            this.lblreferenceno.Size = new System.Drawing.Size(257, 43);
-            this.lblreferenceno.TabIndex = 110;
-            this.lblreferenceno.Text = "lblreferenceno";
-            this.lblreferenceno.Visible = false;
-            // 
-            // lblorderno
-            // 
-            this.lblorderno.AutoSize = true;
-            this.lblorderno.Font = new System.Drawing.Font("Tahoma", 10.25F, System.Drawing.FontStyle.Bold);
-            this.lblorderno.ForeColor = System.Drawing.Color.Gold;
-            this.lblorderno.Location = new System.Drawing.Point(775, 263);
-            this.lblorderno.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
-            this.lblorderno.Name = "lblorderno";
-            this.lblorderno.Size = new System.Drawing.Size(160, 34);
-            this.lblorderno.TabIndex = 109;
-            this.lblorderno.Text = "lblorderno";
-            this.lblorderno.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Arial", 14.25F);
-            this.label7.Location = new System.Drawing.Point(1745, -211);
-            this.label7.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(120, 43);
-            this.label7.TabIndex = 113;
-            this.label7.Text = "label7";
-            this.label7.Visible = false;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Tahoma", 10.25F, System.Drawing.FontStyle.Bold);
-            this.label8.ForeColor = System.Drawing.Color.Gold;
-            this.label8.Location = new System.Drawing.Point(844, 251);
-            this.label8.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(101, 34);
-            this.label8.TabIndex = 112;
-            this.label8.Text = "label8";
-            this.label8.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            // 
-            // labelControl1
-            // 
-            this.labelControl1.Appearance.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold);
-            this.labelControl1.Appearance.ForeColor = System.Drawing.Color.MediumSeaGreen;
-            this.labelControl1.Appearance.Options.UseFont = true;
-            this.labelControl1.Appearance.Options.UseForeColor = true;
-            this.labelControl1.Location = new System.Drawing.Point(633, 39);
-            this.labelControl1.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.labelControl1.Name = "labelControl1";
-            this.labelControl1.Size = new System.Drawing.Size(166, 38);
-            this.labelControl1.TabIndex = 114;
-            this.labelControl1.Text = "Cashier ID:";
-            // 
-            // lblTransactionIDCashier
-            // 
-            this.lblTransactionIDCashier.Appearance.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
-            this.lblTransactionIDCashier.Appearance.ForeColor = System.Drawing.Color.White;
-            this.lblTransactionIDCashier.Appearance.Options.UseFont = true;
-            this.lblTransactionIDCashier.Appearance.Options.UseForeColor = true;
-            this.lblTransactionIDCashier.Location = new System.Drawing.Point(807, 42);
-            this.lblTransactionIDCashier.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.lblTransactionIDCashier.Name = "lblTransactionIDCashier";
-            this.lblTransactionIDCashier.Size = new System.Drawing.Size(95, 37);
-            this.lblTransactionIDCashier.TabIndex = 115;
-            this.lblTransactionIDCashier.Text = "06969";
-            // 
-            // btnSplitBill
-            // 
-            this.btnSplitBill.BackColor = System.Drawing.Color.DodgerBlue;
-            this.btnSplitBill.Font = new System.Drawing.Font("Tahoma", 9.25F);
-            this.btnSplitBill.ForeColor = System.Drawing.Color.White;
-            this.btnSplitBill.Location = new System.Drawing.Point(1623, 37);
-            this.btnSplitBill.Margin = new System.Windows.Forms.Padding(7, 6, 7, 6);
-            this.btnSplitBill.Name = "btnSplitBill";
-            this.btnSplitBill.Size = new System.Drawing.Size(199, 88);
-            this.btnSplitBill.TabIndex = 116;
-            this.btnSplitBill.Text = "Split Bill";
-            this.btnSplitBill.UseVisualStyleBackColor = false;
-            this.btnSplitBill.Click += new System.EventHandler(this.btnSplitBill_Click);
-            // 
-            // lblTotalDiscount
-            // 
-            this.lblTotalDiscount.Appearance.Font = new System.Drawing.Font("Century Gothic", 12.25F);
-            this.lblTotalDiscount.Appearance.ForeColor = System.Drawing.Color.Gold;
-            this.lblTotalDiscount.Appearance.Options.UseFont = true;
-            this.lblTotalDiscount.Appearance.Options.UseForeColor = true;
-            this.lblTotalDiscount.Location = new System.Drawing.Point(1564, 82);
-            this.lblTotalDiscount.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.lblTotalDiscount.Name = "lblTotalDiscount";
-            this.lblTotalDiscount.Size = new System.Drawing.Size(18, 40);
-            this.lblTotalDiscount.TabIndex = 39;
-            this.lblTotalDiscount.Text = "0";
-            // 
-            // labelControl13
-            // 
-            this.labelControl13.Appearance.Font = new System.Drawing.Font("Century Gothic", 12.25F);
-            this.labelControl13.Appearance.ForeColor = System.Drawing.Color.White;
-            this.labelControl13.Appearance.Options.UseFont = true;
-            this.labelControl13.Appearance.Options.UseForeColor = true;
-            this.labelControl13.Location = new System.Drawing.Point(1286, 82);
-            this.labelControl13.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.labelControl13.Name = "labelControl13";
-            this.labelControl13.Size = new System.Drawing.Size(230, 40);
-            this.labelControl13.TabIndex = 38;
-            this.labelControl13.Text = "Total Discount:";
-            // 
-            // lblpwddiscount
-            // 
-            this.lblpwddiscount.Appearance.Font = new System.Drawing.Font("Century Gothic", 12.25F);
-            this.lblpwddiscount.Appearance.ForeColor = System.Drawing.Color.Gold;
-            this.lblpwddiscount.Appearance.Options.UseFont = true;
-            this.lblpwddiscount.Appearance.Options.UseForeColor = true;
-            this.lblpwddiscount.Location = new System.Drawing.Point(1224, 82);
-            this.lblpwddiscount.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.lblpwddiscount.Name = "lblpwddiscount";
-            this.lblpwddiscount.Size = new System.Drawing.Size(18, 40);
-            this.lblpwddiscount.TabIndex = 120;
-            this.lblpwddiscount.Text = "0";
-            // 
-            // lblseniordiscount
-            // 
-            this.lblseniordiscount.Appearance.Font = new System.Drawing.Font("Century Gothic", 12.25F);
-            this.lblseniordiscount.Appearance.ForeColor = System.Drawing.Color.Gold;
-            this.lblseniordiscount.Appearance.Options.UseFont = true;
-            this.lblseniordiscount.Appearance.Options.UseForeColor = true;
-            this.lblseniordiscount.Location = new System.Drawing.Point(1224, 34);
-            this.lblseniordiscount.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.lblseniordiscount.Name = "lblseniordiscount";
-            this.lblseniordiscount.Size = new System.Drawing.Size(18, 40);
-            this.lblseniordiscount.TabIndex = 119;
-            this.lblseniordiscount.Text = "0";
-            // 
-            // labelControl17
-            // 
-            this.labelControl17.Appearance.Font = new System.Drawing.Font("Century Gothic", 12.25F);
-            this.labelControl17.Appearance.ForeColor = System.Drawing.Color.White;
-            this.labelControl17.Appearance.Options.UseFont = true;
-            this.labelControl17.Appearance.Options.UseForeColor = true;
-            this.labelControl17.Location = new System.Drawing.Point(946, 82);
-            this.labelControl17.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.labelControl17.Name = "labelControl17";
-            this.labelControl17.Size = new System.Drawing.Size(231, 40);
-            this.labelControl17.TabIndex = 118;
-            this.labelControl17.Text = "PWD Discount:";
-            // 
-            // labelControl6
-            // 
-            this.labelControl6.Appearance.Font = new System.Drawing.Font("Century Gothic", 12.25F);
-            this.labelControl6.Appearance.ForeColor = System.Drawing.Color.White;
-            this.labelControl6.Appearance.Options.UseFont = true;
-            this.labelControl6.Appearance.Options.UseForeColor = true;
-            this.labelControl6.Location = new System.Drawing.Point(946, 34);
-            this.labelControl6.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.labelControl6.Name = "labelControl6";
-            this.labelControl6.Size = new System.Drawing.Size(252, 40);
-            this.labelControl6.TabIndex = 117;
-            this.labelControl6.Text = "Senior Discount:";
-            // 
-            // chckZeroRated
-            // 
-            this.chckZeroRated.AutoSize = true;
-            this.chckZeroRated.Font = new System.Drawing.Font("Tahoma", 9F);
-            this.chckZeroRated.ForeColor = System.Drawing.Color.White;
-            this.chckZeroRated.Location = new System.Drawing.Point(1290, 39);
-            this.chckZeroRated.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.chckZeroRated.Name = "chckZeroRated";
-            this.chckZeroRated.Size = new System.Drawing.Size(226, 33);
-            this.chckZeroRated.TabIndex = 121;
-            this.chckZeroRated.Text = "Zero Rated Sales";
-            this.chckZeroRated.UseVisualStyleBackColor = true;
             // 
             // POSRestoFinalBilling
             // 

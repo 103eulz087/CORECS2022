@@ -1092,6 +1092,7 @@ namespace SalesInventorySystem.POSDevEx
                 details += Classes.ReceiptSetup.doHeaderB2(brcode, machineused);
                 details += Classes.ReceiptSetup.doTitle("SALES INVOICE");
                 string cashiername1 = Database.getSingleQuery($"SELECT TOP(1) FullName FROM dbo.Users WHERE UserID='{cashiername}'","FullName");
+                string transno = Database.getSingleQuery($"SELECT TOP(1)  FROM dbo.Users WHERE UserID='{cashiername}'", "FullName");
                 details += Classes.ReceiptSetup.doHeaderDetailsX(cashiername1, referenceNo, " ", null, null, null, null, dateOrder, "");
                 details += HelperFunction.createDottedLine() + Environment.NewLine;
                 foreach (DataRow row in receipt) //mga items sa resibo
@@ -1309,24 +1310,26 @@ namespace SalesInventorySystem.POSDevEx
 
                 }
                 //----------------------------------------------------------------------------------------------------------------
-                //string NewAmountTender = "";
-                //double NewChange = 0.0;
-                //NewAmountTender=Database.getSingleResultSet($"SELECT dbo.func_setTenderAmount('{globalamountdue}')");
+                string NewAmountTender = "";
+                double NewChange = 0.0;
+                NewAmountTender = Database.getSingleResultSet($"SELECT dbo.func_setTenderAmount('{globalamountdue}')");
                 if (paytype == "Credit")
                 {
                     //wla sa gamita kay dd2 na gigamit sa sp ang amount tender manipulation
-                    //notUsed details += HelperFunction.PrintLeftRigthText("TENDERED:", NewAmountTender) + Environment.NewLine + Environment.NewLine;
-                    details += HelperFunction.PrintLeftRigthText("TENDERED:", amounttender) + Environment.NewLine + Environment.NewLine;
-                    //NewChange = Convert.ToDouble(NewAmountTender) - globalamountdue;
-                    details += HelperFunction.PrintLeftRigthText("CHANGE  :", "0.00") + Environment.NewLine + Environment.NewLine;
+                    //notUsed 
+                    details += HelperFunction.PrintLeftRigthText("TENDERED:", NewAmountTender) + Environment.NewLine + Environment.NewLine;
+                    //details += HelperFunction.PrintLeftRigthText("TENDERED:", amounttender) + Environment.NewLine + Environment.NewLine;
+                    NewChange = Convert.ToDouble(NewAmountTender) - globalamountdue;
+                    //details += HelperFunction.PrintLeftRigthText("CHANGE  :", "0.00") + Environment.NewLine + Environment.NewLine;
                 }
                 else
                 {
-                    details += HelperFunction.PrintLeftRigthText("TENDERED:", amounttender) + Environment.NewLine;
-                    //details += HelperFunction.PrintLeftRigthText("TENDERED:", NewAmountTender) + Environment.NewLine;
-                    //notUsed NewChange = Math.Round(Convert.ToDouble(NewAmountTender) - globalamountdue,2);
-                    //details += HelperFunction.PrintLeftRigthText("CHANGE  :", NewChange.ToString()) + Environment.NewLine + Environment.NewLine;
-                    details += HelperFunction.PrintLeftRigthText("CHANGE  :", amountchange) + Environment.NewLine + Environment.NewLine;
+                    //details += HelperFunction.PrintLeftRigthText("TENDERED:", amounttender) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftRigthText("TENDERED:", NewAmountTender) + Environment.NewLine;
+                    //notUsed 
+                    NewChange = Math.Round(Convert.ToDouble(NewAmountTender) - globalamountdue,2);
+                    details += HelperFunction.PrintLeftRigthText("CHANGE  :", NewChange.ToString()) + Environment.NewLine + Environment.NewLine;
+                    //details += HelperFunction.PrintLeftRigthText("CHANGE  :", amountchange) + Environment.NewLine + Environment.NewLine;
                 }
 
                 double totalvatableSales = netofscdisc + netofnonscdisc;
@@ -1492,6 +1495,10 @@ namespace SalesInventorySystem.POSDevEx
             if (radtypevatable.Checked == true)
             {
                 total=Database.getSingleResultSet($"SELECT dbo.func_getVatableManipValue('{txtbrcodemgmtdata.Text}','{txtsalesdatemgmtdata.Text}','{txtmanageddatapermachine.Text}')");
+            }
+            if(String.IsNullOrEmpty(total))
+            {
+                total = "0";
             }
             //if (String.IsNullOrEmpty(total)) { total = "0"; }
             double sumval = 0.0;

@@ -92,7 +92,7 @@ namespace SalesInventorySystem.Classes
             try
             {
                
-                var row = Database.getMultipleQuery("POSInfoDetails", "BranchCode <> ' ' " +
+                var row = Database.getMultipleQuery("POSInfoDetails", "BranchCode = '"+ branchcode + "' " +
                 //var row = Database.getMultipleQuery("POSInfoDetails", "BranchCode='" + branchcode + "' " +
                     "AND MachineUsed='" + machinename + "' ", "BusinessName" +
                    ",BusinessAddress   " +

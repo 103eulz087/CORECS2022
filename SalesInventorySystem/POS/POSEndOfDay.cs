@@ -44,7 +44,7 @@ namespace SalesInventorySystem.POS
         {
             //THERE ARE CASHIERS TRANSACTION THAT NOT YET CLOSED
             bool isNotClosedTransaction = Database.checkifExist("SELECT TOP(1) BranchCode " +
-                                                               "FROM SalesTransactionSummary " +
+                                                               "FROM dbo.SalesTransactionSummary " +
                                                                "WHERE BranchCode='" + Login.assignedBranch + "' AND MachineUsed='"+Environment.MachineName+"' " +
                                                                "and isOpen=1 "); //all transaction must be closed, no filtering of date
             if (isNotClosedTransaction)
@@ -451,7 +451,6 @@ namespace SalesInventorySystem.POS
             writer.Close();
         }
 
-
         void PrintZRead()
         {
             DateTime dt1 = Convert.ToDateTime(txttransactiondate.Text);
@@ -663,6 +662,16 @@ namespace SalesInventorySystem.POS
             details += HelperFunction.createAsteriskLine() + Environment.NewLine;
 
             details += HelperFunction.createEqualLine() + Environment.NewLine + Environment.NewLine + Environment.NewLine;
+
+            details += HelperFunction.PrintLeftRigthText("ProductName", "Qty") + Environment.NewLine;
+            for (int x=0;x<=gridView2.RowCount-1;x++)
+            {
+                details += HelperFunction.PrintLeftRigthText(gridView2.GetRowCellValue(x, "ProductName").ToString(), gridView2.GetRowCellValue(x, "Qty").ToString()) + Environment.NewLine;
+
+            }
+            details += HelperFunction.createEqualLine() + Environment.NewLine + Environment.NewLine + Environment.NewLine;
+
+
             details += HelperFunction.createEqualLine() + Environment.NewLine + Environment.NewLine;
             details += HelperFunction.PrintLeftText("Certified Correct By : " + Login.Fullname) + Environment.NewLine + Environment.NewLine;
             details += HelperFunction.createDottedLine() + Environment.NewLine;
@@ -830,6 +839,7 @@ namespace SalesInventorySystem.POS
             }
             checker();
         }
+
         void sendMailNotificationEOD(string dateTran)
         {
             try

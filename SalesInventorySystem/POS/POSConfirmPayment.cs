@@ -29,6 +29,7 @@ namespace SalesInventorySystem.POS
         public static string disctype = "", discname = "", discidno = "", discamount = "", discremarks = "";
         static DataGridView gview;
         public static string orderno = "", transno = "", merchantpaytype = "";
+        public static string totalcashsales = "", totalcreditsales = "";
 
         private void radmerchant_CheckedChanged(object sender, EventArgs e)
         {
@@ -70,18 +71,71 @@ namespace SalesInventorySystem.POS
 
         private void radwallet_CheckedChanged(object sender, EventArgs e)
         {
+            //if (radwallet.Checked.Equals(true))  //WALLET
+            //{
+            //    Database.ExecuteQuery("UPDATE dbo.POSType SET isEnableInvoicePrinting=0");
+            //    netamountpayable = txtamountpayable.Text;
+            //    POS.POSCashWalletTapper pasd = new POSCashWalletTapper();
+            //    pasd.ShowDialog(this);
+            //    if (POSCashWalletTapper.isdone == true)
+            //    {
+            //        //customercode = POSCashWalletTapper.clientid;
+            //        txtamounttender.Text = txtamountpayable.Text;
+            //        POSCashWalletTapper.isdone = false;
+            //        pasd.Dispose();
+            //        button1.PerformClick();
+            //    }
+            //    else
+            //    {
+            //        radcash.Checked = true;
+            //        txtamounttender.Text = "";
+            //        txtamountchange.Text = "";
+            //        txtamounttender.Focus();
+            //    }
+            //}
             if (radwallet.Checked.Equals(true))  //WALLET
             {
                 Database.ExecuteQuery("UPDATE dbo.POSType SET isEnableInvoicePrinting=0");
-                netamountpayable = txtamountpayable.Text;
-                POS.POSCashWalletTapper pasd = new POSCashWalletTapper();
-                pasd.ShowDialog(this);
-                if (POSCashWalletTapper.isdone == true)
+                //netamountpayable = txtamountpayable.Text;
+                //POS.POSCashWalletTapper pasd = new POSCashWalletTapper();
+                //pasd.ShowDialog(this);
+                //if (POSCashWalletTapper.isdone == true)
+                //{
+                //    //customercode = POSCashWalletTapper.clientid;
+                //    txtamounttender.Text = txtamountpayable.Text;
+                //    POSCashWalletTapper.isdone = false;
+                //    pasd.Dispose();
+                //    button1.PerformClick();
+                //}
+                //else
+                //{
+                //    radcash.Checked = true;
+                //    txtamounttender.Text = "";
+                //    txtamountchange.Text = "";
+                //    txtamounttender.Focus();
+                //}
+
+                POSplitBillFinal plslit = new POSplitBillFinal();
+                plslit.txtamountpayable.Text = txtamountpayable.Text;
+                plslit.txtinvoiceno.Text = lblorderno.Text;
+                plslit.txtdiscount.Text = txtdiscount.Text;
+
+                plslit.lblvatexemptsale.Text = lblvatexempt.Text;
+                plslit.lblvatsale.Text = lblvatsale.Text;
+                plslit.lblvat.Text = lblvatinput.Text;
+
+                POSplitBillFinal.orderno = lblorderno.Text;
+                POSplitBillFinal.cashiertransno = lbltranscode.Text;
+                POSplitBillFinal.transno = lbltransno.Text;
+
+                plslit.ShowDialog(this);
+                if (POSplitBillFinal.isdone == true)
                 {
-                    //customercode = POSCashWalletTapper.clientid;
                     txtamounttender.Text = txtamountpayable.Text;
-                    POSCashWalletTapper.isdone = false;
-                    pasd.Dispose();
+                    totalcashsales = POSplitBillFinal.totalCashSales;
+                    totalcreditsales = POSplitBillFinal.totalCreditSales;
+                    POSplitBillFinal.isdone = false;
+                    plslit.Dispose();
                     button1.PerformClick();
                 }
                 else
@@ -91,6 +145,8 @@ namespace SalesInventorySystem.POS
                     txtamountchange.Text = "";
                     txtamounttender.Focus();
                 }
+                transactiondone = true;
+                this.Close();
             }
         }
 
@@ -264,6 +320,9 @@ namespace SalesInventorySystem.POS
 
                 com.Parameters.AddWithValue("@parmiszeroratedsale", ZeroRated);
                 com.Parameters.AddWithValue("@parmmachinename", Environment.MachineName.ToString());
+
+                com.Parameters.AddWithValue("@parmtotalcashsales", totalcashsales);
+                com.Parameters.AddWithValue("@parmtotalcreditsales", totalcreditsales);
                 com.CommandType = CommandType.StoredProcedure;
                 com.CommandText = query;
                 com.ExecuteNonQuery();
@@ -337,6 +396,7 @@ namespace SalesInventorySystem.POS
             ok = Database.checkifExist("SELECT TOP 1 OrderNo FROM dbo.SalesDiscount WHERE OrderNo='" + lblorderno.Text + "' and isErrorCorrect=0");
             return ok;
         }
+
         void ExecutePayment()
         {
             try

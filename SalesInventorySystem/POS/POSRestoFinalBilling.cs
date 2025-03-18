@@ -585,6 +585,12 @@ namespace SalesInventorySystem.POS
             int refnumber = IDGenerator.getIDNumber("POSTransaction", "BranchCode='" + Login.assignedBranch + "'", "TransactionNo", 1);
             lblTransactionID.Text = HelperFunction.sequencePadding1(refnumber.ToString(), 10);//refnumber.ToString();
         }
+
+        private void button16_Click(object sender, EventArgs e)
+        {
+
+        }
+
         double getPerItemDiscount()
         {
             double discount = 0.0;

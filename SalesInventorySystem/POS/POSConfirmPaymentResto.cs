@@ -428,6 +428,7 @@ namespace SalesInventorySystem.POS
                     //update as of 04142020
                     bool isClear = false;
                     if (merchantpaytype == "Credit") { isClear = false; } else { isClear = true; }
+
                     Database.ExecuteQuery("INSERT INTO dbo.POSMerchantTransactions VALUES('" + Login.assignedBranch + "'" +
                         ",'" + DateTime.Now.ToString() + "','" + Environment.MachineName + "','" + lblorderno.Text + "','" + POSPaytoMerchant.refno + "'" +
                         ",'" + POSPaytoMerchant.merchantname + "','" + POSPaytoMerchant.vouchercode + "','" + txtamountpayable.Text + "'" +
@@ -478,6 +479,10 @@ namespace SalesInventorySystem.POS
                     else if (btncaller.Text == "RETAILWITHDASHBOARD")
                     {
                         gview = POS.POSRestoDineInBilling.mygridview;
+                    }
+                    else if (btncaller.Text == "RESTAURANT")
+                    {
+                        gview = POS.POSMainRestoDashboard.mygridview;
                     }
 
                     //if (radmerchant.Checked.Equals(true))//Merchant 
@@ -566,7 +571,7 @@ namespace SalesInventorySystem.POS
                             discamount = DiscountAmount;
 
 
-                            printit.printReceiptResto(lbltransno.Text    //string transcode
+                            printit.printReceiptRestoOneLove(lbltransno.Text    //string transcode
                                                 , lblorderno.Text   //string ordercode
                                                 , HelperFunction.convertToNumericFormat(totaldue)   //string total
                                                 , txtordinarydiscountamount.Text    //string peritemdiscount
@@ -588,17 +593,19 @@ namespace SalesInventorySystem.POS
                                                 , paymenttype); //paymenttype
 
 
-                            printit.printReceiptConsolidatedResto(lbltranscode.Text, lbltransno.Text, lblorderno.Text, HelperFunction.convertToNumericFormat(totaldue), txtordinarydiscountamount.Text, netofvatafteronetimedisc, netOfVatAfterNonOneTimeDisc, vatablesales, vatexemptsales, vat, amounttender, change, gview, haveDiscount, disctype, "CLIENT-COPY", txtcustnamercpt.Text, txtcustaddressrcpt.Text, txtcusttinrcpt.Text, txtcustbussstyle.Text, paymenttype);
-                            printit.printReceiptResto(lbltransno.Text, lblorderno.Text, HelperFunction.convertToNumericFormat(totaldue), txtordinarydiscountamount.Text, netofvatafteronetimedisc, netOfVatAfterNonOneTimeDisc, vatablesales, vatexemptsales, vat, amounttender, change, gview, haveDiscount, disctype, "ACCOUNTING-COPY", txtcustnamercpt.Text, txtcustaddressrcpt.Text, txtcusttinrcpt.Text, txtcustbussstyle.Text, paymenttype);
-                            printit.printReceiptConsolidatedResto(lbltranscode.Text, lbltransno.Text, lblorderno.Text, HelperFunction.convertToNumericFormat(totaldue), txtordinarydiscountamount.Text, netofvatafteronetimedisc, netOfVatAfterNonOneTimeDisc, vatablesales, vatexemptsales, vat, amounttender, change, gview, haveDiscount, disctype, "ACCOUNTING-COPY", txtcustnamercpt.Text, txtcustaddressrcpt.Text, txtcusttinrcpt.Text, txtcustbussstyle.Text, paymenttype);
+                            printit.printReceiptConsolidatedRestoOneLove(lbltranscode.Text, lbltransno.Text, lblorderno.Text, HelperFunction.convertToNumericFormat(totaldue), txtordinarydiscountamount.Text, netofvatafteronetimedisc, netOfVatAfterNonOneTimeDisc, vatablesales, vatexemptsales, vat, amounttender, change, gview, haveDiscount, disctype, "CLIENT-COPY", txtcustnamercpt.Text, txtcustaddressrcpt.Text, txtcusttinrcpt.Text, txtcustbussstyle.Text, paymenttype);
+                            printit.printReceiptRestoOneLove(lbltransno.Text, lblorderno.Text, HelperFunction.convertToNumericFormat(totaldue), txtordinarydiscountamount.Text, netofvatafteronetimedisc, netOfVatAfterNonOneTimeDisc, vatablesales, vatexemptsales, vat, amounttender, change, gview, haveDiscount, disctype, "ACCOUNTING-COPY", txtcustnamercpt.Text, txtcustaddressrcpt.Text, txtcusttinrcpt.Text, txtcustbussstyle.Text, paymenttype);
+                            printit.printReceiptConsolidatedRestoOneLove(lbltranscode.Text, lbltransno.Text, lblorderno.Text, HelperFunction.convertToNumericFormat(totaldue), txtordinarydiscountamount.Text, netofvatafteronetimedisc, netOfVatAfterNonOneTimeDisc, vatablesales, vatexemptsales, vat, amounttender, change, gview, haveDiscount, disctype, "ACCOUNTING-COPY", txtcustnamercpt.Text, txtcustaddressrcpt.Text, txtcusttinrcpt.Text, txtcustbussstyle.Text, paymenttype);
 
                         }
                         else //if no discount
                         {
-                            printit.printReceiptResto(lbltransno.Text, lblorderno.Text, HelperFunction.convertToNumericFormat(totaldue), txtordinarydiscountamount.Text, vatablesales, vatexemptsales, vat, amounttender, change, gview, haveDiscount, txtcustnamercpt.Text, txtcustaddressrcpt.Text, txtcusttinrcpt.Text, txtcustbussstyle.Text, paymenttype, ZeroRated);
-                            printit.printReceiptConsolidatedResto(lbltranscode.Text, lbltransno.Text, lblorderno.Text, HelperFunction.convertToNumericFormat(totaldue), txtordinarydiscountamount.Text, vatablesales, vatexemptsales, vat, amounttender, change, gview, haveDiscount, txtcustnamercpt.Text, txtcustaddressrcpt.Text, txtcusttinrcpt.Text, txtcustbussstyle.Text, paymenttype, ZeroRated);
+                            
+                                printit.printReceiptRestoOneLove(lbltransno.Text, lblorderno.Text, HelperFunction.convertToNumericFormat(totaldue), txtordinarydiscountamount.Text, vatablesales, vatexemptsales, vat, amounttender, change, gview, haveDiscount, txtcustnamercpt.Text, txtcustaddressrcpt.Text, txtcusttinrcpt.Text, txtcustbussstyle.Text, paymenttype, ZeroRated);
+                                printit.printReceiptConsolidatedRestoOneLove(lbltranscode.Text, lbltransno.Text, lblorderno.Text, HelperFunction.convertToNumericFormat(totaldue), txtordinarydiscountamount.Text, vatablesales, vatexemptsales, vat, amounttender, change, gview, haveDiscount, txtcustnamercpt.Text, txtcustaddressrcpt.Text, txtcusttinrcpt.Text, txtcustbussstyle.Text, paymenttype, ZeroRated);
+                            
                         }
-                        printit.ReprintReceiptResto(lbltransno.Text, lblorderno.Text, HelperFunction.convertToNumericFormat(totaldue), txtordinarydiscountamount.Text, netofvatafteronetimedisc, netOfVatAfterNonOneTimeDisc, vatablesales, vatexemptsales, vat, amounttender, change, gview, haveDiscount, disctype, "ACCOUNTING-COPY", txtcustnamercpt.Text, txtcustaddressrcpt.Text, txtcusttinrcpt.Text, txtcustbussstyle.Text, paymenttype);
+                        printit.ReprintReceiptRestoOneLove(lbltransno.Text, lblorderno.Text, HelperFunction.convertToNumericFormat(totaldue), txtordinarydiscountamount.Text, netofvatafteronetimedisc, netOfVatAfterNonOneTimeDisc, vatablesales, vatexemptsales, vat, amounttender, change, gview, haveDiscount, disctype, "ACCOUNTING-COPY", txtcustnamercpt.Text, txtcustaddressrcpt.Text, txtcusttinrcpt.Text, txtcustbussstyle.Text, paymenttype);
 
 
                         string isprinting = Database.getSingleQuery("POSType", "PosType is not null", "isEnableInvoicePrinting");

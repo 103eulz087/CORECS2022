@@ -40,39 +40,39 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
+            this.btnconfirm = new DevExpress.XtraEditors.SimpleButton();
+            this.lblvat = new DevExpress.XtraEditors.LabelControl();
+            this.lblvatexemptsale = new DevExpress.XtraEditors.LabelControl();
+            this.txttotalcredit = new System.Windows.Forms.TextBox();
+            this.lblvatsale = new DevExpress.XtraEditors.LabelControl();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.txttotalcash = new System.Windows.Forms.TextBox();
+            this.btncancel = new DevExpress.XtraEditors.SimpleButton();
+            this.btnpay = new DevExpress.XtraEditors.SimpleButton();
             this.panelControl2 = new DevExpress.XtraEditors.PanelControl();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.addEntryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gridControl1 = new DevExpress.XtraGrid.GridControl();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.reppaymenttype = new DevExpress.XtraEditors.Repository.RepositoryItemSearchLookUpEdit();
             this.repositoryItemSearchLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.repamount = new DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit();
             this.repreferenceno = new DevExpress.XtraEditors.Repository.RepositoryItemTextEdit();
-            this.btnpay = new DevExpress.XtraEditors.SimpleButton();
-            this.btncancel = new DevExpress.XtraEditors.SimpleButton();
-            this.txttotalcash = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.txttotalcredit = new System.Windows.Forms.TextBox();
-            this.lblvat = new DevExpress.XtraEditors.LabelControl();
-            this.lblvatexemptsale = new DevExpress.XtraEditors.LabelControl();
-            this.lblvatsale = new DevExpress.XtraEditors.LabelControl();
-            this.btnconfirm = new DevExpress.XtraEditors.SimpleButton();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.addEntryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.txtamounttender.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).BeginInit();
             this.panelControl2.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.reppaymenttype)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemSearchLookUpEdit1View)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repamount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repreferenceno)).BeginInit();
+            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // txtdiscount
@@ -219,6 +219,116 @@
             this.panelControl1.Size = new System.Drawing.Size(1560, 309);
             this.panelControl1.TabIndex = 47;
             // 
+            // btnconfirm
+            // 
+            this.btnconfirm.Location = new System.Drawing.Point(859, 149);
+            this.btnconfirm.Name = "btnconfirm";
+            this.btnconfirm.Size = new System.Drawing.Size(169, 56);
+            this.btnconfirm.TabIndex = 102;
+            this.btnconfirm.Text = "Confirm";
+            this.btnconfirm.Click += new System.EventHandler(this.simpleButton3_Click);
+            // 
+            // lblvat
+            // 
+            this.lblvat.Appearance.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblvat.Appearance.ForeColor = System.Drawing.Color.MediumSeaGreen;
+            this.lblvat.Appearance.Options.UseFont = true;
+            this.lblvat.Appearance.Options.UseForeColor = true;
+            this.lblvat.Location = new System.Drawing.Point(1449, 217);
+            this.lblvat.Margin = new System.Windows.Forms.Padding(7, 6, 7, 6);
+            this.lblvat.Name = "lblvat";
+            this.lblvat.Size = new System.Drawing.Size(56, 31);
+            this.lblvat.TabIndex = 101;
+            this.lblvat.Text = "9999";
+            // 
+            // lblvatexemptsale
+            // 
+            this.lblvatexemptsale.Appearance.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblvatexemptsale.Appearance.ForeColor = System.Drawing.Color.MediumSeaGreen;
+            this.lblvatexemptsale.Appearance.Options.UseFont = true;
+            this.lblvatexemptsale.Appearance.Options.UseForeColor = true;
+            this.lblvatexemptsale.Location = new System.Drawing.Point(1476, 174);
+            this.lblvatexemptsale.Margin = new System.Windows.Forms.Padding(7, 6, 7, 6);
+            this.lblvatexemptsale.Name = "lblvatexemptsale";
+            this.lblvatexemptsale.Size = new System.Drawing.Size(14, 31);
+            this.lblvatexemptsale.TabIndex = 100;
+            this.lblvatexemptsale.Text = "0";
+            // 
+            // txttotalcredit
+            // 
+            this.txttotalcredit.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.txttotalcredit.Location = new System.Drawing.Point(1033, 80);
+            this.txttotalcredit.Margin = new System.Windows.Forms.Padding(7, 6, 7, 6);
+            this.txttotalcredit.Name = "txttotalcredit";
+            this.txttotalcredit.ReadOnly = true;
+            this.txttotalcredit.Size = new System.Drawing.Size(310, 38);
+            this.txttotalcredit.TabIndex = 52;
+            // 
+            // lblvatsale
+            // 
+            this.lblvatsale.Appearance.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblvatsale.Appearance.ForeColor = System.Drawing.Color.MediumSeaGreen;
+            this.lblvatsale.Appearance.Options.UseFont = true;
+            this.lblvatsale.Appearance.Options.UseForeColor = true;
+            this.lblvatsale.Location = new System.Drawing.Point(1476, 134);
+            this.lblvatsale.Margin = new System.Windows.Forms.Padding(7, 6, 7, 6);
+            this.lblvatsale.Name = "lblvatsale";
+            this.lblvatsale.Size = new System.Drawing.Size(14, 31);
+            this.lblvatsale.TabIndex = 99;
+            this.lblvatsale.Text = "0";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.label7.ForeColor = System.Drawing.Color.Black;
+            this.label7.Location = new System.Drawing.Point(865, 87);
+            this.label7.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(163, 31);
+            this.label7.TabIndex = 51;
+            this.label7.Text = "Total Credit:";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.label2.ForeColor = System.Drawing.Color.Black;
+            this.label2.Location = new System.Drawing.Point(865, 33);
+            this.label2.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(154, 31);
+            this.label2.TabIndex = 50;
+            this.label2.Text = "Total Cash:";
+            // 
+            // txttotalcash
+            // 
+            this.txttotalcash.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.txttotalcash.Location = new System.Drawing.Point(1033, 30);
+            this.txttotalcash.Margin = new System.Windows.Forms.Padding(7, 6, 7, 6);
+            this.txttotalcash.Name = "txttotalcash";
+            this.txttotalcash.ReadOnly = true;
+            this.txttotalcash.Size = new System.Drawing.Size(310, 38);
+            this.txttotalcash.TabIndex = 49;
+            // 
+            // btncancel
+            // 
+            this.btncancel.Location = new System.Drawing.Point(1208, 149);
+            this.btncancel.Name = "btncancel";
+            this.btncancel.Size = new System.Drawing.Size(169, 56);
+            this.btncancel.TabIndex = 48;
+            this.btncancel.Text = "Cancel";
+            this.btncancel.Click += new System.EventHandler(this.btncancel_Click);
+            // 
+            // btnpay
+            // 
+            this.btnpay.Location = new System.Drawing.Point(1033, 149);
+            this.btnpay.Name = "btnpay";
+            this.btnpay.Size = new System.Drawing.Size(169, 56);
+            this.btnpay.TabIndex = 47;
+            this.btnpay.Text = "Pay";
+            this.btnpay.Click += new System.EventHandler(this.simpleButton1_Click);
+            // 
             // panelControl2
             // 
             this.panelControl2.Controls.Add(this.groupBox2);
@@ -240,21 +350,6 @@
             this.groupBox2.Size = new System.Drawing.Size(1554, 687);
             this.groupBox2.TabIndex = 452;
             this.groupBox2.TabStop = false;
-            // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(32, 32);
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.addEntryToolStripMenuItem});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(195, 40);
-            // 
-            // addEntryToolStripMenuItem
-            // 
-            this.addEntryToolStripMenuItem.Name = "addEntryToolStripMenuItem";
-            this.addEntryToolStripMenuItem.Size = new System.Drawing.Size(194, 36);
-            this.addEntryToolStripMenuItem.Text = "Add Entry";
-            this.addEntryToolStripMenuItem.Click += new System.EventHandler(this.addEntryToolStripMenuItem_Click);
             // 
             // gridControl1
             // 
@@ -326,115 +421,20 @@
             this.repreferenceno.AutoHeight = false;
             this.repreferenceno.Name = "repreferenceno";
             // 
-            // btnpay
+            // contextMenuStrip1
             // 
-            this.btnpay.Location = new System.Drawing.Point(1033, 149);
-            this.btnpay.Name = "btnpay";
-            this.btnpay.Size = new System.Drawing.Size(169, 56);
-            this.btnpay.TabIndex = 47;
-            this.btnpay.Text = "Pay";
-            this.btnpay.Click += new System.EventHandler(this.simpleButton1_Click);
+            this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(32, 32);
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.addEntryToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(195, 40);
             // 
-            // btncancel
+            // addEntryToolStripMenuItem
             // 
-            this.btncancel.Location = new System.Drawing.Point(1208, 149);
-            this.btncancel.Name = "btncancel";
-            this.btncancel.Size = new System.Drawing.Size(169, 56);
-            this.btncancel.TabIndex = 48;
-            this.btncancel.Text = "Cancel";
-            this.btncancel.Click += new System.EventHandler(this.btncancel_Click);
-            // 
-            // txttotalcash
-            // 
-            this.txttotalcash.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.txttotalcash.Location = new System.Drawing.Point(1033, 30);
-            this.txttotalcash.Margin = new System.Windows.Forms.Padding(7, 6, 7, 6);
-            this.txttotalcash.Name = "txttotalcash";
-            this.txttotalcash.ReadOnly = true;
-            this.txttotalcash.Size = new System.Drawing.Size(310, 38);
-            this.txttotalcash.TabIndex = 49;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.label2.ForeColor = System.Drawing.Color.Black;
-            this.label2.Location = new System.Drawing.Point(865, 33);
-            this.label2.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(154, 31);
-            this.label2.TabIndex = 50;
-            this.label2.Text = "Total Cash:";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.label7.ForeColor = System.Drawing.Color.Black;
-            this.label7.Location = new System.Drawing.Point(865, 87);
-            this.label7.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(163, 31);
-            this.label7.TabIndex = 51;
-            this.label7.Text = "Total Credit:";
-            // 
-            // txttotalcredit
-            // 
-            this.txttotalcredit.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.txttotalcredit.Location = new System.Drawing.Point(1033, 80);
-            this.txttotalcredit.Margin = new System.Windows.Forms.Padding(7, 6, 7, 6);
-            this.txttotalcredit.Name = "txttotalcredit";
-            this.txttotalcredit.ReadOnly = true;
-            this.txttotalcredit.Size = new System.Drawing.Size(310, 38);
-            this.txttotalcredit.TabIndex = 52;
-            // 
-            // lblvat
-            // 
-            this.lblvat.Appearance.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblvat.Appearance.ForeColor = System.Drawing.Color.MediumSeaGreen;
-            this.lblvat.Appearance.Options.UseFont = true;
-            this.lblvat.Appearance.Options.UseForeColor = true;
-            this.lblvat.Location = new System.Drawing.Point(1449, 217);
-            this.lblvat.Margin = new System.Windows.Forms.Padding(7, 6, 7, 6);
-            this.lblvat.Name = "lblvat";
-            this.lblvat.Size = new System.Drawing.Size(56, 31);
-            this.lblvat.TabIndex = 101;
-            this.lblvat.Text = "9999";
-            // 
-            // lblvatexemptsale
-            // 
-            this.lblvatexemptsale.Appearance.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblvatexemptsale.Appearance.ForeColor = System.Drawing.Color.MediumSeaGreen;
-            this.lblvatexemptsale.Appearance.Options.UseFont = true;
-            this.lblvatexemptsale.Appearance.Options.UseForeColor = true;
-            this.lblvatexemptsale.Location = new System.Drawing.Point(1476, 174);
-            this.lblvatexemptsale.Margin = new System.Windows.Forms.Padding(7, 6, 7, 6);
-            this.lblvatexemptsale.Name = "lblvatexemptsale";
-            this.lblvatexemptsale.Size = new System.Drawing.Size(14, 31);
-            this.lblvatexemptsale.TabIndex = 100;
-            this.lblvatexemptsale.Text = "0";
-            // 
-            // lblvatsale
-            // 
-            this.lblvatsale.Appearance.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblvatsale.Appearance.ForeColor = System.Drawing.Color.MediumSeaGreen;
-            this.lblvatsale.Appearance.Options.UseFont = true;
-            this.lblvatsale.Appearance.Options.UseForeColor = true;
-            this.lblvatsale.Location = new System.Drawing.Point(1476, 134);
-            this.lblvatsale.Margin = new System.Windows.Forms.Padding(7, 6, 7, 6);
-            this.lblvatsale.Name = "lblvatsale";
-            this.lblvatsale.Size = new System.Drawing.Size(14, 31);
-            this.lblvatsale.TabIndex = 99;
-            this.lblvatsale.Text = "0";
-            // 
-            // btnconfirm
-            // 
-            this.btnconfirm.Location = new System.Drawing.Point(859, 149);
-            this.btnconfirm.Name = "btnconfirm";
-            this.btnconfirm.Size = new System.Drawing.Size(169, 56);
-            this.btnconfirm.TabIndex = 102;
-            this.btnconfirm.Text = "Confirm";
-            this.btnconfirm.Click += new System.EventHandler(this.simpleButton3_Click);
+            this.addEntryToolStripMenuItem.Name = "addEntryToolStripMenuItem";
+            this.addEntryToolStripMenuItem.Size = new System.Drawing.Size(194, 36);
+            this.addEntryToolStripMenuItem.Text = "Add Entry";
+            this.addEntryToolStripMenuItem.Click += new System.EventHandler(this.addEntryToolStripMenuItem_Click);
             // 
             // POSplitBillFinal
             // 
@@ -454,13 +454,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).EndInit();
             this.panelControl2.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
-            this.contextMenuStrip1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.reppaymenttype)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemSearchLookUpEdit1View)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repamount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repreferenceno)).EndInit();
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

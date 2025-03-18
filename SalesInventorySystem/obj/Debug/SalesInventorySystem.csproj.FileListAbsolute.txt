@@ -10258,3 +10258,6 @@ C:\Users\avanc\Downloads\CORECS2022\SalesInventorySystem\obj\Debug\SalesInventor
 C:\Users\avanc\Downloads\CORECS2022\SalesInventorySystem\obj\Debug\SalesInventorySystem.POS.POSConfirmPaymentResto.resources
 C:\Users\avanc\Downloads\CORECS2022\SalesInventorySystem\obj\Debug\SalesInventorySystem.POS.POSRestoDineInBilling.resources
 C:\Users\avanc\Downloads\CORECS2022\SalesInventorySystem\obj\Debug\SalesInventorySystem.POS.POSRestoAuthentication.resources
+C:\Users\avanc\Downloads\CORECS2022\SalesInventorySystem\obj\Debug\SalesInventorySystem.POS.POSplitBillFinal.resources
+C:\Users\avanc\Downloads\CORECS2022\SalesInventorySystem\obj\Debug\SalesInventorySystem.POS.POSRestoTableLimit.resources
+C:\Users\avanc\Downloads\CORECS2022\SalesInventorySystem\obj\Debug\SalesInventorySystem.POS.POSRestoTableOption.resources

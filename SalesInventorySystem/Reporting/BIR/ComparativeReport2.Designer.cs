@@ -52,9 +52,9 @@
             this.groupBox2.Controls.Add(this.pivotGridControl1);
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox2.Location = new System.Drawing.Point(0, 117);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(4);
             this.groupBox2.Size = new System.Drawing.Size(1458, 831);
             this.groupBox2.TabIndex = 11;
             this.groupBox2.TabStop = false;
@@ -90,7 +90,7 @@
             this.pivotGridControl1.DataMember = "CustomSqlQuery";
             this.pivotGridControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pivotGridControl1.Location = new System.Drawing.Point(4, 30);
-            this.pivotGridControl1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pivotGridControl1.Margin = new System.Windows.Forms.Padding(4);
             this.pivotGridControl1.Name = "pivotGridControl1";
             this.pivotGridControl1.OptionsBehavior.BestFitMode = ((DevExpress.XtraPivotGrid.PivotGridBestFitMode)((DevExpress.XtraPivotGrid.PivotGridBestFitMode.FieldValue | DevExpress.XtraPivotGrid.PivotGridBestFitMode.FieldHeader)));
             this.pivotGridControl1.OptionsView.FilterSeparatorBarPadding = 0;
@@ -110,9 +110,9 @@
             this.groupBox1.Controls.Add(this.simpleButton1);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox1.Location = new System.Drawing.Point(0, 0);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
             this.groupBox1.Size = new System.Drawing.Size(1458, 117);
             this.groupBox1.TabIndex = 10;
             this.groupBox1.TabStop = false;
@@ -120,7 +120,7 @@
             // simpleButton3
             // 
             this.simpleButton3.Location = new System.Drawing.Point(672, 27);
-            this.simpleButton3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.simpleButton3.Margin = new System.Windows.Forms.Padding(4);
             this.simpleButton3.Name = "simpleButton3";
             this.simpleButton3.Size = new System.Drawing.Size(196, 38);
             this.simpleButton3.TabIndex = 8;
@@ -130,7 +130,7 @@
             // labelControl2
             // 
             this.labelControl2.Location = new System.Drawing.Point(20, 73);
-            this.labelControl2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.labelControl2.Margin = new System.Windows.Forms.Padding(4);
             this.labelControl2.Name = "labelControl2";
             this.labelControl2.Size = new System.Drawing.Size(80, 25);
             this.labelControl2.TabIndex = 7;
@@ -140,7 +140,7 @@
             // 
             this.txtdateto.EditValue = null;
             this.txtdateto.Location = new System.Drawing.Point(144, 71);
-            this.txtdateto.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtdateto.Margin = new System.Windows.Forms.Padding(4);
             this.txtdateto.Name = "txtdateto";
             this.txtdateto.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -154,7 +154,7 @@
             // simpleButton2
             // 
             this.simpleButton2.Location = new System.Drawing.Point(520, 27);
-            this.simpleButton2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.simpleButton2.Margin = new System.Windows.Forms.Padding(4);
             this.simpleButton2.Name = "simpleButton2";
             this.simpleButton2.Size = new System.Drawing.Size(144, 38);
             this.simpleButton2.TabIndex = 5;
@@ -164,7 +164,7 @@
             // 
             this.txtdatefrom.EditValue = null;
             this.txtdatefrom.Location = new System.Drawing.Point(144, 29);
-            this.txtdatefrom.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtdatefrom.Margin = new System.Windows.Forms.Padding(4);
             this.txtdatefrom.Name = "txtdatefrom";
             this.txtdatefrom.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -178,7 +178,7 @@
             // labelControl1
             // 
             this.labelControl1.Location = new System.Drawing.Point(20, 35);
-            this.labelControl1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.labelControl1.Margin = new System.Windows.Forms.Padding(4);
             this.labelControl1.Name = "labelControl1";
             this.labelControl1.Size = new System.Drawing.Size(105, 25);
             this.labelControl1.TabIndex = 3;
@@ -187,7 +187,7 @@
             // simpleButton1
             // 
             this.simpleButton1.Location = new System.Drawing.Point(368, 27);
-            this.simpleButton1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.simpleButton1.Margin = new System.Windows.Forms.Padding(4);
             this.simpleButton1.Name = "simpleButton1";
             this.simpleButton1.Size = new System.Drawing.Size(144, 38);
             this.simpleButton1.TabIndex = 2;
@@ -201,7 +201,7 @@
             this.ClientSize = new System.Drawing.Size(1458, 948);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "ComparativeReport2";
             this.Text = "ComparativeReport2";
             this.groupBox2.ResumeLayout(false);

@@ -31,6 +31,15 @@ namespace SalesInventorySystem.POS
             Database.displaySearchlookupEdit("Select TableNo FROM dbo.RestaurantTable WHERE TableStatus='Available'", searchLookUpEdit1, "TableNo", "TableNo");
         }
 
+        private void button3_Click(object sender, EventArgs e)
+        {
+            string getLimit = Database.getSingleResultSet($"SELECT TOP(1) Limit FROM dbo.RestaurantTable WHERE TableNo='{POSRestoTables.buttonname}'");
+            POSRestoTableLimit tablelimit = new POSRestoTableLimit();
+            tablelimit.txttableno.Text = POSRestoTables.buttonname;
+            tablelimit.txtlimitamount.Text = getLimit;
+            tablelimit.ShowDialog(this);
+        }
+
         private void button2_Click(object sender, EventArgs e)
         {
             Database.ExecuteQuery("UPDATE BatchSalesSummary Set TableNo='" + searchLookUpEdit1.Text + "' WHERE TableNo='" + POSRestoTables.buttonname + "' and Status='Pending' and isFloat=1 And BranchCode='" + Login.assignedBranch + "' And MachineUsed='" + Environment.MachineName + "' ");

@@ -861,7 +861,7 @@ namespace SalesInventorySystem
             }
             else
             {
-                if (postype == "2")
+                if (postype == "1")
                 {
 
                     adis.txtorderno.Text = txtOrderNo.Text;
@@ -869,7 +869,7 @@ namespace SalesInventorySystem
                     adis.txttransactionno.Text = lblTransactionIDInc.Text;
                     adis.ShowDialog(this);
                 }
-                else if (postype == "1")
+                else if (postype == "2")
                 {
 
                     adisres.txtorderno.Text = txtOrderNo.Text;
@@ -1083,6 +1083,8 @@ namespace SalesInventorySystem
         //    refreshView();
         //    updateTransNo();
         //}
+
+
 
         void voidTransaction()
         {
@@ -1700,6 +1702,8 @@ namespace SalesInventorySystem
                     posconfirm.lblvatexempt.Text = lblvatexemptsale.Text;
                     posconfirm.lblvatinput.Text = lblvat.Text;
                     posconfirm.btncaller.Text = "POS";
+
+                    posconfirm.lblcashiertransno.Text = lblTransactionIDCashier.Text;
                     posconfirm.ShowDialog(this);
                     if (POS.POSConfirmPayment.transactiondone == true)
                     {
@@ -2030,7 +2034,7 @@ namespace SalesInventorySystem
                     else
                     {
                         voidTransaction();
-                        updateOR();
+                        //updateOR();
                         refreshView();
                         updateTransactionNo();
                     }
@@ -2105,8 +2109,6 @@ namespace SalesInventorySystem
                         POSCloseTransactionAuthentication.isconfirmedLogin = false;
                         authfrm.Dispose();
                     }
-                    
-
                 }
             }
             catch (Exception ex)
@@ -2227,6 +2229,10 @@ namespace SalesInventorySystem
                 com.Parameters["@parmtotalgrosssales"].Precision = 12;
                 com.Parameters["@parmtotalgrosssales"].Scale = 2;
 
+                com.Parameters.Add("@parmtotalchargetoaccountsales", SqlDbType.Decimal, 12).Direction = ParameterDirection.Output;
+                com.Parameters["@parmtotalchargetoaccountsales"].Precision = 12;
+                com.Parameters["@parmtotalchargetoaccountsales"].Scale = 2;
+
                 com.CommandType = CommandType.StoredProcedure;
                 com.CommandText = query;
                 com.ExecuteNonQuery();
@@ -2282,6 +2288,7 @@ namespace SalesInventorySystem
                 pocls.txtTotalCreditSales.Text = com.Parameters["@parmtotalcreditsales"].Value.ToString();
                 pocls.txtTotalNetSales.Text = com.Parameters["@parmtotalnetsales"].Value.ToString();
                 pocls.txttotalgross.Text = com.Parameters["@parmtotalgrosssales"].Value.ToString();
+                pocls.txtchargesales.Text = com.Parameters["@parmtotalchargetoaccountsales"].Value.ToString();
 
                 
 
@@ -2290,7 +2297,7 @@ namespace SalesInventorySystem
                     ", SUM(QtySold) as QtySold " +
                     ", SUM(TotalAmount) AS TotalAmount " +
                     ", COUNT(*) as TotalItems " +
-                    "from BatchSalesDetails " +
+                    "from dbo.BatchSalesDetails " +
                     "WHERE CAST(DateOrder as date)='" + DateTime.Now.ToShortDateString() + "' " +
                     // "AND CashierTransNo='" + lblTransactionIDCashier.Text + "' " +
                     "AND CashierTransNo='" + cashierTransactionCode + "' " +

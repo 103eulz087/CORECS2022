@@ -31,9 +31,12 @@
             this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.panelpwd = new System.Windows.Forms.Panel();
+            this.txtvatdiscount = new System.Windows.Forms.TextBox();
+            this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
             this.txtamounttodiscount = new System.Windows.Forms.TextBox();
             this.labelControl10 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl9 = new DevExpress.XtraEditors.LabelControl();
+            this.labelControl6 = new DevExpress.XtraEditors.LabelControl();
             this.txtpercentage = new System.Windows.Forms.TextBox();
             this.btnPwdDiscount = new DevExpress.XtraEditors.SimpleButton();
             this.labelControl7 = new DevExpress.XtraEditors.LabelControl();
@@ -41,7 +44,6 @@
             this.txtdiscountedamount = new System.Windows.Forms.TextBox();
             this.txtidno = new System.Windows.Forms.TextBox();
             this.txtname = new System.Windows.Forms.TextBox();
-            this.labelControl6 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
             this.txtnoofpax = new System.Windows.Forms.TextBox();
@@ -54,8 +56,6 @@
             this.txtvatexadj = new System.Windows.Forms.TextBox();
             this.btnSave = new DevExpress.XtraEditors.SimpleButton();
             this.btnshowdiscounteditems = new DevExpress.XtraEditors.SimpleButton();
-            this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
-            this.txtvatdiscount = new System.Windows.Forms.TextBox();
             this.panelpwd.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -106,6 +106,28 @@
             this.panelpwd.Size = new System.Drawing.Size(848, 368);
             this.panelpwd.TabIndex = 31;
             // 
+            // txtvatdiscount
+            // 
+            this.txtvatdiscount.Font = new System.Drawing.Font("Tahoma", 10.25F);
+            this.txtvatdiscount.Location = new System.Drawing.Point(352, 300);
+            this.txtvatdiscount.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
+            this.txtvatdiscount.Name = "txtvatdiscount";
+            this.txtvatdiscount.ReadOnly = true;
+            this.txtvatdiscount.Size = new System.Drawing.Size(189, 40);
+            this.txtvatdiscount.TabIndex = 28;
+            this.txtvatdiscount.Text = "0";
+            // 
+            // labelControl3
+            // 
+            this.labelControl3.Appearance.Font = new System.Drawing.Font("Tahoma", 12.25F);
+            this.labelControl3.Appearance.Options.UseFont = true;
+            this.labelControl3.Location = new System.Drawing.Point(124, 297);
+            this.labelControl3.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
+            this.labelControl3.Name = "labelControl3";
+            this.labelControl3.Size = new System.Drawing.Size(195, 40);
+            this.labelControl3.TabIndex = 27;
+            this.labelControl3.Text = "Vat Discount:";
+            // 
             // txtamounttodiscount
             // 
             this.txtamounttodiscount.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
@@ -140,6 +162,17 @@
             this.labelControl9.Size = new System.Drawing.Size(215, 40);
             this.labelControl9.TabIndex = 24;
             this.labelControl9.Text = "20% Discount:";
+            // 
+            // labelControl6
+            // 
+            this.labelControl6.Appearance.Font = new System.Drawing.Font("Tahoma", 12.25F);
+            this.labelControl6.Appearance.Options.UseFont = true;
+            this.labelControl6.Location = new System.Drawing.Point(20, 24);
+            this.labelControl6.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
+            this.labelControl6.Name = "labelControl6";
+            this.labelControl6.Size = new System.Drawing.Size(80, 40);
+            this.labelControl6.TabIndex = 14;
+            this.labelControl6.Text = "ID #:";
             // 
             // txtpercentage
             // 
@@ -212,17 +245,6 @@
             this.txtname.Name = "txtname";
             this.txtname.Size = new System.Drawing.Size(609, 40);
             this.txtname.TabIndex = 19;
-            // 
-            // labelControl6
-            // 
-            this.labelControl6.Appearance.Font = new System.Drawing.Font("Tahoma", 12.25F);
-            this.labelControl6.Appearance.Options.UseFont = true;
-            this.labelControl6.Location = new System.Drawing.Point(20, 24);
-            this.labelControl6.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
-            this.labelControl6.Name = "labelControl6";
-            this.labelControl6.Size = new System.Drawing.Size(80, 40);
-            this.labelControl6.TabIndex = 14;
-            this.labelControl6.Text = "ID #:";
             // 
             // labelControl1
             // 
@@ -353,28 +375,6 @@
             this.btnshowdiscounteditems.TabIndex = 42;
             this.btnshowdiscounteditems.Text = "Show Discounted Items";
             this.btnshowdiscounteditems.Visible = false;
-            // 
-            // labelControl3
-            // 
-            this.labelControl3.Appearance.Font = new System.Drawing.Font("Tahoma", 12.25F);
-            this.labelControl3.Appearance.Options.UseFont = true;
-            this.labelControl3.Location = new System.Drawing.Point(124, 297);
-            this.labelControl3.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
-            this.labelControl3.Name = "labelControl3";
-            this.labelControl3.Size = new System.Drawing.Size(195, 40);
-            this.labelControl3.TabIndex = 27;
-            this.labelControl3.Text = "Vat Discount:";
-            // 
-            // txtvatdiscount
-            // 
-            this.txtvatdiscount.Font = new System.Drawing.Font("Tahoma", 10.25F);
-            this.txtvatdiscount.Location = new System.Drawing.Point(352, 300);
-            this.txtvatdiscount.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
-            this.txtvatdiscount.Name = "txtvatdiscount";
-            this.txtvatdiscount.ReadOnly = true;
-            this.txtvatdiscount.Size = new System.Drawing.Size(189, 40);
-            this.txtvatdiscount.TabIndex = 28;
-            this.txtvatdiscount.Text = "0";
             // 
             // AddDiscountRestaurant
             // 
