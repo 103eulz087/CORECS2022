@@ -606,6 +606,11 @@ namespace SalesInventorySystem.POS
             }
         }
 
+        private void btnsave_Click(object sender, EventArgs e)
+        {
+
+        }
+
         private void btndeductqty_Click(object sender, EventArgs e)
         {
             int cord = MydataGridView1.CurrentCellAddress.Y;

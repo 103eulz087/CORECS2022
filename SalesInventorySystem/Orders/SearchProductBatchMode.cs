@@ -40,7 +40,7 @@ namespace SalesInventorySystem.Orders
         void extract()
         {
             Database.display("SELECT ProductCode,LongDescription as Description,Barcode,'0' as Quantity,' ' as Units,' ' as Remarks " +
-                "FROM Products WHERE BranchCode='" + Login.assignedBranch + "' " +
+                "FROM dbo.Products WHERE BranchCode='" + Login.assignedBranch + "' " +
                 "AND (Description like '%" + txtsearchprod.Text.Trim() + "%' OR Barcode like '%" + txtsearchprod.Text.Trim() + "%') ", gridControl1, gridView1);
         }
         void save()

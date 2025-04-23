@@ -24,6 +24,7 @@ namespace SalesInventorySystem
     class HelperFunction
     {
         static int papersize = 38;
+        //static int papersize = 27;
         static int cornerlength = 0;
 
        

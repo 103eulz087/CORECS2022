@@ -45,7 +45,8 @@ namespace SalesInventorySystem
             }
             else if (postype == "2")
             {
-                POSMainWithDashboard pcusatfsmr = new POSMainWithDashboard();
+                //POSMainWithDashboard pcusatfsmr = new POSMainWithDashboard();
+                POSMainRestoDashboard pcusatfsmr = new POSMainRestoDashboard();
                 pcusatfsmr.Show();
             }
             //else if (postype == "3")

@@ -14,7 +14,7 @@ namespace SalesInventorySystem.Reporting
 {
     public partial class BadOrderReportDetails : Form
     {
-        public static string brcode, batchid,reportype;
+        public static string brcode, batchid,reportype,dateencode;
         public static bool isdone = false;
         public BadOrderReportDetails()
         {
@@ -65,6 +65,7 @@ namespace SalesInventorySystem.Reporting
             string remarks = Database.getSingleQuery($"SELECT TOP(1) Remarks FROM dbo.StockoutSummary WHERE BatchID='{batchid}' ", "Remarks");
             xct.xrremarks.Text = remarks;
             xct.xrbranchname.Text = brcode;
+            xct.xrdatefrom.Text = dateencode;
             //xct.xrdatefrom.Text = dateFrom.Text;//getDateRequest().Substring(0, 10);
             //xct.xrdateto.Text = dateTo.Text;//getDateRequest().Substring(0, 10);
 

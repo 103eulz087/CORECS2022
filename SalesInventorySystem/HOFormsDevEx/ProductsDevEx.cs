@@ -18,6 +18,8 @@ namespace SalesInventorySystem.HOFormsDevEx
         //bool isprimalcut = false;
         //string parmoption = "";
         string action = "";
+        object txtprodcatobject = null;
+        object txtprodtypeobject = null;
         public ProductsDevEx()
         {
             InitializeComponent();
@@ -34,7 +36,7 @@ namespace SalesInventorySystem.HOFormsDevEx
             else
             {
                 chckapplytoall.Visible = true;
-                Database.displayComboBoxItems("SELECT TOP(1) BranchCode,BranchName FROM dbo.Branches", "BranchName", comboBox1);
+                Database.displayComboBoxItems("SELECT BranchCode,BranchName FROM dbo.Branches", "BranchName", comboBox1);
             }
             //HelperFunction.DisableTextFields(this);
             disableFields();
@@ -46,7 +48,8 @@ namespace SalesInventorySystem.HOFormsDevEx
         {
             txtsellingprice.Enabled = false;
             txtdesc.Enabled = false;
-            txtprodcat.Enabled = false;
+            //txtprodcat.Enabled = false;
+            txtprodcatlookup.Enabled = false;
             txtlandingcost.Enabled = false;
             txtsellingprice.Enabled = false;
             txtprice1.Enabled = false;
@@ -81,27 +84,36 @@ namespace SalesInventorySystem.HOFormsDevEx
             txtreorderlevel.Text = "0";
             txtprodcode.ReadOnly = false;
             txtbranch.Enabled = true;
-            txtprodcat.Enabled = true;
-            txtprodcat.Focus();
+            txtprodcatlookup.Enabled = true;
+            txtprodtype.Enabled = true;
+            txtprodcatlookup.Focus();
 
             simpleButton1.Enabled = false;
 
             addbtn.Enabled = true;
             updatebtn.Enabled = false;
             btncancel.Enabled = true;
+
+            loadProdCategoryLookUp();
         }
 
-        String getProductCategoryCode()
+        void loadProdCategoryLookUp()
         {
-            string str = "";
-            str = Database.getSingleData("ProductCategory", "Description", txtprodcat.Text, "ProductCategoryID");
-            return str;
+            Database.displaySearchlookupEdit("SELECT ProductCategoryID as ID,Description,isVat FROM dbo.ProductCategory ORDER BY ProductCategoryID", txtprodcatlookup, "Description", "Description");
+            Database.displaySearchlookupEdit("SELECT * FROM dbo.ProductType ORDER BY TypeCode", txtprodtype, "TypeDescription", "TypeDescription");
         }
+
+        //String getProductCategoryCode()
+        //{
+        //    string str = "";
+        //    str = Database.getSingleData("ProductCategory", "Description", txtprodcat.Text, "ProductCategoryID");
+        //    return str;
+        //}
 
         private void addbtn_Click(object sender, EventArgs e)
         {
             string barcode = "";
-            string smainprice = "0", sprice1 = "0", sprice2 = "0", sprice3 = "0", sprice4 = "0", sdiscountitem = "0", ishavbarcode = "0";
+            string smainprice = "0", sprice1 = "0", sprice2 = "0", sprice3 = "0", sprice4 = "0", sdiscountitem = "0", ishavbarcode = "0", isvat = "0";
             try
             {
                 if (ismainprice.Checked == true)
@@ -140,6 +152,17 @@ namespace SalesInventorySystem.HOFormsDevEx
                     barcode = "";
                 }
 
+                if (chckisvat.Checked == true)
+                {
+                    isvat = "1";
+                   
+                }
+                else
+                {
+                    isvat = "0";
+                   
+                }
+
 
 
                 if (HelperFunction.isTextBoxEmpty(txtdesc, txtprodcode, txtsellingprice, txtlandingcost, txtreorderlevel))
@@ -156,7 +179,8 @@ namespace SalesInventorySystem.HOFormsDevEx
                     }
                     else
                     {
-                        string mark = getProductCategoryCode();
+                        string mark = txtprodcatobject.ToString();
+                        //string mark = getProductCategoryCode();
                         string prodcode = txtprodcode.Text;
                         Database.ExecuteQuery("INSERT INTO dbo.Products VALUES('888'" +
                             ",'" + txtprodcode.Text + "'" +
@@ -164,7 +188,8 @@ namespace SalesInventorySystem.HOFormsDevEx
                             ",'" + txtlongdesc.Text + "'" +
                             ",'" + txtlandingcost.Text + "'" +
                             ",'" + txtsellingprice.Text + "'" +
-                            ",'" + getProductCategoryCode() + "'" +
+                            //",'" + getProductCategoryCode() + "'" +
+                            ",'" + mark + "'" +
                             //",'0'" +
                             //",'0'" +
                             ",'" + txtprice1.Text + "'" +
@@ -180,7 +205,9 @@ namespace SalesInventorySystem.HOFormsDevEx
                             ",'" + sdiscountitem + "'" +
                             ",'" + ishavbarcode + "'" +
                             ",'" + barcode + "'" +
-                            ",'" + txtreorderlevel.Text + "')");
+                            ",'" + txtreorderlevel.Text + "'" +
+                            ",'" + isvat + "'" +
+                            ",'" + txtprodtypeobject.ToString() + "')");
 
                         string caption = "Add New Product with Description name of "+txtdesc.Text+" and Product Code="+txtprodcode.Text+" ";
                         Database.ExecuteQuery("INSERT INTO dbo.HistoryLogs VALUES('"+Login.isglobalUserID+"'" +
@@ -194,8 +221,12 @@ namespace SalesInventorySystem.HOFormsDevEx
                         //HelperFunction.DisableTextFields(this);
                         disableFields();
 
-                        txtprodcat.Text = "";
-                        txtprodcat.Enabled = false;
+                        //txtprodcat.Text = "";
+                        //txtprodcat.Enabled = false;
+                        txtprodcatlookup.Text = "";
+                        txtprodtype.Text = "";
+                        txtprodcatlookup.Enabled = false;
+                        txtprodtype.Enabled = false;
 
                         simpleButton1.Enabled = true;
                         addbtn.Enabled = false;
@@ -218,11 +249,15 @@ namespace SalesInventorySystem.HOFormsDevEx
             {
 
                 // int cord = dataGridView1.CurrentCellAddress.Y;
+                loadProdCategoryLookUp();
                 action = "UPDATE";
                 HelperFunction.ClearAllText(this);
                 HelperFunction.EnableTextFields(this);
                 txtprodcode.Enabled = false;
-                txtprodcat.Enabled = true;
+                //txtprodcat.Enabled = true;
+                txtprodcatlookup.Enabled = true;
+
+                txtprodtype.Enabled = true;
                 txtbranch.Enabled = false;
                 // bool mark = Convert.ToBoolean(dataGridView1.Rows[cord].Cells[6].Value.ToString());
                 //localGrid
@@ -315,7 +350,24 @@ namespace SalesInventorySystem.HOFormsDevEx
                 //txtprice4.Text = dataGridView1.Rows[cord].Cells["Price4"].Value.ToString();
                 //txtprice5.Text = dataGridView1.Rows[cord].Cells["Price5"].Value.ToString();
                 //txtbarcode.Text = dataGridView1.Rows[cord].Cells["Barcode"].Value.ToString();
-                txtprodcat.Text = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "ProductCategory").ToString();//  dataGridView1.Rows[cord].Cells[5].Value.ToString();
+                var eulz = Database.getMultipleQuery($"SELECT TOP(1) ProductCategoryCode FROM dbo.Products WHERE BranchCode='{gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "BranchCode").ToString()}' and ProductCode='{gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "ProductCode").ToString()}'", "ProductCategoryCode");
+                string ProductCategoryCode = eulz["ProductCategoryCode"].ToString();
+                txtproductcategorycode.Text = ProductCategoryCode;
+
+                var mafi = Database.getMultipleQuery($"SELECT TOP(1) TypeCode FROM dbo.ProductType WHERE  TypeDescription='{gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "TypeDescription").ToString()}'", "TypeDescription");
+                string ProductTypeCode = mafi["TypeCode"].ToString();
+                txtproducttypecode.Text = ProductTypeCode;
+
+                var rwz = Database.getMultipleQuery($"SELECT TOP(1) Description FROM dbo.ProductCategory WHERE ProductCategoryID='{txtproductcategorycode.Text}'","Description");
+                string ProductCategoryName = rwz["Description"].ToString();
+
+
+                var rowz = Database.getMultipleQuery($"SELECT TOP(1) TypeDescription FROM dbo.ProductType WHERE TypeCode='{txtproducttypecode.Text}'", "TypeDescription");
+                string ProductTypeName = rowz["TypeDescription"].ToString();
+
+                txtprodcatlookup.Text = ProductCategoryName;//  dataGridView1.Rows[cord].Cells[5].Value.ToString();
+                //txtprodcatlookup.Text = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "ProductCategory").ToString();//  dataGridView1.Rows[cord].Cells[5].Value.ToString();
+                //txtprodcat.Text = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "ProductCategory").ToString();//  dataGridView1.Rows[cord].Cells[5].Value.ToString();
                 txtbranch.Text = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "BranchCode").ToString();// dataGridView1.Rows[cord].Cells[0].Value.ToString();
                 txtprodcode.Text = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "ProductCode").ToString();// dataGridView1.Rows[cord].Cells[1].Value.ToString();
                 txtdesc.Text = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "Description").ToString(); //dataGridView1.Rows[cord].Cells[2].Value.ToString();
@@ -329,6 +381,8 @@ namespace SalesInventorySystem.HOFormsDevEx
                 //txtprice5.Text = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "Price5").ToString();// dataGridView1.Rows[cord].Cells["Price5"].Value.ToString();
                 txtbarcode.Text = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "Barcode").ToString(); //dataGridView1.Rows[cord].Cells["Barcode"].Value.ToString();
                 txtreorderlevel.Text = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "ReOrderLevel").ToString(); //dataGridView1.Rows[cord].Cells["Barcode"].Value.ToString();
+
+               // txtproducttypecode.Text = txtprodcode.Text;
 
                 simpleButton1.Enabled = false;
                 addbtn.Enabled = false;
@@ -345,7 +399,7 @@ namespace SalesInventorySystem.HOFormsDevEx
         {
             //parmoption = "UPDATE";
             string barcode = "";
-            string smainprice = "0", sprice1 = "0", sprice2 = "0", sprice3 = "0", sprice4 = "0", sdiscountitem = "0", shavbarcode = "0"; //ncontainer = "",
+            string smainprice = "0", sprice1 = "0", sprice2 = "0", sprice3 = "0", sprice4 = "0", sdiscountitem = "0", shavbarcode = "0",isvat="0"; //ncontainer = "",
             string applytoall = "";
             try
             {
@@ -394,16 +448,29 @@ namespace SalesInventorySystem.HOFormsDevEx
                     barcode = "";
                 }
 
+                if (chckisvat.Checked == true)
+                {
+                    isvat = "1";
+                    
+                }
+                else
+                {
+                    isvat = "0";
+                 
+                }
 
-                if (HelperFunction.isTextBoxEmpty(txtreorderlevel, txtdesc, txtprodcode, txtsellingprice, txtlandingcost, txtprice1, txtprice2, txtprice3, txtprice4) || txtbranch.Text == "" || txtprodcat.Text == "")
+
+                if (HelperFunction.isTextBoxEmpty(txtreorderlevel, txtdesc, txtprodcode, txtsellingprice, txtlandingcost, txtprice1, txtprice2, txtprice3, txtprice4) || txtbranch.Text == "" || txtprodcatlookup.Text == "")
                 {
                     XtraMessageBox.Show("Please Supply All Fields");
                 }
                 else
                 {
-                    string brcode = "", prodcatcode = "";
+                    string brcode = "", prodcatcode = "", prodtypecode="";
                     brcode = Branch.getBranchCode(txtbranch.Text.Trim());
-                    prodcatcode = getProductCategoryCode();
+                    //prodcatcode = getProductCategoryCode();
+                    prodcatcode = txtproductcategorycode.Text;//txtprodcatobject.ToString();
+                    prodtypecode = txtproducttypecode.Text; 
                     SqlConnection con = Database.getConnection();
                     con.Open();
                     string query = "sp_UpdateProducts";
@@ -434,6 +501,8 @@ namespace SalesInventorySystem.HOFormsDevEx
                     com.Parameters.AddWithValue("@parmexectype", "UPDATE");
                     com.Parameters.AddWithValue("@parmreorderlevel", txtreorderlevel.Text);
                     com.Parameters.AddWithValue("@parmuser", Login.isglobalUserID);
+                    com.Parameters.AddWithValue("@parmisvat", isvat);
+                    com.Parameters.AddWithValue("@parmprodtype", prodtypecode);
                     com.CommandType = CommandType.StoredProcedure;
                     com.CommandText = query;
                     com.ExecuteNonQuery();
@@ -446,8 +515,10 @@ namespace SalesInventorySystem.HOFormsDevEx
                     //HelperFunction.DisableTextFields(this);
                     disableFields();
 
-                    txtprodcat.Text = "";
-                    txtprodcat.Enabled = false;
+                    //txtprodcat.Text = "";
+                    txtprodcatlookup.Text = "";
+                    txtprodcatlookup.Enabled = false;
+                    //txtprodcat.Enabled = false;
 
                     simpleButton1.Enabled = true;
                     addbtn.Enabled = false;
@@ -468,7 +539,8 @@ namespace SalesInventorySystem.HOFormsDevEx
             HelperFunction.DisableTextFields(this);
             txtbranch.Enabled = false;
 
-            txtprodcat.Enabled = false;
+            //txtprodcat.Enabled = false;
+            txtprodcatlookup.Enabled = false;
             simpleButton1.Enabled = true;
             addbtn.Enabled = false;
             updatebtn.Enabled = false;
@@ -505,15 +577,15 @@ namespace SalesInventorySystem.HOFormsDevEx
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //string brcode = "";
-            //brcode = Branch.getBranchCode(comboBox1.Text);
-            //Database.display("SELECT * FROM view_Products WHERE BranchCode='" + brcode + "'", gridControl1,gridView1);
+            string brcode = "";
+            brcode = Branch.getBranchCode(comboBox1.Text);
+            Database.display("SELECT * FROM view_Products WHERE BranchCode='" + brcode + "'", gridControl1, gridView1);
         }
 
-        private void txtprodcat_Click(object sender, EventArgs e)
-        {
-            Database.displayComboBoxItems("SELECT Description FROM dbo.ProductCategory", "Description", txtprodcat);
-        }
+        //private void txtprodcat_Click(object sender, EventArgs e)
+        //{
+        //    Database.displayComboBoxItems("SELECT Description FROM dbo.ProductCategory", "Description", txtprodcat);
+        //}
 
         //String getProductCategoryCode()
         //{
@@ -521,13 +593,6 @@ namespace SalesInventorySystem.HOFormsDevEx
         //    str = Database.getSingleQuery("ProductCategory", "Description='" + txtprodcat.Text + "'", "ProductCategoryID");
         //    return str;
         //}
-
-        int getLastProductCode()
-        {
-            int str;
-            str = Database.getLastID("Products", "ProductCategoryCode='" + getProductCategoryCode() + "'", "ProductCode");
-            return str;
-        }
 
         private void txtprodcat_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -741,6 +806,36 @@ namespace SalesInventorySystem.HOFormsDevEx
                 Database.display("SELECT TOP(50) * FROM dbo.view_Products WHERE BranchCode='" + brcode + "' " +
                     "AND (Description like '%" + txtsrchprodname.Text + "%' OR Barcode like '%" + txtsrchprodname.Text + "%') ", gridControl1, gridView1);
             }
+        }
+
+        private void txtprodcatlookup_EditValueChanged(object sender, EventArgs e)
+        {
+            txtprodcatobject = SearchLookUpClass.getSingleValue(txtprodcatlookup, "ID");
+            if (action != "UPDATE")
+            {
+                int newid = 0;
+                
+                newid = IDGenerator.getIDNumber("Products", "ProductCode", 1); //getLastProductCode()
+                
+                txtprodcode.Text = HelperFunction.sequencePadding1(newid.ToString(), 5);
+                txtprodcode.ReadOnly = true;
+                txtdesc.Focus();
+            }
+        }
+
+        private void txtprodtype_EditValueChanged(object sender, EventArgs e)
+        {
+            txtprodtypeobject = SearchLookUpClass.getSingleValue(txtprodtype, "TypeCode");
+            //if (action != "UPDATE")
+            //{
+            //    int newid = 0;
+
+            //    newid = IDGenerator.getIDNumber("Products", "ProductCode", 1); //getLastProductCode()
+
+            //    txtprodcode.Text = HelperFunction.sequencePadding1(newid.ToString(), 5);
+            //    txtprodcode.ReadOnly = true;
+            //    txtdesc.Focus();
+            //}
         }
     }
 }

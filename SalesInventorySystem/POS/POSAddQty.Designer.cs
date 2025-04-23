@@ -42,10 +42,10 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Tahoma", 20F, System.Drawing.FontStyle.Bold);
             this.label1.ForeColor = System.Drawing.Color.Red;
-            this.label1.Location = new System.Drawing.Point(117, 33);
-            this.label1.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.label1.Location = new System.Drawing.Point(92, 27);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(291, 72);
+            this.label1.Size = new System.Drawing.Size(230, 57);
             this.label1.TabIndex = 0;
             this.label1.Text = "Quantity";
             // 
@@ -56,15 +56,15 @@
             0,
             0,
             0});
-            this.txtqty.Location = new System.Drawing.Point(19, 127);
-            this.txtqty.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.txtqty.Location = new System.Drawing.Point(15, 105);
+            this.txtqty.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtqty.Name = "txtqty";
             this.txtqty.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 18.8F);
             this.txtqty.Properties.Appearance.Options.UseFont = true;
             this.txtqty.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.txtqty.Properties.MaxLength = 6;
-            this.txtqty.Size = new System.Drawing.Size(499, 82);
+            this.txtqty.Size = new System.Drawing.Size(392, 66);
             this.txtqty.TabIndex = 1;
             // 
             // panel1
@@ -74,10 +74,10 @@
             this.panel1.Controls.Add(this.btnsearch);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.txtqty);
-            this.panel1.Location = new System.Drawing.Point(4, 4);
-            this.panel1.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.panel1.Location = new System.Drawing.Point(3, 3);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(534, 335);
+            this.panel1.Size = new System.Drawing.Size(420, 277);
             this.panel1.TabIndex = 2;
             // 
             // simpleButton1
@@ -90,10 +90,10 @@
             this.simpleButton1.Appearance.Options.UseFont = true;
             this.simpleButton1.Appearance.Options.UseForeColor = true;
             this.simpleButton1.ButtonStyle = DevExpress.XtraEditors.Controls.BorderStyles.Simple;
-            this.simpleButton1.Location = new System.Drawing.Point(317, 230);
-            this.simpleButton1.Margin = new System.Windows.Forms.Padding(4, 7, 4, 7);
+            this.simpleButton1.Location = new System.Drawing.Point(249, 190);
+            this.simpleButton1.Margin = new System.Windows.Forms.Padding(3, 6, 3, 6);
             this.simpleButton1.Name = "simpleButton1";
-            this.simpleButton1.Size = new System.Drawing.Size(201, 80);
+            this.simpleButton1.Size = new System.Drawing.Size(158, 66);
             this.simpleButton1.TabIndex = 28;
             this.simpleButton1.Text = "Close";
             this.simpleButton1.Click += new System.EventHandler(this.simpleButton1_Click);
@@ -108,23 +108,23 @@
             this.btnsearch.Appearance.Options.UseFont = true;
             this.btnsearch.Appearance.Options.UseForeColor = true;
             this.btnsearch.ButtonStyle = DevExpress.XtraEditors.Controls.BorderStyles.Simple;
-            this.btnsearch.Location = new System.Drawing.Point(108, 230);
-            this.btnsearch.Margin = new System.Windows.Forms.Padding(4, 7, 4, 7);
+            this.btnsearch.Location = new System.Drawing.Point(85, 190);
+            this.btnsearch.Margin = new System.Windows.Forms.Padding(3, 6, 3, 6);
             this.btnsearch.Name = "btnsearch";
-            this.btnsearch.Size = new System.Drawing.Size(201, 80);
+            this.btnsearch.Size = new System.Drawing.Size(158, 66);
             this.btnsearch.TabIndex = 27;
             this.btnsearch.Text = "Submit";
             this.btnsearch.Click += new System.EventHandler(this.btnsearch_Click);
             // 
             // POSAddQty
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(14F, 29F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(542, 344);
+            this.ClientSize = new System.Drawing.Size(426, 285);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "POSAddQty";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "POSAddQty";

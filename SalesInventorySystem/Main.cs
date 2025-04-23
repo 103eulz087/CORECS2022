@@ -15,6 +15,7 @@ using DevExpress.XtraBars.Helpers;
 using DevExpress.XtraBars.Ribbon;
 using DevExpress.XtraEditors;
 using SalesInventorySystem.POS;
+using SalesInventorySystem.HotelManagement;
 
 namespace SalesInventorySystem
 {
@@ -496,7 +497,7 @@ namespace SalesInventorySystem
 
         void openPOS()
         {
-            bool isRetail = Database.checkifExist("SELECT POSType FROM POSType where POSType=1");
+            bool isRetail = Database.checkifExist("SELECT POSType FROM dbo.POSType where POSType=1");
 
             if (isRetail == true)
             {
@@ -513,7 +514,9 @@ namespace SalesInventorySystem
             }
             else
             {
-                POS.POSMainWithDashboard pcusatfsmr = new POS.POSMainWithDashboard();
+                //POS.POSMainWithDashboard pcusatfsmr = new POS.POSMainWithDashboard();
+                //HotelFrmRestaurant pcusatfsmr = new HotelFrmRestaurant();
+                POSMainRestoDashboard pcusatfsmr = new POSMainRestoDashboard();
                 pcusatfsmr.Show();
             }
         }
@@ -989,13 +992,13 @@ namespace SalesInventorySystem
             //}
             foreach (Form form in Application.OpenForms)
             {
-                if (form.GetType() == typeof(HOConversion))
+                if (form.GetType() == typeof(HOConversionPOS))
                 {
                     form.Activate();
                     return;
                 }
             }
-            HOConversion hocn = new HOConversion();
+            HOConversionPOS hocn = new HOConversionPOS();
             hocn.Show();
         }
 
@@ -1210,6 +1213,7 @@ namespace SalesInventorySystem
             //}
             //ReInventoryIn pcusatfsmr = new ReInventoryIn();
             //pcusatfsmr.Show();
+            //FOR FOR BUILTIN INVENTORY IN
             foreach (Form form in Application.OpenForms)
             {
                 if (form.GetType() == typeof(POS.POSInventoryIN))
@@ -1218,7 +1222,9 @@ namespace SalesInventorySystem
                     return;
                 }
             }
+           
             POS.POSInventoryIN pcusatfsmr = new POS.POSInventoryIN();
+            pcusatfsmr.MdiParent = this;
             pcusatfsmr.Show();
         }
 
@@ -2669,7 +2675,7 @@ namespace SalesInventorySystem
         {
             string charDate = Database.getSingleResultSet("SELECT dbo.func_ConvertDateTimeToChar('DATE','" + DateTime.Now.ToShortDateString() + "')");
 
-            bool isPOSDetailsExists = Database.checkifExist("SELECT TOP(1) BranchCode FROM POSInfoDetails WHERE MachineUsed='" + Environment.MachineName + "'");
+            bool isPOSDetailsExists = Database.checkifExist("SELECT TOP(1) BranchCode FROM dbo.POSInfoDetails WHERE MachineUsed='" + Environment.MachineName + "'");
 
             //check if END OF DAY Transaction is already Executed, IF True, cashiers cannot login anymore.
             bool isExists = Database.checkifExist("SELECT TOP(1) MachineUsed " +
@@ -2778,8 +2784,8 @@ namespace SalesInventorySystem
                 }
             }
             BranchInventory brancinv = new BranchInventory();
-            //brancinv.MdiParent = this;
-            brancinv.ShowDialog(this);
+            brancinv.MdiParent = this;
+            brancinv.Show();
         }
 
 
@@ -2984,8 +2990,8 @@ namespace SalesInventorySystem
                 }
             }
             Branches.BranchGenInventory brancinv = new Branches.BranchGenInventory();
-            //brancinv.MdiParent = this;
-            brancinv.ShowDialog(this);
+            brancinv.MdiParent = this;
+            brancinv.Show();
         }
 
         private void btnCashierSalesCollectionSummary_ItemClick(object sender, ItemClickEventArgs e)
@@ -3031,6 +3037,52 @@ namespace SalesInventorySystem
             Reporting.BadOrderReport viewgeninv = new Reporting.BadOrderReport();
             viewgeninv.MdiParent = this;
             viewgeninv.Show();
+        }
+
+        private void btnViewExpense_ItemClick(object sender, ItemClickEventArgs e)
+        {
+
+            foreach (Form form in Application.OpenForms)
+            {
+                if (form.GetType() == typeof(HOFormsDevEx.ViewExpenseDevEx))
+                {
+                    form.Activate();
+                    return;
+                }
+            }
+            HOFormsDevEx.ViewExpenseDevEx viewexpense = new HOFormsDevEx.ViewExpenseDevEx();
+            viewexpense.MdiParent = this;
+            viewexpense.Show();
+        }
+
+        private void barButtonItem32_ItemClick_1(object sender, ItemClickEventArgs e)
+        {
+            foreach (Form form in Application.OpenForms)
+            {
+                if (form.GetType() == typeof(Reporting.BIR.POSSalesReportSummary))
+                {
+                    form.Activate();
+                    return;
+                }
+            }
+            Reporting.BIR.POSSalesReportSummary pfoap = new Reporting.BIR.POSSalesReportSummary("B");
+            pfoap.MdiParent = this;
+            pfoap.Show();
+        }
+
+        private void barButtonItem33_ItemClick_1(object sender, ItemClickEventArgs e)
+        {
+            foreach (Form form in Application.OpenForms)
+            {
+                if (form.GetType() == typeof(Reporting.BIR.POSSalesReportSummary))
+                {
+                    form.Activate();
+                    return;
+                }
+            }
+            Reporting.BIR.SalesDetailsComparative pfoap = new Reporting.BIR.SalesDetailsComparative();
+            pfoap.MdiParent = this;
+            pfoap.Show();
         }
 
         private void Main_FormClosing(object sender, FormClosingEventArgs e)
@@ -3240,14 +3292,14 @@ namespace SalesInventorySystem
         {
             string transdate = Database.getSingleResultSet("SELECT dbo.func_ConvertDateTimeToChar('DATE','"+DateTime.Now.ToString()+"') ");
             bool isexist = Database.checkifExist("SELECT TOP(1) BranchCode " +
-                "FROM POSEODMonitoring " +
+                "FROM dbo.POSEODMonitoring " +
                 "WHERE BranchCode='" + Login.assignedBranch + "' " +
                 "AND TransactionDate='" + transdate.Trim() + "' " +
                 "and isCashBegin=1 " +
                 "and isEndOfDay=0 ");
 
             bool isoverride = false;
-            isoverride = Database.checkifExist("SELECT TOP(1) isnull(isOverride,0) FROM POSFunctions WHERE FunctionName='ENDOFDAY' AND isOverride=1");
+            isoverride = Database.checkifExist("SELECT TOP(1) isnull(isOverride,0) FROM dbo.POSFunctions WHERE FunctionName='ENDOFDAY' AND isOverride=1");
             if (!isoverride)
             {
                 if (isexist)
@@ -3356,7 +3408,7 @@ namespace SalesInventorySystem
                     return;
                 }
             }
-            Reporting.BIR.POSSalesReportSummary pfoap = new Reporting.BIR.POSSalesReportSummary();
+            Reporting.BIR.POSSalesReportSummary pfoap = new Reporting.BIR.POSSalesReportSummary("A");
             pfoap.MdiParent = this;
             pfoap.Show();
         }

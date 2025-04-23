@@ -49,35 +49,35 @@
             this.labelControl2.Appearance.Options.UseBackColor = true;
             this.labelControl2.Appearance.Options.UseFont = true;
             this.labelControl2.Appearance.Options.UseForeColor = true;
-            this.labelControl2.Location = new System.Drawing.Point(108, 351);
-            this.labelControl2.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            this.labelControl2.Location = new System.Drawing.Point(154, 505);
+            this.labelControl2.Margin = new System.Windows.Forms.Padding(3, 7, 3, 7);
             this.labelControl2.Name = "labelControl2";
-            this.labelControl2.Size = new System.Drawing.Size(77, 21);
+            this.labelControl2.Size = new System.Drawing.Size(103, 28);
             this.labelControl2.TabIndex = 1;
             this.labelControl2.Text = "Password:";
             this.labelControl2.Visible = false;
             // 
             // txtuserid
             // 
-            this.txtuserid.Location = new System.Drawing.Point(134, 227);
-            this.txtuserid.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            this.txtuserid.Location = new System.Drawing.Point(191, 326);
+            this.txtuserid.Margin = new System.Windows.Forms.Padding(3, 7, 3, 7);
             this.txtuserid.Name = "txtuserid";
             this.txtuserid.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtuserid.Properties.Appearance.Options.UseFont = true;
-            this.txtuserid.Size = new System.Drawing.Size(373, 30);
+            this.txtuserid.Size = new System.Drawing.Size(533, 46);
             this.txtuserid.TabIndex = 2;
             this.txtuserid.EditValueChanged += new System.EventHandler(this.txtuserid_EditValueChanged);
             this.txtuserid.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtuserid_KeyDown);
             // 
             // txtpassword
             // 
-            this.txtpassword.Location = new System.Drawing.Point(134, 287);
-            this.txtpassword.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            this.txtpassword.Location = new System.Drawing.Point(191, 413);
+            this.txtpassword.Margin = new System.Windows.Forms.Padding(3, 7, 3, 7);
             this.txtpassword.Name = "txtpassword";
             this.txtpassword.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtpassword.Properties.Appearance.Options.UseFont = true;
             this.txtpassword.Properties.PasswordChar = '*';
-            this.txtpassword.Size = new System.Drawing.Size(373, 30);
+            this.txtpassword.Size = new System.Drawing.Size(533, 46);
             this.txtpassword.TabIndex = 3;
             this.txtpassword.EditValueChanged += new System.EventHandler(this.txtpassword_EditValueChanged);
             this.txtpassword.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtpassword_KeyDown);
@@ -91,10 +91,10 @@
             this.simpleButton1.Appearance.Options.UseFont = true;
             this.simpleButton1.Appearance.Options.UseForeColor = true;
             this.simpleButton1.ButtonStyle = DevExpress.XtraEditors.Controls.BorderStyles.Flat;
-            this.simpleButton1.Location = new System.Drawing.Point(482, 335);
-            this.simpleButton1.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            this.simpleButton1.Location = new System.Drawing.Point(689, 482);
+            this.simpleButton1.Margin = new System.Windows.Forms.Padding(3, 7, 3, 7);
             this.simpleButton1.Name = "simpleButton1";
-            this.simpleButton1.Size = new System.Drawing.Size(89, 39);
+            this.simpleButton1.Size = new System.Drawing.Size(127, 56);
             this.simpleButton1.TabIndex = 4;
             this.simpleButton1.Text = "Login";
             this.simpleButton1.Visible = false;
@@ -108,10 +108,10 @@
             this.labelControl1.Appearance.Options.UseBackColor = true;
             this.labelControl1.Appearance.Options.UseFont = true;
             this.labelControl1.Appearance.Options.UseForeColor = true;
-            this.labelControl1.Location = new System.Drawing.Point(30, 351);
-            this.labelControl1.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            this.labelControl1.Location = new System.Drawing.Point(43, 505);
+            this.labelControl1.Margin = new System.Windows.Forms.Padding(3, 7, 3, 7);
             this.labelControl1.Name = "labelControl1";
-            this.labelControl1.Size = new System.Drawing.Size(81, 21);
+            this.labelControl1.Size = new System.Drawing.Size(109, 28);
             this.labelControl1.TabIndex = 7;
             this.labelControl1.Text = "Username:";
             this.labelControl1.Visible = false;
@@ -121,10 +121,10 @@
             this.button1.BackColor = System.Drawing.Color.Black;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
-            this.button1.Location = new System.Drawing.Point(560, 0);
-            this.button1.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            this.button1.Location = new System.Drawing.Point(800, 0);
+            this.button1.Margin = new System.Windows.Forms.Padding(3, 7, 3, 7);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(37, 43);
+            this.button1.Size = new System.Drawing.Size(53, 62);
             this.button1.TabIndex = 8;
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
@@ -134,9 +134,9 @@
             this.PictureBox1.BackColor = System.Drawing.Color.Transparent;
             this.PictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("PictureBox1.Image")));
             this.PictureBox1.Location = new System.Drawing.Point(0, 0);
-            this.PictureBox1.Margin = new System.Windows.Forms.Padding(5);
+            this.PictureBox1.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
             this.PictureBox1.Name = "PictureBox1";
-            this.PictureBox1.Size = new System.Drawing.Size(597, 389);
+            this.PictureBox1.Size = new System.Drawing.Size(853, 559);
             this.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.PictureBox1.TabIndex = 17;
             this.PictureBox1.TabStop = false;
@@ -146,9 +146,9 @@
             // 
             this.Appearance.BackColor = System.Drawing.Color.Transparent;
             this.Appearance.Options.UseBackColor = true;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 23F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(600, 389);
+            this.ClientSize = new System.Drawing.Size(857, 559);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.labelControl1);
             this.Controls.Add(this.simpleButton1);
@@ -157,7 +157,7 @@
             this.Controls.Add(this.labelControl2);
             this.Controls.Add(this.PictureBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
+            this.Margin = new System.Windows.Forms.Padding(3, 7, 3, 7);
             this.Name = "Login";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "IT CORE SYSTEM Inc. version 1.0";

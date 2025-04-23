@@ -1093,6 +1093,12 @@
     <Compile Include="HOFormsDevEx\DepartmentsDevEx.Designer.cs">
       <DependentUpon>DepartmentsDevEx.cs</DependentUpon>
     </Compile>
+    <Compile Include="HOFormsDevEx\EditExpenseDevEx.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HOFormsDevEx\EditExpenseDevEx.Designer.cs">
+      <DependentUpon>EditExpenseDevEx.cs</DependentUpon>
+    </Compile>
     <Compile Include="HOFormsDevEx\EditOrderDetailsDevEx.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1152,6 +1158,12 @@
     </Compile>
     <Compile Include="HOFormsDevEx\InventoryAdjustmentDevEx.Designer.cs">
       <DependentUpon>InventoryAdjustmentDevEx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HOFormsDevEx\InventoryConversion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HOFormsDevEx\InventoryConversion.Designer.cs">
+      <DependentUpon>InventoryConversion.cs</DependentUpon>
     </Compile>
     <Compile Include="HOFormsDevEx\InventoryCost.cs">
       <SubType>Form</SubType>
@@ -1411,6 +1423,18 @@
     <Compile Include="HOFormsDevEx\ViewDepreciationSchedule.Designer.cs">
       <DependentUpon>ViewDepreciationSchedule.cs</DependentUpon>
     </Compile>
+    <Compile Include="HOFormsDevEx\ViewExpenseDetailsDevEx.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HOFormsDevEx\ViewExpenseDetailsDevEx.Designer.cs">
+      <DependentUpon>ViewExpenseDetailsDevEx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HOFormsDevEx\ViewExpenseDevEx.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HOFormsDevEx\ViewExpenseDevEx.Designer.cs">
+      <DependentUpon>ViewExpenseDevEx.cs</DependentUpon>
+    </Compile>
     <Compile Include="HOFormsDevEx\ViewGeneralnventory.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1530,6 +1554,12 @@
     </Compile>
     <Compile Include="HOForms\HeadOfficeInventory.Designer.cs">
       <DependentUpon>HeadOfficeInventory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HOForms\HOConversionPOS.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HOForms\HOConversionPOS.Designer.cs">
+      <DependentUpon>HOConversionPOS.cs</DependentUpon>
     </Compile>
     <Compile Include="HOForms\HOConversion.cs">
       <SubType>Form</SubType>
@@ -2222,6 +2252,12 @@
     <Compile Include="POS\AddDiscount.Designer.cs">
       <DependentUpon>AddDiscount.cs</DependentUpon>
     </Compile>
+    <Compile Include="POS\AddDiscountRestaurant.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="POS\AddDiscountRestaurant.Designer.cs">
+      <DependentUpon>AddDiscountRestaurant.cs</DependentUpon>
+    </Compile>
     <Compile Include="POS\AuthorizedConfirmationFrm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -2293,6 +2329,12 @@
     </Compile>
     <Compile Include="POS\POSConfirmPayment.Designer.cs">
       <DependentUpon>POSConfirmPayment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="POS\POSConfirmPaymentResto.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="POS\POSConfirmPaymentResto.Designer.cs">
+      <DependentUpon>POSConfirmPaymentResto.cs</DependentUpon>
     </Compile>
     <Compile Include="POS\POSConfirmPaymentWithKeyboard.cs">
       <SubType>Form</SubType>
@@ -2372,6 +2414,12 @@
     <Compile Include="POS\POSLoader.Designer.cs">
       <DependentUpon>POSLoader.cs</DependentUpon>
     </Compile>
+    <Compile Include="POS\POSMainRestoDashboard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="POS\POSMainRestoDashboard.Designer.cs">
+      <DependentUpon>POSMainRestoDashboard.cs</DependentUpon>
+    </Compile>
     <Compile Include="POS\POSMainWithDashboard.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -2396,6 +2444,12 @@
     <Compile Include="POS\POSPaytoMerchant.Designer.cs">
       <DependentUpon>POSPaytoMerchant.cs</DependentUpon>
     </Compile>
+    <Compile Include="POS\POSplitBillFinal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="POS\POSplitBillFinal.Designer.cs">
+      <DependentUpon>POSplitBillFinal.cs</DependentUpon>
+    </Compile>
     <Compile Include="POS\POSRefund.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -2413,6 +2467,42 @@
     </Compile>
     <Compile Include="POS\POSReprintReport.Designer.cs">
       <DependentUpon>POSReprintReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="POS\POSRestoAuthentication.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="POS\POSRestoAuthentication.Designer.cs">
+      <DependentUpon>POSRestoAuthentication.cs</DependentUpon>
+    </Compile>
+    <Compile Include="POS\POSRestoDineInBilling.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="POS\POSRestoDineInBilling.Designer.cs">
+      <DependentUpon>POSRestoDineInBilling.cs</DependentUpon>
+    </Compile>
+    <Compile Include="POS\POSRestoFinalBilling.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="POS\POSRestoFinalBilling.Designer.cs">
+      <DependentUpon>POSRestoFinalBilling.cs</DependentUpon>
+    </Compile>
+    <Compile Include="POS\POSRestoTableLimit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="POS\POSRestoTableLimit.Designer.cs">
+      <DependentUpon>POSRestoTableLimit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="POS\POSRestoTableOption.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="POS\POSRestoTableOption.Designer.cs">
+      <DependentUpon>POSRestoTableOption.cs</DependentUpon>
+    </Compile>
+    <Compile Include="POS\POSRestoTables.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="POS\POSRestoTables.Designer.cs">
+      <DependentUpon>POSRestoTables.cs</DependentUpon>
     </Compile>
     <Compile Include="POS\POSScreenMirror.cs">
       <SubType>Form</SubType>
@@ -2649,6 +2739,12 @@
     </Compile>
     <Compile Include="Reporting\BIR\POSSalesReportSummary.Designer.cs">
       <DependentUpon>POSSalesReportSummary.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reporting\BIR\SalesDetailsComparative.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reporting\BIR\SalesDetailsComparative.Designer.cs">
+      <DependentUpon>SalesDetailsComparative.cs</DependentUpon>
     </Compile>
     <Compile Include="Reporting\BIR\VATInput.cs">
       <SubType>Form</SubType>
@@ -3288,6 +3384,9 @@
     <EmbeddedResource Include="HOFormsDevEx\DepartmentsDevEx.resx">
       <DependentUpon>DepartmentsDevEx.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="HOFormsDevEx\EditExpenseDevEx.resx">
+      <DependentUpon>EditExpenseDevEx.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="HOFormsDevEx\EditOrderDetailsDevEx.resx">
       <DependentUpon>EditOrderDetailsDevEx.cs</DependentUpon>
     </EmbeddedResource>
@@ -3317,6 +3416,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="HOFormsDevEx\InventoryAdjustmentDevEx.resx">
       <DependentUpon>InventoryAdjustmentDevEx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HOFormsDevEx\InventoryConversion.resx">
+      <DependentUpon>InventoryConversion.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="HOFormsDevEx\InventoryCost.resx">
       <DependentUpon>InventoryCost.cs</DependentUpon>
@@ -3444,6 +3546,12 @@
     <EmbeddedResource Include="HOFormsDevEx\ViewDepreciationSchedule.resx">
       <DependentUpon>ViewDepreciationSchedule.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="HOFormsDevEx\ViewExpenseDetailsDevEx.resx">
+      <DependentUpon>ViewExpenseDetailsDevEx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HOFormsDevEx\ViewExpenseDevEx.resx">
+      <DependentUpon>ViewExpenseDevEx.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="HOFormsDevEx\ViewGeneralnventory.resx">
       <DependentUpon>ViewGeneralnventory.cs</DependentUpon>
     </EmbeddedResource>
@@ -3505,6 +3613,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="HOForms\HeadOfficeInventory.resx">
       <DependentUpon>HeadOfficeInventory.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HOForms\HOConversionPOS.resx">
+      <DependentUpon>HOConversionPOS.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="HOForms\HOConversion.resx">
@@ -3861,6 +3973,9 @@
     <EmbeddedResource Include="POS\AddDiscount.resx">
       <DependentUpon>AddDiscount.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="POS\AddDiscountRestaurant.resx">
+      <DependentUpon>AddDiscountRestaurant.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="POS\AuthorizedConfirmationFrm.resx">
       <DependentUpon>AuthorizedConfirmationFrm.cs</DependentUpon>
     </EmbeddedResource>
@@ -3897,6 +4012,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="POS\POSConfirmPayment.resx">
       <DependentUpon>POSConfirmPayment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="POS\POSConfirmPaymentResto.resx">
+      <DependentUpon>POSConfirmPaymentResto.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="POS\POSConfirmPaymentWithKeyboard.resx">
       <DependentUpon>POSConfirmPaymentWithKeyboard.cs</DependentUpon>
@@ -3937,6 +4055,9 @@
     <EmbeddedResource Include="POS\POSLoader.resx">
       <DependentUpon>POSLoader.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="POS\POSMainRestoDashboard.resx">
+      <DependentUpon>POSMainRestoDashboard.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="POS\POSMainWithDashboard.resx">
       <DependentUpon>POSMainWithDashboard.cs</DependentUpon>
     </EmbeddedResource>
@@ -3949,6 +4070,9 @@
     <EmbeddedResource Include="POS\POSPaytoMerchant.resx">
       <DependentUpon>POSPaytoMerchant.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="POS\POSplitBillFinal.resx">
+      <DependentUpon>POSplitBillFinal.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="POS\POSRefund.resx">
       <DependentUpon>POSRefund.cs</DependentUpon>
     </EmbeddedResource>
@@ -3957,6 +4081,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="POS\POSReprintReport.resx">
       <DependentUpon>POSReprintReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="POS\POSRestoAuthentication.resx">
+      <DependentUpon>POSRestoAuthentication.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="POS\POSRestoDineInBilling.resx">
+      <DependentUpon>POSRestoDineInBilling.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="POS\POSRestoFinalBilling.resx">
+      <DependentUpon>POSRestoFinalBilling.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="POS\POSRestoTableLimit.resx">
+      <DependentUpon>POSRestoTableLimit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="POS\POSRestoTableOption.resx">
+      <DependentUpon>POSRestoTableOption.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="POS\POSScreenMirror.resx">
       <DependentUpon>POSScreenMirror.cs</DependentUpon>
@@ -4081,6 +4220,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reporting\BIR\POSSalesReportSummary.resx">
       <DependentUpon>POSSalesReportSummary.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reporting\BIR\SalesDetailsComparative.resx">
+      <DependentUpon>SalesDetailsComparative.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reporting\BIR\VATInput.resx">
       <DependentUpon>VATInput.cs</DependentUpon>

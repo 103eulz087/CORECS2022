@@ -9809,7 +9809,6 @@ C:\Users\avanc\Downloads\CORECS2022\SalesInventorySystem\bin\Debug\de\DevExpress
 C:\Users\avanc\Downloads\CORECS2022\SalesInventorySystem\bin\Debug\es\DevExpress.Diagram.v19.2.Core.resources.dll
 C:\Users\avanc\Downloads\CORECS2022\SalesInventorySystem\bin\Debug\ja\DevExpress.Diagram.v19.2.Core.resources.dll
 C:\Users\avanc\Downloads\CORECS2022\SalesInventorySystem\bin\Debug\ru\DevExpress.Diagram.v19.2.Core.resources.dll
-C:\Users\avanc\Downloads\CORECS2022\SalesInventorySystem\obj\Debug\SalesInventorySystem.csprojAssemblyReference.cache
 C:\Users\avanc\Downloads\CORECS2022\SalesInventorySystem\obj\Debug\SalesInventorySystem.AccountingDevEx.BalanceSheetAccountDetails.resources
 C:\Users\avanc\Downloads\CORECS2022\SalesInventorySystem\obj\Debug\SalesInventorySystem.AccountingDevEx.BalanceSheetDevEx.resources
 C:\Users\avanc\Downloads\CORECS2022\SalesInventorySystem\obj\Debug\SalesInventorySystem.AccountingDevEx.ViewCheckVoucherDetailsDevEx.resources
@@ -10246,3 +10245,19 @@ C:\Users\avanc\Downloads\CORECS2022\SalesInventorySystem\obj\Debug\SalesInventor
 C:\Users\avanc\Downloads\CORECS2022\SalesInventorySystem\obj\Debug\SalesInventorySystem.Reporting.BadOrderReportDetails.resources
 C:\Users\avanc\Downloads\CORECS2022\SalesInventorySystem\obj\Debug\SalesInventorySystem.DevExReportTemplate.BadOrderDetails.resources
 C:\Users\avanc\Downloads\CORECS2022\SalesInventorySystem\obj\Debug\SalesInventorySystem.POSDevEx.POSShowCreditDetails.resources
+C:\Users\avanc\Downloads\CORECS2022\SalesInventorySystem\obj\Debug\SalesInventorySystem.HOFormsDevEx.ViewExpenseDetailsDevEx.resources
+C:\Users\avanc\Downloads\CORECS2022\SalesInventorySystem\obj\Debug\SalesInventorySystem.HOFormsDevEx.ViewExpenseDevEx.resources
+C:\Users\avanc\Downloads\CORECS2022\SalesInventorySystem\obj\Debug\SalesInventorySystem.HOFormsDevEx.EditExpenseDevEx.resources
+C:\Users\avanc\Downloads\CORECS2022\SalesInventorySystem\obj\Debug\SalesInventorySystem.csprojAssemblyReference.cache
+C:\Users\avanc\Downloads\CORECS2022\SalesInventorySystem\obj\Debug\SalesInventorySystem.Reporting.BIR.SalesDetailsComparative.resources
+C:\Users\avanc\Downloads\CORECS2022\SalesInventorySystem\obj\Debug\SalesInventorySystem.HOConversionPOS.resources
+C:\Users\avanc\Downloads\CORECS2022\SalesInventorySystem\obj\Debug\SalesInventorySystem.HOFormsDevEx.InventoryConversion.resources
+C:\Users\avanc\Downloads\CORECS2022\SalesInventorySystem\obj\Debug\SalesInventorySystem.POS.AddDiscountRestaurant.resources
+C:\Users\avanc\Downloads\CORECS2022\SalesInventorySystem\obj\Debug\SalesInventorySystem.POS.POSMainRestoDashboard.resources
+C:\Users\avanc\Downloads\CORECS2022\SalesInventorySystem\obj\Debug\SalesInventorySystem.POS.POSRestoFinalBilling.resources
+C:\Users\avanc\Downloads\CORECS2022\SalesInventorySystem\obj\Debug\SalesInventorySystem.POS.POSConfirmPaymentResto.resources
+C:\Users\avanc\Downloads\CORECS2022\SalesInventorySystem\obj\Debug\SalesInventorySystem.POS.POSRestoDineInBilling.resources
+C:\Users\avanc\Downloads\CORECS2022\SalesInventorySystem\obj\Debug\SalesInventorySystem.POS.POSRestoAuthentication.resources
+C:\Users\avanc\Downloads\CORECS2022\SalesInventorySystem\obj\Debug\SalesInventorySystem.POS.POSplitBillFinal.resources
+C:\Users\avanc\Downloads\CORECS2022\SalesInventorySystem\obj\Debug\SalesInventorySystem.POS.POSRestoTableLimit.resources
+C:\Users\avanc\Downloads\CORECS2022\SalesInventorySystem\obj\Debug\SalesInventorySystem.POS.POSRestoTableOption.resources

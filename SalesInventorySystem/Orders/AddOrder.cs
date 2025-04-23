@@ -11,6 +11,7 @@ using System.Net.Sockets;
 using System.Threading;
 using System.Net;
 using System.Web;
+using DevExpress.XtraGrid.Views.Grid;
 //using Excel = Microsoft.Office.Interop.Excel;
 
 namespace SalesInventorySystem
@@ -985,6 +986,15 @@ namespace SalesInventorySystem
                     this.Close();
                 }
 
+            }
+        }
+
+        private void gridViewitem_ShowingEditor(object sender, CancelEventArgs e)
+        {
+            GridView view = sender as GridView;
+            if (view.FocusedColumn.FieldName != "SellingPrice" )
+            {
+                e.Cancel = true;
             }
         }
 

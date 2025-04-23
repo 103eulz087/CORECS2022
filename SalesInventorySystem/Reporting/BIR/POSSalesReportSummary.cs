@@ -14,15 +14,30 @@ namespace SalesInventorySystem.Reporting.BIR
 {
     public partial class POSSalesReportSummary : DevExpress.XtraEditors.XtraForm
     {
+        string reportyype = "";
         public POSSalesReportSummary()
         {
             InitializeComponent();
         }
+        public POSSalesReportSummary(string rep)
+        {
+            this.reportyype = rep;
+            InitializeComponent();
+        }
+
         void extract()
         {
             SqlConnection con = Database.getConnection();
             con.Open();
-            string query = "spr_POSSalesReportSummary";
+            string query;
+            if (reportyype == "A")
+            {
+                query = "spr_POSSalesReportSummary";
+            }
+            else
+            {
+                query = "spr_POSSalesReportSummary2";
+            }
             SqlCommand com = new SqlCommand(query, con);
             com.Parameters.AddWithValue("@parmdatefrom", dateEdit1.Text);
             com.Parameters.AddWithValue("@parmdateto", dateEdit2.Text);

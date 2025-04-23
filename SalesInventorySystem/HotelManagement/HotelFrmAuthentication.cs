@@ -23,7 +23,7 @@ namespace SalesInventorySystem.HotelManagement
 
         private void simpleButton1_Click(object sender, EventArgs e)
         {
-            bool isExist = Database.checkifExist("Select WaiterID FROM Waiters WHERE WaiterID='" + txtuserid.Text + "'");
+            bool isExist = Database.checkifExist("Select WaiterID FROM Waiters WHERE WaiterID='" + txtuserid.Text + "'",Database.getCustomizeConnection());
             if(isExist)
             {
                 waiterid = txtuserid.Text;

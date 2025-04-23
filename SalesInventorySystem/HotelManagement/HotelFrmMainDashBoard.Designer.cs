@@ -160,8 +160,6 @@
             this.barAndDockingController1.LookAndFeel.SkinName = "DevExpress Dark Style";
             this.barAndDockingController1.LookAndFeel.UseDefaultLookAndFeel = false;
             this.barAndDockingController1.PropertiesBar.AllowLinkLighting = false;
-            this.barAndDockingController1.PropertiesBar.DefaultGlyphSize = new System.Drawing.Size(16, 16);
-            this.barAndDockingController1.PropertiesBar.DefaultLargeGlyphSize = new System.Drawing.Size(32, 32);
             // 
             // tabControl1
             // 
@@ -175,10 +173,10 @@
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
-            this.tabControl1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.tabControl1.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1421, 816);
+            this.tabControl1.Size = new System.Drawing.Size(2436, 1275);
             this.tabControl1.TabIndex = 2;
             this.tabControl1.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.tabControl1_DrawItem);
             this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
@@ -187,11 +185,11 @@
             // ForCheckout
             // 
             this.ForCheckout.Controls.Add(this.gridControlCheckout);
-            this.ForCheckout.Location = new System.Drawing.Point(4, 28);
-            this.ForCheckout.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.ForCheckout.Location = new System.Drawing.Point(8, 45);
+            this.ForCheckout.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
             this.ForCheckout.Name = "ForCheckout";
-            this.ForCheckout.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.ForCheckout.Size = new System.Drawing.Size(1413, 784);
+            this.ForCheckout.Padding = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            this.ForCheckout.Size = new System.Drawing.Size(2420, 1222);
             this.ForCheckout.TabIndex = 0;
             this.ForCheckout.Text = "Checkout of the Day";
             this.ForCheckout.UseVisualStyleBackColor = true;
@@ -199,12 +197,12 @@
             // gridControlCheckout
             // 
             this.gridControlCheckout.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridControlCheckout.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.gridControlCheckout.Location = new System.Drawing.Point(3, 4);
+            this.gridControlCheckout.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            this.gridControlCheckout.Location = new System.Drawing.Point(5, 6);
             this.gridControlCheckout.MainView = this.gridViewCheckout;
-            this.gridControlCheckout.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.gridControlCheckout.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
             this.gridControlCheckout.Name = "gridControlCheckout";
-            this.gridControlCheckout.Size = new System.Drawing.Size(1407, 776);
+            this.gridControlCheckout.Size = new System.Drawing.Size(2410, 1210);
             this.gridControlCheckout.TabIndex = 3;
             this.gridControlCheckout.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewCheckout});
@@ -215,6 +213,8 @@
             this.gridViewCheckout.Appearance.HeaderPanel.Options.UseFont = true;
             this.gridViewCheckout.Appearance.Row.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gridViewCheckout.Appearance.Row.Options.UseFont = true;
+            this.gridViewCheckout.DetailHeight = 547;
+            this.gridViewCheckout.FixedLineWidth = 3;
             this.gridViewCheckout.GridControl = this.gridControlCheckout;
             this.gridViewCheckout.Name = "gridViewCheckout";
             this.gridViewCheckout.OptionsBehavior.Editable = false;
@@ -225,11 +225,11 @@
             // ForCleaning
             // 
             this.ForCleaning.Controls.Add(this.panel2);
-            this.ForCleaning.Location = new System.Drawing.Point(4, 28);
-            this.ForCleaning.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.ForCleaning.Location = new System.Drawing.Point(8, 45);
+            this.ForCleaning.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
             this.ForCleaning.Name = "ForCleaning";
-            this.ForCleaning.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.ForCleaning.Size = new System.Drawing.Size(1413, 784);
+            this.ForCleaning.Padding = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            this.ForCleaning.Size = new System.Drawing.Size(2420, 1222);
             this.ForCleaning.TabIndex = 1;
             this.ForCleaning.Text = "For Cleaning";
             this.ForCleaning.UseVisualStyleBackColor = true;
@@ -238,21 +238,21 @@
             // 
             this.panel2.Controls.Add(this.gridControlCleaning);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(3, 4);
-            this.panel2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.panel2.Location = new System.Drawing.Point(5, 6);
+            this.panel2.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1407, 776);
+            this.panel2.Size = new System.Drawing.Size(2410, 1210);
             this.panel2.TabIndex = 3;
             // 
             // gridControlCleaning
             // 
             this.gridControlCleaning.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridControlCleaning.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.gridControlCleaning.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
             this.gridControlCleaning.Location = new System.Drawing.Point(0, 0);
             this.gridControlCleaning.MainView = this.gridViewCleaning;
-            this.gridControlCleaning.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.gridControlCleaning.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
             this.gridControlCleaning.Name = "gridControlCleaning";
-            this.gridControlCleaning.Size = new System.Drawing.Size(1407, 776);
+            this.gridControlCleaning.Size = new System.Drawing.Size(2410, 1210);
             this.gridControlCleaning.TabIndex = 1;
             this.gridControlCleaning.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewCleaning});
@@ -264,6 +264,8 @@
             this.gridViewCleaning.Appearance.HeaderPanel.Options.UseFont = true;
             this.gridViewCleaning.Appearance.Row.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gridViewCleaning.Appearance.Row.Options.UseFont = true;
+            this.gridViewCleaning.DetailHeight = 547;
+            this.gridViewCleaning.FixedLineWidth = 3;
             this.gridViewCleaning.GridControl = this.gridControlCleaning;
             this.gridViewCleaning.Name = "gridViewCleaning";
             this.gridViewCleaning.OptionsBehavior.Editable = false;
@@ -274,11 +276,11 @@
             // Available
             // 
             this.Available.Controls.Add(this.panel3);
-            this.Available.Location = new System.Drawing.Point(4, 28);
-            this.Available.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.Available.Location = new System.Drawing.Point(8, 45);
+            this.Available.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
             this.Available.Name = "Available";
-            this.Available.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.Available.Size = new System.Drawing.Size(1413, 784);
+            this.Available.Padding = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            this.Available.Size = new System.Drawing.Size(2420, 1222);
             this.Available.TabIndex = 2;
             this.Available.Text = "Available";
             this.Available.UseVisualStyleBackColor = true;
@@ -287,21 +289,21 @@
             // 
             this.panel3.Controls.Add(this.gridControlAvailable);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel3.Location = new System.Drawing.Point(3, 4);
-            this.panel3.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.panel3.Location = new System.Drawing.Point(5, 6);
+            this.panel3.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(1407, 776);
+            this.panel3.Size = new System.Drawing.Size(2410, 1210);
             this.panel3.TabIndex = 4;
             // 
             // gridControlAvailable
             // 
             this.gridControlAvailable.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridControlAvailable.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.gridControlAvailable.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
             this.gridControlAvailable.Location = new System.Drawing.Point(0, 0);
             this.gridControlAvailable.MainView = this.gridViewAvailable;
-            this.gridControlAvailable.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.gridControlAvailable.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
             this.gridControlAvailable.Name = "gridControlAvailable";
-            this.gridControlAvailable.Size = new System.Drawing.Size(1407, 776);
+            this.gridControlAvailable.Size = new System.Drawing.Size(2410, 1210);
             this.gridControlAvailable.TabIndex = 2;
             this.gridControlAvailable.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewAvailable});
@@ -313,6 +315,8 @@
             this.gridViewAvailable.Appearance.HeaderPanel.Options.UseFont = true;
             this.gridViewAvailable.Appearance.Row.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gridViewAvailable.Appearance.Row.Options.UseFont = true;
+            this.gridViewAvailable.DetailHeight = 547;
+            this.gridViewAvailable.FixedLineWidth = 3;
             this.gridViewAvailable.GridControl = this.gridControlAvailable;
             this.gridViewAvailable.Name = "gridViewAvailable";
             this.gridViewAvailable.OptionsBehavior.Editable = false;
@@ -323,11 +327,11 @@
             // Occupied
             // 
             this.Occupied.Controls.Add(this.groupBox2);
-            this.Occupied.Location = new System.Drawing.Point(4, 28);
-            this.Occupied.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.Occupied.Location = new System.Drawing.Point(8, 45);
+            this.Occupied.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
             this.Occupied.Name = "Occupied";
-            this.Occupied.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.Occupied.Size = new System.Drawing.Size(1413, 784);
+            this.Occupied.Padding = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            this.Occupied.Size = new System.Drawing.Size(2420, 1222);
             this.Occupied.TabIndex = 3;
             this.Occupied.Text = "Occupied";
             this.Occupied.UseVisualStyleBackColor = true;
@@ -336,23 +340,23 @@
             // 
             this.groupBox2.Controls.Add(this.gridControlOccupied);
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox2.Location = new System.Drawing.Point(3, 4);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.groupBox2.Location = new System.Drawing.Point(5, 6);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.groupBox2.Size = new System.Drawing.Size(1407, 776);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            this.groupBox2.Size = new System.Drawing.Size(2410, 1210);
             this.groupBox2.TabIndex = 5;
             this.groupBox2.TabStop = false;
             // 
             // gridControlOccupied
             // 
             this.gridControlOccupied.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridControlOccupied.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.gridControlOccupied.Location = new System.Drawing.Point(3, 24);
+            this.gridControlOccupied.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            this.gridControlOccupied.Location = new System.Drawing.Point(5, 38);
             this.gridControlOccupied.MainView = this.gridViewOccupied;
-            this.gridControlOccupied.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.gridControlOccupied.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
             this.gridControlOccupied.Name = "gridControlOccupied";
-            this.gridControlOccupied.Size = new System.Drawing.Size(1401, 748);
+            this.gridControlOccupied.Size = new System.Drawing.Size(2400, 1166);
             this.gridControlOccupied.TabIndex = 3;
             this.gridControlOccupied.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewOccupied});
@@ -364,6 +368,8 @@
             this.gridViewOccupied.Appearance.HeaderPanel.Options.UseFont = true;
             this.gridViewOccupied.Appearance.Row.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gridViewOccupied.Appearance.Row.Options.UseFont = true;
+            this.gridViewOccupied.DetailHeight = 547;
+            this.gridViewOccupied.FixedLineWidth = 3;
             this.gridViewOccupied.GridControl = this.gridControlOccupied;
             this.gridViewOccupied.Name = "gridViewOccupied";
             this.gridViewOccupied.OptionsBehavior.Editable = false;
@@ -374,11 +380,11 @@
             // ForCollection
             // 
             this.ForCollection.Controls.Add(this.gridControlCollection);
-            this.ForCollection.Location = new System.Drawing.Point(4, 28);
-            this.ForCollection.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.ForCollection.Location = new System.Drawing.Point(8, 45);
+            this.ForCollection.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
             this.ForCollection.Name = "ForCollection";
-            this.ForCollection.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.ForCollection.Size = new System.Drawing.Size(1413, 784);
+            this.ForCollection.Padding = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            this.ForCollection.Size = new System.Drawing.Size(2420, 1222);
             this.ForCollection.TabIndex = 4;
             this.ForCollection.Text = "For Collection";
             this.ForCollection.UseVisualStyleBackColor = true;
@@ -386,12 +392,12 @@
             // gridControlCollection
             // 
             this.gridControlCollection.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridControlCollection.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.gridControlCollection.Location = new System.Drawing.Point(3, 4);
+            this.gridControlCollection.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            this.gridControlCollection.Location = new System.Drawing.Point(5, 6);
             this.gridControlCollection.MainView = this.gridViewCollection;
-            this.gridControlCollection.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.gridControlCollection.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
             this.gridControlCollection.Name = "gridControlCollection";
-            this.gridControlCollection.Size = new System.Drawing.Size(1407, 776);
+            this.gridControlCollection.Size = new System.Drawing.Size(2410, 1210);
             this.gridControlCollection.TabIndex = 3;
             this.gridControlCollection.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewCollection});
@@ -402,6 +408,8 @@
             this.gridViewCollection.Appearance.HeaderPanel.Options.UseFont = true;
             this.gridViewCollection.Appearance.Row.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gridViewCollection.Appearance.Row.Options.UseFont = true;
+            this.gridViewCollection.DetailHeight = 547;
+            this.gridViewCollection.FixedLineWidth = 3;
             this.gridViewCollection.GridControl = this.gridControlCollection;
             this.gridViewCollection.Name = "gridViewCollection";
             this.gridViewCollection.OptionsBehavior.Editable = false;
@@ -412,11 +420,11 @@
             // checkinAndReservation
             // 
             this.checkinAndReservation.Controls.Add(this.tableLayoutPanel1);
-            this.checkinAndReservation.Location = new System.Drawing.Point(4, 28);
-            this.checkinAndReservation.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.checkinAndReservation.Location = new System.Drawing.Point(8, 45);
+            this.checkinAndReservation.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
             this.checkinAndReservation.Name = "checkinAndReservation";
-            this.checkinAndReservation.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.checkinAndReservation.Size = new System.Drawing.Size(1413, 784);
+            this.checkinAndReservation.Padding = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            this.checkinAndReservation.Size = new System.Drawing.Size(2420, 1222);
             this.checkinAndReservation.TabIndex = 5;
             this.checkinAndReservation.Text = "CheckedIn & Reservations";
             this.checkinAndReservation.UseVisualStyleBackColor = true;
@@ -429,34 +437,34 @@
             this.tableLayoutPanel1.Controls.Add(this.groupControl2, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.groupControl1, 0, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 4);
-            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(5, 6);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1407, 776);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(2410, 1210);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // groupControl2
             // 
             this.groupControl2.Controls.Add(this.gridControl7);
             this.groupControl2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupControl2.Location = new System.Drawing.Point(706, 4);
-            this.groupControl2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.groupControl2.Location = new System.Drawing.Point(1210, 6);
+            this.groupControl2.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
             this.groupControl2.Name = "groupControl2";
-            this.groupControl2.Size = new System.Drawing.Size(698, 768);
+            this.groupControl2.Size = new System.Drawing.Size(1195, 1198);
             this.groupControl2.TabIndex = 1;
             this.groupControl2.Text = "Reservations";
             // 
             // gridControl7
             // 
             this.gridControl7.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridControl7.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.gridControl7.Location = new System.Drawing.Point(2, 25);
+            this.gridControl7.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            this.gridControl7.Location = new System.Drawing.Point(3, 45);
             this.gridControl7.MainView = this.gridView7;
-            this.gridControl7.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.gridControl7.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
             this.gridControl7.Name = "gridControl7";
-            this.gridControl7.Size = new System.Drawing.Size(694, 741);
+            this.gridControl7.Size = new System.Drawing.Size(1189, 1150);
             this.gridControl7.TabIndex = 4;
             this.gridControl7.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView7});
@@ -468,6 +476,8 @@
             this.gridView7.Appearance.HeaderPanel.Options.UseFont = true;
             this.gridView7.Appearance.Row.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gridView7.Appearance.Row.Options.UseFont = true;
+            this.gridView7.DetailHeight = 547;
+            this.gridView7.FixedLineWidth = 3;
             this.gridView7.GridControl = this.gridControl7;
             this.gridView7.Name = "gridView7";
             this.gridView7.OptionsBehavior.Editable = false;
@@ -479,22 +489,22 @@
             // 
             this.groupControl1.Controls.Add(this.gridControlCheckin);
             this.groupControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupControl1.Location = new System.Drawing.Point(3, 4);
-            this.groupControl1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.groupControl1.Location = new System.Drawing.Point(5, 6);
+            this.groupControl1.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
             this.groupControl1.Name = "groupControl1";
-            this.groupControl1.Size = new System.Drawing.Size(697, 768);
+            this.groupControl1.Size = new System.Drawing.Size(1195, 1198);
             this.groupControl1.TabIndex = 0;
             this.groupControl1.Text = "Currently Checked-In";
             // 
             // gridControlCheckin
             // 
             this.gridControlCheckin.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridControlCheckin.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.gridControlCheckin.Location = new System.Drawing.Point(2, 25);
+            this.gridControlCheckin.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            this.gridControlCheckin.Location = new System.Drawing.Point(3, 45);
             this.gridControlCheckin.MainView = this.gridViewCheckin;
-            this.gridControlCheckin.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.gridControlCheckin.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
             this.gridControlCheckin.Name = "gridControlCheckin";
-            this.gridControlCheckin.Size = new System.Drawing.Size(693, 741);
+            this.gridControlCheckin.Size = new System.Drawing.Size(1189, 1150);
             this.gridControlCheckin.TabIndex = 4;
             this.gridControlCheckin.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewCheckin});
@@ -506,6 +516,8 @@
             this.gridViewCheckin.Appearance.HeaderPanel.Options.UseFont = true;
             this.gridViewCheckin.Appearance.Row.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gridViewCheckin.Appearance.Row.Options.UseFont = true;
+            this.gridViewCheckin.DetailHeight = 547;
+            this.gridViewCheckin.FixedLineWidth = 3;
             this.gridViewCheckin.GridControl = this.gridControlCheckin;
             this.gridViewCheckin.Name = "gridViewCheckin";
             this.gridViewCheckin.OptionsBehavior.Editable = false;
@@ -516,9 +528,10 @@
             // Arrival
             // 
             this.Arrival.Controls.Add(this.tableLayoutPanel2);
-            this.Arrival.Location = new System.Drawing.Point(4, 28);
+            this.Arrival.Location = new System.Drawing.Point(8, 45);
+            this.Arrival.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.Arrival.Name = "Arrival";
-            this.Arrival.Size = new System.Drawing.Size(1413, 784);
+            this.Arrival.Size = new System.Drawing.Size(2420, 1222);
             this.Arrival.TabIndex = 6;
             this.Arrival.Text = "Arrival For Today";
             this.Arrival.UseVisualStyleBackColor = true;
@@ -532,33 +545,33 @@
             this.tableLayoutPanel2.Controls.Add(this.groupControl4, 0, 0);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(1413, 784);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(2420, 1222);
             this.tableLayoutPanel2.TabIndex = 1;
             // 
             // groupControl3
             // 
             this.groupControl3.Controls.Add(this.gridControlArrivalForTomAndBeyond);
             this.groupControl3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupControl3.Location = new System.Drawing.Point(709, 4);
-            this.groupControl3.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.groupControl3.Location = new System.Drawing.Point(1215, 6);
+            this.groupControl3.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
             this.groupControl3.Name = "groupControl3";
-            this.groupControl3.Size = new System.Drawing.Size(701, 776);
+            this.groupControl3.Size = new System.Drawing.Size(1200, 1210);
             this.groupControl3.TabIndex = 1;
             this.groupControl3.Text = "Arrival For Tommorow and Beyond";
             // 
             // gridControlArrivalForTomAndBeyond
             // 
             this.gridControlArrivalForTomAndBeyond.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridControlArrivalForTomAndBeyond.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.gridControlArrivalForTomAndBeyond.Location = new System.Drawing.Point(2, 25);
+            this.gridControlArrivalForTomAndBeyond.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            this.gridControlArrivalForTomAndBeyond.Location = new System.Drawing.Point(3, 45);
             this.gridControlArrivalForTomAndBeyond.MainView = this.gridViewArrivalForTomAndBeyond;
-            this.gridControlArrivalForTomAndBeyond.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.gridControlArrivalForTomAndBeyond.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
             this.gridControlArrivalForTomAndBeyond.Name = "gridControlArrivalForTomAndBeyond";
-            this.gridControlArrivalForTomAndBeyond.Size = new System.Drawing.Size(697, 749);
+            this.gridControlArrivalForTomAndBeyond.Size = new System.Drawing.Size(1194, 1162);
             this.gridControlArrivalForTomAndBeyond.TabIndex = 4;
             this.gridControlArrivalForTomAndBeyond.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewArrivalForTomAndBeyond});
@@ -569,6 +582,8 @@
             this.gridViewArrivalForTomAndBeyond.Appearance.HeaderPanel.Options.UseFont = true;
             this.gridViewArrivalForTomAndBeyond.Appearance.Row.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gridViewArrivalForTomAndBeyond.Appearance.Row.Options.UseFont = true;
+            this.gridViewArrivalForTomAndBeyond.DetailHeight = 547;
+            this.gridViewArrivalForTomAndBeyond.FixedLineWidth = 3;
             this.gridViewArrivalForTomAndBeyond.GridControl = this.gridControlArrivalForTomAndBeyond;
             this.gridViewArrivalForTomAndBeyond.Name = "gridViewArrivalForTomAndBeyond";
             this.gridViewArrivalForTomAndBeyond.OptionsBehavior.Editable = false;
@@ -580,22 +595,22 @@
             // 
             this.groupControl4.Controls.Add(this.gridControlArrivalForToday);
             this.groupControl4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupControl4.Location = new System.Drawing.Point(3, 4);
-            this.groupControl4.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.groupControl4.Location = new System.Drawing.Point(5, 6);
+            this.groupControl4.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
             this.groupControl4.Name = "groupControl4";
-            this.groupControl4.Size = new System.Drawing.Size(700, 776);
+            this.groupControl4.Size = new System.Drawing.Size(1200, 1210);
             this.groupControl4.TabIndex = 0;
             this.groupControl4.Text = "Arrival For Today";
             // 
             // gridControlArrivalForToday
             // 
             this.gridControlArrivalForToday.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridControlArrivalForToday.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.gridControlArrivalForToday.Location = new System.Drawing.Point(2, 25);
+            this.gridControlArrivalForToday.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            this.gridControlArrivalForToday.Location = new System.Drawing.Point(3, 45);
             this.gridControlArrivalForToday.MainView = this.gridViewArrivalForToday;
-            this.gridControlArrivalForToday.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.gridControlArrivalForToday.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
             this.gridControlArrivalForToday.Name = "gridControlArrivalForToday";
-            this.gridControlArrivalForToday.Size = new System.Drawing.Size(696, 749);
+            this.gridControlArrivalForToday.Size = new System.Drawing.Size(1194, 1162);
             this.gridControlArrivalForToday.TabIndex = 4;
             this.gridControlArrivalForToday.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewArrivalForToday});
@@ -607,6 +622,8 @@
             this.gridViewArrivalForToday.Appearance.HeaderPanel.Options.UseFont = true;
             this.gridViewArrivalForToday.Appearance.Row.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gridViewArrivalForToday.Appearance.Row.Options.UseFont = true;
+            this.gridViewArrivalForToday.DetailHeight = 547;
+            this.gridViewArrivalForToday.FixedLineWidth = 3;
             this.gridViewArrivalForToday.GridControl = this.gridControlArrivalForToday;
             this.gridViewArrivalForToday.Name = "gridViewArrivalForToday";
             this.gridViewArrivalForToday.OptionsBehavior.Editable = false;
@@ -621,19 +638,19 @@
             this.checkInToolStripMenuItem,
             this.requestForCleaningToolStripMenuItem});
             this.contextMenuStripAvailable.Name = "contextMenuStripAvailable";
-            this.contextMenuStripAvailable.Size = new System.Drawing.Size(217, 52);
+            this.contextMenuStripAvailable.Size = new System.Drawing.Size(314, 76);
             // 
             // checkInToolStripMenuItem
             // 
             this.checkInToolStripMenuItem.Name = "checkInToolStripMenuItem";
-            this.checkInToolStripMenuItem.Size = new System.Drawing.Size(216, 24);
+            this.checkInToolStripMenuItem.Size = new System.Drawing.Size(313, 36);
             this.checkInToolStripMenuItem.Text = "Check-In";
             this.checkInToolStripMenuItem.Click += new System.EventHandler(this.checkInToolStripMenuItem_Click);
             // 
             // requestForCleaningToolStripMenuItem
             // 
             this.requestForCleaningToolStripMenuItem.Name = "requestForCleaningToolStripMenuItem";
-            this.requestForCleaningToolStripMenuItem.Size = new System.Drawing.Size(216, 24);
+            this.requestForCleaningToolStripMenuItem.Size = new System.Drawing.Size(313, 36);
             this.requestForCleaningToolStripMenuItem.Text = "Request for Cleaning";
             this.requestForCleaningToolStripMenuItem.Click += new System.EventHandler(this.requestForCleaningToolStripMenuItem_Click);
             // 
@@ -643,12 +660,12 @@
             this.contextMenuReservation.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuItem1});
             this.contextMenuReservation.Name = "contextMenuStripAvailable";
-            this.contextMenuReservation.Size = new System.Drawing.Size(136, 28);
+            this.contextMenuReservation.Size = new System.Drawing.Size(186, 40);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(135, 24);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(185, 36);
             this.toolStripMenuItem1.Text = "Check-In";
             this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
             // 
@@ -664,13 +681,13 @@
             this.clientInfoSheetToolStripMenuItem,
             this.viewBookingDetailsToolStripMenuItem});
             this.contextMenuStripCheckin.Name = "contextMenuStripAvailable";
-            this.contextMenuStripCheckin.Size = new System.Drawing.Size(224, 186);
+            this.contextMenuStripCheckin.Size = new System.Drawing.Size(320, 256);
             // 
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItem2.Image")));
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(223, 26);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(319, 36);
             this.toolStripMenuItem2.Text = "Checkout";
             this.toolStripMenuItem2.Click += new System.EventHandler(this.toolStripMenuItem2_Click);
             // 
@@ -678,7 +695,7 @@
             // 
             this.transferRoomToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("transferRoomToolStripMenuItem.Image")));
             this.transferRoomToolStripMenuItem.Name = "transferRoomToolStripMenuItem";
-            this.transferRoomToolStripMenuItem.Size = new System.Drawing.Size(223, 26);
+            this.transferRoomToolStripMenuItem.Size = new System.Drawing.Size(319, 36);
             this.transferRoomToolStripMenuItem.Text = "Transfer Room";
             this.transferRoomToolStripMenuItem.Click += new System.EventHandler(this.transferRoomToolStripMenuItem_Click);
             // 
@@ -686,7 +703,7 @@
             // 
             this.addServiceToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("addServiceToolStripMenuItem.Image")));
             this.addServiceToolStripMenuItem.Name = "addServiceToolStripMenuItem";
-            this.addServiceToolStripMenuItem.Size = new System.Drawing.Size(223, 26);
+            this.addServiceToolStripMenuItem.Size = new System.Drawing.Size(319, 36);
             this.addServiceToolStripMenuItem.Text = "Add Charges";
             this.addServiceToolStripMenuItem.Click += new System.EventHandler(this.addServiceToolStripMenuItem_Click);
             // 
@@ -694,7 +711,7 @@
             // 
             this.addDiscountToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("addDiscountToolStripMenuItem.Image")));
             this.addDiscountToolStripMenuItem.Name = "addDiscountToolStripMenuItem";
-            this.addDiscountToolStripMenuItem.Size = new System.Drawing.Size(223, 26);
+            this.addDiscountToolStripMenuItem.Size = new System.Drawing.Size(319, 36);
             this.addDiscountToolStripMenuItem.Text = "Add Discount";
             this.addDiscountToolStripMenuItem.Click += new System.EventHandler(this.addDiscountToolStripMenuItem_Click);
             // 
@@ -702,7 +719,7 @@
             // 
             this.requestForCleaningToolStripMenuItem1.Image = ((System.Drawing.Image)(resources.GetObject("requestForCleaningToolStripMenuItem1.Image")));
             this.requestForCleaningToolStripMenuItem1.Name = "requestForCleaningToolStripMenuItem1";
-            this.requestForCleaningToolStripMenuItem1.Size = new System.Drawing.Size(223, 26);
+            this.requestForCleaningToolStripMenuItem1.Size = new System.Drawing.Size(319, 36);
             this.requestForCleaningToolStripMenuItem1.Text = "Request for Cleaning";
             this.requestForCleaningToolStripMenuItem1.Click += new System.EventHandler(this.requestForCleaningToolStripMenuItem1_Click);
             // 
@@ -710,7 +727,7 @@
             // 
             this.clientInfoSheetToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("clientInfoSheetToolStripMenuItem.Image")));
             this.clientInfoSheetToolStripMenuItem.Name = "clientInfoSheetToolStripMenuItem";
-            this.clientInfoSheetToolStripMenuItem.Size = new System.Drawing.Size(223, 26);
+            this.clientInfoSheetToolStripMenuItem.Size = new System.Drawing.Size(319, 36);
             this.clientInfoSheetToolStripMenuItem.Text = "Client Info Sheet";
             this.clientInfoSheetToolStripMenuItem.Click += new System.EventHandler(this.clientInfoSheetToolStripMenuItem_Click);
             // 
@@ -718,7 +735,7 @@
             // 
             this.viewBookingDetailsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("viewBookingDetailsToolStripMenuItem.Image")));
             this.viewBookingDetailsToolStripMenuItem.Name = "viewBookingDetailsToolStripMenuItem";
-            this.viewBookingDetailsToolStripMenuItem.Size = new System.Drawing.Size(223, 26);
+            this.viewBookingDetailsToolStripMenuItem.Size = new System.Drawing.Size(319, 36);
             this.viewBookingDetailsToolStripMenuItem.Text = "View Booking Details";
             this.viewBookingDetailsToolStripMenuItem.Click += new System.EventHandler(this.viewBookingDetailsToolStripMenuItem_Click);
             // 
@@ -728,12 +745,12 @@
             this.contextMenuOccupied.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuItem3});
             this.contextMenuOccupied.Name = "contextMenuStripAvailable";
-            this.contextMenuOccupied.Size = new System.Drawing.Size(217, 28);
+            this.contextMenuOccupied.Size = new System.Drawing.Size(314, 40);
             // 
             // toolStripMenuItem3
             // 
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(216, 24);
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(313, 36);
             this.toolStripMenuItem3.Text = "Request for Cleaning";
             this.toolStripMenuItem3.Click += new System.EventHandler(this.toolStripMenuItem3_Click);
             // 
@@ -743,12 +760,12 @@
             this.contextMenuStripForCleaning.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuItem4});
             this.contextMenuStripForCleaning.Name = "contextMenuStripAvailable";
-            this.contextMenuStripForCleaning.Size = new System.Drawing.Size(128, 28);
+            this.contextMenuStripForCleaning.Size = new System.Drawing.Size(168, 40);
             // 
             // toolStripMenuItem4
             // 
             this.toolStripMenuItem4.Name = "toolStripMenuItem4";
-            this.toolStripMenuItem4.Size = new System.Drawing.Size(127, 24);
+            this.toolStripMenuItem4.Size = new System.Drawing.Size(167, 36);
             this.toolStripMenuItem4.Text = "Update";
             this.toolStripMenuItem4.Click += new System.EventHandler(this.toolStripMenuItem4_Click);
             // 
@@ -758,21 +775,21 @@
             this.contextMenuStripArrivalForToday.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuItem5});
             this.contextMenuStripArrivalForToday.Name = "contextMenuStripAvailable";
-            this.contextMenuStripArrivalForToday.Size = new System.Drawing.Size(222, 28);
+            this.contextMenuStripArrivalForToday.Size = new System.Drawing.Size(326, 40);
             // 
             // toolStripMenuItem5
             // 
             this.toolStripMenuItem5.Name = "toolStripMenuItem5";
-            this.toolStripMenuItem5.Size = new System.Drawing.Size(221, 24);
+            this.toolStripMenuItem5.Size = new System.Drawing.Size(325, 36);
             this.toolStripMenuItem5.Text = "Print Thank You Letter";
             // 
             // HotelFrmMainDashBoard
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1421, 816);
+            this.ClientSize = new System.Drawing.Size(2436, 1275);
             this.Controls.Add(this.tabControl1);
-            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
             this.Name = "HotelFrmMainDashBoard";
             this.Text = "HotelFrmMainDashBoard";
             this.Load += new System.EventHandler(this.HotelFrmMainDashBoard_Load);

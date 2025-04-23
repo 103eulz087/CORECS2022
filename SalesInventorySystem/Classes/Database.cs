@@ -698,6 +698,7 @@ namespace SalesInventorySystem
             try
             {
                 SqlCommand com = new SqlCommand(query, con);
+                com.CommandTimeout = 0;
                 SqlDataReader reader = com.ExecuteReader();
                 if(reader.Read())
                 {
@@ -1090,7 +1091,7 @@ namespace SalesInventorySystem
             DataTable table = new DataTable();
             try
             {
-                com.CommandTimeout = 180;
+                com.CommandTimeout = 0;
                 view.Columns.Clear();
                 cont.DataSource = null;
                 adapter.Fill(table);

@@ -75,6 +75,110 @@ namespace SalesInventorySystem
             writer.Close();
             printTextFile2(filetoprint);
         }
+
+
+        public void printReceiptBillingWithDiscount(string transcode, string ordercode, string total, string vatablesale, string vatexemptsale, string vat, string cash, string change, DataGridView gridview, string tableno, bool isDiscount, string disctype,string netdue)
+        {
+
+            String details = "";
+            string filepath = "C:\\POSTransaction\\Restaurant\\Billing\\";
+            string filepath1 = "C:\\POSTransaction\\Restaurant\\LastTransaction\\";
+            details = "" + (Char)27 + (Char)112 + (Char)0 + (Char)25 + "";
+            //string terminalno = "122";
+            details += Classes.ReceiptSetup.doHeader(Login.assignedBranch);
+            //details += Classes.ReceiptSetup.doHeaderDetails(ordercode, transcode, terminalno);
+            details += HelperFunction.PrintLeftText("Table #:" + tableno) + Environment.NewLine;
+            details += Classes.ReceiptSetup.doTitle("TRANSACTION BILL");
+
+            for (int i = 0; i <= gridview.RowCount - 1; i++)
+            {
+                string addV = "";
+                //if (Convert.ToBoolean(gridview.Rows[i].Cells["isVat"].Value.ToString()) == true)
+                //{
+                //    addV = "V";
+                //}
+                //else
+                //{
+                //    addV = "";
+                //}
+                details += HelperFunction.PrintLeftRigthText(gridview.Rows[i].Cells["Particulars"].Value.ToString(), gridview.Rows[i].Cells["Amount"].Value.ToString()) + Environment.NewLine;
+                string a = "  - " + gridview.Rows[i].Cells["Qty"].Value;// + " @ " + gridview.Rows[i].Cells["UnitPrice"].Value;
+                string b = " " + gridview.Rows[i].Cells["Amount"].Value + addV;
+                //details += HelperFunction.PrintLeftText(a) + Environment.NewLine;
+            }
+            details += HelperFunction.PrinttoRight("----------") + Environment.NewLine;
+            details += HelperFunction.PrintLeftRigthText("TOTAL DUE", total) + Environment.NewLine;
+            details += HelperFunction.createDottedLine() + Environment.NewLine;
+
+            if (isDiscount == true)
+            {
+                var rowz = Database.getMultipleQuery($"SELECT DiscIDNo,DiscName,DiscountAmount FROM dbo.SalesDiscount WHERE OrderNo='{ordercode}' and isErrorCorrect=0", "DiscIDNo,DiscName,DiscountAmount");
+                string DiscIDNo, DiscName, DiscountAmount;
+                DiscIDNo = rowz["DiscIDNo"].ToString();
+                DiscName = rowz["DiscName"].ToString();
+                DiscountAmount = rowz["DiscountAmount"].ToString();
+                if (disctype == "SENIOR")
+                {
+                    details += HelperFunction.createDottedLine() + Environment.NewLine;
+                    details += HelperFunction.PrintLeftText("SENIOR DISCOUNT") + Environment.NewLine;
+                    details += HelperFunction.PrintLeftText("OSCA SC/ID: " + DiscIDNo) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftText("Name: " + DiscName) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftRigthText("Discount Amount:", HelperFunction.convertToNumericFormat(Convert.ToDouble(DiscountAmount))) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftText("Signature: _______________") + Environment.NewLine;
+                    details += HelperFunction.createDottedLine() + Environment.NewLine;
+                    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+                    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+                    details += HelperFunction.createDottedLine() + Environment.NewLine;
+                    details += HelperFunction.PrintLeftRigthText("AMOUNT DUE:", HelperFunction.convertToNumericFormat(Convert.ToDouble(netdue))) + Environment.NewLine + Environment.NewLine;
+
+                }
+                else if (disctype == "PWD")
+                {
+                    details += HelperFunction.createDottedLine() + Environment.NewLine;
+                    details += HelperFunction.PrintLeftText("PWD DISCOUNT") + Environment.NewLine;
+                    details += HelperFunction.PrintLeftText("PWD ID: " + DiscIDNo) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftText("Name: " + DiscName) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftRigthText("Discount Amount:", HelperFunction.convertToNumericFormat(Convert.ToDouble(DiscountAmount))) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftText("Signature: _______________") + Environment.NewLine;
+                    details += HelperFunction.createDottedLine() + Environment.NewLine;
+                    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+                    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+                    details += HelperFunction.createDottedLine() + Environment.NewLine;
+                    details += HelperFunction.PrintLeftRigthText("AMOUNT DUE:", HelperFunction.convertToNumericFormat(Convert.ToDouble(netdue))) + Environment.NewLine + Environment.NewLine;
+                }
+            }
+
+            details += HelperFunction.PrintLeftRigthText("VAT Sales", vatablesale) + Environment.NewLine;
+            details += HelperFunction.PrintLeftRigthText("VAT (12%)", vat) + Environment.NewLine;
+            details += HelperFunction.PrintLeftRigthText("VAT-EXEMPT SALES", vatexemptsale) + Environment.NewLine + Environment.NewLine;
+
+            //details += Classes.ReceiptSetup.doFooter();
+            details += HelperFunction.LastPagePaper();
+            if (!Directory.Exists(filepath))
+            {
+                Directory.CreateDirectory(filepath);
+            }
+
+            txtorder = "\\" + ordercode + ".txt";
+            string filetoprint = filepath + txtorder;
+            StreamWriter writer = new StreamWriter(filepath + txtorder);
+            writer.Write(details);
+            writer.Close();
+            printTextFile(filetoprint);
+
+            if (!Directory.Exists(filepath1))
+            {
+                Directory.CreateDirectory(filepath1);
+            }
+            string lasttrans = "\\LastTran.txt";
+            StreamWriter writer1 = new StreamWriter(filepath1 + lasttrans);
+            writer1.Write(details);
+            writer1.Close();
+            //printTextFile(filetoprint);
+        }
+
         //IS USED
         public void printReceiptBilling(string transcode, string ordercode, string total, string vatablesale, string vatexemptsale, string vat, string cash, string change, DataGridView gridview,string tableno)
         {
@@ -100,9 +204,16 @@ namespace SalesInventorySystem
                 //{
                 //    addV = "";
                 //}
-                details += HelperFunction.PrintLeftRigthText(gridview.Rows[i].Cells["Particulars"].Value.ToString(), gridview.Rows[i].Cells["Amount"].Value.ToString()) + Environment.NewLine;
+                details += HelperFunction.PrintLeftText(gridview.Rows[i].Cells["Particulars"].Value.ToString()) + Environment.NewLine;
+
+               
+
+                //details += HelperFunction.PrintLeftRigthText(gridview.Rows[i].Cells["Particulars"].Value.ToString(), gridview.Rows[i].Cells["Amount"].Value.ToString()) + Environment.NewLine;
                 string a = "  - " + gridview.Rows[i].Cells["Qty"].Value;// + " @ " + gridview.Rows[i].Cells["UnitPrice"].Value;
-                string b = " " + gridview.Rows[i].Cells["Amount"].Value + addV;
+                string b = " " + gridview.Rows[i].Cells["Amount"].Value;// + addV;
+                double totamnt = 0.0;
+                totamnt = Convert.ToDouble(b);
+                details += HelperFunction.PrintLeftRigthText(a, HelperFunction.convertToNumericFormat(totamnt)) + Environment.NewLine;
                 //details += HelperFunction.PrintLeftText(a) + Environment.NewLine;
             }
             details += HelperFunction.PrinttoRight("----------") + Environment.NewLine;
@@ -280,11 +391,11 @@ namespace SalesInventorySystem
                 Directory.CreateDirectory(LastTransactionfilepath);
             }
 
-            txtorder = "\\" + PointOfSale.refno + ".txt";
+            txtorder = "\\" + ordercode + ".txt";
             string lastranfile = "\\LastTran.txt";
 
             string filetoprint = filepath + txtorder;
-            StreamWriter writer = new StreamWriter(filepath + txtorder);
+            StreamWriter writer = new StreamWriter(filetoprint);
             writer.Write(details);
             writer.Close();
 
@@ -295,6 +406,303 @@ namespace SalesInventorySystem
 
 
             printTextFile(filetoprint);
+        }
+
+        //THIS TEMPLATE IS USED FOR PLAIN TRANSACTION NO ONE TIME DISCOUNT 
+        public void printReceiptResto(string transcode
+                                , string ordercode
+                                , string total
+                                , string peritemdiscount
+                                , string vatablesale
+                                , string vatexemptsale
+                                , string vat
+                                , string cash
+                                , string change
+                                , DataGridView gridview
+                                , bool isDiscount
+                                , string name
+                                , string address
+                                , string tin
+                                , string bussstyle
+                                , string paytype
+                                , bool iszerorated = false)
+
+
+        {
+
+            String details = "";
+            string filepath = "C:\\POSTransaction\\DailySales\\" + DateTime.Now.ToString("yyyyMMdd") + "\\";
+            string LastTransactionfilepath = "C:\\POSTransaction\\LastTransaction\\";
+            details = "" + (Char)27 + (Char)112 + (Char)0 + (Char)25 + "";
+            string terminalno = "122";
+            details += Classes.ReceiptSetup.doHeader(Login.assignedBranch, GlobalVariables.computerName);
+            details += Classes.ReceiptSetup.doTitle("SALES INVOICE");
+            details += Classes.ReceiptSetup.doHeaderDetails(ordercode, transcode, terminalno, name, address, tin, bussstyle);
+            details += HelperFunction.createDottedLine() + Environment.NewLine;
+
+            for (int i = 0; i <= gridview.RowCount - 1; i++)
+            {
+                string mark = gridview.Rows[i].Cells["isVat"].Value.ToString();
+                string addV = "";
+                if (Convert.ToBoolean(gridview.Rows[i].Cells["isVat"].Value.ToString()) == true)
+                {
+                    addV = "V";
+                }
+                else
+                {
+                    addV = "";
+                }
+                string addD = "";
+                if (Convert.ToDouble(gridview.Rows[i].Cells["Discount"].Value.ToString()) > 0)
+                {
+                    addD = "  - (Less: Discount)";
+                }
+                else
+                {
+                    addD = "";
+                }
+                details += HelperFunction.PrintLeftText(gridview.Rows[i].Cells["Particulars"].Value.ToString()) + Environment.NewLine;
+                string a = "  - " + gridview.Rows[i].Cells["Qty"].Value + " @ " + gridview.Rows[i].Cells["UnitPrice"].Value;
+                double cleanbalance = 0.0;
+                cleanbalance = Convert.ToDouble(gridview.Rows[i].Cells["Amount"].Value) + Convert.ToDouble(gridview.Rows[i].Cells["Discount"].Value);
+
+                // string b = " " + gridview.Rows[i].Cells["Amount"].Value + addV;
+                string b = " " + HelperFunction.convertToNumericFormat(cleanbalance) + addV;
+                details += HelperFunction.PrintLeftRigthText(a, b) + Environment.NewLine;
+                if (Convert.ToDouble(gridview.Rows[i].Cells["Discount"].Value.ToString()) > 0)
+                {
+                    details += HelperFunction.PrintLeftRigthText(addD, "(" + gridview.Rows[i].Cells["Discount"].Value.ToString() + ")") + Environment.NewLine;
+                }
+            }
+            details += HelperFunction.PrinttoRight("----------") + Environment.NewLine;
+            if (Convert.ToDouble(peritemdiscount) > 0)
+            {
+                details += HelperFunction.PrintLeftRigthText("TOTAL DISCOUNT:", peritemdiscount) + Environment.NewLine;
+            }
+            details += HelperFunction.PrintLeftRigthText("TOTAL DUE:", total) + Environment.NewLine;
+            details += HelperFunction.PrinttoRight("==========") + Environment.NewLine;
+
+            if (paytype == "Credit")
+            {
+                details += HelperFunction.PrintLeftRigthText("TENDERED:", HelperFunction.convertToNumericFormat(Convert.ToDouble(POS.POSConfirmPaymentResto.netamountpayable))) + Environment.NewLine + Environment.NewLine;
+                details += HelperFunction.PrintLeftRigthText("CHANGE  :", "0.00") + Environment.NewLine + Environment.NewLine;
+            }
+            details += HelperFunction.PrintLeftRigthText("TENDERED:", cash) + Environment.NewLine;
+            details += HelperFunction.PrintLeftRigthText("CHANGE  :", change) + Environment.NewLine + Environment.NewLine;
+            if (iszerorated == true)
+            {
+                details += HelperFunction.PrintLeftRigthText("VATable Sales", "0.00") + Environment.NewLine;
+                details += HelperFunction.PrintLeftRigthText("VAT Amount", "0.00") + Environment.NewLine;
+                details += HelperFunction.PrintLeftRigthText("VAT-EXEMPT SALES", "0.00") + Environment.NewLine;
+                details += HelperFunction.PrintLeftRigthText("ZERO RATED SALES", total) + Environment.NewLine + Environment.NewLine;
+            }
+            else
+            {
+                details += HelperFunction.PrintLeftRigthText("VATable Sales", vatablesale) + Environment.NewLine;
+                details += HelperFunction.PrintLeftRigthText("VAT Amount", vat) + Environment.NewLine;
+                details += HelperFunction.PrintLeftRigthText("VAT-EXEMPT SALES", vatexemptsale) + Environment.NewLine;
+                details += HelperFunction.PrintLeftRigthText("ZERO RATED SALES", "0.00") + Environment.NewLine + Environment.NewLine;
+            }
+            if (paytype == "Credit")
+            {
+                string cardno = "", cardtype = "", cardrefno = "";
+                var rox = Database.getMultipleQuery("POSCreditCardTransactions", $"ReferenceNo='{ordercode}' ", "CCName,CCNumber,CCType,CCBank,CCPaymentReferenceNo");
+                cardno = rox["CCNumber"].ToString();
+                cardtype = rox["CCType"].ToString();
+                cardrefno = rox["CCPaymentReferenceNo"].ToString();
+                string last4 = Database.getSingleResultSet($"SELECT RIGHT(CCNumber,4) FROM POSCreditCardTransactions WHERE ReferenceNo='{ordercode}'");
+                details += HelperFunction.createDottedLine() + Environment.NewLine;
+                details += HelperFunction.PrintLeftText("PAYMENT TYPE: Credit Card") + Environment.NewLine;
+                details += HelperFunction.PrintLeftText("Card Number: XXXX-XXXX-XXXX-" + last4) + Environment.NewLine;
+                details += HelperFunction.PrintLeftText("Card Type: " + cardtype) + Environment.NewLine;
+                details += HelperFunction.PrintLeftText("Reference No.: " + cardrefno) + Environment.NewLine;
+                details += HelperFunction.createDottedLine() + Environment.NewLine;
+            }
+            if (paytype == "Merchant")
+            {
+                string ReferenceNo = "", MerchantName = "", VoucherCode = "";
+                var rox = Database.getMultipleQuery("POSMerchantTransactions", $"OrderNo='{ordercode}' ", "ReferenceNo,MerchantName,VoucherCode,Amount");
+                ReferenceNo = rox["ReferenceNo"].ToString();
+                MerchantName = rox["MerchantName"].ToString();
+                VoucherCode = rox["VoucherCode"].ToString();
+                //string last4 = Database.getSingleResultSet($"SELECT RIGHT(CCNumber,4) FROM POSCreditCardTransactions WHERE ReferenceNo='{ordercode}'");
+                details += HelperFunction.createDottedLine() + Environment.NewLine;
+                details += HelperFunction.PrintLeftText("PAYMENT TYPE: Merchant " + MerchantName) + Environment.NewLine;
+                //details += HelperFunction.PrintLeftText("Card Number: XXXX-XXXX-XXXX-" + last4) + Environment.NewLine;
+                details += HelperFunction.PrintLeftText("VoucherCode: " + VoucherCode) + Environment.NewLine;
+                details += HelperFunction.PrintLeftText("Reference No.: " + ReferenceNo) + Environment.NewLine;
+                details += HelperFunction.createDottedLine() + Environment.NewLine;
+            }
+
+            string pathfile = System.IO.File.ReadAllText(Application.StartupPath + "\\FOOTER.txt");
+            details += HelperFunction.PrintCenterText(pathfile) + Environment.NewLine;
+            details += HelperFunction.LastPagePaper();
+
+            if (!Directory.Exists(filepath))
+            {
+                Directory.CreateDirectory(filepath);
+            }
+            if (!Directory.Exists(LastTransactionfilepath)) //last ttransaction filepath
+            {
+                Directory.CreateDirectory(LastTransactionfilepath);
+            }
+
+            txtorder =  ordercode + ".txt";
+            string lastranfile = "\\LastTran.txt";
+
+            string filetoprint = filepath + txtorder;
+            StreamWriter writer = new StreamWriter(filepath + ordercode);
+            writer.Write(details);
+            writer.Close();
+
+            string lastfiletoprint = LastTransactionfilepath + ordercode;
+            StreamWriter writerLast = new StreamWriter(LastTransactionfilepath + lastranfile);
+            writerLast.Write(details);
+            writerLast.Close();
+
+
+            printTextFile(filetoprint);
+        }
+
+        public void printReceiptRestoOneLove(string transcode
+                                , string ordercode
+                                , string total
+                                , string peritemdiscount
+                                , string vatablesale
+                                , string vatexemptsale
+                                , string vat
+                                , string cash
+                                , string change
+                                , DataGridView gridview
+                                , bool isDiscount
+                                , string name
+                                , string address
+                                , string tin
+                                , string bussstyle
+                                , string paytype
+                                , bool iszerorated = false)
+
+
+        {
+
+            String details = "";
+            string filepath = "C:\\POSTransaction\\DailySales\\" + DateTime.Now.ToString("yyyyMMdd") + "\\";
+            string LastTransactionfilepath = "C:\\POSTransaction\\LastTransaction\\";
+            details = "" + (Char)27 + (Char)112 + (Char)0 + (Char)25 + "";
+            details += Environment.NewLine;
+            details += Convert.ToInt32(ordercode).ToString();
+            details += Environment.NewLine;
+
+            for (int i = 0; i <= gridview.RowCount - 1; i++)
+            {
+                string mark = gridview.Rows[i].Cells["isVat"].Value.ToString();
+                string addV = "";
+                if (Convert.ToBoolean(gridview.Rows[i].Cells["isVat"].Value.ToString()) == true)
+                {
+                    addV = "V";
+                }
+                else
+                {
+                    addV = "";
+                }
+                string addD = "";
+                if (Convert.ToDouble(gridview.Rows[i].Cells["Discount"].Value.ToString()) > 0)
+                {
+                    addD = "  - (Less: Discount)";
+                }
+                else
+                {
+                    addD = "";
+                }
+                details += HelperFunction.PrintLeftText(gridview.Rows[i].Cells["Particulars"].Value.ToString()) + Environment.NewLine;
+                string a = "  - " + gridview.Rows[i].Cells["Qty"].Value + " @ " + gridview.Rows[i].Cells["UnitPrice"].Value;
+                double cleanbalance = 0.0;
+                cleanbalance = Convert.ToDouble(gridview.Rows[i].Cells["Amount"].Value) + Convert.ToDouble(gridview.Rows[i].Cells["Discount"].Value);
+
+                // string b = " " + gridview.Rows[i].Cells["Amount"].Value + addV;
+                string b = " " + HelperFunction.convertToNumericFormat(cleanbalance) + addV;
+                details += HelperFunction.PrintLeftRigthText(a, b) + Environment.NewLine;
+                if (Convert.ToDouble(gridview.Rows[i].Cells["Discount"].Value.ToString()) > 0)
+                {
+                    details += HelperFunction.PrintLeftRigthText(addD, "(" + gridview.Rows[i].Cells["Discount"].Value.ToString() + ")") + Environment.NewLine;
+                }
+            }
+            details += HelperFunction.PrinttoRight("----------") + Environment.NewLine;
+            if (Convert.ToDouble(peritemdiscount) > 0)
+            {
+                details += HelperFunction.PrintLeftRigthText("TOTAL DISCOUNT:", peritemdiscount) + Environment.NewLine;
+            }
+            details += HelperFunction.PrintLeftRigthText("TOTAL DUE:", total) + Environment.NewLine;
+            details += HelperFunction.PrinttoRight("==========") + Environment.NewLine;
+
+            if (paytype == "Credit")
+            {
+                details += HelperFunction.PrintLeftRigthText("TENDERED:", HelperFunction.convertToNumericFormat(Convert.ToDouble(POS.POSConfirmPaymentResto.netamountpayable))) + Environment.NewLine + Environment.NewLine;
+                details += HelperFunction.PrintLeftRigthText("CHANGE  :", "0.00") + Environment.NewLine + Environment.NewLine;
+            }
+            details += HelperFunction.PrintLeftRigthText("TENDERED:", cash) + Environment.NewLine;
+            details += HelperFunction.PrintLeftRigthText("CHANGE  :", change) + Environment.NewLine + Environment.NewLine;
+
+            if (paytype == "Credit")
+            {
+                string cardno = "", cardtype = "", cardrefno = "";
+                var rox = Database.getMultipleQuery("POSCreditCardTransactions", $"ReferenceNo='{ordercode}' ", "CCName,CCNumber,CCType,CCBank,CCPaymentReferenceNo");
+                cardno = rox["CCNumber"].ToString();
+                cardtype = rox["CCType"].ToString();
+                cardrefno = rox["CCPaymentReferenceNo"].ToString();
+                string last4 = Database.getSingleResultSet($"SELECT RIGHT(CCNumber,4) FROM POSCreditCardTransactions WHERE ReferenceNo='{ordercode}'");
+                details += HelperFunction.createDottedLine() + Environment.NewLine;
+                details += HelperFunction.PrintLeftText("PAYMENT TYPE: Credit Card") + Environment.NewLine;
+                details += HelperFunction.PrintLeftText("Card Number: XXXX-XXXX-XXXX-" + last4) + Environment.NewLine;
+                details += HelperFunction.PrintLeftText("Card Type: " + cardtype) + Environment.NewLine;
+                details += HelperFunction.PrintLeftText("Reference No.: " + cardrefno) + Environment.NewLine;
+                details += HelperFunction.createDottedLine() + Environment.NewLine;
+            }
+            if (paytype == "Merchant")
+            {
+                string ReferenceNo = "", MerchantName = "", VoucherCode = "";
+                var rox = Database.getMultipleQuery("POSMerchantTransactions", $"OrderNo='{ordercode}' ", "ReferenceNo,MerchantName,VoucherCode,Amount");
+                ReferenceNo = rox["ReferenceNo"].ToString();
+                MerchantName = rox["MerchantName"].ToString();
+                VoucherCode = rox["VoucherCode"].ToString();
+                //string last4 = Database.getSingleResultSet($"SELECT RIGHT(CCNumber,4) FROM POSCreditCardTransactions WHERE ReferenceNo='{ordercode}'");
+                details += HelperFunction.createDottedLine() + Environment.NewLine;
+                details += HelperFunction.PrintLeftText("PAYMENT TYPE: Merchant " + MerchantName) + Environment.NewLine;
+                //details += HelperFunction.PrintLeftText("Card Number: XXXX-XXXX-XXXX-" + last4) + Environment.NewLine;
+                details += HelperFunction.PrintLeftText("VoucherCode: " + VoucherCode) + Environment.NewLine;
+                details += HelperFunction.PrintLeftText("Reference No.: " + ReferenceNo) + Environment.NewLine;
+                details += HelperFunction.createDottedLine() + Environment.NewLine;
+            }
+
+            string pathfile = System.IO.File.ReadAllText(Application.StartupPath + "\\FOOTER.txt");
+            //details += HelperFunction.PrintCenterText(pathfile) + Environment.NewLine;
+            details += HelperFunction.LastPagePaper();
+
+            if (!Directory.Exists(filepath))
+            {
+                Directory.CreateDirectory(filepath);
+            }
+            if (!Directory.Exists(LastTransactionfilepath)) //last ttransaction filepath
+            {
+                Directory.CreateDirectory(LastTransactionfilepath);
+            }
+
+            txtorder = "\\" + ordercode + ".txt";
+            string lastranfile = "\\LastTran.txt";
+
+            string filetoprint = filepath + txtorder;
+            StreamWriter writer = new StreamWriter(filetoprint);
+            writer.Write(details);
+            writer.Close();
+
+            string lastfiletoprint = LastTransactionfilepath + ordercode;
+            StreamWriter writerLast = new StreamWriter(LastTransactionfilepath + lastranfile);
+            writerLast.Write(details);
+            writerLast.Close();
+            for(int xxx=0;xxx<=3;xxx++)
+            {
+                printTextFile(filetoprint);
+            }
         }
         //THIS TEMPLATE HAS BEEN USED WITH ONE TIME DISCOUNT (e.g SENIOR,PWD,OTHERS)
         public void printReceipt(string transcode
@@ -571,6 +979,555 @@ namespace SalesInventorySystem
             printTextFile(filetoprint);
         }
 
+        ///--------------------------------------------------------------------------------
+        /////THIS TEMPLATE HAS BEEN USED WITH ONE TIME DISCOUNT (e.g SENIOR,PWD,OTHERS)
+        public void printReceiptResto(string transcode
+                                , string ordercode
+                                , string total
+                                , string peritemdiscount
+                                , string netofvatindiscitems
+                                , string netofvatindinonscitems
+                                , string vatablesale
+                                , string vatexemptsale
+                                , string vat
+                                , string cash
+                                , string change
+                                , DataGridView gridview
+                                , bool isDiscount
+                                , string disctype
+                                , string footerlabel
+                                , string name
+                                , string address
+                                , string tin
+                                , string bussstyle
+                                , string paytype)
+        {
+
+            String details = "";
+            string filepath = "C:\\POSTransaction\\DailySales\\" + DateTime.Now.ToString("yyyyMMdd") + "\\";
+            string LastTransactionfilepath = "C:\\POSTransaction\\LastTransaction\\";
+            details = "" + (Char)27 + (Char)112 + (Char)0 + (Char)25 + "";
+            string terminalno = "122";
+            details += Classes.ReceiptSetup.doHeader(Login.assignedBranch, Environment.MachineName);
+            details += Classes.ReceiptSetup.doTitle("SALES INVOICE");
+            details += Classes.ReceiptSetup.doHeaderDetails(ordercode, transcode, terminalno, name, address, tin, bussstyle);
+            details += HelperFunction.createDottedLine() + Environment.NewLine;
+
+            var rows = Database.getMultipleQuery("SalesDiscount", $"OrderNo='{ordercode}' " +
+                $"AND isErrorCorrect=0 " +
+                $"AND BranchCode='{Login.assignedBranch}' " +
+                $"AND MachineUsed='{Environment.MachineName}'", "DiscRemarks,DiscountPercentage,DiscountAmount");
+
+            string discremarks = rows["DiscRemarks"].ToString();
+            string discountpercentage = rows["DiscountPercentage"].ToString();
+            string discountamount = rows["DiscountAmount"].ToString();
+            double discpercent = Convert.ToDouble(discountpercentage) * 100;
+            double totalvatitems = 0.0;
+            for (int i = 0; i <= gridview.RowCount - 1; i++)
+            {
+                string addV = "";
+                if (Convert.ToBoolean(gridview.Rows[i].Cells["isVat"].Value.ToString()) == true)
+                {
+                    addV = "V";
+                    totalvatitems += Convert.ToDouble(gridview.Rows[i].Cells["Amount"].Value.ToString());
+                }
+                else
+                {
+                    addV = "";
+                }
+                string addD = "";
+                if (Convert.ToDouble(gridview.Rows[i].Cells["Discount"].Value.ToString()) > 0)
+                {
+                    addD = "  - (Less: Discount)";
+                }
+                else
+                {
+                    addD = "";
+                }
+
+                details += HelperFunction.PrintLeftText(gridview.Rows[i].Cells["Particulars"].Value.ToString()) + Environment.NewLine;
+                string a = "  - " + gridview.Rows[i].Cells["Qty"].Value + " @ " + gridview.Rows[i].Cells["UnitPrice"].Value;
+                double cleanbalance = 0.0;
+                cleanbalance = Convert.ToDouble(gridview.Rows[i].Cells["Amount"].Value) + Convert.ToDouble(gridview.Rows[i].Cells["Discount"].Value);
+
+
+                string b = " " + HelperFunction.convertToNumericFormat(cleanbalance) + addV;
+                details += HelperFunction.PrintLeftRigthText(a, b) + Environment.NewLine;
+                if (Convert.ToDouble(gridview.Rows[i].Cells["Discount"].Value.ToString()) > 0)
+                {
+                    details += HelperFunction.PrintLeftRigthText(addD, "(" + gridview.Rows[i].Cells["Discount"].Value.ToString() + ")") + Environment.NewLine;
+                }
+                if (isDiscount)
+                {
+                    if (disctype == "REGULAR")
+                    {
+                        details += HelperFunction.PrintLeftText("  - (Less: Discount " + discpercent.ToString() + "%)") + Environment.NewLine;
+                    }
+                    else if (disctype != "REGULAR")
+                    {
+                        bool isSCorPWDDiscounted = false;
+                        isSCorPWDDiscounted = Database.checkifExist("SELECT TOP 1 Description FROM Products WHERE BranchCode='" + Login.assignedBranch + "' " +
+                            "AND Description='" + gridview.Rows[i].Cells["Particulars"].Value.ToString() + "' " +
+                            "AND isDiscount=1");
+                        if (isSCorPWDDiscounted)
+                        {
+                            details += HelperFunction.PrintLeftText("  - (Less: Discount " + discpercent.ToString() + "%)") + Environment.NewLine;
+                        }
+                    }
+
+                }
+            }
+            details += HelperFunction.PrinttoRight("----------") + Environment.NewLine;
+            if (Convert.ToDouble(peritemdiscount) > 0)
+            {
+                details += HelperFunction.PrintLeftRigthText("TOTAL DISCOUNT:", peritemdiscount) + Environment.NewLine;
+            }
+            details += HelperFunction.PrintLeftRigthText("TOTAL DUE:", total) + Environment.NewLine;
+            details += HelperFunction.PrinttoRight("==========") + Environment.NewLine;
+
+            double lessvat = 0.0, netofvat = 0.0, lessscdisc = 0.0, netofscdisc = 0.0, netofnonscdisc = 0.0, addvat = 0.0, totaltotal = 0.0;
+            netofnonscdisc = Convert.ToDouble(netofvatindinonscitems);
+            if (isDiscount == true)
+            {
+                //if (POS.POSConfirmPayment.isSeniorDiscount == true)
+                if (disctype == "SENIOR")
+                {
+                    details += HelperFunction.createDottedLine() + Environment.NewLine;
+                    details += HelperFunction.PrintLeftText("SENIOR DISCOUNT") + Environment.NewLine;
+                    details += HelperFunction.PrintLeftText("OSCA SC/ID: " + POS.POSConfirmPaymentResto.discidno) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftText("Name: " + POS.POSConfirmPaymentResto.discname) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftRigthText("Discount Amount:", HelperFunction.convertToNumericFormat(Convert.ToDouble(POS.POSConfirmPaymentResto.discamount))) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftText("Signature: _______________") + Environment.NewLine;
+                    details += HelperFunction.createDottedLine() + Environment.NewLine;
+                    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+                    lessvat = Math.Round(Convert.ToDouble(netofvatindiscitems) * 0.12, 2);
+                    netofvat = Math.Round(Convert.ToDouble(netofvatindiscitems), 2);
+                    lessscdisc = Math.Round(netofvat * Convert.ToDouble(discountpercentage), 2);
+                    //lessscdisc = Math.Round(netofvat * 0.05, 2);
+                    netofscdisc = Math.Round(netofvat - lessscdisc, 2);
+                    addvat = Math.Round(netofscdisc * .12, 2);
+                    totaltotal = Math.Round(netofscdisc + addvat, 2);
+                    details += HelperFunction.PrintLeftRigthText("Less VAT:", HelperFunction.convertToNumericFormat(lessvat)) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftRigthText("Net of VAT:", HelperFunction.convertToNumericFormat(netofvat)) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftRigthText("Less SC Discount:", HelperFunction.convertToNumericFormat(lessscdisc)) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftRigthText("Net SC Discount:", HelperFunction.convertToNumericFormat(netofscdisc)) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftRigthText("Add VAT:", HelperFunction.convertToNumericFormat(addvat)) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftRigthText("Total:", HelperFunction.convertToNumericFormat(totaltotal)) + Environment.NewLine;
+
+                    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+                    details += HelperFunction.createDottedLine() + Environment.NewLine;
+                    details += HelperFunction.PrintLeftRigthText("AMOUNT DUE:", HelperFunction.convertToNumericFormat(Convert.ToDouble(POS.POSConfirmPaymentResto.netamountpayable))) + Environment.NewLine + Environment.NewLine;
+
+                }
+                //else if (POS.POSConfirmPayment.isPwdDiscount == true)
+                else if (disctype == "PWD")
+                {
+                    details += HelperFunction.createDottedLine() + Environment.NewLine;
+                    details += HelperFunction.PrintLeftText("PWD DISCOUNT") + Environment.NewLine;
+                    details += HelperFunction.PrintLeftText("PWD ID: " + POS.POSConfirmPaymentResto.discidno) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftText("Name: " + POS.POSConfirmPaymentResto.discname) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftRigthText("Discount Amount:", HelperFunction.convertToNumericFormat(Convert.ToDouble(POS.POSConfirmPaymentResto.discamount))) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftText("Signature: _______________") + Environment.NewLine;
+                    details += HelperFunction.createDottedLine() + Environment.NewLine;
+                    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+                    lessvat = Math.Round(Convert.ToDouble(netofvatindiscitems) * 0.12, 2);
+                    netofvat = Math.Round(Convert.ToDouble(netofvatindiscitems), 2);
+                    //lessscdisc = Math.Round(netofvat * 0.05, 2);
+                    lessscdisc = Math.Round(netofvat * Convert.ToDouble(discountpercentage), 2);
+                    netofscdisc = Math.Round(netofvat - lessscdisc, 2);
+                    addvat = Math.Round(netofscdisc * .12, 2);
+                    totaltotal = Math.Round(netofscdisc + addvat, 2);
+
+                    details += HelperFunction.PrintLeftRigthText("Less VAT:", HelperFunction.convertToNumericFormat(lessvat)) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftRigthText("Net of VAT:", HelperFunction.convertToNumericFormat(netofvat)) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftRigthText("Less PWD Discount:", HelperFunction.convertToNumericFormat(lessscdisc)) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftRigthText("Net PWD Discount:", HelperFunction.convertToNumericFormat(netofscdisc)) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftRigthText("Add VAT:", HelperFunction.convertToNumericFormat(addvat)) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftRigthText("Total:", HelperFunction.convertToNumericFormat(totaltotal)) + Environment.NewLine;
+
+                    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+                    details += HelperFunction.createDottedLine() + Environment.NewLine;
+                    details += HelperFunction.PrintLeftRigthText("AMOUNT DUE:", HelperFunction.convertToNumericFormat(Convert.ToDouble(POS.POSConfirmPaymentResto.netamountpayable))) + Environment.NewLine + Environment.NewLine;
+                }
+                //else if (POS.POSConfirmPayment.isOthersDiscount == true)
+                else if (disctype == "REGULAR")
+                {
+                    details += HelperFunction.createDottedLine() + Environment.NewLine;
+                    details += HelperFunction.PrintLeftText("REGULAR DISCOUNT") + Environment.NewLine;
+                    //details += HelperFunction.PrintLeftText("Remarks: " + POS.POSConfirmPayment.othersRemarks) + Environment.NewLine + Environment.NewLine;
+                    //details += HelperFunction.PrintLeftRigthText("Discount Amount: ", HelperFunction.convertToNumericFormat(Convert.ToDouble(POS.POSConfirmPayment.otherDiscountAmount))) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftText("Remarks: " + discremarks) + Environment.NewLine + Environment.NewLine;
+                    details += HelperFunction.PrintLeftRigthText("Discount Amount: ", HelperFunction.convertToNumericFormat(Convert.ToDouble(POS.POSConfirmPaymentResto.discamount))) + Environment.NewLine;
+                    details += HelperFunction.createDottedLine() + Environment.NewLine;
+                    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+                    lessvat = Math.Round(totalvatitems / 1.12 * 0.12, 2);
+                    netofvat = Math.Round(totalvatitems / 1.12, 2);
+                    lessscdisc = Math.Round(netofvat * Convert.ToDouble(discountpercentage), 2);
+                    netofscdisc = Math.Round(netofvat - lessscdisc, 2);
+                    addvat = Math.Round(netofscdisc * .12, 2);
+                    totaltotal = Math.Round(netofscdisc + addvat, 2);
+
+                    details += HelperFunction.PrintLeftRigthText("Less VAT:", HelperFunction.convertToNumericFormat(lessvat)) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftRigthText("Net of VAT:", HelperFunction.convertToNumericFormat(netofvat)) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftRigthText("Less Reg Discount:", HelperFunction.convertToNumericFormat(lessscdisc)) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftRigthText("Net Reg Discount:", HelperFunction.convertToNumericFormat(netofscdisc)) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftRigthText("Add VAT:", HelperFunction.convertToNumericFormat(addvat)) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftRigthText("Total:", HelperFunction.convertToNumericFormat(totaltotal)) + Environment.NewLine;
+
+                    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+                    details += HelperFunction.PrintLeftRigthText("AMOUNT DUE:", HelperFunction.convertToNumericFormat(Convert.ToDouble(POS.POSConfirmPaymentResto.netamountpayable))) + Environment.NewLine + Environment.NewLine;
+                }
+
+            }
+            //if(Convert.ToDouble(peritemdiscount) > 0 && isDiscount == false)
+            //{
+            //    details += HelperFunction.PrintLeftRigthText("NET Due:", POS.POSConfirmPayment.netamountpayable) + Environment.NewLine + Environment.NewLine;
+            //}
+            if (paytype == "Credit")
+            {
+                details += HelperFunction.PrintLeftRigthText("TENDERED:", HelperFunction.convertToNumericFormat(Convert.ToDouble(POS.POSConfirmPaymentResto.netamountpayable))) + Environment.NewLine + Environment.NewLine;
+                details += HelperFunction.PrintLeftRigthText("CHANGE  :", "0.00") + Environment.NewLine + Environment.NewLine;
+            }
+            details += HelperFunction.PrintLeftRigthText("TENDERED:", cash) + Environment.NewLine;
+            details += HelperFunction.PrintLeftRigthText("CHANGE  :", change) + Environment.NewLine + Environment.NewLine;
+
+            double totalvatableSales = netofscdisc + netofnonscdisc;
+            double totalVatInputSale = 0.0;
+            totalVatInputSale = totalvatableSales * 0.12;
+
+            details += HelperFunction.PrintLeftRigthText("VATable Sales", HelperFunction.convertToNumericFormat(totalvatableSales)) + Environment.NewLine;// vatablesale) + Environment.NewLine;
+            details += HelperFunction.PrintLeftRigthText("VAT Amount", HelperFunction.convertToNumericFormat(totalVatInputSale)) + Environment.NewLine;// vat) + Environment.NewLine;
+            // details += HelperFunction.PrintLeftRigthText("ZERO RATED", "0.00") + Environment.NewLine;
+            details += HelperFunction.PrintLeftRigthText("VAT-EXEMPT SALES", vatexemptsale) + Environment.NewLine;
+            details += HelperFunction.PrintLeftRigthText("ZERO RATED SALES", "0.00") + Environment.NewLine + Environment.NewLine;
+            if (paytype == "Credit")
+            {
+                string cardno = "", cardtype = "", cardrefno = "";
+                details += HelperFunction.createDottedLine() + Environment.NewLine;
+                details += HelperFunction.PrintLeftText("PAYMENT TYPE: Credit Card") + Environment.NewLine;
+                details += HelperFunction.PrintLeftText("Card Number: XXXX-XXXX-XXXX-" + cardno) + Environment.NewLine;
+                details += HelperFunction.PrintLeftText("Card Type: " + cardtype) + Environment.NewLine;
+                details += HelperFunction.PrintLeftText("Reference No.: " + cardrefno) + Environment.NewLine;
+                details += HelperFunction.createDottedLine() + Environment.NewLine;
+            }
+
+
+            string pathfile = System.IO.File.ReadAllText(Application.StartupPath + "\\FOOTER.txt");
+            //details += Classes.ReceiptSetup.doFooter(Login.assignedBranch) + Environment.NewLine;
+            details += HelperFunction.PrintCenterText(pathfile) + Environment.NewLine;
+            if (isDiscount)
+            {
+                details += HelperFunction.PrintCenterText(footerlabel);
+            }
+            details += HelperFunction.LastPagePaper();
+
+            if (!Directory.Exists(filepath))
+            {
+                Directory.CreateDirectory(filepath);
+            }
+            if (!Directory.Exists(LastTransactionfilepath)) //last ttransaction filepath
+            {
+                Directory.CreateDirectory(LastTransactionfilepath);
+            }
+            if (isDiscount)
+            {
+                txtorder = ordercode + "-" + footerlabel + ".txt";
+            }
+            else
+            {
+                txtorder = ordercode + ".txt";
+            }
+            string lastranfile = "LastTran.txt";
+
+            string filetoprint = filepath + txtorder;
+            StreamWriter writer = new StreamWriter(filepath + txtorder);
+            writer.Write(details);
+            writer.Close();
+
+            string lastfiletoprint = LastTransactionfilepath + txtorder;
+            StreamWriter writerLast = new StreamWriter(LastTransactionfilepath + lastranfile);
+            writerLast.Write(details);
+            writerLast.Close();
+
+            printTextFile(filetoprint);
+        }
+        ///
+
+        ///--------------------------------------------------------------------------------
+        /////THIS TEMPLATE HAS BEEN USED WITH ONE TIME DISCOUNT (e.g SENIOR,PWD,OTHERS)
+        public void printReceiptRestoOneLove(string transcode
+                                , string ordercode
+                                , string total
+                                , string peritemdiscount
+                                , string netofvatindiscitems
+                                , string netofvatindinonscitems
+                                , string vatablesale
+                                , string vatexemptsale
+                                , string vat
+                                , string cash
+                                , string change
+                                , DataGridView gridview
+                                , bool isDiscount
+                                , string disctype
+                                , string footerlabel
+                                , string name
+                                , string address
+                                , string tin
+                                , string bussstyle
+                                , string paytype)
+        {
+
+            String details = "";
+            string filepath = "C:\\POSTransaction\\DailySales\\" + DateTime.Now.ToString("yyyyMMdd") + "\\";
+            string LastTransactionfilepath = "C:\\POSTransaction\\LastTransaction\\";
+            details = "" + (Char)27 + (Char)112 + (Char)0 + (Char)25 + "";
+            details += Environment.NewLine;
+
+            details += Convert.ToInt32(ordercode).ToString();
+            details += Environment.NewLine;
+
+            var rows = Database.getMultipleQuery("SalesDiscount", $"OrderNo='{ordercode}' " +
+                $"AND isErrorCorrect=0 " +
+                $"AND BranchCode='{Login.assignedBranch}' " +
+                $"AND MachineUsed='{Environment.MachineName}'", "DiscRemarks,DiscountPercentage,DiscountAmount");
+
+            string discremarks = rows["DiscRemarks"].ToString();
+            string discountpercentage = rows["DiscountPercentage"].ToString();
+            string discountamount = rows["DiscountAmount"].ToString();
+            double discpercent = Convert.ToDouble(discountpercentage) * 100;
+            double totalvatitems = 0.0;
+            for (int i = 0; i <= gridview.RowCount - 1; i++)
+            {
+                string addV = "";
+                if (Convert.ToBoolean(gridview.Rows[i].Cells["isVat"].Value.ToString()) == true)
+                {
+                    addV = "V";
+                    totalvatitems += Convert.ToDouble(gridview.Rows[i].Cells["Amount"].Value.ToString());
+                }
+                else
+                {
+                    addV = "";
+                }
+                string addD = "";
+                if (Convert.ToDouble(gridview.Rows[i].Cells["Discount"].Value.ToString()) > 0)
+                {
+                    addD = "  - (Less: Discount)";
+                }
+                else
+                {
+                    addD = "";
+                }
+
+                details += HelperFunction.PrintLeftText(gridview.Rows[i].Cells["Particulars"].Value.ToString()) + Environment.NewLine;
+                string a = "  - " + gridview.Rows[i].Cells["Qty"].Value + " @ " + gridview.Rows[i].Cells["UnitPrice"].Value;
+                double cleanbalance = 0.0;
+                cleanbalance = Convert.ToDouble(gridview.Rows[i].Cells["Amount"].Value) + Convert.ToDouble(gridview.Rows[i].Cells["Discount"].Value);
+
+
+                string b = " " + HelperFunction.convertToNumericFormat(cleanbalance) + addV;
+                details += HelperFunction.PrintLeftRigthText(a, b) + Environment.NewLine;
+                if (Convert.ToDouble(gridview.Rows[i].Cells["Discount"].Value.ToString()) > 0)
+                {
+                    details += HelperFunction.PrintLeftRigthText(addD, "(" + gridview.Rows[i].Cells["Discount"].Value.ToString() + ")") + Environment.NewLine;
+                }
+                if (isDiscount)
+                {
+                    if (disctype == "REGULAR")
+                    {
+                        details += HelperFunction.PrintLeftText("  - (Less: Discount " + discpercent.ToString() + "%)") + Environment.NewLine;
+                    }
+                    else if (disctype != "REGULAR")
+                    {
+                        bool isSCorPWDDiscounted = false;
+                        isSCorPWDDiscounted = Database.checkifExist("SELECT TOP 1 Description FROM Products WHERE BranchCode='" + Login.assignedBranch + "' " +
+                            "AND Description='" + gridview.Rows[i].Cells["Particulars"].Value.ToString() + "' " +
+                            "AND isDiscount=1");
+                        if (isSCorPWDDiscounted)
+                        {
+                            details += HelperFunction.PrintLeftText("  - (Less: Discount " + discpercent.ToString() + "%)") + Environment.NewLine;
+                        }
+                    }
+
+                }
+            }
+            details += HelperFunction.PrinttoRight("----------") + Environment.NewLine;
+            if (Convert.ToDouble(peritemdiscount) > 0)
+            {
+                details += HelperFunction.PrintLeftRigthText("TOTAL DISCOUNT:", peritemdiscount) + Environment.NewLine;
+            }
+            details += HelperFunction.PrintLeftRigthText("TOTAL DUE:", total) + Environment.NewLine;
+            details += HelperFunction.PrinttoRight("==========") + Environment.NewLine;
+
+            double lessvat = 0.0, netofvat = 0.0, lessscdisc = 0.0, netofscdisc = 0.0, netofnonscdisc = 0.0, addvat = 0.0, totaltotal = 0.0;
+            netofnonscdisc = Convert.ToDouble(netofvatindinonscitems);
+            if (isDiscount == true)
+            {
+                //if (POS.POSConfirmPayment.isSeniorDiscount == true)
+                if (disctype == "SENIOR")
+                {
+                    details += HelperFunction.createDottedLine() + Environment.NewLine;
+                    details += HelperFunction.PrintLeftText("SENIOR DISCOUNT") + Environment.NewLine;
+                    details += HelperFunction.PrintLeftText("OSCA SC/ID: " + POS.POSConfirmPaymentResto.discidno) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftText("Name: " + POS.POSConfirmPaymentResto.discname) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftRigthText("Discount Amount:", HelperFunction.convertToNumericFormat(Convert.ToDouble(POS.POSConfirmPaymentResto.discamount))) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftText("Signature: _______________") + Environment.NewLine;
+                    details += HelperFunction.createDottedLine() + Environment.NewLine;
+                    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+                    lessvat = Math.Round(Convert.ToDouble(netofvatindiscitems) * 0.12, 2);
+                    netofvat = Math.Round(Convert.ToDouble(netofvatindiscitems), 2);
+                    lessscdisc = Math.Round(netofvat * Convert.ToDouble(discountpercentage), 2);
+                    //lessscdisc = Math.Round(netofvat * 0.05, 2);
+                    netofscdisc = Math.Round(netofvat - lessscdisc, 2);
+                    addvat = Math.Round(netofscdisc * .12, 2);
+                    totaltotal = Math.Round(netofscdisc + addvat, 2);
+                    details += HelperFunction.PrintLeftRigthText("Less VAT:", HelperFunction.convertToNumericFormat(lessvat)) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftRigthText("Net of VAT:", HelperFunction.convertToNumericFormat(netofvat)) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftRigthText("Less SC Discount:", HelperFunction.convertToNumericFormat(lessscdisc)) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftRigthText("Net SC Discount:", HelperFunction.convertToNumericFormat(netofscdisc)) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftRigthText("Add VAT:", HelperFunction.convertToNumericFormat(addvat)) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftRigthText("Total:", HelperFunction.convertToNumericFormat(totaltotal)) + Environment.NewLine;
+
+                    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+                    details += HelperFunction.createDottedLine() + Environment.NewLine;
+                    details += HelperFunction.PrintLeftRigthText("AMOUNT DUE:", HelperFunction.convertToNumericFormat(Convert.ToDouble(POS.POSConfirmPaymentResto.netamountpayable))) + Environment.NewLine + Environment.NewLine;
+
+                }
+                //else if (POS.POSConfirmPayment.isPwdDiscount == true)
+                else if (disctype == "PWD")
+                {
+                    details += HelperFunction.createDottedLine() + Environment.NewLine;
+                    details += HelperFunction.PrintLeftText("PWD DISCOUNT") + Environment.NewLine;
+                    details += HelperFunction.PrintLeftText("PWD ID: " + POS.POSConfirmPaymentResto.discidno) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftText("Name: " + POS.POSConfirmPaymentResto.discname) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftRigthText("Discount Amount:", HelperFunction.convertToNumericFormat(Convert.ToDouble(POS.POSConfirmPaymentResto.discamount))) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftText("Signature: _______________") + Environment.NewLine;
+                    details += HelperFunction.createDottedLine() + Environment.NewLine;
+                    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+                    lessvat = Math.Round(Convert.ToDouble(netofvatindiscitems) * 0.12, 2);
+                    netofvat = Math.Round(Convert.ToDouble(netofvatindiscitems), 2);
+                    //lessscdisc = Math.Round(netofvat * 0.05, 2);
+                    lessscdisc = Math.Round(netofvat * Convert.ToDouble(discountpercentage), 2);
+                    netofscdisc = Math.Round(netofvat - lessscdisc, 2);
+                    addvat = Math.Round(netofscdisc * .12, 2);
+                    totaltotal = Math.Round(netofscdisc + addvat, 2);
+
+                    details += HelperFunction.PrintLeftRigthText("Less VAT:", HelperFunction.convertToNumericFormat(lessvat)) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftRigthText("Net of VAT:", HelperFunction.convertToNumericFormat(netofvat)) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftRigthText("Less PWD Discount:", HelperFunction.convertToNumericFormat(lessscdisc)) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftRigthText("Net PWD Discount:", HelperFunction.convertToNumericFormat(netofscdisc)) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftRigthText("Add VAT:", HelperFunction.convertToNumericFormat(addvat)) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftRigthText("Total:", HelperFunction.convertToNumericFormat(totaltotal)) + Environment.NewLine;
+
+                    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+                    details += HelperFunction.createDottedLine() + Environment.NewLine;
+                    details += HelperFunction.PrintLeftRigthText("AMOUNT DUE:", HelperFunction.convertToNumericFormat(Convert.ToDouble(POS.POSConfirmPaymentResto.netamountpayable))) + Environment.NewLine + Environment.NewLine;
+                }
+                //else if (POS.POSConfirmPayment.isOthersDiscount == true)
+                else if (disctype == "REGULAR")
+                {
+                    details += HelperFunction.createDottedLine() + Environment.NewLine;
+                    details += HelperFunction.PrintLeftText("REGULAR DISCOUNT") + Environment.NewLine;
+                    //details += HelperFunction.PrintLeftText("Remarks: " + POS.POSConfirmPayment.othersRemarks) + Environment.NewLine + Environment.NewLine;
+                    //details += HelperFunction.PrintLeftRigthText("Discount Amount: ", HelperFunction.convertToNumericFormat(Convert.ToDouble(POS.POSConfirmPayment.otherDiscountAmount))) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftText("Remarks: " + discremarks) + Environment.NewLine + Environment.NewLine;
+                    details += HelperFunction.PrintLeftRigthText("Discount Amount: ", HelperFunction.convertToNumericFormat(Convert.ToDouble(POS.POSConfirmPaymentResto.discamount))) + Environment.NewLine;
+                    details += HelperFunction.createDottedLine() + Environment.NewLine;
+                    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+                    lessvat = Math.Round(totalvatitems / 1.12 * 0.12, 2);
+                    netofvat = Math.Round(totalvatitems / 1.12, 2);
+                    lessscdisc = Math.Round(netofvat * Convert.ToDouble(discountpercentage), 2);
+                    netofscdisc = Math.Round(netofvat - lessscdisc, 2);
+                    addvat = Math.Round(netofscdisc * .12, 2);
+                    totaltotal = Math.Round(netofscdisc + addvat, 2);
+
+                    details += HelperFunction.PrintLeftRigthText("Less VAT:", HelperFunction.convertToNumericFormat(lessvat)) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftRigthText("Net of VAT:", HelperFunction.convertToNumericFormat(netofvat)) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftRigthText("Less Reg Discount:", HelperFunction.convertToNumericFormat(lessscdisc)) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftRigthText("Net Reg Discount:", HelperFunction.convertToNumericFormat(netofscdisc)) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftRigthText("Add VAT:", HelperFunction.convertToNumericFormat(addvat)) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftRigthText("Total:", HelperFunction.convertToNumericFormat(totaltotal)) + Environment.NewLine;
+
+                    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+                    details += HelperFunction.PrintLeftRigthText("AMOUNT DUE:", HelperFunction.convertToNumericFormat(Convert.ToDouble(POS.POSConfirmPaymentResto.netamountpayable))) + Environment.NewLine + Environment.NewLine;
+                }
+
+            }
+            //if(Convert.ToDouble(peritemdiscount) > 0 && isDiscount == false)
+            //{
+            //    details += HelperFunction.PrintLeftRigthText("NET Due:", POS.POSConfirmPayment.netamountpayable) + Environment.NewLine + Environment.NewLine;
+            //}
+            if (paytype == "Credit")
+            {
+                details += HelperFunction.PrintLeftRigthText("TENDERED:", HelperFunction.convertToNumericFormat(Convert.ToDouble(POS.POSConfirmPaymentResto.netamountpayable))) + Environment.NewLine + Environment.NewLine;
+                details += HelperFunction.PrintLeftRigthText("CHANGE  :", "0.00") + Environment.NewLine + Environment.NewLine;
+            }
+            details += HelperFunction.PrintLeftRigthText("TENDERED:", cash) + Environment.NewLine;
+            details += HelperFunction.PrintLeftRigthText("CHANGE  :", change) + Environment.NewLine + Environment.NewLine;
+
+            double totalvatableSales = netofscdisc + netofnonscdisc;
+            double totalVatInputSale = 0.0;
+            totalVatInputSale = totalvatableSales * 0.12;
+
+            if (paytype == "Credit")
+            {
+                string cardno = "", cardtype = "", cardrefno = "";
+                details += HelperFunction.createDottedLine() + Environment.NewLine;
+                details += HelperFunction.PrintLeftText("PAYMENT TYPE: Credit Card") + Environment.NewLine;
+                details += HelperFunction.PrintLeftText("Card Number: XXXX-XXXX-XXXX-" + cardno) + Environment.NewLine;
+                details += HelperFunction.PrintLeftText("Card Type: " + cardtype) + Environment.NewLine;
+                details += HelperFunction.PrintLeftText("Reference No.: " + cardrefno) + Environment.NewLine;
+                details += HelperFunction.createDottedLine() + Environment.NewLine;
+            }
+
+
+            string pathfile = System.IO.File.ReadAllText(Application.StartupPath + "\\FOOTER.txt");
+            //details += Classes.ReceiptSetup.doFooter(Login.assignedBranch) + Environment.NewLine;
+            details += HelperFunction.PrintCenterText(pathfile) + Environment.NewLine;
+            if (isDiscount)
+            {
+                //details += HelperFunction.PrintCenterText(footerlabel);
+            }
+            details += HelperFunction.LastPagePaper();
+
+            if (!Directory.Exists(filepath))
+            {
+                Directory.CreateDirectory(filepath);
+            }
+            if (!Directory.Exists(LastTransactionfilepath)) //last ttransaction filepath
+            {
+                Directory.CreateDirectory(LastTransactionfilepath);
+            }
+            if (isDiscount)
+            {
+                txtorder = ordercode + "-" + footerlabel + ".txt";
+            }
+            else
+            {
+                txtorder = ordercode + ".txt";
+            }
+            string lastranfile = "LastTran.txt";
+
+            string filetoprint = filepath + txtorder;
+            StreamWriter writer = new StreamWriter(filepath + txtorder);
+            writer.Write(details);
+            writer.Close();
+
+            string lastfiletoprint = LastTransactionfilepath + txtorder;
+            StreamWriter writerLast = new StreamWriter(LastTransactionfilepath + lastranfile);
+            writerLast.Write(details);
+            writerLast.Close();
+
+            printTextFile(filetoprint);
+        }
+        ///
+
+
         //THIS TEMPLATE HAS BEEN ALWAYS USED FOR REPRINT
         public void ReprintReceipt(string transcode
                                     , string ordercode
@@ -823,6 +1780,495 @@ namespace SalesInventorySystem
             writer1.Close();
         }
 
+        /// ////////////////////////////////////////////////////////////////
+        //THIS TEMPLATE HAS BEEN ALWAYS USED FOR REPRINT
+        public void ReprintReceiptResto(string transcode
+                                    , string ordercode
+                                    , string total
+                                    , string peritemdiscount
+                                    , string netofvatindiscitems
+                                    , string netofvatindinonscitems
+                                    , string vatablesale
+                                    , string vatexemptsale
+                                    , string vat
+                                    , string cash
+                                    , string change
+                                    , DataGridView gridview
+                                    , bool isDiscount
+                                    , string disctype
+                                    , string footerlabel
+                                    , string name
+                                    , string address
+                                    , string tin
+                                    , string bussstyle
+                                    , string paytype
+                                    , bool iszerorated = false
+                                   )
+        {
+
+            String details = "";
+            string filepath1 = "C:\\POSTransaction\\CopyForReprint\\";
+            details = "" + (Char)27 + (Char)112 + (Char)0 + (Char)25 + "";
+            string terminalno = "122";
+            details += Classes.ReceiptSetup.doHeader(Login.assignedBranch, Environment.MachineName);
+            details += Classes.ReceiptSetup.doTitle("SALES INVOICE");
+            details += Classes.ReceiptSetup.doTitle("REPRINT");
+            //details += HelperFunction.PrintLeftText("REPRINT#:*") + Environment.NewLine;
+            details += Classes.ReceiptSetup.doHeaderDetails(ordercode, transcode, terminalno, name, address, tin, bussstyle);
+            details += HelperFunction.createDottedLine() + Environment.NewLine;
+            string discountpercentage = "0";
+            double totalvatitems = 0.0;
+            for (int i = 0; i <= gridview.RowCount - 1; i++)
+            {
+                string addV = "";
+                if (Convert.ToBoolean(gridview.Rows[i].Cells["isVat"].Value.ToString()) == true)
+                {
+                    addV = "V";
+                    totalvatitems += Convert.ToDouble(gridview.Rows[i].Cells["Amount"].Value.ToString());
+                }
+                else
+                {
+                    addV = "";
+                }
+                string addD = "";
+                if (Convert.ToDouble(gridview.Rows[i].Cells["Discount"].Value.ToString()) > 0)
+                {
+                    addD = "  - (Less: Discount)";
+                }
+                else
+                {
+                    addD = "";
+                }
+
+                details += HelperFunction.PrintLeftText(gridview.Rows[i].Cells["Particulars"].Value.ToString()) + Environment.NewLine;
+                string a = "  - " + gridview.Rows[i].Cells["Qty"].Value + " @ " + gridview.Rows[i].Cells["UnitPrice"].Value;
+                double cleanbalance = 0.0;
+                cleanbalance = Convert.ToDouble(gridview.Rows[i].Cells["Amount"].Value) + Convert.ToDouble(gridview.Rows[i].Cells["Discount"].Value);
+
+                // string b = " " + gridview.Rows[i].Cells["Amount"].Value + addV;
+                string b = " " + HelperFunction.convertToNumericFormat(cleanbalance) + addV;
+                details += HelperFunction.PrintLeftRigthText(a, b) + Environment.NewLine;
+                if (Convert.ToDouble(gridview.Rows[i].Cells["Discount"].Value.ToString()) > 0)
+                {
+                    details += HelperFunction.PrintLeftRigthText(addD, "(" + gridview.Rows[i].Cells["Discount"].Value.ToString() + ")") + Environment.NewLine;
+                }
+
+                if (isDiscount)
+                {
+                    discountpercentage = Database.getSingleQuery("SalesDiscount", $"OrderNo='{ordercode}' and isErrorCorrect=0 AND BranchCode='{Login.assignedBranch}' ", "DiscountPercentage");
+                    double discPercent = Convert.ToDouble(discountpercentage) * 100;
+                    if (disctype == "REGULAR")
+                    {
+                        details += HelperFunction.PrintLeftText("  - (Less: Discount " + discPercent.ToString() + "%)") + Environment.NewLine;
+                    }
+                    else if (disctype != "REGULAR")
+                    {
+                        bool isSCorPWDDiscounted = false;
+                        isSCorPWDDiscounted = Database.checkifExist("SELECT TOP 1 Description FROM Products WHERE BranchCode='" + Login.assignedBranch + "' " +
+                            "AND Description='" + gridview.Rows[i].Cells["Particulars"].Value.ToString() + "' " +
+                            "AND isDiscount=1");
+                        if (isSCorPWDDiscounted)
+                        {
+                            details += HelperFunction.PrintLeftText("  - (Less: Discount " + discPercent.ToString() + "%)") + Environment.NewLine;
+                        }
+                    }
+
+                }
+            }
+            details += HelperFunction.PrinttoRight("----------") + Environment.NewLine;
+            if (Convert.ToDouble(peritemdiscount) > 0)
+            {
+                details += HelperFunction.PrintLeftRigthText("TOTAL DISCOUNT:", peritemdiscount) + Environment.NewLine;
+            }
+            details += HelperFunction.PrintLeftRigthText("TOTAL DUE:", total) + Environment.NewLine;
+            details += HelperFunction.PrinttoRight("==========") + Environment.NewLine;
+
+            double lessvat = 0.0, netofvat = 0.0, lessscdisc = 0.0, netofscdisc = 0.0, netofnonscdisc = 0.0, addvat = 0.0, totaltotal = 0.0;
+            netofnonscdisc = Convert.ToDouble(netofvatindinonscitems);
+            if (isDiscount == true)
+            {
+                if (disctype == "SENIOR")
+                {
+                    details += HelperFunction.createDottedLine() + Environment.NewLine;
+                    details += HelperFunction.PrintLeftText("SENIOR DISCOUNT") + Environment.NewLine;
+                    details += HelperFunction.PrintLeftText("OSCA SC/ID: " + POS.POSConfirmPaymentResto.discidno) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftText("Name: " + POS.POSConfirmPaymentResto.discname) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftRigthText("Discount Amount:", HelperFunction.convertToNumericFormat(Convert.ToDouble(POS.POSConfirmPaymentResto.discamount))) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftText("Signature: _______________") + Environment.NewLine;
+                    details += HelperFunction.createDottedLine() + Environment.NewLine;
+                    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+                    lessvat = Math.Round(Convert.ToDouble(netofvatindiscitems) * 0.12, 2);
+                    netofvat = Math.Round(Convert.ToDouble(netofvatindiscitems), 2);
+                    //lessscdisc = Math.Round(netofvat * 0.05, 2);
+                    lessscdisc = Math.Round(netofvat * Convert.ToDouble(discountpercentage), 2);
+                    netofscdisc = Math.Round(netofvat - lessscdisc, 2);
+                    addvat = Math.Round(netofscdisc * .12, 2);
+                    totaltotal = Math.Round(netofscdisc + addvat, 2);
+
+                    details += HelperFunction.PrintLeftRigthText("Less VAT:", HelperFunction.convertToNumericFormat(lessvat)) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftRigthText("Net of VAT:", HelperFunction.convertToNumericFormat(netofvat)) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftRigthText("Less SC Discount:", HelperFunction.convertToNumericFormat(lessscdisc)) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftRigthText("Net SC Discount:", HelperFunction.convertToNumericFormat(netofscdisc)) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftRigthText("Add VAT:", HelperFunction.convertToNumericFormat(addvat)) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftRigthText("Total:", HelperFunction.convertToNumericFormat(totaltotal)) + Environment.NewLine;
+
+                    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+                    details += HelperFunction.createDottedLine() + Environment.NewLine;
+                    details += HelperFunction.PrintLeftRigthText("AMOUNT DUE:", HelperFunction.convertToNumericFormat(Convert.ToDouble(POS.POSConfirmPaymentResto.netamountpayable))) + Environment.NewLine + Environment.NewLine;
+                }
+                else if (disctype == "PWD")
+                {
+                    details += HelperFunction.createDottedLine() + Environment.NewLine;
+                    details += HelperFunction.PrintLeftText("PWD DISCOUNT") + Environment.NewLine;
+                    details += HelperFunction.PrintLeftText("PWD ID: " + POS.POSConfirmPaymentResto.discidno) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftText("Name: " + POS.POSConfirmPaymentResto.discname) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftRigthText("Discount Amount:", HelperFunction.convertToNumericFormat(Convert.ToDouble(POS.POSConfirmPaymentResto.discamount))) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftText("Signature: _______________") + Environment.NewLine;
+                    details += HelperFunction.createDottedLine() + Environment.NewLine;
+                    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+                    lessvat = Math.Round(Convert.ToDouble(netofvatindiscitems) * 0.12, 2);
+                    netofvat = Math.Round(Convert.ToDouble(netofvatindiscitems), 2);
+                    //lessscdisc = Math.Round(netofvat * 0.05, 2);
+                    lessscdisc = Math.Round(netofvat * Convert.ToDouble(discountpercentage), 2);
+                    netofscdisc = Math.Round(netofvat - lessscdisc, 2);
+                    addvat = Math.Round(netofscdisc * .12, 2);
+                    totaltotal = Math.Round(netofscdisc + addvat, 2);
+
+                    details += HelperFunction.PrintLeftRigthText("Less VAT:", HelperFunction.convertToNumericFormat(lessvat)) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftRigthText("Net of VAT:", HelperFunction.convertToNumericFormat(netofvat)) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftRigthText("Less PWD Discount:", HelperFunction.convertToNumericFormat(lessscdisc)) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftRigthText("Net PWD Discount:", HelperFunction.convertToNumericFormat(netofscdisc)) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftRigthText("Add VAT:", HelperFunction.convertToNumericFormat(addvat)) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftRigthText("Total:", HelperFunction.convertToNumericFormat(totaltotal)) + Environment.NewLine;
+
+                    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+                    details += HelperFunction.createDottedLine() + Environment.NewLine;
+                    details += HelperFunction.PrintLeftRigthText("AMOUNT DUE:", HelperFunction.convertToNumericFormat(Convert.ToDouble(POS.POSConfirmPaymentResto.netamountpayable))) + Environment.NewLine + Environment.NewLine;
+                }
+                else if (disctype == "REGULAR")
+                {
+                    details += HelperFunction.createDottedLine() + Environment.NewLine;
+                    details += HelperFunction.PrintLeftText("REGULAR DISCOUNT") + Environment.NewLine;
+                    //details += HelperFunction.PrintLeftText("Remarks: " + POS.POSConfirmPaymentResto.othersRemarks) + Environment.NewLine + Environment.NewLine;
+                    //details += HelperFunction.PrintLeftRigthText("Discount Amount: ", HelperFunction.convertToNumericFormat(Convert.ToDouble(POS.POSConfirmPaymentResto.otherDiscountAmount))) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftText("Remarks: " + POS.POSConfirmPaymentResto.discremarks) + Environment.NewLine + Environment.NewLine;
+                    details += HelperFunction.PrintLeftRigthText("Discount Amount: ", HelperFunction.convertToNumericFormat(Convert.ToDouble(POS.POSConfirmPaymentResto.discamount))) + Environment.NewLine;
+                    details += HelperFunction.createDottedLine() + Environment.NewLine;
+                    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+                    lessvat = Math.Round(totalvatitems / 1.12 * 0.12, 2);
+                    netofvat = Math.Round(totalvatitems / 1.12, 2);
+                    //lessscdisc = Math.Round(netofvat * 0.05, 2);
+                    lessscdisc = Math.Round(netofvat * Convert.ToDouble(discountpercentage), 2);
+                    netofscdisc = Math.Round(netofvat - lessscdisc, 2);
+                    addvat = Math.Round(netofscdisc * .12, 2);
+                    totaltotal = Math.Round(netofscdisc + addvat, 2);
+
+                    details += HelperFunction.PrintLeftRigthText("Less VAT:", HelperFunction.convertToNumericFormat(lessvat)) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftRigthText("Net of VAT:", HelperFunction.convertToNumericFormat(netofvat)) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftRigthText("Less Reg Discount:", HelperFunction.convertToNumericFormat(lessscdisc)) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftRigthText("Net Reg Discount:", HelperFunction.convertToNumericFormat(netofscdisc)) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftRigthText("Add VAT:", HelperFunction.convertToNumericFormat(addvat)) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftRigthText("Total:", HelperFunction.convertToNumericFormat(totaltotal)) + Environment.NewLine;
+
+                    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+                    details += HelperFunction.PrintLeftRigthText("AMOUNT DUE:", HelperFunction.convertToNumericFormat(Convert.ToDouble(POS.POSConfirmPaymentResto.netamountpayable))) + Environment.NewLine + Environment.NewLine;
+
+                }
+            }
+            if (paytype == "Credit")
+            {
+                details += HelperFunction.PrintLeftRigthText("TENDERED:", HelperFunction.convertToNumericFormat(Convert.ToDouble(POS.POSConfirmPaymentResto.netamountpayable))) + Environment.NewLine + Environment.NewLine;
+                details += HelperFunction.PrintLeftRigthText("CHANGE  :", "0.00") + Environment.NewLine + Environment.NewLine;
+            }
+            //if(Convert.ToDouble(peritemdiscount) > 0 && isDiscount == false)
+            //{
+            //    details += HelperFunction.PrintLeftRigthText("NET Due:", POS.POSConfirmPaymentResto.netamountpayable) + Environment.NewLine + Environment.NewLine;
+            //}
+            details += HelperFunction.PrintLeftRigthText("TENDERED:", cash) + Environment.NewLine;
+            details += HelperFunction.PrintLeftRigthText("CHANGE  :", change) + Environment.NewLine + Environment.NewLine;
+            if (iszerorated == true)
+            {
+                details += HelperFunction.PrintLeftRigthText("VATable Sales", "0.00") + Environment.NewLine;
+                details += HelperFunction.PrintLeftRigthText("VAT Amount", "0.00") + Environment.NewLine;
+                details += HelperFunction.PrintLeftRigthText("VAT-EXEMPT SALES", "0.00") + Environment.NewLine;
+                details += HelperFunction.PrintLeftRigthText("ZERO RATED SALES", total) + Environment.NewLine + Environment.NewLine;
+            }
+            else
+            {
+                details += HelperFunction.PrintLeftRigthText("VATable Sales", vatablesale) + Environment.NewLine;
+                details += HelperFunction.PrintLeftRigthText("VAT Amount", vat) + Environment.NewLine;
+                details += HelperFunction.PrintLeftRigthText("VAT-EXEMPT SALES", vatexemptsale) + Environment.NewLine;
+                details += HelperFunction.PrintLeftRigthText("ZERO RATED SALES", "0.00") + Environment.NewLine + Environment.NewLine;
+            }
+            if (paytype == "Credit")
+            {
+                string cardno = "", cardtype = "", cardrefno = "";
+                details += HelperFunction.createDottedLine() + Environment.NewLine;
+                details += HelperFunction.PrintLeftText("PAYMENT TYPE: Credit Card") + Environment.NewLine;
+                details += HelperFunction.PrintLeftText("Card Number: XXXX-XXXX-XXXX-" + cardno) + Environment.NewLine;
+                details += HelperFunction.PrintLeftText("Card Type: " + cardtype) + Environment.NewLine;
+                details += HelperFunction.PrintLeftText("Reference No.: " + cardrefno) + Environment.NewLine;
+                details += HelperFunction.createDottedLine() + Environment.NewLine;
+            }
+
+            string pathfile = System.IO.File.ReadAllText(Application.StartupPath + "\\FOOTER.txt");
+            details += HelperFunction.PrintCenterText(pathfile) + Environment.NewLine;
+            if (isDiscount)
+            {
+                details += HelperFunction.PrintCenterText(footerlabel);
+            }
+
+            details += HelperFunction.LastPagePaper();
+
+
+            if (!Directory.Exists(filepath1))
+            {
+                Directory.CreateDirectory(filepath1);
+            }
+            string lasttrans = ordercode + ".txt";
+            StreamWriter writer1 = new StreamWriter(filepath1 + lasttrans);
+            writer1.Write(details);
+            writer1.Close();
+        }
+
+        public void ReprintReceiptRestoOneLove(string transcode
+                                    , string ordercode
+                                    , string total
+                                    , string peritemdiscount
+                                    , string netofvatindiscitems
+                                    , string netofvatindinonscitems
+                                    , string vatablesale
+                                    , string vatexemptsale
+                                    , string vat
+                                    , string cash
+                                    , string change
+                                    , DataGridView gridview
+                                    , bool isDiscount
+                                    , string disctype
+                                    , string footerlabel
+                                    , string name
+                                    , string address
+                                    , string tin
+                                    , string bussstyle
+                                    , string paytype
+                                    , bool iszerorated = false
+                                   )
+        {
+
+            String details = "";
+            string filepath1 = "C:\\POSTransaction\\CopyForReprint\\"; 
+            details = "" + (Char)27 + (Char)112 + (Char)0 + (Char)25 + "";
+            details += Environment.NewLine;
+            details += Convert.ToInt32(ordercode).ToString();
+            details += Environment.NewLine;
+
+            string discountpercentage = "0";
+            double totalvatitems = 0.0;
+            for (int i = 0; i <= gridview.RowCount - 1; i++)
+            {
+                string addV = "";
+                if (Convert.ToBoolean(gridview.Rows[i].Cells["isVat"].Value.ToString()) == true)
+                {
+                    addV = "V";
+                    totalvatitems += Convert.ToDouble(gridview.Rows[i].Cells["Amount"].Value.ToString());
+                }
+                else
+                {
+                    addV = "";
+                }
+                string addD = "";
+                if (Convert.ToDouble(gridview.Rows[i].Cells["Discount"].Value.ToString()) > 0)
+                {
+                    addD = "  - (Less: Discount)";
+                }
+                else
+                {
+                    addD = "";
+                }
+
+                details += HelperFunction.PrintLeftText(gridview.Rows[i].Cells["Particulars"].Value.ToString()) + Environment.NewLine;
+                string a = "  - " + gridview.Rows[i].Cells["Qty"].Value + " @ " + gridview.Rows[i].Cells["UnitPrice"].Value;
+                double cleanbalance = 0.0;
+                cleanbalance = Convert.ToDouble(gridview.Rows[i].Cells["Amount"].Value) + Convert.ToDouble(gridview.Rows[i].Cells["Discount"].Value);
+
+                // string b = " " + gridview.Rows[i].Cells["Amount"].Value + addV;
+                string b = " " + HelperFunction.convertToNumericFormat(cleanbalance) + addV;
+                details += HelperFunction.PrintLeftRigthText(a, b) + Environment.NewLine;
+                if (Convert.ToDouble(gridview.Rows[i].Cells["Discount"].Value.ToString()) > 0)
+                {
+                    details += HelperFunction.PrintLeftRigthText(addD, "(" + gridview.Rows[i].Cells["Discount"].Value.ToString() + ")") + Environment.NewLine;
+                }
+
+                if (isDiscount)
+                {
+                    discountpercentage = Database.getSingleQuery("SalesDiscount", $"OrderNo='{ordercode}' and isErrorCorrect=0 AND BranchCode='{Login.assignedBranch}' ", "DiscountPercentage");
+                    double discPercent = Convert.ToDouble(discountpercentage) * 100;
+                    if (disctype == "REGULAR")
+                    {
+                        details += HelperFunction.PrintLeftText("  - (Less: Discount " + discPercent.ToString() + "%)") + Environment.NewLine;
+                    }
+                    else if (disctype != "REGULAR")
+                    {
+                        bool isSCorPWDDiscounted = false;
+                        isSCorPWDDiscounted = Database.checkifExist("SELECT TOP 1 Description FROM Products WHERE BranchCode='" + Login.assignedBranch + "' " +
+                            "AND Description='" + gridview.Rows[i].Cells["Particulars"].Value.ToString() + "' " +
+                            "AND isDiscount=1");
+                        if (isSCorPWDDiscounted)
+                        {
+                            details += HelperFunction.PrintLeftText("  - (Less: Discount " + discPercent.ToString() + "%)") + Environment.NewLine;
+                        }
+                    }
+
+                }
+            }
+            details += HelperFunction.PrinttoRight("----------") + Environment.NewLine;
+            if (Convert.ToDouble(peritemdiscount) > 0)
+            {
+                details += HelperFunction.PrintLeftRigthText("TOTAL DISCOUNT:", peritemdiscount) + Environment.NewLine;
+            }
+            details += HelperFunction.PrintLeftRigthText("TOTAL DUE:", total) + Environment.NewLine;
+            details += HelperFunction.PrinttoRight("==========") + Environment.NewLine;
+
+            double lessvat = 0.0, netofvat = 0.0, lessscdisc = 0.0, netofscdisc = 0.0, netofnonscdisc = 0.0, addvat = 0.0, totaltotal = 0.0;
+            netofnonscdisc = Convert.ToDouble(netofvatindinonscitems);
+            if (isDiscount == true)
+            {
+                if (disctype == "SENIOR")
+                {
+                    details += HelperFunction.createDottedLine() + Environment.NewLine;
+                    details += HelperFunction.PrintLeftText("SENIOR DISCOUNT") + Environment.NewLine;
+                    details += HelperFunction.PrintLeftText("OSCA SC/ID: " + POS.POSConfirmPaymentResto.discidno) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftText("Name: " + POS.POSConfirmPaymentResto.discname) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftRigthText("Discount Amount:", HelperFunction.convertToNumericFormat(Convert.ToDouble(POS.POSConfirmPaymentResto.discamount))) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftText("Signature: _______________") + Environment.NewLine;
+                    details += HelperFunction.createDottedLine() + Environment.NewLine;
+                    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+                    lessvat = Math.Round(Convert.ToDouble(netofvatindiscitems) * 0.12, 2);
+                    netofvat = Math.Round(Convert.ToDouble(netofvatindiscitems), 2);
+                    //lessscdisc = Math.Round(netofvat * 0.05, 2);
+                    lessscdisc = Math.Round(netofvat * Convert.ToDouble(discountpercentage), 2);
+                    netofscdisc = Math.Round(netofvat - lessscdisc, 2);
+                    addvat = Math.Round(netofscdisc * .12, 2);
+                    totaltotal = Math.Round(netofscdisc + addvat, 2);
+
+                    details += HelperFunction.PrintLeftRigthText("Less VAT:", HelperFunction.convertToNumericFormat(lessvat)) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftRigthText("Net of VAT:", HelperFunction.convertToNumericFormat(netofvat)) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftRigthText("Less SC Discount:", HelperFunction.convertToNumericFormat(lessscdisc)) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftRigthText("Net SC Discount:", HelperFunction.convertToNumericFormat(netofscdisc)) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftRigthText("Add VAT:", HelperFunction.convertToNumericFormat(addvat)) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftRigthText("Total:", HelperFunction.convertToNumericFormat(totaltotal)) + Environment.NewLine;
+
+                    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+                    details += HelperFunction.createDottedLine() + Environment.NewLine;
+                    details += HelperFunction.PrintLeftRigthText("AMOUNT DUE:", HelperFunction.convertToNumericFormat(Convert.ToDouble(POS.POSConfirmPaymentResto.netamountpayable))) + Environment.NewLine + Environment.NewLine;
+                }
+                else if (disctype == "PWD")
+                {
+                    details += HelperFunction.createDottedLine() + Environment.NewLine;
+                    details += HelperFunction.PrintLeftText("PWD DISCOUNT") + Environment.NewLine;
+                    details += HelperFunction.PrintLeftText("PWD ID: " + POS.POSConfirmPaymentResto.discidno) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftText("Name: " + POS.POSConfirmPaymentResto.discname) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftRigthText("Discount Amount:", HelperFunction.convertToNumericFormat(Convert.ToDouble(POS.POSConfirmPaymentResto.discamount))) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftText("Signature: _______________") + Environment.NewLine;
+                    details += HelperFunction.createDottedLine() + Environment.NewLine;
+                    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+                    lessvat = Math.Round(Convert.ToDouble(netofvatindiscitems) * 0.12, 2);
+                    netofvat = Math.Round(Convert.ToDouble(netofvatindiscitems), 2);
+                    //lessscdisc = Math.Round(netofvat * 0.05, 2);
+                    lessscdisc = Math.Round(netofvat * Convert.ToDouble(discountpercentage), 2);
+                    netofscdisc = Math.Round(netofvat - lessscdisc, 2);
+                    addvat = Math.Round(netofscdisc * .12, 2);
+                    totaltotal = Math.Round(netofscdisc + addvat, 2);
+
+                    details += HelperFunction.PrintLeftRigthText("Less VAT:", HelperFunction.convertToNumericFormat(lessvat)) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftRigthText("Net of VAT:", HelperFunction.convertToNumericFormat(netofvat)) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftRigthText("Less PWD Discount:", HelperFunction.convertToNumericFormat(lessscdisc)) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftRigthText("Net PWD Discount:", HelperFunction.convertToNumericFormat(netofscdisc)) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftRigthText("Add VAT:", HelperFunction.convertToNumericFormat(addvat)) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftRigthText("Total:", HelperFunction.convertToNumericFormat(totaltotal)) + Environment.NewLine;
+
+                    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+                    details += HelperFunction.createDottedLine() + Environment.NewLine;
+                    details += HelperFunction.PrintLeftRigthText("AMOUNT DUE:", HelperFunction.convertToNumericFormat(Convert.ToDouble(POS.POSConfirmPaymentResto.netamountpayable))) + Environment.NewLine + Environment.NewLine;
+                }
+                else if (disctype == "REGULAR")
+                {
+                    details += HelperFunction.createDottedLine() + Environment.NewLine;
+                    details += HelperFunction.PrintLeftText("REGULAR DISCOUNT") + Environment.NewLine;
+                    //details += HelperFunction.PrintLeftText("Remarks: " + POS.POSConfirmPaymentResto.othersRemarks) + Environment.NewLine + Environment.NewLine;
+                    //details += HelperFunction.PrintLeftRigthText("Discount Amount: ", HelperFunction.convertToNumericFormat(Convert.ToDouble(POS.POSConfirmPaymentResto.otherDiscountAmount))) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftText("Remarks: " + POS.POSConfirmPaymentResto.discremarks) + Environment.NewLine + Environment.NewLine;
+                    details += HelperFunction.PrintLeftRigthText("Discount Amount: ", HelperFunction.convertToNumericFormat(Convert.ToDouble(POS.POSConfirmPaymentResto.discamount))) + Environment.NewLine;
+                    details += HelperFunction.createDottedLine() + Environment.NewLine;
+                    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+                    lessvat = Math.Round(totalvatitems / 1.12 * 0.12, 2);
+                    netofvat = Math.Round(totalvatitems / 1.12, 2);
+                    //lessscdisc = Math.Round(netofvat * 0.05, 2);
+                    lessscdisc = Math.Round(netofvat * Convert.ToDouble(discountpercentage), 2);
+                    netofscdisc = Math.Round(netofvat - lessscdisc, 2);
+                    addvat = Math.Round(netofscdisc * .12, 2);
+                    totaltotal = Math.Round(netofscdisc + addvat, 2);
+
+                    details += HelperFunction.PrintLeftRigthText("Less VAT:", HelperFunction.convertToNumericFormat(lessvat)) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftRigthText("Net of VAT:", HelperFunction.convertToNumericFormat(netofvat)) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftRigthText("Less Reg Discount:", HelperFunction.convertToNumericFormat(lessscdisc)) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftRigthText("Net Reg Discount:", HelperFunction.convertToNumericFormat(netofscdisc)) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftRigthText("Add VAT:", HelperFunction.convertToNumericFormat(addvat)) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftRigthText("Total:", HelperFunction.convertToNumericFormat(totaltotal)) + Environment.NewLine;
+
+                    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+                    details += HelperFunction.PrintLeftRigthText("AMOUNT DUE:", HelperFunction.convertToNumericFormat(Convert.ToDouble(POS.POSConfirmPaymentResto.netamountpayable))) + Environment.NewLine + Environment.NewLine;
+
+                }
+            }
+            if (paytype == "Credit")
+            {
+                details += HelperFunction.PrintLeftRigthText("TENDERED:", HelperFunction.convertToNumericFormat(Convert.ToDouble(POS.POSConfirmPaymentResto.netamountpayable))) + Environment.NewLine + Environment.NewLine;
+                details += HelperFunction.PrintLeftRigthText("CHANGE  :", "0.00") + Environment.NewLine + Environment.NewLine;
+            }
+            //if(Convert.ToDouble(peritemdiscount) > 0 && isDiscount == false)
+            //{
+            //    details += HelperFunction.PrintLeftRigthText("NET Due:", POS.POSConfirmPaymentResto.netamountpayable) + Environment.NewLine + Environment.NewLine;
+            //}
+            details += HelperFunction.PrintLeftRigthText("TENDERED:", cash) + Environment.NewLine;
+            details += HelperFunction.PrintLeftRigthText("CHANGE  :", change) + Environment.NewLine + Environment.NewLine;
+
+            if (paytype == "Credit")
+            {
+                string cardno = "", cardtype = "", cardrefno = "";
+                details += HelperFunction.createDottedLine() + Environment.NewLine;
+                details += HelperFunction.PrintLeftText("PAYMENT TYPE: Credit Card") + Environment.NewLine;
+                details += HelperFunction.PrintLeftText("Card Number: XXXX-XXXX-XXXX-" + cardno) + Environment.NewLine;
+                details += HelperFunction.PrintLeftText("Card Type: " + cardtype) + Environment.NewLine;
+                details += HelperFunction.PrintLeftText("Reference No.: " + cardrefno) + Environment.NewLine;
+                details += HelperFunction.createDottedLine() + Environment.NewLine;
+            }
+
+            string pathfile = System.IO.File.ReadAllText(Application.StartupPath + "\\FOOTER.txt");
+            //details += HelperFunction.PrintCenterText(pathfile) + Environment.NewLine;
+            if (isDiscount)
+            {
+                details += HelperFunction.PrintCenterText(footerlabel);
+            }
+
+            details += HelperFunction.LastPagePaper();
+
+
+            if (!Directory.Exists(filepath1))
+            {
+                Directory.CreateDirectory(filepath1);
+            }
+            string lasttrans = ordercode + ".txt";
+            StreamWriter writer1 = new StreamWriter(filepath1 + lasttrans);
+            writer1.Write(details);
+            writer1.Close();
+        }
+        //////////////////////////////////////////////////////////////////////
+
         //THIS TEMPLATE IS USED FOR PLAIN TRANSACTION
         public void printReceiptConsolidated(string cashiertranscode
                                             , string transcode
@@ -957,6 +2403,261 @@ namespace SalesInventorySystem
             writer.Close();
 
         }
+
+        //----------------------------------------------------------------------------------------------
+        //THIS TEMPLATE IS USED FOR PLAIN TRANSACTION
+        public void printReceiptConsolidatedResto(string cashiertranscode
+                                            , string transcode
+                                            , string ordercode
+                                            , string total
+                                            , string peritemdiscount
+                                            , string vatablesale
+                                            , string vatexemptsale
+                                            , string vat
+                                            , string cash
+                                            , string change
+                                            , DataGridView gridview
+                                            , bool isDiscount
+                                            , string name
+                                            , string address
+                                            , string tin
+                                            , string bussstyle
+                                            , string paytype
+                                            , bool iszerorated = false)
+        {
+            String details = "";
+            string filepath = "C:\\POSTransaction\\DailySales\\" + DateTime.Now.ToString("yyyyMMdd") + "\\" + Login.Fullname + "\\TransactionJournalSummary\\";
+            details = "" + (Char)27 + (Char)112 + (Char)0 + (Char)25 + "";
+
+            string terminalno = "122";
+
+            details += Classes.ReceiptSetup.doHeader(Login.assignedBranch, Environment.MachineName);
+            details += Classes.ReceiptSetup.doTitle("SALES INVOICE");
+            details += Classes.ReceiptSetup.doHeaderDetails(ordercode, transcode, terminalno, name, address, tin, bussstyle);
+            details += HelperFunction.createDottedLine() + Environment.NewLine;
+            for (int i = 0; i <= gridview.RowCount - 1; i++)
+            {
+
+                string addV = "";
+                if (Convert.ToBoolean(gridview.Rows[i].Cells["isVat"].Value.ToString()) == true)
+                {
+                    addV = "V";
+                }
+                else
+                {
+                    addV = "";
+                }
+                string addD = "";
+                if (Convert.ToDouble(gridview.Rows[i].Cells["Discount"].Value.ToString()) > 0)
+                {
+                    addD = "  - (Less: Discount)";
+                }
+                else
+                {
+                    addD = "";
+                }
+                details += HelperFunction.PrintLeftText(gridview.Rows[i].Cells["Particulars"].Value.ToString()) + Environment.NewLine;
+                string a = "  - " + gridview.Rows[i].Cells["Qty"].Value + " @ " + gridview.Rows[i].Cells["UnitPrice"].Value;
+                double cleanbalance = 0.0;
+                cleanbalance = Convert.ToDouble(gridview.Rows[i].Cells["Amount"].Value) + Convert.ToDouble(gridview.Rows[i].Cells["Discount"].Value);
+
+                // string b = " " + gridview.Rows[i].Cells["Amount"].Value + addV;
+                string b = " " + HelperFunction.convertToNumericFormat(cleanbalance) + addV;
+                details += HelperFunction.PrintLeftRigthText(a, b) + Environment.NewLine;
+                if (Convert.ToDouble(gridview.Rows[i].Cells["Discount"].Value.ToString()) > 0)
+                {
+                    details += HelperFunction.PrintLeftRigthText(addD, "(" + gridview.Rows[i].Cells["Discount"].Value.ToString() + ")") + Environment.NewLine;
+                }
+            }
+            details += HelperFunction.PrinttoRight("----------") + Environment.NewLine;
+            if (Convert.ToDouble(peritemdiscount) > 0)
+            {
+                details += HelperFunction.PrintLeftRigthText("TOTAL DISCOUNT:", peritemdiscount) + Environment.NewLine;
+            }
+            details += HelperFunction.PrintLeftRigthText("TOTAL DUE:", total) + Environment.NewLine;
+            details += HelperFunction.PrinttoRight("==========") + Environment.NewLine;
+
+
+            if (paytype == "Credit")
+            {
+                details += HelperFunction.PrintLeftRigthText("TENDERED:", HelperFunction.convertToNumericFormat(Convert.ToDouble(POS.POSConfirmPaymentResto.netamountpayable))) + Environment.NewLine + Environment.NewLine;
+                details += HelperFunction.PrintLeftRigthText("CHANGE  :", "0.00") + Environment.NewLine + Environment.NewLine;
+            }
+            details += HelperFunction.PrintLeftRigthText("TENDERED:", cash) + Environment.NewLine;
+            details += HelperFunction.PrintLeftRigthText("CHANGE  :", change) + Environment.NewLine + Environment.NewLine;
+
+            if (iszerorated == true)
+            {
+                details += HelperFunction.PrintLeftRigthText("VATable Sales", "0.00") + Environment.NewLine;
+                details += HelperFunction.PrintLeftRigthText("VAT Amount", "0.00") + Environment.NewLine;
+                details += HelperFunction.PrintLeftRigthText("VAT-EXEMPT SALES", "0.00") + Environment.NewLine;
+                details += HelperFunction.PrintLeftRigthText("ZERO RATED SALES", total) + Environment.NewLine + Environment.NewLine;
+            }
+            else
+            {
+                details += HelperFunction.PrintLeftRigthText("VATable Sales", vatablesale) + Environment.NewLine;
+                details += HelperFunction.PrintLeftRigthText("VAT Amount", vat) + Environment.NewLine;
+                details += HelperFunction.PrintLeftRigthText("VAT-EXEMPT SALES", vatexemptsale) + Environment.NewLine;
+                details += HelperFunction.PrintLeftRigthText("ZERO RATED SALES", "0.00") + Environment.NewLine + Environment.NewLine;
+            }
+            if (paytype == "Credit")
+            {
+                string cardno = "", cardtype = "", cardrefno = "";
+                details += HelperFunction.createDottedLine() + Environment.NewLine;
+                details += HelperFunction.PrintLeftText("PAYMENT TYPE: Credit Card") + Environment.NewLine;
+                details += HelperFunction.PrintLeftText("Card Number: XXXX-XXXX-XXXX-" + cardno) + Environment.NewLine;
+                details += HelperFunction.PrintLeftText("Card Type: " + cardtype) + Environment.NewLine;
+                details += HelperFunction.PrintLeftText("Reference No.: " + cardrefno) + Environment.NewLine;
+                details += HelperFunction.createDottedLine() + Environment.NewLine;
+            }
+
+            string pathfile = System.IO.File.ReadAllText(Application.StartupPath + "\\FOOTER.txt");
+            details += HelperFunction.PrintCenterText(pathfile) + Environment.NewLine;
+            //details += Classes.ReceiptSetup.doFooter(Login.assignedBranch);
+            details += HelperFunction.LastPagePaper();
+
+            if (!Directory.Exists(filepath))
+            {
+                Directory.CreateDirectory(filepath);
+            }
+
+            txtorder = cashiertranscode + "_E-JOURNAL.txt";
+            txtorder2 = cashiertranscode + "CSVJournal" + ".csv";
+            string filetoprint = filepath + txtorder;
+            string filetoprintcsv = filepath + txtorder2;
+            StreamWriter writer;//,writer22;
+            if (!Directory.Exists(filepath))
+            {
+                Directory.CreateDirectory(filepath);
+                writer = new StreamWriter(filetoprint);
+            }
+            else
+            {
+                writer = new StreamWriter(filetoprint, true);
+            }
+            writer.Write(details);
+            writer.Close();
+
+        }
+
+        public void printReceiptConsolidatedRestoOneLove(string cashiertranscode
+                                           , string transcode
+                                           , string ordercode
+                                           , string total
+                                           , string peritemdiscount
+                                           , string vatablesale
+                                           , string vatexemptsale
+                                           , string vat
+                                           , string cash
+                                           , string change
+                                           , DataGridView gridview
+                                           , bool isDiscount
+                                           , string name
+                                           , string address
+                                           , string tin
+                                           , string bussstyle
+                                           , string paytype
+                                           , bool iszerorated = false)
+        {
+            String details = "";
+            string filepath = "C:\\POSTransaction\\DailySales\\" + DateTime.Now.ToString("yyyyMMdd") + "\\" + Login.Fullname + "\\TransactionJournalSummary\\";
+            details = "" + (Char)27 + (Char)112 + (Char)0 + (Char)25 + "";
+            details += Environment.NewLine;
+            details += Convert.ToInt32(ordercode).ToString();
+            details += Environment.NewLine;
+
+            for (int i = 0; i <= gridview.RowCount - 1; i++)
+            {
+
+                string addV = "";
+                if (Convert.ToBoolean(gridview.Rows[i].Cells["isVat"].Value.ToString()) == true)
+                {
+                    addV = "V";
+                }
+                else
+                {
+                    addV = "";
+                }
+                string addD = "";
+                if (Convert.ToDouble(gridview.Rows[i].Cells["Discount"].Value.ToString()) > 0)
+                {
+                    addD = "  - (Less: Discount)";
+                }
+                else
+                {
+                    addD = "";
+                }
+                details += HelperFunction.PrintLeftText(gridview.Rows[i].Cells["Particulars"].Value.ToString()) + Environment.NewLine;
+                string a = "  - " + gridview.Rows[i].Cells["Qty"].Value + " @ " + gridview.Rows[i].Cells["UnitPrice"].Value;
+                double cleanbalance = 0.0;
+                cleanbalance = Convert.ToDouble(gridview.Rows[i].Cells["Amount"].Value) + Convert.ToDouble(gridview.Rows[i].Cells["Discount"].Value);
+
+                // string b = " " + gridview.Rows[i].Cells["Amount"].Value + addV;
+                string b = " " + HelperFunction.convertToNumericFormat(cleanbalance) + addV;
+                details += HelperFunction.PrintLeftRigthText(a, b) + Environment.NewLine;
+                if (Convert.ToDouble(gridview.Rows[i].Cells["Discount"].Value.ToString()) > 0)
+                {
+                    details += HelperFunction.PrintLeftRigthText(addD, "(" + gridview.Rows[i].Cells["Discount"].Value.ToString() + ")") + Environment.NewLine;
+                }
+            }
+            details += HelperFunction.PrinttoRight("----------") + Environment.NewLine;
+            if (Convert.ToDouble(peritemdiscount) > 0)
+            {
+                details += HelperFunction.PrintLeftRigthText("TOTAL DISCOUNT:", peritemdiscount) + Environment.NewLine;
+            }
+            details += HelperFunction.PrintLeftRigthText("TOTAL DUE:", total) + Environment.NewLine;
+            details += HelperFunction.PrinttoRight("==========") + Environment.NewLine;
+
+
+            if (paytype == "Credit")
+            {
+                details += HelperFunction.PrintLeftRigthText("TENDERED:", HelperFunction.convertToNumericFormat(Convert.ToDouble(POS.POSConfirmPaymentResto.netamountpayable))) + Environment.NewLine + Environment.NewLine;
+                details += HelperFunction.PrintLeftRigthText("CHANGE  :", "0.00") + Environment.NewLine + Environment.NewLine;
+            }
+            details += HelperFunction.PrintLeftRigthText("TENDERED:", cash) + Environment.NewLine;
+            details += HelperFunction.PrintLeftRigthText("CHANGE  :", change) + Environment.NewLine + Environment.NewLine;
+
+
+            if (paytype == "Credit")
+            {
+                string cardno = "", cardtype = "", cardrefno = "";
+                details += HelperFunction.createDottedLine() + Environment.NewLine;
+                details += HelperFunction.PrintLeftText("PAYMENT TYPE: Credit Card") + Environment.NewLine;
+                details += HelperFunction.PrintLeftText("Card Number: XXXX-XXXX-XXXX-" + cardno) + Environment.NewLine;
+                details += HelperFunction.PrintLeftText("Card Type: " + cardtype) + Environment.NewLine;
+                details += HelperFunction.PrintLeftText("Reference No.: " + cardrefno) + Environment.NewLine;
+                details += HelperFunction.createDottedLine() + Environment.NewLine;
+            }
+
+            string pathfile = System.IO.File.ReadAllText(Application.StartupPath + "\\FOOTER.txt");
+            // details += HelperFunction.PrintCenterText(pathfile) + Environment.NewLine;
+            //details += Classes.ReceiptSetup.doFooter(Login.assignedBranch);
+            details += HelperFunction.LastPagePaper();
+
+            if (!Directory.Exists(filepath))
+            {
+                Directory.CreateDirectory(filepath);
+            }
+
+            txtorder = cashiertranscode + "_E-JOURNAL.txt";
+            txtorder2 = cashiertranscode + "CSVJournal" + ".csv";
+            string filetoprint = filepath + txtorder;
+            string filetoprintcsv = filepath + txtorder2;
+            StreamWriter writer;//,writer22;
+            if (!Directory.Exists(filepath))
+            {
+                Directory.CreateDirectory(filepath);
+                writer = new StreamWriter(filetoprint);
+            }
+            else
+            {
+                writer = new StreamWriter(filetoprint, true);
+            }
+            writer.Write(details);
+            writer.Close();
+
+        }
+        //---------------------------------------------------------------------------------------------------------
 
         //THIS TEMPLATE IS USED FOR PLAIN TRANSACTION
         public void printReceiptConsolidatedXX()
@@ -1346,6 +3047,510 @@ namespace SalesInventorySystem
             writer.Close();
 
         }
+        ///
+        //Additional Overriding method
+        //THIS TEMPLATE HAS BEEN USED WITH ONE TIME DISCOUNT (e.g SENIOR,PWD,OTHERS)
+        public void printReceiptConsolidatedResto(string cashiertranscode
+                                            , string transcode
+                                            , string ordercode
+                                            , string total
+                                            , string peritemdiscount
+                                            , string netofvatindiscitems
+                                            , string netofvatindinonscitems
+                                            , string vatablesale
+                                            , string vatexemptsale
+                                            , string vat
+                                            , string cash
+                                            , string change
+                                            , DataGridView gridview
+                                            , bool isDiscount
+                                            , string disctype
+                                            , string footerlabel
+                                            , string name
+                                            , string address
+                                            , string tin
+                                            , string bussstyle
+                                            , string paytype)
+        {
+            String details = "";
+            string filepath = "C:\\POSTransaction\\DailySales\\" + DateTime.Now.ToString("yyyyMMdd") + "\\" + Login.Fullname + "\\TransactionJournalSummary\\";
+            details = "" + (Char)27 + (Char)112 + (Char)0 + (Char)25 + "";
+
+            string terminalno = "122";
+            details += Classes.ReceiptSetup.doHeader(Login.assignedBranch, Environment.MachineName);
+            details += Classes.ReceiptSetup.doTitle("SALES INVOICE");
+            details += Classes.ReceiptSetup.doHeaderDetails(ordercode, transcode, terminalno, name, address, tin, bussstyle);
+            details += HelperFunction.createDottedLine() + Environment.NewLine;
+            string discountpercentage = Database.getSingleQuery("SalesDiscount", $"OrderNo='{ordercode}' and isErrorCorrect=0 AND BranchCode='{Login.assignedBranch}' ", "DiscountPercentage");
+            double discpercent = Convert.ToDouble(discountpercentage) * 100;
+            double totalvatitems = 0.0;
+            for (int i = 0; i <= gridview.RowCount - 1; i++)
+            {
+                string addV = "";
+                if (Convert.ToBoolean(gridview.Rows[i].Cells["isVat"].Value.ToString()) == true)
+                {
+                    addV = "V";
+                    totalvatitems += Convert.ToDouble(gridview.Rows[i].Cells["Amount"].Value.ToString());
+                }
+                else
+                {
+                    addV = "";
+                }
+                string addD = "";
+                if (Convert.ToDouble(gridview.Rows[i].Cells["Discount"].Value.ToString()) > 0)
+                {
+                    addD = "  - (Less: Discount)";
+                }
+                else
+                {
+                    addD = "";
+                }
+
+                details += HelperFunction.PrintLeftText(gridview.Rows[i].Cells["Particulars"].Value.ToString()) + Environment.NewLine;
+                string a = "  - " + gridview.Rows[i].Cells["Qty"].Value + " @ " + gridview.Rows[i].Cells["UnitPrice"].Value;
+                double cleanbalance = 0.0;
+                cleanbalance = Convert.ToDouble(gridview.Rows[i].Cells["Amount"].Value) + Convert.ToDouble(gridview.Rows[i].Cells["Discount"].Value);
+
+                // string b = " " + gridview.Rows[i].Cells["Amount"].Value + addV;
+                string b = " " + HelperFunction.convertToNumericFormat(cleanbalance) + addV;
+                details += HelperFunction.PrintLeftRigthText(a, b) + Environment.NewLine;
+                if (Convert.ToDouble(gridview.Rows[i].Cells["Discount"].Value.ToString()) > 0)
+                {
+                    details += HelperFunction.PrintLeftRigthText(addD, "(" + gridview.Rows[i].Cells["Discount"].Value.ToString() + ")") + Environment.NewLine;
+                }
+                if (isDiscount)
+                {
+                    if (disctype == "REGULAR")
+                    {
+                        details += HelperFunction.PrintLeftText("  - (Less: Discount " + discpercent.ToString() + "%)") + Environment.NewLine;
+                    }
+                    else if (disctype != "REGULAR")
+                    {
+                        bool isSCorPWDDiscounted = false;
+                        isSCorPWDDiscounted = Database.checkifExist("SELECT TOP 1 Description FROM Products WHERE BranchCode='" + Login.assignedBranch + "' " +
+                            "AND Description='" + gridview.Rows[i].Cells["Particulars"].Value.ToString() + "' " +
+                            "AND isDiscount=1");
+                        if (isSCorPWDDiscounted)
+                        {
+                            details += HelperFunction.PrintLeftText("  - (Less: Discount " + discpercent.ToString() + "%)") + Environment.NewLine;
+                        }
+                    }
+
+                }
+            }
+            details += HelperFunction.PrinttoRight("----------") + Environment.NewLine;
+            if (Convert.ToDouble(peritemdiscount) > 0)
+            {
+                details += HelperFunction.PrintLeftRigthText("TOTAL DISCOUNT:", peritemdiscount) + Environment.NewLine;
+            }
+            details += HelperFunction.PrintLeftRigthText("TOTAL DUE:", total) + Environment.NewLine;
+            details += HelperFunction.PrinttoRight("==========") + Environment.NewLine;
+
+            double lessvat = 0.0, netofvat = 0.0, lessscdisc = 0.0, netofscdisc = 0.0, netofnonscdisc = 0.0, addvat = 0.0, totaltotal = 0.0;
+            netofnonscdisc = Convert.ToDouble(netofvatindinonscitems);
+            if (isDiscount == true)
+            {
+                if (disctype == "SENIOR")
+                {
+                    details += HelperFunction.createDottedLine() + Environment.NewLine;
+                    details += HelperFunction.PrintLeftText("SENIOR DISCOUNT") + Environment.NewLine;
+
+                    details += HelperFunction.PrintLeftText("OSCA SC/ID: " + POS.POSConfirmPaymentResto.discidno) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftText("Name: " + POS.POSConfirmPaymentResto.discname) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftRigthText("Discount Amount:", HelperFunction.convertToNumericFormat(Convert.ToDouble(POS.POSConfirmPaymentResto.discamount))) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftText("Signature: _______________") + Environment.NewLine;
+                    details += HelperFunction.createDottedLine() + Environment.NewLine;
+
+                    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+                    ///netofvatafteronetimedisc
+
+                    lessvat = Math.Round(Convert.ToDouble(netofvatindiscitems) * 0.12, 2);
+                    netofvat = Math.Round(Convert.ToDouble(netofvatindiscitems), 2);
+                    //lessscdisc = Math.Round(netofvat * 0.05, 2);
+                    lessscdisc = Math.Round(netofvat * Convert.ToDouble(discountpercentage), 2);
+                    netofscdisc = Math.Round(netofvat - lessscdisc, 2);
+                    addvat = Math.Round(netofscdisc * .12, 2);
+                    totaltotal = Math.Round(netofscdisc + addvat, 2);
+
+                    details += HelperFunction.PrintLeftRigthText("Less VAT:", HelperFunction.convertToNumericFormat(lessvat)) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftRigthText("Net of VAT:", HelperFunction.convertToNumericFormat(netofvat)) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftRigthText("Less SC Discount:", HelperFunction.convertToNumericFormat(lessscdisc)) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftRigthText("Net SC Discount:", HelperFunction.convertToNumericFormat(netofscdisc)) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftRigthText("Add VAT:", HelperFunction.convertToNumericFormat(addvat)) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftRigthText("Total:", HelperFunction.convertToNumericFormat(totaltotal)) + Environment.NewLine;
+
+                    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+                    details += HelperFunction.createDottedLine() + Environment.NewLine;
+                    details += HelperFunction.PrintLeftRigthText("AMOUNT DUE:", HelperFunction.convertToNumericFormat(Convert.ToDouble(POS.POSConfirmPaymentResto.netamountpayable))) + Environment.NewLine + Environment.NewLine;
+                }
+                else if (disctype == "PWD")
+                {
+                    details += HelperFunction.createDottedLine() + Environment.NewLine;
+                    details += HelperFunction.PrintLeftText("PWD DISCOUNT") + Environment.NewLine;
+                    details += HelperFunction.PrintLeftText("PWD ID: " + POS.POSConfirmPaymentResto.discidno) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftText("Name: " + POS.POSConfirmPaymentResto.discname) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftRigthText("Discount Amount:", HelperFunction.convertToNumericFormat(Convert.ToDouble(POS.POSConfirmPaymentResto.discamount))) + Environment.NewLine;
+
+                    details += HelperFunction.PrintLeftText("Signature: _______________") + Environment.NewLine;
+                    details += HelperFunction.createDottedLine() + Environment.NewLine;
+
+                    lessvat = Math.Round(Convert.ToDouble(netofvatindiscitems) * 0.12, 2);
+                    netofvat = Math.Round(Convert.ToDouble(netofvatindiscitems), 2);
+                    //lessscdisc = Math.Round(netofvat * 0.05, 2);
+                    lessscdisc = Math.Round(netofvat * Convert.ToDouble(discountpercentage), 2);
+                    netofscdisc = Math.Round(netofvat - lessscdisc, 2);
+                    addvat = Math.Round(netofscdisc * .12, 2);
+                    totaltotal = Math.Round(netofscdisc + addvat, 2);
+
+                    details += HelperFunction.PrintLeftRigthText("Less VAT:", HelperFunction.convertToNumericFormat(lessvat)) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftRigthText("Net of VAT:", HelperFunction.convertToNumericFormat(netofvat)) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftRigthText("Less PWD Discount:", HelperFunction.convertToNumericFormat(lessscdisc)) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftRigthText("Net PWD Discount:", HelperFunction.convertToNumericFormat(netofscdisc)) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftRigthText("Add VAT:", HelperFunction.convertToNumericFormat(addvat)) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftRigthText("Total:", HelperFunction.convertToNumericFormat(totaltotal)) + Environment.NewLine;
+
+                    details += HelperFunction.PrintLeftRigthText("AMOUNT DUE:", HelperFunction.convertToNumericFormat(Convert.ToDouble(POS.POSConfirmPaymentResto.netamountpayable))) + Environment.NewLine + Environment.NewLine;
+                }
+                else if (disctype == "REGULAR")
+                {
+                    details += HelperFunction.createDottedLine() + Environment.NewLine;
+                    details += HelperFunction.PrintLeftText("REGULAR DISCOUNT") + Environment.NewLine;
+                    details += HelperFunction.PrintLeftText("Remarks: " + POS.POSConfirmPaymentResto.discremarks) + Environment.NewLine + Environment.NewLine;
+                    details += HelperFunction.PrintLeftRigthText("Discount Amount: ", HelperFunction.convertToNumericFormat(Convert.ToDouble(POS.POSConfirmPaymentResto.discamount))) + Environment.NewLine;
+                    details += HelperFunction.createDottedLine() + Environment.NewLine;
+
+                    lessvat = Math.Round(Convert.ToDouble(netofvatindiscitems) * 0.12, 2);
+                    netofvat = Math.Round(Convert.ToDouble(netofvatindiscitems), 2);
+                    //lessscdisc = Math.Round(netofvat * 0.05, 2); //must change the percentage
+                    lessscdisc = Math.Round(netofvat * Convert.ToDouble(discountpercentage), 2);
+                    netofscdisc = Math.Round(netofvat - lessscdisc, 2);
+                    addvat = Math.Round(netofscdisc * .12, 2);
+                    totaltotal = Math.Round(netofscdisc + addvat, 2);
+
+                    details += HelperFunction.PrintLeftRigthText("Less VAT:", HelperFunction.convertToNumericFormat(lessvat)) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftRigthText("Net of VAT:", HelperFunction.convertToNumericFormat(netofvat)) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftRigthText("Less PWD Discount:", HelperFunction.convertToNumericFormat(lessscdisc)) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftRigthText("Net PWD Discount:", HelperFunction.convertToNumericFormat(netofscdisc)) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftRigthText("Add VAT:", HelperFunction.convertToNumericFormat(addvat)) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftRigthText("Total:", HelperFunction.convertToNumericFormat(totaltotal)) + Environment.NewLine;
+
+                    details += HelperFunction.PrintLeftRigthText("AMOUNT DUE:", HelperFunction.convertToNumericFormat(Convert.ToDouble(POS.POSConfirmPaymentResto.netamountpayable))) + Environment.NewLine + Environment.NewLine;
+                }
+
+            }
+            if (paytype == "Credit")
+            {
+                details += HelperFunction.PrintLeftRigthText("TENDERED:", HelperFunction.convertToNumericFormat(Convert.ToDouble(POS.POSConfirmPaymentResto.netamountpayable))) + Environment.NewLine + Environment.NewLine;
+                details += HelperFunction.PrintLeftRigthText("CHANGE  :", "0.00") + Environment.NewLine + Environment.NewLine;
+            }
+            details += HelperFunction.PrintLeftRigthText("TENDERED:", cash) + Environment.NewLine;
+            details += HelperFunction.PrintLeftRigthText("CHANGE  :", change) + Environment.NewLine + Environment.NewLine;
+
+
+            double totalvatableSales = netofscdisc + netofnonscdisc;
+            double totalVatInputSale = 0.0;
+            totalVatInputSale = totalvatableSales * 0.12;
+
+            details += HelperFunction.PrintLeftRigthText("VATable Sales:", HelperFunction.convertToNumericFormat(totalvatableSales)) + Environment.NewLine;
+            details += HelperFunction.PrintLeftRigthText("VAT Amount:", HelperFunction.convertToNumericFormat(totalVatInputSale)) + Environment.NewLine;
+            details += HelperFunction.PrintLeftRigthText("VAT-EXEMPT SALES:", vatexemptsale) + Environment.NewLine;
+            details += HelperFunction.PrintLeftRigthText("ZERO RATED SALES:", "0.00") + Environment.NewLine + Environment.NewLine;
+            if (paytype == "Credit")
+            {
+                string cardno = "", cardtype = "", cardrefno = "";
+                details += HelperFunction.createDottedLine() + Environment.NewLine;
+                details += HelperFunction.PrintLeftText("PAYMENT TYPE: Credit Card") + Environment.NewLine;
+                details += HelperFunction.PrintLeftText("Card Number: XXXX-XXXX-XXXX-" + cardno) + Environment.NewLine;
+                details += HelperFunction.PrintLeftText("Card Type: " + cardtype) + Environment.NewLine;
+                details += HelperFunction.PrintLeftText("Reference No.: " + cardrefno) + Environment.NewLine;
+                details += HelperFunction.createDottedLine() + Environment.NewLine;
+            }
+            string pathfile = System.IO.File.ReadAllText(Application.StartupPath + "\\FOOTER.txt");
+            details += HelperFunction.PrintCenterText(pathfile) + Environment.NewLine;
+            //details += Classes.ReceiptSetup.doFooter(Login.assignedBranch);
+            //details += Classes.ReceiptSetup.doFooter(Login.assignedBranch);
+
+            if (isDiscount)
+            {
+                details += HelperFunction.PrintCenterText(footerlabel);
+            }
+
+            details += HelperFunction.LastPagePaper();
+
+            if (!Directory.Exists(filepath))
+            {
+                Directory.CreateDirectory(filepath);
+            }
+
+            txtorder =  cashiertranscode + "_E-JOURNAL.txt";
+            txtorder2 = cashiertranscode + "CSVJournal" + ".csv";
+            string filetoprint = filepath + txtorder;
+            string filetoprintcsv = filepath + txtorder2;
+            StreamWriter writer;//,writer22;
+            if (!Directory.Exists(filepath))
+            {
+                Directory.CreateDirectory(filepath);
+                writer = new StreamWriter(filetoprint);
+            }
+            else
+            {
+                writer = new StreamWriter(filetoprint, true);
+            }
+            writer.Write(details);
+            writer.Close();
+
+        }
+
+
+        public void printReceiptConsolidatedRestoOneLove(string cashiertranscode
+                                            , string transcode
+                                            , string ordercode
+                                            , string total
+                                            , string peritemdiscount
+                                            , string netofvatindiscitems
+                                            , string netofvatindinonscitems
+                                            , string vatablesale
+                                            , string vatexemptsale
+                                            , string vat
+                                            , string cash
+                                            , string change
+                                            , DataGridView gridview
+                                            , bool isDiscount
+                                            , string disctype
+                                            , string footerlabel
+                                            , string name
+                                            , string address
+                                            , string tin
+                                            , string bussstyle
+                                            , string paytype)
+        {
+            String details = "";
+            string filepath = "C:\\POSTransaction\\DailySales\\" + DateTime.Now.ToString("yyyyMMdd") + "\\" + Login.Fullname + "\\TransactionJournalSummary\\";
+            details = "" + (Char)27 + (Char)112 + (Char)0 + (Char)25 + "";
+            details += Environment.NewLine;
+            details += Convert.ToInt32(ordercode).ToString();
+            details += Environment.NewLine;
+            string discountpercentage = Database.getSingleQuery("SalesDiscount", $"OrderNo='{ordercode}' and isErrorCorrect=0 AND BranchCode='{Login.assignedBranch}' ", "DiscountPercentage");
+            double discpercent = Convert.ToDouble(discountpercentage) * 100;
+            double totalvatitems = 0.0;
+            for (int i = 0; i <= gridview.RowCount - 1; i++)
+            {
+                string addV = "";
+                if (Convert.ToBoolean(gridview.Rows[i].Cells["isVat"].Value.ToString()) == true)
+                {
+                    addV = "V";
+                    totalvatitems += Convert.ToDouble(gridview.Rows[i].Cells["Amount"].Value.ToString());
+                }
+                else
+                {
+                    addV = "";
+                }
+                string addD = "";
+                if (Convert.ToDouble(gridview.Rows[i].Cells["Discount"].Value.ToString()) > 0)
+                {
+                    addD = "  - (Less: Discount)";
+                }
+                else
+                {
+                    addD = "";
+                }
+
+                details += HelperFunction.PrintLeftText(gridview.Rows[i].Cells["Particulars"].Value.ToString()) + Environment.NewLine;
+                string a = "  - " + gridview.Rows[i].Cells["Qty"].Value + " @ " + gridview.Rows[i].Cells["UnitPrice"].Value;
+                double cleanbalance = 0.0;
+                cleanbalance = Convert.ToDouble(gridview.Rows[i].Cells["Amount"].Value) + Convert.ToDouble(gridview.Rows[i].Cells["Discount"].Value);
+
+                // string b = " " + gridview.Rows[i].Cells["Amount"].Value + addV;
+                string b = " " + HelperFunction.convertToNumericFormat(cleanbalance) + addV;
+                details += HelperFunction.PrintLeftRigthText(a, b) + Environment.NewLine;
+                if (Convert.ToDouble(gridview.Rows[i].Cells["Discount"].Value.ToString()) > 0)
+                {
+                    details += HelperFunction.PrintLeftRigthText(addD, "(" + gridview.Rows[i].Cells["Discount"].Value.ToString() + ")") + Environment.NewLine;
+                }
+                if (isDiscount)
+                {
+                    if (disctype == "REGULAR")
+                    {
+                        details += HelperFunction.PrintLeftText("  - (Less: Discount " + discpercent.ToString() + "%)") + Environment.NewLine;
+                    }
+                    else if (disctype != "REGULAR")
+                    {
+                        bool isSCorPWDDiscounted = false;
+                        isSCorPWDDiscounted = Database.checkifExist("SELECT TOP 1 Description FROM Products WHERE BranchCode='" + Login.assignedBranch + "' " +
+                            "AND Description='" + gridview.Rows[i].Cells["Particulars"].Value.ToString() + "' " +
+                            "AND isDiscount=1");
+                        if (isSCorPWDDiscounted)
+                        {
+                            details += HelperFunction.PrintLeftText("  - (Less: Discount " + discpercent.ToString() + "%)") + Environment.NewLine;
+                        }
+                    }
+
+                }
+            }
+            details += HelperFunction.PrinttoRight("----------") + Environment.NewLine;
+            if (Convert.ToDouble(peritemdiscount) > 0)
+            {
+                details += HelperFunction.PrintLeftRigthText("TOTAL DISCOUNT:", peritemdiscount) + Environment.NewLine;
+            }
+            details += HelperFunction.PrintLeftRigthText("TOTAL DUE:", total) + Environment.NewLine;
+            details += HelperFunction.PrinttoRight("==========") + Environment.NewLine;
+
+            double lessvat = 0.0, netofvat = 0.0, lessscdisc = 0.0, netofscdisc = 0.0, netofnonscdisc = 0.0, addvat = 0.0, totaltotal = 0.0;
+            netofnonscdisc = Convert.ToDouble(netofvatindinonscitems);
+            if (isDiscount == true)
+            {
+                if (disctype == "SENIOR")
+                {
+                    details += HelperFunction.createDottedLine() + Environment.NewLine;
+                    details += HelperFunction.PrintLeftText("SENIOR DISCOUNT") + Environment.NewLine;
+
+                    details += HelperFunction.PrintLeftText("OSCA SC/ID: " + POS.POSConfirmPaymentResto.discidno) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftText("Name: " + POS.POSConfirmPaymentResto.discname) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftRigthText("Discount Amount:", HelperFunction.convertToNumericFormat(Convert.ToDouble(POS.POSConfirmPaymentResto.discamount))) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftText("Signature: _______________") + Environment.NewLine;
+                    details += HelperFunction.createDottedLine() + Environment.NewLine;
+
+                    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+                    ///netofvatafteronetimedisc
+
+                    lessvat = Math.Round(Convert.ToDouble(netofvatindiscitems) * 0.12, 2);
+                    netofvat = Math.Round(Convert.ToDouble(netofvatindiscitems), 2);
+                    //lessscdisc = Math.Round(netofvat * 0.05, 2);
+                    lessscdisc = Math.Round(netofvat * Convert.ToDouble(discountpercentage), 2);
+                    netofscdisc = Math.Round(netofvat - lessscdisc, 2);
+                    addvat = Math.Round(netofscdisc * .12, 2);
+                    totaltotal = Math.Round(netofscdisc + addvat, 2);
+
+                    details += HelperFunction.PrintLeftRigthText("Less VAT:", HelperFunction.convertToNumericFormat(lessvat)) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftRigthText("Net of VAT:", HelperFunction.convertToNumericFormat(netofvat)) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftRigthText("Less SC Discount:", HelperFunction.convertToNumericFormat(lessscdisc)) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftRigthText("Net SC Discount:", HelperFunction.convertToNumericFormat(netofscdisc)) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftRigthText("Add VAT:", HelperFunction.convertToNumericFormat(addvat)) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftRigthText("Total:", HelperFunction.convertToNumericFormat(totaltotal)) + Environment.NewLine;
+
+                    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+                    details += HelperFunction.createDottedLine() + Environment.NewLine;
+                    details += HelperFunction.PrintLeftRigthText("AMOUNT DUE:", HelperFunction.convertToNumericFormat(Convert.ToDouble(POS.POSConfirmPaymentResto.netamountpayable))) + Environment.NewLine + Environment.NewLine;
+                }
+                else if (disctype == "PWD")
+                {
+                    details += HelperFunction.createDottedLine() + Environment.NewLine;
+                    details += HelperFunction.PrintLeftText("PWD DISCOUNT") + Environment.NewLine;
+                    details += HelperFunction.PrintLeftText("PWD ID: " + POS.POSConfirmPaymentResto.discidno) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftText("Name: " + POS.POSConfirmPaymentResto.discname) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftRigthText("Discount Amount:", HelperFunction.convertToNumericFormat(Convert.ToDouble(POS.POSConfirmPaymentResto.discamount))) + Environment.NewLine;
+
+                    details += HelperFunction.PrintLeftText("Signature: _______________") + Environment.NewLine;
+                    details += HelperFunction.createDottedLine() + Environment.NewLine;
+
+                    lessvat = Math.Round(Convert.ToDouble(netofvatindiscitems) * 0.12, 2);
+                    netofvat = Math.Round(Convert.ToDouble(netofvatindiscitems), 2);
+                    //lessscdisc = Math.Round(netofvat * 0.05, 2);
+                    lessscdisc = Math.Round(netofvat * Convert.ToDouble(discountpercentage), 2);
+                    netofscdisc = Math.Round(netofvat - lessscdisc, 2);
+                    addvat = Math.Round(netofscdisc * .12, 2);
+                    totaltotal = Math.Round(netofscdisc + addvat, 2);
+
+                    details += HelperFunction.PrintLeftRigthText("Less VAT:", HelperFunction.convertToNumericFormat(lessvat)) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftRigthText("Net of VAT:", HelperFunction.convertToNumericFormat(netofvat)) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftRigthText("Less PWD Discount:", HelperFunction.convertToNumericFormat(lessscdisc)) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftRigthText("Net PWD Discount:", HelperFunction.convertToNumericFormat(netofscdisc)) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftRigthText("Add VAT:", HelperFunction.convertToNumericFormat(addvat)) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftRigthText("Total:", HelperFunction.convertToNumericFormat(totaltotal)) + Environment.NewLine;
+
+                    details += HelperFunction.PrintLeftRigthText("AMOUNT DUE:", HelperFunction.convertToNumericFormat(Convert.ToDouble(POS.POSConfirmPaymentResto.netamountpayable))) + Environment.NewLine + Environment.NewLine;
+                }
+                else if (disctype == "REGULAR")
+                {
+                    details += HelperFunction.createDottedLine() + Environment.NewLine;
+                    details += HelperFunction.PrintLeftText("REGULAR DISCOUNT") + Environment.NewLine;
+                    details += HelperFunction.PrintLeftText("Remarks: " + POS.POSConfirmPaymentResto.discremarks) + Environment.NewLine + Environment.NewLine;
+                    details += HelperFunction.PrintLeftRigthText("Discount Amount: ", HelperFunction.convertToNumericFormat(Convert.ToDouble(POS.POSConfirmPaymentResto.discamount))) + Environment.NewLine;
+                    details += HelperFunction.createDottedLine() + Environment.NewLine;
+
+                    lessvat = Math.Round(Convert.ToDouble(netofvatindiscitems) * 0.12, 2);
+                    netofvat = Math.Round(Convert.ToDouble(netofvatindiscitems), 2);
+                    //lessscdisc = Math.Round(netofvat * 0.05, 2); //must change the percentage
+                    lessscdisc = Math.Round(netofvat * Convert.ToDouble(discountpercentage), 2);
+                    netofscdisc = Math.Round(netofvat - lessscdisc, 2);
+                    addvat = Math.Round(netofscdisc * .12, 2);
+                    totaltotal = Math.Round(netofscdisc + addvat, 2);
+
+                    details += HelperFunction.PrintLeftRigthText("Less VAT:", HelperFunction.convertToNumericFormat(lessvat)) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftRigthText("Net of VAT:", HelperFunction.convertToNumericFormat(netofvat)) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftRigthText("Less PWD Discount:", HelperFunction.convertToNumericFormat(lessscdisc)) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftRigthText("Net PWD Discount:", HelperFunction.convertToNumericFormat(netofscdisc)) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftRigthText("Add VAT:", HelperFunction.convertToNumericFormat(addvat)) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftRigthText("Total:", HelperFunction.convertToNumericFormat(totaltotal)) + Environment.NewLine;
+
+                    details += HelperFunction.PrintLeftRigthText("AMOUNT DUE:", HelperFunction.convertToNumericFormat(Convert.ToDouble(POS.POSConfirmPaymentResto.netamountpayable))) + Environment.NewLine + Environment.NewLine;
+                }
+
+            }
+            if (paytype == "Credit")
+            {
+                details += HelperFunction.PrintLeftRigthText("TENDERED:", HelperFunction.convertToNumericFormat(Convert.ToDouble(POS.POSConfirmPaymentResto.netamountpayable))) + Environment.NewLine + Environment.NewLine;
+                details += HelperFunction.PrintLeftRigthText("CHANGE  :", "0.00") + Environment.NewLine + Environment.NewLine;
+            }
+            details += HelperFunction.PrintLeftRigthText("TENDERED:", cash) + Environment.NewLine;
+            details += HelperFunction.PrintLeftRigthText("CHANGE  :", change) + Environment.NewLine + Environment.NewLine;
+
+
+            double totalvatableSales = netofscdisc + netofnonscdisc;
+            double totalVatInputSale = 0.0;
+            totalVatInputSale = totalvatableSales * 0.12;
+
+
+            if (paytype == "Credit")
+            {
+                string cardno = "", cardtype = "", cardrefno = "";
+                details += HelperFunction.createDottedLine() + Environment.NewLine;
+                details += HelperFunction.PrintLeftText("PAYMENT TYPE: Credit Card") + Environment.NewLine;
+                details += HelperFunction.PrintLeftText("Card Number: XXXX-XXXX-XXXX-" + cardno) + Environment.NewLine;
+                details += HelperFunction.PrintLeftText("Card Type: " + cardtype) + Environment.NewLine;
+                details += HelperFunction.PrintLeftText("Reference No.: " + cardrefno) + Environment.NewLine;
+                details += HelperFunction.createDottedLine() + Environment.NewLine;
+            }
+            string pathfile = System.IO.File.ReadAllText(Application.StartupPath + "\\FOOTER.txt");
+            //details += HelperFunction.PrintCenterText(pathfile) + Environment.NewLine;
+            //details += Classes.ReceiptSetup.doFooter(Login.assignedBranch);
+            //details += Classes.ReceiptSetup.doFooter(Login.assignedBranch);
+
+            if (isDiscount)
+            {
+                //details += HelperFunction.PrintCenterText(footerlabel);
+            }
+
+            details += HelperFunction.LastPagePaper();
+
+            if (!Directory.Exists(filepath))
+            {
+                Directory.CreateDirectory(filepath);
+            }
+
+            txtorder = cashiertranscode + "_E-JOURNAL.txt";
+            txtorder2 = cashiertranscode + "CSVJournal" + ".csv";
+            string filetoprint = filepath + txtorder;
+            string filetoprintcsv = filepath + txtorder2;
+            StreamWriter writer;//,writer22;
+            if (!Directory.Exists(filepath))
+            {
+                Directory.CreateDirectory(filepath);
+                writer = new StreamWriter(filetoprint);
+            }
+            else
+            {
+                writer = new StreamWriter(filetoprint, true);
+            }
+            writer.Write(details);
+            writer.Close();
+
+        }
+
+
+        ///
         // IS USED VOID SELECTED ITEM BUTTON katong mo select ka sa checkbox //CHANGE TO RETURNED
         public void printReturnSelectedItem(string returntranscode,string transcode, string ordercode, DataGridView gridview)
         {

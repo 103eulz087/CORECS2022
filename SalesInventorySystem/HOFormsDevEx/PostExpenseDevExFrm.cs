@@ -17,6 +17,7 @@ namespace SalesInventorySystem.HOFormsDevEx
     {
         DataTable table;
         bool ok = false;
+        object suppid;
         public PostExpenseDevExFrm()
         {
             InitializeComponent();
@@ -51,19 +52,18 @@ namespace SalesInventorySystem.HOFormsDevEx
         }
         void displayvendor()
         {
-            Database.displaySearchlookupEdit("select SupplierID,SupplierName FROM Supplier", txtvendor, "SupplierID", "SupplierID");
+            Database.displaySearchlookupEdit("select SupplierID,SupplierName FROM Supplier", txtvendor, "SupplierName", "SupplierName");
         }
         void loadRepositoryItem()
         {
             Database.displayRepositorySearchlookupEdit("SELECT BranchCode,BranchName FROM Branches", repbrcode, "BranchCode", "BranchCode");
-            Database.displayRepositorySearchlookupEdit("SELECT ExpenseID,ExpenseName FROM ExpensesList", reptypeofexpense, "ExpenseName", "ExpenseName");
+            Database.displayRepositorySearchlookupEdit("SELECT Description FROM CHartOfAccounts WHERE AccountCode like '60%'", reptypeofexpense, "Description", "Description");
             gridView2.BestFitColumns();
             gridView3.BestFitColumns();
         }
 
         private void simpleButton3_Click(object sender, EventArgs e)
         {
-            
             DataRow newRow = table.NewRow();
             newRow["Amount"] = 0;
             table.Rows.Add(newRow);
@@ -88,7 +88,7 @@ namespace SalesInventorySystem.HOFormsDevEx
         {
             try
             {
-                string supplierkey = Database.getSingleQuery("Supplier", "SupplierID='" + txtvendor.Text + "'", "SupplierKey");
+                string supplierkey = Database.getSingleQuery("Supplier", "SupplierID='" + suppid.ToString() + "'", "SupplierKey");
                 string branchcode, expname, particulars, amount;
                 bool isEmpty = false;
                 int ctr = 1;
@@ -99,6 +99,11 @@ namespace SalesInventorySystem.HOFormsDevEx
                         isEmpty = true;
                         break;
                     }
+                }
+                if(gridView1.RowCount==0)
+                {
+                    XtraMessageBox.Show("No Expense Details Entry");
+                    return;
                 }
                 if (isEmpty)
                 {
@@ -121,8 +126,8 @@ namespace SalesInventorySystem.HOFormsDevEx
 
                         //int ledgeseqno = Database.getLastID("SupplierLedger", "SupplierID='" + txtvendor.Text + "'", "TRN_SEQ_NO")+1;
                         //int lastexpseqno = Database.getLastID("SupplierLedger", "SupplierID='" + txtvendor.Text + "'", "TRN_SEQ_NO") + 1;
-                        //Database.ExecuteQuery("INSERT INTO ExpenseMaster VALUES ('"+i+"','" + branchcode + "','" + txtrefno.Text + "','" + txtinvoiceno.Text + "','" + expname + "','" + txtexpdate.Text + "','" + amount + "','" + particulars + "','" + txtvendor.Text + "','UNPAID','" + amount + "',0,0,0,0,0)");
-                        Database.ExecuteQuery("INSERT INTO ExpenseMaster VALUES ('" + ctr + "','" + branchcode + "','" + txtvendor.Text + "','" + txtrefno.Text + "','" + txtinvoiceno.Text + "','" + expname + "','" + txtexpdate.Text + "','" + amount + "','" + particulars + "','UNPAID','" + amount + "',0,0,0,0,0)");
+                        //Database.ExecuteQuery("INSERT INTO ExpenseMaster VALUES ('" + ctr + "','" + branchcode + "','" + txtvendor.Text + "','" + txtrefno.Text + "','" + txtinvoiceno.Text + "','" + expname + "','" + txtexpdate.Text + "','" + amount + "','" + particulars + "','UNPAID','" + amount + "',0,0,0,0,0)");
+                        Database.ExecuteQuery($"INSERT INTO ExpenseDetails VALUES('{ctr}','{branchcode}','{txtrefno.Text}','{txtinvoiceno.Text}','{expname}','{particulars}','{amount}')");
                         //Database.ExecuteQuery("INSERT INTO SupplierLedger VALUES ('" + supplierkey + "','" + txtvendor.Text + "','" + txtexpdate.Text + "','" + particulars + "','EXP','" + DateTime.Now.ToString() + "','" + txtinvoiceno.Text + "',0,0,'" + amount + "',0,'" + Login.Fullname + "','*',0,'UNPAID',0,' ','" + ledgeseqno + "')");
                         ctr += 1;
                     }
@@ -146,11 +151,18 @@ namespace SalesInventorySystem.HOFormsDevEx
                 con.Open();
                 string query = "sp_UpdateExpense";
                 SqlCommand com = new SqlCommand(query, con);
+                //com.Parameters.AddWithValue("@parmrefno", txtrefno.Text);
+                //com.Parameters.AddWithValue("@parmsupplierid", suppid.ToString());
+                //com.Parameters.AddWithValue("@parminvoiceno", txtinvoiceno.Text);
+                //com.Parameters.AddWithValue("@parmexpensedate", txtexpdate.Text);
+                //com.Parameters.AddWithValue("@parmremarks", txtremarks.Text);
+                //com.Parameters.AddWithValue("@parmuser", Login.Fullname);
+               
                 com.Parameters.AddWithValue("@parmrefno", txtrefno.Text);
-                com.Parameters.AddWithValue("@parmsupplierid", txtvendor.Text);
+                com.Parameters.AddWithValue("@parmsupplierid", suppid.ToString());
                 com.Parameters.AddWithValue("@parminvoiceno", txtinvoiceno.Text);
                 com.Parameters.AddWithValue("@parmexpensedate", txtexpdate.Text);
-                com.Parameters.AddWithValue("@parmremarks", txtremarks.Text);
+                com.Parameters.AddWithValue("@parmremarks", txtremarks.Text); //DESCRIPTION
                 com.Parameters.AddWithValue("@parmuser", Login.Fullname);
                 com.CommandType = CommandType.StoredProcedure;
                 com.CommandText = query;
@@ -268,6 +280,11 @@ namespace SalesInventorySystem.HOFormsDevEx
                 e.Appearance.Font = new System.Drawing.Font(e.Appearance.Font, FontStyle.Strikeout);
                 e.Appearance.ForeColor = Color.Red;
             }
+        }
+
+        private void txtvendor_EditValueChanged(object sender, EventArgs e)
+        {
+            suppid = SearchLookUpClass.getSingleValue(txtvendor, "SupplierID");
         }
     }
 }

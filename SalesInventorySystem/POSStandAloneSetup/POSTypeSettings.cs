@@ -25,7 +25,7 @@ namespace SalesInventorySystem.POSStandAloneSetup
         void display()
         {
             var rows = Database.getMultipleQuery("POSType", "PosType is not null", "POSType,DisplayPoolPort,isUsedDisplayPool,isEnablePrinting,SendEmailNotification," +
-                "UploadPerShifting,DataUploading,EnableInvoiceLapsingTerm,EnableCreditLimit,isLinkedServer,linkedServerName,MachineName,EODEmailNotification,CashBeginAmount");
+                "UploadPerShifting,DataUploading,EnableInvoiceLapsingTerm,EnableCreditLimit,isLinkedServer,linkedServerName,MachineName,EODEmailNotification,CashBeginAmount,isEnableInvoicePrinting");
             string POSType = rows["POSType"].ToString();
             string DisplayPoolPort = rows["DisplayPoolPort"].ToString(); //not used
             string isUsedDisplayPool = rows["isUsedDisplayPool"].ToString(); //not used
@@ -40,6 +40,7 @@ namespace SalesInventorySystem.POSStandAloneSetup
             string MachineName = rows["MachineName"].ToString();
             string EODEmailNotification = rows["EODEmailNotification"].ToString();
             string CashBeginAmount = rows["CashBeginAmount"].ToString();
+            string isEnableInvoicePrinting = rows["isEnableInvoicePrinting"].ToString();
 
             if (Convert.ToBoolean(isEnablePrinting)) { chckisenableprinting.Checked = true; } else { chckisenableprinting.Checked = false; }
             if (Convert.ToBoolean(SendEmailNotification)) { chcksendemail.Checked = true; } else { chcksendemail.Checked = false; }
@@ -49,6 +50,7 @@ namespace SalesInventorySystem.POSStandAloneSetup
             if (Convert.ToBoolean(EnableCreditLimit)) { chckcreditlimit.Checked = true; } else { chckcreditlimit.Checked = false; }
             if (Convert.ToBoolean(isLinkedServer)) { chckislinkedserver.Checked = true; } else { chckislinkedserver.Checked = false; }
             if (Convert.ToBoolean(EODEmailNotification)) { chckeodnotification.Checked = true; } else { chckeodnotification.Checked = false; }
+            if (Convert.ToBoolean(isEnableInvoicePrinting)) { chckdenableinvoiceprinting.Checked = true; } else { chckdenableinvoiceprinting.Checked = false; }
 
             txtmachinename.Text = MachineName;
             txtpostype.Text = POSType;
@@ -71,7 +73,7 @@ namespace SalesInventorySystem.POSStandAloneSetup
 
         void update()
         {
-            bool isEnablePrinting, SendEmailNotification, UploadPerShifting, DataUploadingType, EnableInvoiceLapsingTerm, EnableCreditLimit, isLinkedServer, EODEmailNotification;
+            bool isEnablePrinting, isEnableInvoicePrinting,SendEmailNotification, UploadPerShifting, DataUploadingType, EnableInvoiceLapsingTerm, EnableCreditLimit, isLinkedServer, EODEmailNotification;
 
             if (chckisenableprinting.Checked == true) { isEnablePrinting = true; } else { isEnablePrinting = false; }
             if (chcksendemail.Checked == true) { SendEmailNotification = true; }else { SendEmailNotification = false; }
@@ -81,6 +83,7 @@ namespace SalesInventorySystem.POSStandAloneSetup
             if (chckcreditlimit.Checked == true) { EnableCreditLimit = true; }else { EnableCreditLimit = false; }
             if (chckislinkedserver.Checked == true) { isLinkedServer = true; }else { isLinkedServer = false; } 
             if (chckeodnotification.Checked == true) { EODEmailNotification = true; }else { EODEmailNotification = false; } 
+            if (chckdenableinvoiceprinting.Checked == true) { isEnableInvoicePrinting = true; }else { isEnableInvoicePrinting = false; } 
 
             Database.ExecuteQuery("UPDATE POSType Set PosType='"+txtpostype.Text+"'" +
                 ",isEnablePrinting='" + isEnablePrinting + "'" +
@@ -94,6 +97,7 @@ namespace SalesInventorySystem.POSStandAloneSetup
                 ",MachineName='"+txtmachinename.Text+"'" +
                 ",EODEmailNotification='" + EODEmailNotification + "'" +
                 ",CashBeginAmount='" + txtcashbegin.Text + "'" +
+                ",isEnableInvoicePrinting='" + isEnableInvoicePrinting + "'" +
                 " ", "Successfully Updated!");
             this.Dispose();
         }

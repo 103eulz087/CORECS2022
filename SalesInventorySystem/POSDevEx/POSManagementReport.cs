@@ -28,12 +28,11 @@ namespace SalesInventorySystem.POSDevEx
         }
         void populateBranch()
         {
-            Database.displaySearchlookupEdit("SELECT BranchCode,BranchName FROM Branches", txtbranch, "BranchCode", "BranchCode");
-            Database.displaySearchlookupEdit("SELECT BranchCode,BranchName FROM Branches", txtbrcodemgmtdata, "BranchCode", "BranchCode");
-            Database.displaySearchlookupEdit("SELECT BranchCode,BranchName FROM Branches", txtbranchVAT, "BranchCode", "BranchCode");
-            Database.displaySearchlookupEdit("SELECT BranchCode,MachineUsed FROM POSInfoDetails WHERE BranchCode='" + txtbranch.Text + "'", txtmanageddatapermachine, "MachineUsed", "MachineUsed");
-            Database.displaySearchlookupEdit("SELECT BranchCode,MachineUsed FROM POSInfoDetails WHERE BranchCode='" + txtbranchVAT.Text + "'", txtmachineVAT, "MachineUsed", "MachineUsed");
-          
+            Database.displaySearchlookupEdit("SELECT BranchCode,BranchName FROM dbo.Branches ORDER BY BranchCode", txtbranch, "BranchCode", "BranchCode");
+            Database.displaySearchlookupEdit("SELECT BranchCode,BranchName FROM dbo.Branches", txtbrcodemgmtdata, "BranchCode", "BranchCode");
+            Database.displaySearchlookupEdit("SELECT BranchCode,BranchName FROM dbo.Branches", txtbranchVAT, "BranchCode", "BranchCode");
+            Database.displaySearchlookupEdit("SELECT BranchCode,MachineUsed FROM dbo.POSInfoDetails WHERE BranchCode='" + txtbranch.Text + "'", txtmanageddatapermachine, "MachineUsed", "MachineUsed");
+            Database.displaySearchlookupEdit("SELECT BranchCode,MachineUsed FROM dbo.POSInfoDetails WHERE BranchCode='" + txtbranchVAT.Text + "'", txtmachineVAT, "MachineUsed", "MachineUsed"); 
         }
 
         private void simpleButton1_Click(object sender, EventArgs e)
@@ -120,8 +119,9 @@ namespace SalesInventorySystem.POSDevEx
 
         private void txtbranch_EditValueChanged(object sender, EventArgs e)
         {
-            Database.displaySearchlookupEdit("SELECT BranchCode,MachineUsed FROM POSInfoDetails WHERE BranchCode='" + txtbranch.Text + "'", txtmachine, "MachineUsed", "MachineUsed");
-            Database.displaySearchlookupEdit("SELECT BranchCode,MachineUsed FROM POSInfoDetails WHERE BranchCode='" + txtbranch.Text + "'", txtmachineVAT, "MachineUsed", "MachineUsed");
+            Database.displaySearchlookupEdit("SELECT BranchCode,MachineUsed FROM dbo.POSInfoDetails WHERE BranchCode='" + txtbranch.Text + "'", txtmachine, "MachineUsed", "MachineUsed");
+            //Database.displaySearchlookupEdit($"SELECT distinct BranchCode,MachineUsed FROM dbo.SalesTransactionSummary WHERE BranchCode='{txtbranch.Text}' and CAST(TransDate as date) between '{txtsalesdatefrom.Text}' and '{txtsalesdateto.Text}' ", txtmachine, "MachineUsed", "MachineUsed");
+            Database.displaySearchlookupEdit("SELECT BranchCode,MachineUsed FROM dbo.POSInfoDetails WHERE BranchCode='" + txtbranch.Text + "'", txtmachineVAT, "MachineUsed", "MachineUsed");
         }
 
         void executeA(string reportcategory)
@@ -1012,13 +1012,385 @@ namespace SalesInventorySystem.POSDevEx
                 ////txtcashier.Enabled = true;
                 Database.displaySearchlookupEdit("SELECT distinct BranchCode,MachineUsed,ProcessedBy " +
                     "FROM dbo.POSSalesSummary " +
-                    "WHERE BranchCode='" + txtbranch.Text + "' ", txtcashier, "ProcessedBy", "ProcessedBy");
+                    "WHERE BranchCode='" + txtbranch.Text + "' AND MachineUsed='" + txtmachine.Text + "' AND DateOrder between '"+txtsalesdatefrom.Text+"' AND '"+txtsalesdateto.Text+"' ", txtcashier, "ProcessedBy", "ProcessedBy");
             }
         }
 
         private void gridControl1_Click(object sender, EventArgs e)
         {
 
+        }
+        void receiptWithNoDiscount2(string petsa, string brcode, string machineused,string cashier)
+        {
+            //Convert.ToDateTime(petsa)   
+            string pathfile = System.IO.File.ReadAllText(Application.StartupPath + "\\FOOTER.txt");
+            double totalPerItemDiscount = 0.0, total = 0.0;
+            String details = "";
+            string filepath = "C:\\ProgramFliesTest\\DailySales\\" + Convert.ToDateTime(petsa).ToString("yyyyMMdd") + "\\" + cashier + "\\TransactionJournalSummary\\";
+            details = "" + (Char)27 + (Char)112 + (Char)0 + (Char)25 + "";
+            double globalamountdue = 0.0;
+            string subtotal = "", paytype = "", amounttender = "", amountchange = "", TotalVatableSalesSum = "", TotalVatSaleSum = "", TotalVatExemptSum = "", CashierTransNo = "";
+            // details += Classes.ReceiptSetup.doHeader(Login.assignedBranch, Environment.MachineName);
+            //details += Classes.ReceiptSetup.doTitle("SALES INVOICE");
+            //details += Classes.ReceiptSetup.doHeaderDetails(ordercode, transcode, terminalno, name, address, tin, bussstyle);
+            //  details += HelperFunction.createDottedLine() + Environment.NewLine;
+
+            SqlConnection con = Database.getConnection();
+            con.Open();
+            SqlCommand com = new SqlCommand("SELECT a.Description," +
+               " a.QtySold " +
+               ", a.ReferenceNo" +
+               ", a.DiscountTotal" +
+               ", b.SubTotal" +
+               ", a.TotalAmount" +
+               ", a.SellingPrice" +
+               ", a.isVat" +
+               ", b.TotalVATExemptSale" +
+               ", b.TotalVatableSale" +
+               ", b.TotalVATSale" +
+               ", b.AmountTendered" +
+               ", b.AmountChange" +
+               ", b.PaymentType" +
+               ", b.CashierTransNo" +
+               ", c.DiscountAmount" +
+               ", c.DiscountType" +
+               ", c.DiscountPercentage" +
+               ", a.DateOrder" +
+               ", a.ProcessedBy" +
+                " FROM BatchSalesDetails2 a INNER JOIN BatchSalesSummary2 b ON a.ReferenceNo=b.ReferenceNo " +
+                "LEFT OUTER JOIN SalesDiscount c ON b.BranchCode=c.BranchCode and b.ReferenceNo=c.OrderNo " +
+                "AND a.BranchCode=b.BranchCode " +
+                "AND a.MachineUsed=b.MachineUsed " +
+                $"WHERE a.Status='SOLD' and CAST(a.DateOrder as date) = '{petsa}' AND b.BranchCode='{brcode}' AND b.MachineUsed='{machineused}' and a.ProcessedBy='{cashier}' ORDER BY a.ReferenceNo", con);
+            SqlDataAdapter adapter = new SqlDataAdapter(com);
+            com.CommandTimeout = 3600;
+            DataTable table = new DataTable();
+            adapter.Fill(table);
+
+            //var rowz = Database.getMultipleQuery("POSInfoDetails","BranchCode='"+Login.assignedBranch+"' AND MachineUsed='"+Environment.MachineName+"'");
+            Dictionary<string, List<DataRow>> receipts = new Dictionary<string, List<DataRow>>();
+            string cashiername = "", dateOrder = "", discounttype = "", discountAmount = "", discountPercentage = "";
+            double totalvatitems = 0.0;
+            foreach (DataRow row in table.Rows)
+            {
+                cashiername = row["ProcessedBy"].ToString();
+                dateOrder = row["DateOrder"].ToString();
+                discounttype = row["DiscountType"].ToString();
+                discountAmount = row["DiscountAmount"].ToString();
+                discountPercentage = row["DiscountPercentage"].ToString();
+                string referenceNo = row["ReferenceNo"].ToString();
+                if (!receipts.ContainsKey(referenceNo))
+                    receipts[referenceNo] = new List<DataRow>();
+                receipts[referenceNo].Add(row);
+            }
+
+            foreach (KeyValuePair<string, List<DataRow>> kvp in receipts) //List<DataRow> receipt
+            {
+                List<DataRow> receipt = kvp.Value;
+                string referenceNo = kvp.Key;
+                //string datebuy = kvp.Key;
+                details += Classes.ReceiptSetup.doHeaderB2(brcode, machineused);
+                details += Classes.ReceiptSetup.doTitle("SALES INVOICE");
+                string cashiername1 = Database.getSingleQuery($"SELECT TOP(1) FullName FROM dbo.Users WHERE UserID='{cashiername}'","FullName");
+                string transno = Database.getSingleQuery($"SELECT TOP(1)  FROM dbo.Users WHERE UserID='{cashiername}'", "FullName");
+                details += Classes.ReceiptSetup.doHeaderDetailsX(cashiername1, referenceNo, " ", null, null, null, null, dateOrder, "");
+                details += HelperFunction.createDottedLine() + Environment.NewLine;
+                foreach (DataRow row in receipt) //mga items sa resibo
+                {
+                    CashierTransNo = row["CashierTransNo"].ToString();
+                    TotalVatableSalesSum = row["TotalVatableSale"].ToString();
+                    TotalVatSaleSum = row["TotalVATSale"].ToString();
+                    TotalVatExemptSum = row["TotalVATExemptSale"].ToString();
+
+                    amounttender = row["AmountTendered"].ToString();
+                    amountchange = row["AmountChange"].ToString();
+                    paytype = row["PaymentType"].ToString();
+                    totalPerItemDiscount += Convert.ToDouble(row["DiscountTotal"].ToString());
+                    //totalPerItemDiscount += Convert.ToDouble(row["DiscountAmount"].ToString());
+                    total += Convert.ToDouble(row["TotalAmount"].ToString());
+                    subtotal = row["SubTotal"].ToString();
+                    string addV = "";
+
+                    if (Convert.ToBoolean(row["isVat"].ToString()) == true)
+                    {
+                        addV = "V";
+                        totalvatitems += Convert.ToDouble(row["TotalVATSale"].ToString());
+                    }
+                    else
+                    {
+                        addV = "";
+                    }
+                    string addD = "";
+                    if (Convert.ToDouble(Convert.ToDouble(row["DiscountTotal"].ToString())) > 0)
+                    //if (Convert.ToDouble(Convert.ToDouble(row["DiscountAmount"].ToString())) > 0)
+                    {
+                        addD = "  - (Less: Discount)";
+                    }
+                    else
+                    {
+                        addD = "";
+                    }
+                    
+                    if (Convert.ToDouble(row["QtySold"].ToString()) > 0)
+                    {
+                        details += HelperFunction.PrintLeftText(row["Description"].ToString()) + Environment.NewLine;
+                    }
+                    string a = "  - " + row["QtySold"].ToString() + " @ " + row["SellingPrice"].ToString();
+                    double cleanbalance = 0.0;
+                    cleanbalance = Convert.ToDouble(row["TotalAmount"].ToString()) + Convert.ToDouble(row["DiscountTotal"].ToString());
+
+                    // string b = " " + gridview.Rows[i].Cells["Amount"].Value + addV;
+                    string b = " " + HelperFunction.convertToNumericFormat(cleanbalance) + addV;
+                    if(Convert.ToDouble(row["QtySold"].ToString()) > 0)
+                    {
+                        details += HelperFunction.PrintLeftRigthText(a, b) + Environment.NewLine;
+                    }
+                   
+                    if (Convert.ToDouble(row["DiscountTotal"].ToString()) > 0)
+                    {
+                        //details += HelperFunction.PrintLeftRigthText(addD, "(" + row["DiscountAmount"].ToString() + ")") + Environment.NewLine;
+                        details += HelperFunction.PrintLeftRigthText(addD, "(" + row["DiscountTotal"].ToString() + ")") + Environment.NewLine;
+                    }
+                    ////////////////////////////////////////////////////////////
+                    ////////////////////////////////////////////////////////////
+                    bool isDiscount = false;
+                    if (discounttype != null || discounttype != "") { isDiscount = true; }
+                    if (Convert.ToDouble(row["QtySold"].ToString()) > 0)
+                    {
+                        if (isDiscount)
+                        {
+                            if (discounttype == "REGULAR")
+                            {
+                                details += HelperFunction.PrintLeftText("  - (Less: Discount  5%)") + Environment.NewLine;
+                                //details += HelperFunction.PrintLeftText("  - (Less: Discount " + discpercent.ToString() + "%)") + Environment.NewLine;
+                            }
+                            //else if (discounttype != "REGULAR")
+                            //{
+                            //    bool isSCorPWDDiscounted = false;
+                            //    isSCorPWDDiscounted = Database.checkifExist("SELECT TOP(1) Description FROM Products WHERE BranchCode='" + brcode + "' " +
+                            //        "AND Description='" + row["Description"].ToString() + "' " +
+                            //        "AND isDiscount=1");
+                            //    if (isSCorPWDDiscounted)
+                            //    {
+                            //        details += HelperFunction.PrintLeftText("  - (Less: Discount  5%)") + Environment.NewLine;
+                            //        //details += HelperFunction.PrintLeftText("  - (Less: Discount " + discpercent.ToString() + "%)") + Environment.NewLine;
+                            //    }
+                            //}
+
+                        }
+                    }
+                    ////////////////////////////////////////////////////////////
+                    ////////////////////////////////////////////////////////////
+                }
+                details += HelperFunction.PrinttoRight("----------") + Environment.NewLine;
+                //if (Convert.ToDouble(totalPerItemDiscount) > 0)
+                //{
+                //    details += HelperFunction.PrintLeftRigthText("TOTAL DISCOUNT:", totalPerItemDiscount.ToString()) + Environment.NewLine;
+                //}
+                globalamountdue = Convert.ToDouble(subtotal);
+                details += HelperFunction.PrintLeftRigthText("TOTAL DUE:", subtotal) + Environment.NewLine;
+                details += HelperFunction.PrinttoRight("==========") + Environment.NewLine;
+                //----------------------------------------------------------------------------------------------------------------
+                //double lessvat = 0.0, netofvat = 0.0, lessscdisc = 0.0, netofscdisc = 0.0, netofnonscdisc = 0.0, addvat = 0.0, totaltotal = 0.0;
+                string netofvatindinonscitems = Database.getSingleResultSet("SELECT dbo.func_getNetOfVatInNonDiscountedItems('" + brcode + "','" + referenceNo + "')");
+                string netofvatindiscitems = Database.getSingleResultSet("SELECT dbo.func_getNetOfVatInDiscountedItems('" + brcode + "','" + referenceNo + "')");
+                double lessvat = 0.0, netofvat = 0.0, lessscdisc = 0.0, netofscdisc = 0.0, netofnonscdisc = 0.0, addvat = 0.0, totaltotal = 0.0;
+                netofnonscdisc = Convert.ToDouble(netofvatindinonscitems);
+                //netofnonscdisc = Convert.ToDouble(netofvatindinonscitems);
+                string aaa = Database.getSingleQuery($"SELECT TOP(1) DiscountAmount FROM dbo.SalesDiscount WHERE OrderNo='{referenceNo}'", "DiscountAmount");
+                string bbb = Database.getSingleQuery($"SELECT TOP(1) DiscountType FROM dbo.SalesDiscount WHERE OrderNo='{referenceNo}'", "DiscountType");
+                string ccc = Database.getSingleQuery($"SELECT TOP(1) DiscName FROM dbo.SalesDiscount WHERE OrderNo='{referenceNo}'", "DiscName");
+                string ddd = Database.getSingleQuery($"SELECT TOP(1) DiscIDNo FROM dbo.SalesDiscount WHERE OrderNo='{referenceNo}'", "DiscIDNo");
+                string eee = Database.getSingleQuery($"SELECT TOP(1) DiscountPercentage FROM dbo.SalesDiscount WHERE OrderNo='{referenceNo}'", "DiscountPercentage");
+                if (aaa == "") { aaa = "0"; }
+                if (bbb == "") { bbb = ""; }
+                if (ccc == "") { ccc = ""; }
+                if (ddd == "") { ddd = ""; }
+                if (eee == "") { eee = "0"; }
+                if (Convert.ToDouble(aaa) > 0)
+                {
+                    //if (POS.POSConfirmPayment.isSeniorDiscount == true)
+                    double amtdue = 0.0, vatadj = 0.0;
+                    amtdue = Convert.ToDouble(subtotal) - Convert.ToDouble(aaa);
+                    if (bbb == "SENIOR")
+                    {
+                        details += HelperFunction.createDottedLine() + Environment.NewLine;
+                        details += HelperFunction.PrintLeftText("SENIOR DISCOUNT") + Environment.NewLine;
+                        details += HelperFunction.PrintLeftText("OSCA SC/ID: " + ddd) + Environment.NewLine;
+                        details += HelperFunction.PrintLeftText("Name: " + ccc) + Environment.NewLine;
+                        details += HelperFunction.PrintLeftRigthText("Discount Amount:", aaa) + Environment.NewLine;
+                        details += HelperFunction.PrintLeftText("Signature: _______________") + Environment.NewLine;
+                        details += HelperFunction.createDottedLine() + Environment.NewLine;
+                        ///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+                        lessvat = Math.Round(Convert.ToDouble(netofvatindiscitems) * 0.12, 2);
+                        netofvat = Math.Round(Convert.ToDouble(netofvatindiscitems), 2);
+                        lessscdisc = Math.Round(netofvat * Convert.ToDouble(eee), 2);
+                        //lessscdisc = Math.Round(netofvat * 0.05, 2);
+                        netofscdisc = Math.Round(netofvat - lessscdisc, 2);
+                        addvat = Math.Round(netofscdisc * .12, 2);
+                        totaltotal = Math.Round(netofscdisc + addvat, 2);
+                        details += HelperFunction.PrintLeftRigthText("Less VAT:", HelperFunction.convertToNumericFormat(lessvat)) + Environment.NewLine;
+                        details += HelperFunction.PrintLeftRigthText("Net of VAT:", HelperFunction.convertToNumericFormat(netofvat)) + Environment.NewLine;
+                        details += HelperFunction.PrintLeftRigthText("Less SC Discount:", HelperFunction.convertToNumericFormat(lessscdisc)) + Environment.NewLine;
+                        details += HelperFunction.PrintLeftRigthText("Net SC Discount:", HelperFunction.convertToNumericFormat(netofscdisc)) + Environment.NewLine;
+                        details += HelperFunction.PrintLeftRigthText("Add VAT:", HelperFunction.convertToNumericFormat(addvat)) + Environment.NewLine;
+                        details += HelperFunction.PrintLeftRigthText("Total:", HelperFunction.convertToNumericFormat(totaltotal)) + Environment.NewLine;
+
+                        vatadj = lessscdisc * 0.12;
+                        globalamountdue = amtdue - vatadj;
+                        ///////////////////////////////////////////////////////////////////////////////////////////////////////
+                        details += HelperFunction.createDottedLine() + Environment.NewLine;
+                        details += HelperFunction.PrintLeftRigthText("AMOUNT DUE:", HelperFunction.convertToNumericFormat(amtdue - vatadj)) + Environment.NewLine + Environment.NewLine;
+
+                    }
+                    //else if (POS.POSConfirmPayment.isPwdDiscount == true)
+                    else if (bbb == "PWD")
+                    {
+                        details += HelperFunction.createDottedLine() + Environment.NewLine;
+                        details += HelperFunction.PrintLeftText("PWD DISCOUNT") + Environment.NewLine;
+                        details += HelperFunction.PrintLeftText("PWD ID: " + ddd) + Environment.NewLine;
+                        details += HelperFunction.PrintLeftText("Name: " + ccc) + Environment.NewLine;
+                        details += HelperFunction.PrintLeftRigthText("Discount Amount:", aaa) + Environment.NewLine;
+                        details += HelperFunction.PrintLeftText("Signature: _______________") + Environment.NewLine;
+                        details += HelperFunction.createDottedLine() + Environment.NewLine;
+                        ///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+                        lessvat = Math.Round(Convert.ToDouble(netofvatindiscitems) * 0.12, 2);
+                        netofvat = Math.Round(Convert.ToDouble(netofvatindiscitems), 2);
+                        //lessscdisc = Math.Round(netofvat * 0.05, 2);
+                        lessscdisc = Math.Round(netofvat * Convert.ToDouble(eee), 2);
+                        netofscdisc = Math.Round(netofvat - lessscdisc, 2);
+                        addvat = Math.Round(netofscdisc * .12, 2);
+                        totaltotal = Math.Round(netofscdisc + addvat, 2);
+
+                        details += HelperFunction.PrintLeftRigthText("Less VAT:", HelperFunction.convertToNumericFormat(lessvat)) + Environment.NewLine;
+                        details += HelperFunction.PrintLeftRigthText("Net of VAT:", HelperFunction.convertToNumericFormat(netofvat)) + Environment.NewLine;
+                        details += HelperFunction.PrintLeftRigthText("Less PWD Discount:", HelperFunction.convertToNumericFormat(lessscdisc)) + Environment.NewLine;
+                        details += HelperFunction.PrintLeftRigthText("Net PWD Discount:", HelperFunction.convertToNumericFormat(netofscdisc)) + Environment.NewLine;
+                        details += HelperFunction.PrintLeftRigthText("Add VAT:", HelperFunction.convertToNumericFormat(addvat)) + Environment.NewLine;
+                        details += HelperFunction.PrintLeftRigthText("Total:", HelperFunction.convertToNumericFormat(totaltotal)) + Environment.NewLine;
+
+                        ///////////////////////////////////////////////////////////////////////////////////////////////////////
+                        vatadj = lessscdisc * 0.12;
+                        globalamountdue = amtdue - vatadj;
+                        details += HelperFunction.createDottedLine() + Environment.NewLine;
+                        details += HelperFunction.PrintLeftRigthText("AMOUNT DUE:", HelperFunction.convertToNumericFormat(amtdue - vatadj)) + Environment.NewLine + Environment.NewLine;
+                    }
+                    //else if (POS.POSConfirmPayment.isOthersDiscount == true)
+                    else if (bbb == "REGULAR")
+                    {
+                        details += HelperFunction.createDottedLine() + Environment.NewLine;
+                        details += HelperFunction.PrintLeftText("REGULAR DISCOUNT") + Environment.NewLine;
+                        //details += HelperFunction.PrintLeftText("Remarks: " + discremarks) + Environment.NewLine + Environment.NewLine;
+                        details += HelperFunction.PrintLeftRigthText("Discount Amount: ", aaa) + Environment.NewLine;
+                        details += HelperFunction.createDottedLine() + Environment.NewLine;
+                        ///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+                        lessvat = Math.Round(totalvatitems / 1.12 * 0.12, 2);
+                        netofvat = Math.Round(totalvatitems / 1.12, 2);
+                        lessscdisc = Math.Round(netofvat * Convert.ToDouble(eee), 2);
+                        netofscdisc = Math.Round(netofvat - lessscdisc, 2);
+                        addvat = Math.Round(netofscdisc * .12, 2);
+                        totaltotal = Math.Round(netofscdisc + addvat, 2);
+
+                        details += HelperFunction.PrintLeftRigthText("Less VAT:", HelperFunction.convertToNumericFormat(lessvat)) + Environment.NewLine;
+                        details += HelperFunction.PrintLeftRigthText("Net of VAT:", HelperFunction.convertToNumericFormat(netofvat)) + Environment.NewLine;
+                        details += HelperFunction.PrintLeftRigthText("Less Reg Discount:", HelperFunction.convertToNumericFormat(lessscdisc)) + Environment.NewLine;
+                        details += HelperFunction.PrintLeftRigthText("Net Reg Discount:", HelperFunction.convertToNumericFormat(netofscdisc)) + Environment.NewLine;
+                        details += HelperFunction.PrintLeftRigthText("Add VAT:", HelperFunction.convertToNumericFormat(addvat)) + Environment.NewLine;
+                        details += HelperFunction.PrintLeftRigthText("Total:", HelperFunction.convertToNumericFormat(totaltotal)) + Environment.NewLine;
+
+                        ///////////////////////////////////////////////////////////////////////////////////////////////////////
+                        ///
+                        vatadj = lessscdisc * 0.12;
+                        globalamountdue = amtdue - vatadj;
+                        details += HelperFunction.PrintLeftRigthText("AMOUNT DUE:", HelperFunction.convertToNumericFormat(amtdue - vatadj)) + Environment.NewLine + Environment.NewLine;
+                    }
+
+                }
+                //----------------------------------------------------------------------------------------------------------------
+                string NewAmountTender = "";
+                double NewChange = 0.0;
+                NewAmountTender = Database.getSingleResultSet($"SELECT dbo.func_setTenderAmount('{globalamountdue}')");
+                if (paytype == "Credit")
+                {
+                    //wla sa gamita kay dd2 na gigamit sa sp ang amount tender manipulation
+                    //notUsed 
+                    details += HelperFunction.PrintLeftRigthText("TENDERED:", NewAmountTender) + Environment.NewLine + Environment.NewLine;
+                    //details += HelperFunction.PrintLeftRigthText("TENDERED:", amounttender) + Environment.NewLine + Environment.NewLine;
+                    NewChange = Convert.ToDouble(NewAmountTender) - globalamountdue;
+                    //details += HelperFunction.PrintLeftRigthText("CHANGE  :", "0.00") + Environment.NewLine + Environment.NewLine;
+                }
+                else
+                {
+                    //details += HelperFunction.PrintLeftRigthText("TENDERED:", amounttender) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftRigthText("TENDERED:", NewAmountTender) + Environment.NewLine;
+                    //notUsed 
+                    NewChange = Math.Round(Convert.ToDouble(NewAmountTender) - globalamountdue,2);
+                    details += HelperFunction.PrintLeftRigthText("CHANGE  :", NewChange.ToString()) + Environment.NewLine + Environment.NewLine;
+                    //details += HelperFunction.PrintLeftRigthText("CHANGE  :", amountchange) + Environment.NewLine + Environment.NewLine;
+                }
+
+                double totalvatableSales = netofscdisc + netofnonscdisc;
+                double totalVatInputSale = 0.0;
+                totalVatInputSale = totalvatableSales * 0.12;
+
+                details += HelperFunction.PrintLeftRigthText("VATable Sales", HelperFunction.convertToNumericFormat(Convert.ToDouble(TotalVatableSalesSum))) + Environment.NewLine;// vatablesale) + Environment.NewLine;
+                details += HelperFunction.PrintLeftRigthText("VAT Amount", HelperFunction.convertToNumericFormat(Convert.ToDouble(TotalVatSaleSum))) + Environment.NewLine;// vat) + Environment.NewLine;
+                                                                                                                                                                           // details += HelperFunction.PrintLeftRigthText("ZERO RATED", "0.00") + Environment.NewLine;
+                details += HelperFunction.PrintLeftRigthText("VAT-EXEMPT SALES", TotalVatExemptSum) + Environment.NewLine;
+                details += HelperFunction.PrintLeftRigthText("ZERO RATED SALES", "0.00") + Environment.NewLine + Environment.NewLine;
+                if (paytype == "Credit")
+                {
+                    string cardno = "", cardtype = "", cardrefno = "";
+                    details += HelperFunction.createDottedLine() + Environment.NewLine;
+                    details += HelperFunction.PrintLeftText("PAYMENT TYPE: Credit Card") + Environment.NewLine;
+                    details += HelperFunction.PrintLeftText("Card Number: XXXX-XXXX-XXXX-" + cardno) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftText("Card Type: " + cardtype) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftText("Reference No.: " + cardrefno) + Environment.NewLine;
+                    details += HelperFunction.createDottedLine() + Environment.NewLine;
+                }
+
+                details += HelperFunction.PrintCenterText(pathfile) + Environment.NewLine;
+                //details += Classes.ReceiptSetup.doFooter(Login.assignedBranch);
+                details += HelperFunction.LastPagePaper();
+                receipt.Clear();
+            }
+            if (!Directory.Exists(filepath))
+            {
+                Directory.CreateDirectory(filepath);
+            }
+
+            string txtorder = "\\" + CashierTransNo + "_E-JOURNAL.txt";
+            string filetoprint = filepath + txtorder;
+
+            StreamWriter writer;//,writer22;
+            if (!Directory.Exists(filepath))
+            {
+                Directory.CreateDirectory(filepath);
+                writer = new StreamWriter(filetoprint);
+            }
+            else
+            {
+                writer = new StreamWriter(filetoprint, true);
+            }
+            writer.Write(details);
+            writer.Close();
+        }
+        private void simpleButton8_Click(object sender, EventArgs e)
+        {
+            receiptWithNoDiscount2(txtsalesdatefrom.Text, txtbranch.Text, txtmachine.Text,txtcashier.Text);
+            XtraMessageBox.Show("SUCCESS");
+        }
+
+        private void simpleButton6_Click(object sender, EventArgs e)
+        {
+            string filepath = "C:\\MyFiles\\";
+            string filename = txtbranch.Text + "_" + reportype + "_" + txtsalesdatefrom.Text.Replace("/", "-") + "_ZX2.xls";
+            string file = filepath + filename;
+            gridControl4.ExportToXls(file);
+            XtraMessageBox.Show("Export Success");
         }
 
         Double computeTotalVAT()
@@ -1099,7 +1471,7 @@ namespace SalesInventorySystem.POSDevEx
             //goal1 = regsalesvatonly - goal;
             showd.txtgoal.Text = goal1.ToString();
             showd.gridView3.BestFitColumns();
-            showd.gridView3.Columns["CategoryCode"].Visible = false;
+            //showd.gridView3.Columns["CategoryCode"].Visible = false;
             showd.gridView3.Columns["QtySold"].Summary.Clear();
             showd.gridView3.Columns["TotalAmount"].Summary.Clear();
             showd.gridView3.Columns["QtySold"].Summary.Add(DevExpress.Data.SummaryItemType.Sum, "QtySold", "{0}");
@@ -1123,6 +1495,10 @@ namespace SalesInventorySystem.POSDevEx
             if (radtypevatable.Checked == true)
             {
                 total=Database.getSingleResultSet($"SELECT dbo.func_getVatableManipValue('{txtbrcodemgmtdata.Text}','{txtsalesdatemgmtdata.Text}','{txtmanageddatapermachine.Text}')");
+            }
+            if(String.IsNullOrEmpty(total))
+            {
+                total = "0";
             }
             //if (String.IsNullOrEmpty(total)) { total = "0"; }
             double sumval = 0.0;

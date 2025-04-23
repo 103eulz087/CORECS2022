@@ -126,7 +126,6 @@ namespace SalesInventorySystem.Reporting
 
         void showSTSDetails()
         {
-            
             branchcode = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "BranchCode").ToString();
             effectivitydate = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "EffectivityDate").ToString();
             requestedby = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "PreparedBy").ToString();

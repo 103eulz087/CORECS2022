@@ -223,6 +223,8 @@
             this.barButtonItem20 = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem26 = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem30 = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem32 = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem33 = new DevExpress.XtraBars.BarButtonItem();
             this.btnSalesSummary = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem22 = new DevExpress.XtraBars.BarButtonItem();
             this.btnPointOFSale = new DevExpress.XtraBars.BarButtonItem();
@@ -244,6 +246,7 @@
             this.btnInventoryPerBranch = new DevExpress.XtraBars.BarButtonItem();
             this.btnCashierSalesCollectionSummary = new DevExpress.XtraBars.BarButtonItem();
             this.barbtnInventoryMonitoring = new DevExpress.XtraBars.BarButtonItem();
+            this.btnViewExpense = new DevExpress.XtraBars.BarButtonItem();
             this.ribbonPage1 = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup20 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup2 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -514,10 +517,13 @@
             this.barBtnStockOutItems,
             this.btnInventoryPerBranch,
             this.btnCashierSalesCollectionSummary,
-            this.barbtnInventoryMonitoring});
+            this.barbtnInventoryMonitoring,
+            this.btnViewExpense,
+            this.barButtonItem32,
+            this.barButtonItem33});
             this.ribbonControl.Location = new System.Drawing.Point(0, 0);
-            this.ribbonControl.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
-            this.ribbonControl.MaxItemId = 214;
+            this.ribbonControl.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.ribbonControl.MaxItemId = 217;
             this.ribbonControl.Name = "ribbonControl";
             this.ribbonControl.PageHeaderItemLinks.Add(this.barStaticItem2);
             this.ribbonControl.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
@@ -533,7 +539,7 @@
             this.ribbonControl.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonControlStyle.Office2013;
             this.ribbonControl.ShowApplicationButton = DevExpress.Utils.DefaultBoolean.False;
             this.ribbonControl.ShowPageHeadersMode = DevExpress.XtraBars.Ribbon.ShowPageHeadersMode.Show;
-            this.ribbonControl.Size = new System.Drawing.Size(2090, 270);
+            this.ribbonControl.Size = new System.Drawing.Size(2906, 308);
             this.ribbonControl.StatusBar = this.ribbonStatusBar;
             this.ribbonControl.SelectedPageChanged += new System.EventHandler(this.ribbonControl_SelectedPageChanged);
             this.ribbonControl.Click += new System.EventHandler(this.ribbon_Click);
@@ -2241,6 +2247,8 @@
             this.popupMenuBIRSalesReport.ItemLinks.Add(this.barButtonItem20);
             this.popupMenuBIRSalesReport.ItemLinks.Add(this.barButtonItem26);
             this.popupMenuBIRSalesReport.ItemLinks.Add(this.barButtonItem30);
+            this.popupMenuBIRSalesReport.ItemLinks.Add(this.barButtonItem32);
+            this.popupMenuBIRSalesReport.ItemLinks.Add(this.barButtonItem33);
             this.popupMenuBIRSalesReport.MenuCaption = "AR Reports";
             this.popupMenuBIRSalesReport.Name = "popupMenuBIRSalesReport";
             this.popupMenuBIRSalesReport.Ribbon = this.ribbonControl;
@@ -2294,6 +2302,20 @@
             this.barButtonItem30.Id = 208;
             this.barButtonItem30.Name = "barButtonItem30";
             this.barButtonItem30.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem30_ItemClick_1);
+            // 
+            // barButtonItem32
+            // 
+            this.barButtonItem32.Caption = "POS ESales Reports B";
+            this.barButtonItem32.Id = 215;
+            this.barButtonItem32.Name = "barButtonItem32";
+            this.barButtonItem32.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem32_ItemClick_1);
+            // 
+            // barButtonItem33
+            // 
+            this.barButtonItem33.Caption = "Sales Details Comparative";
+            this.barButtonItem33.Id = 216;
+            this.barButtonItem33.Name = "barButtonItem33";
+            this.barButtonItem33.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem33_ItemClick_1);
             // 
             // btnSalesSummary
             // 
@@ -2465,6 +2487,15 @@
             this.barbtnInventoryMonitoring.Name = "barbtnInventoryMonitoring";
             this.barbtnInventoryMonitoring.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
             this.barbtnInventoryMonitoring.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barbtnInventoryMonitoring_ItemClick);
+            // 
+            // btnViewExpense
+            // 
+            this.btnViewExpense.Caption = "View Expense";
+            this.btnViewExpense.Id = 214;
+            this.btnViewExpense.ImageOptions.LargeImage = global::SalesInventorySystem.Properties.Resources.SalesSummary2_32x32;
+            this.btnViewExpense.Name = "btnViewExpense";
+            this.btnViewExpense.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+            this.btnViewExpense.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnViewExpense_ItemClick);
             // 
             // ribbonPage1
             // 
@@ -2663,6 +2694,7 @@
             this.ribbonPageGroup15.ItemLinks.Add(this.btnCreateTicket);
             this.ribbonPageGroup15.ItemLinks.Add(this.btnViewTicket);
             this.ribbonPageGroup15.ItemLinks.Add(this.btnPostExpense, false, "", "", true);
+            this.ribbonPageGroup15.ItemLinks.Add(this.btnViewExpense);
             this.ribbonPageGroup15.Name = "ribbonPageGroup15";
             this.ribbonPageGroup15.Text = "TICKETING (JOURNAL)";
             // 
@@ -2836,11 +2868,11 @@
             this.ribbonStatusBar.ItemLinks.Add(this.barHeaderItem4);
             this.ribbonStatusBar.ItemLinks.Add(this.barStaticItem8);
             this.ribbonStatusBar.ItemLinks.Add(this.barStaticCashierTransNo);
-            this.ribbonStatusBar.Location = new System.Drawing.Point(0, 955);
-            this.ribbonStatusBar.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
+            this.ribbonStatusBar.Location = new System.Drawing.Point(0, 1425);
+            this.ribbonStatusBar.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.ribbonStatusBar.Name = "ribbonStatusBar";
             this.ribbonStatusBar.Ribbon = this.ribbonControl;
-            this.ribbonStatusBar.Size = new System.Drawing.Size(2090, 42);
+            this.ribbonStatusBar.Size = new System.Drawing.Size(2906, 48);
             // 
             // barAndDockingController1
             // 
@@ -2914,18 +2946,18 @@
             // 
             this.Appearance.BackColor = System.Drawing.SystemColors.Control;
             this.Appearance.Options.UseBackColor = true;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 23F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(2090, 997);
+            this.ClientSize = new System.Drawing.Size(2906, 1473);
             this.Controls.Add(this.ribbonStatusBar);
             this.Controls.Add(this.ribbonControl);
             this.IsMdiContainer = true;
-            this.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
+            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "Main";
             this.Ribbon = this.ribbonControl;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.StatusBar = this.ribbonStatusBar;
-            this.Text = "ITCORE-CORE CS ver 6.1.0";
+            this.Text = "ITCORE-CORE CS ver 6.1.6";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Main_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Main_FormClosed);
@@ -3210,5 +3242,8 @@
         private DevExpress.XtraBars.BarButtonItem btnInventoryPerBranch;
         private DevExpress.XtraBars.BarButtonItem btnCashierSalesCollectionSummary;
         private DevExpress.XtraBars.BarButtonItem barbtnInventoryMonitoring;
+        private DevExpress.XtraBars.BarButtonItem btnViewExpense;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem32;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem33;
     }
 }

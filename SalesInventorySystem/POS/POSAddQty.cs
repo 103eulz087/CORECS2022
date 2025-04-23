@@ -49,9 +49,9 @@ namespace SalesInventorySystem.POS
         {
             strqty = "0";
             strqty = txtqty.Text.Replace(",", "");
-            if (Convert.ToDouble(strqty) > 9999)
+            if (Convert.ToDouble(strqty) > 99999)
             {
-                XtraMessageBox.Show("Quantity must not greater than --100");
+                XtraMessageBox.Show("Quantity must not greater than 99999");
                 return;
             }
             else

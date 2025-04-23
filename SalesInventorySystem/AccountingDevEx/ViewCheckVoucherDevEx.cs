@@ -15,7 +15,7 @@ namespace SalesInventorySystem.AccountingDevEx
 {
     public partial class ViewCheckVoucherDevEx : DevExpress.XtraEditors.XtraForm
     { 
-        public static string supplierid,vouchid, paidto, checkno, checkdate, pariculars, amount, vouchertype,dateadded, preparedby;
+        public static string supplierid,refno,vouchid, paidto, checkno, checkdate, pariculars, amount, vouchertype,dateadded, preparedby;
 
         public ViewCheckVoucherDevEx()
         {
@@ -48,6 +48,7 @@ namespace SalesInventorySystem.AccountingDevEx
 
         void viewVoucherDetails()
         {
+            refno = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "ReferenceNumber").ToString();
             supplierid = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "SupplierID").ToString();
             vouchid = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "VoucherID").ToString();
             paidto = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "PaidTo").ToString();
@@ -64,7 +65,8 @@ namespace SalesInventorySystem.AccountingDevEx
                 "WHERE VoucherID='" + vouchid + "' " +
                 "and SupplierID='" + supplierid + "' ", vouch.gridControl1, vouch.gridView1);
             vouch.gridView1.Columns["VoucherID"].Visible = false;
-            Classes.DevXGridViewSettings.ShowFooterCountTotal(vouch.gridView1, "VoucherID");
+            //Database.display($"SELECT * FROM view_VoucherDetails WHERE ReferenceNumber='{refno}'", vouch.gridControl1, vouch.gridView1);
+            //Classes.DevXGridViewSettings.ShowFooterCountTotal(vouch.gridView1, "VoucherID");
             Classes.DevXGridViewSettings.ShowFooterTotal(vouch.gridView1, "Amount");
             vouch.ShowDialog(this);
         }
@@ -128,12 +130,12 @@ namespace SalesInventorySystem.AccountingDevEx
             string a = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "VoucherID").ToString();
             string b = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "SupplierID").ToString();
             bool check = false,checkIfLiquidated=false;
-            check=Database.checkifExist("SELECT TOP 1 isnull(isLiquidation,0) " +
+            check=Database.checkifExist("SELECT TOP(1) isnull(isLiquidation,0) " +
                 "FROM CheckVoucher " +
                 "WHERE VoucherID='" + gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "VoucherID").ToString() + "' " +
                 "AND SupplierID='" + gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "SupplierID").ToString() + "'" +
                 "AND isLiquidation=1 ");
-            checkIfLiquidated = Database.checkifExist("SELECT TOP 1 isnull(isLiquidation,0) " +
+            checkIfLiquidated = Database.checkifExist("SELECT TOP(1) isnull(isLiquidation,0) " +
                 "FROM CheckVoucher " +
                 "WHERE VoucherID='" + gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "VoucherID").ToString() + "' " +
                 "AND SupplierID='" + gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "SupplierID").ToString() + "'" +

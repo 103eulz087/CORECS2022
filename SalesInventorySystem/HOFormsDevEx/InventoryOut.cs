@@ -61,7 +61,7 @@ namespace SalesInventorySystem.HOFormsDevEx
                 com.Parameters.AddWithValue("@parmtransdate", txtdatein.Text);
                 com.Parameters.AddWithValue("@parmbranchcode", txtbrcode.Text);
                 com.Parameters.AddWithValue("@parmprodcode", "");
-                com.Parameters.AddWithValue("@parmqty", txtqty.Text);
+                com.Parameters.AddWithValue("@parmqty", txtqty.Value);
                 com.Parameters.AddWithValue("@parmoption", "2");
                 com.Parameters.AddWithValue("@parmsellingprice", "0");
                 com.Parameters.AddWithValue("@parmcost", "0");
@@ -174,8 +174,8 @@ namespace SalesInventorySystem.HOFormsDevEx
 
         private void btnnew_Click(object sender, EventArgs e)
         {
-            int id = IDGenerator.getIDNumber("StockOutDetails","isDone=1", "ID", 1);
-            txtbatchid.Text = id.ToString();
+            //int id = IDGenerator.getIDNumber("StockOutDetails","isDone=1", "ID", 1);
+            txtbatchid.Text = IDGenerator.getIDNumberSP("sp_GetBadOrderNumber", "orderno"); //IDGenerator.getPONumber();
             btnnew.Enabled = false;
             enableFields();
         }
@@ -320,7 +320,7 @@ namespace SalesInventorySystem.HOFormsDevEx
                 }
                 else
                 {
-                    Database.ExecuteQuery($"UPDATE StockOutDetails set isDone=1 WHERE ID='{txtbatchid.Text}'");
+                    //Database.ExecuteQuery($"UPDATE StockOutDetails set isDone=1 WHERE ID='{txtbatchid.Text}'");
                     doFIFO();
                     doStockOutSummary();
                     XtraMessageBox.Show("Success");

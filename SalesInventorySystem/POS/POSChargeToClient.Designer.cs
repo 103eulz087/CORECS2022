@@ -58,17 +58,17 @@
             this.labelControl1.Appearance.ForeColor = System.Drawing.Color.White;
             this.labelControl1.Appearance.Options.UseFont = true;
             this.labelControl1.Appearance.Options.UseForeColor = true;
-            this.labelControl1.Location = new System.Drawing.Point(40, 22);
-            this.labelControl1.Margin = new System.Windows.Forms.Padding(5);
+            this.labelControl1.Location = new System.Drawing.Point(34, 19);
+            this.labelControl1.Margin = new System.Windows.Forms.Padding(4);
             this.labelControl1.Name = "labelControl1";
-            this.labelControl1.Size = new System.Drawing.Size(282, 50);
+            this.labelControl1.Size = new System.Drawing.Size(253, 45);
             this.labelControl1.TabIndex = 0;
             this.labelControl1.Text = "Select Customer:";
             // 
             // txtcust
             // 
-            this.txtcust.Location = new System.Drawing.Point(348, 22);
-            this.txtcust.Margin = new System.Windows.Forms.Padding(5);
+            this.txtcust.Location = new System.Drawing.Point(298, 19);
+            this.txtcust.Margin = new System.Windows.Forms.Padding(4);
             this.txtcust.Name = "txtcust";
             this.txtcust.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 12.25F);
             this.txtcust.Properties.Appearance.Options.UseFont = true;
@@ -76,14 +76,14 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.txtcust.Properties.NullText = "";
             this.txtcust.Properties.PopupView = this.searchLookUpEdit1View;
-            this.txtcust.Size = new System.Drawing.Size(590, 60);
+            this.txtcust.Size = new System.Drawing.Size(506, 54);
             this.txtcust.TabIndex = 1;
             this.txtcust.EditValueChanged += new System.EventHandler(this.txtcust_EditValueChanged);
             // 
             // searchLookUpEdit1View
             // 
-            this.searchLookUpEdit1View.DetailHeight = 634;
-            this.searchLookUpEdit1View.FixedLineWidth = 4;
+            this.searchLookUpEdit1View.DetailHeight = 547;
+            this.searchLookUpEdit1View.FixedLineWidth = 3;
             this.searchLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
             this.searchLookUpEdit1View.Name = "searchLookUpEdit1View";
             this.searchLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = false;
@@ -95,10 +95,10 @@
             this.labelControl2.Appearance.ForeColor = System.Drawing.Color.White;
             this.labelControl2.Appearance.Options.UseFont = true;
             this.labelControl2.Appearance.Options.UseForeColor = true;
-            this.labelControl2.Location = new System.Drawing.Point(80, 237);
-            this.labelControl2.Margin = new System.Windows.Forms.Padding(5);
+            this.labelControl2.Location = new System.Drawing.Point(69, 204);
+            this.labelControl2.Margin = new System.Windows.Forms.Padding(4);
             this.labelControl2.Name = "labelControl2";
-            this.labelControl2.Size = new System.Drawing.Size(240, 50);
+            this.labelControl2.Size = new System.Drawing.Size(214, 45);
             this.labelControl2.TabIndex = 2;
             this.labelControl2.Text = "Total Amount:";
             // 
@@ -109,15 +109,15 @@
             0,
             0,
             0});
-            this.txtamount.Location = new System.Drawing.Point(348, 236);
-            this.txtamount.Margin = new System.Windows.Forms.Padding(5);
+            this.txtamount.Location = new System.Drawing.Point(298, 203);
+            this.txtamount.Margin = new System.Windows.Forms.Padding(4);
             this.txtamount.Name = "txtamount";
             this.txtamount.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 12.8F);
             this.txtamount.Properties.Appearance.Options.UseFont = true;
             this.txtamount.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.txtamount.Properties.ReadOnly = true;
-            this.txtamount.Size = new System.Drawing.Size(590, 60);
+            this.txtamount.Size = new System.Drawing.Size(506, 56);
             this.txtamount.TabIndex = 3;
             // 
             // labelControl3
@@ -126,19 +126,19 @@
             this.labelControl3.Appearance.ForeColor = System.Drawing.Color.White;
             this.labelControl3.Appearance.Options.UseFont = true;
             this.labelControl3.Appearance.Options.UseForeColor = true;
-            this.labelControl3.Location = new System.Drawing.Point(163, 451);
-            this.labelControl3.Margin = new System.Windows.Forms.Padding(5);
+            this.labelControl3.Location = new System.Drawing.Point(140, 389);
+            this.labelControl3.Margin = new System.Windows.Forms.Padding(4);
             this.labelControl3.Name = "labelControl3";
-            this.labelControl3.Size = new System.Drawing.Size(153, 50);
+            this.labelControl3.Size = new System.Drawing.Size(136, 45);
             this.labelControl3.TabIndex = 4;
             this.labelControl3.Text = "Remarks:";
             // 
             // txtremarks
             // 
-            this.txtremarks.Location = new System.Drawing.Point(348, 381);
-            this.txtremarks.Margin = new System.Windows.Forms.Padding(5);
+            this.txtremarks.Location = new System.Drawing.Point(298, 328);
+            this.txtremarks.Margin = new System.Windows.Forms.Padding(4);
             this.txtremarks.Name = "txtremarks";
-            this.txtremarks.Size = new System.Drawing.Size(587, 214);
+            this.txtremarks.Size = new System.Drawing.Size(504, 185);
             this.txtremarks.TabIndex = 5;
             this.txtremarks.Text = "";
             // 
@@ -148,21 +148,21 @@
             this.labelControl4.Appearance.ForeColor = System.Drawing.Color.White;
             this.labelControl4.Appearance.Options.UseFont = true;
             this.labelControl4.Appearance.Options.UseForeColor = true;
-            this.labelControl4.Location = new System.Drawing.Point(154, 165);
-            this.labelControl4.Margin = new System.Windows.Forms.Padding(5);
+            this.labelControl4.Location = new System.Drawing.Point(132, 143);
+            this.labelControl4.Margin = new System.Windows.Forms.Padding(4);
             this.labelControl4.Name = "labelControl4";
-            this.labelControl4.Size = new System.Drawing.Size(162, 50);
+            this.labelControl4.Size = new System.Drawing.Size(146, 45);
             this.labelControl4.TabIndex = 7;
             this.labelControl4.Text = "Invoice #:";
             // 
             // txtinvoiceno
             // 
-            this.txtinvoiceno.Location = new System.Drawing.Point(348, 163);
-            this.txtinvoiceno.Margin = new System.Windows.Forms.Padding(5);
+            this.txtinvoiceno.Location = new System.Drawing.Point(298, 141);
+            this.txtinvoiceno.Margin = new System.Windows.Forms.Padding(4);
             this.txtinvoiceno.Name = "txtinvoiceno";
             this.txtinvoiceno.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 12.8F);
             this.txtinvoiceno.Properties.Appearance.Options.UseFont = true;
-            this.txtinvoiceno.Size = new System.Drawing.Size(590, 60);
+            this.txtinvoiceno.Size = new System.Drawing.Size(506, 56);
             this.txtinvoiceno.TabIndex = 8;
             // 
             // labelControl5
@@ -171,23 +171,23 @@
             this.labelControl5.Appearance.ForeColor = System.Drawing.Color.White;
             this.labelControl5.Appearance.Options.UseFont = true;
             this.labelControl5.Appearance.Options.UseForeColor = true;
-            this.labelControl5.Location = new System.Drawing.Point(177, 92);
-            this.labelControl5.Margin = new System.Windows.Forms.Padding(5);
+            this.labelControl5.Location = new System.Drawing.Point(152, 79);
+            this.labelControl5.Margin = new System.Windows.Forms.Padding(4);
             this.labelControl5.Name = "labelControl5";
-            this.labelControl5.Size = new System.Drawing.Size(139, 50);
+            this.labelControl5.Size = new System.Drawing.Size(124, 45);
             this.labelControl5.TabIndex = 9;
             this.labelControl5.Text = "Order #:";
             // 
             // txtorderno
             // 
             this.txtorderno.EditValue = "000000000000000000";
-            this.txtorderno.Location = new System.Drawing.Point(348, 91);
-            this.txtorderno.Margin = new System.Windows.Forms.Padding(5);
+            this.txtorderno.Location = new System.Drawing.Point(298, 78);
+            this.txtorderno.Margin = new System.Windows.Forms.Padding(4);
             this.txtorderno.Name = "txtorderno";
             this.txtorderno.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 12.8F);
             this.txtorderno.Properties.Appearance.Options.UseFont = true;
             this.txtorderno.Properties.ReadOnly = true;
-            this.txtorderno.Size = new System.Drawing.Size(590, 60);
+            this.txtorderno.Size = new System.Drawing.Size(506, 56);
             this.txtorderno.TabIndex = 10;
             // 
             // txtdiscountamnt
@@ -197,15 +197,15 @@
             0,
             0,
             0});
-            this.txtdiscountamnt.Location = new System.Drawing.Point(348, 308);
-            this.txtdiscountamnt.Margin = new System.Windows.Forms.Padding(5);
+            this.txtdiscountamnt.Location = new System.Drawing.Point(298, 266);
+            this.txtdiscountamnt.Margin = new System.Windows.Forms.Padding(4);
             this.txtdiscountamnt.Name = "txtdiscountamnt";
             this.txtdiscountamnt.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 12.8F);
             this.txtdiscountamnt.Properties.Appearance.Options.UseFont = true;
             this.txtdiscountamnt.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.txtdiscountamnt.Properties.ReadOnly = true;
-            this.txtdiscountamnt.Size = new System.Drawing.Size(590, 60);
+            this.txtdiscountamnt.Size = new System.Drawing.Size(506, 56);
             this.txtdiscountamnt.TabIndex = 12;
             // 
             // labelControl6
@@ -214,19 +214,19 @@
             this.labelControl6.Appearance.ForeColor = System.Drawing.Color.White;
             this.labelControl6.Appearance.Options.UseFont = true;
             this.labelControl6.Appearance.Options.UseForeColor = true;
-            this.labelControl6.Location = new System.Drawing.Point(21, 310);
-            this.labelControl6.Margin = new System.Windows.Forms.Padding(5);
+            this.labelControl6.Location = new System.Drawing.Point(17, 268);
+            this.labelControl6.Margin = new System.Windows.Forms.Padding(4);
             this.labelControl6.Name = "labelControl6";
-            this.labelControl6.Size = new System.Drawing.Size(305, 50);
+            this.labelControl6.Size = new System.Drawing.Size(271, 45);
             this.labelControl6.TabIndex = 11;
             this.labelControl6.Text = "Discount Amount:";
             // 
             // btnClose
             // 
-            this.btnClose.Location = new System.Drawing.Point(714, 609);
-            this.btnClose.Margin = new System.Windows.Forms.Padding(5);
+            this.btnClose.Location = new System.Drawing.Point(612, 525);
+            this.btnClose.Margin = new System.Windows.Forms.Padding(4);
             this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(224, 83);
+            this.btnClose.Size = new System.Drawing.Size(192, 72);
             this.btnClose.TabIndex = 13;
             this.btnClose.Text = "Close";
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
@@ -234,20 +234,20 @@
             // btnsubmit
             // 
             this.btnsubmit.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnsubmit.ImageOptions.Image")));
-            this.btnsubmit.Location = new System.Drawing.Point(480, 609);
-            this.btnsubmit.Margin = new System.Windows.Forms.Padding(5);
+            this.btnsubmit.Location = new System.Drawing.Point(411, 525);
+            this.btnsubmit.Margin = new System.Windows.Forms.Padding(4);
             this.btnsubmit.Name = "btnsubmit";
-            this.btnsubmit.Size = new System.Drawing.Size(224, 83);
+            this.btnsubmit.Size = new System.Drawing.Size(192, 72);
             this.btnsubmit.TabIndex = 6;
             this.btnsubmit.Text = "Submit";
             this.btnsubmit.Click += new System.EventHandler(this.btnsubmit_Click);
             // 
             // POSChargeToClient
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(14F, 29F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.ClientSize = new System.Drawing.Size(962, 720);
+            this.ClientSize = new System.Drawing.Size(825, 621);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.txtdiscountamnt);
             this.Controls.Add(this.labelControl6);
@@ -263,7 +263,7 @@
             this.Controls.Add(this.txtcust);
             this.Controls.Add(this.labelControl1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(7);
+            this.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
             this.Name = "POSChargeToClient";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Charge to Account";

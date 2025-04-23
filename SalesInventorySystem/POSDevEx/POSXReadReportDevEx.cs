@@ -123,6 +123,8 @@ namespace SalesInventorySystem.POSDevEx
                 reportype = "XERO SalesInvoice";
             else if (comboBoxEdit1.Text == "JUANTAX SalesTransaction")//123
                 reportype = "JUANTAX SalesTransaction";
+            else if (comboBoxEdit1.Text == "Group Product Category")//123
+                reportype = "PRODCAT";
             execute(reportype);
 
             foreach(GridColumn col in gridView1.Columns)

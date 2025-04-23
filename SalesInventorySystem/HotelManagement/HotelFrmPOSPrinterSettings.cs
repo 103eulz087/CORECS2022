@@ -32,5 +32,10 @@ namespace SalesInventorySystem.HotelManagement
                 comboBoxEdit1.Properties.Items.Add(printname);
             }
         }
+
+        private void addbtn_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

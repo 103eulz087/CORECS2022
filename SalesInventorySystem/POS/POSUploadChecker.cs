@@ -78,7 +78,7 @@ namespace SalesInventorySystem.POS
             //string mark = dateEdit1.Text;
             string transdate = Database.getSingleResultSet("SELECT dbo.func_ConvertDateTimeToChar('DATE','" + DateTime.Now.ToShortDateString() + "')");
             //wla pa na endofday
-            bool isOpen = Database.checkifExist($"SELECT TOP(1) BranchCode FROM POSEODMonitoring WHERE TransactionDate='{transdate}' " +
+            bool isOpen = Database.checkifExist($"SELECT TOP(1) BranchCode FROM dbo.POSEODMonitoring WHERE TransactionDate='{transdate}' " +
                 $"AND BranchCode='{Login.assignedBranch}' " +
                 $"AND MachineUsed='{Environment.MachineName}' " +
                 $"AND isEndOfDay=0 ");

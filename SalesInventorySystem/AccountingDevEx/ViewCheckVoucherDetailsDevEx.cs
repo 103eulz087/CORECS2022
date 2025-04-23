@@ -39,10 +39,10 @@ namespace SalesInventorySystem.AccountingDevEx
             adapter.Fill(table);
             gridControl1.DataSource = table;
             gridView1.BestFitColumns();
-            Classes.DevXGridViewSettings.ShowFooterTotal(gridView1, "AmountPaid");
-            Classes.DevXGridViewSettings.ShowFooterTotal(gridView1, "ActualCost");
-            Classes.DevXGridViewSettings.ShowFooterTotal(gridView1, "Discount");
-            Classes.DevXGridViewSettings.ShowFooterTotal(gridView1, "EWTAmount");
+            //Classes.DevXGridViewSettings.ShowFooterTotal(gridView1, "AmountPaid");
+            //Classes.DevXGridViewSettings.ShowFooterTotal(gridView1, "ActualCost");
+            //Classes.DevXGridViewSettings.ShowFooterTotal(gridView1, "Discount");
+            //Classes.DevXGridViewSettings.ShowFooterTotal(gridView1, "EWTAmount");
             con.Close();
         }
 
@@ -57,7 +57,7 @@ namespace SalesInventorySystem.AccountingDevEx
         {
             try
             {
-                populate();
+                //populate();
                 var rows = Database.getMultipleQuery("ReportHeaderSettings", "ReportName='CheckVoucher'","Heading,ImageWidth,ImageHeight,Caption1,Caption2");
               
                 string companyname = rows["Heading"].ToString();  
@@ -101,6 +101,14 @@ namespace SalesInventorySystem.AccountingDevEx
         private void ViewCheckVoucherDetailsDevEx_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void simpleButton1_Click(object sender, EventArgs e)
+        {
+            string transdate = Database.getSingleResultSet("SELECT dbo.func_ConvertDateTimeToChar('DATE','" + DateTime.Now.ToString() + "')");
+
+            string filename = "CheckVoucherDetails_" + transdate;
+            HelperFunction.exporttoexcel(gridView1, filename);
         }
     }
 }

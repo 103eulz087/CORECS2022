@@ -29,12 +29,13 @@ namespace SalesInventorySystem.POS
         public static string disctype = "", discname = "", discidno = "", discamount = "", discremarks = "";
         static DataGridView gview;
         public static string orderno = "", transno = "", merchantpaytype = "";
+        public static string totalcashsales = "", totalcreditsales = "";
 
         private void radmerchant_CheckedChanged(object sender, EventArgs e)
         {
             if (radmerchant.Checked.Equals(true))  //MERCHANT
             {
-
+                Database.ExecuteQuery("UPDATE dbo.POSType SET isEnableInvoicePrinting=0");
                 txtamounttender.Text = txtamountpayable.Text;
                 transno = lbltranscode.Text;
                 orderno = lblorderno.Text;
@@ -60,20 +61,81 @@ namespace SalesInventorySystem.POS
             }
         }
 
+        private void radcash_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radcash.Checked.Equals(true))  //CHARGE TO ACCOUNT
+            {
+                Database.ExecuteQuery("UPDATE dbo.POSType SET isEnableInvoicePrinting=0");
+            }
+        }
+
         private void radwallet_CheckedChanged(object sender, EventArgs e)
         {
+            //if (radwallet.Checked.Equals(true))  //WALLET
+            //{
+            //    Database.ExecuteQuery("UPDATE dbo.POSType SET isEnableInvoicePrinting=0");
+            //    netamountpayable = txtamountpayable.Text;
+            //    POS.POSCashWalletTapper pasd = new POSCashWalletTapper();
+            //    pasd.ShowDialog(this);
+            //    if (POSCashWalletTapper.isdone == true)
+            //    {
+            //        //customercode = POSCashWalletTapper.clientid;
+            //        txtamounttender.Text = txtamountpayable.Text;
+            //        POSCashWalletTapper.isdone = false;
+            //        pasd.Dispose();
+            //        button1.PerformClick();
+            //    }
+            //    else
+            //    {
+            //        radcash.Checked = true;
+            //        txtamounttender.Text = "";
+            //        txtamountchange.Text = "";
+            //        txtamounttender.Focus();
+            //    }
+            //}
             if (radwallet.Checked.Equals(true))  //WALLET
             {
+                Database.ExecuteQuery("UPDATE dbo.POSType SET isEnableInvoicePrinting=0");
+                //netamountpayable = txtamountpayable.Text;
+                //POS.POSCashWalletTapper pasd = new POSCashWalletTapper();
+                //pasd.ShowDialog(this);
+                //if (POSCashWalletTapper.isdone == true)
+                //{
+                //    //customercode = POSCashWalletTapper.clientid;
+                //    txtamounttender.Text = txtamountpayable.Text;
+                //    POSCashWalletTapper.isdone = false;
+                //    pasd.Dispose();
+                //    button1.PerformClick();
+                //}
+                //else
+                //{
+                //    radcash.Checked = true;
+                //    txtamounttender.Text = "";
+                //    txtamountchange.Text = "";
+                //    txtamounttender.Focus();
+                //}
 
-                netamountpayable = txtamountpayable.Text;
-                POS.POSCashWalletTapper pasd = new POSCashWalletTapper();
-                pasd.ShowDialog(this);
-                if (POSCashWalletTapper.isdone == true)
+                POSplitBillFinal plslit = new POSplitBillFinal();
+                plslit.txtamountpayable.Text = txtamountpayable.Text;
+                plslit.txtinvoiceno.Text = lblorderno.Text;
+                plslit.txtdiscount.Text = txtdiscount.Text;
+
+                plslit.lblvatexemptsale.Text = lblvatexempt.Text;
+                plslit.lblvatsale.Text = lblvatsale.Text;
+                plslit.lblvat.Text = lblvatinput.Text;
+
+                POSplitBillFinal.orderno = lblorderno.Text;
+                POSplitBillFinal.cashiertransno = lbltranscode.Text;
+                POSplitBillFinal.transno = lbltransno.Text;
+
+                plslit.ShowDialog(this);
+                if (POSplitBillFinal.isdone == true)
                 {
-                    //customercode = POSCashWalletTapper.clientid;
                     txtamounttender.Text = txtamountpayable.Text;
-                    POSCashWalletTapper.isdone = false;
-                    pasd.Dispose();
+                    totalcashsales = POSplitBillFinal.totalCashSales;
+                    totalcreditsales = POSplitBillFinal.totalCreditSales;
+                    POSplitBillFinal.isdone = false;
+                    plslit.Dispose();
                     button1.PerformClick();
                 }
                 else
@@ -83,14 +145,30 @@ namespace SalesInventorySystem.POS
                     txtamountchange.Text = "";
                     txtamounttender.Focus();
                 }
+                transactiondone = true;
+                this.Close();
             }
+        }
+
+        private void lblvatexempt_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        void checkZeroRated()
+        {
+            if (PointOfSale.iszeroratedsale == true)
+            {
+                string zeroratedsales = Database.getSingleResultSet("SELECT dbo.func_getZeroRatedSales('" + Login.assignedBranch + "','" + lblorderno.Text + "')");
+            }
+
         }
 
         private void radcharge_CheckedChanged(object sender, EventArgs e)
         {
             if (radcharge.Checked.Equals(true))  //CHARGE TO ACCOUNT
             {
-
+                //Database.ExecuteQuery("UPDATE dbo.POSType SET isEnableInvoicePrinting=1");
                 POSChargeToClient poschrge = new POSChargeToClient();
                 poschrge.txtorderno.Text = lblorderno.Text;
                 poschrge.txtamount.Text = txtamountpayable.Text;
@@ -117,10 +195,10 @@ namespace SalesInventorySystem.POS
 
         private void radcc_CheckedChanged(object sender, EventArgs e)
         {
-
+            
             if (radcc.Checked.Equals(true)) //CREDIT CARD
             {
-
+                Database.ExecuteQuery("UPDATE dbo.POSType SET isEnableInvoicePrinting=0");
                 txtamounttender.Text = txtamountpayable.Text;
                 transno = lbltranscode.Text;
                 orderno = lblorderno.Text;
@@ -193,6 +271,19 @@ namespace SalesInventorySystem.POS
 
         void spSaveTransaction(string discounttype, string invoiceno)
         {
+            bool isRetail = Database.checkifExist("Select PosType FROM dbo.POSType WHERE PosType=1");
+            bool OneTimeDisc = false,ZeroRated=false;
+            if (isRetail)
+            {
+                OneTimeDisc = PointOfSale.isOnetimeDiscount;
+                ZeroRated = PointOfSale.iszeroratedsale;
+            }
+            else
+            {
+                OneTimeDisc = POSRestoDineInBilling.isOnetimeDiscount;
+                ZeroRated = POSRestoDineInBilling.iszeroratedsale;
+            }
+           
             SqlConnection con = Database.getConnection();
             con.Open();
             try
@@ -217,7 +308,7 @@ namespace SalesInventorySystem.POS
                 com.Parameters.AddWithValue("@parmdiscount", txtdiscount.Text);
                 //com.Parameters.AddWithValue("@parmseniorcontrolno", senioridno);//txtseniorcontrolno.Text);
                 //com.Parameters.AddWithValue("@parmseniorname", seniorname);//txtseniorname.Text);
-                com.Parameters.AddWithValue("@parmonetimediscount", PointOfSale.isOnetimeDiscount);//isOnetimeDiscount);
+                com.Parameters.AddWithValue("@parmonetimediscount", OneTimeDisc);//isOnetimeDiscount);
                 //com.Parameters.AddWithValue("@parmseniordiscountamount", seniordiscountamount);//seniordiscountAmount);
                 com.Parameters.AddWithValue("@parmdiscounttype", discounttype);
                 //com.Parameters.AddWithValue("@parmpwdidno", pwdIDNo);
@@ -227,8 +318,11 @@ namespace SalesInventorySystem.POS
                 com.Parameters.AddWithValue("@parmdiscname", discname);
                 com.Parameters.AddWithValue("@parmdiscamount", discamount);
 
-                com.Parameters.AddWithValue("@parmiszeroratedsale", PointOfSale.iszeroratedsale);
+                com.Parameters.AddWithValue("@parmiszeroratedsale", ZeroRated);
                 com.Parameters.AddWithValue("@parmmachinename", Environment.MachineName.ToString());
+
+                com.Parameters.AddWithValue("@parmtotalcashsales", totalcashsales);
+                com.Parameters.AddWithValue("@parmtotalcreditsales", totalcreditsales);
                 com.CommandType = CommandType.StoredProcedure;
                 com.CommandText = query;
                 com.ExecuteNonQuery();
@@ -299,9 +393,10 @@ namespace SalesInventorySystem.POS
         bool haveOneTimeDiscount()
         {
             bool ok = false;
-            ok = Database.checkifExist("SELECT TOP 1 OrderNo FROM SalesDiscount WHERE OrderNo='" + lblorderno.Text + "' and isErrorCorrect=0");
+            ok = Database.checkifExist("SELECT TOP 1 OrderNo FROM dbo.SalesDiscount WHERE OrderNo='" + lblorderno.Text + "' and isErrorCorrect=0");
             return ok;
         }
+
         void ExecutePayment()
         {
             try
@@ -318,7 +413,7 @@ namespace SalesInventorySystem.POS
                     paymenttype = "Credit";
                     invno = txtinvoiceno.Text;
                     //update as of 04142020
-                    Database.ExecuteQuery("INSERT INTO POSCreditCardTransactions VALUES('" + lbltranscode.Text + "','" + lblorderno.Text + "','" + Login.assignedBranch + "','" + DateTime.Now.ToString() + "','" + POSPaymentDetails.creditcardname + "','" + POSPaymentDetails.creditcardnum + "','" + POSPaymentDetails.creditcardtype + "','" + POSPaymentDetails.creditcardexpirydate + "','" + POSPaymentDetails.creditcardbankname + "','" + POSPaymentDetails.creditcardmerchant + "','" + POSPaymentDetails.creditcardrefno + "','" + txtamountpayable.Text + "','0','" + DateTime.Now.ToString() + "',' ','" + Login.Fullname + "','" + GlobalVariables.computerName + "')");
+                    Database.ExecuteQuery("INSERT INTO dbo.POSCreditCardTransactions VALUES('" + lbltranscode.Text + "','" + lblorderno.Text + "','" + Login.assignedBranch + "','" + DateTime.Now.ToString() + "','" + POSPaymentDetails.creditcardname + "','" + POSPaymentDetails.creditcardnum + "','" + POSPaymentDetails.creditcardtype + "','" + POSPaymentDetails.creditcardexpirydate + "','" + POSPaymentDetails.creditcardbankname + "','" + POSPaymentDetails.creditcardmerchant + "','" + POSPaymentDetails.creditcardrefno + "','" + txtamountpayable.Text + "','0','" + DateTime.Now.ToString() + "',' ','" + Login.Fullname + "','" + GlobalVariables.computerName + "','"+lblcashiertransno.Text+"')");
                     //update as of 04142020
                 }
                 else if (radmerchant.Checked.Equals(true))
@@ -330,7 +425,7 @@ namespace SalesInventorySystem.POS
                     //update as of 04142020
                     bool isClear = false;
                     if (merchantpaytype == "Credit") { isClear = false; } else { isClear = true; }
-                    Database.ExecuteQuery("INSERT INTO POSMerchantTransactions VALUES('" + Login.assignedBranch + "'" +
+                    Database.ExecuteQuery("INSERT INTO dbo.POSMerchantTransactions VALUES('" + Login.assignedBranch + "'" +
                         ",'" + DateTime.Now.ToString() + "','" + Environment.MachineName + "','" + lblorderno.Text + "','" + POSPaytoMerchant.refno + "'" +
                         ",'" + POSPaytoMerchant.merchantname + "','" + POSPaytoMerchant.vouchercode + "','" + txtamountpayable.Text + "'" +
                         ",'" + DateTime.Now.ToString() + "','" + Login.isglobalUserID + "','" + isClear + "',' ')");
@@ -384,7 +479,8 @@ namespace SalesInventorySystem.POS
                     }
                     else if (btncaller.Text == "RETAILWITHDASHBOARD")
                     {
-                        gview = POS.POSMainWithDashboard.mygridview;
+                        //gview = POS.POSMainWithDashboard.mygridview;
+                        gview = POS.POSRestoDineInBilling.mygridview;
                     }
 
                     //if (radmerchant.Checked.Equals(true))//Merchant 
@@ -423,7 +519,7 @@ namespace SalesInventorySystem.POS
 
                     execute();
                     //after execute of SP check if the Status of BatchSalesSummary is Equal to SOLD
-                    bool checkIfSold = Database.checkifExist($"SELECT TOP(1) ReferenceNo FROM BatchSalesSummary " +
+                    bool checkIfSold = Database.checkifExist($"SELECT TOP(1) ReferenceNo FROM dbo.BatchSalesSummary " +
                         $"WHERE BranchCode='{Login.assignedBranch}' " +
                         $"AND MachineUsed='{Environment.MachineName}' " +
                         $"AND ReferenceNo='{lblorderno.Text}' " +
@@ -544,6 +640,8 @@ namespace SalesInventorySystem.POS
                 con.Close();
             }
         }
+
+
         void printSalesInvoice()
         {
             string custkey = "", custname = "", custaddress = "", custterm = "", TinNo="";
@@ -557,6 +655,7 @@ namespace SalesInventorySystem.POS
             custterm = row["Term"].ToString();
             TinNo = row["TinNo"].ToString();
 
+
             Reporting.SalesInvoiceDexEx viewdet = new Reporting.SalesInvoiceDexEx();
 
 
@@ -569,7 +668,7 @@ namespace SalesInventorySystem.POS
             viewdet.txtterm.Text = custterm;
             viewdet.txtcusttin.Text = TinNo;
 
-            double vatablesales = 0.0, vatexemptsale = 0.0, vatamount = 0.0, totalsales = 0.0, lessvat = 0.0, netofvat = 0.0, amountdue = 0.0, addvat = 0.0, vatsales = 0.0, totalamountdue = 0.0;
+            double vatablesales = 0.0, vatexemptsale = 0.0, zeroratedsale = 0.0,vatamount = 0.0, totalsales = 0.0, lessvat = 0.0, netofvat = 0.0, amountdue = 0.0, addvat = 0.0, vatsales = 0.0, totalamountdue = 0.0;
             for (int i = 0; i <= viewdet.gridView4.RowCount - 1; i++)
             {
                 if (Convert.ToBoolean(viewdet.gridView4.GetRowCellValue(i, "isVat").ToString()) == true)
@@ -581,21 +680,41 @@ namespace SalesInventorySystem.POS
                     vatexemptsale += Convert.ToDouble(viewdet.gridView4.GetRowCellValue(i, "Amount").ToString());
                 }
             }
-
+            bool isZeroRated = Database.checkifExist($"SELECT TOP(1) * FROM dbo.BatchSalesSummary WHERE ReferenceNo='{lblorderno.Text}' AND BranchCode='{Login.assignedBranch}' AND ZeroRatedSale<>0");
             bool isOnetimeDiscount = Database.checkifExist($"SELECT TOP(1) OrderNo FROM dbo.SalesDiscount WHERE OrderNo='{lblorderno.Text}' and isErrorCorrect=0");
-            if(!isOnetimeDiscount)
+            if(!isOnetimeDiscount) 
             {
-                vatsales = Math.Round(vatablesales / 1.12, 2);
-                vatamount = Math.Round(vatsales * 0.12, 2);
-                totalsales = Math.Round(vatablesales + vatexemptsale, 2);
-                lessvat = vatamount;
-                netofvat = totalsales - vatamount;
-                amountdue = netofvat;
-                addvat = vatamount;
-                totalamountdue = totalsales;
+                if (!isZeroRated) //exists
+                {
+                    vatsales = Math.Round(vatablesales / 1.12, 2);
+                    vatamount = Math.Round(vatsales * 0.12, 2);
+                    totalsales = Math.Round(vatablesales + vatexemptsale, 2);
+
+                    lessvat = vatamount;
+                    netofvat = totalsales - vatamount;
+                    amountdue = netofvat;
+                    addvat = vatamount;
+                    totalamountdue = totalsales;
+                }
+                else //ZERO RATED SALES
+                {
+                    vatsales = 0;
+                    vatamount = 0;
+                   
+                    totalsales = Math.Round(vatablesales + vatexemptsale, 2);
+                    zeroratedsale = totalsales;
+
+                    lessvat = 0;
+                    netofvat = 0;
+                    amountdue = totalsales;
+                    addvat = 0;
+                    totalamountdue = Math.Round(totalsales/1.12,2);
+                }
 
                 viewdet.txtvatablesale.Text = vatsales.ToString();
                 viewdet.txtvatexemptsale.Text = vatexemptsale.ToString();
+                //zero rated
+                viewdet.txtzeroratedsale.Text = zeroratedsale.ToString();
                 viewdet.txtvatamount.Text = vatamount.ToString();
                 viewdet.txttotalsales.Text = totalsales.ToString();
                 viewdet.txtlessvat.Text = lessvat.ToString();
@@ -605,19 +724,38 @@ namespace SalesInventorySystem.POS
                 viewdet.txttotalamountdue.Text = totalamountdue.ToString();
                 viewdet.ShowDialog(this);
             }
-            else
+            else //SNIOR PWD REGULAR
             {
                 string netOfVatAfterNonOneTimeDisc = Database.getSingleResultSet("SELECT dbo.func_getNetOfVatInNonDiscountedItems('" + Login.assignedBranch + "','" + lblorderno.Text + "')");
                 string netofvatafteronetimedisc = Database.getSingleResultSet("SELECT dbo.func_getNetOfVatInDiscountedItems('" + Login.assignedBranch + "','" + lblorderno.Text + "')");
                 double lessscdisc = 0.0, netofscdisc = 0.0, netofnonscdisc = 0.0;//,  totaltotal = 0.0;
-                netofnonscdisc = Convert.ToDouble(netOfVatAfterNonOneTimeDisc); //netOfVatAfterNonOneTimeDisc
-                lessvat = Math.Round(Convert.ToDouble(netofvatafteronetimedisc) * 0.12, 2); //netofvatafteronetimedisc
-                netofvat = Math.Round(Convert.ToDouble(netofvatafteronetimedisc), 2);
-                lessscdisc = Math.Round(netofvat * Convert.ToDouble(0.12), 2);
-                netofscdisc = Math.Round(netofvat - lessscdisc, 2);
-                amountdue = Math.Round(netofscdisc + addvat, 2); ; //totaltotal = Math.Round(netofscdisc + addvat, 2);
-                addvat = Math.Round(netofscdisc * .12, 2);
-                totalamountdue = Convert.ToDouble(netamountpayable);
+
+                if (!isZeroRated) //exists
+                {
+                    netofnonscdisc = Convert.ToDouble(netOfVatAfterNonOneTimeDisc); //netOfVatAfterNonOneTimeDisc
+                    lessvat = Math.Round(Convert.ToDouble(netofvatafteronetimedisc) * 0.12, 2); //netofvatafteronetimedisc
+                    netofvat = Math.Round(Convert.ToDouble(netofvatafteronetimedisc), 2);
+                    lessscdisc = Math.Round(netofvat * Convert.ToDouble(0.12), 2);
+                    netofscdisc = Math.Round(netofvat - lessscdisc, 2);
+                    amountdue = Math.Round(netofscdisc + addvat, 2); ; //totaltotal = Math.Round(netofscdisc + addvat, 2);
+                    addvat = Math.Round(netofscdisc * .12, 2);
+                    totalamountdue = Convert.ToDouble(netamountpayable);
+                }
+                else
+                {
+                    vatsales = 0;
+                    vatamount = 0;
+
+                    totalsales = Math.Round(vatablesales + vatexemptsale, 2);
+                    zeroratedsale = totalsales;
+
+                    lessvat = 0;
+                    netofvat = 0;
+                    amountdue = totalsales;
+                    addvat = 0;
+                    totalamountdue = totalsales;
+                }
+              
 
 
                 double totalvatableSales = netofscdisc + netofnonscdisc; //**
@@ -634,6 +772,7 @@ namespace SalesInventorySystem.POS
                 viewdet.txtvatablesale.Text = totalvatableSales.ToString();
                 viewdet.txtvatexemptsale.Text = vatexemptsale.ToString();
                 //zero rated sale
+                viewdet.txtzeroratedsale.Text = zeroratedsale.ToString();
                 viewdet.txtvatamount.Text = totalVatInputSale.ToString();
                 viewdet.txttotalsales.Text = Math.Round(vatablesales,2).ToString();//totalsales.ToString();
                 viewdet.txtlessvat.Text = lessvat.ToString();

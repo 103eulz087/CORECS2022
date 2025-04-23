@@ -296,7 +296,7 @@ namespace SalesInventorySystem
         {
 
             percentamt = "0";
-             isOnetimeDiscount = true;
+            isOnetimeDiscount = true;
             //bool checkifexists = Database.checkifExist("SELECT TOP 1 OrderNo  FROM SalesDiscount WHERE OrderNo='"+asdsa+"' AND isErrorCorrect=0 ");
             //if(checkifexists)
             //{
@@ -387,7 +387,7 @@ namespace SalesInventorySystem
             //    ",'"+txtvatexadj.Text+"' )");
 
 
-            Database.ExecuteQuery("INSERT INTO POSTransaction VALUES ('"+Login.assignedBranch+"'" +
+            Database.ExecuteQuery("INSERT INTO dbo.POSTransaction VALUES ('"+Login.assignedBranch+"'" +
                 ", '"+txttransactionno.Text+"' " +
                 ", '"+Environment.MachineName.ToString()+"' " +
                 ", '"+ discounttype + "' " +

@@ -60,21 +60,21 @@
             // 
             this.groupControl2.Controls.Add(this.gridControl1);
             this.groupControl2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupControl2.Location = new System.Drawing.Point(0, 158);
-            this.groupControl2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.groupControl2.Location = new System.Drawing.Point(0, 247);
+            this.groupControl2.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.groupControl2.Name = "groupControl2";
-            this.groupControl2.Size = new System.Drawing.Size(465, 412);
+            this.groupControl2.Size = new System.Drawing.Size(698, 644);
             this.groupControl2.TabIndex = 3;
             // 
             // gridControl1
             // 
             this.gridControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridControl1.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.gridControl1.Location = new System.Drawing.Point(2, 25);
+            this.gridControl1.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.gridControl1.Location = new System.Drawing.Point(3, 45);
             this.gridControl1.MainView = this.gridView1;
-            this.gridControl1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.gridControl1.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.gridControl1.Name = "gridControl1";
-            this.gridControl1.Size = new System.Drawing.Size(461, 385);
+            this.gridControl1.Size = new System.Drawing.Size(692, 596);
             this.gridControl1.TabIndex = 1;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
@@ -86,6 +86,8 @@
             this.gridView1.Appearance.HeaderPanel.Options.UseFont = true;
             this.gridView1.Appearance.Row.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gridView1.Appearance.Row.Options.UseFont = true;
+            this.gridView1.DetailHeight = 547;
+            this.gridView1.FixedLineWidth = 3;
             this.gridView1.GridControl = this.gridControl1;
             this.gridView1.Name = "gridView1";
             this.gridView1.OptionsBehavior.Editable = false;
@@ -107,92 +109,94 @@
             this.groupControl1.Controls.Add(this.labelControl1);
             this.groupControl1.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupControl1.Location = new System.Drawing.Point(0, 0);
-            this.groupControl1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.groupControl1.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.groupControl1.Name = "groupControl1";
-            this.groupControl1.Size = new System.Drawing.Size(465, 158);
+            this.groupControl1.Size = new System.Drawing.Size(698, 247);
             this.groupControl1.TabIndex = 2;
             // 
             // btncancel
             // 
-            this.btncancel.Image = global::SalesInventorySystem.Properties.Resources.Cancel_16x16__2_;
-            this.btncancel.Location = new System.Drawing.Point(246, 111);
-            this.btncancel.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btncancel.ImageOptions.Image = global::SalesInventorySystem.Properties.Resources.Cancel_16x16__2_;
+            this.btncancel.Location = new System.Drawing.Point(369, 173);
+            this.btncancel.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btncancel.Name = "btncancel";
-            this.btncancel.Size = new System.Drawing.Size(70, 32);
+            this.btncancel.Size = new System.Drawing.Size(105, 50);
             this.btncancel.TabIndex = 61;
             this.btncancel.Text = "Cancel";
             this.btncancel.Click += new System.EventHandler(this.btncancel_Click);
             // 
             // btnupdate
             // 
-            this.btnupdate.Image = global::SalesInventorySystem.Properties.Resources.Refresh_16x16;
-            this.btnupdate.Location = new System.Drawing.Point(169, 111);
-            this.btnupdate.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnupdate.ImageOptions.Image = global::SalesInventorySystem.Properties.Resources.Refresh_16x16;
+            this.btnupdate.Location = new System.Drawing.Point(254, 173);
+            this.btnupdate.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnupdate.Name = "btnupdate";
-            this.btnupdate.Size = new System.Drawing.Size(70, 32);
+            this.btnupdate.Size = new System.Drawing.Size(105, 50);
             this.btnupdate.TabIndex = 60;
             this.btnupdate.Text = "Update";
             this.btnupdate.Click += new System.EventHandler(this.btnupdate_Click);
             // 
             // btnadd
             // 
-            this.btnadd.Image = global::SalesInventorySystem.Properties.Resources.Add_16x16__2_;
-            this.btnadd.Location = new System.Drawing.Point(92, 111);
-            this.btnadd.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnadd.ImageOptions.Image = global::SalesInventorySystem.Properties.Resources.Add_16x16__2_;
+            this.btnadd.Location = new System.Drawing.Point(138, 173);
+            this.btnadd.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnadd.Name = "btnadd";
-            this.btnadd.Size = new System.Drawing.Size(70, 32);
+            this.btnadd.Size = new System.Drawing.Size(105, 50);
             this.btnadd.TabIndex = 59;
             this.btnadd.Text = "Add";
             this.btnadd.Click += new System.EventHandler(this.btnadd_Click);
             // 
             // btnnew
             // 
-            this.btnnew.Image = global::SalesInventorySystem.Properties.Resources.New_16x16__5_;
-            this.btnnew.Location = new System.Drawing.Point(15, 111);
-            this.btnnew.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnnew.ImageOptions.Image = global::SalesInventorySystem.Properties.Resources.New_16x16__5_;
+            this.btnnew.Location = new System.Drawing.Point(22, 173);
+            this.btnnew.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnnew.Name = "btnnew";
-            this.btnnew.Size = new System.Drawing.Size(70, 32);
+            this.btnnew.Size = new System.Drawing.Size(105, 50);
             this.btnnew.TabIndex = 58;
             this.btnnew.Text = "New";
             this.btnnew.Click += new System.EventHandler(this.btnnew_Click);
             // 
             // txtdeptname
             // 
-            this.txtdeptname.Location = new System.Drawing.Point(143, 71);
-            this.txtdeptname.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtdeptname.Location = new System.Drawing.Point(214, 111);
+            this.txtdeptname.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.txtdeptname.Name = "txtdeptname";
             this.txtdeptname.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 9.25F);
             this.txtdeptname.Properties.Appearance.Options.UseFont = true;
-            this.txtdeptname.Size = new System.Drawing.Size(258, 24);
+            this.txtdeptname.Size = new System.Drawing.Size(387, 44);
             this.txtdeptname.TabIndex = 3;
             // 
             // txtdeptid
             // 
-            this.txtdeptid.Location = new System.Drawing.Point(145, 36);
-            this.txtdeptid.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtdeptid.Location = new System.Drawing.Point(218, 56);
+            this.txtdeptid.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.txtdeptid.Name = "txtdeptid";
             this.txtdeptid.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 9.25F);
             this.txtdeptid.Properties.Appearance.Options.UseFont = true;
-            this.txtdeptid.Size = new System.Drawing.Size(258, 24);
+            this.txtdeptid.Size = new System.Drawing.Size(387, 44);
             this.txtdeptid.TabIndex = 2;
             // 
             // labelControl2
             // 
             this.labelControl2.Appearance.Font = new System.Drawing.Font("Tahoma", 9.25F);
-            this.labelControl2.Location = new System.Drawing.Point(14, 75);
-            this.labelControl2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.labelControl2.Appearance.Options.UseFont = true;
+            this.labelControl2.Location = new System.Drawing.Point(21, 117);
+            this.labelControl2.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.labelControl2.Name = "labelControl2";
-            this.labelControl2.Size = new System.Drawing.Size(95, 18);
+            this.labelControl2.Size = new System.Drawing.Size(164, 30);
             this.labelControl2.TabIndex = 1;
             this.labelControl2.Text = "Email Address:";
             // 
             // labelControl1
             // 
             this.labelControl1.Appearance.Font = new System.Drawing.Font("Tahoma", 9.25F);
-            this.labelControl1.Location = new System.Drawing.Point(14, 39);
-            this.labelControl1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.labelControl1.Appearance.Options.UseFont = true;
+            this.labelControl1.Location = new System.Drawing.Point(21, 61);
+            this.labelControl1.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.labelControl1.Name = "labelControl1";
-            this.labelControl1.Size = new System.Drawing.Size(69, 18);
+            this.labelControl1.Size = new System.Drawing.Size(120, 30);
             this.labelControl1.TabIndex = 0;
             this.labelControl1.Text = "Full Name:";
             // 
@@ -203,13 +207,13 @@
             this.editItemsToolStripMenuItem,
             this.deleteToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(180, 84);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(200, 76);
             // 
             // editItemsToolStripMenuItem
             // 
             this.editItemsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("editItemsToolStripMenuItem.Image")));
             this.editItemsToolStripMenuItem.Name = "editItemsToolStripMenuItem";
-            this.editItemsToolStripMenuItem.Size = new System.Drawing.Size(179, 26);
+            this.editItemsToolStripMenuItem.Size = new System.Drawing.Size(199, 36);
             this.editItemsToolStripMenuItem.Text = "Edit Items";
             this.editItemsToolStripMenuItem.Click += new System.EventHandler(this.editItemsToolStripMenuItem_Click);
             // 
@@ -217,17 +221,18 @@
             // 
             this.deleteToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("deleteToolStripMenuItem.Image")));
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(179, 26);
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(199, 36);
             this.deleteToolStripMenuItem.Text = "Delete";
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
             // 
             // POSEmailAddresses
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(465, 570);
+            this.ClientSize = new System.Drawing.Size(698, 891);
             this.Controls.Add(this.groupControl2);
             this.Controls.Add(this.groupControl1);
+            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "POSEmailAddresses";
             this.Text = "POSEmailAddresses";
             this.Load += new System.EventHandler(this.POSEmailAddresses_Load);
