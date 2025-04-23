@@ -86,5 +86,46 @@ namespace SalesInventorySystem
         {
             label1.Text = monthEdit1.Text + " " + comboBoxEdit1.Text;
         }
+
+        public static void SendRawData(string printerIpAddress, int printerPort, string dataToSend)
+        {
+            TcpClient client = null;
+            try
+            {
+                client = new TcpClient(printerIpAddress, printerPort);
+
+                // Convert the string data to bytes using a suitable encoding (e.g., ASCII, UTF-8)
+                byte[] dataBytes = Encoding.ASCII.GetBytes(dataToSend);
+
+                // Get the network stream
+                NetworkStream stream = client.GetStream();
+
+                // Send the data
+                stream.Write(dataBytes, 0, dataBytes.Length);
+                Console.WriteLine($"Data sent successfully to {printerIpAddress}:{printerPort}");
+            }
+            catch (SocketException ex)
+            {
+                Console.WriteLine($"Socket error: {ex.Message}");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An error occurred: {ex.Message}");
+            }
+            finally
+            {
+                // Close the connection
+                client?.Close();
+            }
+        }
+        private void button3_Click(object sender, EventArgs e)
+        {
+            string printerIp = "192.168.0.103"; // Replace with your printer's IP address
+            int printerPort = 9100;              // Typically 9100 for raw printing
+            string receiptData = "This is a test receipt.\n\x1D\x56\x41\x03"; // Example with ESC/POS cut command
+
+            SendRawData(printerIp, printerPort, receiptData);
+            Console.ReadKey();
+        }
     }
 }

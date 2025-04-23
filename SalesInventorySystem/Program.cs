@@ -26,7 +26,7 @@ namespace SalesInventorySystem
                 DevExpress.UserSkins.BonusSkins.Register();
                 foreach (Form form in Application.OpenForms) //HotelManagement.HotelFrmMain()
                 {
-                    if (form.GetType() == typeof(Login))
+                    if (form.GetType() == typeof(RemoteWindow))
                     //if (form.GetType() == typeof(Practice))
                     {
 
@@ -46,7 +46,7 @@ namespace SalesInventorySystem
                 }
 
                 //Application.Run(new Practice());
-                Application.Run(new Login());
+                Application.Run(new RemoteWindow());
                 //Application.Run(new PivotPractice());
                 //Application.Run(new Main());
             }
