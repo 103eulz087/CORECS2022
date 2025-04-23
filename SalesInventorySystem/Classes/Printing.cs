@@ -705,7 +705,7 @@ namespace SalesInventorySystem
             //    printTextFile(filetoprint);
             //}
         }
-        //THIS TEMPLATE HAS BEEN USED WITH ONE TIME DISCOUNT (e.g SENIOR,PWD,OTHERS)
+        //THIS TEMPLATE HAS BEEN USED WITH ONE TIME DISCOUNT (e.g SENIOR,PWD,OTHERS)--eulz
         public void printReceipt(string transcode
                                 , string ordercode
 
