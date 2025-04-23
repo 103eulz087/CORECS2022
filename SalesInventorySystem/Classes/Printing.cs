@@ -699,10 +699,11 @@ namespace SalesInventorySystem
             StreamWriter writerLast = new StreamWriter(LastTransactionfilepath + lastranfile);
             writerLast.Write(details);
             writerLast.Close();
-            for(int xxx=0;xxx<=3;xxx++)
-            {
-                printTextFile(filetoprint);
-            }
+            printTextFile(filetoprint);
+            //for (int xxx=0;xxx<=3;xxx++)
+            //{
+            //    printTextFile(filetoprint);
+            //}
         }
         //THIS TEMPLATE HAS BEEN USED WITH ONE TIME DISCOUNT (e.g SENIOR,PWD,OTHERS)
         public void printReceipt(string transcode
