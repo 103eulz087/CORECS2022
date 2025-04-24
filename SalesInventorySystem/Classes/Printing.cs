@@ -6,6 +6,7 @@ using System.Data.SqlClient;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -15,6 +16,7 @@ namespace SalesInventorySystem
     class Printing
     {
         public string txtorder, txtorder2;
+        private Dictionary<string, Tuple<string, int>> printerMappings = new Dictionary<string, Tuple<string, int>>();
 
         //string tradename = Database.getSingleQuery("CompanyProfile", "BranchCode='"+Login.assignedBranch+"'", "CompanyName");
         //string compaddress1 = Database.getSingleQuery("CompanyProfile", "BranchCode='" + Login.assignedBranch + "'", "Address1");
@@ -23,7 +25,44 @@ namespace SalesInventorySystem
         //string compminno = Database.getSingleQuery("CompanyProfile", "BranchCode='" + Login.assignedBranch + "' ", "MinNo");
         //string compbirpermitno = Database.getSingleQuery("CompanyProfile", "BranchCode='" + Login.assignedBranch + "'", "BirPermitNo");
         //string compserialno = Database.getSingleQuery("CompanyProfile", "BranchCode='" + Login.assignedBranch + "' ", "SerialNo");
+        public void SendRawDataFromFile(string printerIpAddress, int printerPort, string filePath)
+        {
+            TcpClient client = null;
+            try
+            {
+                // Read all text from the file
+                string dataToSend = File.ReadAllText(filePath);
 
+                client = new TcpClient(printerIpAddress, printerPort);
+
+                // Convert the string data to bytes using a suitable encoding
+                byte[] dataBytes = Encoding.ASCII.GetBytes(dataToSend); // Adjust encoding if needed
+
+                // Get the network stream
+                NetworkStream stream = client.GetStream();
+
+                // Send the data
+                stream.Write(dataBytes, 0, dataBytes.Length);
+                Console.WriteLine($"Data from '{filePath}' sent successfully to {printerIpAddress}:{printerPort}");
+            }
+            catch (FileNotFoundException)
+            {
+                Console.WriteLine($"Error: File not found at '{filePath}'");
+            }
+            catch (SocketException ex)
+            {
+                Console.WriteLine($"Socket error: {ex.Message}");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An error occurred: {ex.Message}");
+            }
+            finally
+            {
+                // Close the connection
+                client?.Close();
+            }
+        }
 
         public void printReceiptAtik()
         {
@@ -75,6 +114,338 @@ namespace SalesInventorySystem
             writer.Close();
             printTextFile2(filetoprint);
         }
+
+
+        //private string GeneratePrintData(string itemName)
+        //{
+        //    StringBuilder sb = new StringBuilder();
+        //    sb.AppendLine(itemName);
+        //    sb.AppendLine("-----------------------");
+        //    // Add more formatting and ESC/POS commands as needed
+        //    return sb.ToString();
+        //}
+
+        //public void printOrdersTest(string refno, string waiterid, string tableno, string location, DataGridView gridview)
+        //{
+        //    StringBuilder kitchenReceipt = new StringBuilder();
+        //    StringBuilder grillReceipt = new StringBuilder();
+        //    StringBuilder AllOrdersReceipt = new StringBuilder();
+
+
+        //    // Add order-level information to the receipts
+        //    AllOrdersReceipt.AppendLine($"Order ID: {refno}");
+        //    AllOrdersReceipt.AppendLine("----- ALL ORDERS -----");
+        //    AllOrdersReceipt.AppendLine("" + (Char)27 + (Char)112 + (Char)0 + (Char)25 + "");
+        //    AllOrdersReceipt.AppendLine(HelperFunction.PrintCenterText(location) + Environment.NewLine);
+        //    AllOrdersReceipt.AppendLine(HelperFunction.PrintLeftRigthText("Table #:" + tableno, "Waiter:" + waiterid) + Environment.NewLine);
+
+        //    kitchenReceipt.AppendLine($"Order ID: {refno}");
+        //    kitchenReceipt.AppendLine("----- Kitchen -----");
+        //    kitchenReceipt.AppendLine("" + (Char)27 + (Char)112 + (Char)0 + (Char)25 + "");
+        //    kitchenReceipt.AppendLine(HelperFunction.PrintCenterText(location) + Environment.NewLine);
+        //    kitchenReceipt.AppendLine(HelperFunction.PrintLeftRigthText("Table #:" + tableno, "Waiter:" + waiterid) + Environment.NewLine);
+
+        //    grillReceipt.AppendLine($"Order ID: {refno}");
+        //    grillReceipt.AppendLine("------- Grill -------");
+        //    grillReceipt.AppendLine("" + (Char)27 + (Char)112 + (Char)0 + (Char)25 + "");
+        //    grillReceipt.AppendLine(HelperFunction.PrintCenterText(location) + Environment.NewLine);
+        //    grillReceipt.AppendLine(HelperFunction.PrintLeftRigthText("Table #:" + tableno, "Waiter:" + waiterid) + Environment.NewLine);
+
+
+        //    String details = "";
+        //    string filepath = "";
+        //    string filetoprintmain = "";
+        //    string filetoprintgrill = "";
+        //    string filetoprintkitchen = "";
+        //    //details = "" + (Char)27 + (Char)112 + (Char)0 + (Char)25 + "";
+        //    //details += HelperFunction.PrintCenterText(location) + Environment.NewLine;
+        //    //details += HelperFunction.PrintLeftRigthText("Table #:" + tableno,"Waiter:"+waiterid) + Environment.NewLine;
+        //    //details += Classes.ReceiptSetup.doTitle("ORDERS");
+        //    bool flag = false;
+        //    for (int i = 0; i <= gridview.RowCount - 1; i++)
+        //    {
+
+
+        //        //get productcategorycode
+        //        string prodcatcode = Database.getSingleQuery("SELECT ProductCategoryCode FROM dbo.Products WHERE BranchCode='" + Login.assignedBranch + "' and Description='" + gridview.Rows[i].Cells["Particulars"].Value.ToString() + "'", "ProductCategoryCode");
+        //        string prodcatname = Classes.Product.getProductCategoryName(prodcatcode);
+
+        //        var rowz = Database.getMultipleQuery($"SELECT Description,PrinterID FROM dbo.ProductCategory WHERE ProductCategoryCode='{prodcatcode}'", "Description,PrinterID");
+        //        string Description = rowz["Description"].ToString();
+        //        string PrinterID = rowz["PrinterID"].ToString();
+
+        //        string itemcombi = HelperFunction.PrintLeftRigthText(gridview.Rows[i].Cells["Particulars"].Value.ToString(), gridview.Rows[i].Cells["Qty"].Value.ToString()) + Environment.NewLine;
+
+        //        if (prodcatcode == "10")
+        //        {
+
+        //            filepath = "C:\\POSTransaction\\Restaurant\\Orders\\" + DateTime.Now.ToString("yyyyMMdd") + "\\" + prodcatname + "\\";
+
+        //            beverageReceipt.AppendLine(itemcombi);
+        //            AllOrdersReceipt.AppendLine(itemcombi);
+
+        //            if (!Directory.Exists(filepath))
+        //            {
+        //                Directory.CreateDirectory(filepath);
+        //            }
+        //            txtorder = "\\" + refno + ".txt";
+        //            filetoprintmain = filepath + txtorder;
+        //            //StreamWriter writer = new StreamWriter(filetoprintmain);
+        //            //writer.Write(beverageReceipt.ToString());
+        //            //writer.Close();
+
+        //        }
+        //        else if (prodcatcode == "11")
+        //        {
+        //            filepath = "C:\\POSTransaction\\Restaurant\\Orders\\" + DateTime.Now.ToString("yyyyMMdd") + "\\" + prodcatname + "\\";
+
+        //            grillReceipt.AppendLine(itemcombi);
+        //            AllOrdersReceipt.AppendLine(itemcombi);
+
+        //            if (!Directory.Exists(filepath))
+        //            {
+        //                Directory.CreateDirectory(filepath);
+        //            }
+        //            txtorder = "\\" + refno + ".txt";
+        //            filetoprintkitchen = filepath + txtorder;
+        //        }
+        //        else
+        //        {
+        //            AllOrdersReceipt.AppendLine(itemcombi);
+        //        }
+        //        //else if (prodcatcode == "12")
+        //        //{
+        //        //    filepath = "C:\\POSTransaction\\Restaurant\\Orders\\" + prodcatname + "\\";
+        //        //    details += HelperFunction.PrintLeftRigthText(gridview.Rows[i].Cells["Particulars"].Value.ToString(), gridview.Rows[i].Cells["Qty"].Value.ToString()) + Environment.NewLine;
+        //        //    if (!Directory.Exists(filepath))
+        //        //    {
+        //        //        Directory.CreateDirectory(filepath);
+        //        //    }
+        //        //    txtorder = "\\" + refno + ".txt";
+        //        //    string filetoprint = filepath + txtorder;
+        //        //    StreamWriter writer = new StreamWriter(filetoprint);
+        //        //    writer.Write(details);
+        //        //    writer.Close();
+        //        //}
+        //    }
+        //    //gi append pa ang last page before e ewrite sa notepad sa ubos
+        //    AllOrdersReceipt.AppendLine(HelperFunction.LastPagePaper());
+        //    beverageReceipt.AppendLine(HelperFunction.LastPagePaper());
+        //    grillReceipt.AppendLine(HelperFunction.LastPagePaper());
+
+        //    //gi write na sa notepad
+        //    StreamWriter writer = new StreamWriter(filetoprintmain);
+        //    writer.Write(beverageReceipt.ToString());
+        //    writer.Close();
+
+        //    StreamWriter writer1 = new StreamWriter(filetoprintgrill);
+        //    writer1.Write(beverageReceipt.ToString());
+        //    writer1.Close();
+
+        //    StreamWriter writer2 = new StreamWriter(filetoprintkitchen);
+        //    writer2.Write(grillReceipt.ToString());
+        //    writer2.Close();
+
+        //    printTextFile(filetoprintmain); //print to main printer
+
+        //    string printerIp = "192.168.0.103"; // Replace with your printer's IP address
+        //    int printerPort = 9100;              // Typically 9100 for raw printing
+        //    //string receiptData = "This is a test receipt.\n\x1D\x56\x41\x03"; // Example with ESC/POS cut command
+        //    SendRawDataFromFile(printerIp, printerPort, filetoprintkitchen);
+        //}
+
+        private void LoadPrinterMappings()
+        {
+            SqlConnection connection = Database.getConnection();
+            
+                try
+                {
+                    connection.Open();
+                    string query = "SELECT Description, PrinterID, PrinterPort FROM dbo.ProductCategory"; // Adjust query and table/column names
+
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                string categoryName = reader.GetString(0);
+                                string printerIP = reader.GetString(1);
+                                int printerPort = reader.GetInt32(2);
+                                printerMappings[categoryName.ToLower()] = Tuple.Create(printerIP, printerPort);
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error loading printer mappings: {ex.Message}");
+                    // Handle the error appropriately (e.g., use default mappings or log)
+                }
+            
+
+            //// Example fallback mappings if database loading fails or for categories not in the DB
+            //if (!printerMappings.ContainsKey("beverages"))
+            //{
+            //    printerMappings["beverages"] = Tuple.Create("192.168.0.101", 9100);
+            //}
+            //if (!printerMappings.ContainsKey("grill"))
+            //{
+            //    printerMappings["grill"] = Tuple.Create("192.168.0.102", 9100);
+            //}
+            // Add more fallback mappings as needed
+        }
+        public void PrintOrderToFile(string refno, string waiterid, string tableno, string location, DataGridView gridview)
+        {
+            LoadPrinterMappings();
+            string baseFolderPath = @"C:\RestaurantOrders\";
+            Dictionary<string, StringBuilder> categoryOrderData = new Dictionary<string, StringBuilder>();
+            StringBuilder consolidatedOrder = new StringBuilder();
+            consolidatedOrder.AppendLine($"----- Consolidated Order ID: {refno} -----");
+
+            for (int i = 0; i <= gridview.RowCount - 1; i++)
+            {
+
+
+                //get productcategorycode
+                string prodcatcode = Database.getSingleQuery("SELECT ProductCategoryCode FROM dbo.Products WHERE BranchCode='" + Login.assignedBranch + "' and Description='" + gridview.Rows[i].Cells["Particulars"].Value.ToString() + "'", "ProductCategoryCode");
+                string prodcatname = Classes.Product.getProductCategoryName(prodcatcode);
+
+                var rowz = Database.getMultipleQuery($"SELECT Description,PrinterID FROM dbo.ProductCategory WHERE ProductCategoryID='{prodcatcode}'", "Description,PrinterID");
+                string Description = rowz["Description"].ToString();
+                string PrinterID = rowz["PrinterID"].ToString();
+
+                string itemName = gridview.Rows[i].Cells["Particulars"].Value.ToString();
+                string itemType = prodcatname;
+                string itemOrderLine = GenerateOrderLine(itemName); // Format each item line
+                if (printerMappings.ContainsKey(itemType))
+                {
+                    if (!categoryOrderData.ContainsKey(itemType))
+                    {
+                        categoryOrderData[itemType] = new StringBuilder();
+                        categoryOrderData[itemType].AppendLine($"Order ID: {refno}");
+                        categoryOrderData[itemType].AppendLine($"----- {itemType.ToUpper()} -----");
+                    }
+                    categoryOrderData[itemType].AppendLine(itemOrderLine); // Add to consolidated order data
+                    consolidatedOrder.AppendLine($"{itemType.ToUpper()}: {itemOrderLine}");
+                }
+            }
+
+
+                // Write the accumulated data to separate files
+                foreach (var category in categoryOrderData.Keys)
+                {
+                    if (categoryOrderData[category].Length > ($"Order ID: {refno}\n----- {category.ToUpper()} -----\n").Length && printerMappings.ContainsKey(category))
+                    {
+                        var printerInfo = printerMappings[category];
+
+                        SendRawDataFromFile(printerInfo.Item1, printerInfo.Item2, categoryOrderData[category].ToString());
+                            //Console.WriteLine($"{category.ToUpper()} receipt sent for Order ID: {orderId} to {printerInfo.Item1}:{printerInfo.Item2}");
+                    }
+                    string folderPath = Path.Combine(baseFolderPath, category);
+                    // Create the folder if it doesn't exist
+                    Directory.CreateDirectory(folderPath);
+                    string filePath = Path.Combine(folderPath, $"Order_{refno}.txt");
+
+                    try
+                    {
+                        using (StreamWriter writer = new StreamWriter(filePath))
+                        {
+                            writer.Write(categoryOrderData[category].ToString());
+                            //Console.WriteLine($"Order ID {refno} for category '{category.ToUpper()}' written to: {filePath}");
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                    ex.StackTrace.ToString();
+                        //Console.WriteLine($"Error writing order for category '{category.ToUpper()}': {ex.Message}");
+                    }
+                }
+
+            // Write the consolidated order file
+            string consolidatedFolderPath = Path.Combine(baseFolderPath, "ConsolidatedOrders");
+            Directory.CreateDirectory(consolidatedFolderPath);
+            string consolidatedFilePath = Path.Combine(consolidatedFolderPath, $"Order_{refno}_Consolidated.txt");
+
+            try
+            {
+                using (StreamWriter writer = new StreamWriter(consolidatedFilePath))
+                {
+                    writer.Write(consolidatedOrder.ToString());
+                    //Console.WriteLine($"Consolidated Order ID {refno} written to: {consolidatedFilePath}");
+                }
+            }
+            catch (Exception ex)
+            {
+                //Console.WriteLine($"Error writing consolidated order for ID {refno}: {ex.Message}");
+            }
+
+        }
+
+        private string GenerateOrderLine(string itemName)
+        {
+            return itemName; // Replace with your desired format for each item line
+        }
+
+        public void PrintOrderDynamic(int orderId)
+        {
+            Dictionary<string, StringBuilder> categoryReceipts = new Dictionary<string, StringBuilder>();
+
+            SqlConnection connection = Database.getConnection();
+            
+                connection.Open();
+                string query = "SELECT ItemName, ItemType FROM OrderItems WHERE OrderId = @OrderId"; // Adjust your query
+
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@OrderId", orderId);
+
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            string itemName = reader.GetString(0);
+                            string itemType = reader.GetString(1).ToLower(); // Use lowercase for consistent matching
+                            string itemPrintData = GeneratePrintData(itemName);
+
+                            if (printerMappings.ContainsKey(itemType))
+                            {
+                                if (!categoryReceipts.ContainsKey(itemType))
+                                {
+                                    categoryReceipts[itemType] = new StringBuilder();
+                                    categoryReceipts[itemType].AppendLine($"Order ID: {orderId}");
+                                    categoryReceipts[itemType].AppendLine($"----- {itemType.ToUpper()} -----");
+                                }
+                                categoryReceipts[itemType].AppendLine(itemPrintData);
+                            }
+                            else
+                            {
+                                Console.WriteLine($"No printer mapping found for category '{itemType}' for item '{itemName}'. Not printed.");
+                                // Handle unmapped categories (e.g., log, print to a default printer)
+                            }
+                        }
+                    }
+                }
+
+                // Send the accumulated data for each category to its respective printer
+                foreach (var category in categoryReceipts.Keys)
+                {
+                    if (categoryReceipts[category].Length > ($"Order ID: {orderId}\n----- {category.ToUpper()} -----\n").Length && printerMappings.ContainsKey(category))
+                    {
+                        var printerInfo = printerMappings[category];
+                         SendRawDataFromFile(printerInfo.Item1, printerInfo.Item2, categoryReceipts[category].ToString());
+                        Console.WriteLine($"{category.ToUpper()} receipt sent for Order ID: {orderId} to {printerInfo.Item1}:{printerInfo.Item2}");
+                    }
+                }
+            
+        }
+
+        private string GeneratePrintData(string itemName)
+        {
+            return itemName; // Replace with your actual formatting
+        }
+
+
 
 
         public void printReceiptBillingWithDiscount(string transcode, string ordercode, string total, string vatablesale, string vatexemptsale, string vat, string cash, string change, DataGridView gridview, string tableno, bool isDiscount, string disctype,string netdue)
@@ -699,16 +1070,18 @@ namespace SalesInventorySystem
             StreamWriter writerLast = new StreamWriter(LastTransactionfilepath + lastranfile);
             writerLast.Write(details);
             writerLast.Close();
-            printTextFile(filetoprint);
-            //for (int xxx=0;xxx<=3;xxx++)
-            //{
-            //    printTextFile(filetoprint);
-            //}
+            for(int xxx=0;xxx<=3;xxx++)
+            {
+                printTextFile(filetoprint);
+            }
         }
         //THIS TEMPLATE HAS BEEN USED WITH ONE TIME DISCOUNT (e.g SENIOR,PWD,OTHERS)--eulzcccc
         public void printReceipt(string transcode
-                                , string ordercode
-
+                                , string ordercode /**/
+                                , string total/**/
+                                , string peritemdiscount/**/
+                                , string netofvatindiscitems/**/
+                                , string netofvatindinonscitems
                                 , string vatablesale
                                 , string vatexemptsale
                                 , string vat
