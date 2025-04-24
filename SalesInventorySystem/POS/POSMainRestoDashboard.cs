@@ -706,7 +706,7 @@ namespace SalesInventorySystem.POS
             {
                 mygridview = MydataGridView1;
                 Printing printit = new Printing();
-                printit.printOrders(txtOrderNo.Text, lblwaitername.Text, lbltableno.Text, "MEZANINE", mygridview);
+                printit.printOrdersTest(txtOrderNo.Text, lblwaitername.Text, lbltableno.Text, "MEZANINE", mygridview);
                 //refreshView();
                 display("BatchSalesDetails",txtOrderNo.Text);
                 updateOR();

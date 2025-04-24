@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Net.Sockets;
@@ -17,6 +18,7 @@ namespace SalesInventorySystem
 {
     public partial class RemoteWindow : Form
     {
+        private Dictionary<string, Tuple<string, int>> printerMappings = new Dictionary<string, Tuple<string, int>>();
         delegate void SetTextCallback(string text);
         TcpListener listener;
         TcpClient client;
@@ -120,12 +122,107 @@ namespace SalesInventorySystem
         }
         private void button3_Click(object sender, EventArgs e)
         {
-            string printerIp = "192.168.0.103"; // Replace with your printer's IP address
-            int printerPort = 9100;              // Typically 9100 for raw printing
-            string receiptData = "This is a test receipt.\n\x1D\x56\x41\x03"; // Example with ESC/POS cut command
+            
+        }
 
-            SendRawData(printerIp, printerPort, receiptData);
-            Console.ReadKey();
+        private void LoadPrinterMappings()
+        {
+             
+                      
+                try
+                {
+                    SqlConnection connection = Database.getConnection();
+                    connection.Open();
+                    string query = "SELECT ID, PrinterName, PrinterIPAddress FROM PrinterMapping"; // Adjust query and table/column names
+
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                string ID = reader.GetString(0);
+                                string PrinterName = reader.GetString(1);
+                                string PrinterIPAddress = reader.GetString(2);
+                                printerMappings[PrinterName.ToLower()] = Tuple.Create(PrinterIPAddress, 9100);
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error loading printer mappings: {ex.Message}");
+                    // Handle the error appropriately (e.g., use default mappings or log)
+                }
+            
+
+            //// Example fallback mappings if database loading fails or for categories not in the DB
+            //if (!printerMappings.ContainsKey("beverages"))
+            //{
+            //    printerMappings["beverages"] = Tuple.Create("192.168.0.101", 9100);
+            //}
+            //if (!printerMappings.ContainsKey("grill"))
+            //{
+            //    printerMappings["grill"] = Tuple.Create("192.168.0.102", 9100);
+            //}
+            // Add more fallback mappings as needed
+        }
+
+        public void PrintOrderDynamic(int orderId)
+        {
+            Dictionary<string, StringBuilder> categoryReceipts = new Dictionary<string, StringBuilder>();
+
+            SqlConnection connection = Database.getConnection();
+            connection.Open();
+            string query = "SELECT ItemName, ItemType FROM OrderItems WHERE OrderId = @OrderId"; // Adjust your query
+
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@OrderId", orderId);
+
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            string itemName = reader.GetString(0);
+                            string itemType = reader.GetString(1).ToLower(); // Use lowercase for consistent matching
+                            string itemPrintData = GeneratePrintData(itemName);
+
+                            if (printerMappings.ContainsKey(itemType))
+                            {
+                                if (!categoryReceipts.ContainsKey(itemType))
+                                {
+                                    categoryReceipts[itemType] = new StringBuilder();
+                                    categoryReceipts[itemType].AppendLine($"Order ID: {orderId}");
+                                    categoryReceipts[itemType].AppendLine($"----- {itemType.ToUpper()} -----");
+                                }
+                                categoryReceipts[itemType].AppendLine(itemPrintData);
+                            }
+                            else
+                            {
+                                Console.WriteLine($"No printer mapping found for category '{itemType}' for item '{itemName}'. Not printed.");
+                                // Handle unmapped categories (e.g., log, print to a default printer)
+                            }
+                        }
+                    }
+                }
+
+                // Send the accumulated data for each category to its respective printer
+                foreach (var category in categoryReceipts.Keys)
+                {
+                    if (categoryReceipts[category].Length > ($"Order ID: {orderId}\n----- {category.ToUpper()} -----\n").Length && printerMappings.ContainsKey(category))
+                    {
+                        var printerInfo = printerMappings[category];
+                        SendRawData(printerInfo.Item1, printerInfo.Item2, categoryReceipts[category].ToString());
+                        Console.WriteLine($"{category.ToUpper()} receipt sent for Order ID: {orderId} to {printerInfo.Item1}:{printerInfo.Item2}");
+                    }
+                }
+            
+        }
+
+        private string GeneratePrintData(string itemName)
+        {
+            return itemName; // Replace with your actual formatting
         }
     }
 }
