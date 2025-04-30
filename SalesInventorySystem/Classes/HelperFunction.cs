@@ -357,7 +357,7 @@ namespace SalesInventorySystem
         public static String LastPagePaper()
         {
             string lastpage = "";
-            lastpage = Environment.NewLine + Environment.NewLine + Environment.NewLine + Environment.NewLine + Environment.NewLine + Environment.NewLine + Environment.NewLine + Environment.NewLine + (Char)27 + "i";
+            lastpage = Environment.NewLine + Environment.NewLine + Environment.NewLine + Environment.NewLine + Environment.NewLine + (Char)27 + "i";
             return lastpage;
         }
 

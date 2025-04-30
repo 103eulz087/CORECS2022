@@ -1080,7 +1080,27 @@ namespace SalesInventorySystem
             con.Close();
             return lastdate;
         }
-        
+
+        public static String getMaxRecord(string tableName, string condition, string id)
+        {
+            string lastdate = "";
+            SqlConnection con = getConnection();
+            con.Open();
+            string query = "SELECT TOP(1) MAX(" + id + " ) AS CC FROM " + tableName + " WHERE " + condition + "";
+            SqlCommand com = new SqlCommand(query, con);
+            SqlDataReader reader = com.ExecuteReader();
+            if (reader != null)
+            {
+                while (reader.Read())
+                {
+                    lastdate = reader["CC"].ToString();
+                }
+                reader.Close();
+            }
+            con.Close();
+            return lastdate;
+        }
+
         public static void display(string query, GridControl cont, GridView view)
         {
             SqlConnection con = getConnection();

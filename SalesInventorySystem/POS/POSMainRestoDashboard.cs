@@ -526,7 +526,7 @@ namespace SalesInventorySystem.POS
                 com.Parameters.AddWithValue("@parmcustid", "");
                 com.Parameters.AddWithValue("@parmbranchcode", Login.assignedBranch);
                 com.Parameters.AddWithValue("@parmtranscode", lblTransactionIDCashier.Text);
-                com.Parameters.AddWithValue("@parmbarcode", "");
+                com.Parameters.AddWithValue("@parmbarcode", lblTransactionIDInc.Text);
                 com.Parameters.AddWithValue("@parmprodcode", productcode);
                 com.Parameters.AddWithValue("@parmqty", 1);
                 com.Parameters.AddWithValue("@parmuser", Login.isglobalUserID);
@@ -706,13 +706,14 @@ namespace SalesInventorySystem.POS
             {
                 mygridview = MydataGridView1;
                 Printing printit = new Printing();
-                //printit.printOrders(txtOrderNo.Text, lblwaitername.Text, lbltableno.Text, "MEZANINE", mygridview);
-                printit.PrintOrderToFile(txtOrderNo.Text, lblwaitername.Text, lbltableno.Text, "MEZANINE", mygridview);
+                //printit.printOrdersTest(txtOrderNo.Text, lblwaitername.Text, lbltableno.Text, "MEZANINE", mygridview);
+                //printit.PrintOrderToFile(txtOrderNo.Text, lblwaitername.Text, lbltableno.Text, lblTransactionIDInc.Text, mygridview);
+                printit.PrintOrderToFileTest(txtOrderNo.Text, lblwaitername.Text, lbltableno.Text, lblTransactionIDInc.Text, mygridview);
                 //refreshView();
                 display("BatchSalesDetails",txtOrderNo.Text);
                 updateOR();
-                refreshView();
                 updateTransactionNo();
+                refreshView();
 
                 //int refno = IDGenerator.getIDNumber("BatchSalesSummary", "OrderType<>''", "ReferenceNo", 10000);//getReferenceNumberRestaurant();
                 //txtrefno.Text = refno.ToString();
@@ -743,7 +744,7 @@ namespace SalesInventorySystem.POS
                     Printing printit = new Printing();
                     //printit.ReprintReceiptRestoOneLove(lblTransactionIDInc.Text, txtOrderNo.Text, "", "", "", "", "", "", "", "", "", MydataGridView1, false, "", "", "", "", "", "", "");
                     //printit.printReceiptRestoOneLove(lblTransactionIDInc.Text, txtOrderNo.Text, "", "", "", "", "", "", "", "", "", MydataGridView1, false, "", "", "", "", "", "", "");
-                    printit.printReceiptRestoOneLove(lblTransactionIDInc.Text, txtOrderNo.Text, "", "0", "", "", "", "", "", MydataGridView1, false, "", "", "", "", "",false);
+                    //printit.printReceiptRestoOneLove(lblTransactionIDInc.Text, txtOrderNo.Text, "", "0", "", "", "", "", "", MydataGridView1, false, "", "", "", "", "",false);
 
                     //txtOrderNo.Text = getORNumber();
                 }
