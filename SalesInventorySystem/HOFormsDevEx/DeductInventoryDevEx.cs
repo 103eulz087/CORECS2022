@@ -32,7 +32,7 @@ namespace SalesInventorySystem.HOFormsDevEx
         private void btnAnalyze_Click(object sender, EventArgs e)
         {
             bool isAnalyze = false;
-            isAnalyze = Database.checkifExist("SELECT TOP(1) BranchCode FROM dbo.ReInventoryMonitoring WHERE BranchCode='" + Login.assignedBranch + "' and CAST(DateExecute as date)='" + txtdate.Text + "'");
+            isAnalyze = Database.checkifExist("SELECT TOP(1) BranchCode FROM dbo.ReInventoryMonitoring WHERE BranchCode='" + txtbranch.Text + "' and CAST(DateExecute as date)='" + txtdate.Text + "'");
 
             if (String.IsNullOrEmpty(txtbranch.Text))
             {
@@ -50,7 +50,7 @@ namespace SalesInventorySystem.HOFormsDevEx
                 btnDeduct.Enabled = true;
                 if (!isAnalyze)
                 {
-                    Database.ExecuteQuery("INSERT INTO ReInventoryMonitoring VALUES('" + Login.assignedBranch + "','" + txtdate.Text + "',1,0,'" + Login.Fullname + "',' ','"+Environment.MachineName.ToString()+"') ");
+                    Database.ExecuteQuery("INSERT INTO ReInventoryMonitoring VALUES('" + txtbranch.Text + "','" + txtdate.Text + "',1,0,'" + Login.Fullname + "','"+Environment.MachineName.ToString()+"') ");
                 }
             }
            
@@ -167,8 +167,8 @@ namespace SalesInventorySystem.HOFormsDevEx
         private void btnDeduct_Click(object sender, EventArgs e)
         {
             bool check = Database.checkifExist("SELECT TOP(1) BranchCode FROM dbo.ReInventoryMonitoring " +
-                "WHERE BranchCode='" + Login.assignedBranch + "'  and CAST(DateExecute as date)='" + txtdate.Text + "' and isAnalyze=1 ");
-            var rows = Database.getMultipleQuery("ReInventoryMonitoring", "BranchCode='" + Login.assignedBranch + "' and CAST(DateExecute as date)='" + txtdate.Text + "' ", "isAnalyze,isDeducted");
+                "WHERE BranchCode='" + txtbranch.Text + "'  and CAST(DateExecute as date)='" + txtdate.Text + "' and isAnalyze=1 ");
+            var rows = Database.getMultipleQuery("ReInventoryMonitoring", "BranchCode='" + txtbranch.Text + "' and CAST(DateExecute as date)='" + txtdate.Text + "' ", "isAnalyze,isDeducted");
             string isAnalyze = rows["isAnalyze"].ToString();
             string isDeducted = rows["isDeducted"].ToString();
             if (!check)
@@ -189,14 +189,14 @@ namespace SalesInventorySystem.HOFormsDevEx
             else if (Convert.ToBoolean(isAnalyze) == true && Convert.ToBoolean(isDeducted) == false)
             {
                 //deductInventory();
-                for (int i = 0; i <= gridView1.RowCount - 1; i++)
-                {
-                    if (gridView1.GetRowCellValue(i, "Status").ToString() == "FAILED" || gridView1.GetRowCellValue(i, "Status").ToString() == "NO INVENTORY")
-                    {
-                        XtraMessageBox.Show("You Cant Proceed there is a Failed Inventory Status");
-                        return;
-                    }
-                }
+                //for (int i = 0; i <= gridView1.RowCount - 1; i++)
+                //{
+                //    if (gridView1.GetRowCellValue(i, "Status").ToString() == "FAILED" || gridView1.GetRowCellValue(i, "Status").ToString() == "NO INVENTORY")
+                //    {
+                //        XtraMessageBox.Show("You Cant Proceed there is a Failed Inventory Status");
+                //        return;
+                //    }
+                //}
                 doFIFO();
 
                 progressBarControl1.Position = 80;

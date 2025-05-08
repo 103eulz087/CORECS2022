@@ -348,7 +348,7 @@ namespace SalesInventorySystem.HOFormsDevEx
                 {
                     //gridViewMaster.SetRowCellValue(gridViewMaster.FocusedRowHandle, "AmountPaid", gridViewMaster.GetRowCellValue(gridViewMaster.FocusedRowHandle, "Balance").ToString());
                     HOFormsDevEx.SupplierAddPaymentDevEx asdds = new SupplierAddPaymentDevEx();
-                    asdds.txtshipno.Text = gridViewMaster.GetRowCellValue(gridViewMaster.FocusedRowHandle, "ShipmentNo").ToString();
+                    asdds.txtshipno.Text = gridViewMaster.GetRowCellValue(gridViewMaster.FocusedRowHandle, "ShipmentNo").ToString(); 
                     asdds.txtinvoiceno.Text = gridViewMaster.GetRowCellValue(gridViewMaster.FocusedRowHandle, "InvoiceNo").ToString();
                     asdds.txtinvoicedate.Text = gridViewMaster.GetRowCellValue(gridViewMaster.FocusedRowHandle, "InvoiceDate").ToString();
                     asdds.txtactualcost.Text = gridViewMaster.GetRowCellValue(gridViewMaster.FocusedRowHandle, "ActualCost").ToString();
@@ -483,6 +483,7 @@ namespace SalesInventorySystem.HOFormsDevEx
             populate();
            
             gridViewMaster.Columns[0].Visible = false;
+            gridViewMaster.Columns[1].Visible = false;
             Classes.DevXGridViewSettings.ShowFooterTotal(gridViewMaster, "ActualCost");
             //if (radioButtonExpense.Checked == true)
             //{
@@ -492,13 +493,15 @@ namespace SalesInventorySystem.HOFormsDevEx
             if (radioButtonPurchase.Checked == true)
             {
                 Classes.DevXGridViewSettings.ShowFooterTotal(gridViewMaster, "AmountPaid");
-                Classes.DevXGridViewSettings.ShowFooterTotal(gridViewMaster, "ActualCost");
+                //Classes.DevXGridViewSettings.ShowFooterTotal(gridViewMaster, "ActualCost");
                 //Classes.DevXGridViewSettings.ShowFooterTotal(gridViewMaster, "Balance");
                 Classes.DevXGridViewSettings.ShowFooterTotal(gridViewMaster, "DiscountAmount");
                 Classes.DevXGridViewSettings.ShowFooterTotal(gridViewMaster, "EWTAmount");
                 Classes.DevXGridViewSettings.ShowFooterTotal(gridViewMaster, "ReturnAllowances");
                 //Classes.DevXGridViewSettings.ShowFooterTotal(gridViewMaster, "OffsetAmount");
             }
+            else { 
+}
         }
 
         void printVoucher()

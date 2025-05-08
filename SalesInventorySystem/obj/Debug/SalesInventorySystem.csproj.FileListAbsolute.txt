@@ -10939,3 +10939,4 @@ D:\Repos\CORECS2022\SalesInventorySystem\bin\Debug\es\DevExpress.Diagram.v19.2.C
 D:\Repos\CORECS2022\SalesInventorySystem\bin\Debug\ja\DevExpress.Diagram.v19.2.Core.resources.dll
 D:\Repos\CORECS2022\SalesInventorySystem\bin\Debug\ru\DevExpress.Diagram.v19.2.Core.resources.dll
 D:\Repos\CORECS2022\SalesInventorySystem\obj\Debug\SalesInventorySystem.csproj.CopyComplete
+D:\Repos\CORECS2022\SalesInventorySystem\obj\Debug\SalesInventorySystem.POS.POSRestoTables.resources

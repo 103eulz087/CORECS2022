@@ -63,7 +63,7 @@ namespace SalesInventorySystem.Reporting
                 carrep.gridView1.GroupSummary.Clear();
                 carrep.gridView1.Columns.Clear();
                 carrep.gridControl1.DataSource = null;
-                Database.display("SELECT DateReceived,Description,SUM(Quantity) as Quantity,Cost FROm TempInventoryBatchUpload WHERE ShipmentNo='" + BatchProcessMasterDevEx.shipmentno + "' and Branch='" + Login.assignedBranch + "' GROUP BY DateReceived,Description,Cost", carrep.gridControl1, carrep.gridView1);
+                Database.display("SELECT DateReceived,Description,SUM(Quantity) as Quantity,Cost FROm TempInventoryBatchUpload WHERE ShipmentNo='" + BatchProcessMasterDevEx.shipmentno + "' GROUP BY DateReceived,Description,Cost", carrep.gridControl1, carrep.gridView1);
                  GridView viewz = gridControl1.FocusedView as GridView;
                 viewz.SortInfo.ClearAndAddRange(new GridColumnSortInfo[] {
                 new GridColumnSortInfo(viewz.Columns["Description"],DevExpress.Data.ColumnSortOrder.Ascending)
@@ -85,7 +85,7 @@ namespace SalesInventorySystem.Reporting
                 carrep.gridView1.GroupSummary.Clear();
                 carrep.gridView1.Columns.Clear();
                 carrep.gridControl1.DataSource = null;
-                Database.display("SELECT DateReceived,Barcode,PalletNo,Description,Quantity,Cost FROm TempInventoryBatchUpload WHERE ShipmentNo='" + shipno + "' and Branch='" + Login.assignedBranch + "' ORDER BY Description,PalletNo,Cost", carrep.gridControl1, carrep.gridView1);
+                Database.display("SELECT DateReceived,Barcode,PalletNo,Description,Quantity,Cost FROm TempInventoryBatchUpload WHERE ShipmentNo='" + shipno + "' ORDER BY Description,PalletNo,Cost", carrep.gridControl1, carrep.gridView1);
                 GridView view = gridControl1.FocusedView as GridView;
                 view.SortInfo.ClearAndAddRange(new GridColumnSortInfo[] { 
                 new GridColumnSortInfo(view.Columns["Description"],DevExpress.Data.ColumnSortOrder.Ascending),
@@ -112,7 +112,7 @@ namespace SalesInventorySystem.Reporting
                 carrep.gridView1.GroupSummary.Clear();
                 carrep.gridView1.Columns.Clear();
                 carrep.gridControl1.DataSource = null;
-                Database.display("SELECT DateReceived,Description,SUM(Quantity) as Quantity,Cost FROm TempInventoryBatchUpload WHERE ShipmentNo='" + BatchProcessMasterDevEx.shipmentno + "' and Branch='" + Login.assignedBranch + "' and isSource=1 GROUP BY DateReceived,Description,Cost", carrep.gridControl1, carrep.gridView1);
+                Database.display("SELECT DateReceived,Description,SUM(Quantity) as Quantity,Cost FROm TempInventoryBatchUpload WHERE ShipmentNo='" + BatchProcessMasterDevEx.shipmentno + "' and isSource=1 GROUP BY DateReceived,Description,Cost", carrep.gridControl1, carrep.gridView1);
                 GridView viewz = carrep.gridControl1.FocusedView as GridView;
                 viewz.SortInfo.ClearAndAddRange(new GridColumnSortInfo[] {
                 new GridColumnSortInfo(viewz.Columns["Description"],DevExpress.Data.ColumnSortOrder.Ascending)
@@ -131,7 +131,6 @@ namespace SalesInventorySystem.Reporting
                 Database.display("SELECT DateReceived,Barcode,PalletNo,Description,Quantity,FORMAT(Cost, 'N', 'en-us') as Cost,FORMAT((Quantity*Cost), 'N', 'en-us')  as TotalCost " +
                     "FROm TempInventoryBatchUpload " +
                     "WHERE ShipmentNo='" + shipmentno + "' " +
-                    "and Branch='" + Login.assignedBranch + "' " +
                     "and isSource=1 ORDER BY Description,PalletNo,Cost", carrep.gridControl1, carrep.gridView1);
                 GridView view = gridControl1.FocusedView as GridView;
                 view.SortInfo.ClearAndAddRange(new GridColumnSortInfo[] {

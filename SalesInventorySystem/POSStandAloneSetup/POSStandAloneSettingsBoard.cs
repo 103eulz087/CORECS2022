@@ -31,9 +31,11 @@ namespace SalesInventorySystem.POSStandAloneSetup
 
         private void button3_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("This feature is not allowed.. Please Contact your Product Manager");
-            //HOForms.ProductSettings prodsets = new HOForms.ProductSettings();
+            //  MessageBox.Show("This feature is not allowed.. Please Contact your Product Manager");
+            //HOForms.ProductSettings prodsets = new HOForms.ProductSettings(); ProductsDevEx
             //prodsets.ShowDialog(this);
+            HOFormsDevEx.ProductsDevEx prodsets = new HOFormsDevEx.ProductsDevEx();
+            prodsets.ShowDialog(this);
         }
 
         private void button6_Click(object sender, EventArgs e)

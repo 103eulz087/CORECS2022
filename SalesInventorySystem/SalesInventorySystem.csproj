@@ -4097,6 +4097,9 @@
     <EmbeddedResource Include="POS\POSRestoTableOption.resx">
       <DependentUpon>POSRestoTableOption.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="POS\POSRestoTables.resx">
+      <DependentUpon>POSRestoTables.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="POS\POSScreenMirror.resx">
       <DependentUpon>POSScreenMirror.cs</DependentUpon>
     </EmbeddedResource>

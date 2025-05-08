@@ -466,7 +466,7 @@ namespace SalesInventorySystem.POS
 
         private void button13_Click(object sender, EventArgs e)
         {
-            if (raddinein.Checked == true)
+            if (raddinein.Checked == true && lbltableno.Text == "") // && MydataGridView1.RowCount == 0
             {
                 POSRestoTables tbles = new POSRestoTables();
                 tbles.ShowDialog(this);
@@ -480,6 +480,11 @@ namespace SalesInventorySystem.POS
                     }
                     lblwaitername.Text = POSRestoTables.waiterid;
                 }
+            }
+            else
+            {
+                XtraMessageBox.Show("There are items that need to be save first");
+                return;
             }
 
 
@@ -763,11 +768,35 @@ namespace SalesInventorySystem.POS
 
         }
 
-
+        //radiobutton takeout
         private void radioButton6_CheckedChanged(object sender, EventArgs e)
         {
-
-            if (radtkeout.Checked == true)
+            //check if naay items sa grid, then e check kng ni exist naba cya sa salessummary with tableno.. 
+            //bool ok = false;
+            //ok = Database.checkifExist($"SELECT TOP(1) ReferenceNo FROM dbo.BatchSalesSummary WHERE ReferenceNo='{txtOrderNo.Text}' AND BranchCode='{Login.assignedBranch}' AND MachineUsed='{Environment.MachineName}' AND TableNo <> '' ");
+            string tableno = Database.getSingleQuery($"SELECT TableNo FROM dbo.BatchSalesSummary WHERE ReferenceNo='{txtOrderNo.Text}' AND BranchCode='{Login.assignedBranch}' AND MachineUsed='{Environment.MachineName}' AND TableNo <> '' ","TableNo");
+            if(radtkeout.Checked == true && MydataGridView1.RowCount > 0 && !String.IsNullOrEmpty(tableno))
+            {
+               
+                XtraMessageBox.Show("There are items already exists!..please save it first before you change the order type");
+                raddinein.Checked = true;
+                lbltableno.Text = tableno;
+                btnsave.Visible = true;
+                btnpayment.Visible = false;
+                btnTAbles.Visible = true;
+                paneltable.Visible = true;
+                return;
+            }
+            else if (String.IsNullOrEmpty(tableno))
+            {
+                //newly assigned tableno
+                lbltableno.Text = "";
+                btnsave.Visible = false;
+                btnpayment.Visible = true;
+                btnTAbles.Visible = false;
+                paneltable.Visible = false;
+            }
+            else //if (radtkeout.Checked == true)
             {
 
                 lbltableno.Text = "";
@@ -783,6 +812,7 @@ namespace SalesInventorySystem.POS
 
         }
 
+        //radio button DINEIN
         private void radioButton4_CheckedChanged(object sender, EventArgs e)
         {
             if (raddinein.Checked == true)
@@ -864,7 +894,7 @@ namespace SalesInventorySystem.POS
                 com.Parameters.AddWithValue("@parmseqnum", MydataGridView1[0, MydataGridView1.CurrentRow.Index].Value.ToString());
                 com.Parameters.AddWithValue("@parmqty", MydataGridView1[3, MydataGridView1.CurrentRow.Index].Value.ToString());
                 com.Parameters.AddWithValue("@parmamount", MydataGridView1[4, MydataGridView1.CurrentRow.Index].Value.ToString());
-                com.Parameters.AddWithValue("@parmuser", AuthorizedConfirmationFrm.isglobalUserID);
+                com.Parameters.AddWithValue("@parmuser", Login.isglobalUserID);
                 com.Parameters.AddWithValue("@parmmachinename", Environment.MachineName.ToString());
                 com.CommandType = CommandType.StoredProcedure;
                 com.CommandText = query;
@@ -927,16 +957,26 @@ namespace SalesInventorySystem.POS
 
         private void btndineinbilling_Click(object sender, EventArgs e)
         {
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form.GetType() == typeof(POSRestoDineInBilling))
-                {
-                    form.Activate();
-                    return;
-                }
-            }
+            //foreach (Form form in Application.OpenForms)
+            //{
+            //    if (form.GetType() == typeof(POSRestoDineInBilling))
+            //    {
+            //        form.Activate();
+            //        return;
+            //    }
+            //}
             POSRestoDineInBilling pcusatfsmr = new POSRestoDineInBilling();
-            pcusatfsmr.Show();
+            pcusatfsmr.ShowDialog(this);
+            if (POSRestoDineInBilling.isClosed == true)
+            {
+                raddinein.Checked = true;
+                POSRestoDineInBilling.isClosed = false;
+                pcusatfsmr.Dispose();
+                lbltableno.Text = "";
+                refreshView();
+                updateOR();
+                updateTransactionNo();
+            }
 
             //POSRestoFinalBilling billing = new POSRestoFinalBilling();
             //billing.Show();

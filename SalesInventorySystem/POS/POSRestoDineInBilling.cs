@@ -16,7 +16,7 @@ namespace SalesInventorySystem.POS
     public partial class POSRestoDineInBilling : DevExpress.XtraEditors.XtraForm
     {
         string invno = "";
-        public static bool isClosed = false, ismerge = false;
+        public static bool isClosed = false, ismerge = false,isdone=false;
         string amount = "", num = "", paymenttype = "";
         public static string disctype = "", discname = "", discidno = "", discamount = "", discremarks = "";
         public static bool transactiondone = false, isSeniorDiscount = false, isPwdDiscount = false, isOthersDiscount = false, isOnetimeDiscount = false;
@@ -42,7 +42,7 @@ namespace SalesInventorySystem.POS
         void populateTables()
         {
             //Database.displayCheckedListBoxItemsDevEx("SELECT TableNo FROM OrderSummary where isFloat=1 and Status='Pending' and OrderType='DINE-IN'", "TableNo", checkedListBoxControl1,Database.getCustomizeConnection());
-            Database.displayCheckedListBoxItemsDevEx("SELECT TableNo FROM dbo.BatchSalesSummary where isFloat=1 and Status='Pending' and OrderType='DINE-IN' And BranchCode='" + Login.assignedBranch + "' and MachineUsed='" + Environment.MachineName.ToString() + "' ", "TableNo", checkedListBoxControl1);
+            Database.displayCheckedListBoxItemsDevEx("SELECT TableNo FROM dbo.BatchSalesSummary where isFloat=1 and Status='Pending' and OrderType='DINE-IN' And BranchCode='" + Login.assignedBranch + "' and MachineUsed='" + Environment.MachineName.ToString() + "' AND CAST(TransDate as date)='"+DateTime.Now.ToShortDateString()+"' ", "TableNo", checkedListBoxControl1);
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -679,9 +679,8 @@ namespace SalesInventorySystem.POS
                         POS.POSHistoryCaption.transactiondone = false;
                         //updateOR();
                         refreshView();
-
-
                         updateTransactionNo();
+                        
 
                         POS.POSConfirmPaymentResto.transactiondone = false;
 
@@ -693,9 +692,13 @@ namespace SalesInventorySystem.POS
                         posconfirm.Dispose();
                         //setStandByText();
                         //txtdiscount.Text = "0";
+                       
                     }
-
+                    isdone = true;
+                    isClosed = true;
+                    this.Close();
                 }
+               
             }
             catch (SqlException ex)
             {
