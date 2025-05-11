@@ -19,7 +19,7 @@ namespace SalesInventorySystem.Orders
     public partial class ViewBranchOrderSTS : DevExpress.XtraEditors.XtraForm
     {
         string company = Database.getSingleQuery("CompanyProfile", "CompanyName <> ''", "CompanyName");
-        public static string branchno, ponumber, effectivedate, refno = "", custname = "";
+        public static string branchno, ponumber, effectivedate, refno = "", custname = "",devno="";
         public ViewBranchOrderSTS()
         {
             InitializeComponent();
@@ -44,7 +44,7 @@ namespace SalesInventorySystem.Orders
 
         private void processThisOrderToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            openBranchOrder("STS");
+            
         }
 
         private void gridView2_DoubleClick(object sender, EventArgs e)
@@ -260,6 +260,11 @@ namespace SalesInventorySystem.Orders
             
         }
 
+        private void singleModeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            openBranchOrder("STS");
+        }
+
         private void tabfilter()
         {
             if (tabMain.SelectedTabPage.Equals(tabForApproval))
@@ -278,6 +283,11 @@ namespace SalesInventorySystem.Orders
                 Database.display("SELECT * FROM view_ForDeliverySTS WHERE Status='FOR DELIVERY' and DateAdded >= '" + datefromfordev.Text + "' and DateAdded <= '" + datetofordev.Text + "'", gridControl2, gridView2);
                 gridView2.Focus();
             }
+        }
+
+        private void batchModeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            openBranchOrderBatchMode("STS");
         }
 
         void display()
@@ -341,7 +351,7 @@ namespace SalesInventorySystem.Orders
                 addbrorder.txtrefno.Text = id;//IDGenerator.getReferenceNumber();
                 addbrorder.txteffectivedate.Text = effectivedate;
 
-                Database.display("SELECT SeqNo,PONumber,Category,ProductCode,Barcode,ProductName,Barcode,Qty,Units,Remarks FROM view_TransferOrderDetails WHERE PONumber='" + addbrorder.txtponum.Text + "'", addbrorder.gridControl1, addbrorder.gridView1);//
+                Database.display("SELECT * FROM view_TransferOrderDetails WHERE PONumber='" + addbrorder.txtponum.Text + "'", addbrorder.gridControl1, addbrorder.gridView1);//
                 Database.display("SELECT SeqNo,ProductNo,ProductName,BarcodeNo,QtyDelivered,Status,ProcessedBy FROM DeliveryDetails WHERE DeliveryNo='" + addbrorder.txtdevno.Text + "' AND PONumber='" + addbrorder.txtponum.Text + "' and Status = 'PENDING'", addbrorder.gridControl2, addbrorder.gridView2);
                 //addbrorder.gridView2.Columns["SequenceNo"].Visible = false;
                 addbrorder.gridView1.Columns["PONumber"].Visible = false;
@@ -369,5 +379,29 @@ namespace SalesInventorySystem.Orders
             }
         }
 
+        void openBranchOrderBatchMode(string type)
+        {
+            AddBranchOrderSTSBatchMode addbrorder = new AddBranchOrderSTSBatchMode();
+            addbrorder.Show();
+            
+            branchno = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "InitiatingBranch").ToString();
+            ponumber = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "PONumber").ToString();
+            devno = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "PONumber").ToString();
+            string id = IDGenerator.getIDNumberSP("sp_GetReferenceNumber", "ReferenceNumber");
+            addbrorder.txtbrcode.Text = branchno;
+            addbrorder.txtponum.Text = ponumber;
+            addbrorder.txtdevno.Text = IDGenerator.getIDNumberSP("sp_GetDeliveryNumber", "DeliveryNumber");
+            addbrorder.txtrefno.Text = id;//IDGenerator.getReferenceNumber();
+            Database.display("SELECT * FROM view_TransferOrderDetailsSTS WHERE PONumber='" + addbrorder.txtponum.Text + "'", addbrorder.gridControl1, addbrorder.gridView1);//
+            addbrorder.gridView1.Columns["PONumber"].Visible = false;
+            addbrorder.gridView1.ExpandAllGroups();
+            addbrorder.gridView1.Columns["SeqNo"].Summary.Add(DevExpress.Data.SummaryItemType.Count, "SeqNo", "{0:n2}");
+            if (Orders.AddBranchOrderSTSBatchMode.isdone == true)
+            {
+                Orders.AddBranchOrderSTSBatchMode.isdone = false;
+                addbrorder.Dispose();
+                display();
+            }
+        }
     }
 }
