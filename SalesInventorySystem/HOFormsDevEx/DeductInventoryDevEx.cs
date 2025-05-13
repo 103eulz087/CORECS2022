@@ -208,7 +208,7 @@ namespace SalesInventorySystem.HOFormsDevEx
                 //    "and Available > 0 " +
                 //    "AND isStock=1 " +
                 //    "GROUP BY Branch,Product,Description", gridControl1, gridView1);
-               displayInventoryUnitActivity();
+                displayInventoryUnitActivity();
                 DateTime dt = new DateTime();
                 dt = Convert.ToDateTime(txtdate.Text);
                 string filepath = "C:\\ENDOFDAY_INVENTORY_REPORTS\\" + dt.ToString("yyyyMMdd") + "\\";
