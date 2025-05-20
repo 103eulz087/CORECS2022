@@ -319,7 +319,7 @@ namespace SalesInventorySystem.HOFormsDevEx
         private void display()
         {
             Database.display("SELECT PalletNo,Product,Description,Barcode,Quantity,Cost,IsVat,(Quantity*Cost) as TotalCost " +
-                "FROM TempInventory WHERE ShipmentNo='" + txtshipmentno.Text + "' " +
+                "FROM dbo.TempInventory WHERE ShipmentNo='" + txtshipmentno.Text + "' " +
                 "ORDER BY SequenceNumber DESC", gridControl1, gridView1);
         }
 

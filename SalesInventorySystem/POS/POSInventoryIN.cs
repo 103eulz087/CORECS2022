@@ -23,7 +23,7 @@ namespace SalesInventorySystem.POS
 
         void addInventory()
         {
-            Database.ExecuteQuery("INSERT INTO dbo.TempInventoryIN (ID,BranchCode,DateReceived,ExpiryDate,ProductCode,Description,Barcode,Cost,Quantity,isVat,isDone,DateEncode,EncodeBy) " +
+            Database.ExecuteQuery("INSERT INTO dbo.TempInventoryIN (ID,Branch,DateReceived,ExpiryDate,Product,Description,Barcode,Quantity,Cost,isVat,isDone,DateEncode,EncodeBy) " +
                 "VALUES('" + txtbatchid.Text + "'" +
                 $",'{txtbrcode.Text}'" +
                 $",'{txtdatein.Text}'" +
@@ -31,8 +31,8 @@ namespace SalesInventorySystem.POS
                 $",'{pcode}'" +
                 $",'{desc}'" +
                 $",'{barcode}'" +
-                $",'{txtcost.Text}'" +
                 $",'{txtqty.Text}'" +
+                $",'{txtcost.Text}'" +
                 $",'{isvat}'" +
                 $",'0'" +
                 $",'{DateTime.Now.ToShortDateString()}'" +
@@ -143,8 +143,8 @@ namespace SalesInventorySystem.POS
         private void btncancel_Click(object sender, EventArgs e)
         {
             Database.ExecuteQuery("DELETE FROM dbo.TempInventoryIN WHERE ID='" + gridView2.GetRowCellValue(gridView2.FocusedRowHandle, "ID").ToString() + "' " +
-                "AND BranchCode='" + gridView2.GetRowCellValue(gridView2.FocusedRowHandle, "BranchCode").ToString() + "' " +
-                "AND ProductCode='" + gridView2.GetRowCellValue(gridView2.FocusedRowHandle, "ProductCode").ToString() + "' " +
+                "AND Branch='" + gridView2.GetRowCellValue(gridView2.FocusedRowHandle, "Branch").ToString() + "' " +
+                "AND Product='" + gridView2.GetRowCellValue(gridView2.FocusedRowHandle, "Product").ToString() + "' " +
                 "AND Quantity='" + gridView2.GetRowCellValue(gridView2.FocusedRowHandle, "Quantity").ToString() + "' " +
                 "AND DateEncode='" + gridView2.GetRowCellValue(gridView2.FocusedRowHandle, "DateEncode").ToString() + "' " +
                 "AND EncodeBy='" + gridView2.GetRowCellValue(gridView2.FocusedRowHandle, "EncodeBy").ToString() + "'", "Successfully Deleted");
@@ -184,7 +184,7 @@ namespace SalesInventorySystem.POS
                 devrcptfrm.PaperKind = System.Drawing.Printing.PaperKind.A4;
 
                 gridView2.Columns["ID"].Visible = false;
-                gridView2.Columns["BranchCode"].Visible = false;
+                gridView2.Columns["Branch"].Visible = false;
                 gridView2.Columns["Barcode"].Visible = false;
                 gridView2.Columns["Cost"].Visible = false;
                 gridView2.Columns["isVat"].Visible = false;

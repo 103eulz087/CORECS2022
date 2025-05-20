@@ -113,17 +113,23 @@ namespace SalesInventorySystem.Orders
         {
 
             string branchcode = gridView2.GetRowCellValue(gridView2.FocusedRowHandle, "BranchCode").ToString();
+            string initiatingbranch = gridView2.GetRowCellValue(gridView2.FocusedRowHandle, "InitiatingBranch").ToString();
             string effectivitydate = gridView2.GetRowCellValue(gridView2.FocusedRowHandle, "EffectivityDate").ToString();
             string requestedby = gridView2.GetRowCellValue(gridView2.FocusedRowHandle, "PreparedBy").ToString();
           
             string ponum = gridView2.GetRowCellValue(gridView2.FocusedRowHandle, "PONumber").ToString();
+            string devno = gridView2.GetRowCellValue(gridView2.FocusedRowHandle, "DeliveryNo").ToString();
             StocksOrder devrepfrm = new StocksOrder();
             devrepfrm.txtpono.Text = ponum;
+            devrepfrm.txtdevno.Text = devno;
             devrepfrm.txtbranch.Text = branchcode;
+            devrepfrm.txtbranchdestination.Text = initiatingbranch;
             devrepfrm.txteffectivitydate.Text = Convert.ToDateTime(effectivitydate).ToShortDateString();
             devrepfrm.txtpreparedby.Text = requestedby;
             analyze("spr_STSSummary", ponum, devrepfrm.gridControl1, devrepfrm.gridView1);
             devrepfrm.Show();
+            devrepfrm.gridView1.Columns["SeqNo"].Visible = false;
+            devrepfrm.gridView1.Columns["ProductCode"].Visible = false;
 
             GridView view = devrepfrm.gridControl1.FocusedView as GridView;
             view.SortInfo.ClearAndAddRange(new GridColumnSortInfo[] {
@@ -134,18 +140,12 @@ namespace SalesInventorySystem.Orders
         private void printDeliveryReceiptToolStripMenuItem_Click(object sender, EventArgs e)
         {
             showSTSDetails();
-            //string refno1 = gridView2.GetRowCellValue(gridView2.FocusedRowHandle, "PONumber").ToString();
-            //HOForms.ViewForDeliveryDetails viewdet = new HOForms.ViewForDeliveryDetails();
-            //viewdet.Show();
-            //Database.display("SELECT ProductName,BarcodeNo,QtyDelivered,FORMAT(SellingPrice, 'N','en-US')  AS Price,FORMAT((QtyDelivered*SellingPrice), 'N','en-US') AS Amount,QtyDelivered AS ActualQtyDelivered,ProductNo FROM view_DeliveryReciept WHERE PONumber = '" + refno1 + "'", viewdet.gridControl4, viewdet.gridView4);
-            //viewdet.txtpono.Text = refno1;
-            //viewdet.gridView4.Columns["Amount"].Summary.Add(DevExpress.Data.SummaryItemType.Sum, "Amount", "{0:n2}");
         }
 
          
         private void simpleButton1_Click(object sender, EventArgs e)
         {
-            Database.display("SELECT * FROM view_BranchOrderSTS WHERE isProcess = '0' AND Status='APPROVED' and EffectivityDate >= '" + datefrompending.Text + "' and EffectivityDate <= '" + datetopending.Text + "' and BranchCode='" + Login.assignedBranch + "'", gridControl1, gridView1);
+            Database.display("SELECT * FROM view_BranchOrderSTS WHERE isProcess = '0' AND Status='APPROVED' and EffectivityDate >= '" + datefrompending.Text + "' and EffectivityDate <= '" + datetopending.Text + "' and BranchCode='" + Login.assignedBranch + "' Order by PONumber DESC", gridControl1, gridView1);
             gridView1.Focus();
         }
 
@@ -269,7 +269,7 @@ namespace SalesInventorySystem.Orders
         {
             if (tabMain.SelectedTabPage.Equals(tabForApproval))
             {
-                Database.display("SELECT * FROM view_BranchOrderSTS WHERE isProcess = '0' AND Status='APPROVED' and DateApproved >= '" + datefrompending.Text + "' and DateApproved <= '" + datetopending.Text + "'", gridControl1, gridView1);
+                Database.display("SELECT * FROM view_BranchOrderSTS WHERE isProcess = '0' AND Status='APPROVED' and DateApproved >= '" + datefrompending.Text + "' and DateApproved <= '" + datetopending.Text + "' ORDER BY PONumber DESC", gridControl1, gridView1);
                 gridView1.Focus();
             }
            
@@ -381,21 +381,22 @@ namespace SalesInventorySystem.Orders
 
         void openBranchOrderBatchMode(string type)
         {
-            AddBranchOrderSTSBatchMode addbrorder = new AddBranchOrderSTSBatchMode();
-            addbrorder.Show();
-            
+            string id = IDGenerator.getIDNumberSP("sp_GetReferenceNumber", "ReferenceNumber");
             branchno = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "InitiatingBranch").ToString();
             ponumber = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "PONumber").ToString();
             devno = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "PONumber").ToString();
-            string id = IDGenerator.getIDNumberSP("sp_GetReferenceNumber", "ReferenceNumber");
+
+            AddBranchOrderSTSBatchMode addbrorder = new AddBranchOrderSTSBatchMode();
             addbrorder.txtbrcode.Text = branchno;
             addbrorder.txtponum.Text = ponumber;
             addbrorder.txtdevno.Text = IDGenerator.getIDNumberSP("sp_GetDeliveryNumber", "DeliveryNumber");
             addbrorder.txtrefno.Text = id;//IDGenerator.getReferenceNumber();
-            Database.display("SELECT * FROM view_TransferOrderDetailsSTS WHERE PONumber='" + addbrorder.txtponum.Text + "'", addbrorder.gridControl1, addbrorder.gridView1);//
+            //Database.display("SELECT * FROM view_TransferOrderDetailsSTS WHERE PONumber='" + addbrorder.txtponum.Text + "'", addbrorder.gridControl1, addbrorder.gridView1);//
+            Database.display($"SELECT * FROM dbo.funcview_TransferOrderDetailsSTS('{Login.assignedBranch}') WHERE PONumber='{addbrorder.txtponum.Text}' ", addbrorder.gridControl1, addbrorder.gridView1);//
             addbrorder.gridView1.Columns["PONumber"].Visible = false;
             addbrorder.gridView1.ExpandAllGroups();
             addbrorder.gridView1.Columns["SeqNo"].Summary.Add(DevExpress.Data.SummaryItemType.Count, "SeqNo", "{0:n2}");
+            addbrorder.ShowDialog(this);
             if (Orders.AddBranchOrderSTSBatchMode.isdone == true)
             {
                 Orders.AddBranchOrderSTSBatchMode.isdone = false;

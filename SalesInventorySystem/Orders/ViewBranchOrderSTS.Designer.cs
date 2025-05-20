@@ -657,7 +657,7 @@
             this.tabForDelivery.Controls.Add(this.groupBox1);
             this.tabForDelivery.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("tabForDelivery.ImageOptions.Image")));
             this.tabForDelivery.Name = "tabForDelivery";
-            this.tabForDelivery.Size = new System.Drawing.Size(1014, 611);
+            this.tabForDelivery.Size = new System.Drawing.Size(1014, 527);
             this.tabForDelivery.Text = "For Delivery";
             // 
             // gridControl2
@@ -666,7 +666,7 @@
             this.gridControl2.Location = new System.Drawing.Point(0, 50);
             this.gridControl2.MainView = this.gridView2;
             this.gridControl2.Name = "gridControl2";
-            this.gridControl2.Size = new System.Drawing.Size(1014, 561);
+            this.gridControl2.Size = new System.Drawing.Size(1014, 477);
             this.gridControl2.TabIndex = 7;
             this.gridControl2.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView2,

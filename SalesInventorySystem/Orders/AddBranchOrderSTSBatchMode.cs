@@ -212,5 +212,25 @@ namespace SalesInventorySystem.Orders
             }
         }
 
+        private void gridView1_CellValueChanged(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
+        {
+            if (e.Column.FieldName == "Qty")
+            {
+                double qtyrequested = Convert.ToDouble(gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "QtyRequested").ToString());
+                double qtytosend = Convert.ToDouble(gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "Qty").ToString());
+                double qtyavailable = Convert.ToDouble(gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "AvailableInv").ToString());
+                if(qtytosend > qtyavailable)
+                {
+                    gridView1.SetRowCellValue(gridView1.FocusedRowHandle, "Qty", qtyrequested.ToString());
+                    XtraMessageBox.Show("Greater than Available Inventory Quantity!");
+                    return;
+                }
+                else if(qtytosend > qtyrequested)
+                {
+                    bool confirm = HelperFunction.ConfirmDialog("You are about to send above quantity that requested", "Greater than Quantity Requested");
+                    if (!confirm) { gridView1.SetRowCellValue(gridView1.FocusedRowHandle, "Qty", qtyrequested.ToString());  }
+                }
+            }
+        }
     }
 }

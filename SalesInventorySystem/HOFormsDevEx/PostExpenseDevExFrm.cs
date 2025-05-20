@@ -126,8 +126,8 @@ namespace SalesInventorySystem.HOFormsDevEx
 
                         //int ledgeseqno = Database.getLastID("SupplierLedger", "SupplierID='" + txtvendor.Text + "'", "TRN_SEQ_NO")+1;
                         //int lastexpseqno = Database.getLastID("SupplierLedger", "SupplierID='" + txtvendor.Text + "'", "TRN_SEQ_NO") + 1;
-                        //Database.ExecuteQuery("INSERT INTO ExpenseMaster VALUES ('" + ctr + "','" + branchcode + "','" + txtvendor.Text + "','" + txtrefno.Text + "','" + txtinvoiceno.Text + "','" + expname + "','" + txtexpdate.Text + "','" + amount + "','" + particulars + "','UNPAID','" + amount + "',0,0,0,0,0)");
-                        Database.ExecuteQuery($"INSERT INTO ExpenseDetails VALUES('{ctr}','{branchcode}','{txtrefno.Text}','{txtinvoiceno.Text}','{expname}','{particulars}','{amount}')");
+                        Database.ExecuteQuery("INSERT INTO ExpenseMaster VALUES ('" + ctr + "','" + branchcode + "','" + supplierkey + "','" + txtrefno.Text + "','" + txtinvoiceno.Text + "','" + expname + "','" + txtexpdate.Text + "','" + amount + "','" + particulars + "','UNPAID','" + amount + "',0,0,0,0,0)");
+                        //Database.ExecuteQuery($"INSERT INTO ExpenseDetails VALUES('{ctr}','{branchcode}','{txtrefno.Text}','{txtinvoiceno.Text}','{expname}','{particulars}','{amount}')");
                         //Database.ExecuteQuery("INSERT INTO SupplierLedger VALUES ('" + supplierkey + "','" + txtvendor.Text + "','" + txtexpdate.Text + "','" + particulars + "','EXP','" + DateTime.Now.ToString() + "','" + txtinvoiceno.Text + "',0,0,'" + amount + "',0,'" + Login.Fullname + "','*',0,'UNPAID',0,' ','" + ledgeseqno + "')");
                         ctr += 1;
                     }

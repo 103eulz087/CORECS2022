@@ -48,14 +48,7 @@ namespace SalesInventorySystem.HOFormsDevEx
             con.Open();
             try
             {
-                //string sp = "sp_FiFoMapping";
-                //SqlCommand com = new SqlCommand(sp, con);
-                //com.Parameters.AddWithValue("@parmtransdate", txtdatein.Text);
-                //com.Parameters.AddWithValue("@parmbranchcode", txtbrcode.Text);
-                //com.Parameters.AddWithValue("@parmprodcode", pcode);
-                //com.Parameters.AddWithValue("@parmqty", txtqty.Text);
-                //com.Parameters.AddWithValue("@parmoption", "1");
-                string sp = "sp_FiFoWithOptions";
+                string sp = "sp_FiFoMappingStockOut";
                 SqlCommand com = new SqlCommand(sp, con);
                 com.Parameters.AddWithValue("@parmorderno", txtbatchid.Text);
                 com.Parameters.AddWithValue("@parmtransdate", txtdatein.Text);
