@@ -51,7 +51,7 @@ namespace SalesInventorySystem.POS
 
         private void button15_Click(object sender, EventArgs e)
         {
-            existingor = Database.getSingleQuery("BatchSalesSummary", "TableNo='" + POSRestoTables.buttonname + "' And BranchCode='"+Login.assignedBranch+"' And MachineUsed='"+Environment.MachineName+"' And Status<>'SOLD' ", "ReferenceNo");
+            existingor = Database.getSingleQuery("BatchSalesSummary", "TableNo='" + POSRestoTables.buttonname + "' And BranchCode='"+Login.assignedBranch+"' And MachineUsed='"+Environment.MachineName+ "' And isVoid=0 And Status<>'SOLD' AND CAST(TransDate as date)='" + DateTime.Now.ToShortDateString() + "' ", "ReferenceNo");
             iseditOrder = true;
             isdone = true;
             status = "AddOrder";

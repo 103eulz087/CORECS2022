@@ -2030,6 +2030,12 @@
     <Compile Include="Orders\AddBranchOrderSTS.Designer.cs">
       <DependentUpon>AddBranchOrderSTS.cs</DependentUpon>
     </Compile>
+    <Compile Include="Orders\AddBranchOrderSTSBatchMode.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Orders\AddBranchOrderSTSBatchMode.Designer.cs">
+      <DependentUpon>AddBranchOrderSTSBatchMode.cs</DependentUpon>
+    </Compile>
     <Compile Include="Orders\AddOrder.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -3857,6 +3863,9 @@
     <EmbeddedResource Include="Orders\AddBranchOrderSTS.resx">
       <DependentUpon>AddBranchOrderSTS.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Orders\AddBranchOrderSTSBatchMode.resx">
+      <DependentUpon>AddBranchOrderSTSBatchMode.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Orders\AddOrder.resx">
       <DependentUpon>AddOrder.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -4096,6 +4105,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="POS\POSRestoTableOption.resx">
       <DependentUpon>POSRestoTableOption.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="POS\POSRestoTables.resx">
+      <DependentUpon>POSRestoTables.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="POS\POSScreenMirror.resx">
       <DependentUpon>POSScreenMirror.cs</DependentUpon>

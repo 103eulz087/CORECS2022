@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,8 @@ namespace SalesInventorySystem.Reporting
 {
     public partial class StocksOrder : Form
     {
+        int totalreceive = 0;
+        public static bool isdone = false;
         public StocksOrder()
         {
             InitializeComponent();
@@ -126,6 +129,82 @@ namespace SalesInventorySystem.Reporting
                 printSTS();
             }
            
+        }
+
+        void returnOrder(string devno,string refno,string pono,string prodno,string qty,string brcode,string devseqno)
+        {
+            SqlConnection con = Database.getConnection();
+            con.Open();
+            string query = "sp_CancelDelivery";
+            try
+            {
+                SqlCommand com = new SqlCommand(query, con);
+                com.Parameters.AddWithValue("@parmdevno", devno);
+                com.Parameters.AddWithValue("@parmrefno", refno);
+                com.Parameters.AddWithValue("@parmpono", pono);
+                com.Parameters.AddWithValue("@parmprodno", prodno);
+                com.Parameters.AddWithValue("@parmqty", qty);
+                com.Parameters.AddWithValue("@parmbranchcode", brcode);
+                com.Parameters.AddWithValue("@parmorigin", Login.assignedBranch);
+                com.Parameters.AddWithValue("@preparedby", Login.Fullname);
+                com.Parameters.AddWithValue("@parmdevseqno", devseqno);
+                com.CommandType = CommandType.StoredProcedure;
+                com.CommandText = query;
+                com.ExecuteNonQuery();
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            con.Close();
+        }
+
+        void executeErrorCorrect()
+        {
+            try
+            {
+                GridView view = gridControl1.FocusedView as GridView;
+                view.SortInfo.Clear();
+
+                int[] selectedRows = gridView1.GetSelectedRows();
+
+                foreach (int rowHandle in selectedRows)
+                {
+                    string seqno = gridView1.GetRowCellValue(rowHandle, "SeqNo").ToString();//dataGridView1.Rows[0].Cells["Quantity"].Value.ToString();
+                    string productcode = gridView1.GetRowCellValue(rowHandle, "ProductCode").ToString();//dataGridView1.Rows[0].Cells["Product"].Value.ToString();
+                    string description = gridView1.GetRowCellValue(rowHandle, "ProductName").ToString();// dataGridView1.Rows[0].Cells["Description"].Value.ToString(); 
+                    string cost = gridView1.GetRowCellValue(rowHandle, "Cost").ToString();//dataGridView1.Rows[0].Cells["Quantity"].Value.ToString();
+                    string quantity = gridView1.GetRowCellValue(rowHandle, "Qty").ToString();//dataGridView1.Rows[0].Cells["Quantity"].Value.ToString();
+                    string barcode = gridView1.GetRowCellValue(rowHandle, "BarcodeNo").ToString();//dataGridView1.Rows[0].Cells["Quantity"].Value.ToString();
+                    totalreceive = rowHandle;
+                    if (rowHandle >= 0)
+                    {
+                        returnOrder(txtdevno.Text, "", txtpono.Text, productcode, quantity,txtbranchdestination.Text, seqno);
+                    }
+                }
+                totalreceive = gridView1.SelectedRowsCount;
+                isdone = true;
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show(ex.Message.ToString());
+            }
+        }
+        private void simpleButton1_Click(object sender, EventArgs e)
+        { 
+            bool confirmRcv = HelperFunction.ConfirmDialog("Are you sure you want to Error Correct this Transaction?", "Confirm Error Correct");
+            if (confirmRcv)
+            {
+                executeErrorCorrect();
+                MessageBox.Show("Successfully Deleted");
+                isdone = true;
+                this.Close();
+            }
+            else
+            {
+                return;
+            }
+            
         }
     }
 }

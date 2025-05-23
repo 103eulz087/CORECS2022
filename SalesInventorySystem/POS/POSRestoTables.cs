@@ -29,6 +29,11 @@ namespace SalesInventorySystem.POS
             display();
         }
 
+        private void POSRestoTables_FormClosing(object sender, FormClosingEventArgs e)
+        {
+          
+        }
+
         void display()
         {
             SqlConnection con = Database.getConnection();
@@ -79,7 +84,7 @@ namespace SalesInventorySystem.POS
 
                 if (ok)
                 {
-                    existingor = Database.getSingleQuery("BatchSalesSummary", "TableNo='" + buttonname + "' And BranchCode='"+Login.assignedBranch+"' AND MachineUsed='"+Environment.MachineName+"' And Status<>'SOLD' ", "ReferenceNo");
+                    existingor = Database.getSingleQuery("BatchSalesSummary", "TableNo='" + buttonname + "' And BranchCode='"+Login.assignedBranch+"' AND MachineUsed='"+Environment.MachineName+ "' And Status<>'SOLD' And isVoid=0 AND CAST(TransDate as date)='" + DateTime.Now.ToShortDateString() + "'", "ReferenceNo");
                     iseditOrder = true;
                     isdone = true;
                     status = POSRestoTableOption.status;
@@ -96,6 +101,7 @@ namespace SalesInventorySystem.POS
             }
             else
             {
+                existingor = "";
                 POSRestoAuthentication authfrm = new POSRestoAuthentication();
                 authfrm.ShowDialog(this);
                 if (POSRestoAuthentication.isconfirmedLogin == true)

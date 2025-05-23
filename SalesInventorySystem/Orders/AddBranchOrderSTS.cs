@@ -274,11 +274,6 @@ namespace SalesInventorySystem.Orders
                 if (barcodescanning.Checked == true)
                 {
                     isbarcodscanning = true;
-                    ///////////////////////////////////////////////////////////////////////////////////OLD per plastic pler barcode
-                    //primalproductcode = Database.getSingleQuery("Inventory","Barcode='"+txtbarcodescanning.Text+"' and isWarehouse=1 and Available > 0 and Branch='888' and IsStock=1","Product");
-                    //productcategorycode = primalproductcode.Substring(0,2);
-                    //sourceseqnum = Database.getSingleQuery("Inventory", "Barcode='" + txtbarcodescanning.Text + "' and isWarehouse=1 and Available > 0 and Branch='888' and IsStock=1", "SequenceNumber");
-                    //////////////////////////////////////////////////////////////////////////////////OLD per plastic pler barcode
                     primalproductcode = globalproductcode;
                     productcategorycode = primalproductcode.Substring(0, 2);
                 }

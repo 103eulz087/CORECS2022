@@ -121,9 +121,12 @@ namespace SalesInventorySystem.HOFormsDevEx
 
             }
 
-            Database.display($"SELECT * FROM dbo.ExpenseDetails " +
+            Database.display($"SELECT * FROM dbo.ExpenseMaster " +
                $"WHERE ReferenceNumber='{refno}' " +
                $"AND InvoiceNo='{invoiceno}' ", viewdetdevex.gridControl2, viewdetdevex.gridView2);
+            //Database.display($"SELECT * FROM dbo.ExpenseDetails " +
+            //    $"WHERE ReferenceNumber='{refno}' " +
+            //    $"AND InvoiceNo='{invoiceno}' ", viewdetdevex.gridControl2, viewdetdevex.gridView2);
 
             Classes.DevXGridViewSettings.ShowFooterTotal(viewdetdevex.gridView2, "Amount");
             viewdetdevex.ShowDialog(this);

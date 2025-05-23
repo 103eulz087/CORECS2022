@@ -338,7 +338,7 @@ namespace SalesInventorySystem
             consolidatedOrder.AppendLine(HelperFunction.PrintCenterText(location) + Environment.NewLine);
             consolidatedOrder.AppendLine(HelperFunction.PrintLeftRigthText("Table #:" + tableno, "Waiter:" + waiterid) + Environment.NewLine);
 
-            string query = $"SELECT Description,QtySold,CategoryCode FROM dbo.BatchSalesDetails WHERE ReferenceNo='{refno}' AND Barcode='{location}' AND BranchCode='{Login.assignedBranch}' AND MachineUsed='{Environment.MachineName.ToString()}' ";
+            string query = $"SELECT Description,QtySold,CategoryCode FROM dbo.BatchSalesDetails WHERE ReferenceNo='{refno}' AND Barcode='{location}' AND BranchCode='{Login.assignedBranch}' AND MachineUsed='{Environment.MachineName.ToString()}' AND isCancelled=0 and isVoid=0 AND isErrorCorrect=0";
             string CategoryName = "";
             SqlConnection con = Database.getConnection();
             con.Open();
@@ -1226,10 +1226,11 @@ namespace SalesInventorySystem
             StreamWriter writerLast = new StreamWriter(LastTransactionfilepath + lastranfile);
             writerLast.Write(details);
             writerLast.Close();
-            for(int xxx=0;xxx<=3;xxx++)
-            {
-                printTextFile(filetoprint);
-            }
+            printTextFile(filetoprint);
+            //for (int xxx=0;xxx<=3;xxx++)
+            //{
+            //    printTextFile(filetoprint);
+            //}
         }
         //THIS TEMPLATE HAS BEEN USED WITH ONE TIME DISCOUNT (e.g SENIOR,PWD,OTHERS)--eulzcccc
         public void printReceipt(string transcode
