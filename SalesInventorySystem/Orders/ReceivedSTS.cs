@@ -88,7 +88,8 @@ namespace SalesInventorySystem.Orders
             {
 
                 Orders.STSForApprovalDetails podetails = new Orders.STSForApprovalDetails();
-                Database.display("SELECT * FROM view_TransferOrderDetails WHERE PONumber = '" + gridViewMyReq.GetRowCellValue(gridViewMyReq.FocusedRowHandle,"PONumber").ToString() + "' ORDER BY SeqNo", podetails.gridControl1, podetails.gridView1);
+                //Database.display("SELECT * FROM view_TransferOrderDetails WHERE PONumber = '" + gridViewMyReq.GetRowCellValue(gridViewMyReq.FocusedRowHandle,"PONumber").ToString() + "' ORDER BY SeqNo", podetails.gridControl1, podetails.gridView1);
+                Database.display($"SELECT * FROM funcview_TransferOrderDetailsSTS('{Login.assignedBranch}') WHERE PONumber = '{ gridViewMyReq.GetRowCellValue(gridViewMyReq.FocusedRowHandle,"PONumber").ToString() }' ORDER BY SeqNo", podetails.gridControl1, podetails.gridView1);
                 podetails.txtpono.Text = gridViewMyReq.GetRowCellValue(gridViewMyReq.FocusedRowHandle, "PONumber").ToString();
                 GridView view = podetails.gridControl1.FocusedView as GridView;
                 view.SortInfo.ClearAndAddRange(new GridColumnSortInfo[] {
