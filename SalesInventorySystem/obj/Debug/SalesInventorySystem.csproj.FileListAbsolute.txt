@@ -10941,3 +10941,5 @@ D:\Repos\CORECS2022\SalesInventorySystem\bin\Debug\ru\DevExpress.Diagram.v19.2.C
 D:\Repos\CORECS2022\SalesInventorySystem\obj\Debug\SalesInventorySystem.csproj.CopyComplete
 D:\Repos\CORECS2022\SalesInventorySystem\obj\Debug\SalesInventorySystem.POS.POSRestoTables.resources
 D:\Repos\CORECS2022\SalesInventorySystem\obj\Debug\SalesInventorySystem.Orders.AddBranchOrderSTSBatchMode.resources
+C:\Users\avanc\Downloads\CORECS2022\SalesInventorySystem\obj\Debug\SalesInventorySystem.Orders.AddBranchOrderSTSBatchMode.resources
+C:\Users\avanc\Downloads\CORECS2022\SalesInventorySystem\obj\Debug\SalesInventorySystem.POS.POSRestoTables.resources

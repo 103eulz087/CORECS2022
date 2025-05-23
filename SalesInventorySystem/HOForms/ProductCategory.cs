@@ -64,7 +64,7 @@ namespace SalesInventorySystem
             {
                 isvatable = "0";
             }
-            Database.ExecuteQuery("INSERT INTO ProductCategory VALUES('" + txtcatid.Text + "','" + txtcattype.Text + "','" + isvatable + "')", "Successfully Added!");
+            Database.ExecuteQuery("INSERT INTO ProductCategory VALUES('" + txtcatid.Text + "','" + txtcattype.Text + "','" + isvatable + "',' ',' ')", "Successfully Added!");
             display();
             simpleButton1.Enabled = true;
             addbtn.Enabled = false;

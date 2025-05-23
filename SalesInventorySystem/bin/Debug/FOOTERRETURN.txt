@@ -3,13 +3,13 @@
    NON VAT Reg Tin: 221-413-885-00000
   3720 Woodland Heights R. Duterte St.
         Guadalupe Cebu City 6000
-         Accd#: 1234567890123456
+            Accd#: 1234567890
          Date Issued: 11/13/2019
-         Valid Until: 4/15/2025
-        PTU No.: 123456789123456
-         Date Issued: 6/23/2025
-         Valid Until: 4/15/2025
-  This serves as your OFFICIAL RECEIPT
+         Valid Until: 5/22/2025
+           PTU No.: 1234567890
+         Date Issued: 5/22/2025
+         Valid Until: 5/22/2025
+    This serves as your SALES INVOICE
     THIS DOCUMENT SHALL BE VALID FOR
      FIVE (5) YEARS FROM DATE OF THE
              PERMIT TO USE.

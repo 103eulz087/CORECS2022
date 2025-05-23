@@ -50,7 +50,7 @@ namespace SalesInventorySystem.HOFormsDevEx
                 btnDeduct.Enabled = true;
                 if (!isAnalyze)
                 {
-                    Database.ExecuteQuery("INSERT INTO ReInventoryMonitoring VALUES('" + txtbranch.Text + "','" + txtdate.Text + "',1,0,'" + Login.Fullname + "','"+Environment.MachineName.ToString()+"') ");
+                    Database.ExecuteQuery("INSERT INTO ReInventoryMonitoring VALUES('" + txtbranch.Text + "','" + txtdate.Text + "',1,0,'" + Login.Fullname + "','','"+Environment.MachineName.ToString()+"') ");
                 }
             }
            
