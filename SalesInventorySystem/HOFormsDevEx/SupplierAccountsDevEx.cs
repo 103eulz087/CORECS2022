@@ -72,14 +72,14 @@ namespace SalesInventorySystem.HOFormsDevEx
         }
         void loadExpenses()
         {
-            //    if (checkBox4.Checked == true)
-            //        Database.display("SELECT TRN_SEQ_NO,BranchCode,ReferenceNumber,InvoiceNo,ExpenseName,ExpenseDate,Amount,Remarks,Status,Balance,AmountPaid,EWTAmount,DiscountAmount,OffsetAmount,isErrorCorrect FROM ExpenseMaster WHERE SupplierID='" + txtacctid.Text + "' ", gridControl4, gridView4);
-            //    else
-            //        Database.display("SELECT TRN_SEQ_NO,BranchCode,ReferenceNumber,InvoiceNo,ExpenseName,ExpenseDate,Amount,Remarks,Status,Balance,AmountPaid,EWTAmount,DiscountAmount,OffsetAmount,isErrorCorrect FROM ExpenseMaster WHERE SupplierID='" + txtacctid.Text + "' AND CAST(ExpenseDate as Date) >= '" + expdatefrom.Text + "' and CAST(ExpenseDate as date)<= '" + expdateto.Text + "' ", gridControl4, gridView4);
             if (checkBox4.Checked == true)
-                Database.display("SELECT * FROM ExpenseSummary WHERE SupplierID='" + txtacctid.Text + "' ", gridControl4, gridView4);
+                Database.display("SELECT TRN_SEQ_NO,BranchCode,ReferenceNumber,InvoiceNo,ExpenseName,ExpenseDate,Amount,Remarks,Status,Balance,AmountPaid,EWTAmount,DiscountAmount,OffsetAmount,isErrorCorrect FROM ExpenseMaster WHERE SupplierID='" + txtacctid.Text + "' ", gridControl4, gridView4);
             else
-                Database.display("SELECT * FROM ExpenseSummary WHERE SupplierID='" + txtacctid.Text + "' AND CAST(ExpenseDate as Date) >= '" + expdatefrom.Text + "' and CAST(ExpenseDate as date)<= '" + expdateto.Text + "' ", gridControl4, gridView4);
+                Database.display("SELECT TRN_SEQ_NO,BranchCode,ReferenceNumber,InvoiceNo,ExpenseName,ExpenseDate,Amount,Remarks,Status,Balance,AmountPaid,EWTAmount,DiscountAmount,OffsetAmount,isErrorCorrect FROM ExpenseMaster WHERE SupplierID='" + txtacctid.Text + "' AND CAST(ExpenseDate as Date) >= '" + expdatefrom.Text + "' and CAST(ExpenseDate as date)<= '" + expdateto.Text + "' ", gridControl4, gridView4);
+            //if (checkBox4.Checked == true)
+            //    Database.display("SELECT * FROM ExpenseSummary WHERE SupplierID='" + txtacctid.Text + "' ", gridControl4, gridView4);
+            //else
+            //    Database.display("SELECT * FROM ExpenseSummary WHERE SupplierID='" + txtacctid.Text + "' AND CAST(ExpenseDate as Date) >= '" + expdatefrom.Text + "' and CAST(ExpenseDate as date)<= '" + expdateto.Text + "' ", gridControl4, gridView4);
 
         }
 

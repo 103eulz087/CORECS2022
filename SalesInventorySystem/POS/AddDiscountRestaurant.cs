@@ -60,7 +60,7 @@ namespace SalesInventorySystem.POS
             //NOT USED
             string getVATExAdj = Database.getSingleResultSet("SELECT dbo.func_getDiscountedItemsVATEXADJ('" + Login.assignedBranch + "','" + PointOfSale.refno + "')");
 
-            double netofvat=0.0,lessdisc=0.0,netvatlessdisc=0.0, totalamountdue = 0.0;
+            double lessdisc=0.0,netvatlessdisc=0.0, totalamountdue = 0.0;
             //double totalamountperpax = 0.0, regularsale = 0.0, seniorsale = 0.0;
             double vatablesale = 0.0, vatsale = 0.0,vatexemptsale=0.0,vatdiscount=0.0;
             double shareEachPax = 0.0,shareofNonSC=0.0,netofvatEachSC=0.0,percent=0.0,discountedamount=0.0;

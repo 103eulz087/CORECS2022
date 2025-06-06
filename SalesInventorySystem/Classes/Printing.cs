@@ -183,16 +183,16 @@ namespace SalesInventorySystem
             grillReceipt.AppendLine(HelperFunction.PrintLeftRigthText("Table #:" + tableno, "Waiter:" + waiterid) + Environment.NewLine);
 
 
-            String details = "";
+            //String details = "";
             string filepath = "";
             string filetoprintmain = "";
-            string filetoprintgrill = "";
+            //string filetoprintgrill = "";
             string filetoprintkitchen = "";
             //details = "" + (Char)27 + (Char)112 + (Char)0 + (Char)25 + "";
             //details += HelperFunction.PrintCenterText(location) + Environment.NewLine;
             //details += HelperFunction.PrintLeftRigthText("Table #:" + tableno,"Waiter:"+waiterid) + Environment.NewLine;
             //details += Classes.ReceiptSetup.doTitle("ORDERS");
-            bool flag = false;
+            //bool flag = false;
             for (int i = 0; i <= gridview.RowCount - 1; i++)
             {
 
@@ -722,7 +722,7 @@ namespace SalesInventorySystem
 
             for (int i = 0; i <= gridview.RowCount - 1; i++)
             {
-                string addV = "";
+                //string addV = "";
                 //if (Convert.ToBoolean(gridview.Rows[i].Cells["isVat"].Value.ToString()) == true)
                 //{
                 //    addV = "V";

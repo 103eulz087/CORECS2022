@@ -344,7 +344,7 @@ namespace SalesInventorySystem.HOFormsDevEx
                 //{
 
                 //if ((string)e.Value == "True")
-                if (e.Value == "True")
+                if (e.Value.Equals("True"))
                 {
                     //gridViewMaster.SetRowCellValue(gridViewMaster.FocusedRowHandle, "AmountPaid", gridViewMaster.GetRowCellValue(gridViewMaster.FocusedRowHandle, "Balance").ToString());
                     HOFormsDevEx.SupplierAddPaymentDevEx asdds = new SupplierAddPaymentDevEx();
@@ -366,7 +366,7 @@ namespace SalesInventorySystem.HOFormsDevEx
                         asdds.Dispose();
                     }
                 }
-                else if (e.Value == "False")
+                else if (e.Value.Equals("False"))
                 {
                     gridViewMaster.SetRowCellValue(gridViewMaster.FocusedRowHandle, "AmountPaid", "0");
                 }
