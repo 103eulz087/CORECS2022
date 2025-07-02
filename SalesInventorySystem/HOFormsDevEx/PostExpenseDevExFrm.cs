@@ -57,7 +57,8 @@ namespace SalesInventorySystem.HOFormsDevEx
         void loadRepositoryItem()
         {
             Database.displayRepositorySearchlookupEdit("SELECT BranchCode,BranchName FROM Branches", repbrcode, "BranchCode", "BranchCode");
-            Database.displayRepositorySearchlookupEdit("SELECT Description FROM CHartOfAccounts WHERE AccountCode like '60%'", reptypeofexpense, "Description", "Description");
+            //Database.displayRepositorySearchlookupEdit("SELECT Description FROM CHartOfAccounts WHERE AccountCode like '60%'", reptypeofexpense, "Description", "Description");
+            Database.displayRepositorySearchlookupEdit("SELECT * FROM ExpensesList", reptypeofexpense, "ExpenseName", "ExpenseName");
             gridView2.BestFitColumns();
             gridView3.BestFitColumns();
         }
