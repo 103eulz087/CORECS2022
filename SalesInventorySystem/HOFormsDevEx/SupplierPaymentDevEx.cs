@@ -543,11 +543,11 @@ namespace SalesInventorySystem.HOFormsDevEx
                 //string str = Classes.CurrencyConversion.ConvertToWords(txtamounttopay.Text);
                 string str = Classes.DecimalToWordExtension.ToWords(Convert.ToDecimal(txtamounttopay.Text));
 
-                //gridViewMaster.Columns["Balance"].Visible = false;
+                gridViewMaster.Columns["Balance"].Visible = false;
                 gridViewMaster.Columns["BranchCode"].Visible = false;
                 //gridViewMaster.Columns["Description"].Visible = false;
                 //gridViewMaster.Columns["Type"].Visible = false;
-                //gridViewMaster.Columns["Pay"].Visible = false;
+                gridViewMaster.Columns["Pay"].Visible = false;
                 //gridViewMaster.Columns["OffsetAmount"].Visible = false;
                 //gridViewMaster.Columns["OffsetDebitGLCode"].Visible = false;
                 //gridViewMaster.Columns["OffsetCreditGLCode"].Visible = false;

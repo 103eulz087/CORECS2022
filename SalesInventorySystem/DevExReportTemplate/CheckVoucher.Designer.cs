@@ -690,7 +690,7 @@
             this.xrLabel3.SizeF = new System.Drawing.SizeF(183.125F, 20.83344F);
             this.xrLabel3.StylePriority.UseFont = false;
             this.xrLabel3.StylePriority.UseTextAlignment = false;
-            this.xrLabel3.Text = "Eulz Avancena";
+            this.xrLabel3.Text = "SAIVEE CADENAS";
             this.xrLabel3.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
             // 
             // CheckVoucher

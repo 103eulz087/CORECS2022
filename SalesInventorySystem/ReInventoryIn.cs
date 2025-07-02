@@ -522,7 +522,7 @@ namespace SalesInventorySystem
             }
 
             qty = "1";
-            validproductcode = Database.checkifExist("SELECT ProductCode FROM Products WHERE ProductCode='" + pcode + "'");
+            validproductcode = Database.checkifExist("SELECT TOP(1) ProductCode FROM dbo.Products WHERE ProductCode='" + pcode + "' And BranchCode='"+ Branch.getBranchCode(comboBox1.Text) + "'");
             if (!validproductcode)
             {
                 XtraMessageBox.Show("Invalid Product Code!!..");
@@ -581,30 +581,47 @@ namespace SalesInventorySystem
 
             string prodcatcode = Database.getSingleQuery("Products", "BranchCode='" + Branch.getBranchCode(comboBox1.Text) + "' AND ProductCode='" + pcode + "'", "ProductCategoryCode");
             string isvat = Database.getSingleQuery("ProductCategory", "ProductCategoryID='"+prodcatcode+"'", "isVat");
-            Database.ExecuteQuery("INSERT INTO TempInventoryIN (ID" +
-                        ",Branch" +
-                        ",DateReceived" +
-                        ",Product" +
-                        ",Description" +
-                        ",Barcode" +
-                        ",Quantity" +
-                        ",Cost" +
-                        ",isWarehouse" +
-                        ",isVat" +
-                        ",DateEncode" +
-                        ",EncodeBy) " +
+            //Database.ExecuteQuery("INSERT INTO TempInventoryIN (ID" +
+            //            ",Branch" +
+            //            ",DateReceived" +
+            //            ",Product" +
+            //            ",Description" +
+            //            ",Barcode" +
+            //            ",Quantity" +
+            //            ",Cost" +
+            //            ",isWarehouse" +
+            //            ",isVat" +
+            //            ",DateEncode" +
+            //            ",EncodeBy) " +
+            //    "VALUES('" + txtid.Text + "'" +
+            //            ",'" + Branch.getBranchCode(comboBox1.Text) + "'" +
+            //            ",'" + txtdatereceived.Text + "'" +
+            //            ",'" + pcode + "'" +
+            //            ",'" + desc + "'" +
+            //            ",'" + barcode + "'" +
+            //            ",'" + finalqty + "'" +
+            //            ",'0'" +
+            //            ",'"+iswarehouse+"'" +
+            //            ",'"+ isvat + "'" +
+            //            ",'" + DateTime.Now.ToShortDateString() + "'" +
+            //            ",'" + Login.isglobalUserID + "')");
+
+            Database.ExecuteQuery("INSERT INTO dbo.TempInventoryIN (ID,Branch,DateReceived,ExpiryDate,Product,Description,Barcode,Quantity,Cost,isWarehouse,isVat,isDone,DateEncode,EncodeBy) " +
                 "VALUES('" + txtid.Text + "'" +
-                        ",'" + Branch.getBranchCode(comboBox1.Text) + "'" +
-                        ",'" + txtdatereceived.Text + "'" +
-                        ",'" + pcode + "'" +
-                        ",'" + desc + "'" +
-                        ",'" + barcode + "'" +
-                        ",'" + finalqty + "'" +
-                        ",'0'" +
-                        ",'"+iswarehouse+"'" +
-                        ",'"+ isvat + "'" +
-                        ",'" + DateTime.Now.ToShortDateString() + "'" +
-                        ",'" + Login.isglobalUserID + "')");
+                $",'{Branch.getBranchCode(comboBox1.Text)}'" +
+                $",'{txtdatereceived.Text}'" +
+                $",'{txtxpirydate.Text}'" +
+                $",'{pcode}'" +
+                $",'{desc}'" +
+                $",'{barcode}'" +
+                $",'{finalqty}'" +
+                $",'{txtcost.Text}'" +
+                $",'0" +
+                $",'{isvat}'" +
+                $",'0'" +
+                $",'{DateTime.Now.ToShortDateString()}'" +
+                $",'{Login.isglobalUserID}')", "Succesfully Added");
+
             isusedsearchform = false;
             display();
             gridView1.MoveLast();
