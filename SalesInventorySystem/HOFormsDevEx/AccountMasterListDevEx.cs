@@ -25,38 +25,32 @@ namespace SalesInventorySystem.HOFormsDevEx
 
         void display()
         {
-            if (checkBox1.Checked == false)
-                // Database.display("SELECT SupplierID,SupplierName,InvoiceNo,DueDate,ActualCost,Balance,AmountPaid FROM ShipmentOrder WHERE PaymentStatus='UNPAID' OR PaymentStatus='PARTIAL' AND Balance > 0", gridControl1, gridView1);
-                Database.display("SELECT SupplierID,SupplierName,FORMAT(AccountBalance,'N', 'en-us') as AccountBalance,LastMovementDate FROM SupplierAccounts WHERE AccountBalance > 0", gridControl1, gridView1);
-            else
-                // Database.display("SELECT SupplierID,SupplierName,InvoiceNo,DueDate,ActualCost,Balance,AmountPaid FROM ShipmentOrder WHERE PaymentStatus='UNPAID' OR PaymentStatus='PARTIAL' AND Balance > 0 AND SupplierID='" + searchLookUpEdit1.Text+"'", gridControl1, gridView1);
-                Database.display("SELECT SupplierID,SupplierName,FORMAT(AccountBalance,'N', 'en-us') as AccountBalance,LastMovementDate FROM SupplierAccounts WHERE AccountBalance > 0 AND SupplierID='" + searchLookUpEdit1.Text + "'", gridControl1, gridView1);
-        }
-        void populateCOA()
-        {
-            if (checkBox1.Checked == true)
-                Database.displaySearchlookupEdit("SELECT SupplierID,SupplierName FROM SupplierAccounts", searchLookUpEdit1, "SupplierID", "SupplierID");
-            if (checkBox2.Checked == true)
-                Database.displaySearchlookupEdit("SELECT AccountID,AccountName FROM ClientAccounts", searchLookUpEdit2, "AccountID", "AccountID");
-        }
-
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
-        {
-            if (checkBox1.Checked == true)
+            if (chckzerobal.Checked == false && String.IsNullOrEmpty(txtapaccnt.Text))
             {
-                searchLookUpEdit1.Enabled = true;
-                Database.displaySearchlookupEdit("SELECT SupplierID,SupplierName FROM SupplierAccounts", searchLookUpEdit1, "SupplierID", "SupplierID");
-            }
 
+                string query = "SELECT SupplierID,SupplierName,FORMAT(AccountBalance,'N', 'en-us') as AccountBalance,AccountStatus,LastMovementDate FROM SupplierAccounts with(nolock) WHERE AccountBalance > 0 ";
+                HelperFunction.ShowWaitAndDisplay(query, gridControl1, gridView1, "Please wait", "Populating data into the database...");
+                gridView1.Focus();
+            }
+            else if (chckzerobal.Checked == false && !String.IsNullOrEmpty(txtapaccnt.Text))
+            {
+                string query = "SELECT SupplierID,SupplierName,FORMAT(AccountBalance,'N', 'en-us') as AccountBalance,AccountStatus,LastMovementDate FROM SupplierAccounts with(nolock) WHERE SupplierID='" + txtapaccnt.Text + "' ";
+                HelperFunction.ShowWaitAndDisplay(query, gridControl1, gridView1, "Please wait", "Populating data into the database...");
+                gridView1.Focus();
+            }
             else
-                searchLookUpEdit1.Enabled = false;
+            {
+                string query = "SELECT SupplierID,SupplierName,FORMAT(AccountBalance,'N', 'en-us') as AccountBalance,AccountStatus,LastMovementDate FROM SupplierAccounts with(nolock) ";
+                HelperFunction.ShowWaitAndDisplay(query, gridControl1, gridView1, "Please wait", "Populating data into the database...");
+                gridView1.Focus();
+            }
         }
 
         private void gridView1_DoubleClick(object sender, EventArgs e)
         {
             HOFormsDevEx.AccountPayablesDetailsDevEx acctdev = new HOFormsDevEx.AccountPayablesDetailsDevEx();
             acctdev.Show();
-            Database.display("SELECT SupplierID,SupplierName,InvoiceNo,FORMAT(ActualCost,'N', 'en-us') as InvoiceAmount,InvoiceDate,DueDate,PaymentStatus,FORMAT(AmountPaid,'N', 'en-us') as AmountPaid,FORMAT(Balance,'N', 'en-us') as Balance FROM ShipmentOrder WHERE SupplierID='" + gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "SupplierID").ToString() + "'", acctdev.gridControl1, acctdev.gridView1);
+            Database.display("SELECT InvoiceNo,FORMAT(ActualCost,'N', 'en-us') as InvoiceAmount,InvoiceDate,DueDate,PayStatus,FORMAT(AmountPaid,'N', 'en-us') as AmountPaid,FORMAT(Balance,'N', 'en-us') as Balance FROM APAccounts WHERE SupplierID='" + gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "SupplierID").ToString() + "'", acctdev.gridControl1, acctdev.gridView1);
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -66,36 +60,33 @@ namespace SalesInventorySystem.HOFormsDevEx
         }
         void displayReceivables()
         {
-            if (checkBox2.Checked == false)
-                // Database.display("SELECT SupplierID,SupplierName,InvoiceNo,DueDate,ActualCost,Balance,AmountPaid FROM ShipmentOrder WHERE PaymentStatus='UNPAID' OR PaymentStatus='PARTIAL' AND Balance > 0", gridControl1, gridView1);
-                Database.display("SELECT AccountID,AccountName,FORMAT(AccountBalance,'N', 'en-us') as AccountBalance,LastMovementDate FROM ClientAccounts WHERE AccountBalance > 0", gridControl2, gridView2);
+            if (chckzerobalar.Checked == false && String.IsNullOrEmpty(txtaraccount.Text))
+                Database.display("SELECT AccountKey,AccountName,FORMAT(AccountBalance,'N', 'en-us') as AccountBalance,AccountStatus,LastMovementDate FROM ClientAccounts with(nolock) WHERE AccountBalance > 0", gridControl2, gridView2);
+            else if (chckzerobalar.Checked == false && !String.IsNullOrEmpty(txtaraccount.Text))
+                Database.display("SELECT AccountKey,AccountName,FORMAT(AccountBalance,'N', 'en-us') as AccountBalance,AccountStatus,LastMovementDate FROM ClientAccounts with(nolock) WHERE AccountKey='" + txtaraccount.Text + "'", gridControl2, gridView2);
             else
-                // Database.display("SELECT SupplierID,SupplierName,InvoiceNo,DueDate,ActualCost,Balance,AmountPaid FROM ShipmentOrder WHERE PaymentStatus='UNPAID' OR PaymentStatus='PARTIAL' AND Balance > 0 AND SupplierID='" + searchLookUpEdit1.Text+"'", gridControl1, gridView1);
-                Database.display("SELECT AccountID,AccountName,FORMAT(AccountBalance,'N', 'en-us') as AccountBalance,LastMovementDate FROM ClientAccounts WHERE AccountBalance > 0 AND AccountID='" + searchLookUpEdit2.Text + "'", gridControl2, gridView2);
-        }
-        private void checkBox2_CheckedChanged(object sender, EventArgs e)
-        {
-            if (checkBox2.Checked == true)
-            {
-                searchLookUpEdit2.Enabled = true;
-                Database.displaySearchlookupEdit("SELECT AccountID,AccountName FROM ClientAccounts", searchLookUpEdit2, "AccountID", "AccountID");
-            }
+                Database.display("SELECT AccountKey,AccountName,FORMAT(AccountBalance,'N', 'en-us') as AccountBalance,AccountStatus,LastMovementDate FROM ClientAccounts with(nolock) ", gridControl2, gridView2);
 
-            else
-                searchLookUpEdit2.Enabled = false;
+            //if (chckzerobalar.Checked == false)
+            //    // Database.display("SELECT SupplierID,SupplierName,InvoiceNo,DueDate,ActualCost,Balance,AmountPaid FROM ShipmentOrder WHERE PaymentStatus='UNPAID' OR PaymentStatus='PARTIAL' AND Balance > 0", gridControl1, gridView1);
+            //    Database.display("SELECT AccountID,AccountName,FORMAT(AccountBalance,'N', 'en-us') as AccountBalance,LastMovementDate FROM ClientAccounts WHERE AccountBalance > 0", gridControl2, gridView2);
+            //else
+            //    // Database.display("SELECT SupplierID,SupplierName,InvoiceNo,DueDate,ActualCost,Balance,AmountPaid FROM ShipmentOrder WHERE PaymentStatus='UNPAID' OR PaymentStatus='PARTIAL' AND Balance > 0 AND SupplierID='" + searchLookUpEdit1.Text+"'", gridControl1, gridView1);
+            //    Database.display("SELECT AccountID,AccountName,FORMAT(AccountBalance,'N', 'en-us') as AccountBalance,LastMovementDate FROM ClientAccounts WHERE AccountBalance > 0 AND AccountID='" + txtaraccount.Text + "'", gridControl2, gridView2);
         }
+        
 
         private void gridView2_DoubleClick(object sender, EventArgs e)
         {
             HOFormsDevEx.AccountReceivablesDevEx acctdev = new HOFormsDevEx.AccountReceivablesDevEx();
             acctdev.Show();
-            Database.display("SELECT CustomerID,CAST(TransactionDate as date) as TransactionDate,OrderNo,FORMAT(Amount,'N', 'en-us') as Amount,FORMAT(AmountPaid,'N', 'en-us') as AmountPaid,FORMAT(Balance,'N', 'en-us') as Balance,PaymentStatus FROM TransactionChargeSales WHERE CustomerID='" + gridView2.GetRowCellValue(gridView2.FocusedRowHandle, "AccountID").ToString() + "'", acctdev.gridControl1, acctdev.gridView1);
+            Database.display("SELECT CustomerID,CAST(TransactionDate as date) as TransactionDate,OrderNo,FORMAT(Amount,'N', 'en-us') as Amount,FORMAT(AmountPaid,'N', 'en-us') as AmountPaid,FORMAT(Balance,'N', 'en-us') as Balance,PaymentStatus FROM view_TransactionChargeSales WHERE CustomerID='" + gridView2.GetRowCellValue(gridView2.FocusedRowHandle, "AccountKey").ToString() + "'", acctdev.gridControl1, acctdev.gridView1);
 
         }
 
         private void AccountMasterListDevEx_Load(object sender, EventArgs e)
         {
-
+            Database.displaySearchlookupEdit("SELECT SupplierKey,SupplierName FROM dbo.Supplier", txtapaccnt, "SupplierKey", "SupplierKey");
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -158,6 +149,53 @@ namespace SalesInventorySystem.HOFormsDevEx
             gridView4.Columns["Variance"].Summary.Add(DevExpress.Data.SummaryItemType.Sum, "Variance", "{0}");
             gridView4.BestFitColumns();
 
+        }
+
+        private void gridControl1_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                contextMenu.Show(gridControl1, e.Location);
+            }
+        }
+
+        private void creditMemoToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            string suppid = "";
+            suppid=gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "SupplierID").ToString();
+            HOFormsDevEx.SupplierAccountsDevEx suppacctdev = new SupplierAccountsDevEx();
+            suppacctdev.txtclientname.Text = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "SupplierName").ToString();
+            suppacctdev.txtacctid.Text = suppid;
+            suppacctdev.txtacctbalance.Text = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "AccountBalance").ToString();
+            suppacctdev.txtacctstatus.Text = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "AccountStatus").ToString();
+            suppacctdev.txtmvmtdate.Text = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "LastMovementDate").ToString();
+            suppacctdev.ShowDialog(this);
+        }
+
+        private void gridView2_MouseUp(object sender, MouseEventArgs e)
+        {
+
+        }
+
+        private void gridControl2_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                contextMenuStripAR.Show(gridControl2, e.Location);
+            }
+        }
+
+        private void toolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            string suppid = "";
+            suppid = gridView2.GetRowCellValue(gridView2.FocusedRowHandle, "AccountKey").ToString();
+            HOFormsDevEx.ClientAccountsDevEx suppacctdev = new ClientAccountsDevEx();
+            suppacctdev.txtacctname.Text = gridView2.GetRowCellValue(gridView2.FocusedRowHandle, "AccountName").ToString();
+            suppacctdev.txtacctid.Text = suppid;
+            suppacctdev.txtacctbalance.Text = gridView2.GetRowCellValue(gridView2.FocusedRowHandle, "AccountBalance").ToString();
+            suppacctdev.txtacctstatus.Text = gridView2.GetRowCellValue(gridView2.FocusedRowHandle, "AccountStatus").ToString();
+            //suppacctdev.txtmvmtdate.Text = gridView2.GetRowCellValue(gridView2.FocusedRowHandle, "LastMovementDate").ToString();
+            suppacctdev.ShowDialog(this);
         }
     }
 }

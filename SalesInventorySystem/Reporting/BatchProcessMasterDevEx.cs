@@ -25,6 +25,9 @@ namespace SalesInventorySystem.Reporting
 
         private void BatchProcessMasterDevEx_Load(object sender, EventArgs e)
         {
+            DateTime today = DateTime.Now;
+            txtdate.Text = HelperFunction.GetPreviousMonthSameDay(today).ToShortDateString();
+            txtdateto.Text = today.ToShortDateString();
             loadSupplier();
         }
 
@@ -128,14 +131,18 @@ namespace SalesInventorySystem.Reporting
                 carrep.gridView1.GroupSummary.Clear();
                 carrep.gridView1.Columns.Clear();
                 carrep.gridControl1.DataSource = null;
-                Database.display("SELECT DateReceived,Barcode,PalletNo,Description,Quantity,FORMAT(Cost, 'N', 'en-us') as Cost,FORMAT((Quantity*Cost), 'N', 'en-us')  as TotalCost " +
-                    "FROm TempInventoryBatchUpload " +
-                    "WHERE ShipmentNo='" + shipmentno + "' " +
-                    "and isSource=1 ORDER BY Description,PalletNo,Cost", carrep.gridControl1, carrep.gridView1);
+                //Database.display("SELECT DateReceived,Barcode,PalletNo,Description,Quantity,FORMAT(Cost, 'N', 'en-us') as Cost,FORMAT((Quantity*Cost), 'N', 'en-us')  as TotalCost " +
+                //    "FROm TempInventoryBatchUpload " +
+                //    "WHERE ShipmentNo='" + shipmentno + "' " +
+                //    "and isSource=1 ORDER BY Description,PalletNo,Cost", carrep.gridControl1, carrep.gridView1);
+                Database.display("SELECT SequenceNumber,DateReceived,Barcode,Description,Quantity,Cost,(Quantity*Cost) AS TotalCost " +
+                    "From Inventory with(nolock) WHERE ShipmentNo='" + shipmentno + "' " +
+                    "and Branch='" + Login.assignedBranch + "' ORDER BY Description ASC", carrep.gridControl1, carrep.gridView1);
+
                 GridView view = gridControl1.FocusedView as GridView;
                 view.SortInfo.ClearAndAddRange(new GridColumnSortInfo[] {
                 new GridColumnSortInfo(view.Columns["Description"],DevExpress.Data.ColumnSortOrder.Ascending),
-                new GridColumnSortInfo(view.Columns["PalletNo"],DevExpress.Data.ColumnSortOrder.Ascending)
+                //new GridColumnSortInfo(view.Columns["PalletNo"],DevExpress.Data.ColumnSortOrder.Ascending)
 
                 }, 2);
                 view.ExpandAllGroups();

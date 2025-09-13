@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(POSClosedTransaction));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.txtoverage = new System.Windows.Forms.TextBox();
             this.txtshortage = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -80,6 +80,8 @@
             this.txtActualCashOnHand = new DevExpress.XtraEditors.SpinEdit();
             this.txtNextcashBeginning = new DevExpress.XtraEditors.SpinEdit();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label44 = new System.Windows.Forms.Label();
+            this.txtchargesales = new System.Windows.Forms.TextBox();
             this.txtvatadjustment = new System.Windows.Forms.TextBox();
             this.label42 = new System.Windows.Forms.Label();
             this.label35 = new System.Windows.Forms.Label();
@@ -186,8 +188,6 @@
             this.txtbeginninginvoice = new System.Windows.Forms.TextBox();
             this.txtendingsi = new System.Windows.Forms.TextBox();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.label44 = new System.Windows.Forms.Label();
-            this.txtchargesales = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.grouppendingtran.SuspendLayout();
@@ -775,8 +775,8 @@
             this.MydataGridView1.AllowUserToAddRows = false;
             this.MydataGridView1.AllowUserToDeleteRows = false;
             this.MydataGridView1.AllowUserToResizeRows = false;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.MydataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.MydataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.MydataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.MydataGridView1.BackgroundColor = System.Drawing.Color.White;
             this.MydataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
@@ -790,8 +790,8 @@
             this.MydataGridView1.ReadOnly = true;
             this.MydataGridView1.RowHeadersVisible = false;
             this.MydataGridView1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.MydataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.MydataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle2;
             this.MydataGridView1.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.MydataGridView1.RowTemplate.Height = 30;
             this.MydataGridView1.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
@@ -955,6 +955,30 @@
             this.groupBox2.TabIndex = 123595;
             this.groupBox2.TabStop = false;
             this.groupBox2.Visible = false;
+            // 
+            // label44
+            // 
+            this.label44.AutoSize = true;
+            this.label44.Font = new System.Drawing.Font("Tahoma", 9.25F);
+            this.label44.Location = new System.Drawing.Point(46, 985);
+            this.label44.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label44.Name = "label44";
+            this.label44.Size = new System.Drawing.Size(229, 30);
+            this.label44.TabIndex = 123629;
+            this.label44.Text = "Total Charge Sales:";
+            // 
+            // txtchargesales
+            // 
+            this.txtchargesales.Font = new System.Drawing.Font("Tahoma", 9.25F);
+            this.txtchargesales.ForeColor = System.Drawing.Color.Black;
+            this.txtchargesales.Location = new System.Drawing.Point(344, 979);
+            this.txtchargesales.Margin = new System.Windows.Forms.Padding(8);
+            this.txtchargesales.Name = "txtchargesales";
+            this.txtchargesales.ReadOnly = true;
+            this.txtchargesales.Size = new System.Drawing.Size(144, 37);
+            this.txtchargesales.TabIndex = 123628;
+            this.txtchargesales.Text = "0";
+            this.txtchargesales.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // txtvatadjustment
             // 
@@ -2414,30 +2438,6 @@
             this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
             this.backgroundWorker1.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker1_ProgressChanged);
             this.backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker1_RunWorkerCompleted);
-            // 
-            // label44
-            // 
-            this.label44.AutoSize = true;
-            this.label44.Font = new System.Drawing.Font("Tahoma", 9.25F);
-            this.label44.Location = new System.Drawing.Point(46, 985);
-            this.label44.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label44.Name = "label44";
-            this.label44.Size = new System.Drawing.Size(229, 30);
-            this.label44.TabIndex = 123629;
-            this.label44.Text = "Total Charge Sales:";
-            // 
-            // txtchargesales
-            // 
-            this.txtchargesales.Font = new System.Drawing.Font("Tahoma", 9.25F);
-            this.txtchargesales.ForeColor = System.Drawing.Color.Black;
-            this.txtchargesales.Location = new System.Drawing.Point(344, 979);
-            this.txtchargesales.Margin = new System.Windows.Forms.Padding(8);
-            this.txtchargesales.Name = "txtchargesales";
-            this.txtchargesales.ReadOnly = true;
-            this.txtchargesales.Size = new System.Drawing.Size(144, 37);
-            this.txtchargesales.TabIndex = 123628;
-            this.txtchargesales.Text = "0";
-            this.txtchargesales.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // POSClosedTransaction
             // 

@@ -240,7 +240,7 @@
             this.btnMerchants = new DevExpress.XtraBars.BarButtonItem();
             this.btnActivityLogs = new DevExpress.XtraBars.BarButtonItem();
             this.btnPOSManagement2 = new DevExpress.XtraBars.BarButtonItem();
-            this.barButtonItem27 = new DevExpress.XtraBars.BarButtonItem();
+            this.barbtncomparativeB = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem31 = new DevExpress.XtraBars.BarButtonItem();
             this.barBtnStockOutItems = new DevExpress.XtraBars.BarButtonItem();
             this.btnInventoryPerBranch = new DevExpress.XtraBars.BarButtonItem();
@@ -511,7 +511,7 @@
             this.barButtonItem25,
             this.btnPOSManagement2,
             this.barButtonItem26,
-            this.barButtonItem27,
+            this.barbtncomparativeB,
             this.barButtonItem30,
             this.barButtonItem31,
             this.barBtnStockOutItems,
@@ -522,7 +522,7 @@
             this.barButtonItem32,
             this.barButtonItem33});
             this.ribbonControl.Location = new System.Drawing.Point(0, 0);
-            this.ribbonControl.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.ribbonControl.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.ribbonControl.MaxItemId = 217;
             this.ribbonControl.Name = "ribbonControl";
             this.ribbonControl.PageHeaderItemLinks.Add(this.barStaticItem2);
@@ -539,7 +539,7 @@
             this.ribbonControl.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonControlStyle.Office2013;
             this.ribbonControl.ShowApplicationButton = DevExpress.Utils.DefaultBoolean.False;
             this.ribbonControl.ShowPageHeadersMode = DevExpress.XtraBars.Ribbon.ShowPageHeadersMode.Show;
-            this.ribbonControl.Size = new System.Drawing.Size(1453, 158);
+            this.ribbonControl.Size = new System.Drawing.Size(2906, 308);
             this.ribbonControl.StatusBar = this.ribbonStatusBar;
             this.ribbonControl.SelectedPageChanged += new System.EventHandler(this.ribbonControl_SelectedPageChanged);
             this.ribbonControl.Click += new System.EventHandler(this.ribbon_Click);
@@ -769,7 +769,7 @@
             // 
             // btnTransactions
             // 
-            this.btnTransactions.Caption = "Transactions";
+            this.btnTransactions.Caption = "Client Sales";
             this.btnTransactions.CategoryGuid = new System.Guid("6ffddb2b-9015-4d97-a4c1-91613e0ef537");
             this.btnTransactions.Id = 28;
             this.btnTransactions.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("btnTransactions.ImageOptions.LargeImage")));
@@ -2439,12 +2439,12 @@
             this.btnPOSManagement2.Name = "btnPOSManagement2";
             this.btnPOSManagement2.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnPOSManagement2_ItemClick);
             // 
-            // barButtonItem27
+            // barbtncomparativeB
             // 
-            this.barButtonItem27.Caption = "Comparative Report B";
-            this.barButtonItem27.Id = 207;
-            this.barButtonItem27.Name = "barButtonItem27";
-            this.barButtonItem27.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem27_ItemClick_1);
+            this.barbtncomparativeB.Caption = "Comparative Report B";
+            this.barbtncomparativeB.Id = 207;
+            this.barbtncomparativeB.Name = "barbtncomparativeB";
+            this.barbtncomparativeB.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem27_ItemClick_1);
             // 
             // barButtonItem31
             // 
@@ -2682,8 +2682,6 @@
             // 
             // ribbonPageGroup25
             // 
-            this.ribbonPageGroup25.ItemLinks.Add(this.btnAPAccounts);
-            this.ribbonPageGroup25.ItemLinks.Add(this.btnARAccounts);
             this.ribbonPageGroup25.ItemLinks.Add(this.btnAccountMasterlist);
             this.ribbonPageGroup25.ItemLinks.Add(this.btnCheckVoucher);
             this.ribbonPageGroup25.Name = "ribbonPageGroup25";
@@ -2740,7 +2738,7 @@
             this.ribbonPageGroup11.ItemLinks.Add(this.btnInventoryUnitActivity);
             this.ribbonPageGroup11.ItemLinks.Add(this.btnReturnOrders);
             this.ribbonPageGroup11.ItemLinks.Add(this.btnInventoryCostRep);
-            this.ribbonPageGroup11.ItemLinks.Add(this.barButtonItem27);
+            this.ribbonPageGroup11.ItemLinks.Add(this.barbtncomparativeB);
             this.ribbonPageGroup11.Name = "ribbonPageGroup11";
             this.ribbonPageGroup11.Text = "INVENTORY REPORTS";
             // 
@@ -2868,11 +2866,11 @@
             this.ribbonStatusBar.ItemLinks.Add(this.barHeaderItem4);
             this.ribbonStatusBar.ItemLinks.Add(this.barStaticItem8);
             this.ribbonStatusBar.ItemLinks.Add(this.barStaticCashierTransNo);
-            this.ribbonStatusBar.Location = new System.Drawing.Point(0, 547);
-            this.ribbonStatusBar.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.ribbonStatusBar.Location = new System.Drawing.Point(0, 1050);
+            this.ribbonStatusBar.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.ribbonStatusBar.Name = "ribbonStatusBar";
             this.ribbonStatusBar.Ribbon = this.ribbonControl;
-            this.ribbonStatusBar.Size = new System.Drawing.Size(1453, 24);
+            this.ribbonStatusBar.Size = new System.Drawing.Size(2906, 48);
             // 
             // barAndDockingController1
             // 
@@ -2896,7 +2894,7 @@
             this.xtraTabbedMdiManager1.AppearancePage.Header.Options.UseBackColor = true;
             this.xtraTabbedMdiManager1.AppearancePage.Header.Options.UseFont = true;
             this.xtraTabbedMdiManager1.AppearancePage.Header.Options.UseForeColor = true;
-            this.xtraTabbedMdiManager1.AppearancePage.HeaderActive.BackColor = System.Drawing.Color.DarkTurquoise;
+            this.xtraTabbedMdiManager1.AppearancePage.HeaderActive.BackColor = System.Drawing.Color.DarkGreen;
             this.xtraTabbedMdiManager1.AppearancePage.HeaderActive.Options.UseBackColor = true;
             this.xtraTabbedMdiManager1.ClosePageButtonShowMode = DevExpress.XtraTab.ClosePageButtonShowMode.InActiveTabPageHeader;
             this.xtraTabbedMdiManager1.MdiParent = this;
@@ -2946,18 +2944,18 @@
             // 
             this.Appearance.BackColor = System.Drawing.SystemColors.Control;
             this.Appearance.Options.UseBackColor = true;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1453, 571);
+            this.ClientSize = new System.Drawing.Size(2906, 1098);
             this.Controls.Add(this.ribbonStatusBar);
             this.Controls.Add(this.ribbonControl);
             this.IsMdiContainer = true;
-            this.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.Name = "Main";
             this.Ribbon = this.ribbonControl;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.StatusBar = this.ribbonStatusBar;
-            this.Text = "ITCORE-CORE CS ver 7.0.3";
+            this.Text = "ITCORE-CORE CS ver 8.0.0";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Main_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Main_FormClosed);
@@ -3235,7 +3233,7 @@
         private DevExpress.XtraBars.BarButtonItem barButtonItem25;
         private DevExpress.XtraBars.BarButtonItem btnPOSManagement2;
         private DevExpress.XtraBars.BarButtonItem barButtonItem26;
-        private DevExpress.XtraBars.BarButtonItem barButtonItem27;
+        private DevExpress.XtraBars.BarButtonItem barbtncomparativeB;
         private DevExpress.XtraBars.BarButtonItem barButtonItem30;
         private DevExpress.XtraBars.BarButtonItem barButtonItem31;
         private DevExpress.XtraBars.BarButtonItem barBtnStockOutItems;

@@ -588,7 +588,6 @@ namespace SalesInventorySystem.POS
                 if (!isoverride)
                 {
                     POSEndOfDay posend = new POSEndOfDay();
-                     
                     posend.ShowDialog(this);
                 }
                 else
@@ -604,6 +603,7 @@ namespace SalesInventorySystem.POS
                         posend.ShowDialog(this);
 
                         isdone = true;
+                        frmTrnCheck = "FALSE";
                         AuthorizedConfirmationFrm.isconfirmedLogin = false;
                         authfrm.Dispose();
                         //Classes.Utilities.writeTextfile("C:\\POSTransaction\\ORSeries\\counter.txt", txtOrderNo.Text);

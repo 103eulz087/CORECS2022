@@ -4,8 +4,10 @@ using DevExpress.XtraEditors;
 using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraReports.UI;
+using DevExpress.XtraSplashScreen;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
@@ -14,6 +16,7 @@ using System.Net;
 using System.Net.NetworkInformation;
 using System.Net.Sockets;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -27,7 +30,47 @@ namespace SalesInventorySystem
         //static int papersize = 27;
         static int cornerlength = 0;
 
-       
+        public static void ShowWaitAndDisplay(string query, GridControl grid, GridView view, string caption = "Please wait", string description = "Loading data...", int delayMs = 1000)
+        {
+            try
+            {
+                SplashScreenManager.ShowDefaultWaitForm();
+                SplashScreenManager.Default.SetWaitFormCaption(caption);
+                SplashScreenManager.Default.SetWaitFormDescription(description);
+
+                Database.display(query, grid, view);
+
+                // Optional delay to keep the wait form visible
+                Thread.Sleep(delayMs);
+            }
+            catch (SqlException ex)
+            {
+                XtraMessageBox.Show("Error: " + ex.Message);
+            }
+            finally
+            {
+                SplashScreenManager.CloseDefaultWaitForm();
+            }
+        }
+
+
+        public static DateTime GetPreviousMonthSameDay(DateTime inputDate)
+        {
+            int previousMonth = inputDate.Month - 1;
+            int year = inputDate.Year;
+
+            if (previousMonth == 0)
+            {
+                previousMonth = 12;
+                year -= 1;
+            }
+
+            int daysInPrevMonth = DateTime.DaysInMonth(year, previousMonth);
+            int day = Math.Min(inputDate.Day, daysInPrevMonth);
+
+            return new DateTime(year, previousMonth, day);
+        }
+
 
         public static string convertToNumericFormat(double value)
         {

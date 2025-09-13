@@ -75,6 +75,11 @@
             this.simpleButton2 = new DevExpress.XtraEditors.SimpleButton();
             this.checkBox4 = new System.Windows.Forms.CheckBox();
             this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
+            this.txtproducttypecode = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.txtprodtype = new DevExpress.XtraEditors.SearchLookUpEdit();
+            this.gridView2 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.chckisvat = new System.Windows.Forms.CheckBox();
             this.txtproductcategorycode = new System.Windows.Forms.TextBox();
             this.txtprodcatlookup = new DevExpress.XtraEditors.SearchLookUpEdit();
             this.searchLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -87,16 +92,13 @@
             this.groupControl2 = new DevExpress.XtraEditors.GroupControl();
             this.gridControl1 = new DevExpress.XtraGrid.GridControl();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.chckisvat = new System.Windows.Forms.CheckBox();
-            this.txtprodtype = new DevExpress.XtraEditors.SearchLookUpEdit();
-            this.gridView2 = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.label12 = new System.Windows.Forms.Label();
-            this.txtproducttypecode = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtsrchprodname.Properties)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
             this.groupControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtprodtype.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtprodcatlookup.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
@@ -104,8 +106,6 @@
             this.groupControl2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtprodtype.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView2)).BeginInit();
             this.SuspendLayout();
             // 
             // chckapplytoall
@@ -689,6 +689,59 @@
             this.groupControl1.TabIndex = 57;
             this.groupControl1.Text = "Product Info";
             // 
+            // txtproducttypecode
+            // 
+            this.txtproducttypecode.Enabled = false;
+            this.txtproducttypecode.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtproducttypecode.Location = new System.Drawing.Point(1978, 154);
+            this.txtproducttypecode.Margin = new System.Windows.Forms.Padding(6);
+            this.txtproducttypecode.Name = "txtproducttypecode";
+            this.txtproducttypecode.Size = new System.Drawing.Size(108, 36);
+            this.txtproducttypecode.TabIndex = 69;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.Location = new System.Drawing.Point(1510, 159);
+            this.label12.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(161, 29);
+            this.label12.TabIndex = 68;
+            this.label12.Text = "Product Type:";
+            // 
+            // txtprodtype
+            // 
+            this.txtprodtype.EditValue = "";
+            this.txtprodtype.Enabled = false;
+            this.txtprodtype.Location = new System.Drawing.Point(1694, 153);
+            this.txtprodtype.Name = "txtprodtype";
+            this.txtprodtype.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.txtprodtype.Properties.PopupView = this.gridView2;
+            this.txtprodtype.Size = new System.Drawing.Size(271, 40);
+            this.txtprodtype.TabIndex = 67;
+            this.txtprodtype.EditValueChanged += new System.EventHandler(this.txtprodtype_EditValueChanged);
+            // 
+            // gridView2
+            // 
+            this.gridView2.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
+            this.gridView2.Name = "gridView2";
+            this.gridView2.OptionsSelection.EnableAppearanceFocusedCell = false;
+            this.gridView2.OptionsView.ShowGroupPanel = false;
+            // 
+            // chckisvat
+            // 
+            this.chckisvat.AutoSize = true;
+            this.chckisvat.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chckisvat.Location = new System.Drawing.Point(681, 248);
+            this.chckisvat.Margin = new System.Windows.Forms.Padding(6);
+            this.chckisvat.Name = "chckisvat";
+            this.chckisvat.Size = new System.Drawing.Size(107, 33);
+            this.chckisvat.TabIndex = 66;
+            this.chckisvat.Text = "isVat?";
+            this.chckisvat.UseVisualStyleBackColor = true;
+            // 
             // txtproductcategorycode
             // 
             this.txtproductcategorycode.Enabled = false;
@@ -823,59 +876,6 @@
             this.gridView1.OptionsView.RowAutoHeight = true;
             this.gridView1.OptionsView.ShowFooter = true;
             // 
-            // chckisvat
-            // 
-            this.chckisvat.AutoSize = true;
-            this.chckisvat.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chckisvat.Location = new System.Drawing.Point(681, 248);
-            this.chckisvat.Margin = new System.Windows.Forms.Padding(6);
-            this.chckisvat.Name = "chckisvat";
-            this.chckisvat.Size = new System.Drawing.Size(107, 33);
-            this.chckisvat.TabIndex = 66;
-            this.chckisvat.Text = "isVat?";
-            this.chckisvat.UseVisualStyleBackColor = true;
-            // 
-            // txtprodtype
-            // 
-            this.txtprodtype.EditValue = "";
-            this.txtprodtype.Enabled = false;
-            this.txtprodtype.Location = new System.Drawing.Point(1694, 153);
-            this.txtprodtype.Name = "txtprodtype";
-            this.txtprodtype.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.txtprodtype.Properties.PopupView = this.gridView2;
-            this.txtprodtype.Size = new System.Drawing.Size(271, 40);
-            this.txtprodtype.TabIndex = 67;
-            this.txtprodtype.EditValueChanged += new System.EventHandler(this.txtprodtype_EditValueChanged);
-            // 
-            // gridView2
-            // 
-            this.gridView2.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
-            this.gridView2.Name = "gridView2";
-            this.gridView2.OptionsSelection.EnableAppearanceFocusedCell = false;
-            this.gridView2.OptionsView.ShowGroupPanel = false;
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(1510, 159);
-            this.label12.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(161, 29);
-            this.label12.TabIndex = 68;
-            this.label12.Text = "Product Type:";
-            // 
-            // txtproducttypecode
-            // 
-            this.txtproducttypecode.Enabled = false;
-            this.txtproducttypecode.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtproducttypecode.Location = new System.Drawing.Point(1978, 154);
-            this.txtproducttypecode.Margin = new System.Windows.Forms.Padding(6);
-            this.txtproducttypecode.Name = "txtproducttypecode";
-            this.txtproducttypecode.Size = new System.Drawing.Size(108, 36);
-            this.txtproducttypecode.TabIndex = 69;
-            // 
             // ProductsDevEx
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
@@ -895,6 +895,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).EndInit();
             this.groupControl1.ResumeLayout(false);
             this.groupControl1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtprodtype.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtprodcatlookup.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
@@ -902,8 +904,6 @@
             this.groupControl2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtprodtype.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView2)).EndInit();
             this.ResumeLayout(false);
 
         }

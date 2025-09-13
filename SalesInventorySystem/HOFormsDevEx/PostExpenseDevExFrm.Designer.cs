@@ -78,6 +78,8 @@
             this.cancelLineToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.txtbatchid = new DevExpress.XtraEditors.TextEdit();
+            this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).BeginInit();
             this.xtraTabControl1.SuspendLayout();
             this.xtraTabPage1.SuspendLayout();
@@ -117,6 +119,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtbrcodesum.Properties)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.contextMenuStrip2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtbatchid.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // xtraTabControl1
@@ -294,6 +297,8 @@
             // 
             // groupControl1
             // 
+            this.groupControl1.Controls.Add(this.txtbatchid);
+            this.groupControl1.Controls.Add(this.labelControl3);
             this.groupControl1.Controls.Add(this.txtinvoiceno);
             this.groupControl1.Controls.Add(this.txtremarks);
             this.groupControl1.Controls.Add(this.labelControl2);
@@ -313,12 +318,12 @@
             // 
             // txtinvoiceno
             // 
-            this.txtinvoiceno.Location = new System.Drawing.Point(223, 104);
+            this.txtinvoiceno.Location = new System.Drawing.Point(990, 50);
             this.txtinvoiceno.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.txtinvoiceno.Name = "txtinvoiceno";
             this.txtinvoiceno.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtinvoiceno.Properties.Appearance.Options.UseFont = true;
-            this.txtinvoiceno.Size = new System.Drawing.Size(215, 44);
+            this.txtinvoiceno.Size = new System.Drawing.Size(432, 44);
             this.txtinvoiceno.TabIndex = 469;
             // 
             // txtremarks
@@ -368,7 +373,7 @@
             // 
             this.labelControl11.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelControl11.Appearance.Options.UseFont = true;
-            this.labelControl11.Location = new System.Drawing.Point(23, 110);
+            this.labelControl11.Location = new System.Drawing.Point(925, 57);
             this.labelControl11.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
             this.labelControl11.Name = "labelControl11";
             this.labelControl11.Size = new System.Drawing.Size(55, 29);
@@ -671,6 +676,28 @@
             this.toolStripMenuItem1.Text = "ErrorCorrect";
             this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
             // 
+            // txtbatchid
+            // 
+            this.txtbatchid.Location = new System.Drawing.Point(223, 105);
+            this.txtbatchid.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
+            this.txtbatchid.Name = "txtbatchid";
+            this.txtbatchid.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtbatchid.Properties.Appearance.Options.UseFont = true;
+            this.txtbatchid.Properties.ReadOnly = true;
+            this.txtbatchid.Size = new System.Drawing.Size(215, 44);
+            this.txtbatchid.TabIndex = 471;
+            // 
+            // labelControl3
+            // 
+            this.labelControl3.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelControl3.Appearance.Options.UseFont = true;
+            this.labelControl3.Location = new System.Drawing.Point(23, 111);
+            this.labelControl3.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
+            this.labelControl3.Name = "labelControl3";
+            this.labelControl3.Size = new System.Drawing.Size(100, 29);
+            this.labelControl3.TabIndex = 470;
+            this.labelControl3.Text = "Batch ID:";
+            // 
             // PostExpenseDevExFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
@@ -722,6 +749,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtbrcodesum.Properties)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
             this.contextMenuStrip2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.txtbatchid.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -776,5 +804,7 @@
         private DevExpress.XtraEditors.LabelControl labelControl2;
         private System.Windows.Forms.RichTextBox txtremarks;
         private DevExpress.XtraEditors.TextEdit txtinvoiceno;
+        private DevExpress.XtraEditors.TextEdit txtbatchid;
+        private DevExpress.XtraEditors.LabelControl labelControl3;
     }
 }

@@ -731,13 +731,13 @@ namespace SalesInventorySystem
         {
             foreach (Form form in Application.OpenForms)
             {
-                if (form.GetType() == typeof(HOForms.POSTransactions))
+                if (form.GetType() == typeof(POS.POSSalesReportDevEx))
                 {
                     form.Activate();
                     return;
                 }
             }
-            HOForms.POSTransactions postra = new HOForms.POSTransactions();
+            POS.POSSalesReportDevEx postra = new POS.POSSalesReportDevEx();
             postra.Show();
         }
 

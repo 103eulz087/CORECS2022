@@ -69,6 +69,13 @@
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStripPaid = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.btnforapproval = new DevExpress.XtraEditors.SimpleButton();
+            this.txtdatetoforapproval = new System.Windows.Forms.DateTimePicker();
+            this.txtdatefromforapproval = new System.Windows.Forms.DateTimePicker();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).BeginInit();
             this.xtraTabControl1.SuspendLayout();
             this.xtraTabPageForApproval.SuspendLayout();
@@ -95,6 +102,7 @@
             this.contextMenuStripApproved.SuspendLayout();
             this.contextMenuStripCancelled.SuspendLayout();
             this.contextMenuStripPaid.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // xtraTabControl1
@@ -120,6 +128,7 @@
             // xtraTabPageForApproval
             // 
             this.xtraTabPageForApproval.Controls.Add(this.gridControl2);
+            this.xtraTabPageForApproval.Controls.Add(this.groupBox3);
             this.xtraTabPageForApproval.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
             this.xtraTabPageForApproval.Name = "xtraTabPageForApproval";
             this.xtraTabPageForApproval.Size = new System.Drawing.Size(2900, 1398);
@@ -129,11 +138,11 @@
             // 
             this.gridControl2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gridControl2.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
-            this.gridControl2.Location = new System.Drawing.Point(0, 0);
+            this.gridControl2.Location = new System.Drawing.Point(0, 96);
             this.gridControl2.MainView = this.gridView2;
             this.gridControl2.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
             this.gridControl2.Name = "gridControl2";
-            this.gridControl2.Size = new System.Drawing.Size(2900, 1398);
+            this.gridControl2.Size = new System.Drawing.Size(2900, 1302);
             this.gridControl2.TabIndex = 6;
             this.gridControl2.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView2});
@@ -462,19 +471,19 @@
             this.showDetailsToolStripMenuItem,
             this.editDetailsToolStripMenuItem});
             this.contextMenuStripForApproval.Name = "contextMenuStripForApproval";
-            this.contextMenuStripForApproval.Size = new System.Drawing.Size(301, 120);
+            this.contextMenuStripForApproval.Size = new System.Drawing.Size(228, 76);
             // 
             // showDetailsToolStripMenuItem
             // 
             this.showDetailsToolStripMenuItem.Name = "showDetailsToolStripMenuItem";
-            this.showDetailsToolStripMenuItem.Size = new System.Drawing.Size(300, 36);
+            this.showDetailsToolStripMenuItem.Size = new System.Drawing.Size(227, 36);
             this.showDetailsToolStripMenuItem.Text = "Show Details";
             this.showDetailsToolStripMenuItem.Click += new System.EventHandler(this.showDetailsToolStripMenuItem_Click);
             // 
             // editDetailsToolStripMenuItem
             // 
             this.editDetailsToolStripMenuItem.Name = "editDetailsToolStripMenuItem";
-            this.editDetailsToolStripMenuItem.Size = new System.Drawing.Size(300, 36);
+            this.editDetailsToolStripMenuItem.Size = new System.Drawing.Size(227, 36);
             this.editDetailsToolStripMenuItem.Text = "Edit Details";
             this.editDetailsToolStripMenuItem.Click += new System.EventHandler(this.editDetailsToolStripMenuItem_Click);
             // 
@@ -531,6 +540,78 @@
             this.toolStripMenuItem3.Text = "Show Details";
             this.toolStripMenuItem3.Click += new System.EventHandler(this.toolStripMenuItem3_Click);
             // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.btnforapproval);
+            this.groupBox3.Controls.Add(this.txtdatetoforapproval);
+            this.groupBox3.Controls.Add(this.txtdatefromforapproval);
+            this.groupBox3.Controls.Add(this.label5);
+            this.groupBox3.Controls.Add(this.label6);
+            this.groupBox3.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupBox3.Font = new System.Drawing.Font("Tahoma", 7.75F);
+            this.groupBox3.Location = new System.Drawing.Point(0, 0);
+            this.groupBox3.Margin = new System.Windows.Forms.Padding(6);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Padding = new System.Windows.Forms.Padding(6);
+            this.groupBox3.Size = new System.Drawing.Size(2900, 96);
+            this.groupBox3.TabIndex = 7;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Filter Date";
+            // 
+            // btnforapproval
+            // 
+            this.btnforapproval.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("simpleButton1.ImageOptions.Image")));
+            this.btnforapproval.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
+            this.btnforapproval.Location = new System.Drawing.Point(678, 33);
+            this.btnforapproval.Margin = new System.Windows.Forms.Padding(6);
+            this.btnforapproval.Name = "btnforapproval";
+            this.btnforapproval.Size = new System.Drawing.Size(172, 44);
+            this.btnforapproval.TabIndex = 7;
+            this.btnforapproval.Text = "Generate";
+            this.btnforapproval.Click += new System.EventHandler(this.btnforapproval_Click);
+            // 
+            // txtdatetoforapproval
+            // 
+            this.txtdatetoforapproval.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold);
+            this.txtdatetoforapproval.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.txtdatetoforapproval.Location = new System.Drawing.Point(432, 33);
+            this.txtdatetoforapproval.Margin = new System.Windows.Forms.Padding(6);
+            this.txtdatetoforapproval.Name = "txtdatetoforapproval";
+            this.txtdatetoforapproval.Size = new System.Drawing.Size(232, 39);
+            this.txtdatetoforapproval.TabIndex = 3;
+            // 
+            // txtdatefromforapproval
+            // 
+            this.txtdatefromforapproval.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold);
+            this.txtdatefromforapproval.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.txtdatefromforapproval.Location = new System.Drawing.Point(116, 33);
+            this.txtdatefromforapproval.Margin = new System.Windows.Forms.Padding(6);
+            this.txtdatefromforapproval.Name = "txtdatefromforapproval";
+            this.txtdatefromforapproval.Size = new System.Drawing.Size(232, 39);
+            this.txtdatefromforapproval.TabIndex = 2;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold);
+            this.label5.Location = new System.Drawing.Point(364, 42);
+            this.label5.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(55, 31);
+            this.label5.TabIndex = 1;
+            this.label5.Text = "To:";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold);
+            this.label6.Location = new System.Drawing.Point(16, 42);
+            this.label6.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(90, 31);
+            this.label6.TabIndex = 0;
+            this.label6.Text = "From:";
+            // 
             // ViewExpenseDevEx
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
@@ -569,6 +650,8 @@
             this.contextMenuStripApproved.ResumeLayout(false);
             this.contextMenuStripCancelled.ResumeLayout(false);
             this.contextMenuStripPaid.ResumeLayout(false);
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -614,5 +697,12 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem3;
         private System.Windows.Forms.ToolStripMenuItem editDetailsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem errorCorrectToolStripMenuItem;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private DevExpress.XtraEditors.SimpleButton btnforapproval;
+        private System.Windows.Forms.DateTimePicker txtdatetoforapproval;
+        private System.Windows.Forms.DateTimePicker txtdatefromforapproval;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label6;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
     }
 }

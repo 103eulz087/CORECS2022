@@ -21,6 +21,7 @@ namespace SalesInventorySystem.POSDevEx
 {
     public partial class POSXReadReportDevEx : DevExpress.XtraEditors.XtraForm
     {
+        object reportid = null;
         public static string brcode = String.Empty;
         string reportype = String.Empty, groupname= String.Empty;
         //double totkg = 0.0,totamount = 0.0;
@@ -60,6 +61,11 @@ namespace SalesInventorySystem.POSDevEx
         }
         private void POSXReadReportDevEx_Load(object sender, EventArgs e)
         {
+            txtsalesdatefrom.Text = HelperFunction.GetPreviousMonthSameDay(DateTime.Today).ToShortDateString();
+            txtsalesdateto.Text = DateTime.Today.ToShortDateString();
+            dateEdit2.Text = DateTime.Today.ToShortDateString();
+            txtaudlogsdate.Text = DateTime.Today.ToShortDateString();
+            Database.displaySearchlookupEdit("SELECT * FROM dbo.SalesReportType", txtreporttypeposreading, "ReportName", "ReportName");
             populateBranch();
             //xtraTabPage2.TabControl.Visible = false;
         }
@@ -87,45 +93,46 @@ namespace SalesInventorySystem.POSDevEx
                 XtraMessageBox.Show("Date Field must not Empty");
                 return;
             }
-            if (comboBoxEdit1.Text == "Group Category Sales") //123
-                reportype = "GROUPCATEGORY";
-            else if (comboBoxEdit1.Text == "Full Transaction Sales") //123
-                reportype = "FULLTRANSACTION";
-            else if (comboBoxEdit1.Text == "Group Item Sales") //123
-                reportype = "GROUPITEM";
-            else if (comboBoxEdit1.Text == "Cashier Sales")//123
-                reportype = "CASHIERSALES";
-            else if (comboBoxEdit1.Text == "Audit Logs")//123
-                reportype = "AUDITLOGS";
-            else if (comboBoxEdit1.Text == "XREAD")//123
-                reportype = "XREAD";
-            else if (comboBoxEdit1.Text == "ZREAD")//12
-                reportype = "ZREAD";
-            else if (comboBoxEdit1.Text == "REFUND")//123
-                reportype = "REFUND";
-            else if (comboBoxEdit1.Text == "PWD")//123
-                reportype = "PWD";
-            else if (comboBoxEdit1.Text == "Senior Citizen")//123
-                reportype = "SENIOR";
-            else if (comboBoxEdit1.Text == "Regular Disc")//123
-                reportype = "REGULAR";
-            else if (comboBoxEdit1.Text == "Sales Summary Report")//12
-                reportype = "SALESSUMMARY";
-            else if (comboBoxEdit1.Text == "CreditCard")//123
-                reportype = "CREDITCARD";
-            else if (comboBoxEdit1.Text == "Merchant Sales")//123
-                reportype = "MERCHANT";
-            else if (comboBoxEdit1.Text == "SalesIN")//123
-                reportype = "SALESIN";
-            else if (comboBoxEdit1.Text == "BACKUPDATA")//123
-                reportype = "BACKUPDATA";
-            else if (comboBoxEdit1.Text == "XERO SalesInvoice")//123
-                reportype = "XERO SalesInvoice";
-            else if (comboBoxEdit1.Text == "JUANTAX SalesTransaction")//123
-                reportype = "JUANTAX SalesTransaction";
-            else if (comboBoxEdit1.Text == "Group Product Category")//123
-                reportype = "PRODCAT";
-            execute(reportype);
+            //if(reportid.ToString().Equals(""))
+            //if (comboBoxEdit1.Text == "Group Category Sales") //123
+            //    reportype = "GROUPCATEGORY";
+            //else if (comboBoxEdit1.Text == "Full Transaction Sales") //123
+            //    reportype = "FULLTRANSACTION";
+            //else if (comboBoxEdit1.Text == "Group Item Sales") //123
+            //    reportype = "GROUPITEM";
+            //else if (comboBoxEdit1.Text == "Cashier Sales")//123
+            //    reportype = "CASHIERSALES";
+            //else if (comboBoxEdit1.Text == "Audit Logs")//123
+            //    reportype = "AUDITLOGS";
+            //else if (comboBoxEdit1.Text == "XREAD")//123
+            //    reportype = "XREAD";
+            //else if (comboBoxEdit1.Text == "ZREAD")//12
+            //    reportype = "ZREAD";
+            //else if (comboBoxEdit1.Text == "REFUND")//123
+            //    reportype = "REFUND";
+            //else if (comboBoxEdit1.Text == "PWD")//123
+            //    reportype = "PWD";
+            //else if (comboBoxEdit1.Text == "Senior Citizen")//123
+            //    reportype = "SENIOR";
+            //else if (comboBoxEdit1.Text == "Regular Disc")//123
+            //    reportype = "REGULAR";
+            //else if (comboBoxEdit1.Text == "Sales Summary Report")//12
+            //    reportype = "SALESSUMMARY";
+            //else if (comboBoxEdit1.Text == "CreditCard")//123
+            //    reportype = "CREDITCARD";
+            //else if (comboBoxEdit1.Text == "Merchant Sales")//123
+            //    reportype = "MERCHANT";
+            //else if (comboBoxEdit1.Text == "SalesIN")//123
+            //    reportype = "SALESIN";
+            //else if (comboBoxEdit1.Text == "BACKUPDATA")//123
+            //    reportype = "BACKUPDATA";
+            //else if (comboBoxEdit1.Text == "XERO SalesInvoice")//123
+            //    reportype = "XERO SalesInvoice";
+            //else if (comboBoxEdit1.Text == "JUANTAX SalesTransaction")//123
+            //    reportype = "JUANTAX SalesTransaction";
+            //else if (comboBoxEdit1.Text == "Group Product Category")//123
+            //    reportype = "PRODCAT";
+            execute(Convert.ToInt32(reportid.ToString()));
 
             foreach(GridColumn col in gridView1.Columns)
             {
@@ -1149,7 +1156,12 @@ namespace SalesInventorySystem.POSDevEx
             }
         }
 
-        void execute(string reportcategory)
+        private void txtreporttypeposreading_EditValueChanged(object sender, EventArgs e)
+        {
+            reportid = SearchLookUpClass.getSingleValue(txtreporttypeposreading, "ReportID");
+        }
+
+        void execute(int reportcategory)
         {
             bool ispermachine = false, ispercashier = false;
             if(rad1.Checked==true) //PER BRANCH ONLY
@@ -1284,7 +1296,8 @@ namespace SalesInventorySystem.POSDevEx
         private void simpleButton6_Click(object sender, EventArgs e)
         { 
             string filepath = "C:\\MyFiles\\";
-            string filename = txtbranch.Text + "_" + reportype+ "_"+txtsalesdatefrom.Text.Replace("/","-")+"_ZX.xls";
+            //string filename = txtbranch.Text + "_" + txtreporttypeposreading .Text+ "_"+txtsalesdatefrom.Text.Replace("/","-")+".xls";
+            string filename = txtbranch.Text + "_" + txtreporttypeposreading.Text + "_" + DateTime.Now.ToString("yyyyMMddHHmmss") + ".xls";
             string file = filepath + filename;
             gridControl1.ExportToXls(file);
             XtraMessageBox.Show("Export Success");

@@ -32,11 +32,11 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SupplierPaymentDevEx));
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
             this.panelCheckVoucher = new DevExpress.XtraEditors.PanelControl();
+            this.txtlastchecknum = new DevExpress.XtraEditors.TextEdit();
             this.labelControl5 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl6 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl7 = new DevExpress.XtraEditors.LabelControl();
             this.txtcheckdate = new DevExpress.XtraEditors.DateEdit();
-            this.txtlastchecknum = new System.Windows.Forms.Label();
             this.txtcheckno = new DevExpress.XtraEditors.TextEdit();
             this.radCheckVoucher = new System.Windows.Forms.RadioButton();
             this.radCashVoucher = new System.Windows.Forms.RadioButton();
@@ -92,6 +92,7 @@
             this.panelControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelCheckVoucher)).BeginInit();
             this.panelCheckVoucher.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtlastchecknum.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtcheckdate.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtcheckdate.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtcheckno.Properties)).BeginInit();
@@ -155,17 +156,28 @@
             // 
             // panelCheckVoucher
             // 
+            this.panelCheckVoucher.Controls.Add(this.txtlastchecknum);
             this.panelCheckVoucher.Controls.Add(this.labelControl5);
             this.panelCheckVoucher.Controls.Add(this.labelControl6);
             this.panelCheckVoucher.Controls.Add(this.labelControl7);
             this.panelCheckVoucher.Controls.Add(this.txtcheckdate);
-            this.panelCheckVoucher.Controls.Add(this.txtlastchecknum);
             this.panelCheckVoucher.Controls.Add(this.txtcheckno);
             this.panelCheckVoucher.Location = new System.Drawing.Point(728, 8);
             this.panelCheckVoucher.Margin = new System.Windows.Forms.Padding(6, 4, 6, 4);
             this.panelCheckVoucher.Name = "panelCheckVoucher";
             this.panelCheckVoucher.Size = new System.Drawing.Size(672, 154);
             this.panelCheckVoucher.TabIndex = 472;
+            // 
+            // txtlastchecknum
+            // 
+            this.txtlastchecknum.Location = new System.Drawing.Point(292, 4);
+            this.txtlastchecknum.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.txtlastchecknum.Name = "txtlastchecknum";
+            this.txtlastchecknum.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 9.25F);
+            this.txtlastchecknum.Properties.Appearance.Options.UseFont = true;
+            this.txtlastchecknum.Properties.ReadOnly = true;
+            this.txtlastchecknum.Size = new System.Drawing.Size(364, 44);
+            this.txtlastchecknum.TabIndex = 473;
             // 
             // labelControl5
             // 
@@ -214,18 +226,6 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.txtcheckdate.Size = new System.Drawing.Size(364, 44);
             this.txtcheckdate.TabIndex = 457;
-            // 
-            // txtlastchecknum
-            // 
-            this.txtlastchecknum.AutoSize = true;
-            this.txtlastchecknum.Font = new System.Drawing.Font("Tahoma", 9F);
-            this.txtlastchecknum.ForeColor = System.Drawing.Color.Blue;
-            this.txtlastchecknum.Location = new System.Drawing.Point(286, 22);
-            this.txtlastchecknum.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
-            this.txtlastchecknum.Name = "txtlastchecknum";
-            this.txtlastchecknum.Size = new System.Drawing.Size(226, 29);
-            this.txtlastchecknum.TabIndex = 468;
-            this.txtlastchecknum.Text = "Last CheckNo Used:";
             // 
             // txtcheckno
             // 
@@ -604,6 +604,7 @@
             this.gridViewMaster.CustomRowCellEdit += new DevExpress.XtraGrid.Views.Grid.CustomRowCellEditEventHandler(this.gridViewMaster_CustomRowCellEdit);
             this.gridViewMaster.ShowingEditor += new System.ComponentModel.CancelEventHandler(this.gridViewMaster_ShowingEditor);
             this.gridViewMaster.CellValueChanged += new DevExpress.XtraGrid.Views.Base.CellValueChangedEventHandler(this.gridViewMaster_CellValueChanged);
+            this.gridViewMaster.CellValueChanging += new DevExpress.XtraGrid.Views.Base.CellValueChangedEventHandler(this.gridViewMaster_CellValueChanging);
             this.gridViewMaster.Click += new System.EventHandler(this.gridViewMaster_Click);
             // 
             // repositoryItemComboBox5
@@ -790,6 +791,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.panelCheckVoucher)).EndInit();
             this.panelCheckVoucher.ResumeLayout(false);
             this.panelCheckVoucher.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtlastchecknum.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtcheckdate.Properties.CalendarTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtcheckdate.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtcheckno.Properties)).EndInit();
@@ -882,10 +884,10 @@
         public System.Windows.Forms.Label txtsupplierid;
         private DevExpress.XtraEditors.Repository.RepositoryItemSearchLookUpEdit repositoryItemSearchLookUpEditoffsetCreditGLCode;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView2;
-        public System.Windows.Forms.Label txtlastchecknum;
         private System.Windows.Forms.RadioButton radCheckVoucher;
         private System.Windows.Forms.RadioButton radCashVoucher;
         private DevExpress.XtraEditors.LabelControl labelControl11;
         private DevExpress.XtraEditors.PanelControl panelCheckVoucher;
+        public DevExpress.XtraEditors.TextEdit txtlastchecknum;
     }
 }

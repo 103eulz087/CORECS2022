@@ -84,34 +84,47 @@ namespace SalesInventorySystem.Orders
             }
             con.Close();
         }
+
         void executeTransfer()
         {
             try
             {
-                GridView view = gridControl1.FocusedView as GridView;
-                view.SortInfo.Clear();
+                DataTable dtTransfer = new DataTable();
+                dtTransfer.Columns.Add("ProductCategoryCode", typeof(string));
+                dtTransfer.Columns.Add("ProductCode", typeof(string));
+                dtTransfer.Columns.Add("ProductName", typeof(string));
+                dtTransfer.Columns.Add("Cost", typeof(decimal));
+                dtTransfer.Columns.Add("QtyRequested", typeof(decimal));
+                dtTransfer.Columns.Add("Qty", typeof(decimal));
+                dtTransfer.Columns.Add("Barcode", typeof(string));
 
                 int[] selectedRows = gridView1.GetSelectedRows();
-
                 foreach (int rowHandle in selectedRows)
                 {
-
-                    //string prodcatcode = gridView1.GetRowCellValue(rowHandle, "CategoryCode").ToString();//dataGridView1.Rows[0].Cells["Product"].Value.ToString();
-                    string prodcatcode = Classes.Product.getProductCategoryCode(gridView1.GetRowCellValue(rowHandle, "Category").ToString());
-                    string productcode = gridView1.GetRowCellValue(rowHandle, "ProductCode").ToString();//dataGridView1.Rows[0].Cells["Product"].Value.ToString();
-                    string description = gridView1.GetRowCellValue(rowHandle, "ProductName").ToString();// dataGridView1.Rows[0].Cells["Description"].Value.ToString(); 
-                    string cost = gridView1.GetRowCellValue(rowHandle, "Cost").ToString();//dataGridView1.Rows[0].Cells["Quantity"].Value.ToString();
-                    string quantityReq = gridView1.GetRowCellValue(rowHandle, "QtyRequested").ToString();//dataGridView1.Rows[0].Cells["Quantity"].Value.ToString();
-                    string quantity = gridView1.GetRowCellValue(rowHandle, "Qty").ToString();//dataGridView1.Rows[0].Cells["Quantity"].Value.ToString();
-                    string barcode = gridView1.GetRowCellValue(rowHandle, "Barcode").ToString();//dataGridView1.Rows[0].Cells["Quantity"].Value.ToString();
-                    totalreceive = rowHandle;
-
-                    if (rowHandle >= 0)
-                    {
-                         processSTS(txtponum.Text,txtdevno.Text,txtrefno.Text,txtbrcode.Text,prodcatcode, productcode, quantity, barcode);
-                    }
+                    DataRow dr = dtTransfer.NewRow();
+                    dr["ProductCategoryCode"] = Classes.Product.getProductCategoryCode(gridView1.GetRowCellValue(rowHandle, "Category").ToString());
+                    dr["ProductCode"] = gridView1.GetRowCellValue(rowHandle, "ProductCode").ToString();
+                    dr["ProductName"] = gridView1.GetRowCellValue(rowHandle, "ProductName").ToString();
+                    dr["Cost"] = Convert.ToDecimal(gridView1.GetRowCellValue(rowHandle, "Cost"));
+                    dr["QtyRequested"] = Convert.ToDecimal(gridView1.GetRowCellValue(rowHandle, "QtyRequested"));
+                    dr["Qty"] = Convert.ToDecimal(gridView1.GetRowCellValue(rowHandle, "Qty"));
+                    dr["Barcode"] = gridView1.GetRowCellValue(rowHandle, "Barcode").ToString();
+                    dtTransfer.Rows.Add(dr);
                 }
-                totalreceive = gridView1.SelectedRowsCount;
+
+                using (SqlConnection conn = Database.getConnection())
+                using (SqlCommand cmd = new SqlCommand("sp_AddBranchOrderBatch", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@TransferItems", dtTransfer);
+                    cmd.Parameters.AddWithValue("@PONumber", txtponum.Text);
+                    cmd.Parameters.AddWithValue("@DeliveryNo", txtdevno.Text);
+                    cmd.Parameters.AddWithValue("@ReferenceNo", txtrefno.Text);
+                    cmd.Parameters.AddWithValue("@BranchCode", txtbrcode.Text);
+                    conn.Open();
+                    cmd.ExecuteNonQuery();
+                }
+
                 isdone = true;
             }
             catch (SqlException ex)
@@ -119,6 +132,42 @@ namespace SalesInventorySystem.Orders
                 XtraMessageBox.Show(ex.Message.ToString());
             }
         }
+
+        //void executeTransfer()
+        //{
+        //    try
+        //    {
+        //        GridView view = gridControl1.FocusedView as GridView;
+        //        view.SortInfo.Clear();
+
+        //        int[] selectedRows = gridView1.GetSelectedRows();
+
+        //        foreach (int rowHandle in selectedRows)
+        //        {
+
+        //            //string prodcatcode = gridView1.GetRowCellValue(rowHandle, "CategoryCode").ToString();//dataGridView1.Rows[0].Cells["Product"].Value.ToString();
+        //            string prodcatcode = Classes.Product.getProductCategoryCode(gridView1.GetRowCellValue(rowHandle, "Category").ToString());
+        //            string productcode = gridView1.GetRowCellValue(rowHandle, "ProductCode").ToString();//dataGridView1.Rows[0].Cells["Product"].Value.ToString();
+        //            string description = gridView1.GetRowCellValue(rowHandle, "ProductName").ToString();// dataGridView1.Rows[0].Cells["Description"].Value.ToString(); 
+        //            string cost = gridView1.GetRowCellValue(rowHandle, "Cost").ToString();//dataGridView1.Rows[0].Cells["Quantity"].Value.ToString();
+        //            string quantityReq = gridView1.GetRowCellValue(rowHandle, "QtyRequested").ToString();//dataGridView1.Rows[0].Cells["Quantity"].Value.ToString();
+        //            string quantity = gridView1.GetRowCellValue(rowHandle, "Qty").ToString();//dataGridView1.Rows[0].Cells["Quantity"].Value.ToString();
+        //            string barcode = gridView1.GetRowCellValue(rowHandle, "Barcode").ToString();//dataGridView1.Rows[0].Cells["Quantity"].Value.ToString();
+        //            totalreceive = rowHandle;
+
+        //            if (rowHandle >= 0)
+        //            {
+        //                processSTS(txtponum.Text, txtdevno.Text, txtrefno.Text, txtbrcode.Text, prodcatcode, productcode, quantity, barcode);
+        //            }
+        //        }
+        //        totalreceive = gridView1.SelectedRowsCount;
+        //        isdone = true;
+        //    }
+        //    catch (SqlException ex)
+        //    {
+        //        XtraMessageBox.Show(ex.Message.ToString());
+        //    }
+        //}
 
         private void simpleButton2_Click(object sender, EventArgs e)
         {

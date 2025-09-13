@@ -107,9 +107,9 @@
             // 
             this.groupControl2.Controls.Add(this.tabControl1);
             this.groupControl2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupControl2.Location = new System.Drawing.Point(0, 278);
+            this.groupControl2.Location = new System.Drawing.Point(0, 163);
             this.groupControl2.Name = "groupControl2";
-            this.groupControl2.Size = new System.Drawing.Size(1980, 903);
+            this.groupControl2.Size = new System.Drawing.Size(2556, 1213);
             this.groupControl2.TabIndex = 432;
             this.groupControl2.Text = "Transaction Information";
             // 
@@ -124,7 +124,7 @@
             this.tabControl1.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1974, 855);
+            this.tabControl1.Size = new System.Drawing.Size(2550, 1165);
             this.tabControl1.TabIndex = 0;
             // 
             // tabledger
@@ -393,7 +393,7 @@
             this.tabtransdet.Location = new System.Drawing.Point(8, 44);
             this.tabtransdet.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
             this.tabtransdet.Name = "tabtransdet";
-            this.tabtransdet.Size = new System.Drawing.Size(1958, 803);
+            this.tabtransdet.Size = new System.Drawing.Size(2534, 1113);
             this.tabtransdet.TabIndex = 2;
             this.tabtransdet.Text = "Payment History";
             this.tabtransdet.UseVisualStyleBackColor = true;
@@ -406,7 +406,7 @@
             this.groupBox7.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
             this.groupBox7.Name = "groupBox7";
             this.groupBox7.Padding = new System.Windows.Forms.Padding(5, 6, 5, 6);
-            this.groupBox7.Size = new System.Drawing.Size(1958, 712);
+            this.groupBox7.Size = new System.Drawing.Size(2534, 1022);
             this.groupBox7.TabIndex = 14;
             this.groupBox7.TabStop = false;
             // 
@@ -418,7 +418,7 @@
             this.gridControl3.MainView = this.gridView3;
             this.gridControl3.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
             this.gridControl3.Name = "gridControl3";
-            this.gridControl3.Size = new System.Drawing.Size(1948, 670);
+            this.gridControl3.Size = new System.Drawing.Size(2524, 980);
             this.gridControl3.TabIndex = 5;
             this.gridControl3.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView3});
@@ -451,7 +451,7 @@
             this.groupBox8.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
             this.groupBox8.Name = "groupBox8";
             this.groupBox8.Padding = new System.Windows.Forms.Padding(5, 6, 5, 6);
-            this.groupBox8.Size = new System.Drawing.Size(1958, 91);
+            this.groupBox8.Size = new System.Drawing.Size(2534, 91);
             this.groupBox8.TabIndex = 13;
             this.groupBox8.TabStop = false;
             // 
@@ -524,7 +524,7 @@
             this.dataGridView3.Name = "dataGridView3";
             this.dataGridView3.ReadOnly = true;
             this.dataGridView3.RowHeadersVisible = false;
-            this.dataGridView3.Size = new System.Drawing.Size(1958, 803);
+            this.dataGridView3.Size = new System.Drawing.Size(2534, 1113);
             this.dataGridView3.TabIndex = 10;
             // 
             // groupControl1
@@ -545,24 +545,24 @@
             this.groupControl1.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupControl1.Location = new System.Drawing.Point(0, 0);
             this.groupControl1.Name = "groupControl1";
-            this.groupControl1.Size = new System.Drawing.Size(1980, 278);
+            this.groupControl1.Size = new System.Drawing.Size(2556, 163);
             this.groupControl1.TabIndex = 431;
             this.groupControl1.Text = "Client Details";
             // 
             // btnadd
             // 
             this.btnadd.ImageOptions.Image = global::SalesInventorySystem.Properties.Resources.Add_16x16__2_;
-            this.btnadd.Location = new System.Drawing.Point(269, 211);
+            this.btnadd.Location = new System.Drawing.Point(1376, 51);
             this.btnadd.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
             this.btnadd.Name = "btnadd";
-            this.btnadd.Size = new System.Drawing.Size(231, 50);
+            this.btnadd.Size = new System.Drawing.Size(231, 88);
             this.btnadd.TabIndex = 441;
             this.btnadd.Text = "Add Payment";
             this.btnadd.Click += new System.EventHandler(this.btnadd_Click);
             // 
             // searchLookUpEdit1
             // 
-            this.searchLookUpEdit1.Location = new System.Drawing.Point(267, 53);
+            this.searchLookUpEdit1.Location = new System.Drawing.Point(1513, 133);
             this.searchLookUpEdit1.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
             this.searchLookUpEdit1.Name = "searchLookUpEdit1";
             this.searchLookUpEdit1.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -589,7 +589,7 @@
             // 
             this.Label1.AutoSize = true;
             this.Label1.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Label1.Location = new System.Drawing.Point(36, 53);
+            this.Label1.Location = new System.Drawing.Point(2013, 139);
             this.Label1.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.Label1.Name = "Label1";
             this.Label1.Size = new System.Drawing.Size(150, 29);
@@ -621,30 +621,32 @@
             // txtmvmtdate
             // 
             this.txtmvmtdate.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtmvmtdate.Location = new System.Drawing.Point(1023, 158);
+            this.txtmvmtdate.Location = new System.Drawing.Point(1793, 191);
             this.txtmvmtdate.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
             this.txtmvmtdate.MaxLength = 10;
             this.txtmvmtdate.Name = "txtmvmtdate";
             this.txtmvmtdate.ReadOnly = true;
             this.txtmvmtdate.Size = new System.Drawing.Size(343, 36);
             this.txtmvmtdate.TabIndex = 426;
+            this.txtmvmtdate.Visible = false;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(770, 161);
+            this.label5.Location = new System.Drawing.Point(1540, 194);
             this.label5.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(242, 29);
             this.label5.TabIndex = 419;
             this.label5.Text = "Last Movement Date:";
+            this.label5.Visible = false;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(36, 161);
+            this.label2.Location = new System.Drawing.Point(32, 59);
             this.label2.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(174, 29);
@@ -654,7 +656,7 @@
             // txtacctname
             // 
             this.txtacctname.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtacctname.Location = new System.Drawing.Point(273, 158);
+            this.txtacctname.Location = new System.Drawing.Point(269, 56);
             this.txtacctname.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
             this.txtacctname.MaxLength = 10;
             this.txtacctname.Name = "txtacctname";
@@ -710,7 +712,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1980, 1181);
+            this.ClientSize = new System.Drawing.Size(2556, 1376);
             this.Controls.Add(this.groupControl2);
             this.Controls.Add(this.groupControl1);
             this.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
@@ -786,19 +788,19 @@
         private DevExpress.XtraGrid.Views.Grid.GridView gridview;
         internal System.Windows.Forms.Label Label1;
         internal System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox txtacctid;
         private System.Windows.Forms.TextBox txtmvmtdate;
         internal System.Windows.Forms.Label label5;
         internal System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox txtacctname;
-        private System.Windows.Forms.TextBox txtacctbalance;
         internal System.Windows.Forms.Label label4;
         internal System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox txtacctstatus;
         private DevExpress.XtraEditors.SimpleButton btnadd;
         private DevExpress.XtraEditors.SimpleButton simpleButton1;
         private DevExpress.XtraEditors.SimpleButton simpleButton2;
         private DevExpress.XtraEditors.SimpleButton btnTransactionSummary;
         private DevExpress.XtraEditors.SimpleButton btnTransactionPayment;
+        public System.Windows.Forms.TextBox txtacctid;
+        public System.Windows.Forms.TextBox txtacctname;
+        public System.Windows.Forms.TextBox txtacctbalance;
+        public System.Windows.Forms.TextBox txtacctstatus;
     }
 }

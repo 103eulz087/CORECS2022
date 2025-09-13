@@ -2510,6 +2510,12 @@
     <Compile Include="POS\POSRestoTables.Designer.cs">
       <DependentUpon>POSRestoTables.cs</DependentUpon>
     </Compile>
+    <Compile Include="POS\POSSalesReportDevEx.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="POS\POSSalesReportDevEx.Designer.cs">
+      <DependentUpon>POSSalesReportDevEx.cs</DependentUpon>
+    </Compile>
     <Compile Include="POS\POSScreenMirror.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -2823,6 +2829,12 @@
     </Compile>
     <Compile Include="Reporting\InventoryCostingRep.Designer.cs">
       <DependentUpon>InventoryCostingRep.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reporting\InventoryLedgerDevEx.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reporting\InventoryLedgerDevEx.Designer.cs">
+      <DependentUpon>InventoryLedgerDevEx.cs</DependentUpon>
     </Compile>
     <Compile Include="Reporting\InventoryUnitActivity.cs">
       <SubType>Form</SubType>
@@ -4109,6 +4121,9 @@
     <EmbeddedResource Include="POS\POSRestoTables.resx">
       <DependentUpon>POSRestoTables.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="POS\POSSalesReportDevEx.resx">
+      <DependentUpon>POSSalesReportDevEx.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="POS\POSScreenMirror.resx">
       <DependentUpon>POSScreenMirror.cs</DependentUpon>
     </EmbeddedResource>
@@ -4275,6 +4290,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reporting\InventoryCostingRep.resx">
       <DependentUpon>InventoryCostingRep.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reporting\InventoryLedgerDevEx.resx">
+      <DependentUpon>InventoryLedgerDevEx.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reporting\InventoryUnitActivity.resx">
       <DependentUpon>InventoryUnitActivity.cs</DependentUpon>

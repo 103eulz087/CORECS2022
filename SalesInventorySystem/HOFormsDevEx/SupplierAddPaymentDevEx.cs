@@ -29,6 +29,11 @@ namespace SalesInventorySystem.HOFormsDevEx
             this.Close();
         }
 
+        private void chckpayfull_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chckpayfull.Checked == true) { txtamountpaid.Text = txtbalance.Text; } else { txtamountpaid.Text = "0"; }
+        }
+
         public SupplierAddPaymentDevEx()
         {
             InitializeComponent();

@@ -13,6 +13,8 @@ using SalesInventorySystem.Reporting;
 using System.Data.SqlClient;
 using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Columns;
+using DevExpress.XtraSplashScreen;
+using System.Threading;
 
 namespace SalesInventorySystem.Orders
 {
@@ -145,20 +147,23 @@ namespace SalesInventorySystem.Orders
          
         private void simpleButton1_Click(object sender, EventArgs e)
         {
-            Database.display("SELECT * FROM view_BranchOrderSTS WHERE isProcess = '0' AND Status='APPROVED' and EffectivityDate >= '" + datefrompending.Text + "' and EffectivityDate <= '" + datetopending.Text + "' and BranchCode='" + Login.assignedBranch + "' Order by PONumber DESC", gridControl1, gridView1);
+            string query = "SELECT * FROM view_BranchOrderSTS WHERE isProcess = '0' AND Status='APPROVED' and EffectivityDate >= '" + datefrompending.Text + "' and EffectivityDate <= '" + datetopending.Text + "' and BranchCode='" + Login.assignedBranch + "' Order by PONumber DESC";
+            HelperFunction.ShowWaitAndDisplay(query, gridControl1, gridView1, "Please wait", "Populating data into the database...");
             gridView1.Focus();
         }
 
         
         private void simpleButton2_Click(object sender, EventArgs e)
         {
-            Database.display("SELECT * FROM view_ForDeliverySTS WHERE Status='REJECTED' and DateAdded >= '" + datefromrej.Text + "' and DateAdded <= '" + datetorej.Text + "'", gridControl3, gridView3);
+            string query = "SELECT * FROM view_ForDeliverySTS WHERE Status='REJECTED' and DateAdded >= '" + datefromrej.Text + "' and DateAdded <= '" + datetorej.Text + "'";
+            HelperFunction.ShowWaitAndDisplay(query, gridControl3, gridView3, "Please wait", "Populating data into the database...");
             gridView3.Focus();
         }
 
         private void simpleButton3_Click(object sender, EventArgs e)
         {
-            Database.display("SELECT * FROM view_ForDeliverySTS WHERE Status='FOR DELIVERY' and DateAdded >= '" + datefromfordev.Text + "' and DateAdded <= '" + datetofordev.Text + "'", gridControl2, gridView2);
+            string query = "SELECT * FROM view_ForDeliverySTS WHERE Status='FOR DELIVERY' and DateAdded >= '" + datefromfordev.Text + "' and DateAdded <= '" + datetofordev.Text + "'";
+            HelperFunction.ShowWaitAndDisplay(query, gridControl2, gridView2, "Please wait", "Populating data into the database...");
             gridView2.Focus();
         }
 

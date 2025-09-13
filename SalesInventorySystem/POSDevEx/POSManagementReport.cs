@@ -24,6 +24,10 @@ namespace SalesInventorySystem.POSDevEx
 
         private void POSManagementReport_Load(object sender, EventArgs e)
         {
+            txtsalesdatefrom.Text = HelperFunction.GetPreviousMonthSameDay(DateTime.Today).ToShortDateString();
+            txtsalesdateto.Text = DateTime.Today.ToShortDateString();
+            txtsalesdatemgmtdata.Text = DateTime.Today.ToShortDateString();
+            txtdateVAT.Text = DateTime.Today.ToShortDateString();
             populateBranch();
         }
         void populateBranch()

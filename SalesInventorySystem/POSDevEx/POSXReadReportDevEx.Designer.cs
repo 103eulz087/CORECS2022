@@ -36,6 +36,8 @@
             this.gridControl1 = new DevExpress.XtraGrid.GridControl();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
+            this.txtreporttypeposreading = new DevExpress.XtraEditors.SearchLookUpEdit();
+            this.gridView11 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.simpleButton12 = new DevExpress.XtraEditors.SimpleButton();
             this.rad3 = new System.Windows.Forms.RadioButton();
             this.rad2 = new System.Windows.Forms.RadioButton();
@@ -125,6 +127,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
             this.groupControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtreporttypeposreading.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView11)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtsalesdateto.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtsalesdateto.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtmachine.Properties)).BeginInit();
@@ -250,6 +254,7 @@
             // 
             this.groupControl1.Appearance.Font = new System.Drawing.Font("Arial", 9.25F);
             this.groupControl1.Appearance.Options.UseFont = true;
+            this.groupControl1.Controls.Add(this.txtreporttypeposreading);
             this.groupControl1.Controls.Add(this.simpleButton12);
             this.groupControl1.Controls.Add(this.rad3);
             this.groupControl1.Controls.Add(this.rad2);
@@ -276,6 +281,37 @@
             this.groupControl1.Name = "groupControl1";
             this.groupControl1.Size = new System.Drawing.Size(2340, 420);
             this.groupControl1.TabIndex = 0;
+            // 
+            // txtreporttypeposreading
+            // 
+            this.txtreporttypeposreading.Location = new System.Drawing.Point(206, 55);
+            this.txtreporttypeposreading.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
+            this.txtreporttypeposreading.Name = "txtreporttypeposreading";
+            this.txtreporttypeposreading.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9.75F);
+            this.txtreporttypeposreading.Properties.Appearance.Options.UseFont = true;
+            this.txtreporttypeposreading.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.txtreporttypeposreading.Properties.NullText = "";
+            this.txtreporttypeposreading.Properties.PopupView = this.gridView11;
+            this.txtreporttypeposreading.Size = new System.Drawing.Size(310, 50);
+            this.txtreporttypeposreading.TabIndex = 39;
+            this.txtreporttypeposreading.EditValueChanged += new System.EventHandler(this.txtreporttypeposreading_EditValueChanged);
+            // 
+            // gridView11
+            // 
+            this.gridView11.ColumnPanelRowHeight = 0;
+            this.gridView11.DetailHeight = 546;
+            this.gridView11.FixedLineWidth = 4;
+            this.gridView11.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
+            this.gridView11.FooterPanelHeight = 0;
+            this.gridView11.GroupRowHeight = 0;
+            this.gridView11.LevelIndent = 0;
+            this.gridView11.Name = "gridView11";
+            this.gridView11.OptionsSelection.EnableAppearanceFocusedCell = false;
+            this.gridView11.OptionsView.ShowGroupPanel = false;
+            this.gridView11.PreviewIndent = 0;
+            this.gridView11.RowHeight = 0;
+            this.gridView11.ViewCaptionHeight = 0;
             // 
             // simpleButton12
             // 
@@ -543,7 +579,7 @@
             // 
             // comboBoxEdit1
             // 
-            this.comboBoxEdit1.Location = new System.Drawing.Point(206, 55);
+            this.comboBoxEdit1.Location = new System.Drawing.Point(1410, 167);
             this.comboBoxEdit1.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
             this.comboBoxEdit1.Name = "comboBoxEdit1";
             this.comboBoxEdit1.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9.75F);
@@ -571,6 +607,7 @@
             "Group Product Category"});
             this.comboBoxEdit1.Size = new System.Drawing.Size(312, 50);
             this.comboBoxEdit1.TabIndex = 6;
+            this.comboBoxEdit1.Visible = false;
             this.comboBoxEdit1.SelectedIndexChanged += new System.EventHandler(this.comboBoxEdit1_SelectedIndexChanged);
             // 
             // labelControl4
@@ -1389,6 +1426,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).EndInit();
             this.groupControl1.ResumeLayout(false);
             this.groupControl1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtreporttypeposreading.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView11)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtsalesdateto.Properties.CalendarTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtsalesdateto.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtmachine.Properties)).EndInit();
@@ -1530,5 +1569,7 @@
         private System.Windows.Forms.ToolStripMenuItem printToolStripMenuItem;
         private DevExpress.XtraEditors.SimpleButton simpleButton12;
         private System.Windows.Forms.ToolStripMenuItem showCreditDetailsToolStripMenuItem;
+        private DevExpress.XtraEditors.SearchLookUpEdit txtreporttypeposreading;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridView11;
     }
 }

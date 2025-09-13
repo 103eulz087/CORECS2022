@@ -22,7 +22,7 @@ namespace SalesInventorySystem.HOFormsDevEx
         private void gridView1_RowCellStyle(object sender, DevExpress.XtraGrid.Views.Grid.RowCellStyleEventArgs e)
         {
             GridView view = (GridView)sender;
-            string status = view.GetRowCellValue(e.RowHandle, "PaymentStatus").ToString();
+            string status = view.GetRowCellValue(e.RowHandle, "PayStatus").ToString();
             double balance = Convert.ToDouble(view.GetRowCellValue(e.RowHandle, "Balance"));
             if (status == "FULLYPAID")
             {

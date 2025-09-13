@@ -713,7 +713,7 @@ namespace SalesInventorySystem.POS
                 Printing printit = new Printing();
                 //printit.printOrdersTest(txtOrderNo.Text, lblwaitername.Text, lbltableno.Text, "MEZANINE", mygridview);
                 //printit.PrintOrderToFile(txtOrderNo.Text, lblwaitername.Text, lbltableno.Text, lblTransactionIDInc.Text, mygridview);
-                printit.PrintOrderToFileTest(txtOrderNo.Text, lblwaitername.Text, lbltableno.Text, lblTransactionIDInc.Text, mygridview);
+                printit.PrintOrderToFileTestAsync(txtOrderNo.Text, lblwaitername.Text, lbltableno.Text, lblTransactionIDInc.Text, mygridview);
                 //refreshView();
                 display("BatchSalesDetails",txtOrderNo.Text);
                 updateOR();

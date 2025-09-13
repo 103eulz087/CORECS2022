@@ -33,12 +33,17 @@ namespace SalesInventorySystem
             {   
                 if (radioButton1.Checked == true) //DETAILED
                 {
-                    Database.display($"SELECT * FROM func_view_BranchInventoryDetails('{Login.assignedBranch}') ", gridControl1, gridView1);
-                    
+                    //Database.display($"SELECT * FROM func_view_BranchInventoryDetails('{Login.assignedBranch}') ", gridControl1, gridView1);
+                    string query = $"SELECT * FROM func_view_BranchInventoryDetails('{Login.assignedBranch}') ";
+                    HelperFunction.ShowWaitAndDisplay(query, gridControl1, gridView1, "Please wait", "Populating data into the database...");
+                    gridView1.Focus();
                 }
                 else if (radioButton2.Checked == true) //SUMMARY
                 {
-                    Database.display($"SELECT * FROM func_view_BranchInventory('{Login.assignedBranch}') ", gridControl1, gridView1);
+                    //Database.display($"SELECT * FROM func_view_BranchInventory('{Login.assignedBranch}') ", gridControl1, gridView1);
+                    string query = $"SELECT * FROM func_view_BranchInventory('{Login.assignedBranch}') ";
+                    HelperFunction.ShowWaitAndDisplay(query, gridControl1, gridView1, "Please wait", "Populating data into the database...");
+                    gridView1.Focus();
                 }
                 // Database.GridMasterDetail("view_BranchInventory", "view_BranchInventoryDetails", "Branch='" + Login.assignedBranch + "'", "Branch='" + Login.assignedBranch + "'", "Product", "Product", "InventoryBreakdownDetails", gridControl1);
             }

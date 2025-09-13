@@ -60,22 +60,34 @@ namespace SalesInventorySystem.Orders
 
         private void btnForApprovalSTS_Click(object sender, EventArgs e)
         {
-            Database.display("SELECT * FROM view_TransferSummary WHERE Status='FOR APPROVAL' and EffectivityDate >= '" + datefromsts.Text + "' and EffectivityDate <= '" + datetosts.Text + "'and BranchCode='" + Login.assignedBranch + "' ", gridControlSTS, gridViewSTS);
+            //Database.display("SELECT * FROM view_TransferSummary WHERE Status='FOR APPROVAL' and EffectivityDate >= '" + datefromsts.Text + "' and EffectivityDate <= '" + datetosts.Text + "'and BranchCode='" + Login.assignedBranch + "' ", gridControlSTS, gridViewSTS);
+            string query = "SELECT * FROM view_TransferSummary WHERE Status='FOR APPROVAL' and EffectivityDate >= '" + datefromsts.Text + "' and EffectivityDate <= '" + datetosts.Text + "'and BranchCode='" + Login.assignedBranch + "' ";
+            HelperFunction.ShowWaitAndDisplay(query, gridControlSTS, gridViewSTS, "Please wait", "Populating data into the database...");
+            gridViewSTS.Focus();
         }
 
         private void btnApprovedSTS_Click(object sender, EventArgs e)
         {
-            Database.display("SELECT * FROM view_TransferSummary WHERE Status='APPROVED' and EffectivityDate >= '" + datefromsts.Text + "' and EffectivityDate <= '" + datetosts.Text + "' AND BranchCode='" + Login.assignedBranch + "' ORDER BY DateAdded DESC", gridControlapprvdsts, gridViewapprvdsts);
+            //Database.display("SELECT * FROM view_TransferSummary WHERE Status='APPROVED' and EffectivityDate >= '" + datefromapprvdsts.Text + "' and EffectivityDate <= '" + datetoapprvdsts.Text + "' AND BranchCode='" + Login.assignedBranch + "' ORDER BY DateAdded DESC", gridControlapprvdsts, gridViewapprvdsts);
+            string query = "SELECT * FROM view_TransferSummary WHERE Status='APPROVED' and EffectivityDate >= '" + datefromapprvdsts.Text + "' and EffectivityDate <= '" + datetoapprvdsts.Text + "' AND BranchCode='" + Login.assignedBranch + "' ORDER BY DateAdded DESC ";
+            HelperFunction.ShowWaitAndDisplay(query, gridControlapprvdsts, gridViewapprvdsts, "Please wait", "Populating data into the database...");
+            gridViewapprvdsts.Focus();
         }
 
         private void btnRejectedSTS_Click(object sender, EventArgs e)
         {
-            Database.display("SELECT * FROM view_TransferSummary WHERE Status='REJECTED' and EffectivityDate >= '" + datefrmrjctdsts.Text + "' and EffectivityDate <= '" + datetorjctdsts.Text + "' AND BranchCode='" + Login.assignedBranch + "' ", gridControlrjctdsts, gridViewrjctdsts);
+            //Database.display("SELECT * FROM view_TransferSummary WHERE Status='REJECTED' and EffectivityDate >= '" + datefrmrjctdsts.Text + "' and EffectivityDate <= '" + datetorjctdsts.Text + "' AND BranchCode='" + Login.assignedBranch + "' ", gridControlrjctdsts, gridViewrjctdsts);
+            string query = "SELECT * FROM view_TransferSummary WHERE Status='REJECTED' and EffectivityDate >= '" + datefrmrjctdsts.Text + "' and EffectivityDate <= '" + datetorjctdsts.Text + "' AND BranchCode='" + Login.assignedBranch + "' ";
+            HelperFunction.ShowWaitAndDisplay(query, gridControlrjctdsts, gridViewrjctdsts, "Please wait", "Populating data into the database...");
+            gridViewrjctdsts.Focus();
         }
 
         private void btnForDeliverySTS_Click(object sender, EventArgs e)
         {
-            Database.display("SELECT * FROM view_ForDeliverySTS WHERE Status='FOR DELIVERY'  and EffectivityDate >= '" + datefromfordelivsts.Text + "' and EffectivityDate <= '" + datetofordelivsts.Text + "' and BranchCode='" + Login.assignedBranch + "' ", gridControlForDelivSts, gridViewForDelivSts);
+            //Database.display("SELECT * FROM view_ForDeliverySTS WHERE Status='FOR DELIVERY'  and EffectivityDate >= '" + datefromfordelivsts.Text + "' and EffectivityDate <= '" + datetofordelivsts.Text + "' and BranchCode='" + Login.assignedBranch + "' ", gridControlForDelivSts, gridViewForDelivSts);
+            string query = "SELECT * FROM view_ForDeliverySTS WHERE Status='FOR DELIVERY'  and EffectivityDate >= '" + datefromfordelivsts.Text + "' and EffectivityDate <= '" + datetofordelivsts.Text + "' and BranchCode='" + Login.assignedBranch + "'  ";
+            HelperFunction.ShowWaitAndDisplay(query, gridControlForDelivSts, gridViewForDelivSts, "Please wait", "Populating data into the database...");
+            gridViewForDelivSts.Focus();
             Classes.DevXGridViewSettings.ShowFooterCountTotal(gridViewForDelivSts, "DeliveryNo");
             Classes.DevXGridViewSettings.ShowFooterTotal(gridViewForDelivSts, "TotalItem");
             Classes.DevXGridViewSettings.ShowFooterTotal(gridViewForDelivSts, "TotalQtyDelivered");
@@ -83,7 +95,10 @@ namespace SalesInventorySystem.Orders
 
         private void btnDeliveredSTS_Click(object sender, EventArgs e)
         {
-            Database.display("SELECT * FROM view_TransferSummary WHERE Status='DELIVERED' and EffectivityDate >= '" + datefromdelivsts.Text + "' and EffectivityDate <= '" + datetodelivsts.Text + "' and  BranchCode='" + Login.assignedBranch + "'", gridControlDelivSts, gridViewDelivSts);
+            //Database.display("SELECT * FROM view_TransferSummary WHERE Status='DELIVERED' and EffectivityDate >= '" + datefromdelivsts.Text + "' and EffectivityDate <= '" + datetodelivsts.Text + "' and  BranchCode='" + Login.assignedBranch + "'", gridControlDelivSts, gridViewDelivSts);
+            string query = "SELECT * FROM view_TransferSummary WHERE Status='DELIVERED' and EffectivityDate >= '" + datefromdelivsts.Text + "' and EffectivityDate <= '" + datetodelivsts.Text + "' and  BranchCode='" + Login.assignedBranch + "' ";
+            HelperFunction.ShowWaitAndDisplay(query, gridControlDelivSts, gridViewDelivSts, "Please wait", "Populating data into the database...");
+            gridViewDelivSts.Focus();
         }
 
         private void tabMain_SelectedPageChanged(object sender, DevExpress.XtraTab.TabPageChangedEventArgs e)

@@ -536,6 +536,13 @@ namespace SalesInventorySystem
                 {
                     //str = reader[returnval].ToString();
                     dic = ToDictionary(reader);
+                    // Replace null or whitespace values with empty string
+                    foreach (var key in dic.Keys.ToList())
+                    {
+                        var value = dic[key];
+                        dic[key] = string.IsNullOrWhiteSpace(value?.ToString()) ? "" : value;
+                    }
+
                 }
                 reader.Close();
             }

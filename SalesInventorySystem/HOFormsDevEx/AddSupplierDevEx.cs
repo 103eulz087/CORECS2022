@@ -31,7 +31,7 @@ namespace SalesInventorySystem.HOFormsDevEx
             HelperFunction.EnableTextFields(this);
             int id = IDGenerator.getIDNumber("Supplier", "SupplierKey", 1);
             txtsupplierkey.Text = HelperFunction.sequencePadding1(id.ToString(), 6); //pad 6 zeros
-            //txtsupplierid.Text = "000"+IDGenerator.getSupplierNumber().ToString();
+            txtsupplierid.Text = txtsupplierkey.Text;// "000" +IDGenerator.getSupplierNumber().ToString();
             simpleButton1.Enabled = false;
             addbtn.Enabled = true;
             updatebtn.Enabled = false;

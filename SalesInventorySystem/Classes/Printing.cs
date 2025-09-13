@@ -6,6 +6,7 @@ using System.Data.SqlClient;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Media;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
@@ -40,7 +41,7 @@ namespace SalesInventorySystem
 
                 // Send the data
                 stream.Write(dataBytes, 0, dataBytes.Length);
-                Console.WriteLine($"Data sent successfully to {printerIpAddress}:{printerPort}");
+                //Console.WriteLine($"Data sent successfully to {printerIpAddress}:{printerPort}");
             }
             catch (SocketException ex)
             {
@@ -55,6 +56,91 @@ namespace SalesInventorySystem
                 // Close the connection
                 client?.Close();
             }
+        }
+
+        public static async void SendRawDataAsync(string printerIpAddress, int printerPort, string dataToSend)
+        {
+            await Task.Run(() =>
+            {
+                TcpClient client = null;
+                try
+                {
+                    client = new TcpClient(printerIpAddress, printerPort);
+
+                    byte[] dataBytes = Encoding.ASCII.GetBytes(dataToSend);
+
+                    NetworkStream stream = client.GetStream();
+
+                    stream.Write(dataBytes, 0, dataBytes.Length);
+                   
+                    //Console.WriteLine($"Data sent successfully to {printerIpAddress}:{printerPort}");
+                }
+                catch (SocketException ex)
+                {
+                    Console.WriteLine($"Socket error: {ex.Message}");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"An error occurred: {ex.Message}");
+                }
+                finally
+                {
+                    client?.Close();
+                }
+            });
+        }
+
+        public static async Task PlayNotificationSoundAsync(string soundFilePath)
+        {
+            // Use Task.Run to offload the sound loading and playback logic to a background thread.
+            // This prevents the main UI thread from becoming unresponsive, even if the sound file
+            // is large or there are delays in accessing it.
+            await Task.Run(() =>
+            {
+                try
+                {
+                    // 1. Check if the specified sound file actually exists.
+                    if (!File.Exists(soundFilePath))
+                    {
+                        Console.WriteLine($"Error: Sound file not found at '{soundFilePath}'. Please verify the path.");
+                        // Optionally, you could play a default system sound here if the file is missing.
+                        // SystemSounds.Exclamation.Play();
+                        return; // Exit the method if the file is not found.
+                    }
+
+                    // 2. Create a new SoundPlayer instance with the provided file path.
+                    // The 'using' statement ensures that the SoundPlayer object is properly
+                    // disposed of after it's no longer needed, releasing system resources.
+                    using (SoundPlayer player = new SoundPlayer(soundFilePath))
+                    {
+                        // 3. Load the sound into memory. This operation can be synchronous
+                        // but since it's inside Task.Run, it won't block the main thread.
+                        player.Load();
+
+                        // 4. Play the sound. The Play() method plays the sound asynchronously
+                        // on an internal thread managed by SoundPlayer, and returns immediately.
+                        player.Play();
+
+                        //Console.WriteLine($"Notification: Playing sound from '{soundFilePath}'");
+                    }
+                }
+                // 5. Implement robust error handling for common issues.
+                catch (FileNotFoundException)
+                {
+                    Console.WriteLine($"Error: The sound file was not found at '{soundFilePath}'. Double-check the file path and ensure it's accessible.");
+                }
+                catch (InvalidOperationException ex)
+                {
+                    // This typically occurs if the sound file is not a valid .wav format
+                    // or if there's an issue with the audio device.
+                    Console.WriteLine($"Error playing sound from '{soundFilePath}': {ex.Message}. Ensure the file is a valid .wav format and your audio device is working.");
+                }
+                catch (Exception ex)
+                {
+                    // Catch any other unexpected errors during sound playback.
+                    Console.WriteLine($"An unexpected error occurred while attempting to play sound from '{soundFilePath}': {ex.Message}");
+                }
+            });
         }
         public void SendRawDataFromFile(string printerIpAddress, int printerPort, string filePath)
         {
@@ -156,134 +242,134 @@ namespace SalesInventorySystem
         //    return sb.ToString();
         //}
 
-        public void printOrdersTest(string refno, string waiterid, string tableno, string location, DataGridView gridview)
-        {
-            StringBuilder kitchenReceipt = new StringBuilder();
-            StringBuilder grillReceipt = new StringBuilder();
-            StringBuilder AllOrdersReceipt = new StringBuilder();
+        //public void printOrdersTest(string refno, string waiterid, string tableno, string location, DataGridView gridview)
+        //{
+        //    StringBuilder kitchenReceipt = new StringBuilder();
+        //    StringBuilder grillReceipt = new StringBuilder();
+        //    StringBuilder AllOrdersReceipt = new StringBuilder();
 
 
-            // Add order-level information to the receipts
-            AllOrdersReceipt.AppendLine($"Order ID: {refno}");
-            AllOrdersReceipt.AppendLine("----- ALL ORDERS -----");
-            AllOrdersReceipt.AppendLine("" + (Char)27 + (Char)112 + (Char)0 + (Char)25 + "");
-            AllOrdersReceipt.AppendLine(HelperFunction.PrintCenterText(location) + Environment.NewLine);
-            AllOrdersReceipt.AppendLine(HelperFunction.PrintLeftRigthText("Table #:" + tableno, "Waiter:" + waiterid) + Environment.NewLine);
+        //    // Add order-level information to the receipts
+        //    AllOrdersReceipt.AppendLine($"Order ID: {refno}");
+        //    AllOrdersReceipt.AppendLine("----- ALL ORDERS -----");
+        //    AllOrdersReceipt.AppendLine("" + (Char)27 + (Char)112 + (Char)0 + (Char)25 + "");
+        //    AllOrdersReceipt.AppendLine(HelperFunction.PrintCenterText(location) + Environment.NewLine);
+        //    AllOrdersReceipt.AppendLine(HelperFunction.PrintLeftRigthText("Table #:" + tableno, "Waiter:" + waiterid) + Environment.NewLine);
 
-            kitchenReceipt.AppendLine($"Order ID: {refno}");
-            kitchenReceipt.AppendLine("----- Kitchen -----");
-            kitchenReceipt.AppendLine("" + (Char)27 + (Char)112 + (Char)0 + (Char)25 + "");
-            kitchenReceipt.AppendLine(HelperFunction.PrintCenterText(location) + Environment.NewLine);
-            kitchenReceipt.AppendLine(HelperFunction.PrintLeftRigthText("Table #:" + tableno, "Waiter:" + waiterid) + Environment.NewLine);
+        //    kitchenReceipt.AppendLine($"Order ID: {refno}");
+        //    kitchenReceipt.AppendLine("----- Kitchen -----");
+        //    kitchenReceipt.AppendLine("" + (Char)27 + (Char)112 + (Char)0 + (Char)25 + "");
+        //    kitchenReceipt.AppendLine(HelperFunction.PrintCenterText(location) + Environment.NewLine);
+        //    kitchenReceipt.AppendLine(HelperFunction.PrintLeftRigthText("Table #:" + tableno, "Waiter:" + waiterid) + Environment.NewLine);
 
-            grillReceipt.AppendLine($"Order ID: {refno}");
-            grillReceipt.AppendLine("------- Grill -------");
-            grillReceipt.AppendLine("" + (Char)27 + (Char)112 + (Char)0 + (Char)25 + "");
-            grillReceipt.AppendLine(HelperFunction.PrintCenterText(location) + Environment.NewLine);
-            grillReceipt.AppendLine(HelperFunction.PrintLeftRigthText("Table #:" + tableno, "Waiter:" + waiterid) + Environment.NewLine);
-
-
-            //String details = "";
-            string filepath = "";
-            string filetoprintmain = "";
-            //string filetoprintgrill = "";
-            string filetoprintkitchen = "";
-            //details = "" + (Char)27 + (Char)112 + (Char)0 + (Char)25 + "";
-            //details += HelperFunction.PrintCenterText(location) + Environment.NewLine;
-            //details += HelperFunction.PrintLeftRigthText("Table #:" + tableno,"Waiter:"+waiterid) + Environment.NewLine;
-            //details += Classes.ReceiptSetup.doTitle("ORDERS");
-            //bool flag = false;
-            for (int i = 0; i <= gridview.RowCount - 1; i++)
-            {
+        //    grillReceipt.AppendLine($"Order ID: {refno}");
+        //    grillReceipt.AppendLine("------- Grill -------");
+        //    grillReceipt.AppendLine("" + (Char)27 + (Char)112 + (Char)0 + (Char)25 + "");
+        //    grillReceipt.AppendLine(HelperFunction.PrintCenterText(location) + Environment.NewLine);
+        //    grillReceipt.AppendLine(HelperFunction.PrintLeftRigthText("Table #:" + tableno, "Waiter:" + waiterid) + Environment.NewLine);
 
 
-                //get productcategorycode
-                string prodcatcode = Database.getSingleQuery("SELECT ProductCategoryCode FROM dbo.Products WHERE BranchCode='" + Login.assignedBranch + "' and Description='" + gridview.Rows[i].Cells["Particulars"].Value.ToString() + "'", "ProductCategoryCode");
-                string prodcatname = Classes.Product.getProductCategoryName(prodcatcode);
+        //    //String details = "";
+        //    string filepath = "";
+        //    string filetoprintmain = "";
+        //    //string filetoprintgrill = "";
+        //    string filetoprintkitchen = "";
+        //    //details = "" + (Char)27 + (Char)112 + (Char)0 + (Char)25 + "";
+        //    //details += HelperFunction.PrintCenterText(location) + Environment.NewLine;
+        //    //details += HelperFunction.PrintLeftRigthText("Table #:" + tableno,"Waiter:"+waiterid) + Environment.NewLine;
+        //    //details += Classes.ReceiptSetup.doTitle("ORDERS");
+        //    //bool flag = false;
+        //    for (int i = 0; i <= gridview.RowCount - 1; i++)
+        //    {
 
-                var rowz = Database.getMultipleQuery($"SELECT Description,PrinterID FROM dbo.ProductCategory WHERE ProductCategoryID='{prodcatcode}'", "Description,PrinterID");
-                string Description = rowz["Description"].ToString();
-                string PrinterID = rowz["PrinterID"].ToString();
 
-                string itemcombi = HelperFunction.PrintLeftRigthText(gridview.Rows[i].Cells["Particulars"].Value.ToString(), gridview.Rows[i].Cells["Qty"].Value.ToString()) + Environment.NewLine;
+        //        //get productcategorycode
+        //        string prodcatcode = Database.getSingleQuery("SELECT ProductCategoryCode FROM dbo.Products WHERE BranchCode='" + Login.assignedBranch + "' and Description='" + gridview.Rows[i].Cells["Particulars"].Value.ToString() + "'", "ProductCategoryCode");
+        //        string prodcatname = Classes.Product.getProductCategoryName(prodcatcode);
 
-                if (prodcatcode == "10")
-                {
+        //        var rowz = Database.getMultipleQuery($"SELECT Description,PrinterID FROM dbo.ProductCategory WHERE ProductCategoryID='{prodcatcode}'", "Description,PrinterID");
+        //        string Description = rowz["Description"].ToString();
+        //        string PrinterID = rowz["PrinterID"].ToString();
 
-                    filepath = "C:\\POSTransaction\\Restaurant\\Orders\\" + DateTime.Now.ToString("yyyyMMdd") + "\\" + prodcatname + "\\";
+        //        string itemcombi = HelperFunction.PrintLeftRigthText(gridview.Rows[i].Cells["Particulars"].Value.ToString(), gridview.Rows[i].Cells["Qty"].Value.ToString()) + Environment.NewLine;
 
-                    kitchenReceipt.AppendLine(itemcombi);
-                    AllOrdersReceipt.AppendLine(itemcombi);
+        //        if (prodcatcode == "10")
+        //        {
 
-                    if (!Directory.Exists(filepath))
-                    {
-                        Directory.CreateDirectory(filepath);
-                    }
-                    txtorder = "\\" + refno + ".txt";
-                    filetoprintmain = filepath + txtorder;
-                    //StreamWriter writer = new StreamWriter(filetoprintmain);
-                    //writer.Write(beverageReceipt.ToString());
-                    //writer.Close();
+        //            filepath = "C:\\POSTransaction\\Restaurant\\Orders\\" + DateTime.Now.ToString("yyyyMMdd") + "\\" + prodcatname + "\\";
 
-                }
-                else if (prodcatcode == "11")
-                {
-                    filepath = "C:\\POSTransaction\\Restaurant\\Orders\\" + DateTime.Now.ToString("yyyyMMdd") + "\\" + prodcatname + "\\";
+        //            kitchenReceipt.AppendLine(itemcombi);
+        //            AllOrdersReceipt.AppendLine(itemcombi);
 
-                    grillReceipt.AppendLine(itemcombi);
-                    AllOrdersReceipt.AppendLine(itemcombi);
+        //            if (!Directory.Exists(filepath))
+        //            {
+        //                Directory.CreateDirectory(filepath);
+        //            }
+        //            txtorder = "\\" + refno + ".txt";
+        //            filetoprintmain = filepath + txtorder;
+        //            //StreamWriter writer = new StreamWriter(filetoprintmain);
+        //            //writer.Write(beverageReceipt.ToString());
+        //            //writer.Close();
 
-                    if (!Directory.Exists(filepath))
-                    {
-                        Directory.CreateDirectory(filepath);
-                    }
-                    txtorder = "\\" + refno + ".txt";
-                    filetoprintkitchen = filepath + txtorder;
-                }
-                else
-                {
-                    AllOrdersReceipt.AppendLine(itemcombi);
-                }
-                //else if (prodcatcode == "12")
-                //{
-                //    filepath = "C:\\POSTransaction\\Restaurant\\Orders\\" + prodcatname + "\\";
-                //    details += HelperFunction.PrintLeftRigthText(gridview.Rows[i].Cells["Particulars"].Value.ToString(), gridview.Rows[i].Cells["Qty"].Value.ToString()) + Environment.NewLine;
-                //    if (!Directory.Exists(filepath))
-                //    {
-                //        Directory.CreateDirectory(filepath);
-                //    }
-                //    txtorder = "\\" + refno + ".txt";
-                //    string filetoprint = filepath + txtorder;
-                //    StreamWriter writer = new StreamWriter(filetoprint);
-                //    writer.Write(details);
-                //    writer.Close();
-                //}
-            }
-            //gi append pa ang last page before e ewrite sa notepad sa ubos
-            AllOrdersReceipt.AppendLine(HelperFunction.LastPagePaper());
-            kitchenReceipt.AppendLine(HelperFunction.LastPagePaper());
-            grillReceipt.AppendLine(HelperFunction.LastPagePaper());
+        //        }
+        //        else if (prodcatcode == "11")
+        //        {
+        //            filepath = "C:\\POSTransaction\\Restaurant\\Orders\\" + DateTime.Now.ToString("yyyyMMdd") + "\\" + prodcatname + "\\";
 
-            //gi write na sa notepad
-            StreamWriter writer = new StreamWriter(filetoprintmain);
-            writer.Write(kitchenReceipt.ToString());
-            writer.Close();
+        //            grillReceipt.AppendLine(itemcombi);
+        //            AllOrdersReceipt.AppendLine(itemcombi);
 
-            StreamWriter writer1 = new StreamWriter(filetoprintkitchen);
-            writer1.Write(kitchenReceipt.ToString());
-            writer1.Close();
+        //            if (!Directory.Exists(filepath))
+        //            {
+        //                Directory.CreateDirectory(filepath);
+        //            }
+        //            txtorder = "\\" + refno + ".txt";
+        //            filetoprintkitchen = filepath + txtorder;
+        //        }
+        //        else
+        //        {
+        //            AllOrdersReceipt.AppendLine(itemcombi);
+        //        }
+        //        //else if (prodcatcode == "12")
+        //        //{
+        //        //    filepath = "C:\\POSTransaction\\Restaurant\\Orders\\" + prodcatname + "\\";
+        //        //    details += HelperFunction.PrintLeftRigthText(gridview.Rows[i].Cells["Particulars"].Value.ToString(), gridview.Rows[i].Cells["Qty"].Value.ToString()) + Environment.NewLine;
+        //        //    if (!Directory.Exists(filepath))
+        //        //    {
+        //        //        Directory.CreateDirectory(filepath);
+        //        //    }
+        //        //    txtorder = "\\" + refno + ".txt";
+        //        //    string filetoprint = filepath + txtorder;
+        //        //    StreamWriter writer = new StreamWriter(filetoprint);
+        //        //    writer.Write(details);
+        //        //    writer.Close();
+        //        //}
+        //    }
+        //    //gi append pa ang last page before e ewrite sa notepad sa ubos
+        //    AllOrdersReceipt.AppendLine(HelperFunction.LastPagePaper());
+        //    kitchenReceipt.AppendLine(HelperFunction.LastPagePaper());
+        //    grillReceipt.AppendLine(HelperFunction.LastPagePaper());
 
-            //StreamWriter writer2 = new StreamWriter(filetoprintgrill);
-            //writer2.Write(grillReceipt.ToString());
-            //writer2.Close();
+        //    //gi write na sa notepad
+        //    StreamWriter writer = new StreamWriter(filetoprintmain);
+        //    writer.Write(kitchenReceipt.ToString());
+        //    writer.Close();
 
-            printTextFile(filetoprintmain); //print to main printer
+        //    StreamWriter writer1 = new StreamWriter(filetoprintkitchen);
+        //    writer1.Write(kitchenReceipt.ToString());
+        //    writer1.Close();
 
-            string printerIp = "192.168.0.103"; // Replace with your printer's IP address
-            int printerPort = 9100;              // Typically 9100 for raw printing
-            //string receiptData = "This is a test receipt.\n\x1D\x56\x41\x03"; // Example with ESC/POS cut command
-            SendRawDataFromFile(printerIp, printerPort, filetoprintkitchen);
-        }
+        //    //StreamWriter writer2 = new StreamWriter(filetoprintgrill);
+        //    //writer2.Write(grillReceipt.ToString());
+        //    //writer2.Close();
+
+        //    printTextFile(filetoprintmain); //print to main printer
+
+        //    string printerIp = "192.168.0.103"; // Replace with your printer's IP address
+        //    int printerPort = 9100;              // Typically 9100 for raw printing
+        //    //string receiptData = "This is a test receipt.\n\x1D\x56\x41\x03"; // Example with ESC/POS cut command
+        //    SendRawDataFromFile(printerIp, printerPort, filetoprintkitchen);
+        //}
 
         private void LoadPrinterMappings()
         {
@@ -327,7 +413,7 @@ namespace SalesInventorySystem
             // Add more fallback mappings as needed
         }
 
-        public void PrintOrderToFileTest(string refno, string waiterid, string tableno, string location, DataGridView gridview)
+        public async void PrintOrderToFileTestAsync(string refno, string waiterid, string tableno, string location, DataGridView gridview)
         {
             LoadPrinterMappings();
             string baseFolderPath = @"C:\RestaurantOrders\";
@@ -400,8 +486,12 @@ namespace SalesInventorySystem
                 ///////////////////////////////////////////////////////////////////////////////////////////////////
                 if (categoryOrderData[category].Length > ($"Order ID: {refno}\n----- {category.ToUpper()} -----\n").Length && printerMappings.ContainsKey(category))
                 {
-                    var printerInfo = printerMappings[category];
-                    SendRawData(printerInfo.Item1, printerInfo.Item2, categoryOrderData[category].ToString());
+                    var printerInfo = printerMappings[category]; 
+                    //SendRawData(printerInfo.Item1, printerInfo.Item2, categoryOrderData[category].ToString());
+                    SendRawDataAsync(printerInfo.Item1, printerInfo.Item2, categoryOrderData[category].ToString());
+                   // await PlayNotificationSoundAsync("C:\\BackupSalesInventory\\notify1.wav");
+                    await PlayNotificationSoundAsync(Application.StartupPath+"\\notify1.wav");
+                   
                 }
             }
 
@@ -427,6 +517,7 @@ namespace SalesInventorySystem
                 ex.StackTrace.ToString();
             }
             printTextFile(consolidatedFilePath); //print to main printer
+           
             //////////////////////////////////////////////////////////////////////////////////////////
             //////////////////////////////////////////////////////////////////////////////////////////
         }
