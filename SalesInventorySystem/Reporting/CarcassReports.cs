@@ -64,19 +64,20 @@ namespace SalesInventorySystem.Reporting
                 gridView1.GroupSummary.Clear();
                 gridView1.Columns.Clear();
                 gridControl1.DataSource = null;
-                Database.display("SELECT DateReceived,Barcode,PalletNo,Description,TipWeight,Quantity AS ActualWeight,ROUND((TipWeight-Quantity),2) AS Variance,Cost FROm TempInventoryBatchUpload WHERE ShipmentNo='" + BatchProcessMasterDevEx.shipmentno + "' and Branch='"+Login.assignedBranch+"' and isSource=1 ORDER BY Description,PalletNo,Cost", gridControl1, gridView1); 
+                //Database.display("SELECT DateReceived,Barcode,PalletNo,Description,TipWeight,Quantity AS ActualWeight,ROUND((TipWeight-Quantity),2) AS Variance,Cost FROm TempInventoryBatchUpload WHERE ShipmentNo='" + BatchProcessMasterDevEx.shipmentno + "' and Branch='"+Login.assignedBranch+"' and isSource=1 ORDER BY Description,PalletNo,Cost", gridControl1, gridView1); 
+                Database.display("SELECT SequenceNumber,DateReceived,Barcode,Description,Quantity,Cost FROm Inventory with(nolock) WHERE ShipmentNo='" + BatchProcessMasterDevEx.shipmentno + "' and Branch='" + Login.assignedBranch + "' ORDER BY Description ASC", gridControl1, gridView1);
                 GridView view = gridControl1.FocusedView as GridView;
                 view.SortInfo.ClearAndAddRange(new GridColumnSortInfo[] {
             
                 new GridColumnSortInfo(view.Columns["Description"],DevExpress.Data.ColumnSortOrder.Ascending),
-                new GridColumnSortInfo(view.Columns["PalletNo"],DevExpress.Data.ColumnSortOrder.Ascending)
+                //new GridColumnSortInfo(view.Columns["PalletNo"],DevExpress.Data.ColumnSortOrder.Ascending)
 
                 },2);
                 view.ExpandAllGroups();
 
-                Classes.DevXGridViewSettings.ShowFooterTotal(gridView1, "TipWeight");
-                Classes.DevXGridViewSettings.ShowFooterTotal(gridView1, "ActualWeight");
-                Classes.DevXGridViewSettings.ShowFooterTotal(gridView1, "Variance");
+                //Classes.DevXGridViewSettings.ShowFooterTotal(gridView1, "TipWeight");
+                //Classes.DevXGridViewSettings.ShowFooterTotal(gridView1, "ActualWeight");
+                //Classes.DevXGridViewSettings.ShowFooterTotal(gridView1, "Variance");
 
                 gridView1.BestFitColumns();
                 gridControl1.EndUpdate();
@@ -132,6 +133,20 @@ namespace SalesInventorySystem.Reporting
         private void raddetailed_CheckedChanged(object sender, EventArgs e)
         {
             display();
+        }
+
+        private void gridControl1_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+                contextMenuStrip1.Show(gridControl1, e.Location);
+        }
+
+        private void showLedgerInventoryMovementToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string seqrefno = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "SequenceNumber").ToString();
+            InventoryLedgerDevEx invledge = new InventoryLedgerDevEx();
+            Database.display($"SELECT * FROM InventoryLedger with(nolock) WHERE OriginBranch='{Login.assignedBranch}' AND SequenceRefNum='{seqrefno}' ORDER BY DateProcessed ASC", invledge.gridControl1,invledge.gridView1);
+            invledge.ShowDialog(this);
         }
     }
 }

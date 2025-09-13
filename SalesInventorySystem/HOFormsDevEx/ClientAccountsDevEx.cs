@@ -24,7 +24,19 @@ namespace SalesInventorySystem.HOFormsDevEx
 
         private void ClientAccountsDevEx_Load(object sender, EventArgs e)
         {
+            DateTime today = DateTime.Now;
+           
+            datefromledge.Text = HelperFunction.GetPreviousMonthSameDay(today).ToShortDateString();
+            datetoledge.Text = today.ToShortDateString();
+
+            dateFromTransSum.Text = HelperFunction.GetPreviousMonthSameDay(today).ToShortDateString();
+            dateToTransSum.Text = today.ToShortDateString();
+
+            datepymntfrom.Text = HelperFunction.GetPreviousMonthSameDay(today).ToShortDateString();
+            datepymntto.Text = today.ToShortDateString();
+
             loadCustomers();
+
         }
         void loadCustomers()
         {
@@ -45,12 +57,12 @@ namespace SalesInventorySystem.HOFormsDevEx
         {
             Database.display("SELECT CAST(TransactionDate as date) as TransactionDate" +
                     //",CAST(TransactionDate as date) as TransactionDate" +
-                    ",TransCode" +
-                    ",Description" +
+                    //",TransCode" +
+                    ",Particulars" +
                     ",Debit" +
                     ",Credit " +
-                    //",InvoiceNo " +
-                "FROM dbo.ClientLedger " +
+                //",InvoiceNo " +
+                "FROM view_ClientLedger " +
                 "WHERE AccountID='" + txtacctid.Text + "' " +
                 "AND CAST(TransactionDate as date) >= '" + datefromledge.Text + "' " +
                 "and CAST(TransactionDate as date)<= '" + datetoledge.Text + "' ", gridControl2, gridView2);
@@ -77,7 +89,7 @@ namespace SalesInventorySystem.HOFormsDevEx
                 ",EWTAmount  " +
                 ",DiscountAmount  " +
                 ",OffsetAmount  " +
-                "FROM TransactionChargeSales " +
+                "FROM view_TransactionChargeSales " +
                 "WHERE CustomerKey='" + txtacctid.Text + "' " +
                 "AND TransactionDate between '" + dateFromTransSum.Text + "' AND '" + dateToTransSum.Text + "' ", gridControl1, gridView1);
         }
@@ -87,7 +99,7 @@ namespace SalesInventorySystem.HOFormsDevEx
                 ",ReferenceNo" +
                 ",TransactedBy" +
                 ",AmountPaid" +
-                " FROM TransactionPayment " +
+                " FROM view_TransactionPayment " +
                 "WHERE CustomerKey='" + txtacctid.Text + "' " +
                 "AND CAST(DatePaid as date) >= '" + datepymntfrom.Text + "' and CAST(DatePaid as date)<= '" + datepymntto.Text + "' " +
                 "ORDER BY SEQ_NO", gridControl3, gridView3);
@@ -183,7 +195,11 @@ namespace SalesInventorySystem.HOFormsDevEx
             custid = txtacctid.Text;
             custname = txtacctname.Text;
             HOFormsDevEx.ClientPaymentsDevEx clientpayment = new HOFormsDevEx.ClientPaymentsDevEx();
+            clientpayment.txtcustid.Text = txtacctid.Text;
+            clientpayment.txtcustname.Text = txtacctname.Text;
+             
             clientpayment.ShowDialog(this);
+
         }
 
         private void btnTransactionSummary_Click(object sender, EventArgs e)

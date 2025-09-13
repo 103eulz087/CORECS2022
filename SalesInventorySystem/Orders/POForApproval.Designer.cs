@@ -190,12 +190,12 @@
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.approveToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(165, 38);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(181, 40);
             // 
             // approveToolStripMenuItem
             // 
             this.approveToolStripMenuItem.Name = "approveToolStripMenuItem";
-            this.approveToolStripMenuItem.Size = new System.Drawing.Size(164, 34);
+            this.approveToolStripMenuItem.Size = new System.Drawing.Size(180, 36);
             this.approveToolStripMenuItem.Text = "Approve";
             this.approveToolStripMenuItem.Click += new System.EventHandler(this.approveToolStripMenuItem_Click);
             // 
@@ -203,10 +203,10 @@
             // 
             this.btnForApprovalSalesOrder.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnForApprovalSalesOrder.ImageOptions.Image")));
             this.btnForApprovalSalesOrder.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnForApprovalSalesOrder.Location = new System.Drawing.Point(582, 10);
-            this.btnForApprovalSalesOrder.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            this.btnForApprovalSalesOrder.Location = new System.Drawing.Point(698, 11);
+            this.btnForApprovalSalesOrder.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
             this.btnForApprovalSalesOrder.Name = "btnForApprovalSalesOrder";
-            this.btnForApprovalSalesOrder.Size = new System.Drawing.Size(143, 40);
+            this.btnForApprovalSalesOrder.Size = new System.Drawing.Size(172, 43);
             this.btnForApprovalSalesOrder.TabIndex = 5;
             this.btnForApprovalSalesOrder.Text = "Generate";
             this.btnForApprovalSalesOrder.Click += new System.EventHandler(this.btnForApprovalSalesOrder_Click);
@@ -215,10 +215,10 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold);
-            this.label1.Location = new System.Drawing.Point(17, 20);
-            this.label1.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.label1.Location = new System.Drawing.Point(20, 22);
+            this.label1.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(79, 28);
+            this.label1.Size = new System.Drawing.Size(90, 31);
             this.label1.TabIndex = 0;
             this.label1.Text = "From:";
             // 
@@ -226,10 +226,10 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold);
-            this.label2.Location = new System.Drawing.Point(318, 20);
-            this.label2.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.label2.Location = new System.Drawing.Point(382, 22);
+            this.label2.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(48, 28);
+            this.label2.Size = new System.Drawing.Size(55, 31);
             this.label2.TabIndex = 1;
             this.label2.Text = "To:";
             // 
@@ -237,30 +237,30 @@
             // 
             this.datetoforapproval.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold);
             this.datetoforapproval.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.datetoforapproval.Location = new System.Drawing.Point(375, 10);
-            this.datetoforapproval.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            this.datetoforapproval.Location = new System.Drawing.Point(450, 11);
+            this.datetoforapproval.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
             this.datetoforapproval.Name = "datetoforapproval";
-            this.datetoforapproval.Size = new System.Drawing.Size(194, 35);
+            this.datetoforapproval.Size = new System.Drawing.Size(232, 39);
             this.datetoforapproval.TabIndex = 3;
             // 
             // datefromforapproval
             // 
             this.datefromforapproval.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold);
             this.datefromforapproval.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.datefromforapproval.Location = new System.Drawing.Point(112, 10);
-            this.datefromforapproval.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            this.datefromforapproval.Location = new System.Drawing.Point(134, 11);
+            this.datefromforapproval.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
             this.datefromforapproval.Name = "datefromforapproval";
-            this.datefromforapproval.Size = new System.Drawing.Size(194, 35);
+            this.datefromforapproval.Size = new System.Drawing.Size(232, 39);
             this.datefromforapproval.TabIndex = 2;
             // 
             // btnApprovedSalesReq
             // 
             this.btnApprovedSalesReq.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnApprovedSalesReq.ImageOptions.Image")));
             this.btnApprovedSalesReq.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnApprovedSalesReq.Location = new System.Drawing.Point(570, 13);
-            this.btnApprovedSalesReq.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            this.btnApprovedSalesReq.Location = new System.Drawing.Point(684, 14);
+            this.btnApprovedSalesReq.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
             this.btnApprovedSalesReq.Name = "btnApprovedSalesReq";
-            this.btnApprovedSalesReq.Size = new System.Drawing.Size(143, 40);
+            this.btnApprovedSalesReq.Size = new System.Drawing.Size(172, 43);
             this.btnApprovedSalesReq.TabIndex = 7;
             this.btnApprovedSalesReq.Text = "Generate";
             this.btnApprovedSalesReq.Click += new System.EventHandler(this.btnApprovedSalesReq_Click);
@@ -269,30 +269,30 @@
             // 
             this.datetoapproved.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold);
             this.datetoapproved.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.datetoapproved.Location = new System.Drawing.Point(363, 13);
-            this.datetoapproved.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            this.datetoapproved.Location = new System.Drawing.Point(436, 14);
+            this.datetoapproved.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
             this.datetoapproved.Name = "datetoapproved";
-            this.datetoapproved.Size = new System.Drawing.Size(194, 35);
+            this.datetoapproved.Size = new System.Drawing.Size(232, 39);
             this.datetoapproved.TabIndex = 3;
             // 
             // datefromapproved
             // 
             this.datefromapproved.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold);
             this.datefromapproved.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.datefromapproved.Location = new System.Drawing.Point(100, 13);
-            this.datefromapproved.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            this.datefromapproved.Location = new System.Drawing.Point(120, 14);
+            this.datefromapproved.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
             this.datefromapproved.Name = "datefromapproved";
-            this.datefromapproved.Size = new System.Drawing.Size(194, 35);
+            this.datefromapproved.Size = new System.Drawing.Size(232, 39);
             this.datefromapproved.TabIndex = 2;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold);
-            this.label3.Location = new System.Drawing.Point(307, 21);
-            this.label3.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.label3.Location = new System.Drawing.Point(368, 23);
+            this.label3.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(48, 28);
+            this.label3.Size = new System.Drawing.Size(55, 31);
             this.label3.TabIndex = 1;
             this.label3.Text = "To:";
             // 
@@ -300,10 +300,10 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold);
-            this.label4.Location = new System.Drawing.Point(17, 21);
-            this.label4.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.label4.Location = new System.Drawing.Point(20, 23);
+            this.label4.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(79, 28);
+            this.label4.Size = new System.Drawing.Size(90, 31);
             this.label4.TabIndex = 0;
             this.label4.Text = "From:";
             // 
@@ -311,10 +311,10 @@
             // 
             this.simpleButton1.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("simpleButton1.ImageOptions.Image")));
             this.simpleButton1.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.simpleButton1.Location = new System.Drawing.Point(570, 14);
-            this.simpleButton1.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            this.simpleButton1.Location = new System.Drawing.Point(684, 15);
+            this.simpleButton1.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
             this.simpleButton1.Name = "simpleButton1";
-            this.simpleButton1.Size = new System.Drawing.Size(143, 40);
+            this.simpleButton1.Size = new System.Drawing.Size(172, 43);
             this.simpleButton1.TabIndex = 9;
             this.simpleButton1.Text = "Generate";
             this.simpleButton1.Click += new System.EventHandler(this.simpleButton1_Click);
@@ -323,30 +323,30 @@
             // 
             this.datetorejected.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold);
             this.datetorejected.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.datetorejected.Location = new System.Drawing.Point(363, 14);
-            this.datetorejected.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            this.datetorejected.Location = new System.Drawing.Point(436, 15);
+            this.datetorejected.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
             this.datetorejected.Name = "datetorejected";
-            this.datetorejected.Size = new System.Drawing.Size(194, 35);
+            this.datetorejected.Size = new System.Drawing.Size(232, 39);
             this.datetorejected.TabIndex = 3;
             // 
             // datefromrejected
             // 
             this.datefromrejected.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold);
             this.datefromrejected.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.datefromrejected.Location = new System.Drawing.Point(100, 14);
-            this.datefromrejected.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            this.datefromrejected.Location = new System.Drawing.Point(120, 15);
+            this.datefromrejected.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
             this.datefromrejected.Name = "datefromrejected";
-            this.datefromrejected.Size = new System.Drawing.Size(194, 35);
+            this.datefromrejected.Size = new System.Drawing.Size(232, 39);
             this.datefromrejected.TabIndex = 2;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold);
-            this.label5.Location = new System.Drawing.Point(307, 23);
-            this.label5.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.label5.Location = new System.Drawing.Point(368, 25);
+            this.label5.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(48, 28);
+            this.label5.Size = new System.Drawing.Size(55, 31);
             this.label5.TabIndex = 1;
             this.label5.Text = "To:";
             // 
@@ -354,10 +354,10 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold);
-            this.label6.Location = new System.Drawing.Point(17, 23);
-            this.label6.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.label6.Location = new System.Drawing.Point(20, 25);
+            this.label6.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(79, 28);
+            this.label6.Size = new System.Drawing.Size(90, 31);
             this.label6.TabIndex = 0;
             this.label6.Text = "From:";
             // 
@@ -365,10 +365,10 @@
             // 
             this.btnForDelivSalesOrder.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnForDelivSalesOrder.ImageOptions.Image")));
             this.btnForDelivSalesOrder.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnForDelivSalesOrder.Location = new System.Drawing.Point(570, 14);
-            this.btnForDelivSalesOrder.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            this.btnForDelivSalesOrder.Location = new System.Drawing.Point(684, 15);
+            this.btnForDelivSalesOrder.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
             this.btnForDelivSalesOrder.Name = "btnForDelivSalesOrder";
-            this.btnForDelivSalesOrder.Size = new System.Drawing.Size(143, 40);
+            this.btnForDelivSalesOrder.Size = new System.Drawing.Size(172, 43);
             this.btnForDelivSalesOrder.TabIndex = 11;
             this.btnForDelivSalesOrder.Text = "Generate";
             this.btnForDelivSalesOrder.Click += new System.EventHandler(this.btnForDelivSalesOrder_Click);
@@ -377,30 +377,30 @@
             // 
             this.datetodelivered.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold);
             this.datetodelivered.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.datetodelivered.Location = new System.Drawing.Point(363, 14);
-            this.datetodelivered.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            this.datetodelivered.Location = new System.Drawing.Point(436, 15);
+            this.datetodelivered.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
             this.datetodelivered.Name = "datetodelivered";
-            this.datetodelivered.Size = new System.Drawing.Size(194, 35);
+            this.datetodelivered.Size = new System.Drawing.Size(232, 39);
             this.datetodelivered.TabIndex = 7;
             // 
             // datefromdelivered
             // 
             this.datefromdelivered.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold);
             this.datefromdelivered.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.datefromdelivered.Location = new System.Drawing.Point(100, 14);
-            this.datefromdelivered.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            this.datefromdelivered.Location = new System.Drawing.Point(120, 15);
+            this.datefromdelivered.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
             this.datefromdelivered.Name = "datefromdelivered";
-            this.datefromdelivered.Size = new System.Drawing.Size(194, 35);
+            this.datefromdelivered.Size = new System.Drawing.Size(232, 39);
             this.datefromdelivered.TabIndex = 6;
             // 
             // label7
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold);
-            this.label7.Location = new System.Drawing.Point(307, 23);
-            this.label7.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.label7.Location = new System.Drawing.Point(368, 25);
+            this.label7.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(48, 28);
+            this.label7.Size = new System.Drawing.Size(55, 31);
             this.label7.TabIndex = 5;
             this.label7.Text = "To:";
             // 
@@ -408,10 +408,10 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold);
-            this.label8.Location = new System.Drawing.Point(17, 23);
-            this.label8.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.label8.Location = new System.Drawing.Point(20, 25);
+            this.label8.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(79, 28);
+            this.label8.Size = new System.Drawing.Size(90, 31);
             this.label8.TabIndex = 4;
             this.label8.Text = "From:";
             // 
@@ -419,10 +419,10 @@
             // 
             this.btnDeliveredSalesOrder.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnDeliveredSalesOrder.ImageOptions.Image")));
             this.btnDeliveredSalesOrder.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnDeliveredSalesOrder.Location = new System.Drawing.Point(570, 14);
-            this.btnDeliveredSalesOrder.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            this.btnDeliveredSalesOrder.Location = new System.Drawing.Point(684, 15);
+            this.btnDeliveredSalesOrder.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
             this.btnDeliveredSalesOrder.Name = "btnDeliveredSalesOrder";
-            this.btnDeliveredSalesOrder.Size = new System.Drawing.Size(143, 40);
+            this.btnDeliveredSalesOrder.Size = new System.Drawing.Size(172, 43);
             this.btnDeliveredSalesOrder.TabIndex = 13;
             this.btnDeliveredSalesOrder.Text = "Generate";
             this.btnDeliveredSalesOrder.Click += new System.EventHandler(this.btnDeliveredSalesOrder_Click);
@@ -431,30 +431,30 @@
             // 
             this.dateToDeliv.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold);
             this.dateToDeliv.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateToDeliv.Location = new System.Drawing.Point(363, 14);
-            this.dateToDeliv.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            this.dateToDeliv.Location = new System.Drawing.Point(436, 15);
+            this.dateToDeliv.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
             this.dateToDeliv.Name = "dateToDeliv";
-            this.dateToDeliv.Size = new System.Drawing.Size(194, 35);
+            this.dateToDeliv.Size = new System.Drawing.Size(232, 39);
             this.dateToDeliv.TabIndex = 3;
             // 
             // dateFromDeliv
             // 
             this.dateFromDeliv.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold);
             this.dateFromDeliv.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateFromDeliv.Location = new System.Drawing.Point(100, 14);
-            this.dateFromDeliv.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            this.dateFromDeliv.Location = new System.Drawing.Point(120, 15);
+            this.dateFromDeliv.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
             this.dateFromDeliv.Name = "dateFromDeliv";
-            this.dateFromDeliv.Size = new System.Drawing.Size(194, 35);
+            this.dateFromDeliv.Size = new System.Drawing.Size(232, 39);
             this.dateFromDeliv.TabIndex = 2;
             // 
             // label9
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold);
-            this.label9.Location = new System.Drawing.Point(307, 23);
-            this.label9.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.label9.Location = new System.Drawing.Point(368, 25);
+            this.label9.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(48, 28);
+            this.label9.Size = new System.Drawing.Size(55, 31);
             this.label9.TabIndex = 1;
             this.label9.Text = "To:";
             // 
@@ -462,10 +462,10 @@
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold);
-            this.label10.Location = new System.Drawing.Point(17, 23);
-            this.label10.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.label10.Location = new System.Drawing.Point(20, 25);
+            this.label10.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(79, 28);
+            this.label10.Size = new System.Drawing.Size(90, 31);
             this.label10.TabIndex = 0;
             this.label10.Text = "From:";
             // 
@@ -476,19 +476,19 @@
             this.toolStripMenuItem1,
             this.cancelThisOrderToolStripMenuItem});
             this.contextMenuApprovedG2.Name = "contextMenuStrip1";
-            this.contextMenuApprovedG2.Size = new System.Drawing.Size(265, 72);
+            this.contextMenuApprovedG2.Size = new System.Drawing.Size(296, 76);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(264, 34);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(295, 36);
             this.toolStripMenuItem1.Text = "Show Order Details";
             this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
             // 
             // cancelThisOrderToolStripMenuItem
             // 
             this.cancelThisOrderToolStripMenuItem.Name = "cancelThisOrderToolStripMenuItem";
-            this.cancelThisOrderToolStripMenuItem.Size = new System.Drawing.Size(264, 34);
+            this.cancelThisOrderToolStripMenuItem.Size = new System.Drawing.Size(295, 36);
             this.cancelThisOrderToolStripMenuItem.Text = "Cancel this Order";
             this.cancelThisOrderToolStripMenuItem.Click += new System.EventHandler(this.cancelThisOrderToolStripMenuItem_Click);
             // 
@@ -499,19 +499,19 @@
             this.confirmOrderToolStripMenuItem,
             this.printDeliveryReceiptToolStripMenuItem});
             this.contextdelivered.Name = "contextmenug4";
-            this.contextdelivered.Size = new System.Drawing.Size(284, 72);
+            this.contextdelivered.Size = new System.Drawing.Size(319, 76);
             // 
             // confirmOrderToolStripMenuItem
             // 
             this.confirmOrderToolStripMenuItem.Name = "confirmOrderToolStripMenuItem";
-            this.confirmOrderToolStripMenuItem.Size = new System.Drawing.Size(283, 34);
+            this.confirmOrderToolStripMenuItem.Size = new System.Drawing.Size(318, 36);
             this.confirmOrderToolStripMenuItem.Text = "Confirm Order";
             this.confirmOrderToolStripMenuItem.Click += new System.EventHandler(this.confirmOrderToolStripMenuItem_Click);
             // 
             // printDeliveryReceiptToolStripMenuItem
             // 
             this.printDeliveryReceiptToolStripMenuItem.Name = "printDeliveryReceiptToolStripMenuItem";
-            this.printDeliveryReceiptToolStripMenuItem.Size = new System.Drawing.Size(283, 34);
+            this.printDeliveryReceiptToolStripMenuItem.Size = new System.Drawing.Size(318, 36);
             this.printDeliveryReceiptToolStripMenuItem.Text = "Print Delivery Receipt";
             this.printDeliveryReceiptToolStripMenuItem.Click += new System.EventHandler(this.printDeliveryReceiptToolStripMenuItem_Click);
             // 
@@ -528,13 +528,13 @@
             this.printDebitMemoChargesToolStripMenuItem,
             this.showItemsToolStripMenuItem});
             this.contextMenuForDelivery.Name = "contextMenuForDelivery";
-            this.contextMenuForDelivery.Size = new System.Drawing.Size(333, 276);
+            this.contextMenuForDelivery.Size = new System.Drawing.Size(374, 336);
             // 
             // confirmOrderToolStripMenuItem1
             // 
             this.confirmOrderToolStripMenuItem1.Image = ((System.Drawing.Image)(resources.GetObject("confirmOrderToolStripMenuItem1.Image")));
             this.confirmOrderToolStripMenuItem1.Name = "confirmOrderToolStripMenuItem1";
-            this.confirmOrderToolStripMenuItem1.Size = new System.Drawing.Size(332, 34);
+            this.confirmOrderToolStripMenuItem1.Size = new System.Drawing.Size(373, 36);
             this.confirmOrderToolStripMenuItem1.Text = "Confirm Order";
             this.confirmOrderToolStripMenuItem1.Click += new System.EventHandler(this.confirmOrderToolStripMenuItem1_Click);
             // 
@@ -542,7 +542,7 @@
             // 
             this.addChargesToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("addChargesToolStripMenuItem.Image")));
             this.addChargesToolStripMenuItem.Name = "addChargesToolStripMenuItem";
-            this.addChargesToolStripMenuItem.Size = new System.Drawing.Size(332, 34);
+            this.addChargesToolStripMenuItem.Size = new System.Drawing.Size(373, 36);
             this.addChargesToolStripMenuItem.Text = "Add Charges";
             this.addChargesToolStripMenuItem.Click += new System.EventHandler(this.addChargesToolStripMenuItem_Click);
             // 
@@ -550,7 +550,7 @@
             // 
             this.returnOrderToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("returnOrderToolStripMenuItem.Image")));
             this.returnOrderToolStripMenuItem.Name = "returnOrderToolStripMenuItem";
-            this.returnOrderToolStripMenuItem.Size = new System.Drawing.Size(332, 34);
+            this.returnOrderToolStripMenuItem.Size = new System.Drawing.Size(373, 36);
             this.returnOrderToolStripMenuItem.Text = "Return Order";
             this.returnOrderToolStripMenuItem.Click += new System.EventHandler(this.returnOrderToolStripMenuItem_Click);
             // 
@@ -558,7 +558,7 @@
             // 
             this.creditMemoToolStripMenuItem1.Image = ((System.Drawing.Image)(resources.GetObject("creditMemoToolStripMenuItem1.Image")));
             this.creditMemoToolStripMenuItem1.Name = "creditMemoToolStripMenuItem1";
-            this.creditMemoToolStripMenuItem1.Size = new System.Drawing.Size(332, 34);
+            this.creditMemoToolStripMenuItem1.Size = new System.Drawing.Size(373, 36);
             this.creditMemoToolStripMenuItem1.Text = "Credit Memo";
             this.creditMemoToolStripMenuItem1.Click += new System.EventHandler(this.creditMemoToolStripMenuItem1_Click);
             // 
@@ -566,7 +566,7 @@
             // 
             this.printDeliveryReceiptToolStripMenuItem1.Image = ((System.Drawing.Image)(resources.GetObject("printDeliveryReceiptToolStripMenuItem1.Image")));
             this.printDeliveryReceiptToolStripMenuItem1.Name = "printDeliveryReceiptToolStripMenuItem1";
-            this.printDeliveryReceiptToolStripMenuItem1.Size = new System.Drawing.Size(332, 34);
+            this.printDeliveryReceiptToolStripMenuItem1.Size = new System.Drawing.Size(373, 36);
             this.printDeliveryReceiptToolStripMenuItem1.Text = "Update Invoice / Print DR";
             this.printDeliveryReceiptToolStripMenuItem1.Click += new System.EventHandler(this.printDeliveryReceiptToolStripMenuItem1_Click);
             // 
@@ -574,7 +574,7 @@
             // 
             this.printSalesInvoiceToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("printSalesInvoiceToolStripMenuItem.Image")));
             this.printSalesInvoiceToolStripMenuItem.Name = "printSalesInvoiceToolStripMenuItem";
-            this.printSalesInvoiceToolStripMenuItem.Size = new System.Drawing.Size(332, 34);
+            this.printSalesInvoiceToolStripMenuItem.Size = new System.Drawing.Size(373, 36);
             this.printSalesInvoiceToolStripMenuItem.Text = "Print SalesInvoice";
             this.printSalesInvoiceToolStripMenuItem.Click += new System.EventHandler(this.printSalesInvoiceToolStripMenuItem_Click);
             // 
@@ -582,7 +582,7 @@
             // 
             this.printDebitMemoChargesToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("printDebitMemoChargesToolStripMenuItem.Image")));
             this.printDebitMemoChargesToolStripMenuItem.Name = "printDebitMemoChargesToolStripMenuItem";
-            this.printDebitMemoChargesToolStripMenuItem.Size = new System.Drawing.Size(332, 34);
+            this.printDebitMemoChargesToolStripMenuItem.Size = new System.Drawing.Size(373, 36);
             this.printDebitMemoChargesToolStripMenuItem.Text = "Print DebitMemo/Charges";
             this.printDebitMemoChargesToolStripMenuItem.Click += new System.EventHandler(this.printDebitMemoChargesToolStripMenuItem_Click);
             // 
@@ -590,7 +590,7 @@
             // 
             this.showItemsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("showItemsToolStripMenuItem.Image")));
             this.showItemsToolStripMenuItem.Name = "showItemsToolStripMenuItem";
-            this.showItemsToolStripMenuItem.Size = new System.Drawing.Size(332, 34);
+            this.showItemsToolStripMenuItem.Size = new System.Drawing.Size(373, 36);
             this.showItemsToolStripMenuItem.Text = "Show Items";
             this.showItemsToolStripMenuItem.Click += new System.EventHandler(this.showItemsToolStripMenuItem_Click);
             // 
@@ -607,20 +607,20 @@
             this.toolStripMenuItem9,
             this.toolStripMenuItem10});
             this.contextMenuForDeliverySTS.Name = "contextMenuForDelivery";
-            this.contextMenuForDeliverySTS.Size = new System.Drawing.Size(333, 276);
+            this.contextMenuForDeliverySTS.Size = new System.Drawing.Size(374, 292);
             // 
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItem2.Image")));
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(332, 34);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(373, 36);
             this.toolStripMenuItem2.Text = "Confirm Order";
             // 
             // toolStripMenuItem4
             // 
             this.toolStripMenuItem4.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItem4.Image")));
             this.toolStripMenuItem4.Name = "toolStripMenuItem4";
-            this.toolStripMenuItem4.Size = new System.Drawing.Size(332, 34);
+            this.toolStripMenuItem4.Size = new System.Drawing.Size(373, 36);
             this.toolStripMenuItem4.Text = "Add Charges";
             this.toolStripMenuItem4.Click += new System.EventHandler(this.toolStripMenuItem4_Click);
             // 
@@ -628,21 +628,21 @@
             // 
             this.toolStripMenuItem5.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItem5.Image")));
             this.toolStripMenuItem5.Name = "toolStripMenuItem5";
-            this.toolStripMenuItem5.Size = new System.Drawing.Size(332, 34);
+            this.toolStripMenuItem5.Size = new System.Drawing.Size(373, 36);
             this.toolStripMenuItem5.Text = "Return Order";
             // 
             // toolStripMenuItem6
             // 
             this.toolStripMenuItem6.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItem6.Image")));
             this.toolStripMenuItem6.Name = "toolStripMenuItem6";
-            this.toolStripMenuItem6.Size = new System.Drawing.Size(332, 34);
+            this.toolStripMenuItem6.Size = new System.Drawing.Size(373, 36);
             this.toolStripMenuItem6.Text = "Credit Memo";
             // 
             // toolStripMenuItem7
             // 
             this.toolStripMenuItem7.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItem7.Image")));
             this.toolStripMenuItem7.Name = "toolStripMenuItem7";
-            this.toolStripMenuItem7.Size = new System.Drawing.Size(332, 34);
+            this.toolStripMenuItem7.Size = new System.Drawing.Size(373, 36);
             this.toolStripMenuItem7.Text = "Update Invoice / Print DR";
             this.toolStripMenuItem7.Click += new System.EventHandler(this.toolStripMenuItem7_Click);
             // 
@@ -650,21 +650,21 @@
             // 
             this.toolStripMenuItem8.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItem8.Image")));
             this.toolStripMenuItem8.Name = "toolStripMenuItem8";
-            this.toolStripMenuItem8.Size = new System.Drawing.Size(332, 34);
+            this.toolStripMenuItem8.Size = new System.Drawing.Size(373, 36);
             this.toolStripMenuItem8.Text = "Print SalesInvoice";
             // 
             // toolStripMenuItem9
             // 
             this.toolStripMenuItem9.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItem9.Image")));
             this.toolStripMenuItem9.Name = "toolStripMenuItem9";
-            this.toolStripMenuItem9.Size = new System.Drawing.Size(332, 34);
+            this.toolStripMenuItem9.Size = new System.Drawing.Size(373, 36);
             this.toolStripMenuItem9.Text = "Print DebitMemo/Charges";
             // 
             // toolStripMenuItem10
             // 
             this.toolStripMenuItem10.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItem10.Image")));
             this.toolStripMenuItem10.Name = "toolStripMenuItem10";
-            this.toolStripMenuItem10.Size = new System.Drawing.Size(332, 34);
+            this.toolStripMenuItem10.Size = new System.Drawing.Size(373, 36);
             this.toolStripMenuItem10.Text = "Show Items";
             // 
             // tabMain
@@ -675,10 +675,10 @@
             this.tabMain.AppearancePage.HeaderActive.Options.UseFont = true;
             this.tabMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabMain.Location = new System.Drawing.Point(0, 0);
-            this.tabMain.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            this.tabMain.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
             this.tabMain.Name = "tabMain";
             this.tabMain.SelectedTabPage = this.tabForApproval;
-            this.tabMain.Size = new System.Drawing.Size(1995, 1072);
+            this.tabMain.Size = new System.Drawing.Size(2394, 1165);
             this.tabMain.TabIndex = 6;
             this.tabMain.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
             this.tabForApproval,
@@ -692,9 +692,9 @@
             // 
             this.tabForApproval.Controls.Add(this.tabForApprovalSub);
             this.tabForApproval.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("tabForApproval.ImageOptions.Image")));
-            this.tabForApproval.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            this.tabForApproval.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
             this.tabForApproval.Name = "tabForApproval";
-            this.tabForApproval.Size = new System.Drawing.Size(1991, 1024);
+            this.tabForApproval.Size = new System.Drawing.Size(2390, 1111);
             this.tabForApproval.Text = "For Approval";
             // 
             // tabForApprovalSub
@@ -705,10 +705,10 @@
             this.tabForApprovalSub.AppearancePage.HeaderActive.Options.UseFont = true;
             this.tabForApprovalSub.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabForApprovalSub.Location = new System.Drawing.Point(0, 0);
-            this.tabForApprovalSub.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            this.tabForApprovalSub.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
             this.tabForApprovalSub.Name = "tabForApprovalSub";
             this.tabForApprovalSub.SelectedTabPage = this.forApprovalSalesOrder;
-            this.tabForApprovalSub.Size = new System.Drawing.Size(1991, 1024);
+            this.tabForApprovalSub.Size = new System.Drawing.Size(2390, 1111);
             this.tabForApprovalSub.TabIndex = 7;
             this.tabForApprovalSub.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
             this.forApprovalSalesOrder});
@@ -718,32 +718,32 @@
             this.forApprovalSalesOrder.Controls.Add(this.groupBox7);
             this.forApprovalSalesOrder.Controls.Add(this.panelControl1);
             this.forApprovalSalesOrder.ImageOptions.Image = global::SalesInventorySystem.Properties.Resources.Order;
-            this.forApprovalSalesOrder.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            this.forApprovalSalesOrder.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
             this.forApprovalSalesOrder.Name = "forApprovalSalesOrder";
-            this.forApprovalSalesOrder.Size = new System.Drawing.Size(1987, 976);
+            this.forApprovalSalesOrder.Size = new System.Drawing.Size(2386, 1057);
             this.forApprovalSalesOrder.Text = "Sales Order";
             // 
             // groupBox7
             // 
             this.groupBox7.Controls.Add(this.gridControl1);
             this.groupBox7.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox7.Location = new System.Drawing.Point(0, 63);
-            this.groupBox7.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            this.groupBox7.Location = new System.Drawing.Point(0, 68);
+            this.groupBox7.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
             this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Padding = new System.Windows.Forms.Padding(5, 6, 5, 6);
-            this.groupBox7.Size = new System.Drawing.Size(1987, 913);
+            this.groupBox7.Padding = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.groupBox7.Size = new System.Drawing.Size(2386, 989);
             this.groupBox7.TabIndex = 3;
             this.groupBox7.TabStop = false;
             // 
             // gridControl1
             // 
             this.gridControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridControl1.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
-            this.gridControl1.Location = new System.Drawing.Point(5, 29);
+            this.gridControl1.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.gridControl1.Location = new System.Drawing.Point(6, 33);
             this.gridControl1.MainView = this.gridView1;
-            this.gridControl1.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            this.gridControl1.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
             this.gridControl1.Name = "gridControl1";
-            this.gridControl1.Size = new System.Drawing.Size(1977, 878);
+            this.gridControl1.Size = new System.Drawing.Size(2374, 949);
             this.gridControl1.TabIndex = 0;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
@@ -760,7 +760,7 @@
             this.gridView1.Appearance.HeaderPanel.Options.UseFont = true;
             this.gridView1.Appearance.Row.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gridView1.Appearance.Row.Options.UseFont = true;
-            this.gridView1.DetailHeight = 619;
+            this.gridView1.DetailHeight = 673;
             this.gridView1.FixedLineWidth = 3;
             this.gridView1.GridControl = this.gridControl1;
             this.gridView1.Name = "gridView1";
@@ -782,19 +782,19 @@
             this.panelControl1.Controls.Add(this.datetoforapproval);
             this.panelControl1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelControl1.Location = new System.Drawing.Point(0, 0);
-            this.panelControl1.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            this.panelControl1.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
             this.panelControl1.Name = "panelControl1";
-            this.panelControl1.Size = new System.Drawing.Size(1987, 63);
+            this.panelControl1.Size = new System.Drawing.Size(2386, 68);
             this.panelControl1.TabIndex = 0;
             // 
             // btnforapprovalsalesorderexcel
             // 
             this.btnforapprovalsalesorderexcel.ImageOptions.Image = global::SalesInventorySystem.Properties.Resources.ExportToExcel_16x16;
             this.btnforapprovalsalesorderexcel.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnforapprovalsalesorderexcel.Location = new System.Drawing.Point(735, 10);
-            this.btnforapprovalsalesorderexcel.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            this.btnforapprovalsalesorderexcel.Location = new System.Drawing.Point(882, 11);
+            this.btnforapprovalsalesorderexcel.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
             this.btnforapprovalsalesorderexcel.Name = "btnforapprovalsalesorderexcel";
-            this.btnforapprovalsalesorderexcel.Size = new System.Drawing.Size(197, 40);
+            this.btnforapprovalsalesorderexcel.Size = new System.Drawing.Size(236, 43);
             this.btnforapprovalsalesorderexcel.TabIndex = 6;
             this.btnforapprovalsalesorderexcel.Text = "Export to Excel";
             this.btnforapprovalsalesorderexcel.Click += new System.EventHandler(this.btnforapprovalsalesorderexcel_Click);
@@ -803,9 +803,9 @@
             // 
             this.tabApproved.Controls.Add(this.tabApprovedSub);
             this.tabApproved.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("tabApproved.ImageOptions.Image")));
-            this.tabApproved.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            this.tabApproved.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
             this.tabApproved.Name = "tabApproved";
-            this.tabApproved.Size = new System.Drawing.Size(1991, 1024);
+            this.tabApproved.Size = new System.Drawing.Size(2390, 1111);
             this.tabApproved.Text = "Approved Request";
             // 
             // tabApprovedSub
@@ -814,10 +814,10 @@
             this.tabApprovedSub.AppearancePage.HeaderActive.Options.UseFont = true;
             this.tabApprovedSub.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabApprovedSub.Location = new System.Drawing.Point(0, 0);
-            this.tabApprovedSub.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            this.tabApprovedSub.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
             this.tabApprovedSub.Name = "tabApprovedSub";
             this.tabApprovedSub.SelectedTabPage = this.approvedSalesOrder;
-            this.tabApprovedSub.Size = new System.Drawing.Size(1991, 1024);
+            this.tabApprovedSub.Size = new System.Drawing.Size(2390, 1111);
             this.tabApprovedSub.TabIndex = 8;
             this.tabApprovedSub.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
             this.approvedSalesOrder});
@@ -827,32 +827,32 @@
             this.approvedSalesOrder.Controls.Add(this.groupBox25);
             this.approvedSalesOrder.Controls.Add(this.panelControl3);
             this.approvedSalesOrder.ImageOptions.Image = global::SalesInventorySystem.Properties.Resources.Order;
-            this.approvedSalesOrder.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            this.approvedSalesOrder.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
             this.approvedSalesOrder.Name = "approvedSalesOrder";
-            this.approvedSalesOrder.Size = new System.Drawing.Size(1987, 980);
+            this.approvedSalesOrder.Size = new System.Drawing.Size(2386, 1060);
             this.approvedSalesOrder.Text = "Sales Order";
             // 
             // groupBox25
             // 
             this.groupBox25.Controls.Add(this.gridControl2);
             this.groupBox25.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox25.Location = new System.Drawing.Point(0, 63);
-            this.groupBox25.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            this.groupBox25.Location = new System.Drawing.Point(0, 68);
+            this.groupBox25.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
             this.groupBox25.Name = "groupBox25";
-            this.groupBox25.Padding = new System.Windows.Forms.Padding(5, 6, 5, 6);
-            this.groupBox25.Size = new System.Drawing.Size(1987, 917);
+            this.groupBox25.Padding = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.groupBox25.Size = new System.Drawing.Size(2386, 992);
             this.groupBox25.TabIndex = 2;
             this.groupBox25.TabStop = false;
             // 
             // gridControl2
             // 
             this.gridControl2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridControl2.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
-            this.gridControl2.Location = new System.Drawing.Point(5, 29);
+            this.gridControl2.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.gridControl2.Location = new System.Drawing.Point(6, 33);
             this.gridControl2.MainView = this.gridView2;
-            this.gridControl2.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            this.gridControl2.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
             this.gridControl2.Name = "gridControl2";
-            this.gridControl2.Size = new System.Drawing.Size(1977, 882);
+            this.gridControl2.Size = new System.Drawing.Size(2374, 952);
             this.gridControl2.TabIndex = 2;
             this.gridControl2.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView2});
@@ -864,7 +864,7 @@
             this.gridView2.Appearance.HeaderPanel.Options.UseFont = true;
             this.gridView2.Appearance.Row.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gridView2.Appearance.Row.Options.UseFont = true;
-            this.gridView2.DetailHeight = 619;
+            this.gridView2.DetailHeight = 673;
             this.gridView2.FixedLineWidth = 3;
             this.gridView2.GridControl = this.gridControl2;
             this.gridView2.Name = "gridView2";
@@ -885,19 +885,19 @@
             this.panelControl3.Controls.Add(this.datefromapproved);
             this.panelControl3.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelControl3.Location = new System.Drawing.Point(0, 0);
-            this.panelControl3.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            this.panelControl3.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
             this.panelControl3.Name = "panelControl3";
-            this.panelControl3.Size = new System.Drawing.Size(1987, 63);
+            this.panelControl3.Size = new System.Drawing.Size(2386, 68);
             this.panelControl3.TabIndex = 1;
             // 
             // btnapprovedreqsalesorderexcel
             // 
             this.btnapprovedreqsalesorderexcel.ImageOptions.Image = global::SalesInventorySystem.Properties.Resources.ExportToExcel_16x16;
             this.btnapprovedreqsalesorderexcel.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnapprovedreqsalesorderexcel.Location = new System.Drawing.Point(723, 13);
-            this.btnapprovedreqsalesorderexcel.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            this.btnapprovedreqsalesorderexcel.Location = new System.Drawing.Point(868, 14);
+            this.btnapprovedreqsalesorderexcel.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
             this.btnapprovedreqsalesorderexcel.Name = "btnapprovedreqsalesorderexcel";
-            this.btnapprovedreqsalesorderexcel.Size = new System.Drawing.Size(197, 40);
+            this.btnapprovedreqsalesorderexcel.Size = new System.Drawing.Size(236, 43);
             this.btnapprovedreqsalesorderexcel.TabIndex = 8;
             this.btnapprovedreqsalesorderexcel.Text = "Export to Excel";
             this.btnapprovedreqsalesorderexcel.Click += new System.EventHandler(this.btnapprovedreqsalesorderexcel_Click);
@@ -906,9 +906,9 @@
             // 
             this.tabRejected.Controls.Add(this.tabRejectedSub);
             this.tabRejected.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("tabRejected.ImageOptions.Image")));
-            this.tabRejected.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            this.tabRejected.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
             this.tabRejected.Name = "tabRejected";
-            this.tabRejected.Size = new System.Drawing.Size(1991, 1024);
+            this.tabRejected.Size = new System.Drawing.Size(2390, 1111);
             this.tabRejected.Text = "Rejected Request";
             // 
             // tabRejectedSub
@@ -917,10 +917,10 @@
             this.tabRejectedSub.AppearancePage.HeaderActive.Options.UseFont = true;
             this.tabRejectedSub.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabRejectedSub.Location = new System.Drawing.Point(0, 0);
-            this.tabRejectedSub.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            this.tabRejectedSub.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
             this.tabRejectedSub.Name = "tabRejectedSub";
             this.tabRejectedSub.SelectedTabPage = this.rejectedSalesOrder;
-            this.tabRejectedSub.Size = new System.Drawing.Size(1991, 1024);
+            this.tabRejectedSub.Size = new System.Drawing.Size(2390, 1111);
             this.tabRejectedSub.TabIndex = 8;
             this.tabRejectedSub.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
             this.rejectedSalesOrder});
@@ -930,32 +930,32 @@
             this.rejectedSalesOrder.Controls.Add(this.groupBox27);
             this.rejectedSalesOrder.Controls.Add(this.panelControl5);
             this.rejectedSalesOrder.ImageOptions.Image = global::SalesInventorySystem.Properties.Resources.Order;
-            this.rejectedSalesOrder.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            this.rejectedSalesOrder.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
             this.rejectedSalesOrder.Name = "rejectedSalesOrder";
-            this.rejectedSalesOrder.Size = new System.Drawing.Size(1987, 980);
+            this.rejectedSalesOrder.Size = new System.Drawing.Size(2386, 1060);
             this.rejectedSalesOrder.Text = "Sales Order";
             // 
             // groupBox27
             // 
             this.groupBox27.Controls.Add(this.gridControl3);
             this.groupBox27.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox27.Location = new System.Drawing.Point(0, 63);
-            this.groupBox27.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            this.groupBox27.Location = new System.Drawing.Point(0, 68);
+            this.groupBox27.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
             this.groupBox27.Name = "groupBox27";
-            this.groupBox27.Padding = new System.Windows.Forms.Padding(5, 6, 5, 6);
-            this.groupBox27.Size = new System.Drawing.Size(1987, 917);
+            this.groupBox27.Padding = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.groupBox27.Size = new System.Drawing.Size(2386, 992);
             this.groupBox27.TabIndex = 2;
             this.groupBox27.TabStop = false;
             // 
             // gridControl3
             // 
             this.gridControl3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridControl3.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
-            this.gridControl3.Location = new System.Drawing.Point(5, 29);
+            this.gridControl3.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.gridControl3.Location = new System.Drawing.Point(6, 33);
             this.gridControl3.MainView = this.gridView3;
-            this.gridControl3.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            this.gridControl3.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
             this.gridControl3.Name = "gridControl3";
-            this.gridControl3.Size = new System.Drawing.Size(1977, 882);
+            this.gridControl3.Size = new System.Drawing.Size(2374, 952);
             this.gridControl3.TabIndex = 3;
             this.gridControl3.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView3});
@@ -966,7 +966,7 @@
             this.gridView3.Appearance.HeaderPanel.Options.UseFont = true;
             this.gridView3.Appearance.Row.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gridView3.Appearance.Row.Options.UseFont = true;
-            this.gridView3.DetailHeight = 619;
+            this.gridView3.DetailHeight = 673;
             this.gridView3.FixedLineWidth = 3;
             this.gridView3.GridControl = this.gridControl3;
             this.gridView3.Name = "gridView3";
@@ -986,19 +986,19 @@
             this.panelControl5.Controls.Add(this.datefromrejected);
             this.panelControl5.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelControl5.Location = new System.Drawing.Point(0, 0);
-            this.panelControl5.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            this.panelControl5.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
             this.panelControl5.Name = "panelControl5";
-            this.panelControl5.Size = new System.Drawing.Size(1987, 63);
+            this.panelControl5.Size = new System.Drawing.Size(2386, 68);
             this.panelControl5.TabIndex = 1;
             // 
             // btnrejectedsalesorderexcel
             // 
             this.btnrejectedsalesorderexcel.ImageOptions.Image = global::SalesInventorySystem.Properties.Resources.ExportToExcel_16x16;
             this.btnrejectedsalesorderexcel.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnrejectedsalesorderexcel.Location = new System.Drawing.Point(723, 14);
-            this.btnrejectedsalesorderexcel.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            this.btnrejectedsalesorderexcel.Location = new System.Drawing.Point(868, 15);
+            this.btnrejectedsalesorderexcel.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
             this.btnrejectedsalesorderexcel.Name = "btnrejectedsalesorderexcel";
-            this.btnrejectedsalesorderexcel.Size = new System.Drawing.Size(197, 40);
+            this.btnrejectedsalesorderexcel.Size = new System.Drawing.Size(236, 43);
             this.btnrejectedsalesorderexcel.TabIndex = 10;
             this.btnrejectedsalesorderexcel.Text = "Export to Excel";
             this.btnrejectedsalesorderexcel.Click += new System.EventHandler(this.btnrejectedsalesorderexcel_Click);
@@ -1007,9 +1007,9 @@
             // 
             this.tabForDelivery.Controls.Add(this.tabForDelivSub);
             this.tabForDelivery.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("tabForDelivery.ImageOptions.Image")));
-            this.tabForDelivery.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            this.tabForDelivery.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
             this.tabForDelivery.Name = "tabForDelivery";
-            this.tabForDelivery.Size = new System.Drawing.Size(1991, 1024);
+            this.tabForDelivery.Size = new System.Drawing.Size(2390, 1111);
             this.tabForDelivery.Text = "For Delivery";
             // 
             // tabForDelivSub
@@ -1018,10 +1018,10 @@
             this.tabForDelivSub.AppearancePage.HeaderActive.Options.UseFont = true;
             this.tabForDelivSub.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabForDelivSub.Location = new System.Drawing.Point(0, 0);
-            this.tabForDelivSub.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            this.tabForDelivSub.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
             this.tabForDelivSub.Name = "tabForDelivSub";
             this.tabForDelivSub.SelectedTabPage = this.fordelivSalesOrder;
-            this.tabForDelivSub.Size = new System.Drawing.Size(1991, 1024);
+            this.tabForDelivSub.Size = new System.Drawing.Size(2390, 1111);
             this.tabForDelivSub.TabIndex = 8;
             this.tabForDelivSub.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
             this.fordelivSalesOrder});
@@ -1031,32 +1031,32 @@
             this.fordelivSalesOrder.Controls.Add(this.groupBox2);
             this.fordelivSalesOrder.Controls.Add(this.panelControl7);
             this.fordelivSalesOrder.ImageOptions.Image = global::SalesInventorySystem.Properties.Resources.Order;
-            this.fordelivSalesOrder.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            this.fordelivSalesOrder.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
             this.fordelivSalesOrder.Name = "fordelivSalesOrder";
-            this.fordelivSalesOrder.Size = new System.Drawing.Size(1987, 980);
+            this.fordelivSalesOrder.Size = new System.Drawing.Size(2386, 1060);
             this.fordelivSalesOrder.Text = "Sales Order";
             // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.gridControl4);
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox2.Location = new System.Drawing.Point(0, 69);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            this.groupBox2.Location = new System.Drawing.Point(0, 75);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(5, 6, 5, 6);
-            this.groupBox2.Size = new System.Drawing.Size(1987, 911);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.groupBox2.Size = new System.Drawing.Size(2386, 985);
             this.groupBox2.TabIndex = 6;
             this.groupBox2.TabStop = false;
             // 
             // gridControl4
             // 
             this.gridControl4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridControl4.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
-            this.gridControl4.Location = new System.Drawing.Point(5, 29);
+            this.gridControl4.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.gridControl4.Location = new System.Drawing.Point(6, 33);
             this.gridControl4.MainView = this.gridView4;
-            this.gridControl4.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            this.gridControl4.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
             this.gridControl4.Name = "gridControl4";
-            this.gridControl4.Size = new System.Drawing.Size(1977, 876);
+            this.gridControl4.Size = new System.Drawing.Size(2374, 945);
             this.gridControl4.TabIndex = 3;
             this.gridControl4.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView4});
@@ -1068,7 +1068,7 @@
             this.gridView4.Appearance.HeaderPanel.Options.UseFont = true;
             this.gridView4.Appearance.Row.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gridView4.Appearance.Row.Options.UseFont = true;
-            this.gridView4.DetailHeight = 619;
+            this.gridView4.DetailHeight = 673;
             this.gridView4.FixedLineWidth = 3;
             this.gridView4.GridControl = this.gridControl4;
             this.gridView4.Name = "gridView4";
@@ -1089,19 +1089,19 @@
             this.panelControl7.Controls.Add(this.label7);
             this.panelControl7.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelControl7.Location = new System.Drawing.Point(0, 0);
-            this.panelControl7.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            this.panelControl7.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
             this.panelControl7.Name = "panelControl7";
-            this.panelControl7.Size = new System.Drawing.Size(1987, 69);
+            this.panelControl7.Size = new System.Drawing.Size(2386, 75);
             this.panelControl7.TabIndex = 1;
             // 
             // btnfordelivsalesorderexcel
             // 
             this.btnfordelivsalesorderexcel.ImageOptions.Image = global::SalesInventorySystem.Properties.Resources.ExportToExcel_16x16;
             this.btnfordelivsalesorderexcel.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnfordelivsalesorderexcel.Location = new System.Drawing.Point(723, 14);
-            this.btnfordelivsalesorderexcel.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            this.btnfordelivsalesorderexcel.Location = new System.Drawing.Point(868, 15);
+            this.btnfordelivsalesorderexcel.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
             this.btnfordelivsalesorderexcel.Name = "btnfordelivsalesorderexcel";
-            this.btnfordelivsalesorderexcel.Size = new System.Drawing.Size(197, 40);
+            this.btnfordelivsalesorderexcel.Size = new System.Drawing.Size(236, 43);
             this.btnfordelivsalesorderexcel.TabIndex = 14;
             this.btnfordelivsalesorderexcel.Text = "Export to Excel";
             this.btnfordelivsalesorderexcel.Click += new System.EventHandler(this.btnfordelivsalesorderexcel_Click);
@@ -1110,9 +1110,9 @@
             // 
             this.tabDelivered.Controls.Add(this.tabDelivSub);
             this.tabDelivered.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("tabDelivered.ImageOptions.Image")));
-            this.tabDelivered.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            this.tabDelivered.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
             this.tabDelivered.Name = "tabDelivered";
-            this.tabDelivered.Size = new System.Drawing.Size(1991, 1024);
+            this.tabDelivered.Size = new System.Drawing.Size(2390, 1111);
             this.tabDelivered.Text = "Delivered";
             // 
             // tabDelivSub
@@ -1123,10 +1123,10 @@
             this.tabDelivSub.AppearancePage.HeaderActive.Options.UseFont = true;
             this.tabDelivSub.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabDelivSub.Location = new System.Drawing.Point(0, 0);
-            this.tabDelivSub.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            this.tabDelivSub.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
             this.tabDelivSub.Name = "tabDelivSub";
             this.tabDelivSub.SelectedTabPage = this.delivSalesOrder;
-            this.tabDelivSub.Size = new System.Drawing.Size(1991, 1024);
+            this.tabDelivSub.Size = new System.Drawing.Size(2390, 1111);
             this.tabDelivSub.TabIndex = 8;
             this.tabDelivSub.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
             this.delivSalesOrder});
@@ -1136,32 +1136,32 @@
             this.delivSalesOrder.Controls.Add(this.groupBox29);
             this.delivSalesOrder.Controls.Add(this.panelControl9);
             this.delivSalesOrder.ImageOptions.Image = global::SalesInventorySystem.Properties.Resources.Order;
-            this.delivSalesOrder.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            this.delivSalesOrder.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
             this.delivSalesOrder.Name = "delivSalesOrder";
-            this.delivSalesOrder.Size = new System.Drawing.Size(1987, 976);
+            this.delivSalesOrder.Size = new System.Drawing.Size(2386, 1057);
             this.delivSalesOrder.Text = "Sales Order";
             // 
             // groupBox29
             // 
             this.groupBox29.Controls.Add(this.gridControl5);
             this.groupBox29.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox29.Location = new System.Drawing.Point(0, 63);
-            this.groupBox29.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            this.groupBox29.Location = new System.Drawing.Point(0, 68);
+            this.groupBox29.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
             this.groupBox29.Name = "groupBox29";
-            this.groupBox29.Padding = new System.Windows.Forms.Padding(5, 6, 5, 6);
-            this.groupBox29.Size = new System.Drawing.Size(1987, 913);
+            this.groupBox29.Padding = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.groupBox29.Size = new System.Drawing.Size(2386, 989);
             this.groupBox29.TabIndex = 2;
             this.groupBox29.TabStop = false;
             // 
             // gridControl5
             // 
             this.gridControl5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridControl5.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
-            this.gridControl5.Location = new System.Drawing.Point(5, 29);
+            this.gridControl5.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.gridControl5.Location = new System.Drawing.Point(6, 33);
             this.gridControl5.MainView = this.gridView5;
-            this.gridControl5.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            this.gridControl5.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
             this.gridControl5.Name = "gridControl5";
-            this.gridControl5.Size = new System.Drawing.Size(1977, 878);
+            this.gridControl5.Size = new System.Drawing.Size(2374, 949);
             this.gridControl5.TabIndex = 4;
             this.gridControl5.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView5});
@@ -1173,7 +1173,7 @@
             this.gridView5.Appearance.HeaderPanel.Options.UseFont = true;
             this.gridView5.Appearance.Row.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gridView5.Appearance.Row.Options.UseFont = true;
-            this.gridView5.DetailHeight = 619;
+            this.gridView5.DetailHeight = 673;
             this.gridView5.FixedLineWidth = 3;
             this.gridView5.GridControl = this.gridControl5;
             this.gridView5.Name = "gridView5";
@@ -1194,19 +1194,19 @@
             this.panelControl9.Controls.Add(this.dateFromDeliv);
             this.panelControl9.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelControl9.Location = new System.Drawing.Point(0, 0);
-            this.panelControl9.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            this.panelControl9.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
             this.panelControl9.Name = "panelControl9";
-            this.panelControl9.Size = new System.Drawing.Size(1987, 63);
+            this.panelControl9.Size = new System.Drawing.Size(2386, 68);
             this.panelControl9.TabIndex = 1;
             // 
             // btndeliveredsalesorderexcel
             // 
             this.btndeliveredsalesorderexcel.ImageOptions.Image = global::SalesInventorySystem.Properties.Resources.ExportToExcel_16x16;
             this.btndeliveredsalesorderexcel.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btndeliveredsalesorderexcel.Location = new System.Drawing.Point(723, 14);
-            this.btndeliveredsalesorderexcel.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            this.btndeliveredsalesorderexcel.Location = new System.Drawing.Point(868, 15);
+            this.btndeliveredsalesorderexcel.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
             this.btndeliveredsalesorderexcel.Name = "btndeliveredsalesorderexcel";
-            this.btndeliveredsalesorderexcel.Size = new System.Drawing.Size(197, 40);
+            this.btndeliveredsalesorderexcel.Size = new System.Drawing.Size(236, 43);
             this.btndeliveredsalesorderexcel.TabIndex = 16;
             this.btndeliveredsalesorderexcel.Text = "Export to Excel";
             this.btndeliveredsalesorderexcel.Click += new System.EventHandler(this.btndeliveredsalesorderexcel_Click);
@@ -1222,13 +1222,13 @@
             this.toolStripMenuItem17,
             this.toolStripMenuItem18});
             this.contextMenuStripDelivered.Name = "contextMenuForDelivery";
-            this.contextMenuStripDelivered.Size = new System.Drawing.Size(333, 208);
+            this.contextMenuStripDelivered.Size = new System.Drawing.Size(374, 220);
             // 
             // toolStripMenuItem12
             // 
             this.toolStripMenuItem12.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItem12.Image")));
             this.toolStripMenuItem12.Name = "toolStripMenuItem12";
-            this.toolStripMenuItem12.Size = new System.Drawing.Size(332, 34);
+            this.toolStripMenuItem12.Size = new System.Drawing.Size(373, 36);
             this.toolStripMenuItem12.Text = "Add Charges";
             this.toolStripMenuItem12.Click += new System.EventHandler(this.toolStripMenuItem12_Click);
             // 
@@ -1236,7 +1236,7 @@
             // 
             this.toolStripMenuItem13.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItem13.Image")));
             this.toolStripMenuItem13.Name = "toolStripMenuItem13";
-            this.toolStripMenuItem13.Size = new System.Drawing.Size(332, 34);
+            this.toolStripMenuItem13.Size = new System.Drawing.Size(373, 36);
             this.toolStripMenuItem13.Text = "Return Order";
             this.toolStripMenuItem13.Click += new System.EventHandler(this.toolStripMenuItem13_Click);
             // 
@@ -1244,7 +1244,7 @@
             // 
             this.toolStripMenuItem14.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItem14.Image")));
             this.toolStripMenuItem14.Name = "toolStripMenuItem14";
-            this.toolStripMenuItem14.Size = new System.Drawing.Size(332, 34);
+            this.toolStripMenuItem14.Size = new System.Drawing.Size(373, 36);
             this.toolStripMenuItem14.Text = "Credit Memo";
             this.toolStripMenuItem14.Click += new System.EventHandler(this.toolStripMenuItem14_Click);
             // 
@@ -1252,7 +1252,7 @@
             // 
             this.toolStripMenuItem16.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItem16.Image")));
             this.toolStripMenuItem16.Name = "toolStripMenuItem16";
-            this.toolStripMenuItem16.Size = new System.Drawing.Size(332, 34);
+            this.toolStripMenuItem16.Size = new System.Drawing.Size(373, 36);
             this.toolStripMenuItem16.Text = "Print SalesInvoice";
             this.toolStripMenuItem16.Click += new System.EventHandler(this.toolStripMenuItem16_Click);
             // 
@@ -1260,7 +1260,7 @@
             // 
             this.toolStripMenuItem17.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItem17.Image")));
             this.toolStripMenuItem17.Name = "toolStripMenuItem17";
-            this.toolStripMenuItem17.Size = new System.Drawing.Size(332, 34);
+            this.toolStripMenuItem17.Size = new System.Drawing.Size(373, 36);
             this.toolStripMenuItem17.Text = "Print DebitMemo/Charges";
             this.toolStripMenuItem17.Click += new System.EventHandler(this.toolStripMenuItem17_Click);
             // 
@@ -1268,17 +1268,17 @@
             // 
             this.toolStripMenuItem18.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItem18.Image")));
             this.toolStripMenuItem18.Name = "toolStripMenuItem18";
-            this.toolStripMenuItem18.Size = new System.Drawing.Size(332, 34);
+            this.toolStripMenuItem18.Size = new System.Drawing.Size(373, 36);
             this.toolStripMenuItem18.Text = "Show Items";
             this.toolStripMenuItem18.Click += new System.EventHandler(this.toolStripMenuItem18_Click);
             // 
             // POForApproval
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 23F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1995, 1072);
+            this.ClientSize = new System.Drawing.Size(2394, 1165);
             this.Controls.Add(this.tabMain);
-            this.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            this.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
             this.Name = "POForApproval";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ORDERS";

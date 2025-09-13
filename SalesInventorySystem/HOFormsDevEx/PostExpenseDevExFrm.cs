@@ -28,6 +28,7 @@ namespace SalesInventorySystem.HOFormsDevEx
         {
             //Classes.Utilities.setDate(datefrom.Text, dateto.Text);
             DateTime now = DateTime.Now;
+            
             DateTime date = new DateTime(now.Year, now.Month, 1);
             datefrom.Text = date.ToShortDateString();
             var now2 = DateTime.Now;
@@ -36,6 +37,7 @@ namespace SalesInventorySystem.HOFormsDevEx
             var lastDay = new DateTime(now2.Year, now2.Month, DaysInMonth);
             dateto.Text = lastDay.ToShortDateString();
             txtrefno.Text = IDGenerator.getIDNumberSP("sp_GetReferenceNumber", "ReferenceNumber");//IDGenerator.getIDNumberSP("sp_GetExpenseNumber", "expenseno");// IDGenerator.getExpenseNumber();
+            txtbatchid.Text = IDGenerator.getIDNumberSP("sp_GetBatchReferenceID", "BatchReferenceID");//IDGenerator.getIDNumberSP("sp_GetExpenseNumber", "expenseno");// IDGenerator.getExpenseNumber();
             loadRepositoryItem();
             populateBranches2();
             displayvendor();
@@ -127,7 +129,7 @@ namespace SalesInventorySystem.HOFormsDevEx
 
                         //int ledgeseqno = Database.getLastID("SupplierLedger", "SupplierID='" + txtvendor.Text + "'", "TRN_SEQ_NO")+1;
                         //int lastexpseqno = Database.getLastID("SupplierLedger", "SupplierID='" + txtvendor.Text + "'", "TRN_SEQ_NO") + 1;
-                        Database.ExecuteQuery("INSERT INTO ExpenseMaster VALUES ('" + ctr + "','" + branchcode + "','" + supplierkey + "','" + txtrefno.Text + "','" + txtinvoiceno.Text + "','" + expname + "','" + txtexpdate.Text + "','" + amount + "','" + particulars + "','UNPAID','" + amount + "',0,0,0,0,0)");
+                        Database.ExecuteQuery("INSERT INTO ExpenseMaster VALUES ('" + ctr + "','" + branchcode + "','" + supplierkey + "','" + txtrefno.Text + "','" + txtinvoiceno.Text + "','" + expname + "','" + txtexpdate.Text + "','" + amount + "','" + particulars + "','UNPAID','" + amount + "',0,0,0,0,0,'"+txtbatchid.Text+"')");
                         //Database.ExecuteQuery($"INSERT INTO ExpenseDetails VALUES('{ctr}','{branchcode}','{txtrefno.Text}','{txtinvoiceno.Text}','{expname}','{particulars}','{amount}')");
                         //Database.ExecuteQuery("INSERT INTO SupplierLedger VALUES ('" + supplierkey + "','" + txtvendor.Text + "','" + txtexpdate.Text + "','" + particulars + "','EXP','" + DateTime.Now.ToString() + "','" + txtinvoiceno.Text + "',0,0,'" + amount + "',0,'" + Login.Fullname + "','*',0,'UNPAID',0,' ','" + ledgeseqno + "')");
                         ctr += 1;
@@ -160,6 +162,7 @@ namespace SalesInventorySystem.HOFormsDevEx
                 //com.Parameters.AddWithValue("@parmuser", Login.Fullname);
                
                 com.Parameters.AddWithValue("@parmrefno", txtrefno.Text);
+                com.Parameters.AddWithValue("@parmbatchrefno", txtbatchid.Text);
                 com.Parameters.AddWithValue("@parmsupplierid", suppid.ToString());
                 com.Parameters.AddWithValue("@parminvoiceno", txtinvoiceno.Text);
                 com.Parameters.AddWithValue("@parmexpensedate", txtexpdate.Text);

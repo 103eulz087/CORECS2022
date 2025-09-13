@@ -655,7 +655,7 @@ namespace SalesInventorySystem.POS
             details += HelperFunction.PrintLeftRigthText("VATable Sales: ", HelperFunction.convertToNumericFormat(Convert.ToDouble(VatableSales))) + Environment.NewLine;
             details += HelperFunction.PrintLeftRigthText("VAT Amount: ", HelperFunction.convertToNumericFormat(Convert.ToDouble(VatAmount))) + Environment.NewLine;
             details += HelperFunction.PrintLeftRigthText("VAT Exempt Sale: ", HelperFunction.convertToNumericFormat(Convert.ToDouble(VatExemptSales))) + Environment.NewLine;
-            details += HelperFunction.PrintLeftRigthText("ZERO Rated Sales: ", "0.00") + Environment.NewLine + Environment.NewLine;
+            details += HelperFunction.PrintLeftRigthText("ZERO Rated Sales: ", HelperFunction.convertToNumericFormat(Convert.ToDouble(totalzeroratedsales))) + Environment.NewLine + Environment.NewLine;
 
             details += HelperFunction.PrintLeftRigthText("ACCUMULATED GRAND TOTAL ", HelperFunction.convertToNumericFormat(Convert.ToDouble(EndingBalance))) + Environment.NewLine; //total sales txtTotalSales.Text)
             details += HelperFunction.createEqualLine() + Environment.NewLine + Environment.NewLine;

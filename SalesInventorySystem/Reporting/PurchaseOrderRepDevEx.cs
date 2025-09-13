@@ -15,6 +15,18 @@ namespace SalesInventorySystem.Reporting
     public partial class PurchaseOrderRepDevEx : DevExpress.XtraEditors.XtraForm
     {
         public static string supplierid, suppliername, dateorder, pono, approvedby, preparedby;
+
+        private void PurchaseOrderRepDevEx_Load(object sender, EventArgs e)
+        {
+            DateTime now = DateTime.Now;
+            DateTime date = new DateTime(now.Year, now.Month, 1);
+            dateFrom.Text = date.ToShortDateString();
+            var now2 = DateTime.Now;
+            var DaysInMonth = DateTime.DaysInMonth(now2.Year, now2.Month);
+            var lastDay = new DateTime(now2.Year, now2.Month, DaysInMonth);
+            dateTo.Text = lastDay.ToShortDateString();
+        }
+
         public PurchaseOrderRepDevEx()
         {
             InitializeComponent();
@@ -22,7 +34,7 @@ namespace SalesInventorySystem.Reporting
 
         void submit()
         {
-            Database.display("SELECT * FROM view_POSUMMARYREP WHERE CAST(DateOrder as date) between '" + dateFrom.Text + "' and '" + dateTo.Text + "' ", gridControl1, gridView1);
+            Database.display("SELECT * FROM view_POSUMMARYREP with(nolock) WHERE CAST(DateOrder as date) between '" + dateFrom.Text + "' and '" + dateTo.Text + "' ", gridControl1, gridView1);
         }
 
         private void button1_Click(object sender, EventArgs e)

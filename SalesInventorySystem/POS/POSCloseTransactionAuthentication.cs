@@ -58,11 +58,11 @@ namespace SalesInventorySystem.POS
                 return;
             }
             bool checkifexist = Database.checkifExist("SELECT TOP 1 UserID FROM SalesTransactionSummary WHERE BranchCode='" + Login.assignedBranch + "' " +
-                "AND DateOpen='" + DateTime.Today.ToShortDateString() + "' AND isOpen=1 AND UserID='"+ txtuserid.Text.Trim() + "'");
+                "AND DateOpen='" + DateTime.Today.ToShortDateString() + "' AND MachineUsed='"+Environment.MachineName.ToString()+"' AND isOpen=1 AND UserID='"+ txtuserid.Text.Trim() + "'");
             if (checkifexist)
             {
                 var rows = Database.getMultipleQuery("SalesTransactionSummary", "BranchCode='" + Login.assignedBranch + "' " +
-                 "AND UserID='" + txtuserid.Text.Trim() + "' " +
+                 "AND UserID='" + txtuserid.Text.Trim() + "' AND MachineUsed='" + Environment.MachineName.ToString() + "' " +
                  "AND DateOpen='" + DateTime.Today.ToShortDateString() + "' AND isOpen=1"
                  , "UserID,CashierTransNo,MachineUsed");
                 CashierTransNo = "";

@@ -35,10 +35,11 @@ namespace SalesInventorySystem.HOFormsDevEx
 
         private void ClientPaymentsDevEx_Load(object sender, EventArgs e)
         {
-            txtcustid.Text = ClientAccountsDevEx.custid;
-            custkey = ClientAccountsDevEx.custkey;
-            txtcustname.Text = ClientAccountsDevEx.custname;
-            groupControl1.Text = ClientAccountsDevEx.custid;
+            
+            custkey = txtcustid.Text;
+            txtcustid.Text = custkey;
+            txtcustname.Text = txtcustname.Text;
+            groupControl1.Text = custkey;
             populateRepositorySearchLookUp();
             populateCOA();
             display();
@@ -61,7 +62,7 @@ namespace SalesInventorySystem.HOFormsDevEx
             {
                 string sp = "splist_ARAccounts";
                 SqlCommand com = new SqlCommand(sp, con);
-                com.Parameters.AddWithValue("@parmcustkey", ClientAccountsDevEx.custkey);
+                com.Parameters.AddWithValue("@parmcustkey", txtcustid.Text);
                 com.CommandType = CommandType.StoredProcedure;
                 com.CommandTimeout = 3600;
                 com.CommandText = sp;
@@ -119,7 +120,7 @@ namespace SalesInventorySystem.HOFormsDevEx
 
                 groupCreditCardDetails.Visible = false;
                 panelOnline.Visible = false;
-                txtacctbalance.Text = Math.Round(Convert.ToDouble(Database.getSingleQuery("ClientSavingsAccounts", "AccountID='" + txtcustid.Text + "'", "AccountBalance")), 2).ToString();
+                txtacctbalance.Text = Math.Round(Convert.ToDouble(Database.getSingleQuery("ClientSavingsAccounts", "AccountKey='" + txtcustid.Text + "'", "AccountBalance")), 2).ToString();
             }
             else if (radCreditCard.Checked == true) //PAYMENT
             {
@@ -162,7 +163,7 @@ namespace SalesInventorySystem.HOFormsDevEx
                groupCheque.Visible = false;
                groupBoxadvancepayment.Visible = true;
                panelOnline.Visible = false;
-               txtacctbalance.Text = Math.Round(Convert.ToDouble(Database.getSingleQuery("ClientSavingsAccounts", "AccountID='" + txtcustid.Text + "'", "AccountBalance")),2).ToString();
+               txtacctbalance.Text = Math.Round(Convert.ToDouble(Database.getSingleQuery("ClientSavingsAccounts", "AccountKey='" + txtcustid.Text + "'", "AccountBalance")),2).ToString();
            }else if (keyData == Keys.F5) //PAYMENT
             {
                

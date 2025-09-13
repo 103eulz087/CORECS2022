@@ -44,7 +44,18 @@ namespace SalesInventorySystem.HOFormsDevEx
         }
         void loadLedger()
         {
-            Database.display("SELECT * FROM view_APLedger WHERE SupplierID='" + txtacctid.Text + "' AND CAST(TransactionDate as Date) >= '" + dateTimePicker1.Text + "' and CAST(TransactionDate as date)<= '" + dateTimePicker2.Text + "' ORDER BY TRN_SEQ_NO", gridControl2, gridView2);
+            //Database.display("SELECT * FROM view_APLedger WHERE SupplierID='" + txtacctid.Text + "' AND CAST(TransactionDate as Date) >= '" + dateTimePicker1.Text + "' and CAST(TransactionDate as date)<= '" + dateTimePicker2.Text + "' ORDER BY TRN_SEQ_NO", gridControl2, gridView2);
+            string query = "SELECT * FROM view_APLedger WHERE SupplierID='" + txtacctid.Text + "' AND CAST(TransactionDate as Date) >= '" + dateTimePicker1.Text + "' and CAST(TransactionDate as date)<= '" + dateTimePicker2.Text + "' ORDER BY TRN_SEQ_NO ";
+            HelperFunction.ShowWaitAndDisplay(query, gridControl2, gridView2, "Please wait", "Populating data into the database...");
+            gridView2.Focus();
+            gridView2.Columns["SupplierID"].Visible = false;
+            gridView2.Columns["SupplierID"].OptionsColumn.ShowInCustomizationForm = true;
+            gridView2.Columns["PostingDate"].Visible = false;
+            gridView2.Columns["PostingDate"].OptionsColumn.ShowInCustomizationForm = true;
+            gridView2.Columns["PostingDate"].Visible = false;
+            gridView2.Columns["PostingDate"].OptionsColumn.ShowInCustomizationForm = true;
+            gridView2.Columns["TransCode"].Visible = false;
+            gridView2.Columns["TransCode"].OptionsColumn.ShowInCustomizationForm = true;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -54,33 +65,49 @@ namespace SalesInventorySystem.HOFormsDevEx
         void loadPurchases()
         {
             if (checkBox2.Checked == true)
-                //Database.display("SELECT ShipmentNo,InvoiceNo,InvoiceDate,OrderDate,ActualCost,Status,DatePaid FROM ShipmentOrder WHERE SupplierID='" + txtacctid.Text + "' ORDER BY SequenceNumber DESC", gridControl1, gridView1);
-                Database.display("SELECT ShipmentNo,InvoiceNo,InvoiceDate,ActualCost,PayStatus,ReferenceNumber FROM APACCOUNTS WHERE SupplierID='" + txtacctid.Text + "' ORDER BY SequenceNo DESC", gridControl1, gridView1);
+            {
+                string query = "SELECT * FROM vw_SupplierPurchases WHERE SupplierID='" + txtacctid.Text + "' ORDER BY SequenceNo DESC ";
+                HelperFunction.ShowWaitAndDisplay(query, gridControl1, gridView1, "Please wait", "Populating data into the database...");
+                gridView1.Focus();
+            }
             else
-                //Database.display("SELECT ShipmentNo,InvoiceNo,InvoiceDate,OrderDate,ActualCost,Status,DatePaid FROM ShipmentOrder WHERE SupplierID='" + txtacctid.Text + "' AND CAST(OrderDate as Date) >= '" + datefrompurch.Text + "' and CAST(OrderDate as date)<= '" + datetopurch.Text + "' ORDER BY SequenceNumber ASC", gridControl1, gridView1);
-                Database.display("SELECT ShipmentNo,InvoiceNo,InvoiceDate,ActualCost,PayStatus,ReferenceNumber FROM APACCOUNTS WHERE SupplierID='" + txtacctid.Text + "' AND CAST(InvoiceDate as Date) >= '" + datefrompurch.Text + "' and CAST(InvoiceDate as date)<= '" + datetopurch.Text + "' ORDER BY SequenceNo ASC", gridControl1, gridView1);
-
+            {
+                string query = "SELECT * FROM vw_SupplierPurchases WHERE SupplierID='" + txtacctid.Text + "' AND CAST(InvoiceDate as Date) between '" + datefrompurch.Text + "' and '" + datetopurch.Text + "' ORDER BY SequenceNo ASC ";
+                HelperFunction.ShowWaitAndDisplay(query, gridControl1, gridView1, "Please wait", "Populating data into the database...");
+                gridView1.Focus();
+            }
         }
 
         void loadPayments()
         {
             if (checkBox3.Checked == true)
-                Database.display("SELECT SEQ_NO,ReferenceNumber,Amount,VoucherType,DatePaid,ExecuteBy,DateUpdate,UpdateBy,ErrorCorrect FROM TransactionPaymentAP WHERE SupplierKey='" + Classes.Suppliers.getSupplierKey(searchLookUpEdit1.Text)  + "' ORDER BY SEQ_NO ASC", gridControl3, gridView3);
+            {
+                string query = "SELECT SEQ_NO,DatePaid,ReferenceNumber,Amount,VoucherType,ExecuteBy,DateUpdate,UpdateBy,ErrorCorrect FROM TransactionPaymentAP WHERE SupplierKey='" + txtacctid.Text + "' ORDER BY SEQ_NO ASC";
+                HelperFunction.ShowWaitAndDisplay(query, gridControl3, gridView3, "Please wait", "Populating data into the database...");
+                gridView3.Focus();
+            }
             else
-                Database.display("SELECT  SEQ_NO,ReferenceNumber,Amount,VoucherType,DatePaid,ExecuteBy,DateUpdate,UpdateBy,ErrorCorrect FROM TransactionPaymentAP WHERE SupplierKey='" + Classes.Suppliers.getSupplierKey(searchLookUpEdit1.Text) + "' AND CAST(DatePaid as Date) >= '" + datefrompay.Text + "' and CAST(DatePaid as date)<= '" + datetopay.Text + "' ORDER BY SEQ_NO ASC", gridControl3, gridView3);
-
+            {
+                string query = "SELECT SEQ_NO,DatePaid,ReferenceNumber,Amount,VoucherType,ExecuteBy,DateUpdate,UpdateBy,ErrorCorrect FROM TransactionPaymentAP WHERE SupplierKey='" + txtacctid.Text + "' AND CAST(DatePaid as Date) >= '" + datefrompay.Text + "' and CAST(DatePaid as date)<= '" + datetopay.Text + "' ORDER BY SEQ_NO ASC";
+                HelperFunction.ShowWaitAndDisplay(query, gridControl3, gridView3, "Please wait", "Populating data into the database...");
+                gridView3.Focus();
+            }
         }
         void loadExpenses()
         {
             if (checkBox4.Checked == true)
-                Database.display("SELECT TRN_SEQ_NO,BranchCode,ReferenceNumber,InvoiceNo,ExpenseName,ExpenseDate,Amount,Remarks,Status,Balance,AmountPaid,EWTAmount,DiscountAmount,OffsetAmount,isErrorCorrect FROM ExpenseMaster WHERE SupplierID='" + txtacctid.Text + "' ", gridControl4, gridView4);
+            {
+                string query = "SELECT TRN_SEQ_NO,BranchCode,ExpenseDate,ReferenceNumber,InvoiceNo,ExpenseName,Amount,Remarks,Status,Balance,AmountPaid,EWTAmount,DiscountAmount,OffsetAmount,isErrorCorrect FROM ExpenseMaster WHERE SupplierID='" + txtacctid.Text + "' ";
+                HelperFunction.ShowWaitAndDisplay(query, gridControl4, gridView4, "Please wait", "Populating data into the database...");
+                gridView4.Focus();
+            }
             else
-                Database.display("SELECT TRN_SEQ_NO,BranchCode,ReferenceNumber,InvoiceNo,ExpenseName,ExpenseDate,Amount,Remarks,Status,Balance,AmountPaid,EWTAmount,DiscountAmount,OffsetAmount,isErrorCorrect FROM ExpenseMaster WHERE SupplierID='" + txtacctid.Text + "' AND CAST(ExpenseDate as Date) >= '" + expdatefrom.Text + "' and CAST(ExpenseDate as date)<= '" + expdateto.Text + "' ", gridControl4, gridView4);
-            //if (checkBox4.Checked == true)
-            //    Database.display("SELECT * FROM ExpenseSummary WHERE SupplierID='" + txtacctid.Text + "' ", gridControl4, gridView4);
-            //else
-            //    Database.display("SELECT * FROM ExpenseSummary WHERE SupplierID='" + txtacctid.Text + "' AND CAST(ExpenseDate as Date) >= '" + expdatefrom.Text + "' and CAST(ExpenseDate as date)<= '" + expdateto.Text + "' ", gridControl4, gridView4);
-
+            {
+                string query = "SELECT TRN_SEQ_NO,BranchCode,ExpenseDate,ReferenceNumber,InvoiceNo,ExpenseName,Amount,Remarks,Status,Balance,AmountPaid,EWTAmount,DiscountAmount,OffsetAmount,isErrorCorrect FROM ExpenseMaster WHERE SupplierID='" + txtacctid.Text + "' AND CAST(ExpenseDate as Date) >= '" + expdatefrom.Text + "' and CAST(ExpenseDate as date)<= '" + expdateto.Text + "' ";
+                HelperFunction.ShowWaitAndDisplay(query, gridControl4, gridView4, "Please wait", "Populating data into the database...");
+                gridView4.Focus();
+            }
+            
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -146,6 +173,23 @@ namespace SalesInventorySystem.HOFormsDevEx
 
         private void SupplierAccountsDevEx_Load(object sender, EventArgs e)
         {
+            DateTime now = DateTime.Now;
+            DateTime date = new DateTime(now.Year, now.Month, 1);
+            dateTimePicker1.Text = date.ToShortDateString();
+            var now2 = DateTime.Now;
+            //var startOfMonth = new DateTime(now2.Year, now2.Month, 1);
+            var DaysInMonth = DateTime.DaysInMonth(now2.Year, now2.Month);
+            var lastDay = new DateTime(now2.Year, now2.Month, DaysInMonth);
+            dateTimePicker2.Text = lastDay.ToShortDateString();
+
+            datefrompurch.Text = date.ToShortDateString();
+            datetopurch.Text = lastDay.ToShortDateString();
+
+            datefrompay.Text = date.ToShortDateString();
+            datetopay.Text = lastDay.ToShortDateString();
+
+            expdatefrom.Text = date.ToShortDateString();
+            expdateto.Text = lastDay.ToShortDateString();
             Database.displaySearchlookupEdit("select SupplierID,SupplierName FROM Supplier", searchLookUpEdit1, "SupplierName", "SupplierName");
         }
 
@@ -153,13 +197,13 @@ namespace SalesInventorySystem.HOFormsDevEx
         {
             string lastcheque = Database.getSingleQuery("SELECT CheckNo FROM CheckVoucher WHERE SequenceNumber=(SELECT MAX(SequenceNumber) FROM CheckVoucher)", "CheckNo");
             supplierid = txtacctid.Text;
-            suppliername = searchLookUpEdit1.Text;
+            suppliername = txtclientname.Text;//searchLookUpEdit1.Text;
             HOFormsDevEx.SupplierPaymentDevEx adhipma = new HOFormsDevEx.SupplierPaymentDevEx();
             adhipma.Show();
             adhipma.txtsupplierid.Text = supplierid;
             adhipma.txtsuppliername.Text = suppliername;
             adhipma.txtlastchecknum.Text = lastcheque;
-            if (HOForms.TransactionPayment.isdone == true)
+            if (HOFormsDevEx.SupplierPaymentDevEx.isdone == true)// (HOForms.TransactionPayment.isdone == true)
             {
                 //searchLookUpEdit1.Text = "";
                 txtacctid.Text = "";
@@ -171,7 +215,8 @@ namespace SalesInventorySystem.HOFormsDevEx
                 txtacctbalance.Text = Classes.Suppliers.getSupplierBalance(adhipma.txtsuppliername.Text);
                 txtmvmtdate.Text = Classes.Suppliers.getSupplierLastMovementDate(adhipma.txtsuppliername.Text);
 
-                HOForms.TransactionPayment.isdone = false;
+                //HOForms.TransactionPayment.isdone = false;
+                HOFormsDevEx.SupplierPaymentDevEx.isdone = false;
                 adhipma.Dispose();
             }
         }

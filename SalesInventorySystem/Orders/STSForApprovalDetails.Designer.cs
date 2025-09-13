@@ -49,9 +49,9 @@
             this.groupBox2.Controls.Add(this.gridControl1);
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox2.Location = new System.Drawing.Point(0, 0);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(6);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(6);
             this.groupBox2.Size = new System.Drawing.Size(2568, 1245);
             this.groupBox2.TabIndex = 8;
             this.groupBox2.TabStop = false;
@@ -59,10 +59,10 @@
             // gridControl1
             // 
             this.gridControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridControl1.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.gridControl1.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(6);
             this.gridControl1.Location = new System.Drawing.Point(6, 32);
             this.gridControl1.MainView = this.gridView1;
-            this.gridControl1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.gridControl1.Margin = new System.Windows.Forms.Padding(6);
             this.gridControl1.Name = "gridControl1";
             this.gridControl1.Size = new System.Drawing.Size(2556, 1207);
             this.gridControl1.TabIndex = 0;
@@ -110,9 +110,9 @@
             this.groupBox1.Controls.Add(this.richTextBox1);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.groupBox1.Location = new System.Drawing.Point(0, 1245);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(6);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(6);
             this.groupBox1.Size = new System.Drawing.Size(2568, 97);
             this.groupBox1.TabIndex = 7;
             this.groupBox1.TabStop = false;
@@ -122,7 +122,7 @@
             // 
             this.simpleButton10.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("simpleButton10.ImageOptions.Image")));
             this.simpleButton10.Location = new System.Drawing.Point(1514, 33);
-            this.simpleButton10.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.simpleButton10.Margin = new System.Windows.Forms.Padding(6);
             this.simpleButton10.Name = "simpleButton10";
             this.simpleButton10.Size = new System.Drawing.Size(198, 50);
             this.simpleButton10.TabIndex = 79;
@@ -133,7 +133,7 @@
             // 
             this.simpleButton9.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("simpleButton9.ImageOptions.Image")));
             this.simpleButton9.Location = new System.Drawing.Point(1352, 33);
-            this.simpleButton9.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.simpleButton9.Margin = new System.Windows.Forms.Padding(6);
             this.simpleButton9.Name = "simpleButton9";
             this.simpleButton9.Size = new System.Drawing.Size(150, 50);
             this.simpleButton9.TabIndex = 78;
@@ -144,7 +144,7 @@
             // 
             this.btnadd.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnadd.ImageOptions.Image")));
             this.btnadd.Location = new System.Drawing.Point(1162, 33);
-            this.btnadd.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btnadd.Margin = new System.Windows.Forms.Padding(6);
             this.btnadd.Name = "btnadd";
             this.btnadd.Size = new System.Drawing.Size(178, 50);
             this.btnadd.TabIndex = 77;
@@ -154,7 +154,7 @@
             // txtpono
             // 
             this.txtpono.Location = new System.Drawing.Point(1838, 33);
-            this.txtpono.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.txtpono.Margin = new System.Windows.Forms.Padding(6);
             this.txtpono.Name = "txtpono";
             this.txtpono.Size = new System.Drawing.Size(74, 33);
             this.txtpono.TabIndex = 5;
@@ -163,7 +163,7 @@
             // richTextBox1
             // 
             this.richTextBox1.Location = new System.Drawing.Point(24, 33);
-            this.richTextBox1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.richTextBox1.Margin = new System.Windows.Forms.Padding(6);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(1122, 48);
             this.richTextBox1.TabIndex = 0;
@@ -177,7 +177,7 @@
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.IconOptions.Icon = ((System.Drawing.Icon)(resources.GetObject("STSForApprovalDetails.IconOptions.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "STSForApprovalDetails";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "STSForApprovalDetails";

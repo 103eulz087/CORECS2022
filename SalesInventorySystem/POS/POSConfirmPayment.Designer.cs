@@ -88,11 +88,14 @@
             this.radcash = new System.Windows.Forms.RadioButton();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label21 = new System.Windows.Forms.Label();
-            this.txtcustname = new System.Windows.Forms.ComboBox();
             this.label20 = new System.Windows.Forms.Label();
             this.lblcashiertransno = new System.Windows.Forms.Label();
+            this.txtcustnamelookup = new DevExpress.XtraEditors.SearchLookUpEdit();
+            this.searchLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.groupBox1.SuspendLayout();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtcustnamelookup.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -773,8 +776,8 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.Black;
+            this.panel1.Controls.Add(this.txtcustnamelookup);
             this.panel1.Controls.Add(this.label21);
-            this.panel1.Controls.Add(this.txtcustname);
             this.panel1.Controls.Add(this.txtinvoiceno);
             this.panel1.Controls.Add(this.label20);
             this.panel1.Controls.Add(this.groupBox1);
@@ -804,16 +807,6 @@
             this.label21.TabIndex = 57;
             this.label21.Text = "Invoice #:";
             // 
-            // txtcustname
-            // 
-            this.txtcustname.Font = new System.Drawing.Font("Tahoma", 10.75F);
-            this.txtcustname.FormattingEnabled = true;
-            this.txtcustname.Location = new System.Drawing.Point(375, 241);
-            this.txtcustname.Margin = new System.Windows.Forms.Padding(3, 6, 3, 6);
-            this.txtcustname.Name = "txtcustname";
-            this.txtcustname.Size = new System.Drawing.Size(512, 43);
-            this.txtcustname.TabIndex = 56;
-            // 
             // label20
             // 
             this.label20.AutoSize = true;
@@ -837,6 +830,27 @@
             this.lblcashiertransno.TabIndex = 79;
             this.lblcashiertransno.Text = "label22";
             this.lblcashiertransno.Visible = false;
+            // 
+            // txtcustnamelookup
+            // 
+            this.txtcustnamelookup.Location = new System.Drawing.Point(375, 238);
+            this.txtcustnamelookup.Name = "txtcustnamelookup";
+            this.txtcustnamelookup.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 10.875F);
+            this.txtcustnamelookup.Properties.Appearance.Options.UseFont = true;
+            this.txtcustnamelookup.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.txtcustnamelookup.Properties.NullText = "";
+            this.txtcustnamelookup.Properties.PopupView = this.searchLookUpEdit1View;
+            this.txtcustnamelookup.Size = new System.Drawing.Size(512, 50);
+            this.txtcustnamelookup.TabIndex = 58;
+            this.txtcustnamelookup.EditValueChanged += new System.EventHandler(this.txtcustnamelookup_EditValueChanged);
+            // 
+            // searchLookUpEdit1View
+            // 
+            this.searchLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
+            this.searchLookUpEdit1View.Name = "searchLookUpEdit1View";
+            this.searchLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = false;
+            this.searchLookUpEdit1View.OptionsView.ShowGroupPanel = false;
             // 
             // POSConfirmPayment
             // 
@@ -899,6 +913,8 @@
             this.groupBox1.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtcustnamelookup.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -966,8 +982,9 @@
         private System.Windows.Forms.RadioButton radcash;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label20;
-        private System.Windows.Forms.ComboBox txtcustname;
         private System.Windows.Forms.Label label21;
         public System.Windows.Forms.Label lblcashiertransno;
+        private DevExpress.XtraEditors.SearchLookUpEdit txtcustnamelookup;
+        private DevExpress.XtraGrid.Views.Grid.GridView searchLookUpEdit1View;
     }
 }

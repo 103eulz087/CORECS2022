@@ -36,13 +36,17 @@ namespace SalesInventorySystem.Reporting
             { 
                 if(chcktickets.Checked==true)
                 {
-                    Database.display("SELECT * FROM view_AccountingTicketReports WHERE BranchCode='" + txtbrcode.Text + "' AND TicketDate='" + txtdate.Text+ "' AND EnteredBy='"+Login.Fullname+"' ORDER BY TicketNumber", gridControl1, gridView1);
-
+                    //Database.display("SELECT * FROM view_AccountingTicketReports WHERE BranchCode='" + txtbrcode.Text + "' AND TicketDate='" + txtdate.Text+ "' AND EnteredBy='"+Login.Fullname+"' ORDER BY TicketNumber", gridControl1, gridView1);
+                    string query = "SELECT * FROM view_AccountingTicketReports WHERE BranchCode='" + txtbrcode.Text + "' AND TicketDate='" + txtdate.Text + "' AND EnteredBy='" + Login.Fullname + "' ORDER BY TicketNumber ";
+                    HelperFunction.ShowWaitAndDisplay(query, gridControl1, gridView1, "Please wait", "Populating data into the database...");
+                    gridView1.Focus();
                 }
                 else
                 {
-                    Database.display("SELECT * FROM view_AccountingTicketReports WHERE BranchCode='" + txtbrcode.Text + "' AND TicketDate='" + txtdate.Text+ "' ORDER BY TicketNumber", gridControl1, gridView1);
-
+                    //Database.display("SELECT * FROM view_AccountingTicketReports WHERE BranchCode='" + txtbrcode.Text + "' AND TicketDate='" + txtdate.Text+ "' ORDER BY TicketNumber", gridControl1, gridView1);
+                    string query = "SELECT * FROM view_AccountingTicketReports WHERE BranchCode='" + txtbrcode.Text + "' AND TicketDate='" + txtdate.Text + "' ORDER BY TicketNumber";
+                    HelperFunction.ShowWaitAndDisplay(query, gridControl1, gridView1, "Please wait", "Populating data into the database...");
+                    gridView1.Focus();
                 }
                 gridView1.Columns[0].Visible = false;
                 gridView1.Columns[1].Visible = false;

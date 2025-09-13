@@ -33,7 +33,11 @@ namespace SalesInventorySystem.HOFormsDevEx
         {
             if (tabControl1.SelectedTab.Equals(NewShipment))
             {
-                Database.display("SELECT * FROM view_ReceivedShipment WHERE Status='FOR DELIVERY' ORDER BY ShipmentNo", gridControl2, gridView2);
+                //Database.display("SELECT * FROM view_ReceivedShipment WHERE Status='FOR DELIVERY' ORDER BY ShipmentNo DESC", gridControl2, gridView2);
+                string query = $"SELECT * FROM view_ReceivedShipment WHERE Status='FOR DELIVERY' ORDER BY ShipmentNo DESC ";
+                HelperFunction.ShowWaitAndDisplay(query, gridControl2, gridView2, "Please wait", "Populating data into the database...");
+                gridView2.Focus();
+
             }
         }
 
@@ -91,10 +95,17 @@ namespace SalesInventorySystem.HOFormsDevEx
         private void button2_Click(object sender, EventArgs e)
         {
             if (checkBox1.Checked == true)
-                Database.display("SELECT * FROM view_ReceivedShipment WHERE Status='DELIVERED'  ", gridControl1, gridView1);
+            {
+                string query = $"SELECT * FROM view_ReceivedShipment WHERE Status='DELIVERED' ";
+                HelperFunction.ShowWaitAndDisplay(query, gridControl1, gridView1, "Please wait", "Populating data into the database...");
+                gridView1.Focus();
+            }
             else
-                Database.display("SELECT * FROM view_ReceivedShipment WHERE OrderDate >='" + txtdatefrom.Text + "' AND OrderDate <= '" + txtdateto.Text + "' AND Status='DELIVERED'", gridControl1, gridView1);
-
+            {
+                string query = "SELECT * FROM view_ReceivedShipment WHERE OrderDate >='" + txtdatefrom.Text + "' AND OrderDate <= '" + txtdateto.Text + "' AND Status='DELIVERED' ";
+                HelperFunction.ShowWaitAndDisplay(query, gridControl1, gridView1, "Please wait", "Populating data into the database...");
+                gridView1.Focus();
+            }
         }
 
         private void fromLocalConnectionWithoutPOToolStripMenuItem_Click(object sender, EventArgs e)
@@ -143,7 +154,7 @@ namespace SalesInventorySystem.HOFormsDevEx
             shipmentno = gridView2.GetRowCellValue(gridView2.FocusedRowHandle, "ShipmentNo").ToString();
             AddInventoryDevExBatchMode addinv = new AddInventoryDevExBatchMode();
             addinv.txtshipmentno.Text = shipmentno;
-            Database.display("SELECT ProductCategory,OrderCode,Description,Quantity,Cost FROM view_PODETAILS WHERE ShipmentNo='" + shipmentno + "'", addinv.gridControl1, addinv.gridView1);
+            Database.display("SELECT ProductCategory,OrderCode,Description,Quantity,Cost,FORMAT((Quantity*Cost),'N2') TotalCost FROM view_PODETAILS WHERE ShipmentNo='" + shipmentno + "'", addinv.gridControl1, addinv.gridView1);
             //addinv.gridView1.Columns["Cost"].Visible = false;
             addinv.ShowDialog(this);
             if (AddInventoryDevExBatchMode.isdone == true)

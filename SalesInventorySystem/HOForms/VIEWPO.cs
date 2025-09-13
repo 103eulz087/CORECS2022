@@ -22,8 +22,56 @@ namespace SalesInventorySystem.HOForms
             InitializeComponent();
         }
 
+        //void getDateApart(DateTime today,DateTime oneMonthAgo)
+        //{
+        //     today = DateTime.Now;
+        //    //DateTime oneMonthAgo;
+
+        //    int previousMonth = today.Month - 1;
+        //    int year = today.Year;
+
+        //    if (previousMonth == 0)
+        //    {
+        //        previousMonth = 12;
+        //        year -= 1;
+        //    }
+
+        //    // Get the number of days in the previous month
+        //    int daysInPrevMonth = DateTime.DaysInMonth(year, previousMonth);
+
+        //    // Ensure the day doesn't exceed the last day of the previous month
+        //    int day = Math.Min(today.Day, daysInPrevMonth);
+
+        //    oneMonthAgo = new DateTime(year, previousMonth, day);
+
+        //    datefromForApprovalProd.Text = oneMonthAgo.ToShortDateString();
+        //    dateToForApprovalProd.Text = today.ToShortDateString();
+
+        //    dateFromApprovedProd.Text = oneMonthAgo.ToShortDateString();
+        //    dateToApprovedProd.Text = today.ToShortDateString();
+
+        //    dateFromForConfirmProd.Text = oneMonthAgo.ToShortDateString();
+        //    dateToForConfirmProd.Text = today.ToShortDateString();
+
+        //    dateFromConfirmedProd.Text = oneMonthAgo.ToShortDateString();
+        //    dateToConfirmedProd.Text = today.ToShortDateString();
+        //}
+
         private void VIEWPO_Load(object sender, EventArgs e)
         {
+            DateTime today = DateTime.Now;
+
+            datefromForApprovalProd.Text = HelperFunction.GetPreviousMonthSameDay(today).ToShortDateString();
+            dateToForApprovalProd.Text = today.ToShortDateString();
+
+            dateFromApprovedProd.Text = HelperFunction.GetPreviousMonthSameDay(today).ToShortDateString();
+            dateToApprovedProd.Text = today.ToShortDateString();
+
+            dateFromForConfirmProd.Text = HelperFunction.GetPreviousMonthSameDay(today).ToShortDateString();
+            dateToForConfirmProd.Text = today.ToShortDateString();
+
+            dateFromConfirmedProd.Text = HelperFunction.GetPreviousMonthSameDay(today).ToShortDateString();
+            dateToConfirmedProd.Text = today.ToShortDateString();
             filtertab();
         }
         private void filtertab()
@@ -33,12 +81,12 @@ namespace SalesInventorySystem.HOForms
             {
                 if (tabControlForApproval.SelectedTab.Equals(forapproval))
                 {
-                    Database.display("SELECT * FROM view_POSUMMARYREP WHERE Status='FOR APPROVAL' And OrderType='P'", gridControl2, gridView2);
+                    Database.display($"SELECT * FROM view_POSUMMARYREP WHERE Status='FOR APPROVAL' And OrderType='P' AND CAST(DateOrder as date) between '{datefromForApprovalProd.Text}' and '{dateToForApprovalProd.Text}'  ORDER BY ShipmentNo DESC", gridControl2, gridView2);
                     //Database.display("SELECT * FROM POSUMMARY WHERE Status='FOR APPROVAL' ", gridControl2, gridView2);
                 }
                 else if (tabControlForApproval.SelectedTab.Equals(fordelivery))
                 {
-                    Database.display("SELECT * FROM view_POSUMMARYREP WHERE Status='FOR APPROVAL' And OrderType='S'", gridControl1, gridView1);
+                    Database.display("SELECT * FROM view_POSUMMARYREP WHERE Status='FOR APPROVAL' And OrderType='S' ORDER BY ShipmentNo DESC", gridControl1, gridView1);
                 }
             }
             //APPROVED
@@ -47,12 +95,12 @@ namespace SalesInventorySystem.HOForms
 
                 if (tabControlApproved.SelectedTab.Equals(tabPage1))
                 {
-                    Database.display("SELECT * FROM view_POSUMMARYREP WHERE Status='FOR DELIVERY' And OrderType='P'", gridControl3, gridView3);
+                    Database.display($"SELECT * FROM view_POSUMMARYREP WHERE Status='FOR DELIVERY' And OrderType='P' AND CAST(DateOrder as date) between '{dateFromApprovedProd.Text}' and '{dateToApprovedProd.Text}' ORDER BY ShipmentNo DESC", gridControl3, gridView3);
                     //Database.display("SELECT * FROM POSUMMARY WHERE Status='FOR APPROVAL' ", gridControl2, gridView2);
                 }
                 else if (tabControlApproved.SelectedTab.Equals(tabPage2))
                 {
-                    Database.display("SELECT * FROM view_POSUMMARYREP WHERE Status='FOR DELIVERY' And OrderType='S'", gridControl4, gridView4);
+                    Database.display("SELECT * FROM view_POSUMMARYREP WHERE Status='FOR DELIVERY' And OrderType='S' ORDER BY ShipmentNo DESC", gridControl4, gridView4);
                 }
             }
             //FOR CONFIRMATION
@@ -61,11 +109,11 @@ namespace SalesInventorySystem.HOForms
 
                 if (tabControlForConfirmation.SelectedTab.Equals(tabPageForConfirmationProducts))
                 {
-                    Database.display("SELECT * FROM view_POSUMMARYREP WHERE Status='FOR CONFIRMATION' And OrderType='P'", gridControlProductForConfirmation, gridViewProductForConfirmation);
+                    Database.display($"SELECT * FROM view_POSUMMARYREP WHERE Status='FOR CONFIRMATION' And OrderType='P' AND CAST(DateOrder as date) between '{dateFromForConfirmProd.Text}' and '{dateToForConfirmProd.Text}'  ORDER BY ShipmentNo DESC", gridControlProductForConfirmation, gridViewProductForConfirmation);
                 }
                 else if (tabControlForConfirmation.SelectedTab.Equals(tabPageForConfirmationServices))
                 {
-                    Database.display("SELECT * FROM view_POSUMMARYREP WHERE Status='FOR CONFIRMATION' And OrderType='S'", gridControlServicesForConfirmation, gridViewServicesForConfirmation);
+                    Database.display("SELECT * FROM view_POSUMMARYREP WHERE Status='FOR CONFIRMATION' And OrderType='S' ORDER BY ShipmentNo DESC", gridControlServicesForConfirmation, gridViewServicesForConfirmation);
                 }
             }
             //CONFIRMED
@@ -74,15 +122,15 @@ namespace SalesInventorySystem.HOForms
 
                 if (tabControlConfirmed.SelectedTab.Equals(tabPageConfirmedProducts))
                 {
-                    Database.display("SELECT * FROM view_POSUMMARYREP WHERE Status='CONFIRMED' And OrderType='P'", gridControlConfirmedProducts, gridViewConfirmedProducts);
+                    Database.display($"SELECT * FROM view_POSUMMARYREP WHERE Status='CONFIRMED' And OrderType='P' AND CAST(DateOrder as date) between '{dateFromConfirmedProd.Text}' and '{dateToConfirmedProd.Text}' ORDER BY ShipmentNo DESC", gridControlConfirmedProducts, gridViewConfirmedProducts);
                     //Database.display("SELECT * FROM POSUMMARY WHERE Status='FOR APPROVAL' ", gridControl2, gridView2);
                 }
                 else if (tabControlConfirmed.SelectedTab.Equals(tabPageConfirmedServices))
                 {
-                    Database.display("SELECT * FROM view_POSUMMARYREP WHERE Status='CONFIRMED' And OrderType='S'", gridControlConfirmedServices, gridViewServicesForConfirmation);
+                    Database.display("SELECT * FROM view_POSUMMARYREP WHERE Status='CONFIRMED' And OrderType='S' ORDER BY ShipmentNo DESC", gridControlConfirmedServices, gridViewServicesForConfirmation);
                 }
             }
-            
+
         }
 
         private void gridControl2_MouseUp(object sender, MouseEventArgs e)
@@ -139,7 +187,7 @@ namespace SalesInventorySystem.HOForms
 
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            filtertab();
+            //filtertab();
         }
 
         void viewPODetails(GridView view)
@@ -353,6 +401,38 @@ namespace SalesInventorySystem.HOForms
             //HOForms.ViewShipmentDashBoardDetails voerord = new HOForms.ViewShipmentDashBoardDetails();
             //Database.display("SELECT ProductCategory,OrderCode,Description,Quantity FROM view_PODETAILS WHERE ShipmentNo='" + shipmentno + "'", voerord.gridControl1, voerord.gridView1);
             //voerord.ShowDialog(this);
+        }
+
+        private void btnForApprovalProd_Click(object sender, EventArgs e)
+        {
+            //Database.display($"SELECT * FROM view_POSUMMARYREP WHERE Status='FOR APPROVAL' And OrderType='P' AND CAST(DateOrder as date) between '{datefromForApprovalProd.Text}' and '{dateToForApprovalProd.Text}' ORDER BY ShipmentNo DESC", gridControl2, gridView2);
+            string query = $"SELECT * FROM view_POSUMMARYREP WHERE Status='FOR APPROVAL' And OrderType='P' AND CAST(DateOrder as date) between '{datefromForApprovalProd.Text}' and '{dateToForApprovalProd.Text}' ORDER BY ShipmentNo DESC";
+            HelperFunction.ShowWaitAndDisplay(query, gridControl2, gridView2, "Please wait", "Populating data into the database...");
+            gridView2.Focus();
+        }
+
+        private void btnApprovedProd_Click(object sender, EventArgs e)
+        {
+            //Database.display($"SELECT * FROM view_POSUMMARYREP WHERE Status='FOR DELIVERY' And OrderType='P' AND CAST(DateOrder as date) between '{dateFromApprovedProd.Text}' and '{dateToApprovedProd.Text}'  ORDER BY ShipmentNo DESC", gridControl3, gridView3);
+            string query = $"SELECT * FROM view_POSUMMARYREP WHERE Status='FOR DELIVERY' And OrderType='P' AND CAST(DateOrder as date) between '{dateFromApprovedProd.Text}' and '{dateToApprovedProd.Text}'  ORDER BY ShipmentNo DESC";
+            HelperFunction.ShowWaitAndDisplay(query, gridControl3, gridView3, "Please wait", "Populating data into the database...");
+            gridView3.Focus();
+        }
+
+        private void btnForConfirmProd_Click(object sender, EventArgs e)
+        {
+            //Database.display($"SELECT * FROM view_POSUMMARYREP WHERE Status='FOR CONFIRMATION' And OrderType='P' AND CAST(DateOrder as date) between '{dateFromForConfirmProd.Text}' and '{dateToForConfirmProd.Text}'  ORDER BY ShipmentNo DESC", gridControlProductForConfirmation, gridViewProductForConfirmation);
+            string query = $"SELECT * FROM view_POSUMMARYREP WHERE Status='FOR CONFIRMATION' And OrderType='P' AND CAST(DateOrder as date) between '{dateFromForConfirmProd.Text}' and '{dateToForConfirmProd.Text}'  ORDER BY ShipmentNo DESC";
+            HelperFunction.ShowWaitAndDisplay(query, gridControlProductForConfirmation, gridViewProductForConfirmation, "Please wait", "Populating data into the database...");
+            gridViewProductForConfirmation.Focus();
+        }
+
+        private void btnConfirmedProd_Click(object sender, EventArgs e)
+        {
+            //Database.display($"SELECT * FROM view_POSUMMARYREP WHERE Status='CONFIRMED' And OrderType='P'  AND CAST(DateOrder as date) between '{dateFromConfirmedProd.Text}' and '{dateToConfirmedProd.Text}' ORDER BY ShipmentNo DESC", gridControlConfirmedProducts, gridViewConfirmedProducts);
+            string query = $"SELECT * FROM view_POSUMMARYREP WHERE Status='CONFIRMED' And OrderType='P'  AND CAST(DateOrder as date) between '{dateFromConfirmedProd.Text}' and '{dateToConfirmedProd.Text}' ORDER BY ShipmentNo DESC";
+            HelperFunction.ShowWaitAndDisplay(query, gridControlConfirmedProducts, gridViewConfirmedProducts, "Please wait", "Populating data into the database...");
+            gridViewConfirmedProducts.Focus();
         }
 
         private void tabControlApproved_SelectedIndexChanged(object sender, EventArgs e)

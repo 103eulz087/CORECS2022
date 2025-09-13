@@ -39,9 +39,15 @@ namespace SalesInventorySystem.Orders
         }
         void extract()
         {
-            Database.display("SELECT ProductCode,LongDescription as Description,Barcode,'0' as Quantity,' ' as Units,' ' as Remarks " +
+            //Database.display("SELECT ProductCode,LongDescription as Description,Barcode,'0' as Quantity,' ' as Units,' ' as Remarks " +
+            //    "FROM dbo.Products WHERE BranchCode='" + Login.assignedBranch + "' " +
+            //    "AND (Description like '%" + txtsearchprod.Text.Trim() + "%' OR Barcode like '%" + txtsearchprod.Text.Trim() + "%') ", gridControl1, gridView1);
+
+            string query = "SELECT ProductCode,LongDescription as Description,Barcode,'0' as Quantity,' ' as Units,' ' as Remarks " +
                 "FROM dbo.Products WHERE BranchCode='" + Login.assignedBranch + "' " +
-                "AND (Description like '%" + txtsearchprod.Text.Trim() + "%' OR Barcode like '%" + txtsearchprod.Text.Trim() + "%') ", gridControl1, gridView1);
+                "AND (Description like '%" + txtsearchprod.Text.Trim() + "%' OR Barcode like '%" + txtsearchprod.Text.Trim() + "%') ";
+            HelperFunction.ShowWaitAndDisplay(query, gridControl1, gridView1, "Please wait", "Populating data into the database...");
+            gridView1.Focus();
         }
         void save()
         {

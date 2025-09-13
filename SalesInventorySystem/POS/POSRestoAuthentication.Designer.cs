@@ -86,7 +86,7 @@
             this.button11.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
             this.button11.ForeColor = System.Drawing.Color.White;
             this.button11.Location = new System.Drawing.Point(482, 412);
-            this.button11.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.button11.Margin = new System.Windows.Forms.Padding(6);
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(208, 95);
             this.button11.TabIndex = 46;
@@ -101,7 +101,7 @@
             this.button12.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
             this.button12.ForeColor = System.Drawing.Color.White;
             this.button12.Location = new System.Drawing.Point(249, 412);
-            this.button12.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.button12.Margin = new System.Windows.Forms.Padding(6);
             this.button12.Name = "button12";
             this.button12.Size = new System.Drawing.Size(220, 95);
             this.button12.TabIndex = 45;
@@ -116,7 +116,7 @@
             this.button9.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
             this.button9.ForeColor = System.Drawing.Color.White;
             this.button9.Location = new System.Drawing.Point(482, 198);
-            this.button9.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.button9.Margin = new System.Windows.Forms.Padding(6);
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(208, 95);
             this.button9.TabIndex = 43;
@@ -131,7 +131,7 @@
             this.button10.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
             this.button10.ForeColor = System.Drawing.Color.White;
             this.button10.Location = new System.Drawing.Point(249, 198);
-            this.button10.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.button10.Margin = new System.Windows.Forms.Padding(6);
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(220, 95);
             this.button10.TabIndex = 42;
@@ -146,7 +146,7 @@
             this.button7.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
             this.button7.ForeColor = System.Drawing.Color.White;
             this.button7.Location = new System.Drawing.Point(249, 306);
-            this.button7.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.button7.Margin = new System.Windows.Forms.Padding(6);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(220, 95);
             this.button7.TabIndex = 40;
@@ -161,7 +161,7 @@
             this.button8.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
             this.button8.ForeColor = System.Drawing.Color.White;
             this.button8.Location = new System.Drawing.Point(20, 306);
-            this.button8.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.button8.Margin = new System.Windows.Forms.Padding(6);
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(218, 95);
             this.button8.TabIndex = 39;
@@ -176,7 +176,7 @@
             this.button4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
             this.button4.ForeColor = System.Drawing.Color.White;
             this.button4.Location = new System.Drawing.Point(20, 198);
-            this.button4.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.button4.Margin = new System.Windows.Forms.Padding(6);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(218, 95);
             this.button4.TabIndex = 38;
@@ -191,7 +191,7 @@
             this.button3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
             this.button3.ForeColor = System.Drawing.Color.White;
             this.button3.Location = new System.Drawing.Point(482, 89);
-            this.button3.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.button3.Margin = new System.Windows.Forms.Padding(6);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(208, 95);
             this.button3.TabIndex = 37;
@@ -206,7 +206,7 @@
             this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
             this.button2.ForeColor = System.Drawing.Color.White;
             this.button2.Location = new System.Drawing.Point(249, 89);
-            this.button2.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.button2.Margin = new System.Windows.Forms.Padding(6);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(220, 95);
             this.button2.TabIndex = 36;
@@ -221,7 +221,7 @@
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
             this.button1.ForeColor = System.Drawing.Color.White;
             this.button1.Location = new System.Drawing.Point(20, 89);
-            this.button1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.button1.Margin = new System.Windows.Forms.Padding(6);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(218, 95);
             this.button1.TabIndex = 35;
@@ -236,7 +236,7 @@
             this.button6.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
             this.button6.ForeColor = System.Drawing.Color.White;
             this.button6.Location = new System.Drawing.Point(482, 306);
-            this.button6.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.button6.Margin = new System.Windows.Forms.Padding(6);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(208, 95);
             this.button6.TabIndex = 41;

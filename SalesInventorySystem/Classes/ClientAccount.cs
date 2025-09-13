@@ -57,7 +57,7 @@ namespace SalesInventorySystem.Classes
             while (reader.Read())
             {
                 //ListItems(string listname, int listid,string listidchar)
-                listobj = new ListItems(reader["AccountName"].ToString(),reader["AccountID"].ToString());
+                listobj = new ListItems(reader["AccountName"].ToString(),reader["AccountKey"].ToString());
                 box.Items.Add(listobj);
             }
             reader.Close();
@@ -65,10 +65,10 @@ namespace SalesInventorySystem.Classes
 
         public void loadAccountDetails(string acctid)
         {
-            Database.GetRecord("SELECT * FROM ClientAccounts WHERE AccountID='"+acctid+"'");
+            Database.GetRecord("SELECT * FROM ClientAccounts WHERE AccountKey='" + acctid+"'");
             if (reader.Read())
             {
-                acctid = reader["AccountID"].ToString();
+                acctid = reader["AccountKey"].ToString();
                 acctname = reader["AccountName"].ToString();
                 acctbalance = reader["AccountBalance"].ToString();
                 acctstatus = reader["AccountStatus"].ToString();
@@ -86,7 +86,7 @@ namespace SalesInventorySystem.Classes
         public static String getClientID(string custname)
         {
             string custid = "";
-            custid = Database.getSingleQuery("ClientAccounts", "AccountName='" + custname + "'", "AccountID");
+            custid = Database.getSingleQuery("ClientAccounts", "AccountName='" + custname + "'", "AccountKey");
             return custid;
         }
 

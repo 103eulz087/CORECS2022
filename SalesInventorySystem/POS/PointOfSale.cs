@@ -1030,7 +1030,7 @@ namespace SalesInventorySystem
                 com.Parameters.AddWithValue("@parmseqnum", MydataGridView1[0, MydataGridView1.CurrentRow.Index].Value.ToString());
                 com.Parameters.AddWithValue("@parmqty", MydataGridView1[3, MydataGridView1.CurrentRow.Index].Value.ToString());
                 com.Parameters.AddWithValue("@parmamount", MydataGridView1[4, MydataGridView1.CurrentRow.Index].Value.ToString());
-                com.Parameters.AddWithValue("@parmuser", AuthorizedConfirmationFrm.isglobalUserID);
+                com.Parameters.AddWithValue("@parmuser", Login.isglobalUserID);
                 com.Parameters.AddWithValue("@parmmachinename", Environment.MachineName.ToString());
                 com.CommandType = CommandType.StoredProcedure;
                 com.CommandText = query;
@@ -2241,6 +2241,7 @@ namespace SalesInventorySystem
 
                 pocls.txtcashiertransno.Text = cashierTransactionCode;// lblTransactionIDCashier.Text;
                 pocls.txttransactionno.Text = com.Parameters["@parmtransno"].Value.ToString(); //lblTransactionIDInc.Text;
+                pocls.txtcashiername.Text = Login.Fullname;
 
                 pocls.txttransactiondate.Text = com.Parameters["@parmtransdate"].Value.ToString();
                 pocls.txtBeginningCash.Text = com.Parameters["@parmbeginningcash"].Value.ToString();

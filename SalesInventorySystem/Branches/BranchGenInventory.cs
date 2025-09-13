@@ -35,17 +35,22 @@ namespace SalesInventorySystem.Branches
             {
                 if (radioButton1.Checked == true) //DETAILED
                 {
-                    Database.display("SELECT * FROM view_BranchInventoryDetails WHERE Branch='" + brcode + "'", gridControl1, gridView1);
+                    //Database.display("SELECT * FROM view_BranchInventoryDetails WHERE Branch='" + brcode + "'", gridControl1, gridView1);
                     //Database.display("SELECT * FROM view_BranchInventoryDetails WHERE BranchCode='" + brcode + "'", gridControl1, gridView1);
                     //Database.display($"SELECT * FROM func_view_BranchInventoryDetails('{Login.assignedBranch}') ", gridControl1, gridView1);
+                    string query = "SELECT * FROM view_BranchInventoryDetails WHERE Branch='" + brcode + "' ";
+                    HelperFunction.ShowWaitAndDisplay(query, gridControl1, gridView1, "Please wait", "Populating data into the database...");
+                    gridView1.Focus();
 
                 }
                 else if (radioButton2.Checked == true) //SUMMARY
                 {
-                    Database.display("SELECT * FROM view_BranchInventory WHERE Branch='" + brcode + "'", gridControl1, gridView1);
+                    //Database.display("SELECT * FROM view_BranchInventory WHERE Branch='" + brcode + "'", gridControl1, gridView1);
                     //Database.display("SELECT * FROM view_BranchInventory WHERE BranchCode='" + brcode + "'", gridControl1, gridView1);
                     //Database.display($"SELECT * FROM func_view_BranchInventory('{Login.assignedBranch}') ", gridControl1, gridView1);
-
+                    string query = "SELECT * FROM view_BranchInventory WHERE Branch='" + brcode + "' ";
+                    HelperFunction.ShowWaitAndDisplay(query, gridControl1, gridView1, "Please wait", "Populating data into the database...");
+                    gridView1.Focus();
                 }
             }
             catch (SqlException sex2)

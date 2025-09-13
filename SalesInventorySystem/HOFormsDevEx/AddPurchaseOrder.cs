@@ -88,93 +88,65 @@ namespace SalesInventorySystem.HOFormsDevEx
         {
             Database.displayRepositoryComboBoxItems("SELECT * FROM Metrics", "Metrics", repoMetrics);
         }
-        void insert()
+
+        private DataTable BuildPODetailsTable()
+        {
+            DataTable dt = new DataTable();
+            dt.Columns.Add("ShipmentNo", typeof(string));
+            dt.Columns.Add("SupplierID", typeof(string));
+            dt.Columns.Add("OrderType", typeof(string));
+            dt.Columns.Add("OrderCode", typeof(string));
+            dt.Columns.Add("Quantity", typeof(decimal));
+            dt.Columns.Add("Cost", typeof(decimal));
+            dt.Columns.Add("TotalCost", typeof(decimal));
+            dt.Columns.Add("Unit", typeof(string));
+            dt.Columns.Add("ActualQuantity", typeof(decimal));
+            dt.Columns.Add("ActualCost", typeof(decimal));
+            dt.Columns.Add("ActualTotalCost", typeof(decimal));
+            dt.Columns.Add("isVat", typeof(bool));
+
+            int[] selectedRows = gridView1.GetSelectedRows();
+            foreach (int rowHandle in selectedRows)
+            {
+                DataRow dr = dt.NewRow();
+                dr["ShipmentNo"] = txtshipmentno.Text;
+                dr["SupplierID"] = suppkey;
+                dr["OrderType"] = radProducts.Checked ? "P" : "S";
+                dr["OrderCode"] = radProducts.Checked
+                    ? gridView1.GetRowCellValue(rowHandle, "ProductCode").ToString()
+                    : gridView1.GetRowCellValue(rowHandle, "ServiceCode").ToString();
+                dr["Quantity"] = Convert.ToDecimal(gridView1.GetRowCellValue(rowHandle, "Quantity"));
+                dr["Cost"] = Convert.ToDecimal(gridView1.GetRowCellValue(rowHandle, "Cost"));
+                dr["TotalCost"] = 0;
+                dr["Unit"] = radProducts.Checked
+                    ? gridView1.GetRowCellValue(rowHandle, "Units").ToString()
+                    : " ";
+                dr["ActualQuantity"] = 0;
+                dr["ActualCost"] = 0;
+                dr["ActualTotalCost"] = 0;
+                dr["isVat"] = true;
+                dt.Rows.Add(dr);
+            }
+
+            return dt;
+        }
+
+        private void insert()
         {
             try
             {
-                GridView view = gridControl1.FocusedView as GridView;
-                view.SortInfo.Clear();
+                DataTable dtDetails = BuildPODetailsTable();
 
-                int[] selectedRows = gridView1.GetSelectedRows();
-
-                if (radProducts.Checked == true)
+                using (SqlConnection conn = Database.getConnection())
+                using (SqlCommand cmd = new SqlCommand("sp_BulkInsertPODetails", conn))
                 {
-                    foreach (int rowHandle in selectedRows)
-                    {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    SqlParameter tvpParam = cmd.Parameters.AddWithValue("@Items", dtDetails);
+                    tvpParam.SqlDbType = SqlDbType.Structured;
+                    tvpParam.TypeName = "dbo.PODetailsType";
 
-                        string productcode = gridView1.GetRowCellValue(rowHandle, "ProductCode").ToString();//dataGridView1.Rows[0].Cells["Product"].Value.ToString();
-                        string quantity = gridView1.GetRowCellValue(rowHandle, "Quantity").ToString();//dataGridView1.Rows[0].Cells["Quantity"].Value.ToString();
-                        string cost = gridView1.GetRowCellValue(rowHandle, "Cost").ToString();//dataGridView1.Rows[0].Cells["Quantity"].Value.ToString();
-                        string units = gridView1.GetRowCellValue(rowHandle, "Units").ToString();//dataGridView1.Rows[0].Cells["Quantity"].Value.ToString();
-
-                        if (rowHandle >= 0)
-                        {
-
-                            Database.ExecuteQuery("INSERT INTO PODETAILS (ShipmentNo" +
-                                    ",SupplierID" +
-                                    ",OrderType" +
-                                    ",OrderCode" +
-                                    ",Quantity" +
-                                    ",Cost" +
-                                    ",TotalCost" +
-                                    ",Unit" +
-                                    ",ActualQuantity" +
-                                    ",ActualCost" +
-                                    ",ActualTotalCost" +
-                                    ",isVat) " +
-                                "VALUES ('" + txtshipmentno.Text + "'" +
-                                    ",'" + suppkey + "'" +
-                                    ",'P'" +
-                                    ",'" + productcode + "'" +
-                                    ",'" + quantity + "'" +
-                                    ",'" + cost + "'" +
-                                    ",'0'" +
-                                    ",'" + units + "'" +
-                                    ",'0'" +
-                                    ",'0'" +
-                                    ",'0'" +
-                                    ",'1') ");
-                        }
-                    }
-                }
-                else
-                {
-                    foreach (int rowHandle in selectedRows)
-                    {
-
-                        string servicecode = gridView1.GetRowCellValue(rowHandle, "ServiceCode").ToString();//dataGridView1.Rows[0].Cells["Product"].Value.ToString();
-                        string quantity = gridView1.GetRowCellValue(rowHandle, "Quantity").ToString();//dataGridView1.Rows[0].Cells["Quantity"].Value.ToString();
-                        string cost = gridView1.GetRowCellValue(rowHandle, "Cost").ToString();//dataGridView1.Rows[0].Cells["Quantity"].Value.ToString();
-                         
-                        if (rowHandle >= 0)
-                        {
-
-                            Database.ExecuteQuery("INSERT INTO PODETAILS (ShipmentNo" +
-                                    ",SupplierID" +
-                                    ",OrderType" +
-                                    ",OrderCode" +
-                                    ",Quantity" +
-                                    ",Cost" +
-                                    ",TotalCost" +
-                                    ",Unit" +
-                                    ",ActualQuantity" +
-                                    ",ActualCost" +
-                                    ",ActualTotalCost" +
-                                    ",isVat) " +
-                                "VALUES ('" + txtshipmentno.Text + "'" +
-                                    ",'" + suppkey + "'" +
-                                    ",'S'" +
-                                    ",'" + servicecode + "'" +
-                                    ",'" + quantity + "'" +
-                                    ",'" + cost + "'" +
-                                    ",'0'" +
-                                    ",' '" +
-                                    ",'0'" +
-                                    ",'0'" +
-                                    ",'0'" +
-                                    ",'1') ");
-                        }
-                    }
+                    conn.Open();
+                    cmd.ExecuteNonQuery();
                 }
             }
             catch (Exception ex)
@@ -182,6 +154,101 @@ namespace SalesInventorySystem.HOFormsDevEx
                 XtraMessageBox.Show(ex.Message.ToString());
             }
         }
+
+        //void insert()
+        //{
+        //    try
+        //    {
+        //        GridView view = gridControl1.FocusedView as GridView;
+        //        view.SortInfo.Clear();
+
+        //        int[] selectedRows = gridView1.GetSelectedRows();
+
+        //        if (radProducts.Checked == true)
+        //        {
+        //            foreach (int rowHandle in selectedRows)
+        //            {
+
+        //                string productcode = gridView1.GetRowCellValue(rowHandle, "ProductCode").ToString();//dataGridView1.Rows[0].Cells["Product"].Value.ToString();
+        //                string quantity = gridView1.GetRowCellValue(rowHandle, "Quantity").ToString();//dataGridView1.Rows[0].Cells["Quantity"].Value.ToString();
+        //                string cost = gridView1.GetRowCellValue(rowHandle, "Cost").ToString();//dataGridView1.Rows[0].Cells["Quantity"].Value.ToString();
+        //                string units = gridView1.GetRowCellValue(rowHandle, "Units").ToString();//dataGridView1.Rows[0].Cells["Quantity"].Value.ToString();
+
+        //                if (rowHandle >= 0)
+        //                {
+
+        //                    Database.ExecuteQuery("INSERT INTO PODETAILS (ShipmentNo" +
+        //                            ",SupplierID" +
+        //                            ",OrderType" +
+        //                            ",OrderCode" +
+        //                            ",Quantity" +
+        //                            ",Cost" +
+        //                            ",TotalCost" +
+        //                            ",Unit" +
+        //                            ",ActualQuantity" +
+        //                            ",ActualCost" +
+        //                            ",ActualTotalCost" +
+        //                            ",isVat) " +
+        //                        "VALUES ('" + txtshipmentno.Text + "'" +
+        //                            ",'" + suppkey + "'" +
+        //                            ",'P'" +
+        //                            ",'" + productcode + "'" +
+        //                            ",'" + quantity + "'" +
+        //                            ",'" + cost + "'" +
+        //                            ",'0'" +
+        //                            ",'" + units + "'" +
+        //                            ",'0'" +
+        //                            ",'0'" +
+        //                            ",'0'" +
+        //                            ",'1') ");
+        //                }
+        //            }
+        //        }
+        //        else
+        //        {
+        //            foreach (int rowHandle in selectedRows)
+        //            {
+
+        //                string servicecode = gridView1.GetRowCellValue(rowHandle, "ServiceCode").ToString();//dataGridView1.Rows[0].Cells["Product"].Value.ToString();
+        //                string quantity = gridView1.GetRowCellValue(rowHandle, "Quantity").ToString();//dataGridView1.Rows[0].Cells["Quantity"].Value.ToString();
+        //                string cost = gridView1.GetRowCellValue(rowHandle, "Cost").ToString();//dataGridView1.Rows[0].Cells["Quantity"].Value.ToString();
+
+        //                if (rowHandle >= 0)
+        //                {
+
+        //                    Database.ExecuteQuery("INSERT INTO PODETAILS (ShipmentNo" +
+        //                            ",SupplierID" +
+        //                            ",OrderType" +
+        //                            ",OrderCode" +
+        //                            ",Quantity" +
+        //                            ",Cost" +
+        //                            ",TotalCost" +
+        //                            ",Unit" +
+        //                            ",ActualQuantity" +
+        //                            ",ActualCost" +
+        //                            ",ActualTotalCost" +
+        //                            ",isVat) " +
+        //                        "VALUES ('" + txtshipmentno.Text + "'" +
+        //                            ",'" + suppkey + "'" +
+        //                            ",'S'" +
+        //                            ",'" + servicecode + "'" +
+        //                            ",'" + quantity + "'" +
+        //                            ",'" + cost + "'" +
+        //                            ",'0'" +
+        //                            ",' '" +
+        //                            ",'0'" +
+        //                            ",'0'" +
+        //                            ",'0'" +
+        //                            ",'1') ");
+        //                }
+        //            }
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        XtraMessageBox.Show(ex.Message.ToString());
+        //    }
+        //}
 
         void ExecuteSP(string anaction)
         {
@@ -197,7 +264,8 @@ namespace SalesInventorySystem.HOFormsDevEx
                 com.Parameters.AddWithValue("@parmremarks", txtremakrs.Text);
                 com.Parameters.AddWithValue("@parmorderedby", Login.Fullname);
                 com.Parameters.AddWithValue("@parmaction", anaction);
-                com.Parameters.AddWithValue("@parmsuppid", suppkey); 
+                com.Parameters.AddWithValue("@parmsuppid", suppkey);
+                com.Parameters.AddWithValue("@parmordertype", "");
                 com.CommandType = CommandType.StoredProcedure;
                 com.CommandText = query;
                 com.ExecuteNonQuery();
@@ -240,21 +308,16 @@ namespace SalesInventorySystem.HOFormsDevEx
             if (e.Column.FieldName == "Units")
                 e.RepositoryItem = repoMetrics;
         }
-
         void save()
         {
             bool confirm = HelperFunction.ConfirmDialog("Are you sure you want to save this Purchase Order?", "Confirm Purchase Order");
-            if (confirm)
-            {
-                insert();
-                ExecuteSP();
-                XtraMessageBox.Show("PO Successfully Created!...");
-            }
-            else
-            {
-                return;
-            }
+            if (!confirm) return;
+
+            insert();
+            ExecuteSP("SAVE"); // Pass action explicitly
+            XtraMessageBox.Show("PO Successfully Created!...");
         }
+        
      
         private void btnsave_Click(object sender, EventArgs e)
         {

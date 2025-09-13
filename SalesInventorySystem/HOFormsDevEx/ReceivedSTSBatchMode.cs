@@ -68,6 +68,40 @@ namespace SalesInventorySystem.HOFormsDevEx
                 con.Close();
             }
         }
+        //void executeTransfer()
+        //{
+        //    try
+        //    {
+        //        GridView view = gridControl1.FocusedView as GridView;
+        //        view.SortInfo.Clear();
+
+        //        int[] selectedRows = gridView1.GetSelectedRows();
+
+        //        foreach (int rowHandle in selectedRows)
+        //        {
+
+        //            string productcode = gridView1.GetRowCellValue(rowHandle, "ProductNo").ToString();//dataGridView1.Rows[0].Cells["Product"].Value.ToString();
+        //            string description = gridView1.GetRowCellValue(rowHandle, "ProductName").ToString();// dataGridView1.Rows[0].Cells["Description"].Value.ToString(); 
+        //            string barcode = gridView1.GetRowCellValue(rowHandle, "BarcodeNo").ToString();// dataGridView1.Rows[0].Cells["Description"].Value.ToString(); 
+        //            string cost = gridView1.GetRowCellValue(rowHandle, "Cost").ToString();//dataGridView1.Rows[0].Cells["Quantity"].Value.ToString();
+        //            string quantity = gridView1.GetRowCellValue(rowHandle, "QtyDelivered").ToString();//dataGridView1.Rows[0].Cells["Quantity"].Value.ToString();
+        //            string actualqty = gridView1.GetRowCellValue(rowHandle, "ActualQty").ToString();//dataGridView1.Rows[0].Cells["Quantity"].Value.ToString();
+        //            totalreceive = rowHandle;
+
+        //            if (rowHandle >= 0)
+        //            {
+
+        //                receiveSTS(txtshipmentno.Text, productcode, actualqty, barcode,Login.assignedBranch,Login.isglobalUserID,"0","0");
+        //            }
+        //        }
+        //        totalreceive = gridView1.SelectedRowsCount;
+        //        isdone = true;
+        //    }
+        //    catch (SqlException ex)
+        //    {
+        //        XtraMessageBox.Show(ex.Message.ToString());
+        //    }
+        //}
         void executeTransfer()
         {
             try
@@ -77,67 +111,51 @@ namespace SalesInventorySystem.HOFormsDevEx
 
                 int[] selectedRows = gridView1.GetSelectedRows();
 
+                // Create DataTable for TVP
+                DataTable inventoryItems = new DataTable();
+                inventoryItems.Columns.Add("ProductCode", typeof(string));
+                inventoryItems.Columns.Add("Barcode", typeof(string));
+                inventoryItems.Columns.Add("Qty", typeof(float));
+                inventoryItems.Columns.Add("SellingPrice", typeof(decimal));
+                inventoryItems.Columns.Add("IsScan", typeof(bool));
+
                 foreach (int rowHandle in selectedRows)
                 {
-             
-                    string productcode = gridView1.GetRowCellValue(rowHandle, "ProductNo").ToString();//dataGridView1.Rows[0].Cells["Product"].Value.ToString();
-                    string description = gridView1.GetRowCellValue(rowHandle, "ProductName").ToString();// dataGridView1.Rows[0].Cells["Description"].Value.ToString(); 
-                    string barcode = gridView1.GetRowCellValue(rowHandle, "BarcodeNo").ToString();// dataGridView1.Rows[0].Cells["Description"].Value.ToString(); 
-                    string cost = gridView1.GetRowCellValue(rowHandle, "Cost").ToString();//dataGridView1.Rows[0].Cells["Quantity"].Value.ToString();
-                    string quantity = gridView1.GetRowCellValue(rowHandle, "QtyDelivered").ToString();//dataGridView1.Rows[0].Cells["Quantity"].Value.ToString();
-                    string actualqty = gridView1.GetRowCellValue(rowHandle, "ActualQty").ToString();//dataGridView1.Rows[0].Cells["Quantity"].Value.ToString();
-                    totalreceive = rowHandle;
+                    string productCode = gridView1.GetRowCellValue(rowHandle, "ProductNo").ToString();
+                    string barcode = gridView1.GetRowCellValue(rowHandle, "BarcodeNo").ToString();
+                    float qty = Convert.ToSingle(gridView1.GetRowCellValue(rowHandle, "ActualQty"));
+                    decimal sellingPrice = Convert.ToDecimal(gridView1.GetRowCellValue(rowHandle, "SellingPrice"));
+                    bool isScan = false; // Set this based on your logic or UI checkbox
 
-                    if (rowHandle >= 0)
+                    inventoryItems.Rows.Add(productCode, barcode, qty, sellingPrice, isScan);
+                }
+
+                // Call the batch stored procedure
+                using (SqlConnection conn = Database.getConnection())
+                {
+                    using (SqlCommand cmd = new SqlCommand("sp_AddBranchInventoryBatch", conn))
                     {
-                        
-                        receiveSTS(txtshipmentno.Text, productcode, actualqty, barcode,Login.assignedBranch,Login.isglobalUserID,"0","0");
-                        //Database.ExecuteQuery("INSERT INTO Inventory (Branch" +
-                        //    ",ShipmentNo" +
-                        //    ",PalletNo" +
-                        //    ",DateReceived" +
-                        //    ",Product" +
-                        //    ",Description" +
-                        //    ",Cost" +
-                        //    ",Barcode" +
-                        //    ",TipWeight" +
-                        //    ",Quantity" +
-                        //    ",Available" +
-                        //    ",IsStock" +
-                        //    ",IsVat" +
-                        //    ",IsWarehouse" +
-                        //    ",LastMovementDate" +
-                        //    ",isProcess" +
-                        //    ",isSource" +
-                        //    ",isConversion) " +
-                        //    "VALUES ('888'" +
-                        //    ",'" + txtshipmentno.Text + "'" +
-                        //    ",'0'" +
-                        //    ",'" + DateTime.Now.ToShortDateString() + "'" +
-                        //    ",'" + productcode + "'" +
-                        //    ",'" + description + "'" +
-                        //    ",'"+cost+"'" +
-                        //    ",'"+barcode+"'" +
-                        //    ",0" +
-                        //    ",'" + actualqty + "'" +
-                        //    ",'" + actualqty + "'" +
-                        //    ",1" +
-                        //    ",1" +
-                        //    ",1" +
-                        //    ",'" + DateTime.Now.ToShortDateString() + "'" +
-                        //    ",0" +
-                        //    ",1" +
-                        //    ",0) ");
-                        //Database.ExecuteQuery("insert into InventoryBigBlue values ('888',' ',' ','" + txtbatchcode.Text + "','" + DateTime.Now.ToShortDateString() + "','" + productcode + "','" + description + "','" + barcode + "','" + quantity + "','" + quantity + "','0','" + quantity + "',0,1,0,1,'" + txtbatchcode.Text + "','" + DateTime.Now.ToShortDateString() + "',0,0,0);");
-                        //Database.ExecuteQuery("insert into InventoryTransferred values ('888', '" + productcode + "', '" + description + "', '" + DateTime.Now.ToShortDateString() + "', '" + barcode + "', '" + quantity + "', '" + DateTime.Now.ToShortDateString() + "', 1, '" + txtbatchcode.Text + "', 'auto', '" + Login.Fullname + "', 'Commissary', 'BigBlue', ' ', ' ')");
+                        cmd.CommandType = CommandType.StoredProcedure;
+
+                        cmd.Parameters.AddWithValue("@PONumber", txtshipmentno.Text);
+                        cmd.Parameters.AddWithValue("@BranchCode", Login.assignedBranch);
+                        cmd.Parameters.AddWithValue("@ReceivedBy", Login.isglobalUserID);
+
+                        SqlParameter tvpParam = cmd.Parameters.AddWithValue("@Items", inventoryItems);
+                        tvpParam.SqlDbType = SqlDbType.Structured;
+                        tvpParam.TypeName = "dbo.InventoryItemType";
+
+                        conn.Open();
+                        cmd.ExecuteNonQuery();
                     }
                 }
-                totalreceive = gridView1.SelectedRowsCount;
+
+                totalreceive = selectedRows.Length;
                 isdone = true;
             }
             catch (SqlException ex)
             {
-                XtraMessageBox.Show(ex.Message.ToString());
+                XtraMessageBox.Show("Error: " + ex.Message);
             }
         }
         private void simpleButton2_Click(object sender, EventArgs e)

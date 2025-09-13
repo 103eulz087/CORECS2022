@@ -255,14 +255,16 @@ namespace SalesInventorySystem.POSStandAloneSetup
         {
             foreach (Form form in Application.OpenForms)
             {
-                if (form.GetType() == typeof(HOForms.POSTransactions))
+                if (form.GetType() == typeof(POS.POSSalesReportDevEx))
                 {
                     form.Activate();
                     return;
                 }
             }
-            HOForms.POSTransactions postra = new HOForms.POSTransactions();
-            postra.Show();
+            POS.POSSalesReportDevEx posrep = new POS.POSSalesReportDevEx();
+            posrep.Show();
+            //HOForms.POSTransactions postra = new HOForms.POSTransactions();
+            //postra.Show();
         }
     }
 }

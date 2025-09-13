@@ -18,6 +18,7 @@ namespace SalesInventorySystem.POS
 {
     public partial class POSConfirmPayment : Form
     {
+        object custcode = null;
         string customercode = "";
         string invno = "";
 
@@ -150,6 +151,11 @@ namespace SalesInventorySystem.POS
             }
         }
 
+        private void txtcustnamelookup_EditValueChanged(object sender, EventArgs e)
+        {
+            custcode = SearchLookUpClass.getSingleValue(txtcustnamelookup, "CustomerID");
+        }
+
         private void lblvatexempt_Click(object sender, EventArgs e)
         {
 
@@ -235,8 +241,15 @@ namespace SalesInventorySystem.POS
             string referencenumber = IDGenerator.getIDNumberSP("sp_GetReferenceNumber", "ReferenceNumber");// IDGenerator.getReferenceNumber();
             txtinvoiceno.Text = invoicenum.Trim();
             lblreferenceno.Text = referencenumber.Trim();
+
+            if (String.IsNullOrEmpty(txtcustnamelookup.Text)) {
+                string custkey = "000001";
+                custcode = custkey.ToString();
+            }
+
             txtamounttender.Focus();
-            Database.displayComboBoxItems("SELECT distinct CustomerName FROM dbo.Customers", "CustomerName", txtcustname);
+            //Database.displayComboBoxItems("SELECT distinct CustomerName FROM dbo.Customers", "CustomerName", txtcustname);
+            Database.displaySearchlookupEdit("SELECT CustomerID,CustomerName FROM dbo.Customers", txtcustnamelookup,"CustomerName", "CustomerName");
 
         }
         void sp_DataReceived(object sender, SerialDataReceivedEventArgs e)
@@ -407,11 +420,13 @@ namespace SalesInventorySystem.POS
                 {
                     paymenttype = "Cash";
                     invno = txtinvoiceno.Text;
+                    customercode = custcode.ToString();
                 }
                 else if (radcc.Checked.Equals(true))
                 {
                     paymenttype = "Credit";
                     invno = txtinvoiceno.Text;
+                    customercode = custcode.ToString();
                     //update as of 04142020
                     Database.ExecuteQuery("INSERT INTO dbo.POSCreditCardTransactions VALUES('" + lbltranscode.Text + "','" + lblorderno.Text + "','" + Login.assignedBranch + "','" + DateTime.Now.ToString() + "','" + POSPaymentDetails.creditcardname + "','" + POSPaymentDetails.creditcardnum + "','" + POSPaymentDetails.creditcardtype + "','" + POSPaymentDetails.creditcardexpirydate + "','" + POSPaymentDetails.creditcardbankname + "','" + POSPaymentDetails.creditcardmerchant + "','" + POSPaymentDetails.creditcardrefno + "','" + txtamountpayable.Text + "','0','" + DateTime.Now.ToString() + "',' ','" + Login.Fullname + "','" + GlobalVariables.computerName + "','"+lblcashiertransno.Text+"')");
                     //update as of 04142020
@@ -419,8 +434,8 @@ namespace SalesInventorySystem.POS
                 else if (radmerchant.Checked.Equals(true))
                 {
                     paymenttype = "Merchant";// merchantpaytype;// 
-                    customercode = "";
-                    customercode = POSPaytoMerchant.merchantname;
+                    customercode= custcode.ToString(); 
+                    //customercode = POSPaytoMerchant.merchantname;
 
                     //update as of 04142020
                     bool isClear = false;
@@ -436,13 +451,15 @@ namespace SalesInventorySystem.POS
                 else if (radwallet.Checked.Equals(true))
                 {
                     paymenttype = "CashWallet";
-                    customercode = POSCashWalletTapper.clientkey;
+                    customercode = custcode.ToString(); 
+                    //customercode = POSCashWalletTapper.clientkey;
                     invno = txtinvoiceno.Text;
                 }
                 else if (radcharge.Checked.Equals(true))
                 {
                     paymenttype = "ChargeToAccount";
-                    customercode = POSChargeToClient.customercode;
+                    customercode= custcode.ToString();
+                    //customercode = POSChargeToClient.customercode;
                     invno = txtinvoiceno.Text; //POSChargeToClient.invoiceNum;
 
 
@@ -826,6 +843,8 @@ namespace SalesInventorySystem.POS
 
         private void button1_Click(object sender, EventArgs e)
         {
+            //get default walkin in customers table
+          
             if (txtamounttender.Text.Length > 10)
             {
                 //show authentication

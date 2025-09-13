@@ -25,7 +25,7 @@ namespace SalesInventorySystem
         public static String getCustAccountID(string custname)
         {
             string custid = "";
-            custid = Database.getSingleQuery("ClientAccounts", "AccountName='" + custname + "'", "AccountID");
+            custid = Database.getSingleQuery("ClientAccounts", "AccountName='" + custname + "'", "AccountKey");
             return custid;
         }
 
