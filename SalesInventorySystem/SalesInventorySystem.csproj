@@ -4495,6 +4495,7 @@
     <None Include="Resources\Outbox_32x32.png" />
     <None Include="Resources\SalesAnalysis_32x321.png" />
     <None Include="Resources\SalesSummary2_32x32.png" />
+    <None Include="Resources\sparkposlogo.jpg" />
     <Content Include="spireicon.ico" />
     <Content Include="spireicon1.ico" />
   </ItemGroup>

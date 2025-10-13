@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PointOfSale));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
@@ -112,6 +111,7 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.serialPort1 = new System.IO.Ports.SerialPort(this.components);
+            this.labelControl22 = new DevExpress.XtraEditors.LabelControl();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtdiscount.Properties)).BeginInit();
@@ -843,7 +843,7 @@
             // 
             this.pictureBox2.BackColor = System.Drawing.Color.Black;
             this.pictureBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
+            this.pictureBox2.Image = global::SalesInventorySystem.Properties.Resources.sparkposlogo;
             this.pictureBox2.Location = new System.Drawing.Point(0, 0);
             this.pictureBox2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pictureBox2.Name = "pictureBox2";
@@ -1114,6 +1114,7 @@
             this.panelControl4.Appearance.BackColor = System.Drawing.Color.Black;
             this.panelControl4.Appearance.Options.UseBackColor = true;
             this.panelControl4.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.panelControl4.Controls.Add(this.labelControl22);
             this.panelControl4.Controls.Add(this.txtsku);
             this.panelControl4.Controls.Add(this.btnsearch);
             this.panelControl4.Controls.Add(this.labelControl15);
@@ -1302,6 +1303,19 @@
             this.panel3.Size = new System.Drawing.Size(2082, 1193);
             this.panel3.TabIndex = 11;
             // 
+            // labelControl22
+            // 
+            this.labelControl22.Appearance.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
+            this.labelControl22.Appearance.ForeColor = System.Drawing.Color.SpringGreen;
+            this.labelControl22.Appearance.Options.UseFont = true;
+            this.labelControl22.Appearance.Options.UseForeColor = true;
+            this.labelControl22.Location = new System.Drawing.Point(1946, 125);
+            this.labelControl22.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.labelControl22.Name = "labelControl22";
+            this.labelControl22.Size = new System.Drawing.Size(126, 37);
+            this.labelControl22.TabIndex = 49;
+            this.labelControl22.Text = "ONLINE";
+            // 
             // PointOfSale
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
@@ -1428,5 +1442,6 @@
         private DevExpress.XtraEditors.SimpleButton simpleButton4;
         private System.Windows.Forms.CheckBox chckZeroRated;
         public DevExpress.XtraEditors.LabelControl lblTotalAmount;
+        private DevExpress.XtraEditors.LabelControl labelControl22;
     }
 }
