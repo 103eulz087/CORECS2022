@@ -10,11 +10,13 @@ using System.Windows.Forms;
 using DevExpress.XtraEditors;
 using System.Data.SqlClient;
 using System.IO;
+using DevExpress.XtraGrid.Columns;
 
 namespace SalesInventorySystem.POSDevEx
 {
     public partial class POSManagementReport : DevExpress.XtraEditors.XtraForm
     {
+        object reportid = null;
         string reportype = String.Empty, groupname = String.Empty;
         public static double totalamount = 0.0, regsales = 0.0, regsalesvatonly = 0.0, targetsale = 0.0;
         public POSManagementReport()
@@ -24,6 +26,7 @@ namespace SalesInventorySystem.POSDevEx
 
         private void POSManagementReport_Load(object sender, EventArgs e)
         {
+            Database.displaySearchlookupEdit("SELECT * FROM dbo.SalesReportType", txtreporttypeposreading, "ReportName", "ReportName");
             txtsalesdatefrom.Text = HelperFunction.GetPreviousMonthSameDay(DateTime.Today).ToShortDateString();
             txtsalesdateto.Text = DateTime.Today.ToShortDateString();
             txtsalesdatemgmtdata.Text = DateTime.Today.ToShortDateString();
@@ -46,40 +49,12 @@ namespace SalesInventorySystem.POSDevEx
                 XtraMessageBox.Show("Date Field must not Empty");
                 return;
             }
-            if (comboBoxEdit1.Text == "Group Category Sales") //123
-                reportype = "GROUPCATEGORY";
-            else if (comboBoxEdit1.Text == "Full Transaction Sales") //123
-                reportype = "FULLTRANSACTION";
-            else if (comboBoxEdit1.Text == "Group Item Sales") //123
-                reportype = "GROUPITEM";
-            //else if (comboBoxEdit1.Text == "Cashier Sales")//123
-            //    reportype = "CASHIERSALES";
-            //else if (comboBoxEdit1.Text == "Audit Logs")//123
-            //    reportype = "AUDITLOGS";
-            else if (comboBoxEdit1.Text == "XREAD")//123
-                reportype = "XREAD";
-            else if (comboBoxEdit1.Text == "ZREAD")//12
-                reportype = "ZREAD";
-            //else if (comboBoxEdit1.Text == "REFUND")//123
-            //    reportype = "REFUND";
-            //else if (comboBoxEdit1.Text == "PWD")//123
-            //    reportype = "PWD";
-            //else if (comboBoxEdit1.Text == "Senior Citizen")//123
-            //    reportype = "SENIOR";
-            //else if (comboBoxEdit1.Text == "Regular Disc")//123
-            //    reportype = "REGULAR";
-            else if (comboBoxEdit1.Text == "Sales Summary Report")//12
-                reportype = "SALESSUMMARY";
-            else if (comboBoxEdit1.Text == "CreditCard")//123
-                reportype = "CREDITCARD";
-            else if (comboBoxEdit1.Text == "Merchant Sales")//123
-                reportype = "MERCHANT";
-            else if (comboBoxEdit1.Text == "SalesIN")//123
-                reportype = "SALESIN";
-            //else if (comboBoxEdit1.Text == "BACKUPDATA")//123
-            //    reportype = "BACKUPDATA";
-            executeA(reportype);
-            executeB(reportype);
+            executeA(Convert.ToInt32(reportid.ToString()));
+            executeB(Convert.ToInt32(reportid.ToString()));
+            foreach (GridColumn col in gridView1.Columns)
+            {
+                col.Caption = col.FieldName;
+            }
         }
 
         private void simpleButton7_Click(object sender, EventArgs e)
@@ -128,8 +103,25 @@ namespace SalesInventorySystem.POSDevEx
             Database.displaySearchlookupEdit("SELECT BranchCode,MachineUsed FROM dbo.POSInfoDetails WHERE BranchCode='" + txtbranch.Text + "'", txtmachineVAT, "MachineUsed", "MachineUsed");
         }
 
-        void executeA(string reportcategory)
+        void executeA(int reportcategory)
         {
+            bool ispermachine = false, ispercashier = false;
+            if (rad1.Checked == true) //PER BRANCH ONLY
+            {
+                ispermachine = false;
+                ispercashier = false;
+            }
+            else if (rad2.Checked == true) //PER BRANCH AND MACHINE ONLY
+            {
+                ispermachine = true;
+                ispercashier = false;
+            }
+            else if (rad3.Checked == true) //PER BRANCH, MACHINE AND PER CASHIER
+            {
+                ispermachine = true;
+                ispercashier = true;
+            }
+
             SqlConnection con = Database.getConnection();
             con.Open();
             gridControl1.BeginUpdate();
@@ -142,10 +134,10 @@ namespace SalesInventorySystem.POSDevEx
                 com.Parameters.AddWithValue("@parmbrcode", txtbranch.Text);
                 com.Parameters.AddWithValue("@datefrom", txtsalesdatefrom.Text);
                 com.Parameters.AddWithValue("@dateto", txtsalesdateto.Text);
-                com.Parameters.AddWithValue("@parmprocessby", "");
+                com.Parameters.AddWithValue("@parmprocessby", txtcashier.Text);
                 com.Parameters.AddWithValue("@parmoption", reportcategory);
-                com.Parameters.AddWithValue("@parmpercashier", "0");
-                com.Parameters.AddWithValue("@parmispermachine", "1");
+                com.Parameters.AddWithValue("@parmpercashier", ispercashier);
+                com.Parameters.AddWithValue("@parmispermachine", ispermachine);
                 com.Parameters.AddWithValue("@parmmachinename", txtmachine.Text);
                 com.CommandType = CommandType.StoredProcedure;
                 com.CommandText = query;
@@ -167,6 +159,102 @@ namespace SalesInventorySystem.POSDevEx
             }
             con.Close();
         }
+        void executeB(int reportcategory)
+        {
+            bool ispermachine = false, ispercashier = false;
+            if (rad1.Checked == true) //PER BRANCH ONLY
+            {
+                ispermachine = false;
+                ispercashier = false;
+            }
+            else if (rad2.Checked == true) //PER BRANCH AND MACHINE ONLY
+            {
+                ispermachine = true;
+                ispercashier = false;
+            }
+            else if (rad3.Checked == true) //PER BRANCH, MACHINE AND PER CASHIER
+            {
+                ispermachine = true;
+                ispercashier = true;
+            }
+
+            SqlConnection con = Database.getConnection();
+            con.Open();
+            gridControl4.BeginUpdate();
+            try
+            {
+                string query = "spr_POSReports2";
+                SqlCommand com = new SqlCommand(query, con);
+                SqlDataAdapter adapter = new SqlDataAdapter(com);
+                DataTable table = new DataTable();
+                com.Parameters.AddWithValue("@parmbrcode", txtbranch.Text);
+                com.Parameters.AddWithValue("@datefrom", txtsalesdatefrom.Text);
+                com.Parameters.AddWithValue("@dateto", txtsalesdateto.Text);
+                com.Parameters.AddWithValue("@parmprocessby", txtcashier.Text);
+                com.Parameters.AddWithValue("@parmoption", reportcategory);
+                com.Parameters.AddWithValue("@parmpercashier", ispercashier);
+                com.Parameters.AddWithValue("@parmispermachine", ispermachine);
+                com.Parameters.AddWithValue("@parmmachinename", txtmachine.Text);
+                com.CommandType = CommandType.StoredProcedure;
+                com.CommandText = query;
+                com.ExecuteNonQuery();
+                gridView11.Columns.Clear();
+                gridControl4.DataSource = null;
+                adapter.Fill(table);
+                gridControl4.DataSource = table;
+                gridView11.BestFitColumns();
+                Classes.DevXGridViewSettings.setGridFormat(gridView11);
+            }
+            catch (SqlException ex)
+            {
+                XtraMessageBox.Show(ex.Message.ToString());
+            }
+            finally
+            {
+                gridControl4.EndUpdate();
+            }
+            con.Close();
+        }
+
+        //void executeA(string reportcategory)
+        //{
+        //    SqlConnection con = Database.getConnection();
+        //    con.Open();
+        //    gridControl1.BeginUpdate();
+        //    try
+        //    {
+        //        string query = "spr_POSReports";
+        //        SqlCommand com = new SqlCommand(query, con);
+        //        SqlDataAdapter adapter = new SqlDataAdapter(com);
+        //        DataTable table = new DataTable();
+        //        com.Parameters.AddWithValue("@parmbrcode", txtbranch.Text);
+        //        com.Parameters.AddWithValue("@datefrom", txtsalesdatefrom.Text);
+        //        com.Parameters.AddWithValue("@dateto", txtsalesdateto.Text);
+        //        com.Parameters.AddWithValue("@parmprocessby", "");
+        //        com.Parameters.AddWithValue("@parmoption", reportcategory);
+        //        com.Parameters.AddWithValue("@parmpercashier", "0");
+        //        com.Parameters.AddWithValue("@parmispermachine", "1");
+        //        com.Parameters.AddWithValue("@parmmachinename", txtmachine.Text);
+        //        com.CommandType = CommandType.StoredProcedure;
+        //        com.CommandText = query;
+        //        com.ExecuteNonQuery();
+        //        gridView1.Columns.Clear();
+        //        gridControl1.DataSource = null;
+        //        adapter.Fill(table);
+        //        gridControl1.DataSource = table;
+        //        gridView1.BestFitColumns();
+        //        Classes.DevXGridViewSettings.setGridFormat(gridView1);
+        //    }
+        //    catch (SqlException ex)
+        //    {
+        //        XtraMessageBox.Show(ex.Message.ToString());
+        //    }
+        //    finally
+        //    {
+        //        gridControl1.EndUpdate();
+        //    }
+        //    con.Close();
+        //}
         //GET TOTAL SALES FROM BOOK1
         Double getTotalSales()
         {
@@ -315,7 +403,7 @@ namespace SalesInventorySystem.POSDevEx
                 XtraMessageBox.Show("Please Generate Reports First!...");
                 return;
             }
-            else if (gridView11.RowCount > 0 && comboBoxEdit1.Text == "XREAD")
+            else if (gridView11.RowCount > 0 && txtreporttypeposreading.Text == "XREAD")
             {
                 printFinancialReport(txtbranch.Text
                     , gridView11.GetRowCellValue(gridView11.FocusedRowHandle, "DateOpen").ToString()
@@ -323,7 +411,7 @@ namespace SalesInventorySystem.POSDevEx
                     , gridView11.GetRowCellValue(gridView11.FocusedRowHandle, "UserID").ToString());
                 XtraMessageBox.Show("XREAD Successfully Reprint!...");
             }
-            else if (gridView11.RowCount > 0 && comboBoxEdit1.Text == "ZREAD")
+            else if (gridView11.RowCount > 0 && txtreporttypeposreading.Text == "ZREAD")
             {
                 PrintZRead(txtbranch.Text
                     , gridView11.GetRowCellValue(gridView11.FocusedRowHandle, "DateExecute").ToString()
@@ -1395,6 +1483,11 @@ namespace SalesInventorySystem.POSDevEx
             string file = filepath + filename;
             gridControl4.ExportToXls(file);
             XtraMessageBox.Show("Export Success");
+        }
+
+        private void txtreporttypeposreading_EditValueChanged(object sender, EventArgs e)
+        {
+            reportid = SearchLookUpClass.getSingleValue(txtreporttypeposreading, "ReportID");
         }
 
         Double computeTotalVAT()

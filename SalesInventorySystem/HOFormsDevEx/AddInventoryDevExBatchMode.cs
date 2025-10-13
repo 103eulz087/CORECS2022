@@ -184,7 +184,7 @@ namespace SalesInventorySystem.HOFormsDevEx
             {
                 //string query = "spu_postInventory";
                 string query = "SP_POSTINVENTORY";
-                SqlCommand com = new SqlCommand(query, con);SS
+                SqlCommand com = new SqlCommand(query, con);
                 com.Parameters.AddWithValue("@parmshipmentno", txtshipmentno.Text);
                 com.Parameters.AddWithValue("@parmrefno", txtrefno.Text);
                 com.Parameters.AddWithValue("@parmuser", Login.isglobalUserID);

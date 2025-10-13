@@ -26,9 +26,9 @@ namespace SalesInventorySystem
 
         private void display()
         {
-            gridControl1.BeginUpdate();
-            gridView1.Columns.Clear();
-            gridControl1.DataSource = null;
+            //gridControl1.BeginUpdate();
+            //gridView1.Columns.Clear();
+            //gridControl1.DataSource = null;
             try
             {   
                 if (radioButton1.Checked == true) //DETAILED
@@ -51,10 +51,10 @@ namespace SalesInventorySystem
             {
                 XtraMessageBox.Show(sex2.Message.ToString());
             }
-            finally
-            {
-                gridControl1.EndUpdate();
-            }
+            //finally
+            //{
+            //    gridControl1.EndUpdate();
+            //}
             //HelperFunction.getTotalSum("Available");
             //gridView1.Columns["Available"].Summary.Add(DevExpress.Data.SummaryItemType.Sum, "Available", "{0:n2}");
         }
