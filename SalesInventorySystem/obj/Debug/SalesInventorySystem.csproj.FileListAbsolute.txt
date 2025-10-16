@@ -10945,3 +10945,5 @@ C:\Users\avanc\Downloads\CORECS2022\SalesInventorySystem\obj\Debug\SalesInventor
 C:\Users\avanc\Downloads\CORECS2022\SalesInventorySystem\obj\Debug\SalesInventorySystem.POS.POSRestoTables.resources
 C:\Users\avanc\Downloads\CORECS2022\SalesInventorySystem\obj\Debug\SalesInventorySystem.POS.POSSalesReportDevEx.resources
 C:\Users\avanc\Downloads\CORECS2022\SalesInventorySystem\obj\Debug\SalesInventorySystem.Reporting.InventoryLedgerDevEx.resources
+D:\Repos\CORECS2022\SalesInventorySystem\obj\Debug\SalesInventorySystem.POS.POSSalesReportDevEx.resources
+D:\Repos\CORECS2022\SalesInventorySystem\obj\Debug\SalesInventorySystem.Reporting.InventoryLedgerDevEx.resources
