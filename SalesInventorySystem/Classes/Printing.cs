@@ -887,7 +887,8 @@ namespace SalesInventorySystem
                                 , string tin
                                 , string bussstyle
                                 , string paytype
-                                , bool iszerorated = false)
+                                , string emailadd
+                                , bool iszerorated = false,bool issendemail=false)
 
 
         {
@@ -1022,8 +1023,12 @@ namespace SalesInventorySystem
             writerLast.Write(details);
             writerLast.Close();
 
-
             printTextFile(filetoprint);
+            if (issendemail == true)
+            {
+                Classes.EmailSetup mailsetup = new Classes.EmailSetup();
+                mailsetup.setupEmailParamWithAttachment("INVOICE DETAILS", details, filetoprint, true,emailadd);
+            }
         }
 
         //THIS TEMPLATE IS USED FOR PLAIN TRANSACTION NO ONE TIME DISCOUNT 

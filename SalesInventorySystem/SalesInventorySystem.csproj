@@ -601,6 +601,7 @@
     <Compile Include="Classes\Suppliers.cs" />
     <Compile Include="Classes\User.cs" />
     <Compile Include="Classes\Utilities.cs" />
+    <Compile Include="Classes\WebSocketDashboardClient.cs" />
     <Compile Include="Connection.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -702,6 +703,12 @@
     </Compile>
     <Compile Include="DevExReportTemplate\PurchaseOrderShipmentRep.Designer.cs">
       <DependentUpon>PurchaseOrderShipmentRep.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DevExReportTemplate\SabongBetReceipt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DevExReportTemplate\SabongBetReceipt.Designer.cs">
+      <DependentUpon>SabongBetReceipt.cs</DependentUpon>
     </Compile>
     <Compile Include="DevExReportTemplate\SalesInvoice.cs">
       <SubType>Component</SubType>
@@ -2897,6 +2904,21 @@
     <Compile Include="RibbonForm2.Designer.cs">
       <DependentUpon>RibbonForm2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Sabong\SBDashboard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sabong\SBDashboard.Designer.cs">
+      <DependentUpon>SBDashboard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sabong\Trends.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sabong\Trends.Designer.cs">
+      <DependentUpon>Trends.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SalesModel\SalesDataDto.cs" />
+    <Compile Include="SalesModel\TerminalDto.cs" />
+    <Compile Include="SalesModel\ZReadingDto.cs" />
     <Compile Include="SampleForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -3209,6 +3231,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DevExReportTemplate\PurchaseOrderShipmentRep.resx">
       <DependentUpon>PurchaseOrderShipmentRep.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DevExReportTemplate\SabongBetReceipt.resx">
+      <DependentUpon>SabongBetReceipt.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DevExReportTemplate\SalesInvoice.resx">
       <DependentUpon>SalesInvoice.cs</DependentUpon>
@@ -4332,6 +4357,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="RibbonForm2.resx">
       <DependentUpon>RibbonForm2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sabong\SBDashboard.resx">
+      <DependentUpon>SBDashboard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Sabong\Trends.resx">
+      <DependentUpon>Trends.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SampleForm.resx">
       <DependentUpon>SampleForm.cs</DependentUpon>

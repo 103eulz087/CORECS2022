@@ -87,11 +87,13 @@
             this.radcc = new System.Windows.Forms.RadioButton();
             this.radcash = new System.Windows.Forms.RadioButton();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.txtcustnamelookup = new DevExpress.XtraEditors.SearchLookUpEdit();
+            this.searchLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.label21 = new System.Windows.Forms.Label();
             this.label20 = new System.Windows.Forms.Label();
             this.lblcashiertransno = new System.Windows.Forms.Label();
-            this.txtcustnamelookup = new DevExpress.XtraEditors.SearchLookUpEdit();
-            this.searchLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.label22 = new System.Windows.Forms.Label();
+            this.txteinvoicemail = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtcustnamelookup.Properties)).BeginInit();
@@ -776,6 +778,8 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.Black;
+            this.panel1.Controls.Add(this.txteinvoicemail);
+            this.panel1.Controls.Add(this.label22);
             this.panel1.Controls.Add(this.txtcustnamelookup);
             this.panel1.Controls.Add(this.label21);
             this.panel1.Controls.Add(this.txtinvoiceno);
@@ -794,6 +798,27 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1340, 514);
             this.panel1.TabIndex = 55;
+            // 
+            // txtcustnamelookup
+            // 
+            this.txtcustnamelookup.Location = new System.Drawing.Point(375, 238);
+            this.txtcustnamelookup.Name = "txtcustnamelookup";
+            this.txtcustnamelookup.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 10.875F);
+            this.txtcustnamelookup.Properties.Appearance.Options.UseFont = true;
+            this.txtcustnamelookup.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.txtcustnamelookup.Properties.NullText = "";
+            this.txtcustnamelookup.Properties.PopupView = this.searchLookUpEdit1View;
+            this.txtcustnamelookup.Size = new System.Drawing.Size(512, 50);
+            this.txtcustnamelookup.TabIndex = 58;
+            this.txtcustnamelookup.EditValueChanged += new System.EventHandler(this.txtcustnamelookup_EditValueChanged);
+            // 
+            // searchLookUpEdit1View
+            // 
+            this.searchLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
+            this.searchLookUpEdit1View.Name = "searchLookUpEdit1View";
+            this.searchLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = false;
+            this.searchLookUpEdit1View.OptionsView.ShowGroupPanel = false;
             // 
             // label21
             // 
@@ -831,26 +856,28 @@
             this.lblcashiertransno.Text = "label22";
             this.lblcashiertransno.Visible = false;
             // 
-            // txtcustnamelookup
+            // label22
             // 
-            this.txtcustnamelookup.Location = new System.Drawing.Point(375, 238);
-            this.txtcustnamelookup.Name = "txtcustnamelookup";
-            this.txtcustnamelookup.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 10.875F);
-            this.txtcustnamelookup.Properties.Appearance.Options.UseFont = true;
-            this.txtcustnamelookup.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.txtcustnamelookup.Properties.NullText = "";
-            this.txtcustnamelookup.Properties.PopupView = this.searchLookUpEdit1View;
-            this.txtcustnamelookup.Size = new System.Drawing.Size(512, 50);
-            this.txtcustnamelookup.TabIndex = 58;
-            this.txtcustnamelookup.EditValueChanged += new System.EventHandler(this.txtcustnamelookup_EditValueChanged);
+            this.label22.AutoSize = true;
+            this.label22.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold);
+            this.label22.ForeColor = System.Drawing.Color.White;
+            this.label22.Location = new System.Drawing.Point(960, 175);
+            this.label22.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(304, 46);
+            this.label22.TabIndex = 59;
+            this.label22.Text = "E-Invoice Mail:";
             // 
-            // searchLookUpEdit1View
+            // txteinvoicemail
             // 
-            this.searchLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
-            this.searchLookUpEdit1View.Name = "searchLookUpEdit1View";
-            this.searchLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = false;
-            this.searchLookUpEdit1View.OptionsView.ShowGroupPanel = false;
+            this.txteinvoicemail.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
+            this.txteinvoicemail.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.txteinvoicemail.Location = new System.Drawing.Point(906, 231);
+            this.txteinvoicemail.Margin = new System.Windows.Forms.Padding(8, 6, 8, 6);
+            this.txteinvoicemail.Name = "txteinvoicemail";
+            this.txteinvoicemail.Size = new System.Drawing.Size(406, 38);
+            this.txteinvoicemail.TabIndex = 60;
+            this.txteinvoicemail.Text = "avancena.eulz@gmail.com";
             // 
             // POSConfirmPayment
             // 
@@ -986,5 +1013,7 @@
         public System.Windows.Forms.Label lblcashiertransno;
         private DevExpress.XtraEditors.SearchLookUpEdit txtcustnamelookup;
         private DevExpress.XtraGrid.Views.Grid.GridView searchLookUpEdit1View;
+        public System.Windows.Forms.TextBox txteinvoicemail;
+        private System.Windows.Forms.Label label22;
     }
 }

@@ -13,6 +13,10 @@ using System.Threading;
 using System.IO;
 using System.Diagnostics;
 using SalesInventorySystem.POS;
+using SalesInventorySystem.SalesModel;
+using Newtonsoft.Json;
+using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace SalesInventorySystem
 {
@@ -329,17 +333,112 @@ namespace SalesInventorySystem
             voidTransaction();
         }
 
-        void addOrder()
+
+
+        public class TerminalVerifier
+        {
+
+
+            public async Task<bool> VerifyTerminalAsync(string terminalId)
+            {
+
+                try
+                {
+                    using (var client = new HttpClient())
+                    {
+                        if (string.IsNullOrWhiteSpace(terminalId))
+                        {
+                            MessageBox.Show("Terminal ID cannot be empty.");
+                            return false;
+                        }
+
+                        var url = $"http://itcore-apps.com:8181/api/terminals/{Uri.EscapeDataString(terminalId)}";
+
+                        var response = await client.GetAsync(url);
+
+                        if (!response.IsSuccessStatusCode)
+                        {
+                            MessageBox.Show($"Failed to verify terminal. Status: {response.StatusCode}, Reason: {response.ReasonPhrase}");
+                            return false;
+                        }
+
+                        var responseBody = await response.Content.ReadAsStringAsync();
+                        var apiResult = JsonConvert.DeserializeObject<ApiResponse>(responseBody);
+
+                        if (apiResult == null || apiResult.Data == null)
+                        {
+                            MessageBox.Show("Invalid response from server.");
+                            return false;
+                        }
+
+                        // ✅ Terminal exists if Success = true and Data.TerminalId matches
+                        return apiResult.Success && apiResult.Data.TerminalId.Equals(terminalId, StringComparison.OrdinalIgnoreCase);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error: {ex.Message}");
+                    return false;
+                }
+
+            }
+
+
+        }
+
+
+        public class ApiResponse
+        {
+            public bool Success { get; set; }
+            public TerminalData Data { get; set; }
+        }
+
+        public class TerminalData
+        {
+            public int Id { get; set; }
+            public int MerchantId { get; set; }
+            public string TerminalId { get; set; }
+            public string TerminalName { get; set; }
+            public string DateAdded { get; set; }
+            public string TimeAdded { get; set; }
+            public string DateTimeAdded { get; set; }
+            public string DateUpdated { get; set; }
+            public string TimeUpdated { get; set; }
+            public string DateTimeUpdated { get; set; }
+            public int Status { get; set; }
+            public string UatKeys { get; set; }
+            public string ProdKeys { get; set; }
+        }
+
+
+
+        async Task<bool> verifyTerminalAsync()
+        {
+
+            string terminalId = HelperFunction.GetMacAddress2();
+            var verifier = new TerminalVerifier();
+
+            bool exists = await verifier.VerifyTerminalAsync(terminalId);
+            return exists; // ✅ Return the bool value
+        }
+
+        async void addOrder()
         {
             //this.Cursor = Cursors.WaitCursor;
             try
             {
+                bool exists = await verifyTerminalAsync();
                 //ispriceused = "mainprice";
-              
+
                 if (String.IsNullOrEmpty(txtsku.Text))
                 {
                     XtraMessageBox.Show("SKU must not Empty");
                     txtsku.Focus();
+                    return;
+                }
+                else if(!exists)
+                {
+                    XtraMessageBox.Show("Mac Address Not Exists!!..");
                     return;
                 }
                 else

@@ -1,4 +1,6 @@
 ﻿using DevExpress.XtraEditors;
+using Newtonsoft.Json;
+using SalesInventorySystem.SalesModel;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -7,6 +9,7 @@ using System.Data.SqlClient;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -936,6 +939,135 @@ namespace SalesInventorySystem.POS
                     com.ExecuteNonQuery();
             con.Close();
         }
+
+
+
+
+        public async Task PushSaleAsync(ZReadingDto sale)
+        {
+            using (var client = new HttpClient())
+            {
+
+                var json = JsonConvert.SerializeObject(sale);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+                var response = await client.PostAsync("http://itcore-apps.com:8181/api/zreadings", content);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    MessageBox.Show("ZRead pushed successfully!");
+                }
+                else
+                {
+                    MessageBox.Show("Failed to push sale: " + response.ReasonPhrase);
+                }
+            }
+        }
+
+
+
+        public ZReadingDto GetInsertedZRead(string posId,string dateexecute)
+        {
+            ZReadingDto data = null;
+
+            using (SqlConnection conn = Database.getConnection())
+            {
+                string query = "SELECT * FROM POSZReadingTransactions WHERE MachineUsed = @POSID And DateExecute=@dateexec";
+
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@dateexec", dateexecute);
+                    cmd.Parameters.AddWithValue("@POSID", posId);
+
+                    conn.Open();
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            data = new ZReadingDto
+                            {
+
+                                TenantID = 1,
+                                POSID = reader["MachineUsed"].ToString(),
+                                UserID = reader["ExecuteBy"].ToString(),
+                                CounterNo = reader["CounterNo"].ToString(),
+                                BeginningBalance = reader.GetDecimal(reader.GetOrdinal("BeginningBalance")),
+                                Debit = reader.GetDecimal(reader.GetOrdinal("Debit")),
+                                Credit = reader.GetDecimal(reader.GetOrdinal("Credit")),
+                                EndingBalance = reader.GetDecimal(reader.GetOrdinal("EndingBalance")),
+                                BeginningSINo = reader["BeginningSINo"].ToString(),
+                                EndingSINo = reader["EndingSINo"].ToString(),
+                                BeginningReturnTransNo = reader["BeginningReturnTransNo"].ToString(),
+                                EndingReturnTransNo = reader["EndingReturnTransNo"].ToString(),
+                                SoldItems = reader.GetInt32(reader.GetOrdinal("SoldItems")),
+                                CancelledItems = reader.GetInt32(reader.GetOrdinal("CancelledItems")),
+                                VoidItems = reader.GetInt32(reader.GetOrdinal("VoidItems")),
+                                VatItems = reader.GetInt32(reader.GetOrdinal("VatItems")),
+                                DiscountItems = reader.GetInt32(reader.GetOrdinal("DiscountItems")),
+                                SCDiscItems = reader.GetInt32(reader.GetOrdinal("SCDiscItems")),
+                                PWDDiscItems = reader.GetInt32(reader.GetOrdinal("PWDDiscItems")),
+                                RegDiscItems = reader.GetInt32(reader.GetOrdinal("RegDiscItems")),
+                                TotalCashSales = reader.GetDecimal(reader.GetOrdinal("TotalCashSales")),
+                                TotalCreditSales = reader.GetDecimal(reader.GetOrdinal("TotalCreditSales")),
+                                TotalSales = reader.GetDecimal(reader.GetOrdinal("TotalSales")),
+                                TotalCancelledSales = reader.GetDecimal(reader.GetOrdinal("TotalCancelledSales")),
+                                TotalVoidSales = reader.GetDecimal(reader.GetOrdinal("TotalVoidSales")),
+                                TotalReturnedSales = reader.GetDecimal(reader.GetOrdinal("TotalReturnedSales")),
+                                TotalDiscount = reader.GetDecimal(reader.GetOrdinal("TotalDiscount")),
+                                TotalSCDiscount = reader.GetDecimal(reader.GetOrdinal("TotalSCDiscount")),
+                                TotalPWDDiscount = reader.GetDecimal(reader.GetOrdinal("TotalPWDDiscount")),
+                                TotalRegDiscount = reader.GetDecimal(reader.GetOrdinal("TotalRegDiscount")),
+                                TotalVatSales = reader.GetDecimal(reader.GetOrdinal("TotalVatSales")),
+                                VatExemptSale = reader.GetDecimal(reader.GetOrdinal("VatExemptSale")),
+                                VatableSale = reader.GetDecimal(reader.GetOrdinal("VatableSale")),
+                                VatInput = reader.GetDecimal(reader.GetOrdinal("VatInput")),
+                                ZeroRatedSale = reader.GetDecimal(reader.GetOrdinal("ZeroRatedSale")),
+                                VatAdjustment = reader.GetDecimal(reader.GetOrdinal("VatAdjustment")),
+                                TotalNetSales = reader.GetDecimal(reader.GetOrdinal("TotalNetSales")),
+                                DateAdded = reader.GetDateTime(reader.GetOrdinal("DateExecute"))
+
+                            };
+                        }
+                    }
+                }
+            }
+
+            return data;
+        }
+
+        async void pushit()
+        {
+            try
+            {
+                var zread = GetInsertedZRead(Environment.MachineName.ToString(), DateTime.Today.ToShortDateString());
+
+                if (zread != null)
+                {
+                    await PushSaleAsync(zread);
+                }
+                else
+                {
+                    MessageBox.Show("No sale data found to push.");
+                }
+            }
+
+            catch (Exception ex)
+            {
+                string errorMessage = $"Exception: {ex.Message}";
+
+                if (ex.InnerException != null)
+                {
+                    errorMessage += $"\nInner Exception: {ex.InnerException.Message}";
+                }
+
+                MessageBox.Show(errorMessage);
+            }
+
+
+
+        }
+
+
         private void simpleButton1_Click(object sender, EventArgs e)
         {
             simpleButton1.Enabled = false;
@@ -944,6 +1076,7 @@ namespace SalesInventorySystem.POS
             if (confirm)
             {
                 executeEOD();
+                pushit();
                 //AuthorizedConfirmationFrm authfrm = new AuthorizedConfirmationFrm();
                 //authfrm.ShowDialog(this);
                 //if (AuthorizedConfirmationFrm.isconfirmedLogin == true)
@@ -958,9 +1091,9 @@ namespace SalesInventorySystem.POS
                 return;
             }
             this.Dispose();
-            POSUploadChecker posUpload = new POSUploadChecker();
-            posUpload.TopMost = true;
-            posUpload.Show();
+            //POSUploadChecker posUpload = new POSUploadChecker();
+            //posUpload.TopMost = true;
+            //posUpload.Show();
             
             
         }

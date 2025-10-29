@@ -1,6 +1,8 @@
 ﻿using DevExpress.XtraEditors;
 using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Views.Grid;
+using Newtonsoft.Json;
+using SalesInventorySystem.SalesModel;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,6 +11,7 @@ using System.Data.SqlClient;
 using System.Drawing;
 using System.IO.Ports;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -282,6 +285,144 @@ namespace SalesInventorySystem.POS
             HelperFunction.isEnableAlphaWithDecimal(e);
         }
 
+
+
+        public async Task PushSaleAsync(SalesDataDto sale)
+        {
+            using (var client = new HttpClient())
+            {
+
+                var json = JsonConvert.SerializeObject(sale);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+                var response = await client.PostAsync("http://itcore-apps.com:8181/api/sales", content);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    MessageBox.Show("Sale pushed successfully!");
+                }
+                else
+                {
+                    MessageBox.Show("Failed to push sale: " + response.ReasonPhrase);
+                }
+            }
+        }
+
+
+
+        public SalesDataDto GetInsertedSalesData(string orderNo, string posId)
+        {
+            SalesDataDto data = null;
+
+            using (SqlConnection conn = Database.getConnection())
+            {
+                string query = "SELECT * FROM BatchSalesSummary WHERE ReferenceNo = @OrderNo AND MachineUsed = @POSID";
+
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@OrderNo", orderNo);
+                    cmd.Parameters.AddWithValue("@POSID", posId);
+
+                    conn.Open();
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            string paymenttype = "", stat = "", disctype = "";
+                            if (reader["PaymentType"].ToString() == "Cash") { paymenttype = "1"; } else if (reader["PaymentType"].ToString() == "Credit") { paymenttype = "1"; } else { paymenttype = " "; }
+                            if (reader["Status"].ToString() == "SOLD") { stat = "1"; } else if (reader["Status"].ToString() == "Pending") { stat = "2"; } else if (reader["Status"].ToString() == "CANCELLED") { stat = "3"; } else if (reader["Status"].ToString() == "VOID") { stat = "4"; } else { stat = " "; }
+                            if (reader["DiscountType"].ToString() == "SENIOR") { disctype = "1"; } else if (reader["DiscountType"].ToString() == "PWD") { disctype = "2"; } else if (reader["DiscountType"].ToString() == "REGULAR") { disctype = "3"; } else { disctype = " "; }
+                            data = new SalesDataDto
+                            {
+
+                                TenantID = 1,//Convert.ToInt64(reader["TenantID"]),
+                                POSID = reader["MachineUsed"].ToString(),//reader["POSID"].ToString(),
+                                OrderNo = reader["ReferenceNo"].ToString(),//reader["OrderNo"].ToString(),
+                                UserID = reader["CashierTransNo"].ToString(),
+                                CustomerName = reader["CustomerNo"].ToString(),//reader["CustomerName"].ToString(),
+                                TotalItem = Convert.ToInt32(reader["TotalItem"]),
+                                TotalItemSold = Convert.ToInt32(reader["TotalItemSold"]),
+                                TotalItemCancelled = reader["TotalItemCancelled"] != DBNull.Value ? Convert.ToInt32(reader["TotalItemCancelled"]) : 0,
+                                TotalItemVoid = reader["TotalItemVoid"] != DBNull.Value ? Convert.ToInt32(reader["TotalItemVoid"]) : 0,
+                                TotalItemReturned = reader["TotalItemReturned"] != DBNull.Value ? Convert.ToInt32(reader["TotalItemReturned"]) : 0,
+                                TotalItemDiscount = reader["TotalItemDiscount"] != DBNull.Value ? Convert.ToInt32(reader["TotalItemDiscount"]) : 0,
+                                TotalVatableItems = reader["TotalVatableItems"] != DBNull.Value ? Convert.ToInt32(reader["TotalVatableItems"]) : 0,
+                                TotalNonVatableItems = 0,//Convert.ToInt32(reader["TotalNonVatableItems"]),
+                                TotalSoldAmount = Convert.ToDecimal(reader["TotalSoldAmount"]),
+                                TotalCancelledAmount = Convert.ToDecimal(reader["TotalCancelledAmount"]),
+                                TotalVoidAmount = Convert.ToDecimal(reader["TotalVoidAmount"]),
+                                TotalReturnedAmount = Convert.ToDecimal(reader["TotalReturnedAmount"]),
+                                TotalDiscountAmount = Convert.ToDecimal(reader["TotalDiscountAmount"]),
+                                TotalCharge = Convert.ToDecimal(reader["TotalCharge"]),
+                                SubTotal = Convert.ToDecimal(reader["SubTotal"]),//Convert.ToDecimal(reader["SubTotal"]),
+                                TotalAmount = Convert.ToDecimal(reader["TotalAmount"]),
+                                TotalVATSale = Convert.ToDecimal(reader["TotalVATSale"]),
+                                TotalVATExemptSale = Convert.ToDecimal(reader["TotalVATExemptSale"]),
+                                TotalVatableSale = Convert.ToDecimal(reader["TotalVatableSale"]),
+                                TotalZeroRatedSale = Convert.ToDecimal(reader["ZeroRatedSale"]),
+                                PaymentType = Convert.ToChar(paymenttype),
+                                AmountTendered = Convert.ToDecimal(reader["AmountTendered"]),
+                                AmountChange = Convert.ToDecimal(reader["AmountChange"]),
+                                isFloat = Convert.ToBoolean(reader["isFloat"]),
+                                isHold = Convert.ToBoolean(reader["isHold"]),
+                                isVoid = Convert.ToBoolean(reader["isVoid"]),
+                                Status = Convert.ToChar(stat),
+                                DiscountType = Convert.ToChar(disctype),
+                                SeniorControlNo = reader["SeniorControlNo"].ToString(),
+                                SeniorName = reader["SeniorName"].ToString(),
+                                SeniorDiscount = Convert.ToDecimal(reader["SeniorDiscount"]),
+                                PwdIDNo = reader["PwdIDNo"].ToString(),
+                                PwdName = reader["PwdName"].ToString(),
+                                PwdDiscountAmount = Convert.ToDecimal(reader["PwdDiscountAmount"]),
+                                DateAdded = Convert.ToDateTime(reader["TransDate"]),
+                                //TimeAdded = (TimeSpan)reader["TimeAdded"],
+                                DateTimeAdded = Convert.ToDateTime(reader["TransDate"])
+                                //DateUpdated = Convert.ToDateTime(reader["DateUpdated"]),
+                                //TimeUpdated = (TimeSpan)reader["TimeUpdated"],
+                                //DateTimeUpdated = Convert.ToDateTime(reader["DateTimeUpdated"])
+                            };
+                        }
+                    }
+                }
+            }
+
+            return data;
+        }
+
+        async void pushit()
+        {
+            try
+            {
+                var sale = GetInsertedSalesData(lblorderno.Text.Trim(), Environment.MachineName.ToString());
+
+                if (sale != null)
+                {
+                    await PushSaleAsync(sale);
+                }
+                else
+                {
+                    MessageBox.Show("No sale data found to push.");
+                }
+            }
+
+            catch (Exception ex)
+            {
+                string errorMessage = $"Exception: {ex.Message}";
+
+                if (ex.InnerException != null)
+                {
+                    errorMessage += $"\nInner Exception: {ex.InnerException.Message}";
+                }
+
+                MessageBox.Show(errorMessage);
+            }
+
+
+
+        }
+
+
+
         void spSaveTransaction(string discounttype, string invoiceno)
         {
             bool isRetail = Database.checkifExist("Select PosType FROM dbo.POSType WHERE PosType=1");
@@ -402,6 +543,7 @@ namespace SalesInventorySystem.POS
                 discounttype = "REGULAR";
             }
             spSaveTransaction(discounttype, invno);
+            pushit();
         }
         bool haveOneTimeDiscount()
         {
@@ -551,7 +693,8 @@ namespace SalesInventorySystem.POS
                         Printing printit = new Printing();
                         bool haveDiscount = false;
                         haveDiscount = haveOneTimeDiscount();
-
+                        bool clientEmail = false;
+                        if (String.IsNullOrEmpty(txteinvoicemail.Text)) { clientEmail = false; } else { clientEmail = true; }
                         if (haveDiscount)
                         {
                             var rows = Database.getMultipleQuery("SalesDiscount", "OrderNo='" + lblorderno.Text + "' and isErrorCorrect=0",
@@ -602,11 +745,11 @@ namespace SalesInventorySystem.POS
                         }
                         else //if no discount
                         {
-                            printit.printReceipt(lbltransno.Text, lblorderno.Text, HelperFunction.convertToNumericFormat(totaldue), txtordinarydiscountamount.Text, vatablesales, vatexemptsales, vat, amounttender, change, gview, haveDiscount, txtcustnamercpt.Text, txtcustaddressrcpt.Text, txtcusttinrcpt.Text, txtcustbussstyle.Text, paymenttype, PointOfSale.iszeroratedsale);
+                            printit.printReceipt(lbltransno.Text, lblorderno.Text, HelperFunction.convertToNumericFormat(totaldue), txtordinarydiscountamount.Text, vatablesales, vatexemptsales, vat, amounttender, change, gview, haveDiscount, txtcustnamercpt.Text, txtcustaddressrcpt.Text, txtcusttinrcpt.Text, txtcustbussstyle.Text, paymenttype, txteinvoicemail.Text,PointOfSale.iszeroratedsale, clientEmail);
                             printit.printReceiptConsolidated(lbltranscode.Text, lbltransno.Text, lblorderno.Text, HelperFunction.convertToNumericFormat(totaldue), txtordinarydiscountamount.Text, vatablesales, vatexemptsales, vat, amounttender, change, gview, haveDiscount, txtcustnamercpt.Text, txtcustaddressrcpt.Text, txtcusttinrcpt.Text, txtcustbussstyle.Text, paymenttype, PointOfSale.iszeroratedsale);
                         }
                         printit.ReprintReceipt(lbltransno.Text, lblorderno.Text, HelperFunction.convertToNumericFormat(totaldue), txtordinarydiscountamount.Text, netofvatafteronetimedisc, netOfVatAfterNonOneTimeDisc, vatablesales, vatexemptsales, vat, amounttender, change, gview, haveDiscount, disctype, "ACCOUNTING-COPY", txtcustnamercpt.Text, txtcustaddressrcpt.Text, txtcusttinrcpt.Text, txtcustbussstyle.Text, paymenttype);
-
+                        
 
                         string isprinting = Database.getSingleQuery("POSType", "PosType is not null", "isEnableInvoicePrinting");
                         if (Convert.ToBoolean(isprinting) == true)

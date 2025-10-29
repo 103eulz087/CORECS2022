@@ -115,6 +115,21 @@ namespace SalesInventorySystem
             
         }
 
+        public static string GetMacAddress2()
+        {
+            // Use a LINQ query to find the first network interface that meets the criteria
+            string macAddress = NetworkInterface.GetAllNetworkInterfaces()
+                .Where(nic => nic.OperationalStatus == OperationalStatus.Up && // Must be active
+                              nic.NetworkInterfaceType != NetworkInterfaceType.Loopback) // Ignore the loopback adapter
+                .Select(nic => nic.GetPhysicalAddress().ToString()) // Select the MAC address as a string
+                .FirstOrDefault(); // Get the first one found, or null if the sequence is empty
+
+            // The result will be a 12-character string without colons or hyphens (e.g., "A1B2C3D4E5F6").
+            // You can format it with colons/hyphens if required (e.g., A1-B2-C3-D4-E5-F6)
+
+            return macAddress;
+        }
+
         public static String getMacAddress()
         {
             string macaddress = "";
