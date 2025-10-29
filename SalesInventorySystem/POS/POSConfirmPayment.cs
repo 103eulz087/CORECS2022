@@ -256,6 +256,7 @@ namespace SalesInventorySystem.POS
             Database.displaySearchlookupEdit("SELECT CustomerID,CustomerName FROM dbo.Customers", txtcustnamelookup,"CustomerName", "CustomerName");
 
         }
+
         void sp_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
             Thread.Sleep(500);
@@ -263,6 +264,7 @@ namespace SalesInventorySystem.POS
 
             this.BeginInvoke(new SetTextDeleg(si_DataReceived), new object[] { data });
         }
+
         private void si_DataReceived(string data)
         {
             txtamountchange.Text = data.Trim();
