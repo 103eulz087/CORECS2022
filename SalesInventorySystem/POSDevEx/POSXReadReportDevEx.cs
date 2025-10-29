@@ -1205,6 +1205,13 @@ namespace SalesInventorySystem.POSDevEx
                 adapter.Fill(table);
                 gridControl1.DataSource = table;
                 gridView1.BestFitColumns();
+                if (reportcategory == 15)
+                {
+
+                    gridView1.Columns["DateAdded"].DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+                    gridView1.Columns["DateAdded"].DisplayFormat.FormatString = "yyyy/MM/dd HH:mm:ss";
+
+                }
                 Classes.DevXGridViewSettings.setGridFormat(gridView1);
             }
             catch (SqlException ex)

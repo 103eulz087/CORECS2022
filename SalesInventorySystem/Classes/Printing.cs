@@ -4365,15 +4365,15 @@ namespace SalesInventorySystem
                 
                 lessvat = Math.Round((vatableWithSCDiscount / 1.12) * 0.12, 2);
                 netofvat = Math.Round((vatableWithSCDiscount / 1.12), 2);
-                lessscdisc = Math.Round(netofvat * Convert.ToDouble(discpercentageamount), 2); //must change the percentage
+                lessscdisc = Math.Round(netofvat * Convert.ToDouble(discpercentageamount/100), 2); //must change the percentage
                 netofscdisc = Math.Round(netofvat - lessscdisc, 2);
                 addvat = Math.Round(netofscdisc * .12, 2);
                 totaltotal = Math.Round(netofscdisc + addvat, 2);
 
                 details += HelperFunction.PrintLeftRigthText("Less VAT:", HelperFunction.convertToNumericFormat(lessvat * -1)) + Environment.NewLine;
                 details += HelperFunction.PrintLeftRigthText("Net of VAT:", HelperFunction.convertToNumericFormat(netofvat * -1)) + Environment.NewLine;
-                details += HelperFunction.PrintLeftRigthText("Less PWD Discount:", HelperFunction.convertToNumericFormat(lessscdisc * -1)) + Environment.NewLine;
-                details += HelperFunction.PrintLeftRigthText("Net PWD Discount:", HelperFunction.convertToNumericFormat(netofscdisc * -1)) + Environment.NewLine;
+                details += HelperFunction.PrintLeftRigthText("Less Discount:", HelperFunction.convertToNumericFormat(lessscdisc * -1)) + Environment.NewLine;
+                details += HelperFunction.PrintLeftRigthText("Net Discount:", HelperFunction.convertToNumericFormat(netofscdisc * -1)) + Environment.NewLine;
                 details += HelperFunction.PrintLeftRigthText("Add VAT:", HelperFunction.convertToNumericFormat(addvat * -1)) + Environment.NewLine;
                 details += HelperFunction.PrintLeftRigthText("Total:", HelperFunction.convertToNumericFormat(totaltotal * -1)) + Environment.NewLine;
 

@@ -543,7 +543,7 @@ namespace SalesInventorySystem.POS
                 discounttype = "REGULAR";
             }
             spSaveTransaction(discounttype, invno);
-            pushit();
+            //pushit();
         }
         bool haveOneTimeDiscount()
         {
@@ -694,7 +694,8 @@ namespace SalesInventorySystem.POS
                         bool haveDiscount = false;
                         haveDiscount = haveOneTimeDiscount();
                         bool clientEmail = false;
-                        if (String.IsNullOrEmpty(txteinvoicemail.Text)) { clientEmail = false; } else { clientEmail = true; }
+                        if (chckboxeinvoicemail.Checked == true) { clientEmail = true; } else { clientEmail = false; }
+                        //if (String.IsNullOrEmpty(txteinvoicemail.Text)) { clientEmail = false; } else { clientEmail = true; }
                         if (haveDiscount)
                         {
                             var rows = Database.getMultipleQuery("SalesDiscount", "OrderNo='" + lblorderno.Text + "' and isErrorCorrect=0",

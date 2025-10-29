@@ -47,10 +47,12 @@ namespace SalesInventorySystem
         public static string cashierTransactionCode = "";
         public static bool iszeroratedsale = false;
         public static string userid = "";
+        private System.Windows.Forms.Timer statusTimer;
         SqlCommand com;
         public PointOfSale()
         {
             InitializeComponent();
+            InitializeStatusChecker();
             //serialPort1.WriteTimeout = 500;
             //serialPort1.ReadTimeout = 500;
             //_timer = new Timer();
@@ -58,6 +60,33 @@ namespace SalesInventorySystem
             //_timer.Tick += new EventHandler(Timer_Tick);
             MydataGridView1.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         }
+
+
+
+        private void InitializeStatusChecker()
+        {
+            statusTimer = new System.Windows.Forms.Timer();
+            statusTimer.Interval = 5000; // Check every 5 seconds
+            statusTimer.Tick += (s, e) =>
+            {
+                using (var conn = Database.getConnection())
+                {
+                    try
+                    {
+                        conn.Open();
+                        labelControl22.Text = "Connected";
+                        labelControl22.ForeColor = System.Drawing.Color.Green;
+                    }
+                    catch
+                    {
+                        labelControl22.Text = "Offline";
+                        labelControl22.ForeColor = System.Drawing.Color.Red;
+                    }
+                }
+            };
+            statusTimer.Start();
+        }
+
 
         //private void Timer_Tick(object sender, EventArgs e)
         //{
@@ -427,7 +456,7 @@ namespace SalesInventorySystem
             //this.Cursor = Cursors.WaitCursor;
             try
             {
-                bool exists = await verifyTerminalAsync();
+                //bool exists = await verifyTerminalAsync();
                 //ispriceused = "mainprice";
 
                 if (String.IsNullOrEmpty(txtsku.Text))
@@ -436,11 +465,11 @@ namespace SalesInventorySystem
                     txtsku.Focus();
                     return;
                 }
-                else if(!exists)
-                {
-                    XtraMessageBox.Show("Mac Address Not Exists!!..");
-                    return;
-                }
+                //else if(!exists)
+                //{
+                //    XtraMessageBox.Show("Mac Address Not Exists!!..");
+                //    return;
+                //}
                 else
                 {
                     insertData();
