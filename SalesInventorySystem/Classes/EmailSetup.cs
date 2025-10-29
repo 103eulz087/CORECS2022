@@ -7,6 +7,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Mail;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -165,6 +166,107 @@ namespace SalesInventorySystem.Classes
                 client.SendAsync(msg, userstate);
             }
             catch(SmtpException ex)
+            {
+                XtraMessageBox.Show(ex.Message.ToString());
+            }
+        }
+
+        public void setupEmailParamWithAttachment(string subject, string body, string fpath,bool isattachment,string emailaddressclient)
+        {
+            try
+            {
+                string filepath = fpath;//String.Empty;
+                var rowx = Database.getMultipleQuery("EmailServer", "Description <> ''", "Description,Password,SmtpClient,Port,SubjectTitle");
+                string username = rowx["Description"].ToString();
+                string password = rowx["Password"].ToString();
+                string smtp = rowx["SmtpClient"].ToString();
+                string port = rowx["Port"].ToString();
+                string subj = rowx["SubjectTitle"].ToString();
+                ArrayList list_emails = new ArrayList();
+                int i = 0;
+                string email = "";
+                // string subjectEmail = "ENZO REPORT GENERATOR";
+                SqlConnection sqlConnection1 = Database.getConnection();
+                sqlConnection1.Open(); //connection to the database.
+                SqlCommand cmd_Email = new SqlCommand("Select EmailAddress from dbo.EmailAddresses", sqlConnection1);
+                SqlDataReader read_Email = cmd_Email.ExecuteReader();
+                while (read_Email.Read())
+                {
+                    // email = read_Email.GetValue(i).ToString();
+                    email = read_Email.GetValue(i).ToString();
+                    list_emails.Add(email); //Add email to a arraylist
+                    i = i + 1 - 1; //increment or ++i
+                }
+                read_Email.Close();
+                sqlConnection1.Close(); //Close connection
+
+                login = new NetworkCredential(username, password);
+                client = new SmtpClient(smtp);
+                client.Port = Convert.ToInt32(port);
+                client.EnableSsl = true;
+                client.Credentials = login;
+
+
+                string htmlBody = "<html><body style='font-family: monospace; white-space: pre;'>"
+                                + WebUtility.HtmlEncode(body)
+                                + "</body></html>";
+
+
+                msg = new MailMessage { From = new MailAddress("eulzreportservices@gmail.com", subj, Encoding.UTF8) };
+
+                string[] emailArray = emailaddressclient.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+
+                string emailRegexPattern = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
+                foreach (string clientEmail in emailArray)
+                {
+                    string trimmedEmail = clientEmail.Trim();
+                    if (!string.IsNullOrWhiteSpace(trimmedEmail))
+                    {
+                        // 3. Optional: Validate the format before adding
+                        if (Regex.IsMatch(trimmedEmail, emailRegexPattern))
+                        {
+                            try
+                            {
+                                // Add the valid email address to the 'To' collection
+                                msg.To.Add(trimmedEmail);
+                            }
+                            catch (FormatException)
+                            {
+                                // Handle cases where the format is technically invalid 
+                                // despite the basic regex check (e.g., domain too long)
+                                // You might log this or show an error to the user
+                                System.Diagnostics.Debug.WriteLine($"Error: Invalid email format for: {trimmedEmail}");
+                            }
+                        }
+                        else
+                        {
+                            // Handle addresses that don't match the regex (e.g., log them)
+                            System.Diagnostics.Debug.WriteLine($"Warning: Email address '{trimmedEmail}' failed regex validation.");
+                        }
+                    }
+                }
+                //msg.To.Add(emailaddressclient);
+                foreach (string email_to in list_emails)
+                {
+                    msg.To.Add(new MailAddress(email_to));
+                }
+                if (isattachment == true)
+                {
+                    msg.Attachments.Add(new Attachment(filepath));
+                }
+
+                msg.Subject = subject;
+                msg.Body = htmlBody;
+                msg.BodyEncoding = Encoding.UTF8;
+                msg.IsBodyHtml = true;
+                msg.Priority = MailPriority.Normal;
+                msg.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;
+                //client.SendCompleted += new SendCompletedEventHandler(Client_SendCompleted);
+                client.SendCompleted += new SendCompletedEventHandler(Client_SendCompleted);
+                string userstate = "Sending...";
+                client.SendAsync(msg, userstate);
+            }
+            catch (SmtpException ex)
             {
                 XtraMessageBox.Show(ex.Message.ToString());
             }

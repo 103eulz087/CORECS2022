@@ -76,9 +76,9 @@
             // 
             this.simpleButton2.ImageOptions.Image = global::SalesInventorySystem.Properties.Resources.Save_16x16__5_;
             this.simpleButton2.Location = new System.Drawing.Point(908, 63);
-            this.simpleButton2.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.simpleButton2.Margin = new System.Windows.Forms.Padding(6);
             this.simpleButton2.Name = "simpleButton2";
-            this.simpleButton2.Size = new System.Drawing.Size(210, 98);
+            this.simpleButton2.Size = new System.Drawing.Size(210, 104);
             this.simpleButton2.TabIndex = 92;
             this.simpleButton2.Text = "Save";
             this.simpleButton2.Click += new System.EventHandler(this.simpleButton2_Click);
@@ -87,7 +87,7 @@
             // 
             this.txtrefno.EditValue = "";
             this.txtrefno.Location = new System.Drawing.Point(664, 119);
-            this.txtrefno.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.txtrefno.Margin = new System.Windows.Forms.Padding(6);
             this.txtrefno.Name = "txtrefno";
             this.txtrefno.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 10.25F);
             this.txtrefno.Properties.Appearance.Options.UseFont = true;
@@ -100,7 +100,7 @@
             this.labelControl5.Appearance.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold);
             this.labelControl5.Appearance.Options.UseFont = true;
             this.labelControl5.Location = new System.Drawing.Point(406, 127);
-            this.labelControl5.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.labelControl5.Margin = new System.Windows.Forms.Padding(6);
             this.labelControl5.Name = "labelControl5";
             this.labelControl5.Size = new System.Drawing.Size(244, 31);
             this.labelControl5.TabIndex = 24;
@@ -110,7 +110,7 @@
             // 
             this.txtponum.EditValue = "";
             this.txtponum.Location = new System.Drawing.Point(664, 62);
-            this.txtponum.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.txtponum.Margin = new System.Windows.Forms.Padding(6);
             this.txtponum.Name = "txtponum";
             this.txtponum.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 10.25F);
             this.txtponum.Properties.Appearance.Options.UseFont = true;
@@ -122,7 +122,7 @@
             // 
             this.txtbrcode.EditValue = "";
             this.txtbrcode.Location = new System.Drawing.Point(200, 62);
-            this.txtbrcode.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.txtbrcode.Margin = new System.Windows.Forms.Padding(6);
             this.txtbrcode.Name = "txtbrcode";
             this.txtbrcode.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 10.25F);
             this.txtbrcode.Properties.Appearance.Options.UseFont = true;
@@ -135,7 +135,7 @@
             this.labelControl4.Appearance.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold);
             this.labelControl4.Appearance.Options.UseFont = true;
             this.labelControl4.Location = new System.Drawing.Point(406, 69);
-            this.labelControl4.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.labelControl4.Margin = new System.Windows.Forms.Padding(6);
             this.labelControl4.Name = "labelControl4";
             this.labelControl4.Size = new System.Drawing.Size(247, 31);
             this.labelControl4.TabIndex = 21;
@@ -146,7 +146,7 @@
             this.labelControl1.Appearance.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold);
             this.labelControl1.Appearance.Options.UseFont = true;
             this.labelControl1.Location = new System.Drawing.Point(24, 69);
-            this.labelControl1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.labelControl1.Margin = new System.Windows.Forms.Padding(6);
             this.labelControl1.Name = "labelControl1";
             this.labelControl1.Size = new System.Drawing.Size(166, 31);
             this.labelControl1.TabIndex = 20;
@@ -156,7 +156,7 @@
             // 
             this.txtdevno.EditValue = "";
             this.txtdevno.Location = new System.Drawing.Point(200, 119);
-            this.txtdevno.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.txtdevno.Margin = new System.Windows.Forms.Padding(6);
             this.txtdevno.Name = "txtdevno";
             this.txtdevno.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 10.25F);
             this.txtdevno.Properties.Appearance.Options.UseFont = true;
@@ -169,7 +169,7 @@
             this.labelControl3.Appearance.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold);
             this.labelControl3.Appearance.Options.UseFont = true;
             this.labelControl3.Location = new System.Drawing.Point(24, 127);
-            this.labelControl3.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.labelControl3.Margin = new System.Windows.Forms.Padding(6);
             this.labelControl3.Name = "labelControl3";
             this.labelControl3.Size = new System.Drawing.Size(145, 31);
             this.labelControl3.TabIndex = 18;
@@ -188,10 +188,10 @@
             // gridControl1
             // 
             this.gridControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridControl1.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.gridControl1.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(6);
             this.gridControl1.Location = new System.Drawing.Point(3, 45);
             this.gridControl1.MainView = this.gridView1;
-            this.gridControl1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.gridControl1.Margin = new System.Windows.Forms.Padding(6);
             this.gridControl1.Name = "gridControl1";
             this.gridControl1.Size = new System.Drawing.Size(2550, 1085);
             this.gridControl1.TabIndex = 5;
@@ -233,7 +233,7 @@
             this.ClientSize = new System.Drawing.Size(2556, 1323);
             this.Controls.Add(this.groupControl2);
             this.Controls.Add(this.groupControl1);
-            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "AddBranchOrderSTSBatchMode";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "AddBranchOrderSTSBatchMode";

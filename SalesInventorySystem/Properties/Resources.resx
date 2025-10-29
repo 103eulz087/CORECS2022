@@ -124,8 +124,8 @@
   <data name="New_16x16 (5)" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\New_16x16 (5).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="SalesAnalysis_32x321" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\SalesAnalysis_32x321.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="ShowProduct_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ShowProduct_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="tableavailable" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\tableavailable.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -196,6 +196,9 @@
   <data name="EMail_32x32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\EMail_32x32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="SalesSummary2_32x32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SalesSummary2_32x32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="ITCSISAMPLE" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ITCSISAMPLE.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -214,8 +217,8 @@
   <data name="ExportToExcel_32x32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ExportToExcel_32x32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="UpdateTable_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\UpdateTable_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Undo_16x16 (3)" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Undo_16x16 (3).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Image_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Image_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -229,8 +232,8 @@
   <data name="cc_mastercard" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\cc_mastercard.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Undo_16x16 (3)" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Undo_16x16 (3).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="UpdateTable_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\UpdateTable_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="table-512" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\table-512.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -268,8 +271,8 @@
   <data name="resnotavailable" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\resnotavailable.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="ShowProduct_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\ShowProduct_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="SalesAnalysis_32x321" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SalesAnalysis_32x321.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Clear_32x32 (2)" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Clear_32x32 (2).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -286,7 +289,7 @@
   <data name="Transit_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Transit_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="SalesSummary2_32x32" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\SalesSummary2_32x32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="sparkposlogo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\sparkposlogo.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

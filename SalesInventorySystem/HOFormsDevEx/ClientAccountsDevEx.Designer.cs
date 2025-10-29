@@ -135,7 +135,7 @@
             this.tabledger.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
             this.tabledger.Name = "tabledger";
             this.tabledger.Padding = new System.Windows.Forms.Padding(5, 6, 5, 6);
-            this.tabledger.Size = new System.Drawing.Size(1958, 803);
+            this.tabledger.Size = new System.Drawing.Size(2534, 1113);
             this.tabledger.TabIndex = 0;
             this.tabledger.Text = "Ledger";
             this.tabledger.UseVisualStyleBackColor = true;
@@ -148,7 +148,7 @@
             this.groupBox4.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Padding = new System.Windows.Forms.Padding(5, 6, 5, 6);
-            this.groupBox4.Size = new System.Drawing.Size(1948, 700);
+            this.groupBox4.Size = new System.Drawing.Size(2524, 1010);
             this.groupBox4.TabIndex = 10;
             this.groupBox4.TabStop = false;
             // 
@@ -160,7 +160,7 @@
             this.gridControl2.MainView = this.gridView2;
             this.gridControl2.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
             this.gridControl2.Name = "gridControl2";
-            this.gridControl2.Size = new System.Drawing.Size(1938, 658);
+            this.gridControl2.Size = new System.Drawing.Size(2514, 968);
             this.gridControl2.TabIndex = 5;
             this.gridControl2.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView2});
@@ -194,7 +194,7 @@
             this.groupBox3.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Padding = new System.Windows.Forms.Padding(5, 6, 5, 6);
-            this.groupBox3.Size = new System.Drawing.Size(1948, 91);
+            this.groupBox3.Size = new System.Drawing.Size(2524, 91);
             this.groupBox3.TabIndex = 9;
             this.groupBox3.TabStop = false;
             // 
@@ -270,7 +270,7 @@
             this.tabtranssum.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
             this.tabtranssum.Name = "tabtranssum";
             this.tabtranssum.Padding = new System.Windows.Forms.Padding(5, 6, 5, 6);
-            this.tabtranssum.Size = new System.Drawing.Size(1958, 803);
+            this.tabtranssum.Size = new System.Drawing.Size(2534, 1113);
             this.tabtranssum.TabIndex = 1;
             this.tabtranssum.Text = "Transaction Summary";
             this.tabtranssum.UseVisualStyleBackColor = true;
@@ -283,7 +283,7 @@
             this.groupBox5.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Padding = new System.Windows.Forms.Padding(5, 6, 5, 6);
-            this.groupBox5.Size = new System.Drawing.Size(1948, 700);
+            this.groupBox5.Size = new System.Drawing.Size(2524, 1010);
             this.groupBox5.TabIndex = 12;
             this.groupBox5.TabStop = false;
             // 
@@ -295,7 +295,7 @@
             this.gridControl1.MainView = this.gridView1;
             this.gridControl1.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
             this.gridControl1.Name = "gridControl1";
-            this.gridControl1.Size = new System.Drawing.Size(1938, 658);
+            this.gridControl1.Size = new System.Drawing.Size(2514, 968);
             this.gridControl1.TabIndex = 5;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
@@ -328,7 +328,7 @@
             this.groupBox6.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
             this.groupBox6.Name = "groupBox6";
             this.groupBox6.Padding = new System.Windows.Forms.Padding(5, 6, 5, 6);
-            this.groupBox6.Size = new System.Drawing.Size(1948, 91);
+            this.groupBox6.Size = new System.Drawing.Size(2524, 91);
             this.groupBox6.TabIndex = 11;
             this.groupBox6.TabStop = false;
             // 
