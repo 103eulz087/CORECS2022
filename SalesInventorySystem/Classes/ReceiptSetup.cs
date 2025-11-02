@@ -123,7 +123,7 @@ namespace SalesInventorySystem.Classes
                 string sn = "S/N:" + compserialno;
                 details += HelperFunction.PrintCenterText(tradename) + Environment.NewLine;
                 details += HelperFunction.PrintCenterText(compaddress1) + Environment.NewLine;
-                //details += HelperFunction.PrintCenterText(compaddress2) + Environment.NewLine;
+                details += HelperFunction.PrintCenterText("VAT REG") + Environment.NewLine;
                 details += HelperFunction.PrintCenterText("TIN: " + comptinno) + Environment.NewLine; 
                 details += HelperFunction.PrintCenterText(sn) + Environment.NewLine;
                 details += HelperFunction.PrintCenterText("MIN: " + compminno) + Environment.NewLine + Environment.NewLine;

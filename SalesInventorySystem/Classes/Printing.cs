@@ -1371,6 +1371,7 @@ namespace SalesInventorySystem
             string discountamount = rows["DiscountAmount"].ToString();
             double discpercent = Convert.ToDouble(discountpercentage) * 100;
             double totalvatitems = 0.0;
+            double newdiscitems = 0.0;
             for (int i = 0; i <= gridview.RowCount - 1; i++)
             {
                 string addV = "";
@@ -1454,7 +1455,7 @@ namespace SalesInventorySystem
                     lessscdisc = Math.Round(netofvat * Convert.ToDouble(discountpercentage), 2);
                     //lessscdisc = Math.Round(netofvat * 0.05, 2);
                     netofscdisc = Math.Round(netofvat - lessscdisc, 2);
-                    addvat = Math.Round(netofscdisc * .12, 2);
+                    addvat = 0;// Math.Round(netofscdisc * .12, 2);
                     totaltotal = Math.Round(netofscdisc + addvat, 2);
                     details += HelperFunction.PrintLeftRigthText("Less VAT:", HelperFunction.convertToNumericFormat(lessvat)) + Environment.NewLine;
                     details += HelperFunction.PrintLeftRigthText("Net of VAT:", HelperFunction.convertToNumericFormat(netofvat)) + Environment.NewLine;
@@ -1485,7 +1486,7 @@ namespace SalesInventorySystem
                     //lessscdisc = Math.Round(netofvat * 0.05, 2);
                     lessscdisc = Math.Round(netofvat * Convert.ToDouble(discountpercentage), 2);
                     netofscdisc = Math.Round(netofvat - lessscdisc, 2);
-                    addvat = Math.Round(netofscdisc * .12, 2);
+                    addvat = 0;//Math.Round(netofscdisc * .12, 2);
                     totaltotal = Math.Round(netofscdisc + addvat, 2);
 
                     details += HelperFunction.PrintLeftRigthText("Less VAT:", HelperFunction.convertToNumericFormat(lessvat)) + Environment.NewLine;
@@ -1526,7 +1527,9 @@ namespace SalesInventorySystem
                     details += HelperFunction.PrintLeftRigthText("Total:", HelperFunction.convertToNumericFormat(totaltotal)) + Environment.NewLine;
 
                     ///////////////////////////////////////////////////////////////////////////////////////////////////////
-                    details += HelperFunction.PrintLeftRigthText("AMOUNT DUE:", HelperFunction.convertToNumericFormat(Convert.ToDouble(POS.POSConfirmPayment.netamountpayable))) + Environment.NewLine + Environment.NewLine;
+                    //details += HelperFunction.PrintLeftRigthText("AMOUNT DUE:", HelperFunction.convertToNumericFormat(Convert.ToDouble(POS.POSConfirmPayment.netamountpayable))) + Environment.NewLine + Environment.NewLine;
+                    details += HelperFunction.PrintLeftRigthText("AMOUNT DUE:", HelperFunction.convertToNumericFormat(Convert.ToDouble(total)-Convert.ToDouble(POS.POSConfirmPayment.discamount))) + Environment.NewLine + Environment.NewLine;
+                    newdiscitems = Convert.ToDouble(total) - Convert.ToDouble(POS.POSConfirmPayment.discamount);
                 }
 
             }
@@ -1540,7 +1543,7 @@ namespace SalesInventorySystem
                 details += HelperFunction.PrintLeftRigthText("CHANGE  :", "0.00") + Environment.NewLine + Environment.NewLine;
             }
             details += HelperFunction.PrintLeftRigthText("TENDERED:", cash) + Environment.NewLine;
-            details += HelperFunction.PrintLeftRigthText("CHANGE  :", change) + Environment.NewLine + Environment.NewLine;
+            details += HelperFunction.PrintLeftRigthText("CHANGE  :", HelperFunction.convertToNumericFormat(Convert.ToDouble(cash)- newdiscitems)) + Environment.NewLine + Environment.NewLine;
 
             double totalvatableSales = netofscdisc + netofnonscdisc;
             double totalVatInputSale = 0.0;

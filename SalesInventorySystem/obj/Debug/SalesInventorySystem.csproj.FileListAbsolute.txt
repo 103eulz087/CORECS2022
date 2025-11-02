@@ -10953,3 +10953,4 @@ C:\Users\avanc\Downloads\CORECS2022\SalesInventorySystem\obj\Debug\SalesInventor
 D:\Repos\CORECS2022\SalesInventorySystem\obj\Debug\SalesInventorySystem.DevExReportTemplate.SabongBetReceipt.resources
 D:\Repos\CORECS2022\SalesInventorySystem\obj\Debug\SalesInventorySystem.Sabong.SBDashboard.resources
 D:\Repos\CORECS2022\SalesInventorySystem\obj\Debug\SalesInventorySystem.Sabong.Trends.resources
+D:\Repos\CORECS2022\SalesInventorySystem\obj\Debug\SalesInventorySystem.POS.POSXread.resources

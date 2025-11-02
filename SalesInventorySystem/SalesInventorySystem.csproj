@@ -2571,6 +2571,12 @@
     <Compile Include="POS\POSUploadTransaction.Designer.cs">
       <DependentUpon>POSUploadTransaction.cs</DependentUpon>
     </Compile>
+    <Compile Include="POS\POSXread.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="POS\POSXread.Designer.cs">
+      <DependentUpon>POSXread.cs</DependentUpon>
+    </Compile>
     <Compile Include="POS\POSXreadReport.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -4172,6 +4178,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="POS\POSUploadTransaction.resx">
       <DependentUpon>POSUploadTransaction.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="POS\POSXread.resx">
+      <DependentUpon>POSXread.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="POS\POSXreadReport.resx">
       <DependentUpon>POSXreadReport.cs</DependentUpon>

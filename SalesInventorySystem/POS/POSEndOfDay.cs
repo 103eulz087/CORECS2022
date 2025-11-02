@@ -1076,7 +1076,7 @@ namespace SalesInventorySystem.POS
             if (confirm)
             {
                 executeEOD();
-                pushit();
+              //  pushit();
                 //AuthorizedConfirmationFrm authfrm = new AuthorizedConfirmationFrm();
                 //authfrm.ShowDialog(this);
                 //if (AuthorizedConfirmationFrm.isconfirmedLogin == true)
@@ -1606,6 +1606,31 @@ namespace SalesInventorySystem.POS
         private void simpleButton2_Click(object sender, EventArgs e)
         {
             this.Dispose();
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txttransactionno_EditValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txttransactiondate_EditValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblDateOpen_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label30_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
