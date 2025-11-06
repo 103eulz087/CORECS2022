@@ -830,10 +830,142 @@ namespace SalesInventorySystem.POSDevEx
             printfile.printTextFile(filetoprint);
             //embedToJournal();
         }
+
+        public XRTable BuildXRTableFromGrid(GridView gridView)
+        {
+            XRTable table = new XRTable
+            {
+                WidthF = 1000, // Adjust based on page width
+                Borders = DevExpress.XtraPrinting.BorderSide.All,
+                Font = new Font("Arial", 6),
+                LocationF = new PointF(0, 0)
+            };
+            table.BeginInit();
+
+            // Header row
+            XRTableRow headerRow = new XRTableRow();
+            foreach (GridColumn col in gridView.VisibleColumns)
+            {
+                XRTableCell headerCell = new XRTableCell
+                {
+                    Text = col.Caption,
+                    Font = new Font("Arial", 6, FontStyle.Bold),
+                    BackColor = Color.LightGray,
+                    TextAlignment = TextAlignment.MiddleCenter,
+                    Padding = new DevExpress.XtraPrinting.PaddingInfo(0,0,0,0),
+                    CanGrow = true
+                };
+                headerRow.Cells.Add(headerCell);
+            }
+            table.Rows.Add(headerRow);
+
+            // Data rows
+            for (int i = 0; i < gridView.RowCount; i++)
+            {
+                XRTableRow dataRow = new XRTableRow();
+                foreach (GridColumn col in gridView.VisibleColumns)
+                {
+                    string cellText = gridView.GetRowCellDisplayText(i, col);
+                    XRTableCell dataCell = new XRTableCell
+                    {
+                        Text = cellText,
+                        Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0),
+                        CanGrow = true,
+                        WordWrap = true,
+                        TextAlignment = col.ColumnType == typeof(decimal) || col.ColumnType == typeof(double)
+                            ? TextAlignment.MiddleRight
+                            : TextAlignment.MiddleLeft
+                    };
+
+                    // Auto-adjust font size based on content length
+                    int length = cellText.Length;
+                    if (length > 40)
+                        dataCell.Font = new Font("Arial", 6);
+                    else if (length > 20)
+                        dataCell.Font = new Font("Arial", 6);
+                    else
+                        dataCell.Font = new Font("Arial", 6);
+
+                    dataRow.Cells.Add(dataCell);
+                }
+                table.Rows.Add(dataRow);
+            }
+
+            table.EndInit();
+            return table;
+        }
+
+        //void printReport()
+        //{
+        //    try
+        //    {
+        //        DevExReportTemplate.BIRAnnex_E1 xct = new DevExReportTemplate.BIRAnnex_E1
+        //        {
+        //            Landscape = true,
+        //            PaperKind = System.Drawing.Printing.PaperKind.A4
+        //        };
+
+        //         Hide unwanted columns
+        //        gridView1.Columns["BranchCode"].Visible = false;
+        //        gridView1.Columns["MachineUsed"].Visible = false;
+
+        //         Build XRTable from GridView
+        //        XRTable printableTable = BuildXRTableFromGrid(gridView1);
+        //        xct.Bands[BandKind.Detail].Controls.Add(printableTable);
+
+        //         Optional: Set font for the entire band
+        //        xct.Bands[BandKind.Detail].Font = new Font("Arial", 6);
+
+        //        ReportPrintTool report = new ReportPrintTool(xct);
+        //        report.ShowRibbonPreviewDialog();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        XtraMessageBox.Show("Error: " + ex.Message);
+        //    }
+        //}
+
+        void printReport()
+        {
+            try
+            {
+
+
+                DevExReportTemplate.BIRAnnex_E1 xct = new DevExReportTemplate.BIRAnnex_E1();
+                xct.Landscape = true;
+
+
+                xct.PaperKind = System.Drawing.Printing.PaperKind.A4;
+                //xct.Margins = new System.Drawing.Printing.Margins(100, 100, 100, 100);
+
+
+
+
+                //xct.xramount.Text = String.Format("{0:0,0.00}", amounttopay);
+
+
+
+                gridView1.Columns["BranchCode"].Visible = false;
+                gridView1.Columns["MachineUsed"].Visible = false;
+
+                //xct.xramountinwords.Text = str.ToUpper();
+                //xct.xrpreparedby.Text = Login.Fullname;
+                //xct.xrLabel3.Text = Database.getSingleQuery("Approvers", "UserID<>''", "UserID");
+                xct.Bands[BandKind.Detail].Controls.Add(HelperFunction.CopyGridControl(gridControl1));
+                //xct.Bands[BandKind.Detail].Font = new System.Drawing.Font("Tahoma", 10);
+                ReportPrintTool report = new ReportPrintTool(xct);
+                report.ShowRibbonPreviewDialog();
+
+            }
+            catch (FormatException ex)
+            {
+                XtraMessageBox.Show(ex.Message.ToString());
+            }
+        }
         private void simpleButton3_Click(object sender, EventArgs e)
         {
-            
-               
+            printReport();
+
             //brcode = txtbranch.Text;
             //Printing printit = new Printing();
             //if (gridView1.RowCount < 1)

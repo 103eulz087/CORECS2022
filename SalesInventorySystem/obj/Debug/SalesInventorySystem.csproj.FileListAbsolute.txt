@@ -10954,3 +10954,4 @@ D:\Repos\CORECS2022\SalesInventorySystem\obj\Debug\SalesInventorySystem.DevExRep
 D:\Repos\CORECS2022\SalesInventorySystem\obj\Debug\SalesInventorySystem.Sabong.SBDashboard.resources
 D:\Repos\CORECS2022\SalesInventorySystem\obj\Debug\SalesInventorySystem.Sabong.Trends.resources
 D:\Repos\CORECS2022\SalesInventorySystem\obj\Debug\SalesInventorySystem.POS.POSXread.resources
+D:\Repos\CORECS2022\SalesInventorySystem\obj\Debug\SalesInventorySystem.DevExReportTemplate.BIRAnnex_E1.resources

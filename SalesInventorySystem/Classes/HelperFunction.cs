@@ -146,7 +146,25 @@ namespace SalesInventorySystem
             return macaddress;
         }
 
-        
+        public static WinControlContainer CopyGridControlEulz(GridControl grid)
+        {
+            // Auto-fit all columns in the main view
+            GridView view = grid.MainView as GridView;
+            if (view != null)
+            {
+                view.BestFitColumns(); // This adjusts all columns to fit their content
+            }
+
+            // Create a WinControlContainer object
+            WinControlContainer winContainer = new WinControlContainer
+            {
+                Location = new Point(0, 0),
+                Size = grid.Size, // Use the actual grid size for better fit
+                WinControl = grid
+            };
+
+            return winContainer;
+        }
 
         public static WinControlContainer CopyGridControl(GridControl grid)
         {

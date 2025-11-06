@@ -614,6 +614,12 @@
     <Compile Include="DevExReportTemplate\BadOrderDetails.Designer.cs">
       <DependentUpon>BadOrderDetails.cs</DependentUpon>
     </Compile>
+    <Compile Include="DevExReportTemplate\BIRAnnex-E1.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DevExReportTemplate\BIRAnnex-E1.Designer.cs">
+      <DependentUpon>BIRAnnex-E1.cs</DependentUpon>
+    </Compile>
     <Compile Include="DevExReportTemplate\CheckVoucher.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -3192,6 +3198,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DevExReportTemplate\BadOrderDetails.resx">
       <DependentUpon>BadOrderDetails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DevExReportTemplate\BIRAnnex-E1.resx">
+      <DependentUpon>BIRAnnex-E1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DevExReportTemplate\CheckVoucher.resx">
       <DependentUpon>CheckVoucher.cs</DependentUpon>
