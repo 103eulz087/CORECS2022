@@ -87,7 +87,7 @@ namespace SalesInventorySystem.Classes
             }
             return view;
         }
-
+       
         public static GridView getTotalSummation(object sender,params string[] summaryvalues)
         {
             GridView view = sender as GridView;

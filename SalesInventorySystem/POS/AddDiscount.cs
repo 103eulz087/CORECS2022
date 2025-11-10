@@ -218,6 +218,11 @@ namespace SalesInventorySystem
             txtvatexadj.Text = getVATExAdj;
         }
 
+        private void simpleButton4_Click(object sender, EventArgs e)
+        {
+
+        }
+
         void spDiscount()
         {
             SqlConnection con = Database.getConnection();
@@ -458,7 +463,9 @@ namespace SalesInventorySystem
                 ", '"+DateTime.Now.ToShortDateString() +"' " +
                 ", '"+Login.isglobalUserID+"' " +
                 ", 0" +
-                ", 0)");
+                ", 0" +
+                ", Discount Applied. OR# '"+txtorderno.Text +' '+ discounttype + "' Discount of '"+ discountamount + "' applied by Cashier. " +
+                ")");
 
             isdone = true;
             this.Close();

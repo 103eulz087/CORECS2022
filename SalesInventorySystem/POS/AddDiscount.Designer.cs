@@ -53,6 +53,18 @@
             this.labelControl5 = new DevExpress.XtraEditors.LabelControl();
             this.txtothersamount = new System.Windows.Forms.TextBox();
             this.panelpwd = new System.Windows.Forms.Panel();
+            this.panelNac = new System.Windows.Forms.Panel();
+            this.txtnacamount = new System.Windows.Forms.TextBox();
+            this.labelControl16 = new DevExpress.XtraEditors.LabelControl();
+            this.labelControl17 = new DevExpress.XtraEditors.LabelControl();
+            this.labelControl18 = new DevExpress.XtraEditors.LabelControl();
+            this.txtnacpercent = new System.Windows.Forms.TextBox();
+            this.simpleButton3 = new DevExpress.XtraEditors.SimpleButton();
+            this.labelControl19 = new DevExpress.XtraEditors.LabelControl();
+            this.labelControl20 = new DevExpress.XtraEditors.LabelControl();
+            this.txtnacdiscountamount = new System.Windows.Forms.TextBox();
+            this.txtnacid = new System.Windows.Forms.TextBox();
+            this.txtnacname = new System.Windows.Forms.TextBox();
             this.txtpwdamount = new System.Windows.Forms.TextBox();
             this.labelControl10 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl9 = new DevExpress.XtraEditors.LabelControl();
@@ -76,18 +88,6 @@
             this.btnshowdiscounteditems = new DevExpress.XtraEditors.SimpleButton();
             this.radioButton4 = new System.Windows.Forms.RadioButton();
             this.radioButton5 = new System.Windows.Forms.RadioButton();
-            this.panelNac = new System.Windows.Forms.Panel();
-            this.txtnacamount = new System.Windows.Forms.TextBox();
-            this.labelControl16 = new DevExpress.XtraEditors.LabelControl();
-            this.labelControl17 = new DevExpress.XtraEditors.LabelControl();
-            this.labelControl18 = new DevExpress.XtraEditors.LabelControl();
-            this.txtnacpercent = new System.Windows.Forms.TextBox();
-            this.simpleButton3 = new DevExpress.XtraEditors.SimpleButton();
-            this.labelControl19 = new DevExpress.XtraEditors.LabelControl();
-            this.labelControl20 = new DevExpress.XtraEditors.LabelControl();
-            this.txtnacdiscountamount = new System.Windows.Forms.TextBox();
-            this.txtnacid = new System.Windows.Forms.TextBox();
-            this.txtnacname = new System.Windows.Forms.TextBox();
             this.panelmov = new System.Windows.Forms.Panel();
             this.txtmovamount = new System.Windows.Forms.TextBox();
             this.labelControl21 = new DevExpress.XtraEditors.LabelControl();
@@ -247,7 +247,7 @@
             this.panelsenior.Controls.Add(this.txtcontrolno);
             this.panelsenior.Controls.Add(this.txtname);
             this.panelsenior.Location = new System.Drawing.Point(10, 39);
-            this.panelsenior.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panelsenior.Margin = new System.Windows.Forms.Padding(2);
             this.panelsenior.Name = "panelsenior";
             this.panelsenior.Size = new System.Drawing.Size(424, 191);
             this.panelsenior.TabIndex = 24;
@@ -298,7 +298,7 @@
             this.panelothers.Controls.Add(this.txtothersamount);
             this.panelothers.Controls.Add(this.labelControl1);
             this.panelothers.Location = new System.Drawing.Point(10, 39);
-            this.panelothers.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panelothers.Margin = new System.Windows.Forms.Padding(2);
             this.panelothers.Name = "panelothers";
             this.panelothers.Size = new System.Drawing.Size(424, 191);
             this.panelothers.TabIndex = 25;
@@ -352,7 +352,7 @@
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(286, 71);
-            this.button1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button1.Margin = new System.Windows.Forms.Padding(2);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(126, 22);
             this.button1.TabIndex = 24;
@@ -364,7 +364,7 @@
             // txtremarks
             // 
             this.txtremarks.Location = new System.Drawing.Point(132, 102);
-            this.txtremarks.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtremarks.Margin = new System.Windows.Forms.Padding(2);
             this.txtremarks.Name = "txtremarks";
             this.txtremarks.Size = new System.Drawing.Size(280, 54);
             this.txtremarks.TabIndex = 23;
@@ -405,11 +405,149 @@
             this.panelpwd.Controls.Add(this.txtpwdidno);
             this.panelpwd.Controls.Add(this.txtpwdname);
             this.panelpwd.Location = new System.Drawing.Point(10, 39);
-            this.panelpwd.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panelpwd.Margin = new System.Windows.Forms.Padding(2);
             this.panelpwd.Name = "panelpwd";
             this.panelpwd.Size = new System.Drawing.Size(424, 191);
             this.panelpwd.TabIndex = 26;
             this.panelpwd.Visible = false;
+            // 
+            // panelNac
+            // 
+            this.panelNac.Controls.Add(this.txtnacamount);
+            this.panelNac.Controls.Add(this.labelControl16);
+            this.panelNac.Controls.Add(this.labelControl17);
+            this.panelNac.Controls.Add(this.labelControl18);
+            this.panelNac.Controls.Add(this.txtnacpercent);
+            this.panelNac.Controls.Add(this.simpleButton3);
+            this.panelNac.Controls.Add(this.labelControl19);
+            this.panelNac.Controls.Add(this.labelControl20);
+            this.panelNac.Controls.Add(this.txtnacdiscountamount);
+            this.panelNac.Controls.Add(this.txtnacid);
+            this.panelNac.Controls.Add(this.txtnacname);
+            this.panelNac.Location = new System.Drawing.Point(0, 0);
+            this.panelNac.Margin = new System.Windows.Forms.Padding(2);
+            this.panelNac.Name = "panelNac";
+            this.panelNac.Size = new System.Drawing.Size(424, 191);
+            this.panelNac.TabIndex = 34;
+            this.panelNac.Visible = false;
+            // 
+            // txtnacamount
+            // 
+            this.txtnacamount.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
+            this.txtnacamount.Enabled = false;
+            this.txtnacamount.Font = new System.Drawing.Font("Tahoma", 10.25F);
+            this.txtnacamount.Location = new System.Drawing.Point(176, 70);
+            this.txtnacamount.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
+            this.txtnacamount.Name = "txtnacamount";
+            this.txtnacamount.ReadOnly = true;
+            this.txtnacamount.Size = new System.Drawing.Size(96, 24);
+            this.txtnacamount.TabIndex = 26;
+            this.txtnacamount.Text = "0";
+            // 
+            // labelControl16
+            // 
+            this.labelControl16.Appearance.Font = new System.Drawing.Font("Tahoma", 12.25F);
+            this.labelControl16.Appearance.Options.UseFont = true;
+            this.labelControl16.Location = new System.Drawing.Point(10, 69);
+            this.labelControl16.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
+            this.labelControl16.Name = "labelControl16";
+            this.labelControl16.Size = new System.Drawing.Size(148, 19);
+            this.labelControl16.TabIndex = 25;
+            this.labelControl16.Text = "Amount to Discount:";
+            // 
+            // labelControl17
+            // 
+            this.labelControl17.Appearance.Font = new System.Drawing.Font("Tahoma", 12.25F);
+            this.labelControl17.Appearance.Options.UseFont = true;
+            this.labelControl17.Location = new System.Drawing.Point(10, 126);
+            this.labelControl17.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
+            this.labelControl17.Name = "labelControl17";
+            this.labelControl17.Size = new System.Drawing.Size(146, 19);
+            this.labelControl17.TabIndex = 24;
+            this.labelControl17.Text = "Discounted Amount:";
+            // 
+            // labelControl18
+            // 
+            this.labelControl18.Appearance.Font = new System.Drawing.Font("Tahoma", 12.25F);
+            this.labelControl18.Appearance.Options.UseFont = true;
+            this.labelControl18.Location = new System.Drawing.Point(10, 12);
+            this.labelControl18.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
+            this.labelControl18.Name = "labelControl18";
+            this.labelControl18.Size = new System.Drawing.Size(40, 19);
+            this.labelControl18.TabIndex = 14;
+            this.labelControl18.Text = "ID #:";
+            // 
+            // txtnacpercent
+            // 
+            this.txtnacpercent.BackColor = System.Drawing.Color.White;
+            this.txtnacpercent.Font = new System.Drawing.Font("Tahoma", 10.25F);
+            this.txtnacpercent.Location = new System.Drawing.Point(176, 97);
+            this.txtnacpercent.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
+            this.txtnacpercent.Name = "txtnacpercent";
+            this.txtnacpercent.Size = new System.Drawing.Size(96, 24);
+            this.txtnacpercent.TabIndex = 23;
+            this.txtnacpercent.Text = "0";
+            // 
+            // simpleButton3
+            // 
+            this.simpleButton3.Location = new System.Drawing.Point(276, 70);
+            this.simpleButton3.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
+            this.simpleButton3.Name = "simpleButton3";
+            this.simpleButton3.Size = new System.Drawing.Size(132, 80);
+            this.simpleButton3.TabIndex = 13;
+            this.simpleButton3.Text = "SET";
+            this.simpleButton3.Visible = false;
+            // 
+            // labelControl19
+            // 
+            this.labelControl19.Appearance.Font = new System.Drawing.Font("Tahoma", 12.25F);
+            this.labelControl19.Appearance.Options.UseFont = true;
+            this.labelControl19.Location = new System.Drawing.Point(54, 96);
+            this.labelControl19.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
+            this.labelControl19.Name = "labelControl19";
+            this.labelControl19.Size = new System.Drawing.Size(104, 19);
+            this.labelControl19.TabIndex = 22;
+            this.labelControl19.Text = "Percentage %:";
+            // 
+            // labelControl20
+            // 
+            this.labelControl20.Appearance.Font = new System.Drawing.Font("Tahoma", 12.25F);
+            this.labelControl20.Appearance.Options.UseFont = true;
+            this.labelControl20.Location = new System.Drawing.Point(10, 43);
+            this.labelControl20.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
+            this.labelControl20.Name = "labelControl20";
+            this.labelControl20.Size = new System.Drawing.Size(47, 19);
+            this.labelControl20.TabIndex = 17;
+            this.labelControl20.Text = "Name:";
+            // 
+            // txtnacdiscountamount
+            // 
+            this.txtnacdiscountamount.Font = new System.Drawing.Font("Tahoma", 10.25F);
+            this.txtnacdiscountamount.Location = new System.Drawing.Point(176, 128);
+            this.txtnacdiscountamount.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
+            this.txtnacdiscountamount.Name = "txtnacdiscountamount";
+            this.txtnacdiscountamount.ReadOnly = true;
+            this.txtnacdiscountamount.Size = new System.Drawing.Size(96, 24);
+            this.txtnacdiscountamount.TabIndex = 21;
+            this.txtnacdiscountamount.Text = "0";
+            // 
+            // txtnacid
+            // 
+            this.txtnacid.Font = new System.Drawing.Font("Tahoma", 10.25F);
+            this.txtnacid.Location = new System.Drawing.Point(104, 11);
+            this.txtnacid.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
+            this.txtnacid.Name = "txtnacid";
+            this.txtnacid.Size = new System.Drawing.Size(306, 24);
+            this.txtnacid.TabIndex = 18;
+            // 
+            // txtnacname
+            // 
+            this.txtnacname.Font = new System.Drawing.Font("Tahoma", 10.25F);
+            this.txtnacname.Location = new System.Drawing.Point(104, 41);
+            this.txtnacname.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
+            this.txtnacname.Name = "txtnacname";
+            this.txtnacname.Size = new System.Drawing.Size(306, 24);
+            this.txtnacname.TabIndex = 19;
             // 
             // txtpwdamount
             // 
@@ -676,144 +814,6 @@
             this.radioButton5.Text = "MOV (F5)";
             this.radioButton5.UseVisualStyleBackColor = true;
             // 
-            // panelNac
-            // 
-            this.panelNac.Controls.Add(this.txtnacamount);
-            this.panelNac.Controls.Add(this.labelControl16);
-            this.panelNac.Controls.Add(this.labelControl17);
-            this.panelNac.Controls.Add(this.labelControl18);
-            this.panelNac.Controls.Add(this.txtnacpercent);
-            this.panelNac.Controls.Add(this.simpleButton3);
-            this.panelNac.Controls.Add(this.labelControl19);
-            this.panelNac.Controls.Add(this.labelControl20);
-            this.panelNac.Controls.Add(this.txtnacdiscountamount);
-            this.panelNac.Controls.Add(this.txtnacid);
-            this.panelNac.Controls.Add(this.txtnacname);
-            this.panelNac.Location = new System.Drawing.Point(0, 0);
-            this.panelNac.Margin = new System.Windows.Forms.Padding(2);
-            this.panelNac.Name = "panelNac";
-            this.panelNac.Size = new System.Drawing.Size(424, 191);
-            this.panelNac.TabIndex = 34;
-            this.panelNac.Visible = false;
-            // 
-            // txtnacamount
-            // 
-            this.txtnacamount.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
-            this.txtnacamount.Enabled = false;
-            this.txtnacamount.Font = new System.Drawing.Font("Tahoma", 10.25F);
-            this.txtnacamount.Location = new System.Drawing.Point(176, 70);
-            this.txtnacamount.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
-            this.txtnacamount.Name = "txtnacamount";
-            this.txtnacamount.ReadOnly = true;
-            this.txtnacamount.Size = new System.Drawing.Size(96, 24);
-            this.txtnacamount.TabIndex = 26;
-            this.txtnacamount.Text = "0";
-            // 
-            // labelControl16
-            // 
-            this.labelControl16.Appearance.Font = new System.Drawing.Font("Tahoma", 12.25F);
-            this.labelControl16.Appearance.Options.UseFont = true;
-            this.labelControl16.Location = new System.Drawing.Point(10, 69);
-            this.labelControl16.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
-            this.labelControl16.Name = "labelControl16";
-            this.labelControl16.Size = new System.Drawing.Size(148, 19);
-            this.labelControl16.TabIndex = 25;
-            this.labelControl16.Text = "Amount to Discount:";
-            // 
-            // labelControl17
-            // 
-            this.labelControl17.Appearance.Font = new System.Drawing.Font("Tahoma", 12.25F);
-            this.labelControl17.Appearance.Options.UseFont = true;
-            this.labelControl17.Location = new System.Drawing.Point(10, 126);
-            this.labelControl17.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
-            this.labelControl17.Name = "labelControl17";
-            this.labelControl17.Size = new System.Drawing.Size(146, 19);
-            this.labelControl17.TabIndex = 24;
-            this.labelControl17.Text = "Discounted Amount:";
-            // 
-            // labelControl18
-            // 
-            this.labelControl18.Appearance.Font = new System.Drawing.Font("Tahoma", 12.25F);
-            this.labelControl18.Appearance.Options.UseFont = true;
-            this.labelControl18.Location = new System.Drawing.Point(10, 12);
-            this.labelControl18.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
-            this.labelControl18.Name = "labelControl18";
-            this.labelControl18.Size = new System.Drawing.Size(40, 19);
-            this.labelControl18.TabIndex = 14;
-            this.labelControl18.Text = "ID #:";
-            // 
-            // txtnacpercent
-            // 
-            this.txtnacpercent.BackColor = System.Drawing.Color.White;
-            this.txtnacpercent.Font = new System.Drawing.Font("Tahoma", 10.25F);
-            this.txtnacpercent.Location = new System.Drawing.Point(176, 97);
-            this.txtnacpercent.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
-            this.txtnacpercent.Name = "txtnacpercent";
-            this.txtnacpercent.Size = new System.Drawing.Size(96, 24);
-            this.txtnacpercent.TabIndex = 23;
-            this.txtnacpercent.Text = "0";
-            // 
-            // simpleButton3
-            // 
-            this.simpleButton3.Location = new System.Drawing.Point(276, 70);
-            this.simpleButton3.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
-            this.simpleButton3.Name = "simpleButton3";
-            this.simpleButton3.Size = new System.Drawing.Size(132, 80);
-            this.simpleButton3.TabIndex = 13;
-            this.simpleButton3.Text = "SET";
-            this.simpleButton3.Visible = false;
-            // 
-            // labelControl19
-            // 
-            this.labelControl19.Appearance.Font = new System.Drawing.Font("Tahoma", 12.25F);
-            this.labelControl19.Appearance.Options.UseFont = true;
-            this.labelControl19.Location = new System.Drawing.Point(54, 96);
-            this.labelControl19.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
-            this.labelControl19.Name = "labelControl19";
-            this.labelControl19.Size = new System.Drawing.Size(104, 19);
-            this.labelControl19.TabIndex = 22;
-            this.labelControl19.Text = "Percentage %:";
-            // 
-            // labelControl20
-            // 
-            this.labelControl20.Appearance.Font = new System.Drawing.Font("Tahoma", 12.25F);
-            this.labelControl20.Appearance.Options.UseFont = true;
-            this.labelControl20.Location = new System.Drawing.Point(10, 43);
-            this.labelControl20.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
-            this.labelControl20.Name = "labelControl20";
-            this.labelControl20.Size = new System.Drawing.Size(47, 19);
-            this.labelControl20.TabIndex = 17;
-            this.labelControl20.Text = "Name:";
-            // 
-            // txtnacdiscountamount
-            // 
-            this.txtnacdiscountamount.Font = new System.Drawing.Font("Tahoma", 10.25F);
-            this.txtnacdiscountamount.Location = new System.Drawing.Point(176, 128);
-            this.txtnacdiscountamount.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
-            this.txtnacdiscountamount.Name = "txtnacdiscountamount";
-            this.txtnacdiscountamount.ReadOnly = true;
-            this.txtnacdiscountamount.Size = new System.Drawing.Size(96, 24);
-            this.txtnacdiscountamount.TabIndex = 21;
-            this.txtnacdiscountamount.Text = "0";
-            // 
-            // txtnacid
-            // 
-            this.txtnacid.Font = new System.Drawing.Font("Tahoma", 10.25F);
-            this.txtnacid.Location = new System.Drawing.Point(104, 11);
-            this.txtnacid.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
-            this.txtnacid.Name = "txtnacid";
-            this.txtnacid.Size = new System.Drawing.Size(306, 24);
-            this.txtnacid.TabIndex = 18;
-            // 
-            // txtnacname
-            // 
-            this.txtnacname.Font = new System.Drawing.Font("Tahoma", 10.25F);
-            this.txtnacname.Location = new System.Drawing.Point(104, 41);
-            this.txtnacname.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
-            this.txtnacname.Name = "txtnacname";
-            this.txtnacname.Size = new System.Drawing.Size(306, 24);
-            this.txtnacname.TabIndex = 19;
-            // 
             // panelmov
             // 
             this.panelmov.Controls.Add(this.txtmovamount);
@@ -901,6 +901,7 @@
             this.simpleButton4.TabIndex = 13;
             this.simpleButton4.Text = "SET";
             this.simpleButton4.Visible = false;
+            this.simpleButton4.Click += new System.EventHandler(this.simpleButton4_Click);
             // 
             // labelControl24
             // 

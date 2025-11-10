@@ -2187,7 +2187,7 @@ namespace SalesInventorySystem
             details += Classes.ReceiptSetup.doHeader(Login.assignedBranch, Environment.MachineName);
             details += Classes.ReceiptSetup.doTitle("SALES INVOICE");
             details += Classes.ReceiptSetup.doTitle("REPRINT");
-            //details += HelperFunction.PrintLeftText("REPRINT#:*") + Environment.NewLine;
+            details += HelperFunction.PrintLeftText("#") + Environment.NewLine;
             details += Classes.ReceiptSetup.doHeaderDetails(ordercode, transcode, terminalno,name,address,tin,bussstyle);
             details += HelperFunction.createDottedLine() + Environment.NewLine;
             string discountpercentage = "0";
