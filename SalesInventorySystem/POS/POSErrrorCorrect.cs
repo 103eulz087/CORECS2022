@@ -166,7 +166,7 @@ namespace SalesInventorySystem.POS
 
             ////////////////////////////////////////////////
             //Database.ExecuteQuery("INSERT INTO POSReturnTransaction VALUES('"+ Login.assignedBranch + "','"+txtreturntransno.Text+"','"+txtorderno.Text+"','"+txttransno.Text+"','"+DateTime.Now.ToString()+ "','" + Login.Fullname + "')");
-            Database.ExecuteQuery("INSERT INTO POSTransaction VALUES('" + Login.assignedBranch + "','" + txttransno.Text + "','" + Environment.MachineName + "','Transaction Return','" + DateTime.Now.ToString() + "','" + Login.Fullname + "','','','Tranaction Return: OR#: '"+txtorderno.Text+"' processed.')  ");
+            //Database.ExecuteQuery("INSERT INTO POSTransaction VALUES('" + Login.assignedBranch + "','" + txttransno.Text + "','" + Environment.MachineName + "','Transaction Return','" + DateTime.Now.ToString() + "','" + Login.Fullname + "','','','Tranaction Return: OR#: '"+txtorderno.Text+"' processed.')  ");
             XtraMessageBox.Show("Successfully Updated");
             isdone = true;
             this.Close();

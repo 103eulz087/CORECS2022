@@ -722,6 +722,12 @@
     <Compile Include="DevExReportTemplate\SalesInvoice.Designer.cs">
       <DependentUpon>SalesInvoice.cs</DependentUpon>
     </Compile>
+    <Compile Include="DevExReportTemplate\SampleReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DevExReportTemplate\SampleReport.Designer.cs">
+      <DependentUpon>SampleReport.cs</DependentUpon>
+    </Compile>
     <Compile Include="DevExReportTemplate\ShipmentReport.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -3253,6 +3259,9 @@
     <EmbeddedResource Include="DevExReportTemplate\SalesInvoice.resx">
       <DependentUpon>SalesInvoice.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="DevExReportTemplate\SampleReport.resx">
+      <DependentUpon>SampleReport.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="DevExReportTemplate\ShipmentReport.resx">
       <DependentUpon>ShipmentReport.cs</DependentUpon>
     </EmbeddedResource>
@@ -4443,6 +4452,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="ClassDiagram1.cd" />
+    <None Include="DevExReportTemplate\SeniorCitizenSalesReport.repx" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

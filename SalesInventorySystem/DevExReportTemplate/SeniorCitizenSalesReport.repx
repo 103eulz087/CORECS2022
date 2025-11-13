@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<XtraReport Version="22.2" Landscape="True" PaperKind="A4" Font="Arial, 9pt">
+  <Bands>
+    <ReportHeaderBand HeightF="150">
+      <XRLabel Text="Everserve" Font="Arial, 14pt, style=Bold" BoundsF="0,0,300,30"/>
+      <XRLabel Text="Cebu City" Font="Arial, 10pt" BoundsF="0,30,300,20"/>
+      <XRLabel Text="449-385-255-006" Font="Arial, 10pt" BoundsF="0,50,300,20"/>
+      <XRLabel Text="ANNEX "E-2"" Font="Arial, 12pt, style=Bold" BoundsF="650,0,150,30"/>
+      <XRLabel Text="SparkPOS Retail Ver2.0" BoundsF="0,80,300,20"/>
+      <XRLabel Text="POS1 | TABLET-E03BPHI0" BoundsF="0,100,300,20"/>
+      <XRLabel Text="Date: [Parameters.ReportDate]" BoundsF="0,120,300,20"/>
+    </ReportHeaderBand>
+
+    <PageHeaderBand HeightF="40">
+      <XRLabel Text="Senior Citizen Sales Book/Report" Font="Arial, 12pt, style=Bold" TextAlignment="MiddleCenter" BoundsF="0,0,800,40"/>
+    </PageHeaderBand>
+
+    <GroupHeaderBand HeightF="40">
+      <XRTable BoundsF="0,0,800,40">
+        <XRTableRow>
+          <XRTableCell Text="Date" BackColor="#D3D3D3" WidthF="80"/>
+          <XRTableCell Text="Name of Senior Citizen (SC)" BackColor="#00BFFF" WidthF="150"/>
+          <XRTableCell Text="OSCA ID No./SC ID No." BackColor="#FFFF00" WidthF="120"/>
+          <XRTableCell Text="SC TIN" BackColor="#9370DB" WidthF="80"/>
+          <XRTableCell Text="SI/OR Number" BackColor="#FFA500" WidthF="100"/>
+          <XRTableCell Text="Sales (inclusive of VAT)" BackColor="#90EE90" WidthF="120"/>
+          <XRTableCell Text="VAT Amount" BackColor="#FF6347" WidthF="80"/>
+          <XRTableCell Text="VAT Exempt Sales" BackColor="#FFDAB9" WidthF="100"/>
+          <XRTableCell Text="Discount" BackColor="#FFFF99" WidthF="80"/>
+          <XRTableCell Text="Net Sales" BackColor="#D3D3D3" WidthF="100"/>
+        </XRTableRow>
+      </XRTable>
+    </GroupHeaderBand>
+
+    <DetailBand HeightF="25">
+      <XRTable BoundsF="0,0,800,25">
+        <XRTableRow>
+          <XRTableCell ExpressionBindings="[[Text]=[Date]]" WidthF="80"/>
+          <XRTableCell ExpressionBindings="[[Text]=[SeniorCitizenName]]" WidthF="150"/>
+          <XRTableCell ExpressionBindings="[[Text]=[OSCA_ID]]" WidthF="120"/>
+          <XRTableCell ExpressionBindings="[[Text]=[SC_TIN]]" WidthF="80"/>
+          <XRTableCell ExpressionBindings="[[Text]=[SI_OR_Number]]" WidthF="100"/>
+          <XRTableCell ExpressionBindings="[[Text]=[SalesInclusiveVAT]]" WidthF="120"/>
+          <XRTableCell ExpressionBindings="[[Text]=[VATAmount]]" WidthF="80"/>
+          <XRTableCell ExpressionBindings="[[Text]=[VATExemptSales]]" WidthF="100"/>
+          <XRTableCell ExpressionBindings="[[Text]=[Discount]]" WidthF="80"/>
+          <XRTableCell ExpressionBindings="[[Text]=[NetSales]]" WidthF="100"/>
+        </XRTableRow>
+      </XRTable>
+    </DetailBand>
+  </Bands>
+
+  <Parameters>
+    <Parameter Name="ReportDate" Type="DateTime" Value="2025-09-08"/>
+  </Parameters>
+</XtraReport>

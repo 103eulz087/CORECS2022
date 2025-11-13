@@ -16,6 +16,7 @@ using DevExpress.XtraBars.Ribbon;
 using DevExpress.XtraEditors;
 using SalesInventorySystem.POS;
 using SalesInventorySystem.HotelManagement;
+using DevExpress.XtraReports.UI;
 
 namespace SalesInventorySystem
 {
@@ -2651,8 +2652,12 @@ namespace SalesInventorySystem
             //POSDevEx.POSSettingsDevEx pcusatfsmr = new POSDevEx.POSSettingsDevEx();
             //pcusatfsmr.MdiParent = this;
             //pcusatfsmr.Show();
-            Sabong.SBDashboard sbdash = new Sabong.SBDashboard();
-            sbdash.Show();
+
+
+            //Sabong.SBDashboard sbdash = new Sabong.SBDashboard();
+            //sbdash.Show();
+
+            ShowSeniorCitizenReport();
         }
 
 
@@ -2822,10 +2827,42 @@ namespace SalesInventorySystem
             lockeusr.ShowDialog(this);
         }
 
-        private void btnSalesManualEntry_ItemClick(object sender, ItemClickEventArgs e)
+
+        public void ShowSeniorCitizenReport()
+        {
+            // 1. Load the .repx file
+            XtraReport report = XtraReport.FromFile("SeniorCitizenSalesReport.repx", true);
+
+            // 2. Fetch data from your database
+           ;
+            string query = @"SELECT *
+                             FROM BatchSalesSummary";
+
+            DataTable dt = new DataTable();
+            using (SqlConnection conn = Database.getConnection())
+            {
+                SqlDataAdapter adapter = new SqlDataAdapter(query, conn);
+                adapter.Fill(dt);
+            }
+
+            // 3. Bind the DataTable to the report
+            report.DataSource = dt;
+            report.DataMember = ""; // For DataTable, leave empty
+
+            // 4. Optional: Set parameter values (if used in header)
+            report.Parameters["ReportDate"].Value = DateTime.Now;
+
+            // 5. Show the report in a preview dialog
+            ReportPrintTool printTool = new ReportPrintTool(report);
+            printTool.ShowPreviewDialog();
+         
+    }
+
+    private void btnSalesManualEntry_ItemClick(object sender, ItemClickEventArgs e)
         {
             POS.PointOfSaleManual posman = new PointOfSaleManual();
             posman.ShowDialog(this);
+          
         }
 
         private void btnInventoryMapping_ItemClick(object sender, ItemClickEventArgs e)

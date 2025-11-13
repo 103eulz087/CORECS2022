@@ -1469,6 +1469,12 @@ namespace SalesInventorySystem.POSDevEx
                     }
                 }
 
+                //SampleReports report = new SampleReports();
+                //report.DataSource = table;
+                //report.DataMember = "";
+                //ReportPrintTool printTool = new ReportPrintTool(report);
+                //printTool.ShowPreviewDialog();
+
 
             }
             catch (SqlException ex)
