@@ -12,6 +12,7 @@ using System.Drawing;
 using System.IO.Ports;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -285,12 +286,16 @@ namespace SalesInventorySystem.POS
             HelperFunction.isEnableAlphaWithDecimal(e);
         }
 
-
-
         public async Task PushSaleAsync(SalesDataDto sale)
         {
             using (var client = new HttpClient())
             {
+                // Add API key to the request header
+                string apiKey = "your-api-key-here"; // Replace with your actual key
+                client.DefaultRequestHeaders.Clear();
+                client.DefaultRequestHeaders.Add("Authorization", $"IssuedKey {apiKey}");
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
 
                 var json = JsonConvert.SerializeObject(sale);
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
