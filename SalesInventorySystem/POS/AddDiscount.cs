@@ -17,7 +17,7 @@ namespace SalesInventorySystem
     public partial class AddDiscount : DevExpress.XtraEditors.XtraForm
     {
         public static string controlno,id,name,discountamount,remarks,pwdidno,pwdname,pwddiscountamount;
-        public static bool isdone = false, isOnetimeDiscount = false, isSeniorDiscount = false, isPwdDiscount = false, isOthersDiscount = false;
+        public static bool isdone = false, isOnetimeDiscount = false, isSeniorDiscount = false, isPwdDiscount = false, isOthersDiscount = false, isNacDiscount = false,isMovDiscount=false;
         public static string discounttype = "";
         string percentamt = "0";
         public AddDiscount()
@@ -204,6 +204,25 @@ namespace SalesInventorySystem
             txtpwddiscountamount.Text = discountedamount.ToString();
         }
 
+        private void txtmovpercent_TextChanged(object sender, EventArgs e)
+        {
+            double discountedamount = 0.0;
+            double percentageAmount = Convert.ToDouble(txtpwdpercent.Text) / 100;
+            string getVatAdjustment = Database.getSingleResultSet("SELECT dbo.func_getVatAdjustment('" + Login.assignedBranch + "','" + PointOfSale.refno + "','" + percentageAmount + "')");
+
+            discountedamount = Math.Round(Convert.ToDouble(txtpwdamount.Text) * percentageAmount, 2);
+            txtpwddiscountamount.Text = discountedamount.ToString();
+            txtvatadj.Text = getVatAdjustment;
+
+            string getVATExAdj = Database.getSingleResultSet("SELECT dbo.func_getDiscountedItemsVATEXADJ('" + Login.assignedBranch + "','" + PointOfSale.refno + "','" + Environment.MachineName + "','" + percentageAmount + "')");
+            txtvatexadj.Text = getVATExAdj;
+        }
+
+        private void simpleButton4_Click(object sender, EventArgs e)
+        {
+
+        }
+
         void spDiscount()
         {
             SqlConnection con = Database.getConnection();
@@ -326,6 +345,8 @@ namespace SalesInventorySystem
                     isSeniorDiscount = true;
                     isPwdDiscount = false;
                     isOthersDiscount = false;
+                    isNacDiscount = false;
+                    isMovDiscount = false;
                 }
                 
             }
@@ -347,6 +368,8 @@ namespace SalesInventorySystem
                     isSeniorDiscount = false;
                     isPwdDiscount = true;
                     isOthersDiscount = false;
+                    isNacDiscount = false;
+                    isMovDiscount = false;
                 }
             }
             else if (radioButton3.Checked == true) //radiobutton3 OTHERS
@@ -367,6 +390,52 @@ namespace SalesInventorySystem
                     isSeniorDiscount = false;
                     isPwdDiscount = false;
                     isOthersDiscount = true;
+                    isNacDiscount = false;
+                    isMovDiscount = false;
+                }
+            }
+            else if (radioButton4.Checked == true) //radiobutton3 OTHERS
+            {
+                discounttype = "NAC";
+                if (String.IsNullOrEmpty(txtremarks.Text) || String.IsNullOrEmpty(txtnacdiscountamount.Text) || String.IsNullOrEmpty(txtnacpercent.Text))
+                {
+                    XtraMessageBox.Show("Fields Mandatory");
+                    return;
+                }
+                else
+                {
+                    percentamt = txtnacpercent.Text;
+                    id = "";
+                    discountamount = txtnacdiscountamount.Text;
+                    name = "";
+                    remarks = txtremarks.Text;
+                    isSeniorDiscount = false;
+                    isPwdDiscount = false;
+                    isOthersDiscount = false;
+                    isNacDiscount = true;
+                    isMovDiscount = false;
+                }
+            }
+            else if (radioButton5.Checked == true) //radiobutton3 OTHERS
+            {
+                discounttype = "MOV";
+                if (String.IsNullOrEmpty(txtremarks.Text) || String.IsNullOrEmpty(txtmovdiscountamount.Text) || String.IsNullOrEmpty(txtmovpercent.Text))
+                {
+                    XtraMessageBox.Show("Fields Mandatory");
+                    return;
+                }
+                else
+                {
+                    percentamt = txtmovpercent.Text;
+                    id = "";
+                    discountamount = txtmovdiscountamount.Text;
+                    name = "";
+                    remarks = txtremarks.Text;
+                    isSeniorDiscount = false;
+                    isPwdDiscount = false;
+                    isOthersDiscount = false;
+                    isNacDiscount = false;
+                    isMovDiscount = true;
                 }
             }
             spDiscount();
@@ -394,7 +463,9 @@ namespace SalesInventorySystem
                 ", '"+DateTime.Now.ToShortDateString() +"' " +
                 ", '"+Login.isglobalUserID+"' " +
                 ", 0" +
-                ", 0)");
+                ", 0" +
+                ", Discount Applied. OR# '"+txtorderno.Text +' '+ discounttype + "' Discount of '"+ discountamount + "' applied by Cashier. " +
+                ")");
 
             isdone = true;
             this.Close();
@@ -436,6 +507,8 @@ namespace SalesInventorySystem
                 panelsenior.Visible = true;
                 panelothers.Visible = false;
                 panelpwd.Visible = false;
+                panelNac.Visible = false;
+                panelmov.Visible = false;
                 //txtamnttobediscount.Text = pwdAndSeniorDiscountAmount().ToString();
                 btnshowdiscounteditems.Visible = true;
             }
@@ -450,8 +523,10 @@ namespace SalesInventorySystem
 
                 txtpwdidno.Focus();
                 panelsenior.Visible = false;
-                panelothers.Visible = false;
-                panelpwd.Visible = true;
+                panelothers.Visible = true;
+                panelpwd.Visible = false;
+                panelNac.Visible = false;
+                panelmov.Visible = false;
                 //txtpwdamount.Text = pwdAndSeniorDiscountAmount().ToString();
                 btnshowdiscounteditems.Visible = true;
             }
@@ -461,11 +536,47 @@ namespace SalesInventorySystem
                 txtotherspercent.Text = "5";
                 txtotherspercent.Focus();
                 panelsenior.Visible = false;
-                panelothers.Visible = true;
                 panelpwd.Visible = false;
+                panelothers.Visible = true;
+                panelNac.Visible = false;
+                panelmov.Visible = false;
                 btnshowdiscounteditems.Visible = false;
             }
-            
+            else if (radioButton4.Checked == true)
+            {
+                txtnacamount.Text = PointOfSale.totamount;
+                txtnacpercent.Text = "5";
+                getVatAdjustment = Database.getSingleResultSet("SELECT dbo.func_getVatAdjustment('" + Login.assignedBranch + "','" + PointOfSale.refno + "','" + Convert.ToDouble(txtnacpercent.Text) / 100 + "')");
+                txtvatadj.Text = getVatAdjustment;
+                txtvatexadj.Text = getVATExAdj;
+
+                txtnacid.Focus();
+                panelsenior.Visible = false;
+                panelothers.Visible = false;
+                panelpwd.Visible = false;
+                panelNac.Visible = true;
+                panelmov.Visible = false;
+                //txtpwdamount.Text = pwdAndSeniorDiscountAmount().ToString();
+                btnshowdiscounteditems.Visible = true;
+            }
+            else if (radioButton5.Checked == true)
+            {
+                txtmovamount.Text = PointOfSale.totamount;
+                txtmovpercent.Text = "5";
+                getVatAdjustment = Database.getSingleResultSet("SELECT dbo.func_getVatAdjustment('" + Login.assignedBranch + "','" + PointOfSale.refno + "','" + Convert.ToDouble(txtmovpercent.Text) / 100 + "')");
+                txtvatadj.Text = getVatAdjustment;
+                txtvatexadj.Text = getVATExAdj;
+
+                txtmovid.Focus();
+                panelsenior.Visible = false;
+                panelothers.Visible = false;
+                panelpwd.Visible = false;
+                panelNac.Visible = false;
+                panelmov.Visible = true;
+                //txtpwdamount.Text = pwdAndSeniorDiscountAmount().ToString();
+                btnshowdiscounteditems.Visible = true;
+            }
+
         }
 
         private void radioButton1_CheckedChanged(object sender, EventArgs e)//SENIOR

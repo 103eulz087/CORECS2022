@@ -266,5 +266,11 @@ namespace SalesInventorySystem.POSStandAloneSetup
             //HOForms.POSTransactions postra = new HOForms.POSTransactions();
             //postra.Show();
         }
+
+        private void button19_Click(object sender, EventArgs e)
+        {
+            POS.POSXread oiajsd = new POS.POSXread();
+            oiajsd.ShowDialog(this);
+        }
     }
 }

@@ -123,7 +123,7 @@ namespace SalesInventorySystem.Classes
                 string sn = "S/N:" + compserialno;
                 details += HelperFunction.PrintCenterText(tradename) + Environment.NewLine;
                 details += HelperFunction.PrintCenterText(compaddress1) + Environment.NewLine;
-                //details += HelperFunction.PrintCenterText(compaddress2) + Environment.NewLine;
+                details += HelperFunction.PrintCenterText("VAT REG") + Environment.NewLine;
                 details += HelperFunction.PrintCenterText("TIN: " + comptinno) + Environment.NewLine; 
                 details += HelperFunction.PrintCenterText(sn) + Environment.NewLine;
                 details += HelperFunction.PrintCenterText("MIN: " + compminno) + Environment.NewLine + Environment.NewLine;
@@ -205,6 +205,51 @@ namespace SalesInventorySystem.Classes
             details += HelperFunction.PrintLeftText("Business Style : _______________") + Environment.NewLine + Environment.NewLine;
             return details;
         }
+        public static string doHeaderDetailsForReprint(string ordercode, string transcode, string terminalno, string name, string address, string tin, string businesstype,string reprintDate)
+        {
+            String details = "";
+            string datereprint = "Date Reprint: "+ reprintDate;
+            string cashier = "CASHIER : " + Login.Fullname;
+            string custno = "CUST #: " + PointOfSale.custcode;
+            details += HelperFunction.PrintLeftText(datereprint) + Environment.NewLine;
+            details += HelperFunction.PrintLeftRigthText(cashier, custno) + Environment.NewLine;
+            details += HelperFunction.PrintLeftText("SI No.: " + ordercode) + Environment.NewLine;
+            details += HelperFunction.PrintLeftText("Tran#: " + transcode) + Environment.NewLine;
+            //string trans = "TRAN#: " + transcode;
+            //string orderr = "SI No: " + ordercode;
+            //details += HelperFunction.PrintLeftRigthText(orderr, trans) + Environment.NewLine;
+            string petsa = DateTime.Now.ToShortDateString();
+            string oras = DateTime.Now.ToShortTimeString();
+            string fulldate1 = petsa + ' ' + oras;
+
+            if (String.IsNullOrEmpty(name))
+            {
+                name = "__________________";
+            }
+            if (String.IsNullOrEmpty(address))
+            {
+                address = "__________________";
+            }
+            if (String.IsNullOrEmpty(tin))
+            {
+                tin = "__________________";
+            }
+            if (String.IsNullOrEmpty(businesstype))
+            {
+                businesstype = "__________________";
+            }
+
+            DateTime dt = DateTime.Now;
+            string format = "dd-MMM-yyyy ddd hh:mm:ss tt";
+            //string fulldate = String.Format("{dd-MMM-yyyy ddd hh:mm:ss tt}", dt);
+            details += HelperFunction.PrintLeftText("Date:" + dt.ToString(format)) + Environment.NewLine + Environment.NewLine;
+            // details += HelperFunction.PrintLeftText("v896 Terminal#: " + terminalno) + Environment.NewLine;
+            details += HelperFunction.PrintLeftText("NAME : " + name) + Environment.NewLine;
+            details += HelperFunction.PrintLeftText("ADDRESS : " + address) + Environment.NewLine;
+            details += HelperFunction.PrintLeftText("TIN: " + tin) + Environment.NewLine;
+            details += HelperFunction.PrintLeftText("Business Style : " + businesstype) + Environment.NewLine + Environment.NewLine;
+            return details;
+        }
         public static string doHeaderDetails(string ordercode, string transcode, string terminalno, string name, string address, string tin, string businesstype)
         {
             String details = "";
@@ -247,7 +292,9 @@ namespace SalesInventorySystem.Classes
             details += HelperFunction.PrintLeftText("TIN: " + tin) + Environment.NewLine;
             details += HelperFunction.PrintLeftText("Business Style : " + businesstype) + Environment.NewLine + Environment.NewLine;
             return details;
-        }public static string doHeaderDetailsX(string cashiername,string ordercode, string terminalno, string name, string address, string tin, string businesstype,string dateBuy,string timeBuy)
+        }
+
+        public static string doHeaderDetailsX(string cashiername,string ordercode, string terminalno, string name, string address, string tin, string businesstype,string dateBuy,string timeBuy)
         {
             String details = "";
             string cashier = "CASHIER : " + cashiername;// Login.Fullname;

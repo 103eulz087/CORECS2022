@@ -3,6 +3,7 @@ using DevExpress.Data;
 using DevExpress.XtraEditors;
 using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Views.Grid;
+using DevExpress.XtraPrinting;
 using DevExpress.XtraReports.UI;
 using DevExpress.XtraSplashScreen;
 using System;
@@ -146,19 +147,60 @@ namespace SalesInventorySystem
             return macaddress;
         }
 
-        
+        public static WinControlContainer CopyGridControlEulz(GridControl grid)
+        {
+            // Auto-fit all columns in the main view
+            GridView view = grid.MainView as GridView;
+            if (view != null)
+            {
+                view.BestFitColumns(); // This adjusts all columns to fit their content
+            }
+
+            // Create a WinControlContainer object
+            WinControlContainer winContainer = new WinControlContainer
+            {
+                Location = new Point(0, 0),
+                Size = grid.Size, // Use the actual grid size for better fit
+                WinControl = grid
+            };
+
+            return winContainer;
+        }
 
         public static WinControlContainer CopyGridControl(GridControl grid)
         {
 
             // Create a WinControlContainer object.
-            WinControlContainer winContainer = new WinControlContainer();
-            // Set its location and size.
-            winContainer.Location = new Point(0, 0);
-            winContainer.Size = new Size(200, 100);
-            // Set the grid as a wrapped object.
-            winContainer.WinControl = grid;
+            //WinControlContainer winContainer = new WinControlContainer();
+            //// Set its location and size.
+            //winContainer.Location = new Point(0, 0);
+            //winContainer.Size = new Size(200, 100);
+            //// Set the grid as a wrapped object.
+            //winContainer.WinControl = grid;
+            //return winContainer;
+
+            // Apply best fit to columns
+            GridView view = grid.MainView as GridView;
+            if (view != null)
+            {
+                view.OptionsView.ColumnAutoWidth = false; // Allow columns to expand individually
+                //view.BestFitColumns(); // Auto-size columns based on content
+                view.OptionsView.RowAutoHeight = true; // Auto-size rows for multi-line text
+            }
+
+            grid.Size = new Size(1200, 650); // Width x Height in hundredths of an inch
+
+
+            // Create a WinControlContainer object
+            WinControlContainer winContainer = new WinControlContainer
+            {
+                Location = new Point(0, 0),
+                Size = grid.Size, // Use grid's actual size
+                WinControl = grid
+            };
+
             return winContainer;
+
         }
         public static WinControlContainer CopyGridControl(GridControl grid,GridView view,String col)
         {

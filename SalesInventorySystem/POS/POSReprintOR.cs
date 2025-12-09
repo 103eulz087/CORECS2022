@@ -67,7 +67,7 @@ namespace SalesInventorySystem.POS
                 
                 
             //}
-            bool isxists = Database.checkifExist("SELECT ReferenceNo FROM BatchSalesDetails WHERE BranchCode='" + Login.assignedBranch + "' and MachineUsed='" + Environment.MachineName + "' and ReferenceNo='" + txtorno.Text + "' ");
+            bool isxists = Database.checkifExist("SELECT TOP(1) ReferenceNo FROM dbo.BatchSalesDetails WHERE BranchCode='" + Login.assignedBranch + "' and MachineUsed='" + Environment.MachineName + "' and ReferenceNo='" + txtorno.Text + "' ");
             if (!isxists)
             {
                 XtraMessageBox.Show("OR Number not Exists");
@@ -78,6 +78,11 @@ namespace SalesInventorySystem.POS
                 string filepath1 = "C:\\POSTransaction\\CopyForReprint\\" + txtorno.Text + ".txt";
                 var fileContent = string.Empty;
                 fileContent = File.ReadAllText(filepath1);
+
+                string petsa = DateTime.Now.ToShortDateString();
+                string oras = DateTime.Now.ToShortTimeString();
+                string fulldate1 = "Date Reprint: "+petsa + ' ' + oras;
+
                 if (fileContent.Contains("*"))
                 {
                     fileContent = fileContent.Replace("*", txtcounter.Text);
@@ -86,7 +91,11 @@ namespace SalesInventorySystem.POS
                 {
                     fileContent = fileContent.Replace("$$$$$$", txttransno.Text);
                 }
-             
+                if (fileContent.Contains("#"))
+                {
+                    fileContent = fileContent.Replace("#", fulldate1);
+                }
+
                 //StreamWriter writer;//,writer22;
                 //writer = new StreamWriter(filepath1, true);
                 //writer.Write(fileContent);
@@ -124,7 +133,7 @@ namespace SalesInventorySystem.POS
                 //writer.Write(fileContent);
                 //writer.Close();
             }
-            Database.ExecuteQuery("INSERT INTO POSTransaction VALUES('" + Login.assignedBranch + "','" + txttransno.Text + "','" + Environment.MachineName + "','REPRINT OR','" + DateTime.Now.ToString() + "','" + Login.Fullname + "','"+txtcounter.Text+"','0')");
+            Database.ExecuteQuery("INSERT INTO POSTransaction VALUES('" + Login.assignedBranch + "','" + txttransno.Text + "','" + Environment.MachineName + "','Receipt Reprint','" + DateTime.Now.ToString() + "','" + Login.Fullname + "','"+txtcounter.Text+"','0','Receipt Reprint: OR#: '"+ txtorno.Text + "' was reprinted by Cashier on '"+DateTime.Now.ToString()+"' ')");
             XtraMessageBox.Show("Successfully Print");
             isdone = true;
             this.Close();

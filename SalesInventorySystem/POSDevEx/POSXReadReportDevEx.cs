@@ -16,6 +16,8 @@ using System.IO;
 using DevExpress.XtraGrid.Columns;
 using DevExpress.XtraPrinting;
 using System.Globalization;
+using DevExpress.XtraGrid.Printing;
+using DevExpress.XtraGrid.Views.BandedGrid;
 
 namespace SalesInventorySystem.POSDevEx
 {
@@ -93,45 +95,6 @@ namespace SalesInventorySystem.POSDevEx
                 XtraMessageBox.Show("Date Field must not Empty");
                 return;
             }
-            //if(reportid.ToString().Equals(""))
-            //if (comboBoxEdit1.Text == "Group Category Sales") //123
-            //    reportype = "GROUPCATEGORY";
-            //else if (comboBoxEdit1.Text == "Full Transaction Sales") //123
-            //    reportype = "FULLTRANSACTION";
-            //else if (comboBoxEdit1.Text == "Group Item Sales") //123
-            //    reportype = "GROUPITEM";
-            //else if (comboBoxEdit1.Text == "Cashier Sales")//123
-            //    reportype = "CASHIERSALES";
-            //else if (comboBoxEdit1.Text == "Audit Logs")//123
-            //    reportype = "AUDITLOGS";
-            //else if (comboBoxEdit1.Text == "XREAD")//123
-            //    reportype = "XREAD";
-            //else if (comboBoxEdit1.Text == "ZREAD")//12
-            //    reportype = "ZREAD";
-            //else if (comboBoxEdit1.Text == "REFUND")//123
-            //    reportype = "REFUND";
-            //else if (comboBoxEdit1.Text == "PWD")//123
-            //    reportype = "PWD";
-            //else if (comboBoxEdit1.Text == "Senior Citizen")//123
-            //    reportype = "SENIOR";
-            //else if (comboBoxEdit1.Text == "Regular Disc")//123
-            //    reportype = "REGULAR";
-            //else if (comboBoxEdit1.Text == "Sales Summary Report")//12
-            //    reportype = "SALESSUMMARY";
-            //else if (comboBoxEdit1.Text == "CreditCard")//123
-            //    reportype = "CREDITCARD";
-            //else if (comboBoxEdit1.Text == "Merchant Sales")//123
-            //    reportype = "MERCHANT";
-            //else if (comboBoxEdit1.Text == "SalesIN")//123
-            //    reportype = "SALESIN";
-            //else if (comboBoxEdit1.Text == "BACKUPDATA")//123
-            //    reportype = "BACKUPDATA";
-            //else if (comboBoxEdit1.Text == "XERO SalesInvoice")//123
-            //    reportype = "XERO SalesInvoice";
-            //else if (comboBoxEdit1.Text == "JUANTAX SalesTransaction")//123
-            //    reportype = "JUANTAX SalesTransaction";
-            //else if (comboBoxEdit1.Text == "Group Product Category")//123
-            //    reportype = "PRODCAT";
             execute(Convert.ToInt32(reportid.ToString()));
 
             foreach(GridColumn col in gridView1.Columns)
@@ -830,10 +793,272 @@ namespace SalesInventorySystem.POSDevEx
             printfile.printTextFile(filetoprint);
             //embedToJournal();
         }
+
+        //public XRTable BuildXRTableFromGrid(GridView gridView)
+        //{
+        //    XRTable table = new XRTable
+        //    {
+        //        WidthF = 1000, // Adjust based on page width
+        //        Borders = DevExpress.XtraPrinting.BorderSide.All,
+        //        Font = new Font("Arial", 6),
+        //        LocationF = new PointF(0, 0)
+        //    };
+        //    table.BeginInit();
+
+        //    // Header row
+        //    XRTableRow headerRow = new XRTableRow();
+        //    foreach (GridColumn col in gridView.VisibleColumns)
+        //    {
+        //        XRTableCell headerCell = new XRTableCell
+        //        {
+        //            Text = col.Caption,
+        //            Font = new Font("Arial", 6, FontStyle.Bold),
+        //            BackColor = Color.LightGray,
+        //            TextAlignment = TextAlignment.MiddleCenter,
+        //            Padding = new DevExpress.XtraPrinting.PaddingInfo(0,0,0,0),
+        //            CanGrow = true
+        //        };
+        //        headerRow.Cells.Add(headerCell);
+        //    }
+        //    table.Rows.Add(headerRow);
+
+        //    // Data rows
+        //    for (int i = 0; i < gridView.RowCount; i++)
+        //    {
+        //        XRTableRow dataRow = new XRTableRow();
+        //        foreach (GridColumn col in gridView.VisibleColumns)
+        //        {
+        //            string cellText = gridView.GetRowCellDisplayText(i, col);
+        //            XRTableCell dataCell = new XRTableCell
+        //            {
+        //                Text = cellText,
+        //                Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0),
+        //                CanGrow = true,
+        //                WordWrap = true,
+        //                TextAlignment = col.ColumnType == typeof(decimal) || col.ColumnType == typeof(double)
+        //                    ? TextAlignment.MiddleRight
+        //                    : TextAlignment.MiddleLeft
+        //            };
+
+        //            // Auto-adjust font size based on content length
+        //            int length = cellText.Length;
+        //            if (length > 40)
+        //                dataCell.Font = new Font("Arial", 5);
+        //            else if (length > 20)
+        //                dataCell.Font = new Font("Arial", 5);
+        //            else
+        //                dataCell.Font = new Font("Arial", 5);
+
+        //            dataRow.Cells.Add(dataCell);
+        //        }
+        //        table.Rows.Add(dataRow);
+        //    }
+
+        //    table.EndInit();
+        //    return table;
+        //}
+
+        public XRTable BuildXRTableFromGrid(GridView gridView)
+        {
+           
+            XRTable table = new XRTable
+            {
+                WidthF = 1300,
+
+                Borders = DevExpress.XtraPrinting.BorderSide.All,
+                Font = new Font("Arial", 5),
+                LocationF = new PointF(0, 0)
+            };
+            table.BeginInit();
+
+            // 🎨 Define custom header colors
+            Dictionary<string, Color> headerColors = new Dictionary<string, Color>
+            {
+                { "Branch", Color.LightBlue },
+                { "Remarks", Color.LightYellow }
+                // Add more mappings as needed
+            };
+
+            // 🧾 Header row
+            XRTableRow headerRow = new XRTableRow();
+            foreach (GridColumn col in gridView.VisibleColumns)
+            {
+                Color backColor = headerColors.ContainsKey(col.FieldName) ? headerColors[col.FieldName] : Color.LightGray;
+
+                XRTableCell headerCell = new XRTableCell
+                {
+                    Text = col.Caption,
+                    Font = new Font("Arial", 5, FontStyle.Bold),
+                    BackColor = backColor,
+                    TextAlignment = TextAlignment.MiddleCenter,
+                    Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0),
+                    CanGrow = true
+                };
+                headerRow.Cells.Add(headerCell);
+            }
+            table.Rows.Add(headerRow);
+
+            // 📄 Data rows
+            for (int i = 0; i < gridView.RowCount; i++)
+            {
+                XRTableRow dataRow = new XRTableRow();
+                foreach (GridColumn col in gridView.VisibleColumns)
+                {
+                    string cellText = gridView.GetRowCellDisplayText(i, col);
+                    XRTableCell dataCell = new XRTableCell
+                    {
+                        Text = cellText,
+                        Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0),
+                        CanGrow = true,
+                        WordWrap = true,
+                        TextAlignment = col.ColumnType == typeof(decimal) || col.ColumnType == typeof(double)
+                            ? TextAlignment.MiddleRight
+                            : TextAlignment.MiddleLeft,
+                        Font = new Font("Arial", 5)
+                    };
+
+                    dataRow.Cells.Add(dataCell);
+                }
+                table.Rows.Add(dataRow);
+            }
+
+            table.EndInit();
+            return table;
+        }
+
+        //void printReport()
+        //{
+        //    try
+        //    {
+        //        DevExReportTemplate.BIRAnnex_E1 xct = new DevExReportTemplate.BIRAnnex_E1
+        //        {
+        //            Landscape = true,
+        //            PaperKind = System.Drawing.Printing.PaperKind.Legal
+        //        };
+
+        //        //Hide unwanted columns
+        //        //gridView1.Columns["BranchCode"].Visible = false;
+        //        //gridView1.Columns["MachineUsed"].Visible = false;
+
+        //        //Build XRTable from GridView
+        //       XRTable printableTable = BuildXRTableFromGrid(gridView1);
+        //        xct.Bands[BandKind.Detail].Controls.Add(printableTable);
+
+        //    //Optional: Set font for the entire band
+
+        //   xct.Bands[BandKind.Detail].Font = new Font("Arial", 5);
+
+        //        ReportPrintTool report = new ReportPrintTool(xct);
+        //        report.ShowRibbonPreviewDialog();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        XtraMessageBox.Show("Error: " + ex.Message);
+        //    }
+        //}
+
+        void printReport()
+        {
+            try
+            {
+
+
+                DevExReportTemplate.BIRAnnex_E1 xct = new DevExReportTemplate.BIRAnnex_E1();
+                xct.Landscape = true;
+
+
+                xct.PaperKind = System.Drawing.Printing.PaperKind.Legal;
+
+                xct.xrsoftwarename.Text = "Software: SPARK POS ver 2.0";
+                xct.xrserialno.Text = "Serial No:. XXXXX XXXX XXXXX";
+                xct.xrminno.Text = "Min No.: XXX XXXX XXXXX";
+                xct.xrposterminalno.Text = "POS Terminal No.: XXXXX XXXXX XXXXX";
+                xct.xrdatetime.Text = "Date and Time Generated: "+DateTime.Now.ToString();
+                xct.xruserid.Text = "User ID: "+ Login.userid;
+
+                //xct.Margins = new System.Drawing.Printing.Margins(100, 100, 100, 100);
+
+                // Normalize input
+                string reportType = txtreporttypeposreading.Text?.Trim().ToUpperInvariant();
+
+                // Apply default font settings
+                Font defaultRowFont = new Font("Arial", 10);
+                Font defaultHeaderFont = new Font("Arial", 10, FontStyle.Bold);
+
+                // Apply specialized font for SalesSummary and DailyTransaction
+                if (reportType == "SALESSUMMARY" || reportType == "DAILYTRANSACTION")
+                {
+                    xct.xrannex.Text = "ANNEX E-1";
+                    xct.xrreporttitle.Text = txtreporttypeposreading.Text;
+                }
+                else
+                {
+                    // Apply default font for all other types
+                    gridView1.AppearancePrint.Row.Font = defaultRowFont;
+                    gridView1.AppearancePrint.HeaderPanel.Font = defaultHeaderFont;
+
+                    switch (reportType)
+                    {
+                        case "ACTIVITYLOGS":
+                            xct.xrannex.Text = "";
+                            xct.xrreporttitle.Text = "AUDIT LOGS";
+                            break;
+
+                        case "SENIOR":
+                            xct.xrannex.Text = "ANNEX E-2";
+                            xct.xrreporttitle.Text = "Senior Citizen Sales Book/Report";
+                            break;
+
+                        case "PWD":
+                            xct.xrannex.Text = "ANNEX E-3";
+                            xct.xrreporttitle.Text = "Person with Disability Sales Book/Report";
+                            break;
+
+                        default:
+                            xct.xrannex.Text = "";
+                            xct.xrreporttitle.Text = "";
+                            break;
+                    }
+                }
+                //xct.xramount.Text = String.Format("{0:0,0.00}", amounttopay);
+
+
+
+                //gridView1.Columns["Branch"].Visible = false;
+                //gridView1.Columns["MachineUsed"].Visible = false;
+
+                //xct.xramountinwords.Text = str.ToUpper();
+                //xct.xrpreparedby.Text = Login.Fullname;
+                //xct.xrLabel3.Text = Database.getSingleQuery("Approvers", "UserID<>''", "UserID");
+                xct.Bands[BandKind.Detail].Controls.Add(HelperFunction.CopyGridControl(gridControl1));
+                //xct.Bands[BandKind.Detail].Font = new System.Drawing.Font("Tahoma", 10);
+
+             
+
+                PrintableComponentLink link = new PrintableComponentLink(new PrintingSystem());
+                link.Component = gridControl1;
+                link.CreateDocument(); // Important: triggers layout rendering
+                link.Margins = new System.Drawing.Printing.Margins(50, 50, 50, 50);
+                link.Landscape = true;
+                link.PaperKind = System.Drawing.Printing.PaperKind.Legal;
+                link.PrintingSystem.Document.AutoFitToPagesWidth = 1;
+
+                ReportPrintTool printTool = new ReportPrintTool(xct);
+                printTool.ShowPreview();
+
+                //ReportPrintTool report = new ReportPrintTool(xct);
+                //report.ShowRibbonPreviewDialog();
+
+            }
+            catch (FormatException ex)
+            {
+                XtraMessageBox.Show(ex.Message.ToString());
+            }
+        }
         private void simpleButton3_Click(object sender, EventArgs e)
         {
-            
-               
+            printReport();
+
             //brcode = txtbranch.Text;
             //Printing printit = new Printing();
             //if (gridView1.RowCount < 1)
@@ -1161,20 +1386,44 @@ namespace SalesInventorySystem.POSDevEx
             reportid = SearchLookUpClass.getSingleValue(txtreporttypeposreading, "ReportID");
         }
 
+        private void gridView1_CustomDrawColumnHeader(object sender, ColumnHeaderCustomDrawEventArgs e)
+        {
+            if (e.Column == null) return;
+
+            Dictionary<string, Color> headerColors = new Dictionary<string, Color>
+                {
+                    { "DateExecute", Color.LightBlue },
+                   
+                    { "Remarks", Color.LightCoral }
+                };
+
+            if (headerColors.ContainsKey(e.Column.FieldName))
+            {
+                e.Graphics.FillRectangle(new SolidBrush(headerColors[e.Column.FieldName]), e.Bounds);
+                TextRenderer.DrawText(e.Graphics, e.Column.Caption, e.Appearance.Font,
+                                      e.Bounds, e.Appearance.ForeColor,
+                                      TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter);
+                e.Handled = true;
+            }
+
+
+        }
+
         void execute(int reportcategory)
         {
+            
             bool ispermachine = false, ispercashier = false;
-            if(rad1.Checked==true) //PER BRANCH ONLY
-            {  
+            if (rad1.Checked == true) //PER BRANCH ONLY
+            {
                 ispermachine = false;
                 ispercashier = false;
             }
-            else if(rad2.Checked==true) //PER BRANCH AND MACHINE ONLY
+            else if (rad2.Checked == true) //PER BRANCH AND MACHINE ONLY
             {
                 ispermachine = true;
                 ispercashier = false;
             }
-            else if(rad3.Checked==true) //PER BRANCH, MACHINE AND PER CASHIER
+            else if (rad3.Checked == true) //PER BRANCH, MACHINE AND PER CASHIER
             {
                 ispermachine = true;
                 ispercashier = true;
@@ -1201,11 +1450,32 @@ namespace SalesInventorySystem.POSDevEx
                 com.CommandText = query;
                 com.ExecuteNonQuery();
                 gridView1.Columns.Clear();
+
                 gridControl1.DataSource = null;
                 adapter.Fill(table);
                 gridControl1.DataSource = table;
                 gridView1.BestFitColumns();
-                Classes.DevXGridViewSettings.setGridFormat(gridView1);
+            
+                if (reportcategory != 15)
+                {
+                    Classes.DevXGridViewSettings.setGridFormat(gridView1);
+                }
+                else
+                {
+                    if (gridView1.Columns["TransactionDate"] != null)
+                    {
+                        gridView1.Columns["TransactionDate"].DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+                        gridView1.Columns["TransactionDate"].DisplayFormat.FormatString = "MM/dd/yyyy HH:mm:ss";
+                    }
+                }
+
+                //SampleReports report = new SampleReports();
+                //report.DataSource = table;
+                //report.DataMember = "";
+                //ReportPrintTool printTool = new ReportPrintTool(report);
+                //printTool.ShowPreviewDialog();
+
+
             }
             catch (SqlException ex)
             {
@@ -1217,6 +1487,223 @@ namespace SalesInventorySystem.POSDevEx
             }
             con.Close();
         }
+
+        //void execute(int reportcategory)
+        //{
+        //    BandedGridView bandedView = new BandedGridView(gridControl1);
+        //    gridControl1.MainView = bandedView;
+        //    gridControl1.ViewCollection.Add(bandedView);
+
+        //    bool ispermachine = false, ispercashier = false;
+        //    if(rad1.Checked==true) //PER BRANCH ONLY
+        //    {  
+        //        ispermachine = false;
+        //        ispercashier = false;
+        //    }
+        //    else if(rad2.Checked==true) //PER BRANCH AND MACHINE ONLY
+        //    {
+        //        ispermachine = true;
+        //        ispercashier = false;
+        //    }
+        //    else if(rad3.Checked==true) //PER BRANCH, MACHINE AND PER CASHIER
+        //    {
+        //        ispermachine = true;
+        //        ispercashier = true;
+        //    }
+
+        //    SqlConnection con = Database.getConnection();
+        //    con.Open();
+        //    gridControl1.BeginUpdate();
+        //    try
+        //    {
+        //        string query = "spr_POSReports";
+        //        SqlCommand com = new SqlCommand(query, con);
+        //        SqlDataAdapter adapter = new SqlDataAdapter(com);
+        //        DataTable table = new DataTable();
+        //        com.Parameters.AddWithValue("@parmbrcode", txtbranch.Text);
+        //        com.Parameters.AddWithValue("@datefrom", txtsalesdatefrom.Text);
+        //        com.Parameters.AddWithValue("@dateto", txtsalesdateto.Text);
+        //        com.Parameters.AddWithValue("@parmprocessby", txtcashier.Text);
+        //        com.Parameters.AddWithValue("@parmoption", reportcategory);
+        //        com.Parameters.AddWithValue("@parmpercashier", ispercashier);
+        //        com.Parameters.AddWithValue("@parmispermachine", ispermachine);
+        //        com.Parameters.AddWithValue("@parmmachinename", txtmachine.Text);
+        //        com.CommandType = CommandType.StoredProcedure;
+        //        com.CommandText = query;
+        //        com.ExecuteNonQuery();
+        //        //gridView1.Columns.Clear();
+
+        //        gridControl1.DataSource = null;
+        //        adapter.Fill(table);
+        //        gridControl1.DataSource = table;
+        //        //gridView1.BestFitColumns();
+        //        //if (reportcategory != 15)
+        //        //{
+        //        //    Classes.DevXGridViewSettings.setGridFormat(gridView1);
+        //        //}
+        //        //else
+        //        //{
+        //        //    gridView1.Columns["TransactionDate"].DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+        //        //    gridView1.Columns["TransactionDate"].DisplayFormat.FormatString = "MM/dd/yyyy HH:mm:ss";
+        //        //}
+        //        //bandedView.Bands.Clear();
+        //        //bandedView.Columns.Clear();
+
+        //        // Create a default band for ungrouped columns
+
+        //        foreach (DataColumn col in table.Columns)
+        //        {
+        //            BandedGridColumn bandedCol = new BandedGridColumn
+        //            {
+        //                FieldName = col.ColumnName,
+        //                Caption = col.ColumnName,
+        //                Visible = true
+        //            };
+        //            bandedView.Columns.Add(bandedCol);
+        //        }
+        //        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //        //DEDUCTIONS
+        //        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //        GridBand bandDeductions = new GridBand
+        //        {
+        //            Caption = "Deductions",
+        //            AppearanceHeader = { BackColor = Color.Gold, Font = new Font("Arial", 9, FontStyle.Bold) }
+        //        };
+
+        //        GridBand bandDiscount = new GridBand { Caption = "Discount" };
+        //        string[] discountFields = { "SC", "PWD", "NAAC", "SoloParent", "Others" };
+
+        //        foreach (string field in discountFields)
+        //        {
+        //            var col = bandedView.Columns[field];
+        //            if (col != null)
+        //                bandDiscount.Columns.Add(col);
+        //        }
+
+        //        bandDeductions.Children.Add(bandDiscount);
+
+        //        // Add other deduction columns
+        //        string[] otherDeductionFields = { "Returns", "Voids", "TotalDeductions" };
+
+        //        foreach (string field in otherDeductionFields)
+        //        {
+        //            var col = bandedView.Columns[field];
+        //            if (col != null)
+        //            {
+        //                GridBand band = new GridBand { Caption = field };
+        //                band.Columns.Add(col);
+        //                bandDeductions.Children.Add(band);
+        //            }
+        //        }
+        //        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //        /// ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        //        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //        //ADJUSTMENT ON VAT
+        //        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //        GridBand bandAdjustment = new GridBand
+        //        {
+        //            Caption = "Adjustment on VAT",
+        //            AppearanceHeader = { BackColor = Color.Gold, Font = new Font("Arial", 9, FontStyle.Bold) }
+        //        };
+
+        //        GridBand bandDiscountVat = new GridBand { Caption = "Discount" };
+        //        string[] discountVatFields = { "SC1", "PWD1", "Others1" };
+
+        //        foreach (string field in discountVatFields)
+        //        {
+        //            var col = bandedView.Columns[field];
+        //            if (col != null)
+        //                bandDiscountVat.Columns.Add(col);
+        //        }
+
+        //        bandAdjustment.Children.Add(bandDiscountVat);
+
+        //        // Add other deduction columns
+        //        string[] otherVatDeductionFields = { "VatOnReturns", "Others3", "TotalVatAdjustment" };
+
+        //        foreach (string field in otherVatDeductionFields)
+        //        {
+        //            var col = bandedView.Columns[field];
+        //            if (col != null)
+        //            {
+        //                GridBand band = new GridBand { Caption = field };
+        //                band.Columns.Add(col);
+        //                bandAdjustment.Children.Add(band);
+        //            }
+        //        }
+        //        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //        /// // Step 3: Collect assigned columns
+        //        var assignedColumns = bandAdjustment.Children
+        //            .SelectMany(b => b.Columns.Cast<BandedGridColumn>())
+        //            .ToList();
+
+
+        //        /// ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        //        // Step 3: Collect assigned columns
+        //        var assignedColumns2 = bandDeductions.Children
+        //            .SelectMany(b => b.Columns.Cast<BandedGridColumn>())
+        //            .ToList();
+
+        //        // Step 4: Create default band for unassigned columns
+        //        GridBand defaultBand = new GridBand { Caption = "", Visible = true };
+
+        //        foreach (BandedGridColumn col in bandedView.Columns)
+        //        {
+        //            if (!assignedColumns.Contains(col))
+        //            {
+        //                defaultBand.Columns.Add(col);
+        //            }
+        //        }
+        //        foreach (BandedGridColumn col in bandedView.Columns)
+        //        {
+        //            if (!assignedColumns2.Contains(col))
+        //            {
+        //                defaultBand.Columns.Add(col);
+        //            }
+        //        }
+
+
+
+
+        //        // Add the default band to the view
+        //        bandedView.Bands.Add(defaultBand);
+
+        //        // Add only the Deductions band to the view
+        //        bandedView.Bands.Add(bandDeductions);
+        //        bandedView.Bands.Add(bandAdjustment);
+        //        bandedView.Appearance.BandPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+        //        bandedView.OptionsView.ColumnAutoWidth = false;
+        //        bandedView.OptionsView.RowAutoHeight = true;
+        //        bandedView.BestFitColumns();
+
+
+        //        if (reportcategory != 15)
+        //        {
+        //            Classes.DevXGridViewSettings.setGridFormat(bandedView);
+        //        }
+        //        else
+        //        {
+        //            if (bandedView.Columns["TransactionDate"] != null)
+        //            {
+        //                bandedView.Columns["TransactionDate"].DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+        //                bandedView.Columns["TransactionDate"].DisplayFormat.FormatString = "MM/dd/yyyy HH:mm:ss";
+        //            }
+        //        }
+
+
+        //    }
+        //    catch (SqlException ex)
+        //    {
+        //        XtraMessageBox.Show(ex.Message.ToString());
+        //    }
+        //    finally
+        //    {
+        //        gridControl1.EndUpdate();
+        //    }
+        //    con.Close();
+        //}
 
         void radChanged()
         {
