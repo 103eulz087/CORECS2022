@@ -977,7 +977,8 @@ namespace SalesInventorySystem
                 "AND CashierTransNo='" + lblTransactionIDCashier.Text + "'" +
                 "AND isCancelled=0 AND isVoid=0 and isErrorCorrect=0 ", "SequenceNumber");
 
-            AddDiscount adis = new AddDiscount();
+            //AddDiscount adis = new AddDiscount();
+            POSAddDiscount adis = new POSAddDiscount();
             AddDiscountRestaurant adisres = new AddDiscountRestaurant();
             
 
@@ -1036,25 +1037,54 @@ namespace SalesInventorySystem
                 //    //adis.ShowDialog(this);
                 //}
             }
-            if (AddDiscount.isdone == true)
+            if (POSAddDiscount.isdone == true)
             {
                 double totdiscount = 0.0;
                 //totdiscount = Math.Round(Convert.ToDouble(lblTotalDiscount.Text) + getSalesDiscount(), 2);
                 totdiscount = Math.Round(getPerItemDiscount() + getSalesDiscount(), 2);
                 lblTotalDiscount.Text = totdiscount.ToString();//Convert.ToDouble(lblTotalDiscount.Text)+AddDiscount.discountamount;
                 newtotalamount = Convert.ToDouble(lblTotalAmount.Text) - Convert.ToDouble(lblTotalDiscount.Text);
-                if(AddDiscount.discounttype=="SENIOR")
-                {
-                    lblseniordiscount.Text = getSalesDiscount().ToString();
-                }
-                else if (AddDiscount.discounttype == "PWD")
-                {
-                    lblpwddiscount.Text = getSalesDiscount().ToString();
-                }
-                
+
+                //if (POSAddDiscount.discounttype == "SENIOR")
+                //{
+                //    lblseniordiscount.Text = getSalesDiscount().ToString();
+                //}
+                //else if (POSAddDiscount.discounttype == "PWD")
+                //{
+                //    lblpwddiscount.Text = getSalesDiscount().ToString();
+                //}
+                //else if (POSAddDiscount.discounttype == "PWD")
+                //{
+                //    lblpwddiscount.Text = getSalesDiscount().ToString();
+                //}
+                //else if (POSAddDiscount.discounttype == "PWD")
+                //{
+                //    lblpwddiscount.Text = getSalesDiscount().ToString();
+                //}
+
+
                 updateTransactionNo();
                 adis.Dispose();
             }
+            //if (AddDiscount.isdone == true)
+            //{
+            //    double totdiscount = 0.0;
+            //    //totdiscount = Math.Round(Convert.ToDouble(lblTotalDiscount.Text) + getSalesDiscount(), 2);
+            //    totdiscount = Math.Round(getPerItemDiscount() + getSalesDiscount(), 2);
+            //    lblTotalDiscount.Text = totdiscount.ToString();//Convert.ToDouble(lblTotalDiscount.Text)+AddDiscount.discountamount;
+            //    newtotalamount = Convert.ToDouble(lblTotalAmount.Text) - Convert.ToDouble(lblTotalDiscount.Text);
+            //    if(AddDiscount.discounttype=="SENIOR")
+            //    {
+            //        lblseniordiscount.Text = getSalesDiscount().ToString();
+            //    }
+            //    else if (AddDiscount.discounttype == "PWD")
+            //    {
+            //        lblpwddiscount.Text = getSalesDiscount().ToString();
+            //    }
+
+            //    updateTransactionNo();
+            //    adis.Dispose();
+            //}
             if (AddDiscountRestaurant.isdone == true)
             {
                 double totdiscount = 0.0;
@@ -2284,6 +2314,10 @@ namespace SalesInventorySystem
 
                 com.Parameters.Add("@parmnoofscdisc", SqlDbType.Int).Direction = ParameterDirection.Output;
                 com.Parameters.Add("@parmnoofpwddisc", SqlDbType.Int).Direction = ParameterDirection.Output;
+                com.Parameters.Add("@parmnoofnaacdisc", SqlDbType.Int).Direction = ParameterDirection.Output;
+                com.Parameters.Add("@parmnoofmovdisc", SqlDbType.Int).Direction = ParameterDirection.Output;
+                com.Parameters.Add("@parmnoofspdisc", SqlDbType.Int).Direction = ParameterDirection.Output;
+
                 com.Parameters.Add("@parmnoofregdisc", SqlDbType.Int).Direction = ParameterDirection.Output;
 
                 com.Parameters.Add("@parmtotalofcancelleditem", SqlDbType.Decimal,12).Direction = ParameterDirection.Output;
@@ -2314,6 +2348,30 @@ namespace SalesInventorySystem
                 com.Parameters.Add("@parmtotalofpwddisc", SqlDbType.Decimal, 12).Direction = ParameterDirection.Output;
                 com.Parameters["@parmtotalofpwddisc"].Precision = 12;
                 com.Parameters["@parmtotalofpwddisc"].Scale = 2;
+
+
+                ////////////////////
+                com.Parameters.Add("@parmtotalofnaacdisc", SqlDbType.Decimal, 12).Direction = ParameterDirection.Output;
+                com.Parameters["@parmtotalofnaacdisc"].Precision = 12;
+                com.Parameters["@parmtotalofnaacdisc"].Scale = 2;
+
+
+                com.Parameters.Add("@parmtotalofmovdisc", SqlDbType.Decimal, 12).Direction = ParameterDirection.Output;
+                com.Parameters["@parmtotalofmovdisc"].Precision = 12;
+                com.Parameters["@parmtotalofmovdisc"].Scale = 2;
+
+                com.Parameters.Add("@parmtotalofspdisc", SqlDbType.Decimal, 12).Direction = ParameterDirection.Output;
+                com.Parameters["@parmtotalofspdisc"].Precision = 12;
+                com.Parameters["@parmtotalofspdisc"].Scale = 2;
+                ///////////////////////////
+
+
+
+
+
+
+
+
 
                 com.Parameters.Add("@parmtotalofregdisc", SqlDbType.Decimal, 12).Direction = ParameterDirection.Output;
                 com.Parameters["@parmtotalofregdisc"].Precision = 12;
@@ -2392,6 +2450,10 @@ namespace SalesInventorySystem
 
                 pocls.txtnoofscdisc.Text = com.Parameters["@parmnoofscdisc"].Value.ToString();
                 pocls.txtnoofpwddisc.Text = com.Parameters["@parmnoofpwddisc"].Value.ToString();
+                pocls.txtnoofnaacdisc.Text = com.Parameters["@parmnoofnaacdisc"].Value.ToString();
+                pocls.txtnoofmovdisc.Text = com.Parameters["@parmnoofmovdisc"].Value.ToString(); 
+                pocls.txtnoofspdisc.Text = com.Parameters["@parmnoofspdisc"].Value.ToString();
+
                 pocls.txtnoofregdisc.Text = com.Parameters["@parmnoofregdisc"].Value.ToString();
 
                 pocls.txtTotalCancelledTransaction.Text = com.Parameters["@parmtotalofcancelleditem"].Value.ToString();
@@ -2403,6 +2465,10 @@ namespace SalesInventorySystem
 
                 pocls.txttotalofscdisc.Text = com.Parameters["@parmtotalofscdisc"].Value.ToString();
                 pocls.txttotalofpwddisc.Text = com.Parameters["@parmtotalofpwddisc"].Value.ToString();
+
+                pocls.txttotalofnaacdisc.Text = com.Parameters["@parmtotalofnaacdisc"].Value.ToString();
+                pocls.txttotalofmovdisc.Text = com.Parameters["@parmtotalofmovdisc"].Value.ToString();
+                pocls.txttotalofspdisc.Text = com.Parameters["@parmtotalofspdisc"].Value.ToString();
                 pocls.txttotalofregdisc.Text = com.Parameters["@parmtotalofregdisc"].Value.ToString();
 
                 pocls.txtvatadjustment.Text = com.Parameters["@parmvatadjustment"].Value.ToString();
@@ -2669,7 +2735,7 @@ namespace SalesInventorySystem
                     {
                         sequenceNum = MydataGridView1[0, MydataGridView1.CurrentRow.Index].Value.ToString();
                         refno = txtOrderNo.Text.Trim();
-                        transcode = lblTransactionIDCashier.Text;
+                    transcode = lblTransactionIDInc.Text;//lblTransactionIDCashier.Text;
                         POS.POSEditLine edtfmr = new POS.POSEditLine();
                         edtfmr.txtprodname.Text = MydataGridView1[1, MydataGridView1.CurrentRow.Index].Value.ToString();
                         edtfmr.txtuprice.Text = MydataGridView1[2, MydataGridView1.CurrentRow.Index].Value.ToString();

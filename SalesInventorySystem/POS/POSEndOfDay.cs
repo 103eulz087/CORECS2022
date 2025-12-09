@@ -10,6 +10,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -945,21 +946,46 @@ namespace SalesInventorySystem.POS
 
         public async Task PushSaleAsync(ZReadingDto sale)
         {
+            //using (var client = new HttpClient())
+            //{
+
+            //    var json = JsonConvert.SerializeObject(sale);
+            //    var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+            //    var response = await client.PostAsync("http://itcore-apps.com:8181/api/zreadings", content);
+
+            //    if (response.IsSuccessStatusCode)
+            //    {
+            //        MessageBox.Show("ZRead pushed successfully!");
+            //    }
+            //    else
+            //    {
+            //        MessageBox.Show("Failed to push sale: " + response.ReasonPhrase);
+            //    }
+            //}
+
             using (var client = new HttpClient())
             {
 
-                var json = JsonConvert.SerializeObject(sale);
-                var content = new StringContent(json, Encoding.UTF8, "application/json");
-
-                var response = await client.PostAsync("http://itcore-apps.com:8181/api/zreadings", content);
-
-                if (response.IsSuccessStatusCode)
+                //string apiKey = "baf02cb4f4bd4e3681dc7c0ad77068e0x";
+                string apiKey = "b25ffbdd1bcd428f9d60ad679e6e9d66";
+                client.DefaultRequestHeaders.Clear();
+                client.DefaultRequestHeaders.Add("IssuedKey", apiKey);
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                var settings = new JsonSerializerSettings
                 {
-                    MessageBox.Show("ZRead pushed successfully!");
-                }
+                    ContractResolver = new Newtonsoft.Json.Serialization.CamelCasePropertyNamesContractResolver(),
+                    NullValueHandling = NullValueHandling.Ignore
+                };
+                var json = JsonConvert.SerializeObject(sale, settings);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+                var response = await client.PostAsync("http://itcoreapps.com:8181/api/sales", content);
+                if (response.IsSuccessStatusCode) { MessageBox.Show("ZREAD Sale pushed successfully!"); }
                 else
                 {
                     MessageBox.Show("Failed to push sale: " + response.ReasonPhrase);
+                    var errorDetails = await response.Content.ReadAsStringAsync();
+                    MessageBox.Show($"Failed to push sale: {response.ReasonPhrase}\nDetails: {errorDetails}");
                 }
             }
         }
@@ -987,7 +1013,7 @@ namespace SalesInventorySystem.POS
                             data = new ZReadingDto
                             {
 
-                                TenantID = 1,
+                                //TenantID = '0001',
                                 POSID = reader["MachineUsed"].ToString(),
                                 UserID = reader["ExecuteBy"].ToString(),
                                 CounterNo = reader["CounterNo"].ToString(),
@@ -1076,12 +1102,12 @@ namespace SalesInventorySystem.POS
             if (confirm)
             {
                 executeEOD();
-              //  pushit();
+                pushit();
                 //AuthorizedConfirmationFrm authfrm = new AuthorizedConfirmationFrm();
                 //authfrm.ShowDialog(this);
                 //if (AuthorizedConfirmationFrm.isconfirmedLogin == true)
                 //{
-                   
+
                 //    AuthorizedConfirmationFrm.isconfirmedLogin = false;
                 //    authfrm.Dispose();
                 //}

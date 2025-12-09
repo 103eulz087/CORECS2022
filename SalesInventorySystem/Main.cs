@@ -2641,23 +2641,23 @@ namespace SalesInventorySystem
 
         private void POSMachine_ItemClick(object sender, ItemClickEventArgs e)
         {
-            //foreach (Form form in Application.OpenForms)
-            //{
-            //    if (form.GetType() == typeof(POSDevEx.POSSettingsDevEx))
-            //    {
-            //        form.Activate();
-            //        return;
-            //    }
-            //}
-            //POSDevEx.POSSettingsDevEx pcusatfsmr = new POSDevEx.POSSettingsDevEx();
-            //pcusatfsmr.MdiParent = this;
-            //pcusatfsmr.Show();
+            foreach (Form form in Application.OpenForms)
+            {
+                if (form.GetType() == typeof(POSDevEx.POSSettingsDevEx))
+                {
+                    form.Activate();
+                    return;
+                }
+            }
+            POSDevEx.POSSettingsDevEx pcusatfsmr = new POSDevEx.POSSettingsDevEx();
+            pcusatfsmr.MdiParent = this;
+            pcusatfsmr.Show();
 
 
-            //Sabong.SBDashboard sbdash = new Sabong.SBDashboard();
-            //sbdash.Show();
+            Sabong.SBDashboard sbdash = new Sabong.SBDashboard();
+            sbdash.Show();
 
-            ShowSeniorCitizenReport();
+            //ShowSeniorCitizenReport();
         }
 
 

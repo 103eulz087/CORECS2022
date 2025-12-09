@@ -118,7 +118,7 @@ namespace SalesInventorySystem.POS
             string branchcode, CounterNo, TransactionNo, MachineUsed, BeginningBalance, EndingBalance, BeginSI, EndingSI, BeginRetNo, EndingRetNo, TotalCashSales, TotalCreditSales, TotalSales, TotalDiscount, VatExemptSales, VatableSales, VatAmount, DateExeute, ExecuteBy, TotalNetSales;
             string noofsolditems, noofcancelleditems, noofvoiditems, noofreturneditems, noofvatitems, noofdiscountitems, totalcancelledsales, totalvoidsales, totalreturnedsales, totalvatsales;
             string noofscdisc, noofpwddisc, noofregdisc, totalscdisc, totalpwddisc, totalregdisc, totalzeroratedsales, VatAdjustment;
-
+            string noofnaacdisc, noofmovdisc, noofspdisc, totalnaacdisc, totalmovdisc, totalspdisc;
             var rows = Database.getMultipleQuery("POSXReadingTransactions",
               "BranchCode='" + Login.assignedBranch + "' " +
               "and CAST(DateExecute as date)='" + dt1.ToShortDateString() + "' " +
@@ -142,6 +142,12 @@ namespace SalesInventorySystem.POS
                 ",DiscountItems" +
                 ",SCDiscItems" +
                 ",PWDDiscItems" +
+
+                ",NAACDiscItems" +
+                ",MOVDiscItems" +
+                ",SPDiscItems" +
+               
+
                 ",RegDiscItems" +
                 ",TotalCashSales" +
                 ",TotalCreditSales" +
@@ -153,6 +159,13 @@ namespace SalesInventorySystem.POS
                 ",TotalDiscount" +
                 ",TotalSCDiscount" +
                 ",TotalPWDDiscount" +
+
+                 ",TotalNAACDiscount" +
+                ",TotalMOVDiscount" +
+                 ",TotalSPDiscount" +
+                
+
+
                 ",TotalRegDiscount" +
                 ",VatExemptSale" +
                 ",VatableSale" +
@@ -185,6 +198,12 @@ namespace SalesInventorySystem.POS
             noofpwddisc = rows["PWDDiscItems"].ToString(); //Database.getSingleQuery("POSZReadingTransactions", "DateExecute='" + DateTime.Now.ToShortDateString() + "' and MachineUsed='" + Environment.MachineName + "' ", "PWDDiscItems");
             noofregdisc = rows["RegDiscItems"].ToString(); //Database.getSingleQuery("POSZReadingTransactions", "DateExecute='" + DateTime.Now.ToShortDateString() + "' and MachineUsed='" + Environment.MachineName + "' ", "RegDiscItems");
 
+            noofnaacdisc = rows["NAACDiscItems"].ToString(); //Database.getSingleQuery("POSZReadingTransactions", "DateExecute='" + DateTime.Now.ToShortDateString() + "' and MachineUsed='" + Environment.MachineName + "' ", "SCDiscItems");
+            noofmovdisc = rows["MOVDiscItems"].ToString(); //Database.getSingleQuery("POSZReadingTransactions", "DateExecute='" + DateTime.Now.ToShortDateString() + "' and MachineUsed='" + Environment.MachineName + "' ", "PWDDiscItems");
+            noofspdisc = rows["SPDiscItems"].ToString(); //Database.getSingleQuery("POSZReadingTransactions", "DateExecute='" + DateTime.Now.ToShortDateString() + "' and MachineUsed='" + Environment.MachineName + "' ", "RegDiscItems");
+
+
+
             TotalCashSales = rows["TotalCashSales"].ToString(); //Database.getSingleQuery("POSZReadingTransactions", "DateExecute='" + DateTime.Now.ToShortDateString() + "' and MachineUsed='" + Environment.MachineName + "' ", "TotalCashSales");
             TotalCreditSales = rows["TotalCreditSales"].ToString(); //Database.getSingleQuery("POSZReadingTransactions", "DateExecute='" + DateTime.Now.ToShortDateString() + "' and MachineUsed='" + Environment.MachineName + "' ", "TotalCreditSales");
             TotalSales = rows["TotalSales"].ToString(); //Database.getSingleQuery("POSZReadingTransactions", "DateExecute='" + DateTime.Now.ToShortDateString() + "' and MachineUsed='" + Environment.MachineName + "' ", "TotalSales");
@@ -199,6 +218,11 @@ namespace SalesInventorySystem.POS
             totalscdisc = rows["TotalSCDiscount"].ToString(); //Database.getSingleQuery("POSZReadingTransactions", "DateExecute='" + DateTime.Now.ToShortDateString() + "' and MachineUsed='" + Environment.MachineName + "' ", "TotalSCDiscount");
             totalpwddisc = rows["TotalPWDDiscount"].ToString(); //Database.getSingleQuery("POSZReadingTransactions", "DateExecute='" + DateTime.Now.ToShortDateString() + "' and MachineUsed='" + Environment.MachineName + "' ", "TotalPWDDiscount");
             totalregdisc = rows["TotalRegDiscount"].ToString(); //Database.getSingleQuery("POSZReadingTransactions", "DateExecute='" + DateTime.Now.ToShortDateString() + "' and MachineUsed='" + Environment.MachineName + "' ", "TotalRegDiscount");
+
+
+            totalnaacdisc = rows["TotalNAACDiscount"].ToString(); //Database.getSingleQuery("POSZReadingTransactions", "DateExecute='" + DateTime.Now.ToShortDateString() + "' and MachineUsed='" + Environment.MachineName + "' ", "TotalSCDiscount");
+            totalmovdisc = rows["TotalMOVDiscount"].ToString(); //Database.getSingleQuery("POSZReadingTransactions", "DateExecute='" + DateTime.Now.ToShortDateString() + "' and MachineUsed='" + Environment.MachineName + "' ", "TotalPWDDiscount");
+            totalspdisc = rows["TotalSPDiscount"].ToString(); //Database.getSingleQuery("POSZReadingTransactions", "DateExecute='" + DateTime.Now.ToShortDateString() + "' and MachineUsed='" + Environment.MachineName + "' ", "TotalRegDiscount");
 
 
             VatExemptSales = rows["VatExemptSale"].ToString(); //Database.getSingleQuery("POSZReadingTransactions", "DateExecute='" + DateTime.Now.ToShortDateString() + "' and MachineUsed='" + Environment.MachineName + "' ", "VatExemptSale");
@@ -252,17 +276,31 @@ namespace SalesInventorySystem.POS
             details += HelperFunction.PrintLeftRigthText("No. of PWD Discount: ", noofpwddisc) + Environment.NewLine;
             details += HelperFunction.PrintLeftRigthText("Total Amount of PWD Discount: ", HelperFunction.convertToNumericFormat(Convert.ToDouble(totalpwddisc))) + Environment.NewLine;
 
+            details += HelperFunction.PrintLeftRigthText("No. of NAAC Discount: ", noofnaacdisc) + Environment.NewLine;
+            details += HelperFunction.PrintLeftRigthText("Total Amount of NAAC Discount: ", HelperFunction.convertToNumericFormat(Convert.ToDouble(totalnaacdisc))) + Environment.NewLine;
+
+            details += HelperFunction.PrintLeftRigthText("No. of MOV Discount: ", noofmovdisc) + Environment.NewLine;
+            details += HelperFunction.PrintLeftRigthText("Total Amount of MOV Discount: ", HelperFunction.convertToNumericFormat(Convert.ToDouble(totalmovdisc))) + Environment.NewLine;
+
+            details += HelperFunction.PrintLeftRigthText("No. of SP Discount: ", noofspdisc) + Environment.NewLine;
+            details += HelperFunction.PrintLeftRigthText("Total Amount of SP Discount: ", HelperFunction.convertToNumericFormat(Convert.ToDouble(totalspdisc))) + Environment.NewLine;
+
+
+
             details += HelperFunction.PrintLeftRigthText("No. of Regular Discount: ", noofregdisc) + Environment.NewLine;
             details += HelperFunction.PrintLeftRigthText("Total Amount of Regular Discount: ", HelperFunction.convertToNumericFormat(Convert.ToDouble(totalregdisc))) + Environment.NewLine;
 
-            details += HelperFunction.PrintLeftRigthText("No. of Disc P/Item: ", noofdiscountitems) + Environment.NewLine;
-            details += HelperFunction.PrintLeftRigthText("Total Disc P/Item: ", HelperFunction.convertToNumericFormat(Convert.ToDouble(TotalDiscount))) + Environment.NewLine;
+            //details += HelperFunction.PrintLeftRigthText("No. of Disc P/Item: ", noofdiscountitems) + Environment.NewLine;
+            //details += HelperFunction.PrintLeftRigthText("Total Disc P/Item: ", HelperFunction.convertToNumericFormat(Convert.ToDouble(TotalDiscount))) + Environment.NewLine;
 
             details += HelperFunction.createEqualLine() + Environment.NewLine;
             double overalltotaldiscounts = 0.0;
             Math.Round(overalltotaldiscounts = Convert.ToDouble(TotalDiscount) +
                                     Convert.ToDouble(totalscdisc) +
                                     Convert.ToDouble(totalpwddisc) +
+                                      Convert.ToDouble(totalnaacdisc) +
+                                        Convert.ToDouble(totalmovdisc) +
+                                          Convert.ToDouble(totalspdisc) +
                                     Convert.ToDouble(totalregdisc), 2);
             details += HelperFunction.PrintLeftRigthText("TOTAL DISCOUNTS: ", HelperFunction.convertToNumericFormat(overalltotaldiscounts)) + Environment.NewLine + Environment.NewLine;
 
