@@ -36,11 +36,12 @@
             // 
             // txtbatchcode
             // 
-            this.txtbatchcode.Location = new System.Drawing.Point(156, 13);
+            this.txtbatchcode.Location = new System.Drawing.Point(234, 20);
+            this.txtbatchcode.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtbatchcode.Name = "txtbatchcode";
             this.txtbatchcode.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 9.25F);
             this.txtbatchcode.Properties.Appearance.Options.UseFont = true;
-            this.txtbatchcode.Size = new System.Drawing.Size(113, 24);
+            this.txtbatchcode.Size = new System.Drawing.Size(170, 44);
             this.txtbatchcode.TabIndex = 38;
             this.txtbatchcode.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtbatchcode_KeyDown_1);
             this.txtbatchcode.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtbatchcode_KeyPress_1);
@@ -49,9 +50,10 @@
             // 
             this.labelControl1.Appearance.Font = new System.Drawing.Font("Tahoma", 9.25F);
             this.labelControl1.Appearance.Options.UseFont = true;
-            this.labelControl1.Location = new System.Drawing.Point(8, 16);
+            this.labelControl1.Location = new System.Drawing.Point(12, 25);
+            this.labelControl1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.labelControl1.Name = "labelControl1";
-            this.labelControl1.Size = new System.Drawing.Size(130, 18);
+            this.labelControl1.Size = new System.Drawing.Size(219, 30);
             this.labelControl1.TabIndex = 39;
             this.labelControl1.Text = "Enter BatchCode #:";
             // 
@@ -60,24 +62,25 @@
             this.btnsubmit.Appearance.Font = new System.Drawing.Font("Tahoma", 7.25F);
             this.btnsubmit.Appearance.Options.UseFont = true;
             this.btnsubmit.ImageOptions.Image = global::SalesInventorySystem.Properties.Resources.Add_16x16__2_;
-            this.btnsubmit.Location = new System.Drawing.Point(275, 12);
+            this.btnsubmit.Location = new System.Drawing.Point(412, 19);
+            this.btnsubmit.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnsubmit.Name = "btnsubmit";
-            this.btnsubmit.Size = new System.Drawing.Size(94, 26);
+            this.btnsubmit.Size = new System.Drawing.Size(141, 41);
             this.btnsubmit.TabIndex = 40;
             this.btnsubmit.Text = "Submit";
             this.btnsubmit.Click += new System.EventHandler(this.btnsubmit_Click);
             // 
             // SetBatchCodeFrm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(388, 55);
+            this.ClientSize = new System.Drawing.Size(582, 86);
             this.Controls.Add(this.btnsubmit);
             this.Controls.Add(this.labelControl1);
             this.Controls.Add(this.txtbatchcode);
             this.ForeColor = System.Drawing.Color.Black;
-            this.Margin = new System.Windows.Forms.Padding(4);
+            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.Name = "SetBatchCodeFrm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "SetBatchCodeFrm";

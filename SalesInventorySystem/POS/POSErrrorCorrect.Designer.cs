@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(POSErrrorCorrect));
             this.labelControl6 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
@@ -97,7 +97,7 @@
             this.labelControl6.Appearance.Options.UseFont = true;
             this.labelControl6.Appearance.Options.UseForeColor = true;
             this.labelControl6.Location = new System.Drawing.Point(20, 337);
-            this.labelControl6.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.labelControl6.Margin = new System.Windows.Forms.Padding(6);
             this.labelControl6.Name = "labelControl6";
             this.labelControl6.Size = new System.Drawing.Size(142, 29);
             this.labelControl6.TabIndex = 12;
@@ -110,7 +110,7 @@
             this.labelControl1.Appearance.Options.UseFont = true;
             this.labelControl1.Appearance.Options.UseForeColor = true;
             this.labelControl1.Location = new System.Drawing.Point(10, 54);
-            this.labelControl1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.labelControl1.Margin = new System.Windows.Forms.Padding(6);
             this.labelControl1.Name = "labelControl1";
             this.labelControl1.Size = new System.Drawing.Size(220, 33);
             this.labelControl1.TabIndex = 13;
@@ -120,7 +120,7 @@
             // 
             this.txttransno.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txttransno.Location = new System.Drawing.Point(614, 281);
-            this.txttransno.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.txttransno.Margin = new System.Windows.Forms.Padding(6);
             this.txttransno.Name = "txttransno";
             this.txttransno.ReadOnly = true;
             this.txttransno.Size = new System.Drawing.Size(192, 36);
@@ -133,7 +133,7 @@
             this.labelControl5.Appearance.Options.UseFont = true;
             this.labelControl5.Appearance.Options.UseForeColor = true;
             this.labelControl5.Location = new System.Drawing.Point(436, 287);
-            this.labelControl5.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.labelControl5.Margin = new System.Windows.Forms.Padding(6);
             this.labelControl5.Name = "labelControl5";
             this.labelControl5.Size = new System.Drawing.Size(156, 29);
             this.labelControl5.TabIndex = 29;
@@ -143,7 +143,7 @@
             // 
             this.txtreturntransno.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtreturntransno.Location = new System.Drawing.Point(268, 281);
-            this.txtreturntransno.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.txtreturntransno.Margin = new System.Windows.Forms.Padding(6);
             this.txtreturntransno.Name = "txtreturntransno";
             this.txtreturntransno.ReadOnly = true;
             this.txtreturntransno.Size = new System.Drawing.Size(140, 36);
@@ -156,7 +156,7 @@
             this.labelControl4.Appearance.Options.UseFont = true;
             this.labelControl4.Appearance.Options.UseForeColor = true;
             this.labelControl4.Location = new System.Drawing.Point(20, 287);
-            this.labelControl4.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.labelControl4.Margin = new System.Windows.Forms.Padding(6);
             this.labelControl4.Name = "labelControl4";
             this.labelControl4.Size = new System.Drawing.Size(235, 29);
             this.labelControl4.TabIndex = 27;
@@ -165,7 +165,7 @@
             // txtremarks
             // 
             this.txtremarks.Location = new System.Drawing.Point(210, 388);
-            this.txtremarks.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.txtremarks.Margin = new System.Windows.Forms.Padding(6);
             this.txtremarks.Name = "txtremarks";
             this.txtremarks.Size = new System.Drawing.Size(816, 116);
             this.txtremarks.TabIndex = 17;
@@ -179,7 +179,7 @@
             this.labelControl2.Appearance.Options.UseFont = true;
             this.labelControl2.Appearance.Options.UseForeColor = true;
             this.labelControl2.Location = new System.Drawing.Point(42, 423);
-            this.labelControl2.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.labelControl2.Margin = new System.Windows.Forms.Padding(6);
             this.labelControl2.Name = "labelControl2";
             this.labelControl2.Size = new System.Drawing.Size(153, 39);
             this.labelControl2.TabIndex = 16;
@@ -190,7 +190,7 @@
             // 
             this.txtorderno.Font = new System.Drawing.Font("Tahoma", 12F);
             this.txtorderno.Location = new System.Drawing.Point(238, 46);
-            this.txtorderno.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.txtorderno.Margin = new System.Windows.Forms.Padding(6);
             this.txtorderno.Name = "txtorderno";
             this.txtorderno.Size = new System.Drawing.Size(342, 46);
             this.txtorderno.TabIndex = 15;
@@ -200,7 +200,7 @@
             // 
             this.txtbranch.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtbranch.Location = new System.Drawing.Point(268, 331);
-            this.txtbranch.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.txtbranch.Margin = new System.Windows.Forms.Padding(6);
             this.txtbranch.Name = "txtbranch";
             this.txtbranch.ReadOnly = true;
             this.txtbranch.Size = new System.Drawing.Size(140, 36);
@@ -211,35 +211,35 @@
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.AllowUserToDeleteRows = false;
             this.dataGridView1.BackgroundColor = System.Drawing.Color.White;
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle10.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle11.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.Location = new System.Drawing.Point(4, 28);
-            this.dataGridView1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.dataGridView1.Margin = new System.Windows.Forms.Padding(6);
             this.dataGridView1.Name = "dataGridView1";
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridView1.Size = new System.Drawing.Size(1118, 339);
             this.dataGridView1.TabIndex = 15;
             this.dataGridView1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.dataGridView1_MouseUp);
@@ -263,9 +263,9 @@
             // 
             this.groupBox2.Controls.Add(this.dataGridView1);
             this.groupBox2.Location = new System.Drawing.Point(42, 162);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(4);
             this.groupBox2.Size = new System.Drawing.Size(1126, 371);
             this.groupBox2.TabIndex = 27;
             this.groupBox2.TabStop = false;
@@ -276,7 +276,7 @@
             this.labelControl7.Appearance.Options.UseFont = true;
             this.labelControl7.Appearance.Options.UseForeColor = true;
             this.labelControl7.Location = new System.Drawing.Point(238, 108);
-            this.labelControl7.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.labelControl7.Margin = new System.Windows.Forms.Padding(6);
             this.labelControl7.Name = "labelControl7";
             this.labelControl7.Size = new System.Drawing.Size(325, 25);
             this.labelControl7.TabIndex = 32;
@@ -305,7 +305,7 @@
             this.groupControl1.Location = new System.Drawing.Point(0, 0);
             this.groupControl1.LookAndFeel.Style = DevExpress.LookAndFeel.LookAndFeelStyle.Flat;
             this.groupControl1.LookAndFeel.UseDefaultLookAndFeel = false;
-            this.groupControl1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupControl1.Margin = new System.Windows.Forms.Padding(4);
             this.groupControl1.Name = "groupControl1";
             this.groupControl1.Size = new System.Drawing.Size(1826, 163);
             this.groupControl1.TabIndex = 33;
@@ -314,7 +314,7 @@
             // 
             this.btnClose.ImageOptions.Image = global::SalesInventorySystem.Properties.Resources.Cancel_32x32;
             this.btnClose.Location = new System.Drawing.Point(972, 46);
-            this.btnClose.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnClose.Margin = new System.Windows.Forms.Padding(4);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(184, 90);
             this.btnClose.TabIndex = 36;
@@ -325,7 +325,7 @@
             // 
             this.btnReturnALL.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnReturnALL.ImageOptions.Image")));
             this.btnReturnALL.Location = new System.Drawing.Point(1604, 50);
-            this.btnReturnALL.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnReturnALL.Margin = new System.Windows.Forms.Padding(4);
             this.btnReturnALL.Name = "btnReturnALL";
             this.btnReturnALL.Size = new System.Drawing.Size(166, 88);
             this.btnReturnALL.TabIndex = 35;
@@ -339,7 +339,7 @@
             this.btnReturnSelected.Appearance.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
             this.btnReturnSelected.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnReturnSelected.ImageOptions.Image")));
             this.btnReturnSelected.Location = new System.Drawing.Point(720, 46);
-            this.btnReturnSelected.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnReturnSelected.Margin = new System.Windows.Forms.Padding(4);
             this.btnReturnSelected.Name = "btnReturnSelected";
             this.btnReturnSelected.Size = new System.Drawing.Size(244, 90);
             this.btnReturnSelected.TabIndex = 34;
@@ -350,7 +350,7 @@
             // 
             this.simpleButton1.ImageOptions.Image = global::SalesInventorySystem.Properties.Resources.Refresh_16x16;
             this.simpleButton1.Location = new System.Drawing.Point(592, 46);
-            this.simpleButton1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.simpleButton1.Margin = new System.Windows.Forms.Padding(4);
             this.simpleButton1.Name = "simpleButton1";
             this.simpleButton1.Size = new System.Drawing.Size(120, 46);
             this.simpleButton1.TabIndex = 33;
@@ -524,7 +524,7 @@
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupControl1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "POSErrrorCorrect";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "POSErrrorCorrect";

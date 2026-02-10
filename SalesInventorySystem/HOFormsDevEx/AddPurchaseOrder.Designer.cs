@@ -246,7 +246,7 @@
             // 
             this.radServices.AutoSize = true;
             this.radServices.Location = new System.Drawing.Point(406, 158);
-            this.radServices.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.radServices.Margin = new System.Windows.Forms.Padding(5);
             this.radServices.Name = "radServices";
             this.radServices.Size = new System.Drawing.Size(119, 29);
             this.radServices.TabIndex = 88;
@@ -258,7 +258,7 @@
             this.radProducts.AutoSize = true;
             this.radProducts.Checked = true;
             this.radProducts.Location = new System.Drawing.Point(252, 158);
-            this.radProducts.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.radProducts.Margin = new System.Windows.Forms.Padding(5);
             this.radProducts.Name = "radProducts";
             this.radProducts.Size = new System.Drawing.Size(124, 29);
             this.radProducts.TabIndex = 87;
@@ -355,7 +355,7 @@
             this.ClientSize = new System.Drawing.Size(2270, 1216);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
-            this.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.Margin = new System.Windows.Forms.Padding(5);
             this.Name = "AddPurchaseOrder";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "AddPurchaseOrder";

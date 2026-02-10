@@ -761,7 +761,7 @@ namespace SalesInventorySystem
         {
             foreach (Form form in Application.OpenForms)
             {
-                if (form.GetType() == typeof(HOForms.VIEWPO))
+                if (form.GetType() == typeof(HOFormsDevEx.VIEWPO))
                 {
                     form.Activate();
                     return;
@@ -770,7 +770,7 @@ namespace SalesInventorySystem
             //ViewOrder viewrod = new ViewOrder();
             //viewrod.MdiParent = this;
             //viewrod.Show();
-            HOForms.VIEWPO sad = new HOForms.VIEWPO();
+            HOFormsDevEx.VIEWPO sad = new HOFormsDevEx.VIEWPO();
             sad.MdiParent = this;
             sad.Show();
         }

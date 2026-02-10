@@ -9,8 +9,9 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using DevExpress.XtraEditors;
 using System.Data.SqlClient;
+using SalesInventorySystem.HOFormsDevEx;
 
-namespace SalesInventorySystem.HOForms
+namespace SalesInventorySystem.HOFormsDevEx
 {
     public partial class ADDPO : DevExpress.XtraEditors.XtraForm
     {

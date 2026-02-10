@@ -11,8 +11,9 @@ using DevExpress.XtraEditors;
 using DevExpress.XtraReports.UI;
 using System.Data.SqlClient;
 using DevExpress.XtraGrid.Views.Grid;
+using SalesInventorySystem.HOFormsDevEx;
 
-namespace SalesInventorySystem.HOForms
+namespace SalesInventorySystem.HOFormsDevEx
 {
     public partial class VIEWPO : DevExpress.XtraEditors.XtraForm
     {
@@ -193,7 +194,7 @@ namespace SalesInventorySystem.HOForms
         void viewPODetails(GridView view)
         {
            
-            HOForms.VIEWPODETAILS viewpod = new VIEWPODETAILS();
+            HOFormsDevEx.VIEWPODETAILS viewpod = new VIEWPODETAILS();
             if (action == "VIEWAPPROVED")
             {
                 viewpod.simpleButton2.Visible = false;

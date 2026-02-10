@@ -93,10 +93,10 @@ namespace SalesInventorySystem.Orders
                 dtTransfer.Columns.Add("ProductCategoryCode", typeof(string));
                 dtTransfer.Columns.Add("ProductCode", typeof(string));
                 dtTransfer.Columns.Add("ProductName", typeof(string));
-                dtTransfer.Columns.Add("Cost", typeof(decimal));
+                //dtTransfer.Columns.Add("Cost", typeof(decimal));
                 dtTransfer.Columns.Add("QtyRequested", typeof(decimal));
                 dtTransfer.Columns.Add("Qty", typeof(decimal));
-                dtTransfer.Columns.Add("Barcode", typeof(string));
+                //dtTransfer.Columns.Add("Barcode", typeof(string));
 
                 int[] selectedRows = gridView1.GetSelectedRows();
                 foreach (int rowHandle in selectedRows)
@@ -105,10 +105,10 @@ namespace SalesInventorySystem.Orders
                     dr["ProductCategoryCode"] = Classes.Product.getProductCategoryCode(gridView1.GetRowCellValue(rowHandle, "Category").ToString());
                     dr["ProductCode"] = gridView1.GetRowCellValue(rowHandle, "ProductCode").ToString();
                     dr["ProductName"] = gridView1.GetRowCellValue(rowHandle, "ProductName").ToString();
-                    dr["Cost"] = Convert.ToDecimal(gridView1.GetRowCellValue(rowHandle, "Cost"));
+                    //dr["Cost"] = Convert.ToDecimal(gridView1.GetRowCellValue(rowHandle, "Cost"));
                     dr["QtyRequested"] = Convert.ToDecimal(gridView1.GetRowCellValue(rowHandle, "QtyRequested"));
                     dr["Qty"] = Convert.ToDecimal(gridView1.GetRowCellValue(rowHandle, "Qty"));
-                    dr["Barcode"] = gridView1.GetRowCellValue(rowHandle, "Barcode").ToString();
+                    //dr["Barcode"] = gridView1.GetRowCellValue(rowHandle, "Barcode").ToString();
                     dtTransfer.Rows.Add(dr);
                 }
 

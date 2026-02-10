@@ -233,8 +233,14 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\Debug\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="Npgsql, Version=4.0.11.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Npgsql.4.0.11\lib\net451\Npgsql.dll</HintPath>
+    </Reference>
     <Reference Include="System">
       <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Buffers, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.4.0\lib\netstandard2.0\System.Buffers.dll</HintPath>
     </Reference>
     <Reference Include="System.ComponentModel.DataAnnotations, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Configuration">
@@ -250,7 +256,23 @@
     <Reference Include="System.Management">
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.3\lib\netstandard2.0\System.Memory.dll</HintPath>
+    </Reference>
     <Reference Include="System.Net.Http" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.4.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.2\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.2\lib\netstandard2.0\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net461\System.ValueTuple.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web">
       <Private>True</Private>
     </Reference>
@@ -1508,10 +1530,10 @@
     <Compile Include="HOForms\AddNewShipment.Designer.cs">
       <DependentUpon>AddNewShipment.cs</DependentUpon>
     </Compile>
-    <Compile Include="HOForms\ADDPO.cs">
+    <Compile Include="HOFormsDevEx\ADDPO.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="HOForms\ADDPO.Designer.cs">
+    <Compile Include="HOFormsDevEx\ADDPO.Designer.cs">
       <DependentUpon>ADDPO.cs</DependentUpon>
     </Compile>
     <Compile Include="HOForms\AddPrimalCutInventory.cs">
@@ -1544,10 +1566,10 @@
     <Compile Include="HOForms\ChangePassword.Designer.cs">
       <DependentUpon>ChangePassword.cs</DependentUpon>
     </Compile>
-    <Compile Include="HOForms\CONFIRMPO.cs">
+    <Compile Include="HOFormsDevEx\CONFIRMPO.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="HOForms\CONFIRMPO.Designer.cs">
+    <Compile Include="HOFormsDevEx\CONFIRMPO.Designer.cs">
       <DependentUpon>CONFIRMPO.cs</DependentUpon>
     </Compile>
     <Compile Include="HOForms\DataAnalysisAndTicketing.cs">
@@ -1730,16 +1752,16 @@
     <Compile Include="HOForms\ViewOrderDetails.Designer.cs">
       <DependentUpon>ViewOrderDetails.cs</DependentUpon>
     </Compile>
-    <Compile Include="HOForms\VIEWPO.cs">
+    <Compile Include="HOFormsDevEx\VIEWPO.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="HOForms\VIEWPO.Designer.cs">
+    <Compile Include="HOFormsDevEx\VIEWPO.Designer.cs">
       <DependentUpon>VIEWPO.cs</DependentUpon>
     </Compile>
-    <Compile Include="HOForms\VIEWPODETAILS.cs">
+    <Compile Include="HOFormsDevEx\VIEWPODETAILS.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="HOForms\VIEWPODETAILS.Designer.cs">
+    <Compile Include="HOFormsDevEx\VIEWPODETAILS.Designer.cs">
       <DependentUpon>VIEWPODETAILS.cs</DependentUpon>
     </Compile>
     <Compile Include="HOForms\ViewPrimalCutItems.cs">
@@ -2955,6 +2977,48 @@
     <Compile Include="SampleReports.Designer.cs">
       <DependentUpon>SampleReports.cs</DependentUpon>
     </Compile>
+    <Compile Include="Samples\SampleAccounts.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Samples\SampleAccounts.Designer.cs">
+      <DependentUpon>SampleAccounts.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\SampleBetTransactions.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Samples\SampleBetTransactions.Designer.cs">
+      <DependentUpon>SampleBetTransactions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\SampleBonus.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Samples\SampleBonus.Designer.cs">
+      <DependentUpon>SampleBonus.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\SampleCashierTransactions.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Samples\SampleCashierTransactions.Designer.cs">
+      <DependentUpon>SampleCashierTransactions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\SampleMainRibbonForm2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Samples\SampleMainRibbonForm2.Designer.cs">
+      <DependentUpon>SampleMainRibbonForm2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\SamplePlayers.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Samples\SamplePlayers.Designer.cs">
+      <DependentUpon>SamplePlayers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\SampleSalesSummary.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Samples\SampleSalesSummary.Designer.cs">
+      <DependentUpon>SampleSalesSummary.cs</DependentUpon>
+    </Compile>
     <Compile Include="SearchProductItems.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -3653,7 +3717,7 @@
     <EmbeddedResource Include="HOForms\AddNewShipment.resx">
       <DependentUpon>AddNewShipment.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="HOForms\ADDPO.resx">
+    <EmbeddedResource Include="HOFormsDevEx\ADDPO.resx">
       <DependentUpon>ADDPO.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="HOForms\AddPrimalCutInventory.resx">
@@ -3672,7 +3736,7 @@
     <EmbeddedResource Include="HOForms\ChangePassword.resx">
       <DependentUpon>ChangePassword.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="HOForms\CONFIRMPO.resx">
+    <EmbeddedResource Include="HOFormsDevEx\CONFIRMPO.resx">
       <DependentUpon>CONFIRMPO.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="HOForms\DataAnalysisAndTicketing.resx">
@@ -3769,10 +3833,10 @@
     <EmbeddedResource Include="HOForms\ViewOrderDetails.resx">
       <DependentUpon>ViewOrderDetails.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="HOForms\VIEWPO.resx">
+    <EmbeddedResource Include="HOFormsDevEx\VIEWPO.resx">
       <DependentUpon>VIEWPO.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="HOForms\VIEWPODETAILS.resx">
+    <EmbeddedResource Include="HOFormsDevEx\VIEWPODETAILS.resx">
       <DependentUpon>VIEWPODETAILS.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="HOForms\ViewPrimalCutItems.resx">
@@ -4406,6 +4470,27 @@
     <EmbeddedResource Include="SampleReports.resx">
       <DependentUpon>SampleReports.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Samples\SampleAccounts.resx">
+      <DependentUpon>SampleAccounts.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Samples\SampleBetTransactions.resx">
+      <DependentUpon>SampleBetTransactions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Samples\SampleBonus.resx">
+      <DependentUpon>SampleBonus.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Samples\SampleCashierTransactions.resx">
+      <DependentUpon>SampleCashierTransactions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Samples\SampleMainRibbonForm2.resx">
+      <DependentUpon>SampleMainRibbonForm2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Samples\SamplePlayers.resx">
+      <DependentUpon>SamplePlayers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Samples\SampleSalesSummary.resx">
+      <DependentUpon>SampleSalesSummary.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="SearchProductItems.resx">
       <DependentUpon>SearchProductItems.cs</DependentUpon>
     </EmbeddedResource>
@@ -4462,6 +4547,7 @@
     </None>
     <None Include="ClassDiagram1.cd" />
     <None Include="DevExReportTemplate\SeniorCitizenSalesReport.repx" />
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

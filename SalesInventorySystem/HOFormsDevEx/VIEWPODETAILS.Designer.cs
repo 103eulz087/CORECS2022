@@ -1,4 +1,4 @@
-﻿namespace SalesInventorySystem.HOForms
+﻿namespace SalesInventorySystem.HOFormsDevEx
 {
     partial class VIEWPODETAILS
     {

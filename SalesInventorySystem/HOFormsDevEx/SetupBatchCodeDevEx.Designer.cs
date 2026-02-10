@@ -77,24 +77,27 @@
             this.groupControl1.Controls.Add(this.radioButton1);
             this.groupControl1.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupControl1.Location = new System.Drawing.Point(0, 0);
+            this.groupControl1.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.groupControl1.Name = "groupControl1";
-            this.groupControl1.Size = new System.Drawing.Size(1360, 134);
+            this.groupControl1.Size = new System.Drawing.Size(2331, 209);
             this.groupControl1.TabIndex = 0;
             // 
             // simpleButton2
             // 
-            this.simpleButton2.Location = new System.Drawing.Point(555, 34);
+            this.simpleButton2.Location = new System.Drawing.Point(951, 53);
+            this.simpleButton2.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.simpleButton2.Name = "simpleButton2";
-            this.simpleButton2.Size = new System.Drawing.Size(85, 29);
+            this.simpleButton2.Size = new System.Drawing.Size(146, 45);
             this.simpleButton2.TabIndex = 7;
             this.simpleButton2.Text = "Save";
             this.simpleButton2.Click += new System.EventHandler(this.simpleButton2_Click);
             // 
             // simpleButton1
             // 
-            this.simpleButton1.Location = new System.Drawing.Point(465, 34);
+            this.simpleButton1.Location = new System.Drawing.Point(797, 53);
+            this.simpleButton1.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.simpleButton1.Name = "simpleButton1";
-            this.simpleButton1.Size = new System.Drawing.Size(84, 29);
+            this.simpleButton1.Size = new System.Drawing.Size(144, 45);
             this.simpleButton1.TabIndex = 6;
             this.simpleButton1.Text = "Add";
             this.simpleButton1.Click += new System.EventHandler(this.simpleButton1_Click);
@@ -107,37 +110,41 @@
             this.panelControlauto.Controls.Add(this.labelControl4);
             this.panelControlauto.Controls.Add(this.txtshipmentno);
             this.panelControlauto.Controls.Add(this.labelControl3);
-            this.panelControlauto.Location = new System.Drawing.Point(12, 66);
+            this.panelControlauto.Location = new System.Drawing.Point(21, 103);
+            this.panelControlauto.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.panelControlauto.Name = "panelControlauto";
-            this.panelControlauto.Size = new System.Drawing.Size(628, 59);
+            this.panelControlauto.Size = new System.Drawing.Size(1077, 92);
             this.panelControlauto.TabIndex = 5;
             // 
             // txtpalletno
             // 
-            this.txtpalletno.Location = new System.Drawing.Point(501, 20);
+            this.txtpalletno.Location = new System.Drawing.Point(859, 31);
+            this.txtpalletno.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.txtpalletno.Name = "txtpalletno";
             this.txtpalletno.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.txtpalletno.Size = new System.Drawing.Size(118, 22);
+            this.txtpalletno.Size = new System.Drawing.Size(202, 40);
             this.txtpalletno.TabIndex = 11;
             // 
             // labelControl5
             // 
             this.labelControl5.Appearance.Font = new System.Drawing.Font("Tahoma", 9.25F);
             this.labelControl5.Appearance.Options.UseFont = true;
-            this.labelControl5.Location = new System.Drawing.Point(434, 22);
+            this.labelControl5.Location = new System.Drawing.Point(744, 34);
+            this.labelControl5.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.labelControl5.Name = "labelControl5";
-            this.labelControl5.Size = new System.Drawing.Size(61, 18);
+            this.labelControl5.Size = new System.Drawing.Size(108, 30);
             this.labelControl5.TabIndex = 10;
             this.labelControl5.Text = "Pallet No:";
             // 
             // txtproduct
             // 
-            this.txtproduct.Location = new System.Drawing.Point(283, 20);
+            this.txtproduct.Location = new System.Drawing.Point(485, 31);
+            this.txtproduct.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.txtproduct.Name = "txtproduct";
             this.txtproduct.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.txtproduct.Size = new System.Drawing.Size(145, 22);
+            this.txtproduct.Size = new System.Drawing.Size(249, 40);
             this.txtproduct.TabIndex = 9;
             this.txtproduct.SelectedIndexChanged += new System.EventHandler(this.txtproduct_SelectedIndexChanged);
             // 
@@ -145,19 +152,21 @@
             // 
             this.labelControl4.Appearance.Font = new System.Drawing.Font("Tahoma", 9.25F);
             this.labelControl4.Appearance.Options.UseFont = true;
-            this.labelControl4.Location = new System.Drawing.Point(223, 21);
+            this.labelControl4.Location = new System.Drawing.Point(382, 33);
+            this.labelControl4.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.labelControl4.Name = "labelControl4";
-            this.labelControl4.Size = new System.Drawing.Size(54, 18);
+            this.labelControl4.Size = new System.Drawing.Size(94, 30);
             this.labelControl4.TabIndex = 8;
             this.labelControl4.Text = "Product:";
             // 
             // txtshipmentno
             // 
-            this.txtshipmentno.Location = new System.Drawing.Point(108, 20);
+            this.txtshipmentno.Location = new System.Drawing.Point(185, 31);
+            this.txtshipmentno.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.txtshipmentno.Name = "txtshipmentno";
             this.txtshipmentno.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.txtshipmentno.Size = new System.Drawing.Size(109, 22);
+            this.txtshipmentno.Size = new System.Drawing.Size(187, 40);
             this.txtshipmentno.TabIndex = 7;
             this.txtshipmentno.SelectedIndexChanged += new System.EventHandler(this.txtshipmentno_SelectedIndexChanged);
             this.txtshipmentno.Click += new System.EventHandler(this.txtshipmentno_Click);
@@ -166,9 +175,10 @@
             // 
             this.labelControl3.Appearance.Font = new System.Drawing.Font("Tahoma", 9.25F);
             this.labelControl3.Appearance.Options.UseFont = true;
-            this.labelControl3.Location = new System.Drawing.Point(21, 22);
+            this.labelControl3.Location = new System.Drawing.Point(36, 34);
+            this.labelControl3.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.labelControl3.Name = "labelControl3";
-            this.labelControl3.Size = new System.Drawing.Size(81, 18);
+            this.labelControl3.Size = new System.Drawing.Size(139, 30);
             this.labelControl3.TabIndex = 6;
             this.labelControl3.Text = "Shipment #:";
             // 
@@ -176,28 +186,31 @@
             // 
             this.panelControlmanual.Controls.Add(this.labelControl2);
             this.panelControlmanual.Controls.Add(this.txtbarcode);
-            this.panelControlmanual.Location = new System.Drawing.Point(12, 67);
+            this.panelControlmanual.Location = new System.Drawing.Point(21, 105);
+            this.panelControlmanual.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.panelControlmanual.Name = "panelControlmanual";
-            this.panelControlmanual.Size = new System.Drawing.Size(447, 59);
+            this.panelControlmanual.Size = new System.Drawing.Size(766, 92);
             this.panelControlmanual.TabIndex = 4;
             // 
             // labelControl2
             // 
             this.labelControl2.Appearance.Font = new System.Drawing.Font("Tahoma", 9.8F);
             this.labelControl2.Appearance.Options.UseFont = true;
-            this.labelControl2.Location = new System.Drawing.Point(9, 21);
+            this.labelControl2.Location = new System.Drawing.Point(15, 33);
+            this.labelControl2.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.labelControl2.Name = "labelControl2";
-            this.labelControl2.Size = new System.Drawing.Size(73, 19);
+            this.labelControl2.Size = new System.Drawing.Size(118, 31);
             this.labelControl2.TabIndex = 5;
             this.labelControl2.Text = "Scan SKU:";
             // 
             // txtbarcode
             // 
-            this.txtbarcode.Location = new System.Drawing.Point(88, 18);
+            this.txtbarcode.Location = new System.Drawing.Point(151, 28);
+            this.txtbarcode.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.txtbarcode.Name = "txtbarcode";
             this.txtbarcode.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 9.8F);
             this.txtbarcode.Properties.Appearance.Options.UseFont = true;
-            this.txtbarcode.Size = new System.Drawing.Size(347, 26);
+            this.txtbarcode.Size = new System.Drawing.Size(595, 46);
             this.txtbarcode.TabIndex = 4;
             this.txtbarcode.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtbarcode_KeyDown);
             // 
@@ -205,27 +218,30 @@
             // 
             this.labelControl1.Appearance.Font = new System.Drawing.Font("Tahoma", 9.8F);
             this.labelControl1.Appearance.Options.UseFont = true;
-            this.labelControl1.Location = new System.Drawing.Point(12, 38);
+            this.labelControl1.Location = new System.Drawing.Point(21, 59);
+            this.labelControl1.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.labelControl1.Name = "labelControl1";
-            this.labelControl1.Size = new System.Drawing.Size(102, 19);
+            this.labelControl1.Size = new System.Drawing.Size(167, 31);
             this.labelControl1.TabIndex = 3;
             this.labelControl1.Text = "Batch Code #:";
             // 
             // txtbatchcodeno
             // 
-            this.txtbatchcodeno.Location = new System.Drawing.Point(120, 35);
+            this.txtbatchcodeno.Location = new System.Drawing.Point(206, 55);
+            this.txtbatchcodeno.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.txtbatchcodeno.Name = "txtbatchcodeno";
             this.txtbatchcodeno.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 9.8F);
             this.txtbatchcodeno.Properties.Appearance.Options.UseFont = true;
-            this.txtbatchcodeno.Size = new System.Drawing.Size(109, 26);
+            this.txtbatchcodeno.Size = new System.Drawing.Size(187, 46);
             this.txtbatchcodeno.TabIndex = 2;
             // 
             // radioButton2
             // 
             this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(364, 39);
+            this.radioButton2.Location = new System.Drawing.Point(624, 61);
+            this.radioButton2.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(95, 21);
+            this.radioButton2.Size = new System.Drawing.Size(143, 29);
             this.radioButton2.TabIndex = 1;
             this.radioButton2.TabStop = true;
             this.radioButton2.Text = "Auto Mode";
@@ -235,9 +251,10 @@
             // radioButton1
             // 
             this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(250, 39);
+            this.radioButton1.Location = new System.Drawing.Point(429, 61);
+            this.radioButton1.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(108, 21);
+            this.radioButton1.Size = new System.Drawing.Size(167, 29);
             this.radioButton1.TabIndex = 0;
             this.radioButton1.TabStop = true;
             this.radioButton1.Text = "Manual Mode";
@@ -248,20 +265,21 @@
             // 
             this.panelControl1.Controls.Add(this.gridControl1);
             this.panelControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelControl1.Location = new System.Drawing.Point(0, 134);
+            this.panelControl1.Location = new System.Drawing.Point(0, 209);
+            this.panelControl1.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.panelControl1.Name = "panelControl1";
-            this.panelControl1.Size = new System.Drawing.Size(1360, 576);
+            this.panelControl1.Size = new System.Drawing.Size(2331, 900);
             this.panelControl1.TabIndex = 1;
             // 
             // gridControl1
             // 
             this.gridControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridControl1.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(4);
-            this.gridControl1.Location = new System.Drawing.Point(2, 2);
+            this.gridControl1.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(7, 6, 7, 6);
+            this.gridControl1.Location = new System.Drawing.Point(3, 3);
             this.gridControl1.MainView = this.gridView1;
-            this.gridControl1.Margin = new System.Windows.Forms.Padding(4);
+            this.gridControl1.Margin = new System.Windows.Forms.Padding(7, 6, 7, 6);
             this.gridControl1.Name = "gridControl1";
-            this.gridControl1.Size = new System.Drawing.Size(1356, 572);
+            this.gridControl1.Size = new System.Drawing.Size(2325, 894);
             this.gridControl1.TabIndex = 19;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
@@ -272,6 +290,8 @@
             this.gridView1.Appearance.HeaderPanel.Options.UseFont = true;
             this.gridView1.Appearance.Row.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gridView1.Appearance.Row.Options.UseFont = true;
+            this.gridView1.DetailHeight = 547;
+            this.gridView1.FixedLineWidth = 3;
             this.gridView1.GridControl = this.gridControl1;
             this.gridView1.Name = "gridView1";
             this.gridView1.OptionsBehavior.Editable = false;
@@ -282,11 +302,12 @@
             // 
             // SetupBatchCodeDevEx
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1360, 710);
+            this.ClientSize = new System.Drawing.Size(2331, 1109);
             this.Controls.Add(this.panelControl1);
             this.Controls.Add(this.groupControl1);
+            this.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.Name = "SetupBatchCodeDevEx";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "SetupBatchCodeDevEx";

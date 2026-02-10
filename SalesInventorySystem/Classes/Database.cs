@@ -12,6 +12,7 @@ using System.Configuration;
 using Microsoft.Win32;
 using DevExpress.XtraGrid.Views.Card;
 using DevExpress.XtraEditors.Repository;
+using Npgsql;
 
 namespace SalesInventorySystem
 {
@@ -19,15 +20,37 @@ namespace SalesInventorySystem
     {
         static RegistryKey regkey;
         static string constring;
+        static string pgConString;// = "Host=192.168.3.79;Username=HPGame;Password=18E095D40E2;Database=EptBadger_RESTORE";
         //static string constringLocal = "Data Source=127.0.0.1;Initial Catalog=SalesAndInventory;UserID=sa;Password=p@$$w0rd;";
         public Database()
         {
 
         }
+
+        public static NpgsqlConnection getPgConnection()
+        {
+            // Accessing the registry for the Postgres string
+            regkey = Registry.CurrentUser.CreateSubKey(@"AAITCRE\ConnSettingsPostgres");
+
+            // It's safer to provide a fallback value in case the registry key doesn't exist
+            pgConString = regkey.GetValue("dbconn")?.ToString() ?? pgConString;
+
+            NpgsqlConnection con;
+            try
+            {
+                con = new NpgsqlConnection(pgConString);
+            }
+            catch (NpgsqlException ex)
+            {
+                // Log the error or handle it
+                return null;
+            }
+            return con;
+        }
         //public static int getCTRVersionAs(String name)
         //{
         //    int num1 = 0;
-           
+
         //    SqlDataReader sqlDataReader=null;
         //    try
         //    {
@@ -50,7 +73,7 @@ namespace SalesInventorySystem
         //        sqlDataReader.Close();
         //        connection.Close();
         //    }
-         
+
         //    //exitProg:
         //    return num1;
         //}
@@ -1134,6 +1157,52 @@ namespace SalesInventorySystem
             {
              //   cont.EndUpdate();
                 con.Close();
+            }
+        }
+
+        public static void displayPg(string query, GridControl cont, GridView view)
+        {
+            // 1. Use your PostgreSQL connection method
+            NpgsqlConnection con = getPgConnection();
+
+            // 2. Use Npgsql classes instead of Sql classes
+            NpgsqlCommand com = new NpgsqlCommand(query, con);
+            NpgsqlDataAdapter adapter = new NpgsqlDataAdapter(com);
+            DataTable table = new DataTable();
+
+            try
+            {
+                con.Open();
+
+                // CommandTimeout 0 means wait indefinitely (use with caution)
+                com.CommandTimeout = 0;
+
+                view.Columns.Clear();
+                cont.DataSource = null;
+
+                // Fill the DataTable from Postgres
+                adapter.Fill(table);
+
+                cont.DataSource = table;
+                view.BestFitColumns();
+            }
+            catch (NpgsqlException ee) // Catch PostgreSQL specific errors
+            {
+                XtraMessageBox.Show("Postgres Error: " + ee.Message);
+            }
+            catch (Exception ex) // Catch general errors
+            {
+                XtraMessageBox.Show("General Error: " + ex.Message);
+            }
+            finally
+            {
+                if (con.State == ConnectionState.Open)
+                {
+                    con.Close();
+                }
+                // Properly dispose of objects to free memory
+                com.Dispose();
+                adapter.Dispose();
             }
         }
 

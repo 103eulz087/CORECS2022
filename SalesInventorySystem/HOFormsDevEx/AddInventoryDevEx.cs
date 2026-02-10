@@ -110,7 +110,7 @@ namespace SalesInventorySystem.HOFormsDevEx
 
         void InsertData()
         {
-            bool isoverride = false;
+            bool isoverride = false,isusedbarcode=false;
             if (checkBox3.Checked == true)
             {
                 isoverride = true;
@@ -118,6 +118,14 @@ namespace SalesInventorySystem.HOFormsDevEx
             else
             {
                 isoverride = false;
+            }
+            if (chckboxUseBarcode.Checked == true)
+            {
+                isusedbarcode = true;
+            }
+            else
+            {
+                isusedbarcode = false;
             }
             SqlConnection con = Database.getConnection();
             con.Open();
@@ -128,14 +136,15 @@ namespace SalesInventorySystem.HOFormsDevEx
                 com.Parameters.AddWithValue("@parmbranchcode", Login.assignedBranch);
                 com.Parameters.AddWithValue("@parmshipmentno", txtshipmentno.Text);
                 com.Parameters.AddWithValue("@parmpalletno", txtpalletno.Text);
-                com.Parameters.AddWithValue("@parmcategory", Classes.Product.getProductCategoryName(categorycode.ToString()));
-                com.Parameters.AddWithValue("@parmprodtype", txtsrchprod.Text);
+                com.Parameters.AddWithValue("@parmprodcode", productcode.ToString());
+                com.Parameters.AddWithValue("@parmprodname", txtsrchprod.Text);
                 com.Parameters.AddWithValue("@parmbarcode", txtbarcode.Text);
                 com.Parameters.AddWithValue("@parmtipweight", txtweight.Text);
                 com.Parameters.AddWithValue("@parmqty", txtweight.Text);
                 com.Parameters.AddWithValue("@parmcost", txtcost.Text);
                 com.Parameters.AddWithValue("@parmisoverride", isoverride);
-                com.Parameters.AddWithValue("@parmdestination", txtdestination.Text);
+                com.Parameters.AddWithValue("@parmisusebarcode", isusedbarcode);
+
                 com.CommandType = CommandType.StoredProcedure;
                 com.CommandText = query;
                 com.ExecuteNonQuery();

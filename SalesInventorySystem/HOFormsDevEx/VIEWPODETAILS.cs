@@ -10,7 +10,7 @@ using System.Windows.Forms;
 using DevExpress.XtraEditors;
 using DevExpress.XtraReports.UI;
 
-namespace SalesInventorySystem.HOForms
+namespace SalesInventorySystem.HOFormsDevEx
 {
     public partial class VIEWPODETAILS : DevExpress.XtraEditors.XtraForm
     {

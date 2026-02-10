@@ -111,31 +111,31 @@
             this.groupControl1.Controls.Add(this.isprimalcuts);
             this.groupControl1.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupControl1.Location = new System.Drawing.Point(0, 0);
-            this.groupControl1.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.groupControl1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.groupControl1.Name = "groupControl1";
-            this.groupControl1.Size = new System.Drawing.Size(2567, 564);
+            this.groupControl1.Size = new System.Drawing.Size(2200, 486);
             this.groupControl1.TabIndex = 39;
             this.groupControl1.Text = "Process To Primal Cuts";
             this.groupControl1.Paint += new System.Windows.Forms.PaintEventHandler(this.groupControl1_Paint);
             // 
             // txtsrchprod
             // 
-            this.txtsrchprod.Location = new System.Drawing.Point(756, 225);
-            this.txtsrchprod.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.txtsrchprod.Location = new System.Drawing.Point(648, 194);
+            this.txtsrchprod.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtsrchprod.Name = "txtsrchprod";
             this.txtsrchprod.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 11.8F);
             this.txtsrchprod.Properties.Appearance.Options.UseFont = true;
             this.txtsrchprod.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.txtsrchprod.Properties.PopupView = this.searchLookUpEdit1View;
-            this.txtsrchprod.Size = new System.Drawing.Size(744, 56);
+            this.txtsrchprod.Size = new System.Drawing.Size(638, 52);
             this.txtsrchprod.TabIndex = 57;
             this.txtsrchprod.EditValueChanged += new System.EventHandler(this.txtsrchprod_EditValueChanged);
             // 
             // searchLookUpEdit1View
             // 
-            this.searchLookUpEdit1View.DetailHeight = 634;
-            this.searchLookUpEdit1View.FixedLineWidth = 4;
+            this.searchLookUpEdit1View.DetailHeight = 547;
+            this.searchLookUpEdit1View.FixedLineWidth = 3;
             this.searchLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
             this.searchLookUpEdit1View.Name = "searchLookUpEdit1View";
             this.searchLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = false;
@@ -145,10 +145,10 @@
             // 
             this.buttonSearchItems.Appearance.Font = new System.Drawing.Font("Tahoma", 10.25F);
             this.buttonSearchItems.Appearance.Options.UseFont = true;
-            this.buttonSearchItems.Location = new System.Drawing.Point(1512, 152);
-            this.buttonSearchItems.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.buttonSearchItems.Location = new System.Drawing.Point(1296, 131);
+            this.buttonSearchItems.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.buttonSearchItems.Name = "buttonSearchItems";
-            this.buttonSearchItems.Size = new System.Drawing.Size(340, 58);
+            this.buttonSearchItems.Size = new System.Drawing.Size(291, 50);
             this.buttonSearchItems.TabIndex = 56;
             this.buttonSearchItems.Text = "Search Items";
             this.buttonSearchItems.Click += new System.EventHandler(this.buttonSearchItems_Click);
@@ -159,10 +159,10 @@
             this.buttonPrintBarcode.Appearance.Options.UseFont = true;
             this.buttonPrintBarcode.ImageOptions.Image = global::SalesInventorySystem.Properties.Resources.Print_32x32__2_;
             this.buttonPrintBarcode.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.buttonPrintBarcode.Location = new System.Drawing.Point(1512, 297);
-            this.buttonPrintBarcode.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.buttonPrintBarcode.Location = new System.Drawing.Point(1296, 256);
+            this.buttonPrintBarcode.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.buttonPrintBarcode.Name = "buttonPrintBarcode";
-            this.buttonPrintBarcode.Size = new System.Drawing.Size(340, 134);
+            this.buttonPrintBarcode.Size = new System.Drawing.Size(291, 116);
             this.buttonPrintBarcode.TabIndex = 55;
             this.buttonPrintBarcode.Text = "Print Barcode (F8)";
             this.buttonPrintBarcode.Click += new System.EventHandler(this.buttonPrintBarcode_Click_1);
@@ -171,10 +171,10 @@
             // 
             this.buttonGetWeight.Appearance.Font = new System.Drawing.Font("Tahoma", 10.25F);
             this.buttonGetWeight.Appearance.Options.UseFont = true;
-            this.buttonGetWeight.Location = new System.Drawing.Point(1242, 297);
-            this.buttonGetWeight.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.buttonGetWeight.Location = new System.Drawing.Point(1065, 256);
+            this.buttonGetWeight.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.buttonGetWeight.Name = "buttonGetWeight";
-            this.buttonGetWeight.Size = new System.Drawing.Size(257, 58);
+            this.buttonGetWeight.Size = new System.Drawing.Size(220, 50);
             this.buttonGetWeight.TabIndex = 54;
             this.buttonGetWeight.Text = "Get Weight";
             this.buttonGetWeight.Click += new System.EventHandler(this.buttonGetWeight_Click);
@@ -184,10 +184,10 @@
             this.buttonSaveAndTransfer.Appearance.Font = new System.Drawing.Font("Tahoma", 9.25F);
             this.buttonSaveAndTransfer.Appearance.Options.UseFont = true;
             this.buttonSaveAndTransfer.ImageOptions.Image = global::SalesInventorySystem.Properties.Resources.Save_16x16__5_;
-            this.buttonSaveAndTransfer.Location = new System.Drawing.Point(1424, 457);
-            this.buttonSaveAndTransfer.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.buttonSaveAndTransfer.Location = new System.Drawing.Point(1221, 394);
+            this.buttonSaveAndTransfer.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.buttonSaveAndTransfer.Name = "buttonSaveAndTransfer";
-            this.buttonSaveAndTransfer.Size = new System.Drawing.Size(259, 67);
+            this.buttonSaveAndTransfer.Size = new System.Drawing.Size(222, 58);
             this.buttonSaveAndTransfer.TabIndex = 53;
             this.buttonSaveAndTransfer.Text = "Save && Transfer";
             this.buttonSaveAndTransfer.Click += new System.EventHandler(this.buttonSaveAndTransfer_Click);
@@ -198,10 +198,10 @@
             this.buttonClear.Appearance.Options.UseFont = true;
             this.buttonClear.ImageOptions.Image = global::SalesInventorySystem.Properties.Resources.Clear_16x16__2_;
             this.buttonClear.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.buttonClear.Location = new System.Drawing.Point(1204, 457);
-            this.buttonClear.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.buttonClear.Location = new System.Drawing.Point(1032, 394);
+            this.buttonClear.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.buttonClear.Name = "buttonClear";
-            this.buttonClear.Size = new System.Drawing.Size(210, 67);
+            this.buttonClear.Size = new System.Drawing.Size(180, 58);
             this.buttonClear.TabIndex = 52;
             this.buttonClear.Text = "Clear";
             this.buttonClear.Click += new System.EventHandler(this.buttonClear_Click);
@@ -212,10 +212,10 @@
             this.buttonCancel.Appearance.Options.UseFont = true;
             this.buttonCancel.ImageOptions.Image = global::SalesInventorySystem.Properties.Resources.Cancel_16x16__2_;
             this.buttonCancel.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.buttonCancel.Location = new System.Drawing.Point(971, 457);
-            this.buttonCancel.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.buttonCancel.Location = new System.Drawing.Point(832, 394);
+            this.buttonCancel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.buttonCancel.Name = "buttonCancel";
-            this.buttonCancel.Size = new System.Drawing.Size(222, 67);
+            this.buttonCancel.Size = new System.Drawing.Size(190, 58);
             this.buttonCancel.TabIndex = 51;
             this.buttonCancel.Text = "Cancel Line";
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
@@ -226,10 +226,10 @@
             this.buttonAdd.Appearance.Options.UseFont = true;
             this.buttonAdd.ImageOptions.Image = global::SalesInventorySystem.Properties.Resources.Add_16x16__2_;
             this.buttonAdd.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.buttonAdd.Location = new System.Drawing.Point(756, 457);
-            this.buttonAdd.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.buttonAdd.Location = new System.Drawing.Point(648, 394);
+            this.buttonAdd.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.buttonAdd.Name = "buttonAdd";
-            this.buttonAdd.Size = new System.Drawing.Size(205, 67);
+            this.buttonAdd.Size = new System.Drawing.Size(176, 58);
             this.buttonAdd.TabIndex = 50;
             this.buttonAdd.Text = "Add";
             this.buttonAdd.Click += new System.EventHandler(this.buttonAdd_Click);
@@ -237,10 +237,10 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(9, 54);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
+            this.pictureBox1.Location = new System.Drawing.Point(8, 47);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(441, 406);
+            this.pictureBox1.Size = new System.Drawing.Size(378, 350);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 46;
             this.pictureBox1.TabStop = false;
@@ -251,10 +251,10 @@
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button2.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button2.ForeColor = System.Drawing.Color.White;
-            this.button2.Location = new System.Drawing.Point(415, 440);
-            this.button2.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
+            this.button2.Location = new System.Drawing.Point(356, 379);
+            this.button2.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(329, 83);
+            this.button2.Size = new System.Drawing.Size(282, 72);
             this.button2.TabIndex = 27;
             this.button2.Text = "Upload(F10)";
             this.button2.UseVisualStyleBackColor = false;
@@ -266,10 +266,10 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.Black;
-            this.label2.Location = new System.Drawing.Point(464, 303);
-            this.label2.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.label2.Location = new System.Drawing.Point(398, 261);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(261, 43);
+            this.label2.Size = new System.Drawing.Size(231, 39);
             this.label2.TabIndex = 10;
             this.label2.Text = "ACTUAL QTY:";
             // 
@@ -277,11 +277,11 @@
             // 
             this.txtweight.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtweight.ForeColor = System.Drawing.Color.Blue;
-            this.txtweight.Location = new System.Drawing.Point(756, 297);
-            this.txtweight.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.txtweight.Location = new System.Drawing.Point(648, 256);
+            this.txtweight.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.txtweight.MaxLength = 6;
             this.txtweight.Name = "txtweight";
-            this.txtweight.Size = new System.Drawing.Size(473, 51);
+            this.txtweight.Size = new System.Drawing.Size(406, 46);
             this.txtweight.TabIndex = 11;
             this.txtweight.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtweight_KeyDown);
             this.txtweight.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtweight_KeyPress);
@@ -293,10 +293,10 @@
             this.autoprintbarcode.CheckState = System.Windows.Forms.CheckState.Checked;
             this.autoprintbarcode.Font = new System.Drawing.Font("Tahoma", 10F);
             this.autoprintbarcode.ForeColor = System.Drawing.Color.Black;
-            this.autoprintbarcode.Location = new System.Drawing.Point(1881, 444);
-            this.autoprintbarcode.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
+            this.autoprintbarcode.Location = new System.Drawing.Point(1612, 383);
+            this.autoprintbarcode.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.autoprintbarcode.Name = "autoprintbarcode";
-            this.autoprintbarcode.Size = new System.Drawing.Size(296, 40);
+            this.autoprintbarcode.Size = new System.Drawing.Size(269, 37);
             this.autoprintbarcode.TabIndex = 48;
             this.autoprintbarcode.Text = "Auto Print Barcode";
             this.autoprintbarcode.UseVisualStyleBackColor = true;
@@ -306,10 +306,10 @@
             this.txtprodcat.Enabled = false;
             this.txtprodcat.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtprodcat.FormattingEnabled = true;
-            this.txtprodcat.Location = new System.Drawing.Point(756, 152);
-            this.txtprodcat.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.txtprodcat.Location = new System.Drawing.Point(648, 131);
+            this.txtprodcat.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.txtprodcat.Name = "txtprodcat";
-            this.txtprodcat.Size = new System.Drawing.Size(741, 51);
+            this.txtprodcat.Size = new System.Drawing.Size(636, 47);
             this.txtprodcat.TabIndex = 45;
             // 
             // label4
@@ -317,10 +317,10 @@
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.Black;
-            this.label4.Location = new System.Drawing.Point(464, 230);
-            this.label4.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.label4.Location = new System.Drawing.Point(398, 198);
+            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(210, 43);
+            this.label4.Size = new System.Drawing.Size(187, 39);
             this.label4.TabIndex = 8;
             this.label4.Text = "PRODUCT:";
             // 
@@ -329,10 +329,10 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.Black;
-            this.label1.Location = new System.Drawing.Point(464, 377);
-            this.label1.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.label1.Location = new System.Drawing.Point(398, 325);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(209, 43);
+            this.label1.Size = new System.Drawing.Size(186, 39);
             this.label1.TabIndex = 13;
             this.label1.Text = "BARCODE:";
             // 
@@ -341,10 +341,10 @@
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Tahoma", 10F);
             this.label6.ForeColor = System.Drawing.Color.Black;
-            this.label6.Location = new System.Drawing.Point(1874, 277);
-            this.label6.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.label6.Location = new System.Drawing.Point(1606, 239);
+            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(203, 36);
+            this.label6.Size = new System.Drawing.Size(183, 33);
             this.label6.TabIndex = 33;
             this.label6.Text = "BATCH CODE:";
             // 
@@ -352,10 +352,10 @@
             // 
             this.txtshipmentno.Font = new System.Drawing.Font("Tahoma", 10F);
             this.txtshipmentno.FormattingEnabled = true;
-            this.txtshipmentno.Location = new System.Drawing.Point(2177, 330);
-            this.txtshipmentno.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.txtshipmentno.Location = new System.Drawing.Point(1866, 284);
+            this.txtshipmentno.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.txtshipmentno.Name = "txtshipmentno";
-            this.txtshipmentno.Size = new System.Drawing.Size(179, 44);
+            this.txtshipmentno.Size = new System.Drawing.Size(154, 41);
             this.txtshipmentno.TabIndex = 46;
             this.txtshipmentno.Click += new System.EventHandler(this.txtshipmentno_Click);
             // 
@@ -366,10 +366,10 @@
             this.checkBox1.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBox1.Font = new System.Drawing.Font("Tahoma", 10F);
             this.checkBox1.ForeColor = System.Drawing.Color.Black;
-            this.checkBox1.Location = new System.Drawing.Point(1881, 386);
-            this.checkBox1.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
+            this.checkBox1.Location = new System.Drawing.Point(1612, 333);
+            this.checkBox1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(257, 40);
+            this.checkBox1.Size = new System.Drawing.Size(234, 37);
             this.checkBox1.TabIndex = 47;
             this.checkBox1.Text = "Auto GetWeight";
             this.checkBox1.UseVisualStyleBackColor = true;
@@ -378,12 +378,12 @@
             // 
             this.txtbatchcode.Font = new System.Drawing.Font("Tahoma", 10F);
             this.txtbatchcode.ForeColor = System.Drawing.Color.Blue;
-            this.txtbatchcode.Location = new System.Drawing.Point(2177, 272);
-            this.txtbatchcode.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.txtbatchcode.Location = new System.Drawing.Point(1866, 234);
+            this.txtbatchcode.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.txtbatchcode.MaxLength = 6;
             this.txtbatchcode.Name = "txtbatchcode";
             this.txtbatchcode.ReadOnly = true;
-            this.txtbatchcode.Size = new System.Drawing.Size(179, 44);
+            this.txtbatchcode.Size = new System.Drawing.Size(154, 40);
             this.txtbatchcode.TabIndex = 34;
             this.txtbatchcode.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtbatchcode_KeyDown);
             // 
@@ -391,11 +391,11 @@
             // 
             this.txtavailableqty.Font = new System.Drawing.Font("Tahoma", 10F);
             this.txtavailableqty.ForeColor = System.Drawing.Color.Blue;
-            this.txtavailableqty.Location = new System.Drawing.Point(2177, 154);
-            this.txtavailableqty.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.txtavailableqty.Location = new System.Drawing.Point(1866, 133);
+            this.txtavailableqty.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.txtavailableqty.MaxLength = 6;
             this.txtavailableqty.Name = "txtavailableqty";
-            this.txtavailableqty.Size = new System.Drawing.Size(179, 44);
+            this.txtavailableqty.Size = new System.Drawing.Size(154, 40);
             this.txtavailableqty.TabIndex = 44;
             this.txtavailableqty.Visible = false;
             // 
@@ -403,11 +403,11 @@
             // 
             this.txtskuno.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtskuno.ForeColor = System.Drawing.Color.Blue;
-            this.txtskuno.Location = new System.Drawing.Point(756, 373);
-            this.txtskuno.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.txtskuno.Location = new System.Drawing.Point(648, 322);
+            this.txtskuno.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.txtskuno.MaxLength = 40;
             this.txtskuno.Name = "txtskuno";
-            this.txtskuno.Size = new System.Drawing.Size(741, 51);
+            this.txtskuno.Size = new System.Drawing.Size(636, 46);
             this.txtskuno.TabIndex = 14;
             this.txtskuno.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtskuno_KeyDown);
             // 
@@ -416,10 +416,10 @@
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Tahoma", 10F);
             this.label9.ForeColor = System.Drawing.Color.Black;
-            this.label9.Location = new System.Drawing.Point(1878, 335);
-            this.label9.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.label9.Location = new System.Drawing.Point(1610, 289);
+            this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(228, 36);
+            this.label9.Size = new System.Drawing.Size(206, 33);
             this.label9.TabIndex = 45;
             this.label9.Text = "SHIPMENT NO.:";
             // 
@@ -427,10 +427,10 @@
             // 
             this.txtports.Font = new System.Drawing.Font("Tahoma", 10F);
             this.txtports.FormattingEnabled = true;
-            this.txtports.Location = new System.Drawing.Point(2177, 212);
-            this.txtports.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.txtports.Location = new System.Drawing.Point(1866, 183);
+            this.txtports.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.txtports.Name = "txtports";
-            this.txtports.Size = new System.Drawing.Size(179, 44);
+            this.txtports.Size = new System.Drawing.Size(154, 41);
             this.txtports.TabIndex = 36;
             this.txtports.Text = "COM1";
             this.txtports.SelectedIndexChanged += new System.EventHandler(this.txtports_SelectedIndexChanged);
@@ -440,10 +440,10 @@
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.Color.Black;
-            this.label5.Location = new System.Drawing.Point(464, 161);
-            this.label5.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.label5.Location = new System.Drawing.Point(398, 139);
+            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(230, 43);
+            this.label5.Size = new System.Drawing.Size(205, 39);
             this.label5.TabIndex = 44;
             this.label5.Text = "CATEGORY:";
             // 
@@ -451,11 +451,11 @@
             // 
             this.txtprodcode.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtprodcode.ForeColor = System.Drawing.Color.Blue;
-            this.txtprodcode.Location = new System.Drawing.Point(2235, 390);
-            this.txtprodcode.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.txtprodcode.Location = new System.Drawing.Point(1916, 336);
+            this.txtprodcode.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.txtprodcode.MaxLength = 6;
             this.txtprodcode.Name = "txtprodcode";
-            this.txtprodcode.Size = new System.Drawing.Size(121, 109);
+            this.txtprodcode.Size = new System.Drawing.Size(104, 98);
             this.txtprodcode.TabIndex = 32;
             this.txtprodcode.Visible = false;
             // 
@@ -464,10 +464,10 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Tahoma", 10F);
             this.label3.ForeColor = System.Drawing.Color.Black;
-            this.label3.Location = new System.Drawing.Point(1874, 221);
-            this.label3.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.label3.Location = new System.Drawing.Point(1606, 191);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(172, 36);
+            this.label3.Size = new System.Drawing.Size(156, 33);
             this.label3.TabIndex = 37;
             this.label3.Text = "COM PORT:";
             // 
@@ -476,10 +476,10 @@
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Tahoma", 10F);
             this.label8.ForeColor = System.Drawing.Color.Black;
-            this.label8.Location = new System.Drawing.Point(1871, 160);
-            this.label8.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.label8.Location = new System.Drawing.Point(1604, 138);
+            this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(200, 36);
+            this.label8.Size = new System.Drawing.Size(178, 33);
             this.label8.TabIndex = 44;
             this.label8.Text = "Available Qty:";
             this.label8.Visible = false;
@@ -489,10 +489,10 @@
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Tahoma", 25.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.ForeColor = System.Drawing.Color.Maroon;
-            this.label7.Location = new System.Drawing.Point(455, 54);
-            this.label7.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.label7.Location = new System.Drawing.Point(390, 47);
+            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(922, 94);
+            this.label7.Size = new System.Drawing.Size(813, 83);
             this.label7.TabIndex = 40;
             this.label7.Text = "ENZO\'S MEAT MARKET";
             // 
@@ -501,10 +501,10 @@
             this.isprimalcuts.AutoSize = true;
             this.isprimalcuts.Font = new System.Drawing.Font("Tahoma", 10F);
             this.isprimalcuts.ForeColor = System.Drawing.Color.Black;
-            this.isprimalcuts.Location = new System.Drawing.Point(1512, 234);
-            this.isprimalcuts.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
+            this.isprimalcuts.Location = new System.Drawing.Point(1296, 202);
+            this.isprimalcuts.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.isprimalcuts.Name = "isprimalcuts";
-            this.isprimalcuts.Size = new System.Drawing.Size(208, 40);
+            this.isprimalcuts.Size = new System.Drawing.Size(191, 37);
             this.isprimalcuts.TabIndex = 43;
             this.isprimalcuts.Text = "isPrimalCuts";
             this.isprimalcuts.UseVisualStyleBackColor = true;
@@ -513,22 +513,22 @@
             // 
             this.groupControl2.Controls.Add(this.gridControl1);
             this.groupControl2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupControl2.Location = new System.Drawing.Point(0, 564);
-            this.groupControl2.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.groupControl2.Location = new System.Drawing.Point(0, 486);
+            this.groupControl2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.groupControl2.Name = "groupControl2";
-            this.groupControl2.Size = new System.Drawing.Size(2567, 750);
+            this.groupControl2.Size = new System.Drawing.Size(2200, 647);
             this.groupControl2.TabIndex = 40;
             this.groupControl2.Text = "Primal Cut Items";
             // 
             // gridControl1
             // 
             this.gridControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridControl1.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
-            this.gridControl1.Location = new System.Drawing.Point(3, 50);
+            this.gridControl1.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.gridControl1.Location = new System.Drawing.Point(3, 45);
             this.gridControl1.MainView = this.gridView1;
-            this.gridControl1.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
+            this.gridControl1.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.gridControl1.Name = "gridControl1";
-            this.gridControl1.Size = new System.Drawing.Size(2561, 697);
+            this.gridControl1.Size = new System.Drawing.Size(2194, 599);
             this.gridControl1.TabIndex = 97;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
@@ -539,8 +539,8 @@
             this.gridView1.Appearance.HeaderPanel.Options.UseFont = true;
             this.gridView1.Appearance.Row.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gridView1.Appearance.Row.Options.UseFont = true;
-            this.gridView1.DetailHeight = 781;
-            this.gridView1.FixedLineWidth = 4;
+            this.gridView1.DetailHeight = 673;
+            this.gridView1.FixedLineWidth = 3;
             this.gridView1.GridControl = this.gridControl1;
             this.gridView1.Name = "gridView1";
             this.gridView1.OptionsView.ColumnAutoWidth = false;
@@ -550,13 +550,13 @@
             // 
             // AddPrimalCutInventory
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(14F, 29F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))));
-            this.ClientSize = new System.Drawing.Size(2567, 1314);
+            this.ClientSize = new System.Drawing.Size(2200, 1133);
             this.Controls.Add(this.groupControl2);
             this.Controls.Add(this.groupControl1);
-            this.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
+            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.Name = "AddPrimalCutInventory";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "AddPrimalCutInventory";
