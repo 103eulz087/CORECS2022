@@ -125,6 +125,7 @@ namespace SalesInventorySystem.POS
                 com.Parameters.AddWithValue("@parmdiscountrate", Convert.ToDouble(percentagedisc.Text)/100);
                 com.Parameters.AddWithValue("@parmdiscountamount", txtspecialprice.Text);
                 com.Parameters.AddWithValue("@parmnewtotal", txtnewtotal.Text);
+                com.Parameters.AddWithValue("@parmuser", Login.isglobalUserID);
                 com.Parameters.AddWithValue("@parmmachinename", Environment.MachineName.ToString());
                 com.CommandType = CommandType.StoredProcedure;
                 com.CommandText = query;

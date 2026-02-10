@@ -89,13 +89,13 @@ namespace SalesInventorySystem.POS
                 }
                 if (fileContent.Contains("$$$$$$"))
                 {
-                    fileContent = fileContent.Replace("$$$$$$", txttransno.Text);
+                    fileContent = fileContent.Replace("$$$$$$", fulldate1);
                 }
-                if (fileContent.Contains("#"))
+                if (fileContent.Contains("$$$$$"))
                 {
-                    fileContent = fileContent.Replace("#", fulldate1);
+                    fileContent = fileContent.Replace("$$$$$", fulldate1);
                 }
-
+                File.WriteAllText(filepath1, fileContent);
                 //StreamWriter writer;//,writer22;
                 //writer = new StreamWriter(filepath1, true);
                 //writer.Write(fileContent);
@@ -133,7 +133,7 @@ namespace SalesInventorySystem.POS
                 //writer.Write(fileContent);
                 //writer.Close();
             }
-            Database.ExecuteQuery("INSERT INTO POSTransaction VALUES('" + Login.assignedBranch + "','" + txttransno.Text + "','" + Environment.MachineName + "','Receipt Reprint','" + DateTime.Now.ToString() + "','" + Login.Fullname + "','"+txtcounter.Text+"','0','Receipt Reprint: OR#: '"+ txtorno.Text + "' was reprinted by Cashier on '"+DateTime.Now.ToString()+"' ')");
+            Database.ExecuteQuery("INSERT INTO POSTransaction VALUES('" + Login.assignedBranch + "','" + txttransno.Text + "','" + Environment.MachineName + "','Receipt Reprint','" + DateTime.Now.ToString() + "','" + Login.Fullname + "','"+txtcounter.Text+"','0','Receipt Reprint: OR#: "+ txtorno.Text + " was reprinted by Cashier.','','','','')");
             XtraMessageBox.Show("Successfully Print");
             isdone = true;
             this.Close();

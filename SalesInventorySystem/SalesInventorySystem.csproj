@@ -2307,6 +2307,12 @@
     <Compile Include="POS\PointOfSaleManual.Designer.cs">
       <DependentUpon>PointOfSaleManual.cs</DependentUpon>
     </Compile>
+    <Compile Include="POS\POSAddDiscount.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="POS\POSAddDiscount.Designer.cs">
+      <DependentUpon>POSAddDiscount.cs</DependentUpon>
+    </Compile>
     <Compile Include="POS\POSAddQty.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -4058,6 +4064,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="POS\PointOfSaleManual.resx">
       <DependentUpon>PointOfSaleManual.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="POS\POSAddDiscount.resx">
+      <DependentUpon>POSAddDiscount.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="POS\POSAddQty.resx">
       <DependentUpon>POSAddQty.cs</DependentUpon>

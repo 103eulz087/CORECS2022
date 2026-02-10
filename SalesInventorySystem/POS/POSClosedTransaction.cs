@@ -484,7 +484,7 @@ namespace SalesInventorySystem
                 details += HelperFunction.PrintLeftText(dt.ToString(format)) + Environment.NewLine;
                 details += HelperFunction.PrintLeftText("CASHIER : " + fullname) + Environment.NewLine;
                 details += HelperFunction.createAsteriskLine() + Environment.NewLine;
-                details += HelperFunction.PrintCenterText("X - READING") + Environment.NewLine;
+                //details += HelperFunction.PrintCenterText("X - READING") + Environment.NewLine;
                 details += HelperFunction.PrintCenterText("Cashier's Accountability Report") + Environment.NewLine;
                 details += HelperFunction.createAsteriskLine() + Environment.NewLine + Environment.NewLine;
                 details += HelperFunction.PrintLeftText("TRAN.#: " + txttransactionno.Text) + Environment.NewLine;
@@ -506,6 +506,14 @@ namespace SalesInventorySystem
                 details += HelperFunction.PrintLeftRigthText("Total Amount of SC Discount: ", HelperFunction.convertToNumericFormat(Convert.ToDouble(txttotalofscdisc.Text))) + Environment.NewLine;
                 details += HelperFunction.PrintLeftRigthText("No. of PWD Discount: ", txtnoofpwddisc.Text) + Environment.NewLine;
                 details += HelperFunction.PrintLeftRigthText("Total Amount of PWD Discount: ", HelperFunction.convertToNumericFormat(Convert.ToDouble(txttotalofpwddisc.Text))) + Environment.NewLine;
+
+                details += HelperFunction.PrintLeftRigthText("No. of NAAC Discount: ", txtnoofscdisc.Text) + Environment.NewLine;
+                details += HelperFunction.PrintLeftRigthText("Total Amount of NAAC Discount: ", HelperFunction.convertToNumericFormat(Convert.ToDouble(txttotalofscdisc.Text))) + Environment.NewLine;
+                details += HelperFunction.PrintLeftRigthText("No. of MOV Discount: ", txtnoofpwddisc.Text) + Environment.NewLine;
+                details += HelperFunction.PrintLeftRigthText("Total Amount of MOV Discount: ", HelperFunction.convertToNumericFormat(Convert.ToDouble(txttotalofpwddisc.Text))) + Environment.NewLine;
+                details += HelperFunction.PrintLeftRigthText("No. of SP Discount: ", txtnoofscdisc.Text) + Environment.NewLine;
+                details += HelperFunction.PrintLeftRigthText("Total Amount of SP Discount: ", HelperFunction.convertToNumericFormat(Convert.ToDouble(txttotalofscdisc.Text))) + Environment.NewLine;
+
                 details += HelperFunction.PrintLeftRigthText("No. Regular Discount: ", txtnoofregdisc.Text) + Environment.NewLine;
                 details += HelperFunction.PrintLeftRigthText("Total Amount of Regular Discount: ", HelperFunction.convertToNumericFormat(Convert.ToDouble(txttotalofregdisc.Text))) + Environment.NewLine;
                 details += HelperFunction.PrintLeftRigthText("No. of Disc P/Item: ", txtnoofdiscount.Text) + Environment.NewLine;

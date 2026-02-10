@@ -36,7 +36,8 @@ namespace SalesInventorySystem.POS
         private void textBox2_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
-                searchItem();
+                //searchItem();
+                simpleButton1.PerformClick();
         }
 
         void searchItem()
@@ -119,27 +120,28 @@ namespace SalesInventorySystem.POS
         
         void returnSelectedItem()
         {
-            option = "";
-            option = "Checkbox";
+            //option = "";
+            //option = "Checkbox";
             orderno = HelperFunction.sequencePadding1(txtorderno.Text, 18);
-            bool ok = false;
-            foreach (DataGridViewRow row in dataGridView1.Rows)
-            {
-                DataGridViewCheckBoxCell chk = (DataGridViewCheckBoxCell)row.Cells[0];
-                if (chk.Value != chk.FalseValue || chk.Value != null)
-                {
-                    ok = true;
-                }
-            }
-            if (!ok)
-            {
-                XtraMessageBox.Show("No items to Returned!.. Please select item in the checkbox you want to void.");
-                return;
-            }
+            //bool ok = false;
+            //foreach (DataGridViewRow row in dataGridView1.Rows)
+            //{
+            //    DataGridViewCheckBoxCell chk = (DataGridViewCheckBoxCell)row.Cells[0];
+            //    if (chk.Value != chk.FalseValue || chk.Value != null)
+            //    {
+            //        ok = true;
+            //    }
+            //}
+            //if (!ok)
+            //{
+            //    XtraMessageBox.Show("No items to Returned!.. Please select item in the checkbox you want to void.");
+            //    return;
+            //}
             Printing printit = new Printing();
-            delete(); //gi update lng sa ang isErrorCorrect = 1
+            //delete(); //gi update lng sa ang isErrorCorrect = 1
             voidSelectedItem(); //dri na gi update ang status sa SP Status='RETURNED'
-            printit.printReturnSelectedItem(txtreturntransno.Text, txttransno.Text, orderno, this.dataGridView1);
+            printit.printReturnSelectedItemDevEx(txtreturntransno.Text, txttransno.Text, orderno, gridViewMaster);
+            //printit.printReturnSelectedItem(txtreturntransno.Text, txttransno.Text, orderno, this.dataGridView1);
             ////////////////////////////////////////////////
             //string filepathConso = "C:\\POSTransaction\\ReturnedSales\\";
             string filepath = "C:\\POSTransaction\\ReturnedSalesConso\\" + orderno + ".txt";
@@ -178,16 +180,72 @@ namespace SalesInventorySystem.POS
 
         }
 
-      
-
+        
         private void simpleButton1_Click(object sender, EventArgs e)
         {
-            searchItem();
+            //searchItem();
+            Int64 orderno = Convert.ToInt64(txtorderno.Text);
+            string neworderno = HelperFunction.sequencePadding1(orderno.ToString(), 18);
+            str = "SELECT '' as Ret,SequenceNumber" +
+                //  ",TransactionCode" +
+                ",ReferenceNo" +
+                ",BranchCode" +
+                ",ProductCode" +
+                ",Description" +
+                ",FORMAT(SellingPrice,'N', 'en-us') AS SellingPrice" +
+                ",QtySold" +
+                ",FORMAT(DiscountTotal,'N', 'en-us') AS DiscountTotal" +
+                ",FORMAT(TaxTotal,'N', 'en-us') AS TaxTotal" +
+                ",FORMAT(SubTotal,'N', 'en-us') AS SubTotal" +
+                ",FORMAT(TotalAmount,'N', 'en-us') AS TotalAmount " +
+                ",isVat " +
+                //",isConfirmed" +
+                //",isErrorCorrect" +
+                //",isVoid " +
+                "FROM dbo.BatchSalesDetails  " +
+                //"WHERE ReferenceNo='" + txtorderno.Text.Trim() + "' " +
+                "WHERE ReferenceNo='" + neworderno.Trim() + "' " +
+                "AND BranchCode='" + txtbranch.Text.Trim() + "' " +
+                "AND isConfirmed='1' " +
+                "AND isErrorCorrect='0' " +
+                "AND isCancelled='0' " +
+                "AND MachineUsed='" + Environment.MachineName + "' " +
+                "AND isVoid='0' ";
+            Database.display(str, gridControlMaster, gridViewMaster);
         }
 
         private void btnReturnSelected_Click(object sender, EventArgs e)
         {
+            
+            int ctr = 0;
+            for (int i = 0; i <= gridViewMaster.RowCount - 1; i++)
+            {
+                if (gridViewMaster.GetRowCellValue(i, "Ret").ToString() == "True")
+                {
+                    ctr += 1;
+                   
+                }
+
+            }
+
+            if (ctr == 0)
+            {
+                XtraMessageBox.Show("No Items Selected!");
+                return;
+            }
+            else
+            {
+                for (int j = 0; j <= gridViewMaster.RowCount - 1; j++)
+                {
+                    if (gridViewMaster.GetRowCellValue(j, "Ret").ToString() == "True")
+                    {
+                        Database.ExecuteQuery($"UPDATE dbo.BatchSalesDetails SET isErrorCorrect=1,Status='RETURNED' WHERE BranchCode='{txtbranch.Text}' AND MachineUsed='{Environment.MachineName}' AND ReferenceNo='{gridViewMaster.GetRowCellValue(j,"ReferenceNo").ToString()}' AND SequenceNumber='{gridViewMaster.GetRowCellValue(j, "SequenceNumber").ToString()}' ");
+                    }
+                }
+                XtraMessageBox.Show("Successfully Updated!");
+            }
             returnSelectedItem();
+
         }
 
         private void btnReturnALL_Click(object sender, EventArgs e)
@@ -217,7 +275,7 @@ namespace SalesInventorySystem.POS
 
         private void voidSelectedItem()
         {
-            sequenceNo = dataGridView1.Rows[0].Cells["SequenceNumber"].Value.ToString();
+            //sequenceNo = dataGridView1.Rows[0].Cells["SequenceNumber"].Value.ToString();
             SqlConnection con = Database.getConnection();
             con.Open();
             string query = "sp_VoidSelectedItem";
@@ -227,9 +285,9 @@ namespace SalesInventorySystem.POS
             com.Parameters.AddWithValue("@parmtransno", txttransno.Text);
             com.Parameters.AddWithValue("@parmcashiertranscode", PointOfSale.cashierTransactionCode);
             com.Parameters.AddWithValue("@parmreturntransno", txtreturntransno.Text);
-            com.Parameters.AddWithValue("@parmsequenceno", sequenceNo);
+            //com.Parameters.AddWithValue("@parmsequenceno", sequenceNo);
             com.Parameters.AddWithValue("@parmuser", Login.isglobalUserID);
-            com.Parameters.AddWithValue("@parmoption", option);
+            //com.Parameters.AddWithValue("@parmoption", option);
             com.Parameters.AddWithValue("@parmmachinename", Environment.MachineName.ToString());
             com.CommandType = CommandType.StoredProcedure;
             com.CommandText = query;
@@ -293,6 +351,12 @@ namespace SalesInventorySystem.POS
             dataGridView1.DataMember = "BatchSalesDetails";
             dataGridView1.DataSource = ds;
             con.Close();
+        }
+
+        private void gridViewMaster_CustomRowCellEdit(object sender, DevExpress.XtraGrid.Views.Grid.CustomRowCellEditEventArgs e)
+        {
+            if (e.Column.FieldName == "Ret")
+                e.RepositoryItem = repositoryItemCheckEditStat;
         }
 
         private void bindgridReverse()

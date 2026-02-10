@@ -94,6 +94,7 @@ namespace SalesInventorySystem.HOFormsDevEx
         {
             confirmPayment();
         }
+
         void AddPaymentBtnExecute()
         {
             int ctr = 0;

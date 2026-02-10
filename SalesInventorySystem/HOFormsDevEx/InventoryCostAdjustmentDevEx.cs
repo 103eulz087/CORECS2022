@@ -56,7 +56,7 @@ namespace SalesInventorySystem.HOFormsDevEx
                 com.Parameters.AddWithValue("@parmstat", ViewGeneralInventory.status);
                 com.Parameters.AddWithValue("@parmisvat", Convert.ToBoolean(ViewGeneralInventory.isvat));
                 //com.Parameters.AddWithValue("@parmrefno",);
-                com.Parameters.AddWithValue("@parmuser", Login.userid);
+                com.Parameters.AddWithValue("@parmuser", Login.isglobalUserID);
                 com.Parameters.AddWithValue("@parmtype", cmbtype.Text);
                 com.Parameters.AddWithValue("@parmsupplierid", txtsupplier.Text);
                 //Gain / Loss

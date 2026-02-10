@@ -1013,6 +1013,22 @@ namespace SalesInventorySystem.POSDevEx
                             xct.xrannex.Text = "ANNEX E-3";
                             xct.xrreporttitle.Text = "Person with Disability Sales Book/Report";
                             break;
+                        case "REGULAR":
+                            xct.xrannex.Text = "ANNEX E-3";
+                            xct.xrreporttitle.Text = "Person with Disability Sales Book/Report";
+                            break;
+                        case "NAAC":
+                            xct.xrannex.Text = "ANNEX E-3";
+                            xct.xrreporttitle.Text = "National Athletes & Coaches";
+                            break;
+                        case "MOV":
+                            xct.xrannex.Text = "ANNEX E-4";
+                            xct.xrreporttitle.Text = "Medal of Valor";
+                            break;
+                        case "SOLOPARENT":
+                            xct.xrannex.Text = "ANNEX E-5";
+                            xct.xrreporttitle.Text = "Solo Parent ";
+                            break;
 
                         default:
                             xct.xrannex.Text = "";

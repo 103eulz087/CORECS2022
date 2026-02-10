@@ -522,7 +522,7 @@
             this.barButtonItem32,
             this.barButtonItem33});
             this.ribbonControl.Location = new System.Drawing.Point(0, 0);
-            this.ribbonControl.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.ribbonControl.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.ribbonControl.MaxItemId = 217;
             this.ribbonControl.Name = "ribbonControl";
             this.ribbonControl.PageHeaderItemLinks.Add(this.barStaticItem2);
@@ -539,7 +539,7 @@
             this.ribbonControl.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonControlStyle.Office2013;
             this.ribbonControl.ShowApplicationButton = DevExpress.Utils.DefaultBoolean.False;
             this.ribbonControl.ShowPageHeadersMode = DevExpress.XtraBars.Ribbon.ShowPageHeadersMode.Show;
-            this.ribbonControl.Size = new System.Drawing.Size(1453, 158);
+            this.ribbonControl.Size = new System.Drawing.Size(2906, 308);
             this.ribbonControl.StatusBar = this.ribbonStatusBar;
             this.ribbonControl.SelectedPageChanged += new System.EventHandler(this.ribbonControl_SelectedPageChanged);
             this.ribbonControl.Click += new System.EventHandler(this.ribbon_Click);
@@ -2055,6 +2055,7 @@
             this.btnSTSSummaryRep.Id = 166;
             this.btnSTSSummaryRep.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("btnSTSSummaryRep.ImageOptions.LargeImage")));
             this.btnSTSSummaryRep.Name = "btnSTSSummaryRep";
+            this.btnSTSSummaryRep.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
             this.btnSTSSummaryRep.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnSTSSummaryRep_ItemClick);
             // 
             // btnConnectionSettings
@@ -2412,6 +2413,7 @@
             this.btnInventoryCostRep.Caption = "Inventory Costing";
             this.btnInventoryCostRep.Id = 201;
             this.btnInventoryCostRep.Name = "btnInventoryCostRep";
+            this.btnInventoryCostRep.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
             this.btnInventoryCostRep.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnInventoryCostRep_ItemClick);
             // 
             // btnMerchants
@@ -2437,6 +2439,7 @@
             this.btnPOSManagement2.Id = 205;
             this.btnPOSManagement2.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("btnPOSManagement2.ImageOptions.LargeImage")));
             this.btnPOSManagement2.Name = "btnPOSManagement2";
+            this.btnPOSManagement2.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
             this.btnPOSManagement2.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnPOSManagement2_ItemClick);
             // 
             // barbtncomparativeB
@@ -2444,6 +2447,7 @@
             this.barbtncomparativeB.Caption = "Comparative Report B";
             this.barbtncomparativeB.Id = 207;
             this.barbtncomparativeB.Name = "barbtncomparativeB";
+            this.barbtncomparativeB.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
             this.barbtncomparativeB.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem27_ItemClick_1);
             // 
             // barButtonItem31
@@ -2866,11 +2870,11 @@
             this.ribbonStatusBar.ItemLinks.Add(this.barHeaderItem4);
             this.ribbonStatusBar.ItemLinks.Add(this.barStaticItem8);
             this.ribbonStatusBar.ItemLinks.Add(this.barStaticCashierTransNo);
-            this.ribbonStatusBar.Location = new System.Drawing.Point(0, 636);
-            this.ribbonStatusBar.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.ribbonStatusBar.Location = new System.Drawing.Point(0, 1221);
+            this.ribbonStatusBar.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.ribbonStatusBar.Name = "ribbonStatusBar";
             this.ribbonStatusBar.Ribbon = this.ribbonControl;
-            this.ribbonStatusBar.Size = new System.Drawing.Size(1453, 24);
+            this.ribbonStatusBar.Size = new System.Drawing.Size(2906, 48);
             // 
             // barAndDockingController1
             // 
@@ -2944,13 +2948,13 @@
             // 
             this.Appearance.BackColor = System.Drawing.SystemColors.Control;
             this.Appearance.Options.UseBackColor = true;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1453, 660);
+            this.ClientSize = new System.Drawing.Size(2906, 1269);
             this.Controls.Add(this.ribbonStatusBar);
             this.Controls.Add(this.ribbonControl);
             this.IsMdiContainer = true;
-            this.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.Name = "Main";
             this.Ribbon = this.ribbonControl;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
