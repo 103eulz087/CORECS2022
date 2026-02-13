@@ -101,6 +101,8 @@
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStripForConfirmationServices = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
+            this.contextMenuStripApproved = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolStripMenuItem9 = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControlForApproval.SuspendLayout();
             this.forapproval.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl2)).BeginInit();
@@ -143,6 +145,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridViewConfirmedServices)).BeginInit();
             this.contextMenuStripForConfirmationProducts.SuspendLayout();
             this.contextMenuStripForConfirmationServices.SuspendLayout();
+            this.contextMenuStripApproved.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControlForApproval
@@ -475,6 +478,7 @@
             this.gridControl3.TabIndex = 5;
             this.gridControl3.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView3});
+            this.gridControl3.MouseUp += new System.Windows.Forms.MouseEventHandler(this.gridControl3_MouseUp);
             // 
             // gridView3
             // 
@@ -999,6 +1003,21 @@
             this.toolStripMenuItem3.Text = "Confirm Services";
             this.toolStripMenuItem3.Click += new System.EventHandler(this.toolStripMenuItem3_Click);
             // 
+            // contextMenuStripApproved
+            // 
+            this.contextMenuStripApproved.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.contextMenuStripApproved.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem9});
+            this.contextMenuStripApproved.Name = "contextMenuStrip1";
+            this.contextMenuStripApproved.Size = new System.Drawing.Size(391, 40);
+            // 
+            // toolStripMenuItem9
+            // 
+            this.toolStripMenuItem9.Name = "toolStripMenuItem9";
+            this.toolStripMenuItem9.Size = new System.Drawing.Size(390, 36);
+            this.toolStripMenuItem9.Text = "View Purchase Order Details";
+            this.toolStripMenuItem9.Click += new System.EventHandler(this.toolStripMenuItem9_Click);
+            // 
             // VIEWPO
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
@@ -1056,6 +1075,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridViewConfirmedServices)).EndInit();
             this.contextMenuStripForConfirmationProducts.ResumeLayout(false);
             this.contextMenuStripForConfirmationServices.ResumeLayout(false);
+            this.contextMenuStripApproved.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1133,5 +1153,7 @@
         private System.Windows.Forms.DateTimePicker dateFromConfirmedProd;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStripApproved;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem9;
     }
 }

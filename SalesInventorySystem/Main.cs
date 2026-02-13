@@ -991,15 +991,25 @@ namespace SalesInventorySystem
             //    HOConversion hocn = new HOConversion();
             //    hocn.Show();
             //}
+            //foreach (Form form in Application.OpenForms)
+            //{
+            //    if (form.GetType() == typeof(HOConversionPOS))
+            //    {
+            //        form.Activate();
+            //        return;
+            //    }
+            //}
+            //HOConversionPOS hocn = new HOConversionPOS();
+            //hocn.Show();
             foreach (Form form in Application.OpenForms)
             {
-                if (form.GetType() == typeof(HOConversionPOS))
+                if (form.GetType() == typeof(HOConversion))
                 {
                     form.Activate();
                     return;
                 }
             }
-            HOConversionPOS hocn = new HOConversionPOS();
+            HOConversion hocn = new HOConversion();
             hocn.Show();
         }
 
@@ -2798,14 +2808,16 @@ namespace SalesInventorySystem
 
         private void btnTransferPerPallet_ItemClick(object sender, ItemClickEventArgs e)
         {
-            HOFormsDevEx.TransferPerPalletDevEx ads = new HOFormsDevEx.TransferPerPalletDevEx();
+            HOFormsDevEx.TransferPerPalletDevExFixed ads = new HOFormsDevEx.TransferPerPalletDevExFixed();
             ads.Show();
+            //HOFormsDevEx.TransferPerPalletDevEx ads = new HOFormsDevEx.TransferPerPalletDevEx();
+            //ads.Show();
         }
 
         private void btnTransferPerBarcode_ItemClick(object sender, ItemClickEventArgs e)
         {
-            HOFormsDevEx.TransferPerBarcodeDevEx ads = new HOFormsDevEx.TransferPerBarcodeDevEx();
-            ads.Show();
+            //HOFormsDevEx.TransferPerBarcodeDevEx ads = new HOFormsDevEx.TransferPerBarcodeDevEx();
+            //ads.Show();
         }
 
         private void barButtonItem24_ItemClick_1(object sender, ItemClickEventArgs e)

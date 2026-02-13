@@ -52,6 +52,8 @@ namespace SalesInventorySystem
                 barcodescanning.Checked = false;
                 panel1.Visible = false;
                 panel2.Visible = false;
+                panel3.Visible = false;
+                panel4.Visible = true;
             }
             else
             {
@@ -156,51 +158,74 @@ namespace SalesInventorySystem
 
         private void add()
         {
+            if (barcodescanning.Checked == true)
+            {
+                addbyBarcode();
+            }
+            else
+            {
+                addBranchOrder();
+            }
+        }
+
+        void addBranchOrder()
+        {
+            string sourceseqnum = "";
+            sourceseqnum = txtseqno.Text;
             SqlConnection con = Database.getConnection();
             con.Open();
             string query = "sp_AddBranchOrder";
             try
             {
-                bool isbarcodscanning = false;
-                string sourceseqnum = "";
-                if(barcodescanning.Checked==true)
-                {
-                    isbarcodscanning = true;
-                    ///////////////////////////////////////////////////////////////////////////////////OLD per plastic pler barcode
-                    //primalproductcode = Database.getSingleQuery("Inventory","Barcode='"+txtbarcodescanning.Text+"' and isWarehouse=1 and Available > 0 and Branch='888' and IsStock=1","Product");
-                    //productcategorycode = primalproductcode.Substring(0,2);
-                    //sourceseqnum = Database.getSingleQuery("Inventory", "Barcode='" + txtbarcodescanning.Text + "' and isWarehouse=1 and Available > 0 and Branch='888' and IsStock=1", "SequenceNumber");
-                    //////////////////////////////////////////////////////////////////////////////////OLD per plastic pler barcode
-                    primalproductcode = globalproductcode;
-                    productcategorycode = primalproductcode.Substring(0, 2);
-                }
-                else
-                {
-                    sourceseqnum = txtseqno.Text;
-                }
                 SqlCommand com = new SqlCommand(query, con);
-                com.Parameters.AddWithValue("@parmdevno", txtdevno.Text); 
+                com.Parameters.AddWithValue("@parmdevno", txtdevno.Text);
                 com.Parameters.AddWithValue("@parmrefno", txtrefno.Text);
                 com.Parameters.AddWithValue("@parmpono", txtponum.Text);
                 com.Parameters.AddWithValue("@parmprodcatcode", productcategorycode);
                 com.Parameters.AddWithValue("@parmprodcode", primalproductcode);
                 com.Parameters.AddWithValue("@parmqty", txtweight.Text);
                 com.Parameters.AddWithValue("@parmbarcode", txtsku.Text);
-                //com.Parameters.AddWithValue("@parmsourcebranchcode", searchLookUpEditBranch.Text);
-                com.Parameters.AddWithValue("@parmbranchcode", txtbrcode.Text);
+
+                com.Parameters.AddWithValue("@parmbranchcode", txtbrcode.Text); //initiating branhc
                 com.Parameters.AddWithValue("@parmorigin", Login.assignedBranch);
                 com.Parameters.AddWithValue("@preparedby", Login.Fullname);
                 //com.Parameters.AddWithValue("@parmeffectivitydate", txteffectivedate.Text);
                 com.Parameters.AddWithValue("@parmsourceseqno", sourceseqnum);
-                com.Parameters.AddWithValue("@parmbarcodescanning", isbarcodscanning);
+                com.Parameters.AddWithValue("@parmbarcodescanning", "");
                 com.CommandType = CommandType.StoredProcedure;
-                com.CommandTimeout = 3600;
                 com.CommandText = query;
                 com.ExecuteNonQuery();
             }
             catch (SqlException ex)
             {
-                XtraMessageBox.Show(ex.Message.ToString()+"XYZ");
+                XtraMessageBox.Show(ex.Message.ToString() + "XYZ");
+            }
+            con.Close();
+        }
+
+        void addbyBarcode()
+        {
+            SqlConnection con = Database.getConnection();
+            con.Open();
+            string query = "sp_AddBranchOrderByBarcode";
+            try
+            {
+                SqlCommand com = new SqlCommand(query, con);
+                com.Parameters.AddWithValue("@parmdevno", txtdevno.Text);
+                com.Parameters.AddWithValue("@parmrefno", txtrefno.Text);
+                com.Parameters.AddWithValue("@parmpono", txtponum.Text);
+
+                com.Parameters.AddWithValue("@parmbarcode", txtsku.Text);
+                com.Parameters.AddWithValue("@parmbranchcode", txtbrcode.Text); //initiating branhc
+                com.Parameters.AddWithValue("@parmorigin", Login.assignedBranch);
+                com.Parameters.AddWithValue("@preparedby", Login.Fullname);
+                com.CommandType = CommandType.StoredProcedure;
+                com.CommandText = query;
+                com.ExecuteNonQuery();
+            }
+            catch (SqlException ex)
+            {
+                XtraMessageBox.Show(ex.Message.ToString() + "XYZ");
             }
             con.Close();
         }
@@ -693,9 +718,9 @@ namespace SalesInventorySystem
         {
             if(barcodescanning.Checked==true)
             {
-                Database.ExecuteQuery("UPDATE InventorySettings SET isFifo=0");
                 isFifo = false;
                 panel2.Visible = true;
+                panel4.Visible = false;
                 panel3.Visible = false;
                 panel1.Visible = false;
                 txtbarcodescanning.Focus();

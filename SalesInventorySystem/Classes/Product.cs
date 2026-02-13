@@ -14,6 +14,12 @@ namespace SalesInventorySystem.Classes
             str = Database.getSingleQuery("ProductCategory", "Description='" + ProductName + "'", "ProductCategoryID");
             return str;
         }
+        public static String getProductCategoryCodeByPcode(String productcode)
+        {
+            string str = "";
+            str = Database.getSingleQuery("Products", "ProductCode='" + productcode + "' and BranchCode='"+Login.assignedBranch+"'", "ProductCategoryCode");
+            return str;
+        }
         public static String getProductCategoryName(String id)
         {
             string str = "";

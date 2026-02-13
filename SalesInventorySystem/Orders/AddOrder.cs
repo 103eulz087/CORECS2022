@@ -298,12 +298,13 @@ namespace SalesInventorySystem
         {
             this.ActiveControl = txtprodcat;
             comboBox1.Text = "Kg";
-            if (Login.assignedBranch == "888")
-            {
-                panel1.Visible = true;
-                checkBox1.Visible = true;
-                chckspecialprice.Visible = true;
-            }
+            panel1.Visible = true;
+            checkBox1.Visible = true;
+            chckspecialprice.Visible = true;
+            //if (Login.assignedBranch == "888")
+            //{
+                
+            //}
 
 
         }

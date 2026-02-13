@@ -30,6 +30,12 @@ namespace SalesInventorySystem.Orders
             textEdit1.Text = IDGenerator.getIDNumberSP("sp_GetPurchaseOrderNumber", "PONumber"); //IDGenerator.getPONumber();
             txtgroup.Enabled = true;
             Database.displayComboBoxItems("Select CategoryName FROM GroupCategory", "CategoryName", txtgroup);
+
+            btnnew.Enabled = false;
+            btnadd.Enabled = true;
+            btnsave.Enabled = false;
+            btncancel.Enabled = false;
+            btnclose.Enabled = true;
         }
         
         void saveAll()
@@ -192,6 +198,12 @@ namespace SalesInventorySystem.Orders
                     Orders.SearchProductBatchMode.isdone = false;
                     orderko.Dispose();
                     display();
+
+                    btnnew.Enabled = false;
+                    btnadd.Enabled = true;
+                    btnsave.Enabled = true;
+                    btncancel.Enabled = true;
+                    btnclose.Enabled = true;
                 }
             }
         }

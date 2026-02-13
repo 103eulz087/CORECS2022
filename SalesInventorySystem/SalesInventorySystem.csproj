@@ -1422,11 +1422,11 @@
     <Compile Include="HOFormsDevEx\SupplierPaymentDevEx.Designer.cs">
       <DependentUpon>SupplierPaymentDevEx.cs</DependentUpon>
     </Compile>
-    <Compile Include="HOFormsDevEx\TransferPerBarcodeDevEx.cs">
+    <Compile Include="HOFormsDevEx\TransferPerPalletDevExFixed.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="HOFormsDevEx\TransferPerBarcodeDevEx.Designer.cs">
-      <DependentUpon>TransferPerBarcodeDevEx.cs</DependentUpon>
+    <Compile Include="HOFormsDevEx\TransferPerPalletDevExFixed.Designer.cs">
+      <DependentUpon>TransferPerPalletDevExFixed.cs</DependentUpon>
     </Compile>
     <Compile Include="HOFormsDevEx\TransferPerPalletDevEx.cs">
       <SubType>Form</SubType>
@@ -3664,6 +3664,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="HOFormsDevEx\SupplierPaymentDevEx.resx">
       <DependentUpon>SupplierPaymentDevEx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HOFormsDevEx\TransferPerPalletDevExFixed.resx">
+      <DependentUpon>TransferPerPalletDevExFixed.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="HOFormsDevEx\TransferPerPalletDevEx.resx">
       <DependentUpon>TransferPerPalletDevEx.cs</DependentUpon>

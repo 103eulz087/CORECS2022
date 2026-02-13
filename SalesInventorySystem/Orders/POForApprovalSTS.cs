@@ -125,33 +125,33 @@ namespace SalesInventorySystem.Orders
             if (Convert.ToBoolean(Login.isglobalWarehouseOfficer).Equals(true))
             {
                 //Database.display("SELECT * FROM view_TransferOrderDetails WHERE PONumber = '" + refno + "'", podetails.gridControl1, podetails.gridView1);
-                Database.display($"SELECT * FROM funcview_TransferOrderDetailsSTS('{Login.assignedBranch}') WHERE PONumber = '{ refno }' ORDER BY SeqNo", podetails.gridControl1, podetails.gridView1);
+                Database.display($"SELECT * FROM funcview_TransferOrderDetailsSTS('{Login.assignedBranch}','{refno}') ", podetails.gridControl1, podetails.gridView1);
 
                 podetails.txtpono.Text = refno;
                 GridView view = podetails.gridControl1.FocusedView as GridView;
                 view.SortInfo.ClearAndAddRange(new GridColumnSortInfo[] {
                 new GridColumnSortInfo(view.Columns["Category"],DevExpress.Data.ColumnSortOrder.Ascending)
                 }, 1);
-                podetails.gridView1.Columns["SeqNo"].Visible = false;
+                //podetails.gridView1.Columns["SeqNo"].Visible = false;
                 podetails.gridView1.ExpandAllGroups();
             }
             if (Convert.ToBoolean(Login.isglobalApprover).Equals(true))
             {
                 //Database.display("SELECT * FROM view_TransferOrderDetails WHERE PONumber = '" + refno + "'", podetails.gridControl1, podetails.gridView1);
-                Database.display($"SELECT * FROM funcview_TransferOrderDetailsSTS('{Login.assignedBranch}') WHERE PONumber = '{ refno }' ORDER BY SeqNo", podetails.gridControl1, podetails.gridView1);
+                Database.display($"SELECT * FROM funcview_TransferOrderDetailsSTS('{Login.assignedBranch}','{refno}') ", podetails.gridControl1, podetails.gridView1);
                 podetails.txtpono.Text = refno;
                 GridView view = podetails.gridControl1.FocusedView as GridView;
                 view.SortInfo.ClearAndAddRange(new GridColumnSortInfo[] {
                 new GridColumnSortInfo(view.Columns["Category"],DevExpress.Data.ColumnSortOrder.Ascending)
                 }, 1);
-                podetails.gridView1.Columns["SeqNo"].Visible = false;
+                //podetails.gridView1.Columns["SeqNo"].Visible = false;
                 podetails.gridView1.ExpandAllGroups();
             }
             else
             {
                 //Database.display("SELECT SeqNo,PONumber,ProductName,Qty,Units FROM view_TransferOrderDetails WHERE PONumber = '" + refno + "' ", podetails.gridControl1, podetails.gridView1);
-                Database.display($"SELECT * FROM funcview_TransferOrderDetailsSTS('{Login.assignedBranch}') WHERE PONumber = '{ refno }' ORDER BY SeqNo", podetails.gridControl1, podetails.gridView1);
-                podetails.gridView1.Columns["SeqNo"].Visible = false;
+                Database.display($"SELECT * FROM funcview_TransferOrderDetailsSTS('{Login.assignedBranch}','{refno}') ", podetails.gridControl1, podetails.gridView1);
+                //podetails.gridView1.Columns["SeqNo"].Visible = false;
                 podetails.txtpono.Text = refno;
             }
             GridGroupSummaryItem ite = new GridGroupSummaryItem();
@@ -289,6 +289,17 @@ namespace SalesInventorySystem.Orders
             showSTSDetails(gridViewForDelivSts);
         }
 
+        private void toolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            showSTSForApproval();
+        }
+
+        private void gridViewSTS_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+                contextMenuStripForApproval.Show(gridControlSTS, e.Location);
+        }
+
         private void btnfordelivstsexcel_Click(object sender, EventArgs e)
         {
             string filename = "FORDELIVERY_STS" + DateTime.Now.ToShortDateString().Replace(@"\", "-");
@@ -344,7 +355,7 @@ namespace SalesInventorySystem.Orders
                 
                 //Database.display("SELECT * FROM view_TransferOrderDetails WHERE PONumber = '" + refno + "' ORDER BY SeqNo", podetails.gridControl1, podetails.gridView1);
 
-                Database.display($"SELECT * FROM funcview_TransferOrderDetailsSTS('{Login.assignedBranch}') WHERE PONumber = '{ refno }' ORDER BY SeqNo", podetails.gridControl1, podetails.gridView1);
+                Database.display($"SELECT * FROM funcview_TransferOrderDetailsSTS('{Login.assignedBranch}','{refno}') ", podetails.gridControl1, podetails.gridView1);
                 podetails.txtpono.Text = refno;
                 GridView view = podetails.gridControl1.FocusedView as GridView;
                 view.SortInfo.ClearAndAddRange(new GridColumnSortInfo[] {
@@ -398,7 +409,7 @@ namespace SalesInventorySystem.Orders
         }
         private void gridViewSTS_DoubleClick(object sender, EventArgs e)
         {
-            showSTSForApproval();
+            //showSTSForApproval();
         }
     }
 }
