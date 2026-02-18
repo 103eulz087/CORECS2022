@@ -779,9 +779,9 @@ namespace SalesInventorySystem.Orders
         {
             Orders.OrderCheckerDevEx oread = new Orders.OrderCheckerDevEx();
 
-            Database.display("SELECT ProductName,Qty FROM TransferOrderDetails WHERE PONumber='" + txtponum.Text + "'", oread.gridControl1, oread.gridView1);
-            Database.display("SELECT ProductName,QtyDelivered FROM DeliveryDetails WHERE PONumber='" + txtponum.Text + "'", oread.gridControl2, oread.gridView2);
-            Database.display("SELECT ProductName,Qty FROM TransferOrderDetails WHERE ProductCode not in (Select ProductNo FROM DeliveryDetails WHERE PONumber='" + txtponum.Text + "') AND PONumber='" + txtponum.Text + "' ", oread.gridControl3, oread.gridView3);
+            Database.display("SELECT ProductName,Qty FROM TransferOrderDetails WHERE PONumber='" + txtponum.Text + "'", oread.gridControlDelivByComm, oread.gridViewDelivByComm);
+            Database.display("SELECT ProductName,QtyDelivered FROM DeliveryDetails WHERE PONumber='" + txtponum.Text + "'", oread.gridControlActualRcvd, oread.gridViewActualRcvd);
+            Database.display("SELECT ProductName,Qty FROM TransferOrderDetails WHERE ProductCode not in (Select ProductNo FROM DeliveryDetails WHERE PONumber='" + txtponum.Text + "') AND PONumber='" + txtponum.Text + "' ", oread.gridControlMyStsReq, oread.gridViewMyStsReq);
 
             oread.ShowDialog(this);
         }
@@ -817,7 +817,7 @@ namespace SalesInventorySystem.Orders
                 decimal quantity;
                 string strquantity;
                 string productcode = "";
-                if (txtcomport.Text == "")
+                if (txtcomport.Text == "" || txtcomport.Text == null)
                 {
                     XtraMessageBox.Show("Please Select COM-PORT");
                 }
@@ -827,8 +827,6 @@ namespace SalesInventorySystem.Orders
                     {
                         ctr2++;
                     }
-                    Random rand = new Random();
-                    int ctr = rand.Next(0, 9);
                     txtweight.Invoke(this.myDelegate, new Object[] { wieght2 });
 
                     quantity = Decimal.Parse(txtweight.Text);
@@ -842,7 +840,11 @@ namespace SalesInventorySystem.Orders
                     else
                     {
                         productcode = pcode.ToString();//getProductCode();
-                        txtsku.Text = Database.getSingleQuery("Products", "BranchCode='" + Login.assignedBranch + "' AND ProductCode='" + pcode + "' ", "Barcode");
+                        //txtsku.Text = Database.getSingleQuery("Products", "BranchCode='" + Login.assignedBranch + "' AND ProductCode='" + pcode + "' ", "Barcode");
+                        string barcode = Database.getSingleResultSet($"SELECT dbo.func_GenerateBarcode" +
+                $"('{Login.assignedBranch}',0,'{txtponum.Text}','{productcode.ToString()}','{strquantity}','2') ");
+
+                        txtsku.Text = barcode;
                         //if (isBarcodeLong == true)
                         //{
                         //    txtsku.Text = "33333" + productcode + strquantity.Replace(".", "") + Classes.Utilities.sequencePadding(ctr2.ToString());
@@ -860,7 +862,7 @@ namespace SalesInventorySystem.Orders
                         //{
                         //    simpleButton1.Focus();
                         //}
-                        txtsku.Focus();
+                        btnadd.Focus();
                     }
 
 
@@ -904,22 +906,22 @@ namespace SalesInventorySystem.Orders
                         productcategorycode = Database.getSingleQuery("Products",$"ProductCode='{primalproductcode}' AND BranchCode='{Login.assignedBranch}'","ProductCategoryCode");//primalproductcode.Substring(0, 2);
 
                     }
-                    bool requestedProductExist = false;
-                    for (int j = 0; j <= gridView1.RowCount - 1; j++)
-                    {
-                        if (gridView1.GetRowCellValue(j, "ProductCode").ToString() == primalproductcode)
-                            requestedProductExist = true;
-                        if (requestedProductExist)
-                            break;
-                    }
+                    //bool requestedProductExist = false;
+                    //for (int j = 0; j <= gridView1.RowCount - 1; j++)
+                    //{
+                    //    if (gridView1.GetRowCellValue(j, "ProductCode").ToString() == primalproductcode)
+                    //        requestedProductExist = true;
+                    //    if (requestedProductExist)
+                    //        break;
+                    //}
                     bool inventoryExist = Database.checkifExist("SELECT TOP(1) Product FROM Inventory WHERE Product='" + primalproductcode + "' AND Branch='" + Login.assignedBranch + "' AND Available > 0 and isWarehouse=1 ");
 
-                    if (!requestedProductExist && txtbrcode.Text!="999")
-                    {
-                        XtraMessageBox.Show("You cant add this Product because it is not available in Purchase Order List!");
-                        txtsku.Text = "";
-                    }
-                    else if (!inventoryExist)
+                    //if (!requestedProductExist && txtbrcode.Text!="999")
+                    //{
+                    //    XtraMessageBox.Show("You cant add this Product because it is not available in Purchase Order List!");
+                    //    txtsku.Text = "";
+                    //}
+                    if (!inventoryExist)
                     {
                         XtraMessageBox.Show("No Product Inventory");
                         txtsku.Text = "";
@@ -933,6 +935,7 @@ namespace SalesInventorySystem.Orders
                     else
                     {
                         add();
+                      
                         displayForDelivery();
                         //if(isFifo==false)
                         //{
@@ -1041,11 +1044,11 @@ namespace SalesInventorySystem.Orders
         {
             Orders.OrderCheckerDevEx oread = new Orders.OrderCheckerDevEx();
 
-            Database.display("SELECT ProductName,Qty FROM TransferOrderDetails WHERE PONumber='" + txtponum.Text + "'", oread.gridControl1, oread.gridView1); 
+            Database.display("SELECT ProductName,Qty FROM TransferOrderDetails WHERE PONumber='" + txtponum.Text + "'", oread.gridControlDelivByComm, oread.gridViewDelivByComm); 
 
-            Database.display("SELECT ProductName,SUM(QtyDelivered) as TotalKilos,COUNT(distinct BarcodeNo) as TotalBox FROM DeliveryDetails WHERE PONumber='" + txtponum.Text + "' GROUP BY ProductName", oread.gridControl2, oread.gridView2);
+            Database.display("SELECT ProductName,SUM(QtyDelivered) as TotalKilos,COUNT(distinct BarcodeNo) as TotalBox FROM DeliveryDetails WHERE PONumber='" + txtponum.Text + "' GROUP BY ProductName", oread.gridControlActualRcvd, oread.gridViewActualRcvd);
            
-            Database.display("SELECT ProductName,Qty FROM TransferOrderDetails WHERE ProductCode not in (Select ProductNo FROM DeliveryDetails WHERE PONumber='" + txtponum.Text + "') AND PONumber='" + txtponum.Text + "' ", oread.gridControl3, oread.gridView3);
+            Database.display("SELECT ProductName,Qty FROM TransferOrderDetails WHERE ProductCode not in (Select ProductNo FROM DeliveryDetails WHERE PONumber='" + txtponum.Text + "') AND PONumber='" + txtponum.Text + "' ", oread.gridControlMyStsReq, oread.gridViewMyStsReq);
 
             oread.ShowDialog(this);
         }
@@ -1059,6 +1062,8 @@ namespace SalesInventorySystem.Orders
                 {
                     //string qtydel = gridView2.GetRowCellValue(i, "QtyDelivered").ToString();
                     Barcode.BarcodePrinting bprint = new Barcode.BarcodePrinting();
+                    bprint.xrLabel3.Text = "PONumber:";
+                    bprint.xrLabel6.Text = "";
                     bprint.lblmanufdate.Text = DateTime.Now.ToShortDateString();
                     bprint.lblprodtype.Text = gridView2.GetRowCellValue(i, "ProductName").ToString();
                     bprint.lbltotalkilos.Text = gridView2.GetRowCellValue(i, "QtyDelivered").ToString();

@@ -53,14 +53,9 @@
             this.txtdiff = new DevExpress.XtraEditors.TextEdit();
             this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.txtprodcode = new DevExpress.XtraEditors.TextEdit();
-            this.txtprodcatcode = new DevExpress.XtraEditors.TextEdit();
             this.txtactualqty = new DevExpress.XtraEditors.TextEdit();
-            this.labelControl15 = new DevExpress.XtraEditors.LabelControl();
-            this.txtprodcatcon = new System.Windows.Forms.ComboBox();
             this.labelControl12 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl13 = new DevExpress.XtraEditors.LabelControl();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.simpleButton3 = new DevExpress.XtraEditors.SimpleButton();
             this.txtsrcqty = new DevExpress.XtraEditors.TextEdit();
             this.radioButton2 = new System.Windows.Forms.RadioButton();
@@ -89,7 +84,12 @@
             this.repositoryItemComboBox1 = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
             this.repositoryItemSearchLookUpEditConversionItems = new DevExpress.XtraEditors.Repository.RepositoryItemSearchLookUpEdit();
             this.repositoryItemSearchLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.txtprodcat = new System.Windows.Forms.ComboBox();
+            this.contextMenuStripSourceProd = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.txtsrchprodcat = new DevExpress.XtraEditors.SearchLookUpEdit();
+            this.searchLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.txtsrchprdctmanytoone = new DevExpress.XtraEditors.SearchLookUpEdit();
+            this.gridView2 = new DevExpress.XtraGrid.Views.Grid.GridView();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.spinEdit1.Properties)).BeginInit();
@@ -104,8 +104,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
             this.groupControl1.SuspendLayout();
             this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtprodcode.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtprodcatcode.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtactualqty.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtsrcqty.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtrefcode.Properties)).BeginInit();
@@ -120,6 +118,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemSearchLookUpEditConversionItems)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemSearchLookUpEdit1View)).BeginInit();
+            this.contextMenuStripSourceProd.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtsrchprodcat.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtsrchprdctmanytoone.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView2)).BeginInit();
             this.SuspendLayout();
             // 
             // gridControl1
@@ -134,6 +137,7 @@
             this.gridControl1.TabIndex = 0;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
+            this.gridControl1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.gridControl1_MouseUp);
             // 
             // gridView1
             // 
@@ -357,6 +361,7 @@
             // 
             // groupControl1
             // 
+            this.groupControl1.Controls.Add(this.txtsrchprodcat);
             this.groupControl1.Controls.Add(this.panel2);
             this.groupControl1.Controls.Add(this.simpleButton3);
             this.groupControl1.Controls.Add(this.simpleButton1);
@@ -365,7 +370,6 @@
             this.groupControl1.Controls.Add(this.labelControl18);
             this.groupControl1.Controls.Add(this.radioButton1);
             this.groupControl1.Controls.Add(this.labelControl14);
-            this.groupControl1.Controls.Add(this.txtprodcat);
             this.groupControl1.Controls.Add(this.labelControl2);
             this.groupControl1.Controls.Add(this.txtrefcode);
             this.groupControl1.Controls.Add(this.spinEdit1);
@@ -381,14 +385,10 @@
             // 
             // panel2
             // 
-            this.panel2.Controls.Add(this.txtprodcode);
-            this.panel2.Controls.Add(this.txtprodcatcode);
+            this.panel2.Controls.Add(this.txtsrchprdctmanytoone);
             this.panel2.Controls.Add(this.txtactualqty);
-            this.panel2.Controls.Add(this.labelControl15);
-            this.panel2.Controls.Add(this.txtprodcatcon);
             this.panel2.Controls.Add(this.labelControl12);
             this.panel2.Controls.Add(this.labelControl13);
-            this.panel2.Controls.Add(this.comboBox1);
             this.panel2.Location = new System.Drawing.Point(802, 45);
             this.panel2.Margin = new System.Windows.Forms.Padding(6);
             this.panel2.Name = "panel2";
@@ -396,34 +396,10 @@
             this.panel2.TabIndex = 37;
             this.panel2.Visible = false;
             // 
-            // txtprodcode
-            // 
-            this.txtprodcode.EditValue = "";
-            this.txtprodcode.Location = new System.Drawing.Point(642, 59);
-            this.txtprodcode.Margin = new System.Windows.Forms.Padding(6);
-            this.txtprodcode.Name = "txtprodcode";
-            this.txtprodcode.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 10.25F);
-            this.txtprodcode.Properties.Appearance.Options.UseFont = true;
-            this.txtprodcode.Properties.ReadOnly = true;
-            this.txtprodcode.Size = new System.Drawing.Size(144, 48);
-            this.txtprodcode.TabIndex = 40;
-            // 
-            // txtprodcatcode
-            // 
-            this.txtprodcatcode.EditValue = "";
-            this.txtprodcatcode.Location = new System.Drawing.Point(642, 6);
-            this.txtprodcatcode.Margin = new System.Windows.Forms.Padding(6);
-            this.txtprodcatcode.Name = "txtprodcatcode";
-            this.txtprodcatcode.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 10.25F);
-            this.txtprodcatcode.Properties.Appearance.Options.UseFont = true;
-            this.txtprodcatcode.Properties.ReadOnly = true;
-            this.txtprodcatcode.Size = new System.Drawing.Size(144, 48);
-            this.txtprodcatcode.TabIndex = 39;
-            // 
             // txtactualqty
             // 
             this.txtactualqty.EditValue = "";
-            this.txtactualqty.Location = new System.Drawing.Point(172, 98);
+            this.txtactualqty.Location = new System.Drawing.Point(171, 51);
             this.txtactualqty.Margin = new System.Windows.Forms.Padding(6);
             this.txtactualqty.Name = "txtactualqty";
             this.txtactualqty.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -431,33 +407,11 @@
             this.txtactualqty.Size = new System.Drawing.Size(208, 44);
             this.txtactualqty.TabIndex = 38;
             // 
-            // labelControl15
-            // 
-            this.labelControl15.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelControl15.Appearance.Options.UseFont = true;
-            this.labelControl15.Location = new System.Drawing.Point(36, 11);
-            this.labelControl15.Margin = new System.Windows.Forms.Padding(6);
-            this.labelControl15.Name = "labelControl15";
-            this.labelControl15.Size = new System.Drawing.Size(103, 29);
-            this.labelControl15.TabIndex = 35;
-            this.labelControl15.Text = "Category:";
-            // 
-            // txtprodcatcon
-            // 
-            this.txtprodcatcon.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtprodcatcon.FormattingEnabled = true;
-            this.txtprodcatcon.Location = new System.Drawing.Point(172, 6);
-            this.txtprodcatcon.Margin = new System.Windows.Forms.Padding(6);
-            this.txtprodcatcon.Name = "txtprodcatcon";
-            this.txtprodcatcon.Size = new System.Drawing.Size(460, 37);
-            this.txtprodcatcon.TabIndex = 36;
-            this.txtprodcatcon.SelectedIndexChanged += new System.EventHandler(this.txtprodcatcon_SelectedIndexChanged);
-            // 
             // labelControl12
             // 
             this.labelControl12.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelControl12.Appearance.Options.UseFont = true;
-            this.labelControl12.Location = new System.Drawing.Point(22, 102);
+            this.labelControl12.Location = new System.Drawing.Point(21, 55);
             this.labelControl12.Margin = new System.Windows.Forms.Padding(6);
             this.labelControl12.Name = "labelControl12";
             this.labelControl12.Size = new System.Drawing.Size(117, 29);
@@ -468,23 +422,12 @@
             // 
             this.labelControl13.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelControl13.Appearance.Options.UseFont = true;
-            this.labelControl13.Location = new System.Drawing.Point(14, 53);
+            this.labelControl13.Location = new System.Drawing.Point(13, 6);
             this.labelControl13.Margin = new System.Windows.Forms.Padding(6);
             this.labelControl13.Name = "labelControl13";
             this.labelControl13.Size = new System.Drawing.Size(125, 29);
             this.labelControl13.TabIndex = 30;
             this.labelControl13.Text = "Convert To:";
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(172, 52);
-            this.comboBox1.Margin = new System.Windows.Forms.Padding(6);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(462, 37);
-            this.comboBox1.TabIndex = 31;
-            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // simpleButton3
             // 
@@ -815,16 +758,68 @@
             this.repositoryItemSearchLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = false;
             this.repositoryItemSearchLookUpEdit1View.OptionsView.ShowGroupPanel = false;
             // 
-            // txtprodcat
+            // contextMenuStripSourceProd
             // 
-            this.txtprodcat.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtprodcat.FormattingEnabled = true;
-            this.txtprodcat.Location = new System.Drawing.Point(256, 50);
-            this.txtprodcat.Margin = new System.Windows.Forms.Padding(6);
-            this.txtprodcat.Name = "txtprodcat";
-            this.txtprodcat.Size = new System.Drawing.Size(460, 37);
-            this.txtprodcat.TabIndex = 17;
-            this.txtprodcat.SelectedIndexChanged += new System.EventHandler(this.txtprodcat_SelectedIndexChanged);
+            this.contextMenuStripSourceProd.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.contextMenuStripSourceProd.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem1});
+            this.contextMenuStripSourceProd.Name = "contextMenuStrip1";
+            this.contextMenuStripSourceProd.Size = new System.Drawing.Size(375, 40);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(374, 36);
+            this.toolStripMenuItem1.Text = "Add this Item for Entry -->";
+            this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
+            // 
+            // txtsrchprodcat
+            // 
+            this.txtsrchprodcat.Location = new System.Drawing.Point(256, 45);
+            this.txtsrchprodcat.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.txtsrchprodcat.Name = "txtsrchprodcat";
+            this.txtsrchprodcat.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 9.8F);
+            this.txtsrchprodcat.Properties.Appearance.Options.UseFont = true;
+            this.txtsrchprodcat.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.txtsrchprodcat.Properties.NullText = "";
+            this.txtsrchprodcat.Properties.PopupView = this.searchLookUpEdit1View;
+            this.txtsrchprodcat.Size = new System.Drawing.Size(468, 46);
+            this.txtsrchprodcat.TabIndex = 106;
+            this.txtsrchprodcat.EditValueChanged += new System.EventHandler(this.txtsrchprodcat_EditValueChanged);
+            // 
+            // searchLookUpEdit1View
+            // 
+            this.searchLookUpEdit1View.DetailHeight = 547;
+            this.searchLookUpEdit1View.FixedLineWidth = 3;
+            this.searchLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
+            this.searchLookUpEdit1View.Name = "searchLookUpEdit1View";
+            this.searchLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = false;
+            this.searchLookUpEdit1View.OptionsView.ShowGroupPanel = false;
+            // 
+            // txtsrchprdctmanytoone
+            // 
+            this.txtsrchprdctmanytoone.Location = new System.Drawing.Point(171, 0);
+            this.txtsrchprdctmanytoone.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.txtsrchprdctmanytoone.Name = "txtsrchprdctmanytoone";
+            this.txtsrchprdctmanytoone.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 9.8F);
+            this.txtsrchprdctmanytoone.Properties.Appearance.Options.UseFont = true;
+            this.txtsrchprdctmanytoone.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.txtsrchprdctmanytoone.Properties.NullText = "";
+            this.txtsrchprdctmanytoone.Properties.PopupView = this.gridView2;
+            this.txtsrchprdctmanytoone.Size = new System.Drawing.Size(460, 46);
+            this.txtsrchprdctmanytoone.TabIndex = 107;
+            this.txtsrchprdctmanytoone.EditValueChanged += new System.EventHandler(this.txtsrchprdctmanytoone_EditValueChanged);
+            // 
+            // gridView2
+            // 
+            this.gridView2.DetailHeight = 547;
+            this.gridView2.FixedLineWidth = 3;
+            this.gridView2.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
+            this.gridView2.Name = "gridView2";
+            this.gridView2.OptionsSelection.EnableAppearanceFocusedCell = false;
+            this.gridView2.OptionsView.ShowGroupPanel = false;
             // 
             // HOConversion
             // 
@@ -855,8 +850,6 @@
             this.groupControl1.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtprodcode.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtprodcatcode.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtactualqty.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtsrcqty.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtrefcode.Properties)).EndInit();
@@ -872,6 +865,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemSearchLookUpEditConversionItems)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemSearchLookUpEdit1View)).EndInit();
+            this.contextMenuStripSourceProd.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.txtsrchprodcat.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtsrchprdctmanytoone.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView2)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -904,13 +902,10 @@
         private DevExpress.XtraEditors.SimpleButton simpleButton2;
         private System.Windows.Forms.Timer timer1;
         private DevExpress.XtraEditors.LabelControl labelControl13;
-        private System.Windows.Forms.ComboBox comboBox1;
         private DevExpress.XtraEditors.SimpleButton simpleButton3;
         private System.Windows.Forms.RadioButton radioButton2;
         private System.Windows.Forms.RadioButton radioButton1;
         private DevExpress.XtraEditors.LabelControl labelControl14;
-        private System.Windows.Forms.ComboBox txtprodcatcon;
-        private DevExpress.XtraEditors.LabelControl labelControl15;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem cancelLineToolStripMenuItem;
@@ -934,10 +929,13 @@
         private DevExpress.XtraEditors.TextEdit txtsrcqty;
         private DevExpress.XtraEditors.LabelControl labelControl18;
         private DevExpress.XtraEditors.LabelControl labeleulz;
-        private DevExpress.XtraEditors.TextEdit txtprodcode;
-        private DevExpress.XtraEditors.TextEdit txtprodcatcode;
         private DevExpress.XtraEditors.Repository.RepositoryItemSearchLookUpEdit repositoryItemSearchLookUpEditConversionItems;
         private DevExpress.XtraGrid.Views.Grid.GridView repositoryItemSearchLookUpEdit1View;
-        private System.Windows.Forms.ComboBox txtprodcat;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStripSourceProd;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+        private DevExpress.XtraEditors.SearchLookUpEdit txtsrchprodcat;
+        private DevExpress.XtraGrid.Views.Grid.GridView searchLookUpEdit1View;
+        private DevExpress.XtraEditors.SearchLookUpEdit txtsrchprdctmanytoone;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridView2;
     }
 }

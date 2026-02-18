@@ -54,6 +54,8 @@
             this.label7 = new System.Windows.Forms.Label();
             this.contextMenuStripForReceiving = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.showForReceivingItemsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.contextMenuStripMyRequest = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.tabMain)).BeginInit();
             this.tabMain.SuspendLayout();
             this.tabForReceiving.SuspendLayout();
@@ -68,6 +70,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.panelControl7)).BeginInit();
             this.panelControl7.SuspendLayout();
             this.contextMenuStripForReceiving.SuspendLayout();
+            this.contextMenuStripMyRequest.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabMain
@@ -247,6 +250,7 @@
             this.gridControlMyReq.TabIndex = 3;
             this.gridControlMyReq.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewMyReq});
+            this.gridControlMyReq.MouseUp += new System.Windows.Forms.MouseEventHandler(this.gridControlMyReq_MouseUp);
             // 
             // gridViewMyReq
             // 
@@ -352,7 +356,7 @@
             this.contextMenuStripForReceiving.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.showForReceivingItemsToolStripMenuItem});
             this.contextMenuStripForReceiving.Name = "contextMenuStripForReceiving";
-            this.contextMenuStripForReceiving.Size = new System.Drawing.Size(360, 84);
+            this.contextMenuStripForReceiving.Size = new System.Drawing.Size(360, 40);
             // 
             // showForReceivingItemsToolStripMenuItem
             // 
@@ -360,6 +364,21 @@
             this.showForReceivingItemsToolStripMenuItem.Size = new System.Drawing.Size(359, 36);
             this.showForReceivingItemsToolStripMenuItem.Text = "Show for Receiving Items";
             this.showForReceivingItemsToolStripMenuItem.Click += new System.EventHandler(this.showForReceivingItemsToolStripMenuItem_Click);
+            // 
+            // contextMenuStripMyRequest
+            // 
+            this.contextMenuStripMyRequest.ImageScalingSize = new System.Drawing.Size(32, 32);
+            this.contextMenuStripMyRequest.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem1});
+            this.contextMenuStripMyRequest.Name = "contextMenuStripForReceiving";
+            this.contextMenuStripMyRequest.Size = new System.Drawing.Size(320, 84);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(319, 36);
+            this.toolStripMenuItem1.Text = "Show Request Details";
+            this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
             // 
             // ReceivedSTS
             // 
@@ -388,6 +407,7 @@
             this.panelControl7.ResumeLayout(false);
             this.panelControl7.PerformLayout();
             this.contextMenuStripForReceiving.ResumeLayout(false);
+            this.contextMenuStripMyRequest.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -418,5 +438,7 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.ContextMenuStrip contextMenuStripForReceiving;
         private System.Windows.Forms.ToolStripMenuItem showForReceivingItemsToolStripMenuItem;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStripMyRequest;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
     }
 }

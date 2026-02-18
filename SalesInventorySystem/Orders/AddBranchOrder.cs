@@ -883,9 +883,9 @@ namespace SalesInventorySystem
         {
             Orders.OrderCheckerDevEx oread = new Orders.OrderCheckerDevEx();
             
-            Database.display("SELECT ProductName,Qty FROM PurchaseOrderDetails WHERE PONumber='" + txtponum.Text + "'", oread.gridControl1, oread.gridView1);
-            Database.display("SELECT ProductName,SUM(QtyDelivered) as TotalKilos,COUNT(distinct BarcodeNo) as TotalBox FROM DeliveryDetails WHERE PONumber='" + txtponum.Text + "' GROUP BY ProductName", oread.gridControl2, oread.gridView2);
-            Database.display("SELECT ProductName,Qty FROM PurchaseOrderDetails WHERE ProductCode not in (Select ProductNo FROM DeliveryDetails WHERE PONumber='" + txtponum.Text + "') AND PONumber='" + txtponum.Text + "' ", oread.gridControl3, oread.gridView3);
+            Database.display("SELECT ProductName,Qty FROM PurchaseOrderDetails WHERE PONumber='" + txtponum.Text + "'", oread.gridControlDelivByComm, oread.gridViewDelivByComm);
+            Database.display("SELECT ProductName,SUM(QtyDelivered) as TotalKilos,COUNT(distinct BarcodeNo) as TotalBox FROM DeliveryDetails WHERE PONumber='" + txtponum.Text + "' GROUP BY ProductName", oread.gridControlActualRcvd, oread.gridViewActualRcvd);
+            Database.display("SELECT ProductName,Qty FROM PurchaseOrderDetails WHERE ProductCode not in (Select ProductNo FROM DeliveryDetails WHERE PONumber='" + txtponum.Text + "') AND PONumber='" + txtponum.Text + "' ", oread.gridControlMyStsReq, oread.gridViewMyStsReq);
 
             oread.ShowDialog(this);
         }
@@ -1055,9 +1055,9 @@ namespace SalesInventorySystem
         {
             Orders.OrderCheckerDevEx oread = new Orders.OrderCheckerDevEx();
 
-            Database.display("SELECT ProductName,Qty FROM PurchaseOrderDetails WHERE PONumber='" + txtponum.Text + "'", oread.gridControl1, oread.gridView1);
-            Database.display("SELECT ProductName,SUM(QtyDelivered) as TotalKilos,COUNT(distinct BarcodeNo) as TotalBox FROM DeliveryDetails WHERE PONumber='" + txtponum.Text + "' GROUP BY ProductName", oread.gridControl2, oread.gridView2);
-            Database.display("SELECT ProductName,Qty FROM PurchaseOrderDetails WHERE ProductCode not in (Select ProductNo FROM DeliveryDetails WHERE PONumber='" + txtponum.Text + "') AND PONumber='" + txtponum.Text + "' ", oread.gridControl3, oread.gridView3);
+            Database.display("SELECT ProductName,Qty FROM PurchaseOrderDetails WHERE PONumber='" + txtponum.Text + "'", oread.gridControlDelivByComm, oread.gridViewDelivByComm);
+            Database.display("SELECT ProductName,SUM(QtyDelivered) as TotalKilos,COUNT(distinct BarcodeNo) as TotalBox FROM DeliveryDetails WHERE PONumber='" + txtponum.Text + "' GROUP BY ProductName", oread.gridControlActualRcvd, oread.gridViewActualRcvd);
+            Database.display("SELECT ProductName,Qty FROM PurchaseOrderDetails WHERE ProductCode not in (Select ProductNo FROM DeliveryDetails WHERE PONumber='" + txtponum.Text + "') AND PONumber='" + txtponum.Text + "' ", oread.gridControlMyStsReq, oread.gridViewMyStsReq);
 
             oread.ShowDialog(this);
         }

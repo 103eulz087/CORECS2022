@@ -236,6 +236,9 @@ namespace SalesInventorySystem.HOFormsDevEx
                 gridControl1.DataSource = table;
                 gridView1.BestFitColumns();
             }
+            txtshipmentno.Text = "";
+            txtproduct.Text = "";
+            txtpalletno.Text = "";
         }
 
 

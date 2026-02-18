@@ -23,6 +23,8 @@ namespace SalesInventorySystem.Orders
         private void AddOrderSTSBatchMode_Load(object sender, EventArgs e)
         {
             panelControl2.Visible = true;
+            ordertype.SelectedIndex = 0;
+            //txtgroup.SelectedIndex = 0;
         }
 
         private void btnnew_Click(object sender, EventArgs e)
@@ -91,6 +93,7 @@ namespace SalesInventorySystem.Orders
                 XtraMessageBox.Show("Order Number must not Empty...");
                 return;
             }
+            txtgroup.Text = "INVENTORYTRANSFER";
             if (String.IsNullOrEmpty(txtgroup.Text))
             {
                 XtraMessageBox.Show("Group Category Must Not Empty!...");
@@ -192,6 +195,12 @@ namespace SalesInventorySystem.Orders
             {
                 Orders.SearchProductBatchMode orderko = new SearchProductBatchMode();
                 orderko.txtpono.Text = textEdit1.Text;
+                 string query = "SELECT ProductCode,Description,'0' as Quantity,' ' as Remarks " +
+                "FROM dbo.Products with(nolock) " +
+                "WHERE BranchCode='" + Login.assignedBranch + "' ";
+           
+            HelperFunction.ShowWaitAndDisplay(query, gridControl1, gridView1, "Please wait", "Populating data into the database...");
+            gridView1.Focus();
                 orderko.ShowDialog(this);
                 if (Orders.SearchProductBatchMode.isdone == true)
                 {

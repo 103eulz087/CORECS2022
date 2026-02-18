@@ -84,12 +84,12 @@ namespace SalesInventorySystem.Orders
         void checker()
         {
             Orders.OrderCheckerDevEx oread = new Orders.OrderCheckerDevEx();
-            Database.display("SELECT SeqNo,ProductName,Qty FROM TransferOrderDetails WHERE PONumber='" + gridViewMyReq.GetRowCellValue(gridViewMyReq.FocusedRowHandle, "PONumber").ToString() + "' ", oread.gridControl1, oread.gridView1);
-            Database.display("SELECT SeqNo,ProductName,ActualQty FROM DeliveryDetails WHERE   PONumber='" + gridViewMyReq.GetRowCellValue(gridViewMyReq.FocusedRowHandle, "PONumber").ToString() + "' ", oread.gridControl2, oread.gridView2);
+            Database.display("SELECT SeqNo,ProductName,Qty FROM TransferOrderDetails WHERE PONumber='" + gridViewMyReq.GetRowCellValue(gridViewMyReq.FocusedRowHandle, "PONumber").ToString() + "' ", oread.gridControlDelivByComm, oread.gridViewDelivByComm);
+            Database.display("SELECT SeqNo,ProductName,ActualQty FROM DeliveryDetails WHERE   PONumber='" + gridViewMyReq.GetRowCellValue(gridViewMyReq.FocusedRowHandle, "PONumber").ToString() + "' ", oread.gridControlActualRcvd, oread.gridViewActualRcvd);
 
             //Database.display("SELECT ProductName,ActualQty FROM DeliveryDetails WHERE PONumber='" + txtpono.Text + "'", oread.gridControl1, oread.gridView1);
             //Database.display("SELECT ProductName,QtyDelivered FROM DeliveryDetails WHERE PONumber='" + txtponum.Text + "'", oread.gridControl2, oread.gridView2);
-            Database.display("SELECT SeqNo,ProductName,Qty FROM ReceivedOrderDetails  WHERE PONumber='" + gridViewMyReq.GetRowCellValue(gridViewMyReq.FocusedRowHandle, "PONumber").ToString() + "' ", oread.gridControl3, oread.gridView3);
+            Database.display("SELECT SeqNo,ProductName,Qty FROM ReceivedOrderDetails  WHERE PONumber='" + gridViewMyReq.GetRowCellValue(gridViewMyReq.FocusedRowHandle, "PONumber").ToString() + "' ", oread.gridControlMyStsReq, oread.gridViewMyStsReq);
             //Database.display("SELECT ProductName,SUM(QtyDelivered) as TotalKilos,COUNT(distinct BarcodeNo) as TotalBox FROM DeliveryDetails WHERE PONumber='" + txtpono.Text + "' GROUP BY ProductName", oread.gridControl2, oread.gridView2);
            
             oread.ShowDialog(this);
@@ -103,7 +103,7 @@ namespace SalesInventorySystem.Orders
 
                 Orders.STSForApprovalDetails podetails = new Orders.STSForApprovalDetails();
                 //Database.display("SELECT * FROM view_TransferOrderDetails WHERE PONumber = '" + gridViewMyReq.GetRowCellValue(gridViewMyReq.FocusedRowHandle,"PONumber").ToString() + "' ORDER BY SeqNo", podetails.gridControl1, podetails.gridView1);
-                Database.display($"SELECT * FROM funcview_TransferOrderDetailsSTS('{Login.assignedBranch}') WHERE PONumber = '{ gridViewMyReq.GetRowCellValue(gridViewMyReq.FocusedRowHandle,"PONumber").ToString() }' ORDER BY SeqNo", podetails.gridControl1, podetails.gridView1);
+                Database.display($"SELECT * FROM funcview_TransferOrderDetailsSTS('{Login.assignedBranch}') WHERE PONumber = '{ gridViewMyReq.GetRowCellValue(gridViewMyReq.FocusedRowHandle,"PONumber").ToString() }' ", podetails.gridControl1, podetails.gridView1);
                 podetails.txtpono.Text = gridViewMyReq.GetRowCellValue(gridViewMyReq.FocusedRowHandle, "PONumber").ToString();
                 GridView view = podetails.gridControl1.FocusedView as GridView;
                 view.SortInfo.ClearAndAddRange(new GridColumnSortInfo[] {
@@ -123,13 +123,15 @@ namespace SalesInventorySystem.Orders
             {
                 Orders.OrderCheckerDevEx oread = new Orders.OrderCheckerDevEx();
 
-                Database.display("SELECT ProductName,ActualQty FROM DeliveryDetails WHERE PONumber='" + gridViewMyReq.GetRowCellValue(gridViewMyReq.FocusedRowHandle, "PONumber").ToString() + "'", oread.gridControl1, oread.gridView1);
-                //Database.display("SELECT ProductName,QtyDelivered FROM DeliveryDetails WHERE PONumber='" + txtponum.Text + "'", oread.gridControl2, oread.gridView2);
-                Database.display("SELECT ProductName,SUM(Qty) as TotalKilos,COUNT(distinct Barcode) as TotalBox FROM ReceivedOrderDetails WHERE PONumber='" + gridViewMyReq.GetRowCellValue(gridViewMyReq.FocusedRowHandle, "PONumber").ToString() + "' GROUP BY ProductName", oread.gridControl2, oread.gridView2);
-                //Database.display("SELECT ProductName,SUM(QtyDelivered) as TotalKilos,COUNT(distinct BarcodeNo) as TotalBox FROM DeliveryDetails WHERE PONumber='" + txtpono.Text + "' GROUP BY ProductName", oread.gridControl2, oread.gridView2);
-                Database.display("SELECT ProductName,ActualQty FROM DeliveryDetails WHERE ProductNo not in (Select ProductCode FROM ReceivedOrderDetails WHERE PONumber='" + gridViewMyReq.GetRowCellValue(gridViewMyReq.FocusedRowHandle, "PONumber").ToString() + "') AND PONumber='" + gridViewMyReq.GetRowCellValue(gridViewMyReq.FocusedRowHandle, "PONumber").ToString() + "' ", oread.gridControl3, oread.gridView3);
-                //Database.display("SELECT ProductName,Qty FROM TransferOrderDetails WHERE ProductCode not in (Select ProductNo FROM DeliveryDetails WHERE PONumber='" + txtpono.Text + "') AND PONumber='" + txtpono.Text + "' ", oread.gridControl3, oread.gridView3);
+                //MY STS REQUEST ITEMS
+                Database.display("SELECT ProductCode,ProductName,Qty FROM TransferOrderDetails WHERE PONumber='" + gridViewMyReq.GetRowCellValue(gridViewMyReq.FocusedRowHandle, "PONumber").ToString() + "' ORDER BY ProductCode ASC", oread.gridControlMyStsReq, oread.gridViewMyStsReq);
 
+
+                //DELIVERED BY COMMISSARY
+                Database.display("SELECT ProductNo,ProductName,QtyDelivered FROM DeliveryDetails WHERE PONumber='" + gridViewMyReq.GetRowCellValue(gridViewMyReq.FocusedRowHandle, "PONumber").ToString() + "' ORDER BY ProductNo ASC", oread.gridControlDelivByComm, oread.gridViewDelivByComm);
+
+                //ACTUAL RECEIVED
+                Database.display("SELECT ProductCode,ProductName,SUM(Qty) as TotalKilos FROM ReceivedOrderDetails WHERE PONumber='" + gridViewMyReq.GetRowCellValue(gridViewMyReq.FocusedRowHandle, "PONumber").ToString() + "' GROUP BY ProductCode,ProductName  ORDER BY ProductCode ASC", oread.gridControlActualRcvd, oread.gridViewActualRcvd);
                 oread.ShowDialog(this);
             }
          
@@ -139,7 +141,7 @@ namespace SalesInventorySystem.Orders
             //Orders.ReceivedSTSDetails recvdsts = new ReceivedSTSDetails();
             //Database.display("SELECT * FROM TransferOrderDetails WHERE PONumber='" + gridViewMyReq.GetRowCellValue(gridViewMyReq.FocusedRowHandle, "PONumber").ToString() + "'", recvdsts.gridControlMyReq, recvdsts.gridViewMyReq);
             //recvdsts.ShowDialog(this);
-            checker2();
+           
         }
 
         private void tabMain_SelectedPageChanged(object sender, DevExpress.XtraTab.TabPageChangedEventArgs e)
@@ -191,6 +193,17 @@ namespace SalesInventorySystem.Orders
                 HOFormsDevEx.ReceivedSTSBatchMode.isdone = false;
                 askdh.Dispose();
             }
+        }
+
+        private void gridControlMyReq_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+                contextMenuStripMyRequest.Show(gridControlMyReq, e.Location);
+        }
+
+        private void toolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            checker2();
         }
     }
 }

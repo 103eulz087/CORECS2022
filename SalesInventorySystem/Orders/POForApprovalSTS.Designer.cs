@@ -503,7 +503,7 @@
             this.tabRejected.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("tabRejected.ImageOptions.Image")));
             this.tabRejected.Margin = new System.Windows.Forms.Padding(6, 8, 6, 8);
             this.tabRejected.Name = "tabRejected";
-            this.tabRejected.Size = new System.Drawing.Size(2636, 1013);
+            this.tabRejected.Size = new System.Drawing.Size(2582, 1013);
             this.tabRejected.Text = "Rejected Request";
             // 
             // tabRejectedSub
@@ -515,7 +515,7 @@
             this.tabRejectedSub.Margin = new System.Windows.Forms.Padding(6, 8, 6, 8);
             this.tabRejectedSub.Name = "tabRejectedSub";
             this.tabRejectedSub.SelectedTabPage = this.rejectedSTS;
-            this.tabRejectedSub.Size = new System.Drawing.Size(2636, 1013);
+            this.tabRejectedSub.Size = new System.Drawing.Size(2582, 1013);
             this.tabRejectedSub.TabIndex = 8;
             this.tabRejectedSub.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
             this.rejectedSTS});
@@ -527,7 +527,7 @@
             this.rejectedSTS.ImageOptions.Image = global::SalesInventorySystem.Properties.Resources.Transit_16x16;
             this.rejectedSTS.Margin = new System.Windows.Forms.Padding(6, 8, 6, 8);
             this.rejectedSTS.Name = "rejectedSTS";
-            this.rejectedSTS.Size = new System.Drawing.Size(2632, 962);
+            this.rejectedSTS.Size = new System.Drawing.Size(2578, 962);
             this.rejectedSTS.Text = "STS";
             // 
             // groupBox28
@@ -538,7 +538,7 @@
             this.groupBox28.Margin = new System.Windows.Forms.Padding(6, 8, 6, 8);
             this.groupBox28.Name = "groupBox28";
             this.groupBox28.Padding = new System.Windows.Forms.Padding(6, 8, 6, 8);
-            this.groupBox28.Size = new System.Drawing.Size(2632, 895);
+            this.groupBox28.Size = new System.Drawing.Size(2578, 895);
             this.groupBox28.TabIndex = 2;
             this.groupBox28.TabStop = false;
             // 
@@ -550,7 +550,7 @@
             this.gridControlrjctdsts.MainView = this.gridViewrjctdsts;
             this.gridControlrjctdsts.Margin = new System.Windows.Forms.Padding(6, 8, 6, 8);
             this.gridControlrjctdsts.Name = "gridControlrjctdsts";
-            this.gridControlrjctdsts.Size = new System.Drawing.Size(2620, 853);
+            this.gridControlrjctdsts.Size = new System.Drawing.Size(2566, 853);
             this.gridControlrjctdsts.TabIndex = 3;
             this.gridControlrjctdsts.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewrjctdsts});
@@ -585,7 +585,7 @@
             this.panelControl6.Location = new System.Drawing.Point(0, 0);
             this.panelControl6.Margin = new System.Windows.Forms.Padding(6, 8, 6, 8);
             this.panelControl6.Name = "panelControl6";
-            this.panelControl6.Size = new System.Drawing.Size(2632, 67);
+            this.panelControl6.Size = new System.Drawing.Size(2578, 67);
             this.panelControl6.TabIndex = 1;
             // 
             // btnrejectedstsexcel
@@ -660,7 +660,7 @@
             this.tabForDelivery.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("tabForDelivery.ImageOptions.Image")));
             this.tabForDelivery.Margin = new System.Windows.Forms.Padding(6, 8, 6, 8);
             this.tabForDelivery.Name = "tabForDelivery";
-            this.tabForDelivery.Size = new System.Drawing.Size(2636, 1013);
+            this.tabForDelivery.Size = new System.Drawing.Size(2582, 1013);
             this.tabForDelivery.Text = "For Delivery";
             // 
             // tabForDelivSub
@@ -672,7 +672,7 @@
             this.tabForDelivSub.Margin = new System.Windows.Forms.Padding(6, 8, 6, 8);
             this.tabForDelivSub.Name = "tabForDelivSub";
             this.tabForDelivSub.SelectedTabPage = this.forDelivSTS;
-            this.tabForDelivSub.Size = new System.Drawing.Size(2636, 1013);
+            this.tabForDelivSub.Size = new System.Drawing.Size(2582, 1013);
             this.tabForDelivSub.TabIndex = 8;
             this.tabForDelivSub.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
             this.forDelivSTS});
@@ -684,7 +684,7 @@
             this.forDelivSTS.ImageOptions.Image = global::SalesInventorySystem.Properties.Resources.Transit_16x16;
             this.forDelivSTS.Margin = new System.Windows.Forms.Padding(6, 8, 6, 8);
             this.forDelivSTS.Name = "forDelivSTS";
-            this.forDelivSTS.Size = new System.Drawing.Size(2632, 962);
+            this.forDelivSTS.Size = new System.Drawing.Size(2578, 962);
             this.forDelivSTS.Text = "STS";
             // 
             // groupBox20
@@ -695,7 +695,7 @@
             this.groupBox20.Margin = new System.Windows.Forms.Padding(6, 8, 6, 8);
             this.groupBox20.Name = "groupBox20";
             this.groupBox20.Padding = new System.Windows.Forms.Padding(6, 8, 6, 8);
-            this.groupBox20.Size = new System.Drawing.Size(2632, 895);
+            this.groupBox20.Size = new System.Drawing.Size(2578, 895);
             this.groupBox20.TabIndex = 6;
             this.groupBox20.TabStop = false;
             // 
@@ -707,7 +707,7 @@
             this.gridControlForDelivSts.MainView = this.gridViewForDelivSts;
             this.gridControlForDelivSts.Margin = new System.Windows.Forms.Padding(6, 8, 6, 8);
             this.gridControlForDelivSts.Name = "gridControlForDelivSts";
-            this.gridControlForDelivSts.Size = new System.Drawing.Size(2620, 853);
+            this.gridControlForDelivSts.Size = new System.Drawing.Size(2566, 853);
             this.gridControlForDelivSts.TabIndex = 3;
             this.gridControlForDelivSts.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewForDelivSts});
@@ -743,7 +743,7 @@
             this.panelControl8.Location = new System.Drawing.Point(0, 0);
             this.panelControl8.Margin = new System.Windows.Forms.Padding(6, 8, 6, 8);
             this.panelControl8.Name = "panelControl8";
-            this.panelControl8.Size = new System.Drawing.Size(2632, 67);
+            this.panelControl8.Size = new System.Drawing.Size(2578, 67);
             this.panelControl8.TabIndex = 1;
             // 
             // btnfordelivstsexcel
@@ -818,7 +818,7 @@
             this.tabDelivered.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("tabDelivered.ImageOptions.Image")));
             this.tabDelivered.Margin = new System.Windows.Forms.Padding(6, 8, 6, 8);
             this.tabDelivered.Name = "tabDelivered";
-            this.tabDelivered.Size = new System.Drawing.Size(2636, 1013);
+            this.tabDelivered.Size = new System.Drawing.Size(2582, 1013);
             this.tabDelivered.Text = "Delivered";
             // 
             // tabDelivSub
@@ -832,7 +832,7 @@
             this.tabDelivSub.Margin = new System.Windows.Forms.Padding(6, 8, 6, 8);
             this.tabDelivSub.Name = "tabDelivSub";
             this.tabDelivSub.SelectedTabPage = this.delivSTS;
-            this.tabDelivSub.Size = new System.Drawing.Size(2636, 1013);
+            this.tabDelivSub.Size = new System.Drawing.Size(2582, 1013);
             this.tabDelivSub.TabIndex = 8;
             this.tabDelivSub.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
             this.delivSTS});
@@ -844,7 +844,7 @@
             this.delivSTS.ImageOptions.Image = global::SalesInventorySystem.Properties.Resources.Transit_16x16;
             this.delivSTS.Margin = new System.Windows.Forms.Padding(6, 8, 6, 8);
             this.delivSTS.Name = "delivSTS";
-            this.delivSTS.Size = new System.Drawing.Size(2632, 959);
+            this.delivSTS.Size = new System.Drawing.Size(2578, 959);
             this.delivSTS.Text = "STS";
             // 
             // groupBox30
@@ -855,7 +855,7 @@
             this.groupBox30.Margin = new System.Windows.Forms.Padding(6, 8, 6, 8);
             this.groupBox30.Name = "groupBox30";
             this.groupBox30.Padding = new System.Windows.Forms.Padding(6, 8, 6, 8);
-            this.groupBox30.Size = new System.Drawing.Size(2632, 892);
+            this.groupBox30.Size = new System.Drawing.Size(2578, 892);
             this.groupBox30.TabIndex = 2;
             this.groupBox30.TabStop = false;
             // 
@@ -867,7 +867,7 @@
             this.gridControlDelivSts.MainView = this.gridViewDelivSts;
             this.gridControlDelivSts.Margin = new System.Windows.Forms.Padding(6, 8, 6, 8);
             this.gridControlDelivSts.Name = "gridControlDelivSts";
-            this.gridControlDelivSts.Size = new System.Drawing.Size(2620, 850);
+            this.gridControlDelivSts.Size = new System.Drawing.Size(2566, 850);
             this.gridControlDelivSts.TabIndex = 4;
             this.gridControlDelivSts.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewDelivSts});
@@ -902,7 +902,7 @@
             this.panelControl10.Location = new System.Drawing.Point(0, 0);
             this.panelControl10.Margin = new System.Windows.Forms.Padding(6, 8, 6, 8);
             this.panelControl10.Name = "panelControl10";
-            this.panelControl10.Size = new System.Drawing.Size(2632, 67);
+            this.panelControl10.Size = new System.Drawing.Size(2578, 67);
             this.panelControl10.TabIndex = 1;
             // 
             // btndeliveredstsexcel

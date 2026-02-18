@@ -22,7 +22,7 @@ namespace SalesInventorySystem
         //bool isoverage = false;
         double totalqtysource = 0.0, totalqtyconverted = 0.0;
         public static bool isConversion = false;
-        object objprod, objprodname;
+        object objprod, objprodname,objprodforcodemanytoone;
         private bool _conversionItemsLoaded;
         public HOConversion()
         {
@@ -35,9 +35,7 @@ namespace SalesInventorySystem
 
             txtrefcode.Text = IDGenerator.getIDNumberSP("sp_GetConversionNumber", "conversionnumber");
             displayProdCat();
-            loadcomb();
-
-           
+            Database.displaySearchlookupEdit($"SELECT ProductCode,Description FROM Products with(nolock) WHERE BranchCode='{Login.assignedBranch}'", txtsrchprdctmanytoone, "Description", "Description");
 
         }
 
@@ -73,14 +71,11 @@ namespace SalesInventorySystem
 
         void displayProdCat()
         {
-            Classes.Product.displayProductCategoryComboBoxItems(txtprodcat);
-            Classes.Product.displayProductCategoryComboBoxItems(txtprodcatcon);
+            //Classes.Product.displayProductCategoryComboBoxItems(txtprodcat);
+            Database.displaySearchlookupEdit("Select ProductCategoryID,Description FROM ProductCategory with(nolock)", txtsrchprodcat, "Description", "Description");
+           
         }
 
-        void loadcomb()
-        {
-            Database.displayComboBoxItems("SELECT Description FROM dbo.Products WHERE BranchCode='888' AND ProductCategoryCode='"+Classes.Product.getProductCategoryCode(txtprodcatcon.Text)+"' ORDER BY Description ASC", "Description",comboBox1);
-        }
 
         private void add()
         {
@@ -154,19 +149,7 @@ namespace SalesInventorySystem
             minvalue = value - range;
             return minvalue;
         }
-
-        String getProductCategoryCode()
-        {
-            string str = "";
-            str = Database.getSingleQuery("ProductCategory", "Description='" + txtprodcatcon.Text + "'", "ProductCategoryID");
-            return str;
-        }
-        String getProductCode()
-        {
-            string str = "";
-            str = Database.getSingleQuery("Products", "Description='" + comboBox1.Text + "' and ProductCategoryCode='"+getProductCategoryCode()+"'", "ProductCode");
-            return str;
-        }
+        
 
         void addEntry()
         {
@@ -282,7 +265,7 @@ namespace SalesInventorySystem
                         totalSourceQuantity += Convert.ToDouble(sourceAvailableGrid2);
 
                         conversionType = "ManyToOne";
-                        Database.ExecuteQuery("INSERT INTO TempConversionDetails VALUES('" + Login.assignedBranch + "','" + txtrefcode.Text + "','" + sourceSeqNum1 + "','" + sourceProd1 + "','" + sourceDesc1 + "','" + sourceAvailableGrid2 + "','0',0,'" + txtprodcode.Text + "','" + comboBox1.Text + "','" + gridView3.GetRowCellValue(i, "Quantity").ToString() + "','" + txtactualqty.Text + "','0','" + percentagePerPart2 + "',0,0,'" + sourceAmountPerPart2 + "','" + gridView3.GetRowCellValue(i, "Barcode").ToString() + "')");
+                        Database.ExecuteQuery("INSERT INTO TempConversionDetails VALUES('" + Login.assignedBranch + "','" + txtrefcode.Text + "','" + sourceSeqNum1 + "','" + sourceProd1 + "','" + sourceDesc1 + "','" + sourceAvailableGrid2 + "','0',0,'" + objprodforcodemanytoone.ToString() + "','" + txtsrchprdctmanytoone.Text+ "','" + gridView3.GetRowCellValue(i, "Quantity").ToString() + "','" + txtactualqty.Text + "','0','" + percentagePerPart2 + "',0,0,'" + sourceAmountPerPart2 + "','" + gridView3.GetRowCellValue(i, "Barcode").ToString() + "')");
 
 
                     }
@@ -330,41 +313,7 @@ namespace SalesInventorySystem
             }
             return ok;
         }
-
-        private void save()
-        {
-            
-            string prodcode = "";
-            string prodcatcode = Classes.Product.getProductCategoryCode(txtprodcatcon.Text);
-            prodcode = Classes.Product.getProductCode(comboBox1.Text, prodcatcode);
-            string barcode = prodcatcode + prodcode + txttotalweight.Text + '1';
-            
-            SqlConnection con = Database.getConnection();
-            con.Open();
-                try
-                {
-                    string query = "sp_Conversion";
-                    SqlCommand com = new SqlCommand(query, con);
-                    com.Parameters.AddWithValue("@parmbranchcode", Login.assignedBranch);
-                    com.Parameters.AddWithValue("@refcode", txtrefcode.Text);
-                    com.Parameters.AddWithValue("@parmconvertto", comboBox1.Text);
-                    com.Parameters.AddWithValue("@parmconvertprodcode", prodcode);
-                    com.CommandType = CommandType.StoredProcedure;
-                    com.CommandText = query;
-                    com.ExecuteNonQuery();
-                    XtraMessageBox.Show("Successfully Converted");
-                }
-                catch (SqlException ex)
-                {
-                    XtraMessageBox.Show(ex.Message.ToString());
-                }
-                finally
-                {
-                    con.Close();
-                }
-            this.Close();
-        }
-
+        
         private void conversionProcess()
         {
             SqlConnection con = Database.getConnection();
@@ -430,7 +379,7 @@ namespace SalesInventorySystem
             }
             if (radioButton2.Checked==true)
             {
-                if(String.IsNullOrEmpty(txtprodcode.Text) || String.IsNullOrEmpty(txtprodcatcode.Text))
+                if(String.IsNullOrEmpty(objprodforcodemanytoone.ToString())) 
                 {
                     XtraMessageBox.Show("Product Category Code or Product Code must not Empty!!!...");
                     return;
@@ -445,18 +394,7 @@ namespace SalesInventorySystem
            
         }
         
-        private void txtprodcat_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            
-            Database.display("SELECT Product,Description,SUM(Available) as Available " +
-                "FROM Inventory " +
-                "WHERE Branch='" + Login.assignedBranch+"' " +
-                "and IsStock=1 " +
-                "and Available > 0 " +
-                "and Product in (Select ProductCode FROM Products WHERE BranchCode='"+Login.assignedBranch+"' AND ProductCategoryCode='"+Classes.Product.getProductCategoryCode(txtprodcat.Text)+ "') " +
-                "GROUP BY Product,Description", gridControl1, gridView1);
-        }
-
+    
 
         private void simpleButton3_Click(object sender, EventArgs e)
         {
@@ -605,15 +543,7 @@ namespace SalesInventorySystem
             }
         }
 
-        private void txtprodcatcon_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            loadcomb();
-            string prodcatcode = "";
-            prodcatcode = Database.getSingleQuery("ProductCategory", "Description='" + txtprodcatcon.Text + "'", "ProductCategoryID");
-            txtprodcatcode.Text = prodcatcode;
-            comboBox1.Text = "";
-            txtprodcode.Text = "";
-        }
+      
 
         private void cancelLineToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -622,7 +552,7 @@ namespace SalesInventorySystem
         
         private void gridView1_DoubleClick(object sender, EventArgs e)
         {
-            addItemEntry();
+            
         }
 
         private void gridView1_RowCellStyle(object sender, RowCellStyleEventArgs e)
@@ -686,12 +616,7 @@ namespace SalesInventorySystem
 
         }
 
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            string prodcode = "";
-            prodcode = Database.getSingleQuery("Products", "ProductCategoryCode='"+txtprodcatcode.Text+"' and BranchCode='"+Login.assignedBranch+"' and Description='"+comboBox1.Text+"'", "ProductCode");
-            txtprodcode.Text = prodcode;
-        }
+      
 
         private void repositoryItemSearchLookUpEditConversionItems_Click(object sender, EventArgs e)
         {
@@ -792,6 +717,33 @@ namespace SalesInventorySystem
             // Optionally move focus to next column
             // gridView.FocusedColumn = gridView.Columns["NextColumnName"];
 
+        }
+
+        private void gridControl1_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+                contextMenuStripSourceProd.Show(gridControl1, e.Location);
+        }
+
+        private void toolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            addItemEntry();
+        }
+
+        private void txtsrchprdctmanytoone_EditValueChanged(object sender, EventArgs e)
+        {
+            objprodforcodemanytoone = SearchLookUpClass.getSingleValue(txtsrchprdctmanytoone, "ProductCode");
+        }
+
+        private void txtsrchprodcat_EditValueChanged(object sender, EventArgs e)
+        {
+            objprod = SearchLookUpClass.getSingleValue(txtsrchprodcat, "ProductCategoryID");
+            Database.display("SELECT Product,Description,SUM(Available) as Available " +
+             "FROM Inventory with(nolock)" +
+             "WHERE Branch='" + Login.assignedBranch + "' " +
+             "and Available > 0 " +
+             "and Product in (Select ProductCode FROM Products with(nolock) WHERE BranchCode='" + Login.assignedBranch + "' AND ProductCategoryCode='" + objprod + "') " +
+             "GROUP BY Product,Description", gridControl1, gridView1);
         }
 
         private void repositoryItemSearchLookUpEditConversionItems_EditValueChanged(object sender, EventArgs e)
@@ -966,8 +918,9 @@ namespace SalesInventorySystem
         private void repositoryItemBtnSearch_Click(object sender, EventArgs e)
         {
             isConversion = true;
-            string prodcatcode = Classes.Product.getProductCategoryCode(txtprodcat.Text);
-            HOForms.SearchProducts searchProd = new HOForms.SearchProducts(prodcatcode);
+            //string prodcatcode = Classes.Product.getProductCategoryCode(txtprodcat.Text);
+            //HOForms.SearchProducts searchProd = new HOForms.SearchProducts(prodcatcode);
+            HOForms.SearchProducts searchProd = new HOForms.SearchProducts();
             searchProd.FormClosed += new FormClosedEventHandler(searchProd_FormClosed);
             searchProd.Show();
         }

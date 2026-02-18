@@ -1370,16 +1370,16 @@ namespace SalesInventorySystem
             //}
             //HOForms.TransferInventoryUpdate pcusatfsmr = new HOForms.TransferInventoryUpdate();
             //pcusatfsmr.Show();
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form.GetType() == typeof(HOForms.TransferInventoryUpdate))
-                {
-                    form.Activate();
-                    return;
-                }
-            }
-            HOForms.TransferInventoryUpdate pcusatfsmr = new HOForms.TransferInventoryUpdate();
-            pcusatfsmr.Show();
+            //foreach (Form form in Application.OpenForms)
+            //{
+            //    if (form.GetType() == typeof(HOForms.TransferInventoryUpdate))
+            //    {
+            //        form.Activate();
+            //        return;
+            //    }
+            //}
+            //HOForms.TransferInventoryUpdate pcusatfsmr = new HOForms.TransferInventoryUpdate();
+            //pcusatfsmr.Show();
         }
 
         private void barButtonItem63_ItemClick(object sender, ItemClickEventArgs e)
@@ -2816,6 +2816,8 @@ namespace SalesInventorySystem
 
         private void btnTransferPerBarcode_ItemClick(object sender, ItemClickEventArgs e)
         {
+            HOFormsDevEx.TransferByBarcode ads = new HOFormsDevEx.TransferByBarcode();
+            ads.Show();
             //HOFormsDevEx.TransferPerBarcodeDevEx ads = new HOFormsDevEx.TransferPerBarcodeDevEx();
             //ads.Show();
         }
