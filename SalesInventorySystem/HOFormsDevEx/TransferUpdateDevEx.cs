@@ -294,7 +294,7 @@ namespace SalesInventorySystem.HOFormsDevEx
             DevExReportTemplate.TransferInventory xct = new DevExReportTemplate.TransferInventory();
             xct.Landscape = false;
             xct.Landscape = false;
-            xct.PaperKind = System.Drawing.Printing.PaperKind.Letter;
+            xct.PaperKind = System.Drawing.Printing.PaperKind.A4;
             xct.Margins = new System.Drawing.Printing.Margins(100, 100, 100, 100);
 
 
@@ -332,7 +332,7 @@ namespace SalesInventorySystem.HOFormsDevEx
             xct.xrcaption2.Text = caption2;
 
             xct.Landscape = false;
-            xct.PaperKind = System.Drawing.Printing.PaperKind.Letter;
+            xct.PaperKind = System.Drawing.Printing.PaperKind.A4;
             xct.Margins = new System.Drawing.Printing.Margins(100, 100, 100, 100);
             xct.xrdate.Text = DateTime.Now.ToShortDateString();
             xct.xrpreparedby.Text = Login.Fullname;

@@ -242,7 +242,7 @@
             this.txtcategory.Font = new System.Drawing.Font("Tahoma", 11.14286F);
             this.txtcategory.FormattingEnabled = true;
             this.txtcategory.Location = new System.Drawing.Point(198, 265);
-            this.txtcategory.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtcategory.Margin = new System.Windows.Forms.Padding(4);
             this.txtcategory.Name = "txtcategory";
             this.txtcategory.Size = new System.Drawing.Size(370, 44);
             this.txtcategory.TabIndex = 79;
@@ -261,7 +261,7 @@
             // txtremarks
             // 
             this.txtremarks.Location = new System.Drawing.Point(198, 419);
-            this.txtremarks.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtremarks.Margin = new System.Windows.Forms.Padding(4);
             this.txtremarks.Name = "txtremarks";
             this.txtremarks.Size = new System.Drawing.Size(664, 104);
             this.txtremarks.TabIndex = 77;

@@ -83,6 +83,7 @@
             this.bandedGridView1 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridView();
             this.advBandedGridView1 = new DevExpress.XtraGrid.Views.BandedGrid.AdvBandedGridView();
             this.gridBand1 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
+            this.chckboxUseBarcode = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).BeginInit();
             this.groupControl2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
@@ -119,21 +120,21 @@
             // 
             this.groupControl2.Controls.Add(this.gridControl1);
             this.groupControl2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupControl2.Location = new System.Drawing.Point(3, 279);
-            this.groupControl2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.groupControl2.Location = new System.Drawing.Point(3, 303);
+            this.groupControl2.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
             this.groupControl2.Name = "groupControl2";
-            this.groupControl2.Size = new System.Drawing.Size(2275, 474);
+            this.groupControl2.Size = new System.Drawing.Size(2731, 516);
             this.groupControl2.TabIndex = 24;
             // 
             // gridControl1
             // 
             this.gridControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridControl1.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.gridControl1.Location = new System.Drawing.Point(3, 39);
+            this.gridControl1.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
+            this.gridControl1.Location = new System.Drawing.Point(3, 45);
             this.gridControl1.MainView = this.gridView1;
-            this.gridControl1.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.gridControl1.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
             this.gridControl1.Name = "gridControl1";
-            this.gridControl1.Size = new System.Drawing.Size(2269, 432);
+            this.gridControl1.Size = new System.Drawing.Size(2725, 468);
             this.gridControl1.TabIndex = 18;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
@@ -144,7 +145,7 @@
             this.gridView1.Appearance.HeaderPanel.Options.UseFont = true;
             this.gridView1.Appearance.Row.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gridView1.Appearance.Row.Options.UseFont = true;
-            this.gridView1.DetailHeight = 503;
+            this.gridView1.DetailHeight = 547;
             this.gridView1.FixedLineWidth = 3;
             this.gridView1.GridControl = this.gridControl1;
             this.gridView1.Name = "gridView1";
@@ -154,6 +155,7 @@
             // 
             // groupControl1
             // 
+            this.groupControl1.Controls.Add(this.chckboxUseBarcode);
             this.groupControl1.Controls.Add(this.labelControl7);
             this.groupControl1.Controls.Add(this.txtsrchprod);
             this.groupControl1.Controls.Add(this.btnchecker);
@@ -195,9 +197,9 @@
             this.groupControl1.Controls.Add(this.labelControl9);
             this.groupControl1.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupControl1.Location = new System.Drawing.Point(3, 3);
-            this.groupControl1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.groupControl1.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
             this.groupControl1.Name = "groupControl1";
-            this.groupControl1.Size = new System.Drawing.Size(2275, 276);
+            this.groupControl1.Size = new System.Drawing.Size(2731, 300);
             this.groupControl1.TabIndex = 23;
             this.groupControl1.Text = "Receive PO/Inventory";
             // 
@@ -205,17 +207,17 @@
             // 
             this.labelControl7.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelControl7.Appearance.Options.UseFont = true;
-            this.labelControl7.Location = new System.Drawing.Point(63, 115);
-            this.labelControl7.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.labelControl7.Location = new System.Drawing.Point(76, 125);
+            this.labelControl7.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
             this.labelControl7.Name = "labelControl7";
-            this.labelControl7.Size = new System.Drawing.Size(159, 25);
+            this.labelControl7.Size = new System.Drawing.Size(183, 29);
             this.labelControl7.TabIndex = 106;
             this.labelControl7.Text = "Select Product:";
             // 
             // txtsrchprod
             // 
-            this.txtsrchprod.Location = new System.Drawing.Point(239, 106);
-            this.txtsrchprod.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtsrchprod.Location = new System.Drawing.Point(287, 115);
+            this.txtsrchprod.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.txtsrchprod.Name = "txtsrchprod";
             this.txtsrchprod.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 10.8F);
             this.txtsrchprod.Properties.Appearance.Options.UseFont = true;
@@ -223,13 +225,13 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.txtsrchprod.Properties.NullText = "";
             this.txtsrchprod.Properties.PopupView = this.searchLookUpEdit1View;
-            this.txtsrchprod.Size = new System.Drawing.Size(390, 42);
+            this.txtsrchprod.Size = new System.Drawing.Size(468, 50);
             this.txtsrchprod.TabIndex = 105;
             this.txtsrchprod.EditValueChanged += new System.EventHandler(this.txtsrchprod_EditValueChanged);
             // 
             // searchLookUpEdit1View
             // 
-            this.searchLookUpEdit1View.DetailHeight = 503;
+            this.searchLookUpEdit1View.DetailHeight = 547;
             this.searchLookUpEdit1View.FixedLineWidth = 3;
             this.searchLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
             this.searchLookUpEdit1View.Name = "searchLookUpEdit1View";
@@ -239,23 +241,23 @@
             // btnchecker
             // 
             this.btnchecker.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnchecker.ImageOptions.Image")));
-            this.btnchecker.Location = new System.Drawing.Point(1029, 47);
-            this.btnchecker.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnchecker.Location = new System.Drawing.Point(1235, 51);
+            this.btnchecker.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
             this.btnchecker.Name = "btnchecker";
-            this.btnchecker.Size = new System.Drawing.Size(199, 46);
+            this.btnchecker.Size = new System.Drawing.Size(239, 50);
             this.btnchecker.TabIndex = 104;
             this.btnchecker.Text = "Checker (F5)";
             this.btnchecker.Click += new System.EventHandler(this.btnchecker_Click);
             // 
             // txtweight
             // 
-            this.txtweight.Location = new System.Drawing.Point(789, 105);
-            this.txtweight.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.txtweight.Location = new System.Drawing.Point(947, 114);
+            this.txtweight.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
             this.txtweight.Name = "txtweight";
             this.txtweight.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 10.25F);
             this.txtweight.Properties.Appearance.Options.UseFont = true;
             this.txtweight.Properties.MaxLength = 30;
-            this.txtweight.Size = new System.Drawing.Size(230, 42);
+            this.txtweight.Size = new System.Drawing.Size(276, 48);
             this.txtweight.TabIndex = 103;
             this.txtweight.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtweight_KeyDown);
             // 
@@ -267,46 +269,46 @@
             0,
             0});
             this.txtcost.Enabled = false;
-            this.txtcost.Location = new System.Drawing.Point(240, 157);
-            this.txtcost.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.txtcost.Location = new System.Drawing.Point(288, 171);
+            this.txtcost.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
             this.txtcost.Name = "txtcost";
             this.txtcost.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 10.25F);
             this.txtcost.Properties.Appearance.Options.UseFont = true;
             this.txtcost.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.txtcost.Size = new System.Drawing.Size(129, 42);
+            this.txtcost.Size = new System.Drawing.Size(155, 48);
             this.txtcost.TabIndex = 102;
             // 
             // txtinvoiceno
             // 
-            this.txtinvoiceno.Location = new System.Drawing.Point(1397, 52);
-            this.txtinvoiceno.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.txtinvoiceno.Location = new System.Drawing.Point(1676, 57);
+            this.txtinvoiceno.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
             this.txtinvoiceno.Name = "txtinvoiceno";
             this.txtinvoiceno.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 10.25F);
             this.txtinvoiceno.Properties.Appearance.Options.UseFont = true;
             this.txtinvoiceno.Properties.MaxLength = 30;
-            this.txtinvoiceno.Size = new System.Drawing.Size(234, 42);
+            this.txtinvoiceno.Size = new System.Drawing.Size(281, 48);
             this.txtinvoiceno.TabIndex = 101;
             // 
             // txtdestination
             // 
-            this.txtdestination.Location = new System.Drawing.Point(789, 47);
-            this.txtdestination.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.txtdestination.Location = new System.Drawing.Point(947, 51);
+            this.txtdestination.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
             this.txtdestination.Name = "txtdestination";
             this.txtdestination.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 10.25F);
             this.txtdestination.Properties.Appearance.Options.UseFont = true;
             this.txtdestination.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.txtdestination.Size = new System.Drawing.Size(230, 42);
+            this.txtdestination.Size = new System.Drawing.Size(276, 48);
             this.txtdestination.TabIndex = 99;
             // 
             // simpleButton4
             // 
             this.simpleButton4.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("simpleButton4.ImageOptions.Image")));
-            this.simpleButton4.Location = new System.Drawing.Point(1029, 101);
-            this.simpleButton4.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.simpleButton4.Location = new System.Drawing.Point(1235, 110);
+            this.simpleButton4.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
             this.simpleButton4.Name = "simpleButton4";
-            this.simpleButton4.Size = new System.Drawing.Size(199, 46);
+            this.simpleButton4.Size = new System.Drawing.Size(239, 50);
             this.simpleButton4.TabIndex = 95;
             this.simpleButton4.Text = "Get Weight";
             this.simpleButton4.Click += new System.EventHandler(this.simpleButton4_Click);
@@ -314,10 +316,10 @@
             // simpleButton5
             // 
             this.simpleButton5.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("simpleButton5.ImageOptions.Image")));
-            this.simpleButton5.Location = new System.Drawing.Point(1029, 155);
-            this.simpleButton5.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.simpleButton5.Location = new System.Drawing.Point(1235, 168);
+            this.simpleButton5.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
             this.simpleButton5.Name = "simpleButton5";
-            this.simpleButton5.Size = new System.Drawing.Size(199, 46);
+            this.simpleButton5.Size = new System.Drawing.Size(239, 50);
             this.simpleButton5.TabIndex = 94;
             this.simpleButton5.Text = "Print Barcode (F8)";
             this.simpleButton5.Click += new System.EventHandler(this.simpleButton5_Click);
@@ -325,10 +327,10 @@
             // btnclear
             // 
             this.btnclear.ImageOptions.Image = global::SalesInventorySystem.Properties.Resources.Clear_16x16__2_;
-            this.btnclear.Location = new System.Drawing.Point(236, 208);
-            this.btnclear.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnclear.Location = new System.Drawing.Point(283, 226);
+            this.btnclear.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
             this.btnclear.Name = "btnclear";
-            this.btnclear.Size = new System.Drawing.Size(137, 46);
+            this.btnclear.Size = new System.Drawing.Size(164, 50);
             this.btnclear.TabIndex = 93;
             this.btnclear.Text = "Clear (F6)";
             this.btnclear.Click += new System.EventHandler(this.btnclear_Click);
@@ -336,10 +338,10 @@
             // simpleButton3
             // 
             this.simpleButton3.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("simpleButton3.ImageOptions.Image")));
-            this.simpleButton3.Location = new System.Drawing.Point(381, 208);
-            this.simpleButton3.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.simpleButton3.Location = new System.Drawing.Point(457, 226);
+            this.simpleButton3.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
             this.simpleButton3.Name = "simpleButton3";
-            this.simpleButton3.Size = new System.Drawing.Size(193, 46);
+            this.simpleButton3.Size = new System.Drawing.Size(232, 50);
             this.simpleButton3.TabIndex = 92;
             this.simpleButton3.Text = "Cancel Line (Del)";
             this.simpleButton3.Click += new System.EventHandler(this.simpleButton3_Click);
@@ -347,10 +349,10 @@
             // simpleButton2
             // 
             this.simpleButton2.ImageOptions.Image = global::SalesInventorySystem.Properties.Resources.Save_16x16__5_;
-            this.simpleButton2.Location = new System.Drawing.Point(586, 208);
-            this.simpleButton2.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.simpleButton2.Location = new System.Drawing.Point(703, 226);
+            this.simpleButton2.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
             this.simpleButton2.Name = "simpleButton2";
-            this.simpleButton2.Size = new System.Drawing.Size(150, 46);
+            this.simpleButton2.Size = new System.Drawing.Size(180, 50);
             this.simpleButton2.TabIndex = 91;
             this.simpleButton2.Text = "Save (F10)";
             this.simpleButton2.Click += new System.EventHandler(this.simpleButton2_Click);
@@ -358,10 +360,10 @@
             // simpleButton1
             // 
             this.simpleButton1.ImageOptions.Image = global::SalesInventorySystem.Properties.Resources.Add_16x16__2_;
-            this.simpleButton1.Location = new System.Drawing.Point(86, 207);
-            this.simpleButton1.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.simpleButton1.Location = new System.Drawing.Point(103, 225);
+            this.simpleButton1.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
             this.simpleButton1.Name = "simpleButton1";
-            this.simpleButton1.Size = new System.Drawing.Size(140, 46);
+            this.simpleButton1.Size = new System.Drawing.Size(168, 50);
             this.simpleButton1.TabIndex = 90;
             this.simpleButton1.Text = "Add (Enter)";
             this.simpleButton1.Click += new System.EventHandler(this.simpleButton1_Click);
@@ -370,10 +372,10 @@
             // 
             this.labelControl1.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelControl1.Appearance.Options.UseFont = true;
-            this.labelControl1.Location = new System.Drawing.Point(21, 59);
-            this.labelControl1.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.labelControl1.Location = new System.Drawing.Point(25, 64);
+            this.labelControl1.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
             this.labelControl1.Name = "labelControl1";
-            this.labelControl1.Size = new System.Drawing.Size(207, 25);
+            this.labelControl1.Size = new System.Drawing.Size(239, 29);
             this.labelControl1.TabIndex = 18;
             this.labelControl1.Text = "PO # / Shipment #:";
             // 
@@ -381,10 +383,10 @@
             // 
             this.labelControl13.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelControl13.Appearance.Options.UseFont = true;
-            this.labelControl13.Location = new System.Drawing.Point(173, 171);
-            this.labelControl13.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.labelControl13.Location = new System.Drawing.Point(208, 186);
+            this.labelControl13.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
             this.labelControl13.Name = "labelControl13";
-            this.labelControl13.Size = new System.Drawing.Size(55, 25);
+            this.labelControl13.Size = new System.Drawing.Size(62, 29);
             this.labelControl13.TabIndex = 88;
             this.labelControl13.Text = "Cost:";
             // 
@@ -394,10 +396,10 @@
             this.checkBox3.BackColor = System.Drawing.Color.Transparent;
             this.checkBox3.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.checkBox3.ForeColor = System.Drawing.Color.Black;
-            this.checkBox3.Location = new System.Drawing.Point(379, 164);
-            this.checkBox3.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.checkBox3.Location = new System.Drawing.Point(455, 178);
+            this.checkBox3.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
             this.checkBox3.Name = "checkBox3";
-            this.checkBox3.Size = new System.Drawing.Size(192, 29);
+            this.checkBox3.Size = new System.Drawing.Size(221, 33);
             this.checkBox3.TabIndex = 87;
             this.checkBox3.Text = "Override Cost?";
             this.checkBox3.UseVisualStyleBackColor = false;
@@ -406,42 +408,42 @@
             // txtpalletno
             // 
             this.txtpalletno.Font = new System.Drawing.Font("Tahoma", 10.25F);
-            this.txtpalletno.Location = new System.Drawing.Point(1749, 49);
-            this.txtpalletno.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.txtpalletno.Location = new System.Drawing.Point(2099, 53);
+            this.txtpalletno.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
             this.txtpalletno.MaxLength = 10;
             this.txtpalletno.Name = "txtpalletno";
-            this.txtpalletno.Size = new System.Drawing.Size(117, 36);
+            this.txtpalletno.Size = new System.Drawing.Size(140, 40);
             this.txtpalletno.TabIndex = 86;
             this.txtpalletno.Text = "0";
             // 
             // txtshipmentno
             // 
-            this.txtshipmentno.Location = new System.Drawing.Point(239, 52);
-            this.txtshipmentno.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.txtshipmentno.Location = new System.Drawing.Point(287, 57);
+            this.txtshipmentno.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
             this.txtshipmentno.Name = "txtshipmentno";
             this.txtshipmentno.Properties.Appearance.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.txtshipmentno.Properties.Appearance.Options.UseFont = true;
             this.txtshipmentno.Properties.MaxLength = 13;
             this.txtshipmentno.Properties.ReadOnly = true;
-            this.txtshipmentno.Size = new System.Drawing.Size(94, 42);
+            this.txtshipmentno.Size = new System.Drawing.Size(113, 46);
             this.txtshipmentno.TabIndex = 19;
             // 
             // labelControl12
             // 
             this.labelControl12.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelControl12.Appearance.Options.UseFont = true;
-            this.labelControl12.Location = new System.Drawing.Point(1643, 56);
-            this.labelControl12.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.labelControl12.Location = new System.Drawing.Point(1972, 61);
+            this.labelControl12.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
             this.labelControl12.Name = "labelControl12";
-            this.labelControl12.Size = new System.Drawing.Size(103, 25);
+            this.labelControl12.Size = new System.Drawing.Size(118, 29);
             this.labelControl12.TabIndex = 85;
             this.labelControl12.Text = "Pallet No:";
             // 
             // txtduedate
             // 
             this.txtduedate.EditValue = null;
-            this.txtduedate.Location = new System.Drawing.Point(1397, 154);
-            this.txtduedate.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.txtduedate.Location = new System.Drawing.Point(1676, 167);
+            this.txtduedate.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
             this.txtduedate.Name = "txtduedate";
             this.txtduedate.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 10.25F);
             this.txtduedate.Properties.Appearance.Options.UseFont = true;
@@ -449,20 +451,20 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.txtduedate.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.txtduedate.Size = new System.Drawing.Size(234, 42);
+            this.txtduedate.Size = new System.Drawing.Size(281, 48);
             this.txtduedate.TabIndex = 84;
             // 
             // txtfreightcost
             // 
             this.txtfreightcost.EditValue = "0";
             this.txtfreightcost.Enabled = false;
-            this.txtfreightcost.Location = new System.Drawing.Point(1874, 168);
-            this.txtfreightcost.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.txtfreightcost.Location = new System.Drawing.Point(2249, 183);
+            this.txtfreightcost.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
             this.txtfreightcost.Name = "txtfreightcost";
             this.txtfreightcost.Properties.Appearance.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.txtfreightcost.Properties.Appearance.Options.UseFont = true;
             this.txtfreightcost.Properties.MaxLength = 13;
-            this.txtfreightcost.Size = new System.Drawing.Size(120, 44);
+            this.txtfreightcost.Size = new System.Drawing.Size(144, 52);
             this.txtfreightcost.TabIndex = 21;
             this.txtfreightcost.Visible = false;
             // 
@@ -470,20 +472,20 @@
             // 
             this.labelControl11.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelControl11.Appearance.Options.UseFont = true;
-            this.labelControl11.Location = new System.Drawing.Point(1263, 162);
-            this.labelControl11.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.labelControl11.Location = new System.Drawing.Point(1516, 176);
+            this.labelControl11.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
             this.labelControl11.Name = "labelControl11";
-            this.labelControl11.Size = new System.Drawing.Size(130, 25);
+            this.labelControl11.Size = new System.Drawing.Size(148, 29);
             this.labelControl11.TabIndex = 83;
             this.labelControl11.Text = "Expiry Date:";
             // 
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(2009, 184);
-            this.checkBox1.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.checkBox1.Location = new System.Drawing.Point(2411, 200);
+            this.checkBox1.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
             this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(183, 28);
+            this.checkBox1.Size = new System.Drawing.Size(201, 29);
             this.checkBox1.TabIndex = 22;
             this.checkBox1.Text = "Add Freight Cost";
             this.checkBox1.UseVisualStyleBackColor = true;
@@ -492,8 +494,8 @@
             // txtinvoicedate
             // 
             this.txtinvoicedate.EditValue = null;
-            this.txtinvoicedate.Location = new System.Drawing.Point(1397, 105);
-            this.txtinvoicedate.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.txtinvoicedate.Location = new System.Drawing.Point(1676, 114);
+            this.txtinvoicedate.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
             this.txtinvoicedate.Name = "txtinvoicedate";
             this.txtinvoicedate.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 10.25F);
             this.txtinvoicedate.Properties.Appearance.Options.UseFont = true;
@@ -501,17 +503,17 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.txtinvoicedate.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.txtinvoicedate.Size = new System.Drawing.Size(234, 42);
+            this.txtinvoicedate.Size = new System.Drawing.Size(281, 48);
             this.txtinvoicedate.TabIndex = 82;
             // 
             // labelControl2
             // 
             this.labelControl2.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelControl2.Appearance.Options.UseFont = true;
-            this.labelControl2.Location = new System.Drawing.Point(1753, 132);
-            this.labelControl2.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.labelControl2.Location = new System.Drawing.Point(2104, 143);
+            this.labelControl2.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
             this.labelControl2.Name = "labelControl2";
-            this.labelControl2.Size = new System.Drawing.Size(135, 25);
+            this.labelControl2.Size = new System.Drawing.Size(156, 29);
             this.labelControl2.TabIndex = 23;
             this.labelControl2.Text = "Reference #:";
             this.labelControl2.Visible = false;
@@ -520,36 +522,36 @@
             // 
             this.labelControl10.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelControl10.Appearance.Options.UseFont = true;
-            this.labelControl10.Location = new System.Drawing.Point(1251, 109);
-            this.labelControl10.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.labelControl10.Location = new System.Drawing.Point(1501, 118);
+            this.labelControl10.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
             this.labelControl10.Name = "labelControl10";
-            this.labelControl10.Size = new System.Drawing.Size(141, 25);
+            this.labelControl10.Size = new System.Drawing.Size(162, 29);
             this.labelControl10.TabIndex = 81;
             this.labelControl10.Text = "Invoice Date:";
             // 
             // txtrefno
             // 
-            this.txtrefno.Location = new System.Drawing.Point(1904, 122);
-            this.txtrefno.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.txtrefno.Location = new System.Drawing.Point(2285, 133);
+            this.txtrefno.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
             this.txtrefno.Name = "txtrefno";
             this.txtrefno.Properties.Appearance.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.txtrefno.Properties.Appearance.Options.UseFont = true;
             this.txtrefno.Properties.MaxLength = 13;
             this.txtrefno.Properties.ReadOnly = true;
-            this.txtrefno.Size = new System.Drawing.Size(111, 44);
+            this.txtrefno.Size = new System.Drawing.Size(133, 52);
             this.txtrefno.TabIndex = 24;
             this.txtrefno.Visible = false;
             // 
             // txtprodcatcode
             // 
-            this.txtprodcatcode.Location = new System.Drawing.Point(1753, 168);
-            this.txtprodcatcode.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.txtprodcatcode.Location = new System.Drawing.Point(2104, 183);
+            this.txtprodcatcode.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
             this.txtprodcatcode.Name = "txtprodcatcode";
             this.txtprodcatcode.Properties.Appearance.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.txtprodcatcode.Properties.Appearance.Options.UseFont = true;
             this.txtprodcatcode.Properties.MaxLength = 13;
             this.txtprodcatcode.Properties.ReadOnly = true;
-            this.txtprodcatcode.Size = new System.Drawing.Size(111, 44);
+            this.txtprodcatcode.Size = new System.Drawing.Size(133, 52);
             this.txtprodcatcode.TabIndex = 25;
             this.txtprodcatcode.Visible = false;
             // 
@@ -557,22 +559,22 @@
             // 
             this.labelControl6.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelControl6.Appearance.Options.UseFont = true;
-            this.labelControl6.Location = new System.Drawing.Point(1273, 56);
-            this.labelControl6.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.labelControl6.Location = new System.Drawing.Point(1528, 61);
+            this.labelControl6.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
             this.labelControl6.Name = "labelControl6";
-            this.labelControl6.Size = new System.Drawing.Size(120, 25);
+            this.labelControl6.Size = new System.Drawing.Size(140, 29);
             this.labelControl6.TabIndex = 79;
             this.labelControl6.Text = "Invoice No:";
             // 
             // txtbarcode
             // 
-            this.txtbarcode.Location = new System.Drawing.Point(789, 158);
-            this.txtbarcode.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.txtbarcode.Location = new System.Drawing.Point(947, 172);
+            this.txtbarcode.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
             this.txtbarcode.Name = "txtbarcode";
             this.txtbarcode.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtbarcode.Properties.Appearance.Options.UseFont = true;
             this.txtbarcode.Properties.MaxLength = 30;
-            this.txtbarcode.Size = new System.Drawing.Size(230, 40);
+            this.txtbarcode.Size = new System.Drawing.Size(276, 46);
             this.txtbarcode.TabIndex = 59;
             this.txtbarcode.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtbarcode_KeyDown);
             this.txtbarcode.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtbarcode_KeyPress);
@@ -581,10 +583,10 @@
             // 
             this.radioButton2.AutoSize = true;
             this.radioButton2.Font = new System.Drawing.Font("Tahoma", 9.25F, System.Drawing.FontStyle.Bold);
-            this.radioButton2.Location = new System.Drawing.Point(1524, 208);
-            this.radioButton2.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.radioButton2.Location = new System.Drawing.Point(1829, 226);
+            this.radioButton2.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
             this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(177, 31);
+            this.radioButton2.Size = new System.Drawing.Size(202, 34);
             this.radioButton2.TabIndex = 78;
             this.radioButton2.TabStop = true;
             this.radioButton2.Text = "Full Delivery";
@@ -595,10 +597,10 @@
             // 
             this.labelControl4.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelControl4.Appearance.Options.UseFont = true;
-            this.labelControl4.Location = new System.Drawing.Point(731, 164);
-            this.labelControl4.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.labelControl4.Location = new System.Drawing.Point(877, 178);
+            this.labelControl4.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
             this.labelControl4.Name = "labelControl4";
-            this.labelControl4.Size = new System.Drawing.Size(52, 25);
+            this.labelControl4.Size = new System.Drawing.Size(59, 29);
             this.labelControl4.TabIndex = 60;
             this.labelControl4.Text = "SKU:";
             // 
@@ -606,10 +608,10 @@
             // 
             this.radioButton1.AutoSize = true;
             this.radioButton1.Font = new System.Drawing.Font("Tahoma", 9.25F, System.Drawing.FontStyle.Bold);
-            this.radioButton1.Location = new System.Drawing.Point(1291, 208);
-            this.radioButton1.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.radioButton1.Location = new System.Drawing.Point(1549, 226);
+            this.radioButton1.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
             this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(209, 31);
+            this.radioButton1.Size = new System.Drawing.Size(238, 34);
             this.radioButton1.TabIndex = 77;
             this.radioButton1.TabStop = true;
             this.radioButton1.Text = "Partial Delivery";
@@ -620,10 +622,10 @@
             // 
             this.labelControl3.Appearance.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold);
             this.labelControl3.Appearance.Options.UseFont = true;
-            this.labelControl3.Location = new System.Drawing.Point(343, 62);
-            this.labelControl3.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.labelControl3.Location = new System.Drawing.Point(412, 67);
+            this.labelControl3.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
             this.labelControl3.Name = "labelControl3";
-            this.labelControl3.Size = new System.Drawing.Size(115, 28);
+            this.labelControl3.Size = new System.Drawing.Size(130, 31);
             this.labelControl3.TabIndex = 61;
             this.labelControl3.Text = "Com Port:";
             // 
@@ -633,10 +635,10 @@
             this.chckboxbarcode.BackColor = System.Drawing.Color.Transparent;
             this.chckboxbarcode.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chckboxbarcode.ForeColor = System.Drawing.Color.Black;
-            this.chckboxbarcode.Location = new System.Drawing.Point(1009, 208);
-            this.chckboxbarcode.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.chckboxbarcode.Location = new System.Drawing.Point(1235, 228);
+            this.chckboxbarcode.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
             this.chckboxbarcode.Name = "chckboxbarcode";
-            this.chckboxbarcode.Size = new System.Drawing.Size(235, 29);
+            this.chckboxbarcode.Size = new System.Drawing.Size(270, 33);
             this.chckboxbarcode.TabIndex = 76;
             this.chckboxbarcode.Text = "Auto Print Barcode";
             this.chckboxbarcode.UseVisualStyleBackColor = false;
@@ -644,10 +646,10 @@
             // txtcomport
             // 
             this.txtcomport.FormattingEnabled = true;
-            this.txtcomport.Location = new System.Drawing.Point(470, 56);
-            this.txtcomport.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.txtcomport.Location = new System.Drawing.Point(564, 61);
+            this.txtcomport.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
             this.txtcomport.Name = "txtcomport";
-            this.txtcomport.Size = new System.Drawing.Size(111, 31);
+            this.txtcomport.Size = new System.Drawing.Size(132, 33);
             this.txtcomport.TabIndex = 62;
             this.txtcomport.Text = "COM1";
             // 
@@ -655,10 +657,10 @@
             // 
             this.labelControl5.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelControl5.Appearance.Options.UseFont = true;
-            this.labelControl5.Location = new System.Drawing.Point(649, 56);
-            this.labelControl5.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.labelControl5.Location = new System.Drawing.Point(779, 61);
+            this.labelControl5.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
             this.labelControl5.Name = "labelControl5";
-            this.labelControl5.Size = new System.Drawing.Size(129, 25);
+            this.labelControl5.Size = new System.Drawing.Size(146, 29);
             this.labelControl5.TabIndex = 73;
             this.labelControl5.Text = "Destination:";
             // 
@@ -668,10 +670,10 @@
             this.checkBox2.BackColor = System.Drawing.Color.Transparent;
             this.checkBox2.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.checkBox2.ForeColor = System.Drawing.Color.Black;
-            this.checkBox2.Location = new System.Drawing.Point(789, 208);
-            this.checkBox2.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.checkBox2.Location = new System.Drawing.Point(1235, 267);
+            this.checkBox2.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
             this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(205, 29);
+            this.checkBox2.Size = new System.Drawing.Size(236, 33);
             this.checkBox2.TabIndex = 72;
             this.checkBox2.Text = "Auto GetWeight";
             this.checkBox2.UseVisualStyleBackColor = false;
@@ -680,10 +682,10 @@
             // 
             this.labelControl9.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelControl9.Appearance.Options.UseFont = true;
-            this.labelControl9.Location = new System.Drawing.Point(679, 109);
-            this.labelControl9.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.labelControl9.Location = new System.Drawing.Point(815, 118);
+            this.labelControl9.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
             this.labelControl9.Name = "labelControl9";
-            this.labelControl9.Size = new System.Drawing.Size(99, 25);
+            this.labelControl9.Size = new System.Drawing.Size(112, 29);
             this.labelControl9.TabIndex = 67;
             this.labelControl9.Text = "Quantity:";
             // 
@@ -692,10 +694,10 @@
             this.panelControl1.Controls.Add(this.groupControl2);
             this.panelControl1.Controls.Add(this.groupControl1);
             this.panelControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelControl1.Location = new System.Drawing.Point(0, 538);
-            this.panelControl1.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.panelControl1.Location = new System.Drawing.Point(0, 585);
+            this.panelControl1.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
             this.panelControl1.Name = "panelControl1";
-            this.panelControl1.Size = new System.Drawing.Size(2281, 756);
+            this.panelControl1.Size = new System.Drawing.Size(2737, 822);
             this.panelControl1.TabIndex = 25;
             // 
             // dockManager1
@@ -716,21 +718,21 @@
             this.groupControl3.Controls.Add(this.gridControl2);
             this.groupControl3.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupControl3.Location = new System.Drawing.Point(0, 0);
-            this.groupControl3.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.groupControl3.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
             this.groupControl3.Name = "groupControl3";
-            this.groupControl3.Size = new System.Drawing.Size(2281, 538);
+            this.groupControl3.Size = new System.Drawing.Size(2737, 585);
             this.groupControl3.TabIndex = 26;
             this.groupControl3.Text = "Order Details";
             // 
             // gridControl2
             // 
             this.gridControl2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridControl2.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.gridControl2.Location = new System.Drawing.Point(3, 39);
+            this.gridControl2.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
+            this.gridControl2.Location = new System.Drawing.Point(3, 45);
             this.gridControl2.MainView = this.gridView2;
-            this.gridControl2.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.gridControl2.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
             this.gridControl2.Name = "gridControl2";
-            this.gridControl2.Size = new System.Drawing.Size(2275, 496);
+            this.gridControl2.Size = new System.Drawing.Size(2731, 537);
             this.gridControl2.TabIndex = 2;
             this.gridControl2.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView2,
@@ -747,7 +749,7 @@
             this.gridView2.Appearance.HeaderPanel.Options.UseFont = true;
             this.gridView2.Appearance.Row.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gridView2.Appearance.Row.Options.UseFont = true;
-            this.gridView2.DetailHeight = 620;
+            this.gridView2.DetailHeight = 674;
             this.gridView2.FixedLineWidth = 3;
             this.gridView2.GridControl = this.gridControl2;
             this.gridView2.Name = "gridView2";
@@ -760,7 +762,7 @@
             // 
             // bandedGridView1
             // 
-            this.bandedGridView1.DetailHeight = 620;
+            this.bandedGridView1.DetailHeight = 674;
             this.bandedGridView1.FixedLineWidth = 3;
             this.bandedGridView1.GridControl = this.gridControl2;
             this.bandedGridView1.Name = "bandedGridView1";
@@ -769,7 +771,7 @@
             // 
             this.advBandedGridView1.Bands.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.GridBand[] {
             this.gridBand1});
-            this.advBandedGridView1.DetailHeight = 620;
+            this.advBandedGridView1.DetailHeight = 674;
             this.advBandedGridView1.FixedLineWidth = 3;
             this.advBandedGridView1.GridControl = this.gridControl2;
             this.advBandedGridView1.Name = "advBandedGridView1";
@@ -777,19 +779,35 @@
             // gridBand1
             // 
             this.gridBand1.Caption = "gridBand1";
-            this.gridBand1.MinWidth = 17;
+            this.gridBand1.MinWidth = 20;
             this.gridBand1.Name = "gridBand1";
             this.gridBand1.VisibleIndex = 0;
-            this.gridBand1.Width = 117;
+            this.gridBand1.Width = 140;
+            // 
+            // chckboxUseBarcode
+            // 
+            this.chckboxUseBarcode.AutoSize = true;
+            this.chckboxUseBarcode.BackColor = System.Drawing.Color.Transparent;
+            this.chckboxUseBarcode.Checked = true;
+            this.chckboxUseBarcode.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chckboxUseBarcode.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chckboxUseBarcode.ForeColor = System.Drawing.Color.Black;
+            this.chckboxUseBarcode.Location = new System.Drawing.Point(947, 227);
+            this.chckboxUseBarcode.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
+            this.chckboxUseBarcode.Name = "chckboxUseBarcode";
+            this.chckboxUseBarcode.Size = new System.Drawing.Size(244, 33);
+            this.chckboxUseBarcode.TabIndex = 107;
+            this.chckboxUseBarcode.Text = "Use this Barcode";
+            this.chckboxUseBarcode.UseVisualStyleBackColor = false;
             // 
             // AddInventoryDevEx
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 23F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(2281, 1294);
+            this.ClientSize = new System.Drawing.Size(2737, 1407);
             this.Controls.Add(this.panelControl1);
             this.Controls.Add(this.groupControl3);
-            this.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
             this.Name = "AddInventoryDevEx";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "AddInventoryDevEx";
@@ -885,5 +903,6 @@
         private DevExpress.XtraEditors.SearchLookUpEdit txtsrchprod;
         private DevExpress.XtraGrid.Views.Grid.GridView searchLookUpEdit1View;
         private DevExpress.XtraEditors.LabelControl labelControl7;
+        private System.Windows.Forms.CheckBox chckboxUseBarcode;
     }
 }

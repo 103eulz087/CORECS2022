@@ -32,16 +32,16 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
+            this.lblmovdiscount = new DevExpress.XtraEditors.LabelControl();
+            this.labelControl26 = new DevExpress.XtraEditors.LabelControl();
+            this.lblnaacdiscount = new DevExpress.XtraEditors.LabelControl();
+            this.labelControl24 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl19 = new DevExpress.XtraEditors.LabelControl();
             this.lblTransactionIDInc = new DevExpress.XtraEditors.LabelControl();
             this.txtcustbussstyle = new System.Windows.Forms.TextBox();
-            this.lblonetimediscountamount = new DevExpress.XtraEditors.LabelControl();
             this.txtcusttinrcpt = new System.Windows.Forms.TextBox();
-            this.labelControl21 = new DevExpress.XtraEditors.LabelControl();
             this.txtcustaddressrcpt = new System.Windows.Forms.TextBox();
-            this.lblperitemdiscountamount = new DevExpress.XtraEditors.LabelControl();
             this.txtcustnamercpt = new System.Windows.Forms.TextBox();
-            this.labelControl20 = new DevExpress.XtraEditors.LabelControl();
             this.lblotherdiscount = new DevExpress.XtraEditors.LabelControl();
             this.lblpwddiscount = new DevExpress.XtraEditors.LabelControl();
             this.lblseniordiscount = new DevExpress.XtraEditors.LabelControl();
@@ -68,6 +68,10 @@
             this.lblTransactionIDCashier = new DevExpress.XtraEditors.LabelControl();
             this.txtOrderNo = new DevExpress.XtraEditors.TextEdit();
             this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
+            this.lblonetimediscountamount = new DevExpress.XtraEditors.LabelControl();
+            this.labelControl21 = new DevExpress.XtraEditors.LabelControl();
+            this.lblperitemdiscountamount = new DevExpress.XtraEditors.LabelControl();
+            this.labelControl20 = new DevExpress.XtraEditors.LabelControl();
             this.txtcustname = new System.Windows.Forms.ComboBox();
             this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
             this.Onhold = new DevExpress.XtraEditors.SimpleButton();
@@ -112,10 +116,6 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.serialPort1 = new System.IO.Ports.SerialPort(this.components);
-            this.lblnaacdiscount = new DevExpress.XtraEditors.LabelControl();
-            this.labelControl24 = new DevExpress.XtraEditors.LabelControl();
-            this.lblmovdiscount = new DevExpress.XtraEditors.LabelControl();
-            this.labelControl26 = new DevExpress.XtraEditors.LabelControl();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtdiscount.Properties)).BeginInit();
@@ -183,6 +183,62 @@
             this.panelControl1.Size = new System.Drawing.Size(2606, 185);
             this.panelControl1.TabIndex = 0;
             // 
+            // lblmovdiscount
+            // 
+            this.lblmovdiscount.Appearance.Font = new System.Drawing.Font("Century Gothic", 12.25F);
+            this.lblmovdiscount.Appearance.ForeColor = System.Drawing.Color.Gold;
+            this.lblmovdiscount.Appearance.Options.UseFont = true;
+            this.lblmovdiscount.Appearance.Options.UseForeColor = true;
+            this.lblmovdiscount.Location = new System.Drawing.Point(2388, 115);
+            this.lblmovdiscount.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.lblmovdiscount.Name = "lblmovdiscount";
+            this.lblmovdiscount.Size = new System.Drawing.Size(18, 40);
+            this.lblmovdiscount.TabIndex = 52;
+            this.lblmovdiscount.Text = "0";
+            this.lblmovdiscount.Visible = false;
+            // 
+            // labelControl26
+            // 
+            this.labelControl26.Appearance.Font = new System.Drawing.Font("Century Gothic", 12.25F);
+            this.labelControl26.Appearance.ForeColor = System.Drawing.Color.White;
+            this.labelControl26.Appearance.Options.UseFont = true;
+            this.labelControl26.Appearance.Options.UseForeColor = true;
+            this.labelControl26.Location = new System.Drawing.Point(2110, 115);
+            this.labelControl26.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.labelControl26.Name = "labelControl26";
+            this.labelControl26.Size = new System.Drawing.Size(239, 40);
+            this.labelControl26.TabIndex = 51;
+            this.labelControl26.Text = "MOV Discount:";
+            this.labelControl26.Visible = false;
+            // 
+            // lblnaacdiscount
+            // 
+            this.lblnaacdiscount.Appearance.Font = new System.Drawing.Font("Century Gothic", 12.25F);
+            this.lblnaacdiscount.Appearance.ForeColor = System.Drawing.Color.Gold;
+            this.lblnaacdiscount.Appearance.Options.UseFont = true;
+            this.lblnaacdiscount.Appearance.Options.UseForeColor = true;
+            this.lblnaacdiscount.Location = new System.Drawing.Point(2388, 68);
+            this.lblnaacdiscount.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.lblnaacdiscount.Name = "lblnaacdiscount";
+            this.lblnaacdiscount.Size = new System.Drawing.Size(18, 40);
+            this.lblnaacdiscount.TabIndex = 50;
+            this.lblnaacdiscount.Text = "0";
+            this.lblnaacdiscount.Visible = false;
+            // 
+            // labelControl24
+            // 
+            this.labelControl24.Appearance.Font = new System.Drawing.Font("Century Gothic", 12.25F);
+            this.labelControl24.Appearance.ForeColor = System.Drawing.Color.White;
+            this.labelControl24.Appearance.Options.UseFont = true;
+            this.labelControl24.Appearance.Options.UseForeColor = true;
+            this.labelControl24.Location = new System.Drawing.Point(2110, 68);
+            this.labelControl24.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.labelControl24.Name = "labelControl24";
+            this.labelControl24.Size = new System.Drawing.Size(253, 40);
+            this.labelControl24.TabIndex = 49;
+            this.labelControl24.Text = "NAAC Discount:";
+            this.labelControl24.Visible = false;
+            // 
             // labelControl19
             // 
             this.labelControl19.Appearance.Font = new System.Drawing.Font("Century Gothic", 12.25F);
@@ -221,20 +277,6 @@
             this.txtcustbussstyle.Visible = false;
             this.txtcustbussstyle.WordWrap = false;
             // 
-            // lblonetimediscountamount
-            // 
-            this.lblonetimediscountamount.Appearance.Font = new System.Drawing.Font("Century Gothic", 12.25F);
-            this.lblonetimediscountamount.Appearance.ForeColor = System.Drawing.Color.Gold;
-            this.lblonetimediscountamount.Appearance.Options.UseFont = true;
-            this.lblonetimediscountamount.Appearance.Options.UseForeColor = true;
-            this.lblonetimediscountamount.Location = new System.Drawing.Point(441, 1355);
-            this.lblonetimediscountamount.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.lblonetimediscountamount.Name = "lblonetimediscountamount";
-            this.lblonetimediscountamount.Size = new System.Drawing.Size(18, 40);
-            this.lblonetimediscountamount.TabIndex = 46;
-            this.lblonetimediscountamount.Text = "0";
-            this.lblonetimediscountamount.Visible = false;
-            // 
             // txtcusttinrcpt
             // 
             this.txtcusttinrcpt.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -245,20 +287,6 @@
             this.txtcusttinrcpt.Size = new System.Drawing.Size(416, 39);
             this.txtcusttinrcpt.TabIndex = 37;
             this.txtcusttinrcpt.Visible = false;
-            // 
-            // labelControl21
-            // 
-            this.labelControl21.Appearance.Font = new System.Drawing.Font("Century Gothic", 12.25F);
-            this.labelControl21.Appearance.ForeColor = System.Drawing.Color.White;
-            this.labelControl21.Appearance.Options.UseFont = true;
-            this.labelControl21.Appearance.Options.UseForeColor = true;
-            this.labelControl21.Location = new System.Drawing.Point(105, 1355);
-            this.labelControl21.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.labelControl21.Name = "labelControl21";
-            this.labelControl21.Size = new System.Drawing.Size(306, 40);
-            this.labelControl21.TabIndex = 45;
-            this.labelControl21.Text = "One Time Discount:";
-            this.labelControl21.Visible = false;
             // 
             // txtcustaddressrcpt
             // 
@@ -271,20 +299,6 @@
             this.txtcustaddressrcpt.TabIndex = 36;
             this.txtcustaddressrcpt.Visible = false;
             // 
-            // lblperitemdiscountamount
-            // 
-            this.lblperitemdiscountamount.Appearance.Font = new System.Drawing.Font("Century Gothic", 12.25F);
-            this.lblperitemdiscountamount.Appearance.ForeColor = System.Drawing.Color.Gold;
-            this.lblperitemdiscountamount.Appearance.Options.UseFont = true;
-            this.lblperitemdiscountamount.Appearance.Options.UseForeColor = true;
-            this.lblperitemdiscountamount.Location = new System.Drawing.Point(423, 1308);
-            this.lblperitemdiscountamount.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.lblperitemdiscountamount.Name = "lblperitemdiscountamount";
-            this.lblperitemdiscountamount.Size = new System.Drawing.Size(18, 40);
-            this.lblperitemdiscountamount.TabIndex = 44;
-            this.lblperitemdiscountamount.Text = "0";
-            this.lblperitemdiscountamount.Visible = false;
-            // 
             // txtcustnamercpt
             // 
             this.txtcustnamercpt.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -295,20 +309,6 @@
             this.txtcustnamercpt.Size = new System.Drawing.Size(416, 39);
             this.txtcustnamercpt.TabIndex = 35;
             this.txtcustnamercpt.Visible = false;
-            // 
-            // labelControl20
-            // 
-            this.labelControl20.Appearance.Font = new System.Drawing.Font("Century Gothic", 12.25F);
-            this.labelControl20.Appearance.ForeColor = System.Drawing.Color.White;
-            this.labelControl20.Appearance.Options.UseFont = true;
-            this.labelControl20.Appearance.Options.UseForeColor = true;
-            this.labelControl20.Location = new System.Drawing.Point(105, 1308);
-            this.labelControl20.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.labelControl20.Name = "labelControl20";
-            this.labelControl20.Size = new System.Drawing.Size(285, 40);
-            this.labelControl20.TabIndex = 43;
-            this.labelControl20.Text = "Per Item Discount:";
-            this.labelControl20.Visible = false;
             // 
             // lblotherdiscount
             // 
@@ -658,6 +658,62 @@
             this.labelControl3.TabIndex = 17;
             this.labelControl3.Text = "Order #:";
             // 
+            // lblonetimediscountamount
+            // 
+            this.lblonetimediscountamount.Appearance.Font = new System.Drawing.Font("Century Gothic", 12.25F);
+            this.lblonetimediscountamount.Appearance.ForeColor = System.Drawing.Color.Gold;
+            this.lblonetimediscountamount.Appearance.Options.UseFont = true;
+            this.lblonetimediscountamount.Appearance.Options.UseForeColor = true;
+            this.lblonetimediscountamount.Location = new System.Drawing.Point(441, 1355);
+            this.lblonetimediscountamount.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.lblonetimediscountamount.Name = "lblonetimediscountamount";
+            this.lblonetimediscountamount.Size = new System.Drawing.Size(18, 40);
+            this.lblonetimediscountamount.TabIndex = 46;
+            this.lblonetimediscountamount.Text = "0";
+            this.lblonetimediscountamount.Visible = false;
+            // 
+            // labelControl21
+            // 
+            this.labelControl21.Appearance.Font = new System.Drawing.Font("Century Gothic", 12.25F);
+            this.labelControl21.Appearance.ForeColor = System.Drawing.Color.White;
+            this.labelControl21.Appearance.Options.UseFont = true;
+            this.labelControl21.Appearance.Options.UseForeColor = true;
+            this.labelControl21.Location = new System.Drawing.Point(105, 1355);
+            this.labelControl21.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.labelControl21.Name = "labelControl21";
+            this.labelControl21.Size = new System.Drawing.Size(306, 40);
+            this.labelControl21.TabIndex = 45;
+            this.labelControl21.Text = "One Time Discount:";
+            this.labelControl21.Visible = false;
+            // 
+            // lblperitemdiscountamount
+            // 
+            this.lblperitemdiscountamount.Appearance.Font = new System.Drawing.Font("Century Gothic", 12.25F);
+            this.lblperitemdiscountamount.Appearance.ForeColor = System.Drawing.Color.Gold;
+            this.lblperitemdiscountamount.Appearance.Options.UseFont = true;
+            this.lblperitemdiscountamount.Appearance.Options.UseForeColor = true;
+            this.lblperitemdiscountamount.Location = new System.Drawing.Point(423, 1308);
+            this.lblperitemdiscountamount.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.lblperitemdiscountamount.Name = "lblperitemdiscountamount";
+            this.lblperitemdiscountamount.Size = new System.Drawing.Size(18, 40);
+            this.lblperitemdiscountamount.TabIndex = 44;
+            this.lblperitemdiscountamount.Text = "0";
+            this.lblperitemdiscountamount.Visible = false;
+            // 
+            // labelControl20
+            // 
+            this.labelControl20.Appearance.Font = new System.Drawing.Font("Century Gothic", 12.25F);
+            this.labelControl20.Appearance.ForeColor = System.Drawing.Color.White;
+            this.labelControl20.Appearance.Options.UseFont = true;
+            this.labelControl20.Appearance.Options.UseForeColor = true;
+            this.labelControl20.Location = new System.Drawing.Point(105, 1308);
+            this.labelControl20.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.labelControl20.Name = "labelControl20";
+            this.labelControl20.Size = new System.Drawing.Size(285, 40);
+            this.labelControl20.TabIndex = 43;
+            this.labelControl20.Text = "Per Item Discount:";
+            this.labelControl20.Visible = false;
+            // 
             // txtcustname
             // 
             this.txtcustname.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -850,7 +906,7 @@
             this.panel1.BackColor = System.Drawing.Color.Black;
             this.panel1.Controls.Add(this.pictureBox2);
             this.panel1.Location = new System.Drawing.Point(0, 6);
-            this.panel1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.panel1.Margin = new System.Windows.Forms.Padding(6);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(470, 177);
             this.panel1.TabIndex = 34;
@@ -1331,62 +1387,6 @@
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(2136, 1127);
             this.panel3.TabIndex = 11;
-            // 
-            // lblnaacdiscount
-            // 
-            this.lblnaacdiscount.Appearance.Font = new System.Drawing.Font("Century Gothic", 12.25F);
-            this.lblnaacdiscount.Appearance.ForeColor = System.Drawing.Color.Gold;
-            this.lblnaacdiscount.Appearance.Options.UseFont = true;
-            this.lblnaacdiscount.Appearance.Options.UseForeColor = true;
-            this.lblnaacdiscount.Location = new System.Drawing.Point(2388, 68);
-            this.lblnaacdiscount.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.lblnaacdiscount.Name = "lblnaacdiscount";
-            this.lblnaacdiscount.Size = new System.Drawing.Size(18, 40);
-            this.lblnaacdiscount.TabIndex = 50;
-            this.lblnaacdiscount.Text = "0";
-            this.lblnaacdiscount.Visible = false;
-            // 
-            // labelControl24
-            // 
-            this.labelControl24.Appearance.Font = new System.Drawing.Font("Century Gothic", 12.25F);
-            this.labelControl24.Appearance.ForeColor = System.Drawing.Color.White;
-            this.labelControl24.Appearance.Options.UseFont = true;
-            this.labelControl24.Appearance.Options.UseForeColor = true;
-            this.labelControl24.Location = new System.Drawing.Point(2110, 68);
-            this.labelControl24.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.labelControl24.Name = "labelControl24";
-            this.labelControl24.Size = new System.Drawing.Size(253, 40);
-            this.labelControl24.TabIndex = 49;
-            this.labelControl24.Text = "NAAC Discount:";
-            this.labelControl24.Visible = false;
-            // 
-            // lblmovdiscount
-            // 
-            this.lblmovdiscount.Appearance.Font = new System.Drawing.Font("Century Gothic", 12.25F);
-            this.lblmovdiscount.Appearance.ForeColor = System.Drawing.Color.Gold;
-            this.lblmovdiscount.Appearance.Options.UseFont = true;
-            this.lblmovdiscount.Appearance.Options.UseForeColor = true;
-            this.lblmovdiscount.Location = new System.Drawing.Point(2388, 115);
-            this.lblmovdiscount.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.lblmovdiscount.Name = "lblmovdiscount";
-            this.lblmovdiscount.Size = new System.Drawing.Size(18, 40);
-            this.lblmovdiscount.TabIndex = 52;
-            this.lblmovdiscount.Text = "0";
-            this.lblmovdiscount.Visible = false;
-            // 
-            // labelControl26
-            // 
-            this.labelControl26.Appearance.Font = new System.Drawing.Font("Century Gothic", 12.25F);
-            this.labelControl26.Appearance.ForeColor = System.Drawing.Color.White;
-            this.labelControl26.Appearance.Options.UseFont = true;
-            this.labelControl26.Appearance.Options.UseForeColor = true;
-            this.labelControl26.Location = new System.Drawing.Point(2110, 115);
-            this.labelControl26.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.labelControl26.Name = "labelControl26";
-            this.labelControl26.Size = new System.Drawing.Size(239, 40);
-            this.labelControl26.TabIndex = 51;
-            this.labelControl26.Text = "MOV Discount:";
-            this.labelControl26.Visible = false;
             // 
             // PointOfSale
             // 

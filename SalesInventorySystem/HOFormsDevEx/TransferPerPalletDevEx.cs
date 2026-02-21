@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using DevExpress.XtraEditors;
 using System.Data.SqlClient;
+using DevExpress.XtraReports.UI;
 
 namespace SalesInventorySystem.HOFormsDevEx
 {
@@ -64,10 +65,11 @@ namespace SalesInventorySystem.HOFormsDevEx
             {
                 source = "Commissary";
                 destination = "BigBlue";
-                isExist = Database.checkifExist("SELECT TOP(1) Branch FROM InventoryBigBlue " +
+                isExist = Database.checkifExist("SELECT TOP(1) Branch FROM Inventory " +
                     "WHERE ShipmentNo='" + txtshipmentno.Text + "' " +
                     "AND Description='" + txtproduct.Text + "' " +
                     "AND PalletNo='" + txtpalletno.Text + "'" +
+                     "AND isWarehouse=0 " +
                     "AND Branch='" + Login.assignedBranch + "' ORDER BY SequenceNumber");
             }
             else //transfer to comm
@@ -78,6 +80,7 @@ namespace SalesInventorySystem.HOFormsDevEx
                     "WHERE ShipmentNo='" + txtshipmentno.Text + "' " +
                     "AND Description='" + txtproduct.Text + "' " +
                     "AND PalletNo='" + txtpalletno.Text + "'" +
+                     "AND isWarehouse=1 " +
                     "AND Branch='" + Login.assignedBranch + "' ORDER BY SequenceNumber");
             }
             if (String.IsNullOrEmpty(txtdispatchno.Text))
@@ -107,13 +110,13 @@ namespace SalesInventorySystem.HOFormsDevEx
             {
                 //clear();
                 Database.displaySearchlookupEdit("SELECT distinct ShipmentNo FROM Inventory " +
-                    "WHERE Available > 0 and isStock=1 order by ShipmentNo ASC", txtshipmentno, "ShipmentNo", "ShipmentNo");
+                    "WHERE Available > 0 and isWarehouse=1 order by ShipmentNo ASC", txtshipmentno, "ShipmentNo", "ShipmentNo");
             }
             else
             {
                 //clear();
-                Database.displaySearchlookupEdit("SELECT distinct ShipmentNo FROM InventoryBigBlue " +
-                    "WHERE Available > 0 and isStock=1 order by ShipmentNo ASC", txtshipmentno, "ShipmentNo", "ShipmentNo");
+                Database.displaySearchlookupEdit("SELECT distinct ShipmentNo FROM Inventory " +
+                    "WHERE Available > 0 and isWarehouse=0 order by ShipmentNo ASC", txtshipmentno, "ShipmentNo", "ShipmentNo");
             }
         }
         void clear()
@@ -137,17 +140,17 @@ namespace SalesInventorySystem.HOFormsDevEx
                     "WHERE ShipmentNo='" + txtshipmentno.Text + "' " +
                     "And Product='" + var.ToString() + "' " +
                     "AND Available > 0 " +
-                    "AND isStock=1 " +
+                    "AND isWarehouse = 1 " +
                     "order by PalletNo ASC", "PalletNo", txtpalletno);
             }
             else
             {
                 Database.displayDevComboBoxItems("SELECT distinct PalletNo " +
-                         "FROM InventoryBigBlue " +
+                         "FROM Inventory " +
                          "WHERE ShipmentNo='" + txtshipmentno.Text + "' " +
                          "And Product='" + var.ToString() + "' " +
                          "AND Available > 0 " +
-                         "AND isStock=1 " +
+                         "AND isWarehouse=0 " +
                          "order by PalletNo ASC", "PalletNo", txtpalletno);
             }
         }
@@ -168,34 +171,32 @@ namespace SalesInventorySystem.HOFormsDevEx
                     source = "Commissary";
                     destination = "BigBlue";
                     sp_Transfer(source, destination, "SAVE");
-                    for (int i = 0; i <= gridView1.RowCount - 1; i++)
-                    {
-                        //source is commissary
-                        Database.ExecuteQuery("Update Inventory SET Available=0" +
-                            ",isStock=0" +
-                            ",ReferenceCode='Trans2BigBluePPallet'" +
-                            ",LastMovementDate='" + DateTime.Now.ToShortDateString() + "' " +
-                            "WHERE Barcode='" + gridView1.GetRowCellValue(i, "Barcode").ToString() + "' " +
-                            "and ShipmentNo='" + txtshipmentno.Text + "' " +
-                            "and PalletNo='" + gridView1.GetRowCellValue(i, "PalletNo").ToString() + "'" +
-                            "and SequenceNumber='" + gridView1.GetRowCellValue(i, "SequenceReferenceNumber").ToString() + "' ");
-                    }
+                    //for (int i = 0; i <= gridView1.RowCount - 1; i++)
+                    //{
+                    //    //source is commissary
+                    //    Database.ExecuteQuery("Update Inventory SET isWarehouse=0" +
+                    //        ",ReferenceCode='Trans2BigBluePPallet'" +
+                    //        ",LastMovementDate='" + DateTime.Now.ToShortDateString() + "' " +
+                    //        "WHERE Barcode='" + gridView1.GetRowCellValue(i, "Barcode").ToString() + "' " +
+                    //        "and ShipmentNo='" + txtshipmentno.Text + "' " +
+                    //        "and PalletNo='" + gridView1.GetRowCellValue(i, "PalletNo").ToString() + "'" +
+                    //        "and SequenceNumber='" + gridView1.GetRowCellValue(i, "SequenceReferenceNumber").ToString() + "' ");
+                    //}
                 }
                 else //transfer to commissary
                 {
                     source = "BigBlue";
                     destination = "Commissary";
                     sp_Transfer(source, destination, "SAVE");
-                    for (int i = 0; i <= gridView1.RowCount - 1; i++)
-                    {
-                        //source is biglbue
-                        Database.ExecuteQuery("Update InventoryBigBlue SET Available=0" +
-                            ",isStock=0" +
-                            ",ReferenceCode='Trans2ComPPallet'" +
-                            ",LastMovementDate='" + DateTime.Now.ToShortDateString() + "' " +
-                            "WHERE Barcode='" + gridView1.GetRowCellValue(i, "Barcode").ToString() + "' " +
-                            "and SequenceNumber='" + gridView1.GetRowCellValue(i, "SequenceReferenceNumber").ToString() + "' ");
-                    }
+                    //for (int i = 0; i <= gridView1.RowCount - 1; i++)
+                    //{
+                    //    //source is biglbue
+                    //    Database.ExecuteQuery("Update Inventory SET isWarehouse=1" +
+                    //        ",ReferenceCode='Trans2ComPPallet'" +
+                    //        ",LastMovementDate='" + DateTime.Now.ToShortDateString() + "' " +
+                    //        "WHERE Barcode='" + gridView1.GetRowCellValue(i, "Barcode").ToString() + "' " +
+                    //        "and SequenceNumber='" + gridView1.GetRowCellValue(i, "SequenceReferenceNumber").ToString() + "' ");
+                    //}
                 }
 
             }
@@ -241,14 +242,95 @@ namespace SalesInventorySystem.HOFormsDevEx
             if (radtobigblue.Checked == true)
             {
                 Database.displaySearchlookupEdit("SELECT DISTINCT Product,Description FROM Inventory " +
-                    "WHERE ShipmentNo='" + txtshipmentno.Text + "' " +
+                    "WHERE ShipmentNo='" + txtshipmentno.Text + "' and isWarehouse=1 and Available > 0 " +
                     "ORDER BY Description ASC ", txtproduct, "Description", "Description");
             }
             else
             {
-                Database.displaySearchlookupEdit("SELECT DISTINCT Product,Description FROM InventoryBigBlue " +
-                   "WHERE ShipmentNo='" + txtshipmentno.Text + "' " +
+                Database.displaySearchlookupEdit("SELECT DISTINCT Product,Description FROM Inventory " +
+                   "WHERE ShipmentNo='" + txtshipmentno.Text + "' and isWarehouse=0 and Available > 0 " +
                    "ORDER BY Description ASC ", txtproduct, "Description", "Description");
+            }
+        }
+
+        void BigBlueTemplate()
+        {
+            string companyname = Database.getSingleQuery("ReportHeaderSettings", "ReportName='CustomerRequest'", "Heading");
+            string imagewidth = Database.getSingleQuery("ReportHeaderSettings", "ReportName='CustomerRequest'", "ImageWidth");
+            string imageheight = Database.getSingleQuery("ReportHeaderSettings", "ReportName='CustomerRequest'", "ImageHeight");
+            string caption1 = Database.getSingleQuery("ReportHeaderSettings", "ReportName='CustomerRequest'", "Caption1");
+            string caption2 = Database.getSingleQuery("ReportHeaderSettings", "ReportName='CustomerRequest'", "Caption2");
+
+            //DevExReportTemplate.CustomerRequest xct = new DevExReportTemplate.CustomerRequest();
+            DevExReportTemplate.TransferInventory xct = new DevExReportTemplate.TransferInventory();
+            xct.Landscape = false;
+            xct.Landscape = false;
+            xct.PaperKind = System.Drawing.Printing.PaperKind.A4;
+            xct.Margins = new System.Drawing.Printing.Margins(100, 100, 100, 100);
+
+
+            xct.xrdate.Text = DateTime.Now.ToShortDateString();
+            xct.xrpreparedby.Text = Login.Fullname;
+            xct.xrtransfertype.Text = "Transfer to BigBlue";
+            xct.xrdispatchno.Text = txtdispatchno.Text;
+
+            //xct.xrdateneeded.Text = DateTime.Now.ToShortDateString();
+            //xct.xrrequestedby.Text = Login.Fullname;
+            //xct.xrdaterequest.Text = String.Format("{0:MM/dd/yyyy HH:mm:ss}", DateTime.Now);
+            //xct.xrdateneeded.Text = String.Format("{0:MM/dd/yyyy HH:mm:ss}", dateTimePicker1.Value);
+
+
+            xct.Bands[BandKind.Detail].Controls.Add(HelperFunction.CopyGridControl(this.gridControl1));
+            xct.Bands[BandKind.Detail].Font = new System.Drawing.Font("Tahoma", 10);
+            ReportPrintTool report = new ReportPrintTool(xct);
+            report.ShowRibbonPreviewDialog();
+        }
+
+        void CommissaryTemplate()
+        {
+            string companyname = Database.getSingleQuery("ReportHeaderSettings", "ReportName='StorageReceivingForm'", "Heading");
+            string imagewidth = Database.getSingleQuery("ReportHeaderSettings", "ReportName='StorageReceivingForm'", "ImageWidth");
+            string imageheight = Database.getSingleQuery("ReportHeaderSettings", "ReportName='StorageReceivingForm'", "ImageHeight");
+            string caption1 = Database.getSingleQuery("ReportHeaderSettings", "ReportName='StorageReceivingForm'", "Caption1");
+            string caption2 = Database.getSingleQuery("ReportHeaderSettings", "ReportName='StorageReceivingForm'", "Caption2");
+
+            DevExReportTemplate.StorageReceivingForm xct = new DevExReportTemplate.StorageReceivingForm();
+
+            Classes.Utilities.GetImageDevEx(xct.xrPictureBox1, "ReportHeaderSettings", "ReportName='StorageReceivingForm'", "ImageLogo");
+            xct.xrPictureBox1.SizeF = new SizeF(float.Parse(imagewidth), float.Parse(imageheight));
+            xct.xrcompanyname.Text = companyname;
+            xct.xrcaption1.Text = caption1;
+            xct.xrcaption2.Text = caption2;
+
+            xct.Landscape = false;
+            xct.PaperKind = System.Drawing.Printing.PaperKind.A4;
+            xct.Margins = new System.Drawing.Printing.Margins(100, 100, 100, 100);
+            xct.xrdate.Text = DateTime.Now.ToShortDateString();
+            xct.xrpreparedby.Text = Login.Fullname;
+            xct.xrtime.Text = String.Format("{0:HH:mm:ss}", DateTime.Now);
+            //xct.xrdateneeded.Text = String.Format("{0:MM/dd/yyyy HH:mm:ss}", dateTimePicker1.Value);
+            //xct.Font = new System.Drawing.Font("Arial Narrow", 8);
+
+            xct.Bands[BandKind.Detail].Controls.Add(HelperFunction.CopyGridControl(this.gridControl1));
+            xct.Bands[BandKind.Detail].Font = new System.Drawing.Font("Tahoma", 10);
+            ReportPrintTool report = new ReportPrintTool(xct);
+            report.ShowRibbonPreviewDialog();
+        }
+
+        private void btnprint_Click(object sender, EventArgs e)
+        {
+            if (gridView1.RowCount <= 0)
+            {
+                XtraMessageBox.Show("No Data to print");
+                return;
+            }
+            if (radtobigblue.Checked == true)
+            {
+                BigBlueTemplate();
+            }
+            else
+            {
+                CommissaryTemplate();
             }
         }
     }

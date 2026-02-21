@@ -27,15 +27,17 @@ namespace SalesInventorySystem.HOFormsDevEx
 
         void extract()
         {
-            Database.display("SELECT ProductCategoryCode as CategoryCode,ProductCode" +
-                ",Description" +
-                ",Barcode" +
-                ",'0' as Cost " +
-                "FROM Products WHERE BranchCode='" + Login.assignedBranch + "' " +
-                "AND ProductCode not in (SELECT ProductCode " +
-                                        "FROM InventoryCost " +
-                                        "WHERE SupplierID='"+txtsupplierid.Text+"') " +
-                "AND (Description like '%" + txtsearchprod.Text.Trim() + "%' OR Barcode like '%" + txtsearchprod.Text.Trim() + "%') ", gridControl1, gridView1);
+            //Database.display("SELECT ProductCategoryCode as CategoryCode,ProductCode" +
+            //    ",Description" +
+            //    ",Barcode" +
+            //    ",'0' as Cost " +
+            //    "FROM Products WHERE BranchCode='" + Login.assignedBranch + "' " +
+            //    "AND ProductCode not in (SELECT ProductCode " +
+            //                            "FROM InventoryCost " +
+            //                            "WHERE SupplierID='"+txtsupplierid.Text+"') " +
+            //    "AND (Description like '%" + txtsearchprod.Text.Trim() + "%' OR Barcode like '%" + txtsearchprod.Text.Trim() + "%') ", gridControl1, gridView1);
+            Database.display($"SELECT * FROM func_InventoryCostList('{Login.assignedBranch}','{txtsupplierid.Text}','{txtsearchprod.Text}')", gridControl1, gridView1);
+            gridView1.Columns[0].Visible = false;
         }
         void save()
         {

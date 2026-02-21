@@ -27,11 +27,14 @@ namespace SalesInventorySystem
 
         private void display()
         {
-            
-            Database.display("SELECT * FROM view_PrimalCutInventory ", gridControl1, gridView1);
-            gridView1.Columns[0].Visible = false;
+            //string query = "SELECT * FROM view_PrimalCutInventory";
+            //HelperFunction.ShowWaitAndDisplay(query, gridControl1, gridView1, "Please wait", "Populating data into the database...");
+            //gridView1.Focus();
+           
 
-            if(Convert.ToBoolean(Login.isglobalAdmin) == true)
+            Database.display("SELECT * FROM view_PrimalCutInventory", gridControl1, gridView1);
+            gridView1.Columns[0].Visible = false;
+            if (Convert.ToBoolean(Login.isglobalAdmin) == true)
             {
 
                 gridView1.Columns["Cost"].Visible = true;

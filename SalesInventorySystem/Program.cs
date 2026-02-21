@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
+using DevExpress.LookAndFeel;
 using DevExpress.UserSkins;
 using DevExpress.XtraEditors;
 //using System.Windows.Forms.VisualStyles.VisualStyleElement;
@@ -24,10 +25,12 @@ namespace SalesInventorySystem
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
                 DevExpress.UserSkins.BonusSkins.Register();
+                UserLookAndFeel.Default.SetSkinStyle(SkinStyle.Office2019White);
                 foreach (Form form in Application.OpenForms) //HotelManagement.HotelFrmMain()
                 {
                     if (form.GetType() == typeof(Login))
-                    //if (form.GetType() == typeof(Practice))
+
+                        //if (form.GetType() == typeof(RibbonForm2))
                     {
 
                         form.Activate();
@@ -47,7 +50,7 @@ namespace SalesInventorySystem
 
                 //Application.Run(new Practice());
                 Application.Run(new Login());
-                //Application.Run(new PivotPractice());
+                //Application.Run(new RibbonForm2());
                 //Application.Run(new Main());
             }
             catch (Exception ex)

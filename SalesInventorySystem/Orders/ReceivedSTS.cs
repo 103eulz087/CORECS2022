@@ -28,7 +28,7 @@ namespace SalesInventorySystem.Orders
 
             datefrom.Text = HelperFunction.GetPreviousMonthSameDay(DateTime.Today).ToShortDateString();
             dateto.Text = DateTime.Today.ToShortDateString();
-            display();
+            
         }
 
         void display()
@@ -156,10 +156,29 @@ namespace SalesInventorySystem.Orders
             //addbrnchinv.txtpono.Text = gridViewForReceiving.GetRowCellValue(gridViewForReceiving.FocusedRowHandle, "PONumber").ToString();
             //Database.display("SELECT ProductNo,ProductName,QtyDelivered,Cost,SellingPrice FROM DeliveryDetails WHERE PONumber='" + addbrnchinv.txtpono.Text + "' ", addbrnchinv.gridControl2, addbrnchinv.gridView2);
           
+           
+        }
+
+        private void btnforrcvng_Click(object sender, EventArgs e)
+        {
+            //Database.display("SELECT * FROM view_ForReceivingSTS WHERE InitiatingBranch='" + Login.assignedBranch + "' and Status='FOR DELIVERY' and EffectivityDate between '" + txtdatefromforrcvng.Text + "' and '" + txtdatetoforrcvng.Text + "'  ORDER BY PONumber DESC", gridControlForReceiving, gridViewForReceiving);
+            string query = "SELECT * FROM view_ForReceivingSTS WHERE InitiatingBranch='" + Login.assignedBranch + "' and Status='FOR DELIVERY' and EffectivityDate between '" + txtdatefromforrcvng.Text + "' and '" + txtdatetoforrcvng.Text + "'  ORDER BY PONumber DESC ";
+            HelperFunction.ShowWaitAndDisplay(query, gridControlForReceiving, gridViewForReceiving, "Please wait", "Populating data into the database...");
+            gridViewForReceiving.Focus();
+        }
+
+        private void gridControlForReceiving_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+                contextMenuStripForReceiving.Show(gridControlForReceiving, e.Location);
+        }
+
+        private void showForReceivingItemsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
             string pono;
             pono = gridViewForReceiving.GetRowCellValue(gridViewForReceiving.FocusedRowHandle, "PONumber").ToString();
             HOFormsDevEx.ReceivedSTSBatchMode askdh = new HOFormsDevEx.ReceivedSTSBatchMode();
-        
+
             askdh.txtshipmentno.Text = pono;
             //Database.display("SELECT ProductNo,ProductName,BarcodeNo,Cost,QtyDelivered,QtyDelivered as ActualQty FROM DeliveryDetails with(nolock) WHERE PONumber='" + pono + "' ", askdh.gridControl1, askdh.gridView1);
             string query = "SELECT ProductNo,ProductName,BarcodeNo,Cost,QtyDelivered,QtyDelivered as ActualQty FROM DeliveryDetails with(nolock) WHERE PONumber='" + pono + "'  ";
@@ -172,14 +191,6 @@ namespace SalesInventorySystem.Orders
                 HOFormsDevEx.ReceivedSTSBatchMode.isdone = false;
                 askdh.Dispose();
             }
-        }
-
-        private void btnforrcvng_Click(object sender, EventArgs e)
-        {
-            //Database.display("SELECT * FROM view_ForReceivingSTS WHERE InitiatingBranch='" + Login.assignedBranch + "' and Status='FOR DELIVERY' and EffectivityDate between '" + txtdatefromforrcvng.Text + "' and '" + txtdatetoforrcvng.Text + "'  ORDER BY PONumber DESC", gridControlForReceiving, gridViewForReceiving);
-            string query = "SELECT * FROM view_ForReceivingSTS WHERE InitiatingBranch='" + Login.assignedBranch + "' and Status='FOR DELIVERY' and EffectivityDate between '" + txtdatefromforrcvng.Text + "' and '" + txtdatetoforrcvng.Text + "'  ORDER BY PONumber DESC ";
-            HelperFunction.ShowWaitAndDisplay(query, gridControlForReceiving, gridViewForReceiving, "Please wait", "Populating data into the database...");
-            gridViewForReceiving.Focus();
         }
     }
 }

@@ -10,7 +10,7 @@ using System.Windows.Forms;
 using DevExpress.XtraEditors;
 using System.Data.SqlClient;
 
-namespace SalesInventorySystem.HOForms
+namespace SalesInventorySystem.HOFormsDevEx
 {
     public partial class CONFIRMPO : DevExpress.XtraEditors.XtraForm
     {

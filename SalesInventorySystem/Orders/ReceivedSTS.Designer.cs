@@ -28,12 +28,19 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ReceivedSTS));
             this.tabMain = new DevExpress.XtraTab.XtraTabControl();
             this.tabForReceiving = new DevExpress.XtraTab.XtraTabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.gridControlForReceiving = new DevExpress.XtraGrid.GridControl();
             this.gridViewForReceiving = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.btnforrcvng = new DevExpress.XtraEditors.SimpleButton();
+            this.txtdatetoforrcvng = new System.Windows.Forms.DateTimePicker();
+            this.txtdatefromforrcvng = new System.Windows.Forms.DateTimePicker();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
             this.tabMyRequest = new DevExpress.XtraTab.XtraTabPage();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.gridControlMyReq = new DevExpress.XtraGrid.GridControl();
@@ -45,25 +52,22 @@
             this.dateto = new System.Windows.Forms.DateTimePicker();
             this.datefrom = new System.Windows.Forms.DateTimePicker();
             this.label7 = new System.Windows.Forms.Label();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.btnforrcvng = new DevExpress.XtraEditors.SimpleButton();
-            this.txtdatetoforrcvng = new System.Windows.Forms.DateTimePicker();
-            this.txtdatefromforrcvng = new System.Windows.Forms.DateTimePicker();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
+            this.contextMenuStripForReceiving = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.showForReceivingItemsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.tabMain)).BeginInit();
             this.tabMain.SuspendLayout();
             this.tabForReceiving.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControlForReceiving)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridViewForReceiving)).BeginInit();
+            this.groupBox3.SuspendLayout();
             this.tabMyRequest.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControlMyReq)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridViewMyReq)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl7)).BeginInit();
             this.panelControl7.SuspendLayout();
-            this.groupBox3.SuspendLayout();
+            this.contextMenuStripForReceiving.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabMain
@@ -118,6 +122,7 @@
             this.gridControlForReceiving.TabIndex = 3;
             this.gridControlForReceiving.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewForReceiving});
+            this.gridControlForReceiving.MouseUp += new System.Windows.Forms.MouseEventHandler(this.gridControlForReceiving_MouseUp);
             // 
             // gridViewForReceiving
             // 
@@ -135,6 +140,78 @@
             this.gridViewForReceiving.OptionsView.RowAutoHeight = true;
             this.gridViewForReceiving.OptionsView.ShowFooter = true;
             this.gridViewForReceiving.DoubleClick += new System.EventHandler(this.gridViewForReceiving_DoubleClick);
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.btnforrcvng);
+            this.groupBox3.Controls.Add(this.txtdatetoforrcvng);
+            this.groupBox3.Controls.Add(this.txtdatefromforrcvng);
+            this.groupBox3.Controls.Add(this.label5);
+            this.groupBox3.Controls.Add(this.label6);
+            this.groupBox3.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupBox3.Font = new System.Drawing.Font("Tahoma", 7.75F);
+            this.groupBox3.Location = new System.Drawing.Point(6, 33);
+            this.groupBox3.Margin = new System.Windows.Forms.Padding(6);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Padding = new System.Windows.Forms.Padding(6);
+            this.groupBox3.Size = new System.Drawing.Size(2534, 96);
+            this.groupBox3.TabIndex = 8;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Filter Date";
+            // 
+            // btnforrcvng
+            // 
+            this.btnforrcvng.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnforrcvng.ImageOptions.Image")));
+            this.btnforrcvng.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
+            this.btnforrcvng.Location = new System.Drawing.Point(678, 33);
+            this.btnforrcvng.Margin = new System.Windows.Forms.Padding(6);
+            this.btnforrcvng.Name = "btnforrcvng";
+            this.btnforrcvng.Size = new System.Drawing.Size(172, 44);
+            this.btnforrcvng.TabIndex = 7;
+            this.btnforrcvng.Text = "Generate";
+            this.btnforrcvng.Click += new System.EventHandler(this.btnforrcvng_Click);
+            // 
+            // txtdatetoforrcvng
+            // 
+            this.txtdatetoforrcvng.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold);
+            this.txtdatetoforrcvng.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.txtdatetoforrcvng.Location = new System.Drawing.Point(432, 33);
+            this.txtdatetoforrcvng.Margin = new System.Windows.Forms.Padding(6);
+            this.txtdatetoforrcvng.Name = "txtdatetoforrcvng";
+            this.txtdatetoforrcvng.Size = new System.Drawing.Size(232, 39);
+            this.txtdatetoforrcvng.TabIndex = 3;
+            // 
+            // txtdatefromforrcvng
+            // 
+            this.txtdatefromforrcvng.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold);
+            this.txtdatefromforrcvng.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.txtdatefromforrcvng.Location = new System.Drawing.Point(116, 33);
+            this.txtdatefromforrcvng.Margin = new System.Windows.Forms.Padding(6);
+            this.txtdatefromforrcvng.Name = "txtdatefromforrcvng";
+            this.txtdatefromforrcvng.Size = new System.Drawing.Size(232, 39);
+            this.txtdatefromforrcvng.TabIndex = 2;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold);
+            this.label5.Location = new System.Drawing.Point(364, 42);
+            this.label5.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(55, 31);
+            this.label5.TabIndex = 1;
+            this.label5.Text = "To:";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold);
+            this.label6.Location = new System.Drawing.Point(16, 42);
+            this.label6.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(90, 31);
+            this.label6.TabIndex = 0;
+            this.label6.Text = "From:";
             // 
             // tabMyRequest
             // 
@@ -269,77 +346,20 @@
             this.label7.TabIndex = 5;
             this.label7.Text = "To:";
             // 
-            // groupBox3
+            // contextMenuStripForReceiving
             // 
-            this.groupBox3.Controls.Add(this.btnforrcvng);
-            this.groupBox3.Controls.Add(this.txtdatetoforrcvng);
-            this.groupBox3.Controls.Add(this.txtdatefromforrcvng);
-            this.groupBox3.Controls.Add(this.label5);
-            this.groupBox3.Controls.Add(this.label6);
-            this.groupBox3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBox3.Font = new System.Drawing.Font("Tahoma", 7.75F);
-            this.groupBox3.Location = new System.Drawing.Point(6, 33);
-            this.groupBox3.Margin = new System.Windows.Forms.Padding(6);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Padding = new System.Windows.Forms.Padding(6);
-            this.groupBox3.Size = new System.Drawing.Size(2534, 96);
-            this.groupBox3.TabIndex = 8;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Filter Date";
+            this.contextMenuStripForReceiving.ImageScalingSize = new System.Drawing.Size(32, 32);
+            this.contextMenuStripForReceiving.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.showForReceivingItemsToolStripMenuItem});
+            this.contextMenuStripForReceiving.Name = "contextMenuStripForReceiving";
+            this.contextMenuStripForReceiving.Size = new System.Drawing.Size(360, 84);
             // 
-            // btnforrcvng
+            // showForReceivingItemsToolStripMenuItem
             // 
-            this.btnforrcvng.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnforapproval.ImageOptions.Image")));
-            this.btnforrcvng.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnforrcvng.Location = new System.Drawing.Point(678, 33);
-            this.btnforrcvng.Margin = new System.Windows.Forms.Padding(6);
-            this.btnforrcvng.Name = "btnforrcvng";
-            this.btnforrcvng.Size = new System.Drawing.Size(172, 44);
-            this.btnforrcvng.TabIndex = 7;
-            this.btnforrcvng.Text = "Generate";
-            this.btnforrcvng.Click += new System.EventHandler(this.btnforrcvng_Click);
-            // 
-            // txtdatetoforrcvng
-            // 
-            this.txtdatetoforrcvng.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold);
-            this.txtdatetoforrcvng.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.txtdatetoforrcvng.Location = new System.Drawing.Point(432, 33);
-            this.txtdatetoforrcvng.Margin = new System.Windows.Forms.Padding(6);
-            this.txtdatetoforrcvng.Name = "txtdatetoforrcvng";
-            this.txtdatetoforrcvng.Size = new System.Drawing.Size(232, 39);
-            this.txtdatetoforrcvng.TabIndex = 3;
-            // 
-            // txtdatefromforrcvng
-            // 
-            this.txtdatefromforrcvng.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold);
-            this.txtdatefromforrcvng.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.txtdatefromforrcvng.Location = new System.Drawing.Point(116, 33);
-            this.txtdatefromforrcvng.Margin = new System.Windows.Forms.Padding(6);
-            this.txtdatefromforrcvng.Name = "txtdatefromforrcvng";
-            this.txtdatefromforrcvng.Size = new System.Drawing.Size(232, 39);
-            this.txtdatefromforrcvng.TabIndex = 2;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold);
-            this.label5.Location = new System.Drawing.Point(364, 42);
-            this.label5.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(55, 31);
-            this.label5.TabIndex = 1;
-            this.label5.Text = "To:";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold);
-            this.label6.Location = new System.Drawing.Point(16, 42);
-            this.label6.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(90, 31);
-            this.label6.TabIndex = 0;
-            this.label6.Text = "From:";
+            this.showForReceivingItemsToolStripMenuItem.Name = "showForReceivingItemsToolStripMenuItem";
+            this.showForReceivingItemsToolStripMenuItem.Size = new System.Drawing.Size(359, 36);
+            this.showForReceivingItemsToolStripMenuItem.Text = "Show for Receiving Items";
+            this.showForReceivingItemsToolStripMenuItem.Click += new System.EventHandler(this.showForReceivingItemsToolStripMenuItem_Click);
             // 
             // ReceivedSTS
             // 
@@ -358,6 +378,8 @@
             this.groupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridControlForReceiving)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridViewForReceiving)).EndInit();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.tabMyRequest.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridControlMyReq)).EndInit();
@@ -365,8 +387,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.panelControl7)).EndInit();
             this.panelControl7.ResumeLayout(false);
             this.panelControl7.PerformLayout();
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
+            this.contextMenuStripForReceiving.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -395,5 +416,7 @@
         private System.Windows.Forms.DateTimePicker txtdatefromforrcvng;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStripForReceiving;
+        private System.Windows.Forms.ToolStripMenuItem showForReceivingItemsToolStripMenuItem;
     }
 }
