@@ -11079,3 +11079,6 @@ C:\Users\avanc\Downloads\CORECS2022\SalesInventorySystem\obj\Debug\SalesInventor
 C:\Users\avanc\Downloads\CORECS2022\SalesInventorySystem\obj\Debug\SalesInventorySystem.HOFormsDevEx.TransferPerPalletDevExFixed.resources
 C:\Users\avanc\Downloads\CORECS2022\SalesInventorySystem\obj\Debug\SalesInventorySystem.csprojAssemblyReference.cache
 C:\Users\avanc\Downloads\CORECS2022\SalesInventorySystem\obj\Debug\SalesInventorySystem.HOFormsDevEx.TransferByBarcode.resources
+C:\Users\avanc\Downloads\CORECS2022\SalesInventorySystem\obj\Debug\SalesInventorySystem.HOFormsDevEx.PrimalCutCosting.resources
+C:\Users\avanc\Downloads\CORECS2022\SalesInventorySystem\obj\Debug\SalesInventorySystem.HOFormsDevEx.AddPrimalCutDevEx.resources
+C:\Users\avanc\Downloads\CORECS2022\SalesInventorySystem\obj\Debug\SalesInventorySystem.Reporting.BranchInventoryProductSummary.resources

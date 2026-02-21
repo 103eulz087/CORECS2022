@@ -99,6 +99,7 @@
             this.btnprint.Size = new System.Drawing.Size(186, 97);
             this.btnprint.TabIndex = 54;
             this.btnprint.Text = "Print";
+            this.btnprint.Click += new System.EventHandler(this.btnprint_Click);
             // 
             // panelControl1
             // 
@@ -256,7 +257,7 @@
             // cancelLineToolStripMenuItem
             // 
             this.cancelLineToolStripMenuItem.Name = "cancelLineToolStripMenuItem";
-            this.cancelLineToolStripMenuItem.Size = new System.Drawing.Size(300, 36);
+            this.cancelLineToolStripMenuItem.Size = new System.Drawing.Size(212, 36);
             this.cancelLineToolStripMenuItem.Text = "Cancel Line";
             this.cancelLineToolStripMenuItem.Click += new System.EventHandler(this.cancelLineToolStripMenuItem_Click);
             // 

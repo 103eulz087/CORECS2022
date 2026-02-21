@@ -2473,6 +2473,7 @@
             this.btnInventoryPerBranch.Id = 211;
             this.btnInventoryPerBranch.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("btnInventoryPerBranch.ImageOptions.LargeImage")));
             this.btnInventoryPerBranch.Name = "btnInventoryPerBranch";
+            this.btnInventoryPerBranch.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
             this.btnInventoryPerBranch.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnInventoryPerBranch_ItemClick);
             // 
             // btnCashierSalesCollectionSummary

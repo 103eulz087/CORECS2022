@@ -122,6 +122,11 @@ namespace SalesInventorySystem.HOFormsDevEx
                 btnadd.PerformClick();
         }
 
+        private void btnprint_Click(object sender, EventArgs e)
+        {
+
+        }
+
         private void CommitBatch()
         {
             if (gridView1.RowCount == 0)

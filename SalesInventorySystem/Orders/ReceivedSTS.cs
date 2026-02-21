@@ -103,7 +103,7 @@ namespace SalesInventorySystem.Orders
 
                 Orders.STSForApprovalDetails podetails = new Orders.STSForApprovalDetails();
                 //Database.display("SELECT * FROM view_TransferOrderDetails WHERE PONumber = '" + gridViewMyReq.GetRowCellValue(gridViewMyReq.FocusedRowHandle,"PONumber").ToString() + "' ORDER BY SeqNo", podetails.gridControl1, podetails.gridView1);
-                Database.display($"SELECT * FROM funcview_TransferOrderDetailsSTS('{Login.assignedBranch}') WHERE PONumber = '{ gridViewMyReq.GetRowCellValue(gridViewMyReq.FocusedRowHandle,"PONumber").ToString() }' ", podetails.gridControl1, podetails.gridView1);
+                Database.display($"SELECT * FROM funcview_TransferOrderDetailsSTS('{Login.assignedBranch}','{gridViewMyReq.GetRowCellValue(gridViewMyReq.FocusedRowHandle, "PONumber").ToString()}')  ", podetails.gridControl1, podetails.gridView1);
                 podetails.txtpono.Text = gridViewMyReq.GetRowCellValue(gridViewMyReq.FocusedRowHandle, "PONumber").ToString();
                 GridView view = podetails.gridControl1.FocusedView as GridView;
                 view.SortInfo.ClearAndAddRange(new GridColumnSortInfo[] {
@@ -184,7 +184,9 @@ namespace SalesInventorySystem.Orders
             askdh.txtshipmentno.Text = pono;
             //Database.display("SELECT ProductNo,ProductName,BarcodeNo,Cost,QtyDelivered,QtyDelivered as ActualQty FROM DeliveryDetails with(nolock) WHERE PONumber='" + pono + "' ", askdh.gridControl1, askdh.gridView1);
             string query = "SELECT ProductNo,ProductName,BarcodeNo,Cost,QtyDelivered,QtyDelivered as ActualQty FROM DeliveryDetails with(nolock) WHERE PONumber='" + pono + "'  ";
-            HelperFunction.ShowWaitAndDisplay(query, askdh.gridControl1, askdh.gridView1, "Please wait", "Populating data into the database...");
+            //HelperFunction.ShowWaitAndDisplay(query, askdh.gridControl1, askdh.gridView1, "Please wait", "Populating data into the database...");
+            HelperFunction.ShowWaitAndDisplay(query, askdh.gridControlRcvd, askdh.gridViewRcvd, "Please wait", "Populating data into the database...");
+
             askdh.gridView1.Focus();
             askdh.ShowDialog(this);
             if (HOFormsDevEx.ReceivedSTSBatchMode.isdone == true)

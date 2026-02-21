@@ -195,12 +195,7 @@ namespace SalesInventorySystem.Orders
             {
                 Orders.SearchProductBatchMode orderko = new SearchProductBatchMode();
                 orderko.txtpono.Text = textEdit1.Text;
-                 string query = "SELECT ProductCode,Description,'0' as Quantity,' ' as Remarks " +
-                "FROM dbo.Products with(nolock) " +
-                "WHERE BranchCode='" + Login.assignedBranch + "' ";
-           
-            HelperFunction.ShowWaitAndDisplay(query, gridControl1, gridView1, "Please wait", "Populating data into the database...");
-            gridView1.Focus();
+                
                 orderko.ShowDialog(this);
                 if (Orders.SearchProductBatchMode.isdone == true)
                 {

@@ -18,6 +18,7 @@ namespace SalesInventorySystem.Orders
         HashSet<string> selectedProductCodes = new HashSet<string>();
         //List<string> selectedProductCodes = new List<string>();
         public static bool isdone = false;
+        object prodcatid = null;
         public SearchProductBatchMode()
         {
             InitializeComponent();
@@ -34,6 +35,7 @@ namespace SalesInventorySystem.Orders
         private void SearchProductBatchMode_Load(object sender, EventArgs e)
         {
             txtsearchprod.Focus();
+            loadCategory();
             populateRepositoryMetrics();
         }
         void populateRepositoryMetrics()
@@ -188,7 +190,7 @@ namespace SalesInventorySystem.Orders
 
                     string description = gridView1.GetRowCellValue(rowHandle, "Description").ToString();
                     string quantity = gridView1.GetRowCellValue(rowHandle, "Quantity").ToString();
-                    string units = gridView1.GetRowCellValue(rowHandle, "Units").ToString();
+                    //string units = gridView1.GetRowCellValue(rowHandle, "Units").ToString();
                     string remarks = gridView1.GetRowCellValue(rowHandle, "Remarks").ToString();
 
                     bool checkifexists = Database.checkifExist(
@@ -215,7 +217,7 @@ namespace SalesInventorySystem.Orders
                             ",'" + productCode + "'" +
                             ",'" + description + "'" +
                             ",'" + quantity + "'" +
-                            ",'" + units + "'" +
+                            ",'kgs'" +
                             ",'1'" +
                             ",'" + remarks + "') ");
                     }
@@ -247,11 +249,6 @@ namespace SalesInventorySystem.Orders
         private void btnsave_Click(object sender, EventArgs e)
         {
             bool confirm = HelperFunction.ConfirmDialog("Are you sure you want to save this Request?", "Confirm Request Order");
-            if(totalrowhandle==0)
-            {
-                XtraMessageBox.Show("You must check atleast one item to received..");
-                return;
-            }
             if (confirm)
             {
 
@@ -379,6 +376,27 @@ namespace SalesInventorySystem.Orders
             }
 
 
+        }
+
+        private void txtsrchprodcat_EditValueChanged(object sender, EventArgs e)
+        {
+            prodcatid = SearchLookUpClass.getSingleValue(txtsrchprodcat, "ProductCategoryID");
+            populateProducts(prodcatid.ToString());
+        }
+
+        void loadCategory()
+        {
+            Database.displaySearchlookupEdit("SELECT ProductCategoryID,Description FROM ProductCategory with(nolock)", txtsrchprodcat, "Description", "Description");
+        }
+
+        void populateProducts(string catid)
+        {
+            string query = "SELECT ProductCode,Description,'0' as Quantity,' ' as Remarks " +
+               "FROM dbo.Products with(nolock) " +
+               "WHERE BranchCode='" + Login.assignedBranch + "' AND ProductCategoryCode='"+ catid + "' ";
+
+            HelperFunction.ShowWaitAndDisplay(query, gridControl1, gridView1, "Please wait", "Populating data into the database...");
+            gridView1.Focus();
         }
     }
 }

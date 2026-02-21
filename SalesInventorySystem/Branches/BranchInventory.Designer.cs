@@ -33,13 +33,13 @@
             this.gridControl1 = new DevExpress.XtraGrid.GridControl();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
             this.btnforapprovalsalesorderexcel = new DevExpress.XtraEditors.SimpleButton();
             this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.deleteThisItemToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -92,6 +92,18 @@
             this.groupBox1.Size = new System.Drawing.Size(2368, 75);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
+            // 
+            // simpleButton1
+            // 
+            this.simpleButton1.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("simpleButton1.ImageOptions.Image")));
+            this.simpleButton1.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
+            this.simpleButton1.Location = new System.Drawing.Point(340, 23);
+            this.simpleButton1.Margin = new System.Windows.Forms.Padding(6);
+            this.simpleButton1.Name = "simpleButton1";
+            this.simpleButton1.Size = new System.Drawing.Size(167, 44);
+            this.simpleButton1.TabIndex = 9;
+            this.simpleButton1.Text = "Generate";
+            this.simpleButton1.Click += new System.EventHandler(this.simpleButton1_Click);
             // 
             // btnforapprovalsalesorderexcel
             // 
@@ -159,18 +171,6 @@
             this.deleteThisItemToolStripMenuItem.Size = new System.Drawing.Size(339, 36);
             this.deleteThisItemToolStripMenuItem.Text = "Transfer to Commissary";
             this.deleteThisItemToolStripMenuItem.Click += new System.EventHandler(this.deleteThisItemToolStripMenuItem_Click);
-            // 
-            // simpleButton1
-            // 
-            this.simpleButton1.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("simpleButton1.ImageOptions.Image")));
-            this.simpleButton1.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.simpleButton1.Location = new System.Drawing.Point(340, 23);
-            this.simpleButton1.Margin = new System.Windows.Forms.Padding(6);
-            this.simpleButton1.Name = "simpleButton1";
-            this.simpleButton1.Size = new System.Drawing.Size(167, 44);
-            this.simpleButton1.TabIndex = 9;
-            this.simpleButton1.Text = "Generate";
-            this.simpleButton1.Click += new System.EventHandler(this.simpleButton1_Click);
             // 
             // BranchInventory
             // 

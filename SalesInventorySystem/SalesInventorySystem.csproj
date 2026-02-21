@@ -930,6 +930,12 @@
     <Compile Include="HOFormsDevEx\AddPODevEx.Designer.cs">
       <DependentUpon>AddPODevEx.cs</DependentUpon>
     </Compile>
+    <Compile Include="HOFormsDevEx\AddPrimalCutDevEx.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HOFormsDevEx\AddPrimalCutDevEx.Designer.cs">
+      <DependentUpon>AddPrimalCutDevEx.cs</DependentUpon>
+    </Compile>
     <Compile Include="HOFormsDevEx\AddPrimalCutInventoryDevEx.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1337,6 +1343,12 @@
     </Compile>
     <Compile Include="HOFormsDevEx\PostExpenseDevExFrm.Designer.cs">
       <DependentUpon>PostExpenseDevExFrm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HOFormsDevEx\PrimalCutCosting.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HOFormsDevEx\PrimalCutCosting.Designer.cs">
+      <DependentUpon>PrimalCutCosting.cs</DependentUpon>
     </Compile>
     <Compile Include="HOFormsDevEx\PrimalTransferDevEx.cs">
       <SubType>Form</SubType>
@@ -2925,6 +2937,12 @@
     <Compile Include="Reporting\StocksOrder.Designer.cs">
       <DependentUpon>StocksOrder.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reporting\BranchInventoryProductSummary.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reporting\BranchInventoryProductSummary.Designer.cs">
+      <DependentUpon>BranchInventoryProductSummary.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reporting\STSSummaryReport.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -3425,6 +3443,9 @@
     <EmbeddedResource Include="HOFormsDevEx\AddNonTradeOrdersDevEx.resx">
       <DependentUpon>AddNonTradeOrdersDevEx.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="HOFormsDevEx\AddPrimalCutDevEx.resx">
+      <DependentUpon>AddPrimalCutDevEx.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="HOFormsDevEx\AddPrimalCutInventoryDevEx.resx">
       <DependentUpon>AddPrimalCutInventoryDevEx.cs</DependentUpon>
     </EmbeddedResource>
@@ -3628,6 +3649,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="HOFormsDevEx\PostExpenseDevExFrm.resx">
       <DependentUpon>PostExpenseDevExFrm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HOFormsDevEx\PrimalCutCosting.resx">
+      <DependentUpon>PrimalCutCosting.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="HOFormsDevEx\PrimalTransferDevEx.resx">
       <DependentUpon>PrimalTransferDevEx.cs</DependentUpon>
@@ -4454,6 +4478,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reporting\StocksOrder.resx">
       <DependentUpon>StocksOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reporting\BranchInventoryProductSummary.resx">
+      <DependentUpon>BranchInventoryProductSummary.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reporting\STSSummaryReport.resx">
       <DependentUpon>STSSummaryReport.cs</DependentUpon>

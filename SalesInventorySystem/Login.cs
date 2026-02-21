@@ -96,7 +96,7 @@ namespace SalesInventorySystem
             //********RYAN VIAJEDOR*****************************************************************************
             try
             {
-                int server_version = -1;// GetCTRVersion().Result;
+                int server_version  = GetCTRVersion().Result;
                 int client_version = Convert.ToInt32(file["Version"]);
                 if (server_version != -1 && client_version < server_version)
                 {

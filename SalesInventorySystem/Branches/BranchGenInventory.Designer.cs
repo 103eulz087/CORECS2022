@@ -40,6 +40,7 @@
             this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.btnforapprovalsalesorderexcel = new DevExpress.XtraEditors.SimpleButton();
             this.label1 = new System.Windows.Forms.Label();
+            this.simpleButton2 = new DevExpress.XtraEditors.SimpleButton();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
@@ -55,9 +56,9 @@
             this.groupBox2.Controls.Add(this.gridControl1);
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox2.Location = new System.Drawing.Point(0, 171);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(6);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(6);
             this.groupBox2.Size = new System.Drawing.Size(1600, 694);
             this.groupBox2.TabIndex = 13;
             this.groupBox2.TabStop = false;
@@ -65,10 +66,10 @@
             // gridControl1
             // 
             this.gridControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridControl1.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.gridControl1.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(6);
             this.gridControl1.Location = new System.Drawing.Point(6, 30);
             this.gridControl1.MainView = this.gridView1;
-            this.gridControl1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.gridControl1.Margin = new System.Windows.Forms.Padding(6);
             this.gridControl1.Name = "gridControl1";
             this.gridControl1.Size = new System.Drawing.Size(1588, 658);
             this.gridControl1.TabIndex = 1;
@@ -100,6 +101,7 @@
             // 
             // groupControl1
             // 
+            this.groupControl1.Controls.Add(this.simpleButton2);
             this.groupControl1.Controls.Add(this.searchLookUpEdit1);
             this.groupControl1.Controls.Add(this.simpleButton1);
             this.groupControl1.Controls.Add(this.label2);
@@ -109,7 +111,7 @@
             this.groupControl1.Controls.Add(this.label1);
             this.groupControl1.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupControl1.Location = new System.Drawing.Point(0, 0);
-            this.groupControl1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.groupControl1.Margin = new System.Windows.Forms.Padding(6);
             this.groupControl1.Name = "groupControl1";
             this.groupControl1.Size = new System.Drawing.Size(1600, 171);
             this.groupControl1.TabIndex = 14;
@@ -117,7 +119,7 @@
             // searchLookUpEdit1
             // 
             this.searchLookUpEdit1.Location = new System.Drawing.Point(218, 62);
-            this.searchLookUpEdit1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.searchLookUpEdit1.Margin = new System.Windows.Forms.Padding(6);
             this.searchLookUpEdit1.Name = "searchLookUpEdit1";
             this.searchLookUpEdit1.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 9.25F);
             this.searchLookUpEdit1.Properties.Appearance.Options.UseFont = true;
@@ -143,7 +145,7 @@
             this.simpleButton1.ImageOptions.Image = global::SalesInventorySystem.Properties.Resources.Refresh_16x16;
             this.simpleButton1.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
             this.simpleButton1.Location = new System.Drawing.Point(562, 62);
-            this.simpleButton1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.simpleButton1.Margin = new System.Windows.Forms.Padding(6);
             this.simpleButton1.Name = "simpleButton1";
             this.simpleButton1.Size = new System.Drawing.Size(186, 81);
             this.simpleButton1.TabIndex = 13;
@@ -168,7 +170,7 @@
             this.radioButton2.Checked = true;
             this.radioButton2.Font = new System.Drawing.Font("Tahoma", 9.25F);
             this.radioButton2.Location = new System.Drawing.Point(374, 115);
-            this.radioButton2.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.radioButton2.Margin = new System.Windows.Forms.Padding(6);
             this.radioButton2.Name = "radioButton2";
             this.radioButton2.Size = new System.Drawing.Size(148, 34);
             this.radioButton2.TabIndex = 11;
@@ -182,7 +184,7 @@
             this.radioButton1.AutoSize = true;
             this.radioButton1.Font = new System.Drawing.Font("Tahoma", 9.25F);
             this.radioButton1.Location = new System.Drawing.Point(218, 115);
-            this.radioButton1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.radioButton1.Margin = new System.Windows.Forms.Padding(6);
             this.radioButton1.Name = "radioButton1";
             this.radioButton1.Size = new System.Drawing.Size(134, 34);
             this.radioButton1.TabIndex = 10;
@@ -195,7 +197,7 @@
             this.btnforapprovalsalesorderexcel.ImageOptions.Image = global::SalesInventorySystem.Properties.Resources.ExportToExcel_16x16;
             this.btnforapprovalsalesorderexcel.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
             this.btnforapprovalsalesorderexcel.Location = new System.Drawing.Point(760, 62);
-            this.btnforapprovalsalesorderexcel.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btnforapprovalsalesorderexcel.Margin = new System.Windows.Forms.Padding(6);
             this.btnforapprovalsalesorderexcel.Name = "btnforapprovalsalesorderexcel";
             this.btnforapprovalsalesorderexcel.Size = new System.Drawing.Size(228, 81);
             this.btnforapprovalsalesorderexcel.TabIndex = 9;
@@ -214,6 +216,18 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Select Branch:";
             // 
+            // simpleButton2
+            // 
+            this.simpleButton2.ImageOptions.Image = global::SalesInventorySystem.Properties.Resources.ExportToExcel_16x16;
+            this.simpleButton2.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
+            this.simpleButton2.Location = new System.Drawing.Point(1000, 62);
+            this.simpleButton2.Margin = new System.Windows.Forms.Padding(6);
+            this.simpleButton2.Name = "simpleButton2";
+            this.simpleButton2.Size = new System.Drawing.Size(283, 81);
+            this.simpleButton2.TabIndex = 15;
+            this.simpleButton2.Text = "All Branch Product List";
+            this.simpleButton2.Click += new System.EventHandler(this.simpleButton2_Click);
+            // 
             // BranchGenInventory
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
@@ -221,7 +235,7 @@
             this.ClientSize = new System.Drawing.Size(1600, 865);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupControl1);
-            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "BranchGenInventory";
             this.Text = "BranchGenInventory";
             this.Load += new System.EventHandler(this.BranchGenInventory_Load);
@@ -251,5 +265,6 @@
         private DevExpress.XtraEditors.SimpleButton simpleButton1;
         private DevExpress.XtraEditors.SearchLookUpEdit searchLookUpEdit1;
         private DevExpress.XtraGrid.Views.Grid.GridView searchLookUpEdit1View;
+        private DevExpress.XtraEditors.SimpleButton simpleButton2;
     }
 }

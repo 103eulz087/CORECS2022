@@ -648,6 +648,7 @@ namespace SalesInventorySystem
             CashSalesReport cashreps = new CashSalesReport();
             cashreps.MdiParent = this;
             cashreps.Show();
+
         }
 
         private void barStaticItem1_ItemClick(object sender, ItemClickEventArgs e)
@@ -657,7 +658,7 @@ namespace SalesInventorySystem
 
         private void barButtonItem19_ItemClick(object sender, ItemClickEventArgs e)
         {
-           
+
             //foreach (Form form in Application.OpenForms)
             //{
             //    if (form.GetType() == typeof(HOForms.ProcessPrimalCutForm))
@@ -669,7 +670,7 @@ namespace SalesInventorySystem
             HOForms.SetBatchCodeFrm setbarcho = new HOForms.SetBatchCodeFrm();
 
             setbarcho.Show();
-            setbarcho.TopMost = true;
+            //setbarcho.TopMost = true;
             //AddPrimalCuts pcutfmr = new AddPrimalCuts();
             //pcutfmr.Show();
 
@@ -677,6 +678,9 @@ namespace SalesInventorySystem
             //pcutform.Show();
 
             //HOForms.AddPrimalCutInventory pcutform = new HOForms.AddPrimalCutInventory();
+            //pcutform.Show();
+
+            //HOFormsDevEx.AddPrimalCutDevEx pcutform = new HOFormsDevEx.AddPrimalCutDevEx();
             //pcutform.Show();
 
         }
@@ -1272,15 +1276,26 @@ namespace SalesInventorySystem
 
         private void barButtonItem59_ItemClick(object sender, ItemClickEventArgs e)
         {
+            //foreach (Form form in Application.OpenForms)
+            //{
+            //    if (form.GetType() == typeof(HOFormsDevEx.CarcassCostingDevEx))
+            //    {
+            //        form.Activate();
+            //        return;
+            //    }
+            //}
+            //HOFormsDevEx.CarcassCostingDevEx pcusatfsmr = new HOFormsDevEx.CarcassCostingDevEx();
+            //pcusatfsmr.MdiParent = this;
+            //pcusatfsmr.Show();
             foreach (Form form in Application.OpenForms)
             {
-                if (form.GetType() == typeof(HOFormsDevEx.CarcassCostingDevEx))
+                if (form.GetType() == typeof(HOFormsDevEx.PrimalCutCosting))
                 {
                     form.Activate();
                     return;
                 }
             }
-            HOFormsDevEx.CarcassCostingDevEx pcusatfsmr = new HOFormsDevEx.CarcassCostingDevEx();
+            HOFormsDevEx.PrimalCutCosting pcusatfsmr = new HOFormsDevEx.PrimalCutCosting();
             pcusatfsmr.MdiParent = this;
             pcusatfsmr.Show();
         }
