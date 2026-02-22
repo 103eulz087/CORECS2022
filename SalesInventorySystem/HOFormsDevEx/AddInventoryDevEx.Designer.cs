@@ -34,6 +34,7 @@
             this.gridControl1 = new DevExpress.XtraGrid.GridControl();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
+            this.chckboxUseBarcode = new System.Windows.Forms.CheckBox();
             this.labelControl7 = new DevExpress.XtraEditors.LabelControl();
             this.txtsrchprod = new DevExpress.XtraEditors.SearchLookUpEdit();
             this.searchLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -83,7 +84,6 @@
             this.bandedGridView1 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridView();
             this.advBandedGridView1 = new DevExpress.XtraGrid.Views.BandedGrid.AdvBandedGridView();
             this.gridBand1 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
-            this.chckboxUseBarcode = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).BeginInit();
             this.groupControl2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
@@ -123,7 +123,7 @@
             this.groupControl2.Location = new System.Drawing.Point(3, 303);
             this.groupControl2.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
             this.groupControl2.Name = "groupControl2";
-            this.groupControl2.Size = new System.Drawing.Size(2731, 516);
+            this.groupControl2.Size = new System.Drawing.Size(2731, 558);
             this.groupControl2.TabIndex = 24;
             // 
             // gridControl1
@@ -134,7 +134,7 @@
             this.gridControl1.MainView = this.gridView1;
             this.gridControl1.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
             this.gridControl1.Name = "gridControl1";
-            this.gridControl1.Size = new System.Drawing.Size(2725, 468);
+            this.gridControl1.Size = new System.Drawing.Size(2725, 510);
             this.gridControl1.TabIndex = 18;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
@@ -203,6 +203,22 @@
             this.groupControl1.TabIndex = 23;
             this.groupControl1.Text = "Receive PO/Inventory";
             // 
+            // chckboxUseBarcode
+            // 
+            this.chckboxUseBarcode.AutoSize = true;
+            this.chckboxUseBarcode.BackColor = System.Drawing.Color.Transparent;
+            this.chckboxUseBarcode.Checked = true;
+            this.chckboxUseBarcode.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chckboxUseBarcode.Font = new System.Drawing.Font("Tahoma", 8F);
+            this.chckboxUseBarcode.ForeColor = System.Drawing.Color.Black;
+            this.chckboxUseBarcode.Location = new System.Drawing.Point(947, 227);
+            this.chckboxUseBarcode.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
+            this.chckboxUseBarcode.Name = "chckboxUseBarcode";
+            this.chckboxUseBarcode.Size = new System.Drawing.Size(207, 31);
+            this.chckboxUseBarcode.TabIndex = 107;
+            this.chckboxUseBarcode.Text = "Use this Barcode";
+            this.chckboxUseBarcode.UseVisualStyleBackColor = false;
+            // 
             // labelControl7
             // 
             this.labelControl7.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -247,6 +263,7 @@
             this.btnchecker.Size = new System.Drawing.Size(239, 50);
             this.btnchecker.TabIndex = 104;
             this.btnchecker.Text = "Checker (F5)";
+            this.btnchecker.Visible = false;
             this.btnchecker.Click += new System.EventHandler(this.btnchecker_Click);
             // 
             // txtweight
@@ -278,6 +295,7 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.txtcost.Size = new System.Drawing.Size(155, 48);
             this.txtcost.TabIndex = 102;
+            this.txtcost.Visible = false;
             // 
             // txtinvoiceno
             // 
@@ -292,7 +310,7 @@
             // 
             // txtdestination
             // 
-            this.txtdestination.Location = new System.Drawing.Point(947, 51);
+            this.txtdestination.Location = new System.Drawing.Point(947, 261);
             this.txtdestination.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
             this.txtdestination.Name = "txtdestination";
             this.txtdestination.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 10.25F);
@@ -301,6 +319,7 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.txtdestination.Size = new System.Drawing.Size(276, 48);
             this.txtdestination.TabIndex = 99;
+            this.txtdestination.Visible = false;
             // 
             // simpleButton4
             // 
@@ -389,6 +408,7 @@
             this.labelControl13.Size = new System.Drawing.Size(62, 29);
             this.labelControl13.TabIndex = 88;
             this.labelControl13.Text = "Cost:";
+            this.labelControl13.Visible = false;
             // 
             // checkBox3
             // 
@@ -403,18 +423,18 @@
             this.checkBox3.TabIndex = 87;
             this.checkBox3.Text = "Override Cost?";
             this.checkBox3.UseVisualStyleBackColor = false;
+            this.checkBox3.Visible = false;
             this.checkBox3.CheckedChanged += new System.EventHandler(this.checkBox3_CheckedChanged);
             // 
             // txtpalletno
             // 
             this.txtpalletno.Font = new System.Drawing.Font("Tahoma", 10.25F);
-            this.txtpalletno.Location = new System.Drawing.Point(2099, 53);
+            this.txtpalletno.Location = new System.Drawing.Point(946, 61);
             this.txtpalletno.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
             this.txtpalletno.MaxLength = 10;
             this.txtpalletno.Name = "txtpalletno";
             this.txtpalletno.Size = new System.Drawing.Size(140, 40);
             this.txtpalletno.TabIndex = 86;
-            this.txtpalletno.Text = "0";
             // 
             // txtshipmentno
             // 
@@ -432,7 +452,7 @@
             // 
             this.labelControl12.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelControl12.Appearance.Options.UseFont = true;
-            this.labelControl12.Location = new System.Drawing.Point(1972, 61);
+            this.labelControl12.Location = new System.Drawing.Point(818, 65);
             this.labelControl12.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
             this.labelControl12.Name = "labelControl12";
             this.labelControl12.Size = new System.Drawing.Size(118, 29);
@@ -574,6 +594,7 @@
             this.txtbarcode.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtbarcode.Properties.Appearance.Options.UseFont = true;
             this.txtbarcode.Properties.MaxLength = 30;
+            this.txtbarcode.Properties.ReadOnly = true;
             this.txtbarcode.Size = new System.Drawing.Size(276, 46);
             this.txtbarcode.TabIndex = 59;
             this.txtbarcode.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtbarcode_KeyDown);
@@ -633,12 +654,14 @@
             // 
             this.chckboxbarcode.AutoSize = true;
             this.chckboxbarcode.BackColor = System.Drawing.Color.Transparent;
-            this.chckboxbarcode.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chckboxbarcode.Checked = true;
+            this.chckboxbarcode.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chckboxbarcode.Font = new System.Drawing.Font("Tahoma", 8F);
             this.chckboxbarcode.ForeColor = System.Drawing.Color.Black;
             this.chckboxbarcode.Location = new System.Drawing.Point(1235, 228);
             this.chckboxbarcode.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
             this.chckboxbarcode.Name = "chckboxbarcode";
-            this.chckboxbarcode.Size = new System.Drawing.Size(270, 33);
+            this.chckboxbarcode.Size = new System.Drawing.Size(225, 31);
             this.chckboxbarcode.TabIndex = 76;
             this.chckboxbarcode.Text = "Auto Print Barcode";
             this.chckboxbarcode.UseVisualStyleBackColor = false;
@@ -657,23 +680,24 @@
             // 
             this.labelControl5.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelControl5.Appearance.Options.UseFont = true;
-            this.labelControl5.Location = new System.Drawing.Point(779, 61);
+            this.labelControl5.Location = new System.Drawing.Point(779, 271);
             this.labelControl5.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
             this.labelControl5.Name = "labelControl5";
             this.labelControl5.Size = new System.Drawing.Size(146, 29);
             this.labelControl5.TabIndex = 73;
             this.labelControl5.Text = "Destination:";
+            this.labelControl5.Visible = false;
             // 
             // checkBox2
             // 
             this.checkBox2.AutoSize = true;
             this.checkBox2.BackColor = System.Drawing.Color.Transparent;
-            this.checkBox2.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBox2.Font = new System.Drawing.Font("Tahoma", 8F);
             this.checkBox2.ForeColor = System.Drawing.Color.Black;
             this.checkBox2.Location = new System.Drawing.Point(1235, 267);
             this.checkBox2.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
             this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(236, 33);
+            this.checkBox2.Size = new System.Drawing.Size(197, 31);
             this.checkBox2.TabIndex = 72;
             this.checkBox2.Text = "Auto GetWeight";
             this.checkBox2.UseVisualStyleBackColor = false;
@@ -682,7 +706,7 @@
             // 
             this.labelControl9.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelControl9.Appearance.Options.UseFont = true;
-            this.labelControl9.Location = new System.Drawing.Point(815, 118);
+            this.labelControl9.Location = new System.Drawing.Point(824, 121);
             this.labelControl9.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
             this.labelControl9.Name = "labelControl9";
             this.labelControl9.Size = new System.Drawing.Size(112, 29);
@@ -694,10 +718,10 @@
             this.panelControl1.Controls.Add(this.groupControl2);
             this.panelControl1.Controls.Add(this.groupControl1);
             this.panelControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelControl1.Location = new System.Drawing.Point(0, 585);
+            this.panelControl1.Location = new System.Drawing.Point(0, 543);
             this.panelControl1.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
             this.panelControl1.Name = "panelControl1";
-            this.panelControl1.Size = new System.Drawing.Size(2737, 822);
+            this.panelControl1.Size = new System.Drawing.Size(2737, 864);
             this.panelControl1.TabIndex = 25;
             // 
             // dockManager1
@@ -720,9 +744,9 @@
             this.groupControl3.Location = new System.Drawing.Point(0, 0);
             this.groupControl3.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
             this.groupControl3.Name = "groupControl3";
-            this.groupControl3.Size = new System.Drawing.Size(2737, 585);
+            this.groupControl3.Size = new System.Drawing.Size(2737, 543);
             this.groupControl3.TabIndex = 26;
-            this.groupControl3.Text = "Order Details";
+            this.groupControl3.Text = "Purchase Order Details";
             // 
             // gridControl2
             // 
@@ -732,7 +756,7 @@
             this.gridControl2.MainView = this.gridView2;
             this.gridControl2.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
             this.gridControl2.Name = "gridControl2";
-            this.gridControl2.Size = new System.Drawing.Size(2731, 537);
+            this.gridControl2.Size = new System.Drawing.Size(2731, 495);
             this.gridControl2.TabIndex = 2;
             this.gridControl2.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView2,
@@ -783,22 +807,6 @@
             this.gridBand1.Name = "gridBand1";
             this.gridBand1.VisibleIndex = 0;
             this.gridBand1.Width = 140;
-            // 
-            // chckboxUseBarcode
-            // 
-            this.chckboxUseBarcode.AutoSize = true;
-            this.chckboxUseBarcode.BackColor = System.Drawing.Color.Transparent;
-            this.chckboxUseBarcode.Checked = true;
-            this.chckboxUseBarcode.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chckboxUseBarcode.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chckboxUseBarcode.ForeColor = System.Drawing.Color.Black;
-            this.chckboxUseBarcode.Location = new System.Drawing.Point(947, 227);
-            this.chckboxUseBarcode.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
-            this.chckboxUseBarcode.Name = "chckboxUseBarcode";
-            this.chckboxUseBarcode.Size = new System.Drawing.Size(244, 33);
-            this.chckboxUseBarcode.TabIndex = 107;
-            this.chckboxUseBarcode.Text = "Use this Barcode";
-            this.chckboxUseBarcode.UseVisualStyleBackColor = false;
             // 
             // AddInventoryDevEx
             // 

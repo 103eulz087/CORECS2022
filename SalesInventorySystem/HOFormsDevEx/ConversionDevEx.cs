@@ -23,18 +23,49 @@ namespace SalesInventorySystem.HOFormsDevEx
         {
             InitializeComponent();
         }
-
-        private void txtprodcat_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            Database.display("SELECT SequenceNumber as #,Product,Description,Available,Cost,Barcode FROM Inventory WHERE Branch='" + Login.assignedBranch + "' and isWarehouse=1 and Available > 0 and IsStock=1 and SUBSTRING(Product,1,2)='" + Classes.Product.getProductCategoryCode(txtprodcat.Text) + "' ", gridControlDisplay, gridViewDisplay);
-        }
-
         private void ConversionDevEx_Load(object sender, EventArgs e)
         {
             txtrefcode.Text = IDGenerator.getIDNumberSP("sp_GetConversionNumber", "conversionnumber"); //IDGenerator.getConversionNumber();
             loadcomb();
             displayProdCat();
         }
+        void displayGrid()
+        {
+            gridControlPrepare.BeginUpdate();
+            gridViewPrepare.Columns.Clear();
+            tablePrepare = new DataTable();
+            tablePrepare.Columns.Add("#");
+            tablePrepare.Columns.Add("ProductCode");
+            tablePrepare.Columns.Add("Description");
+            tablePrepare.Columns.Add("Quantity");
+            tablePrepare.Columns.Add("Cost");
+            tablePrepare.Columns.Add("ActualQty");
+            tablePrepare.Columns.Add("Variance");
+            tablePrepare.Columns.Add("Barcode");
+            gridControlPrepare.DataSource = null;
+            gridControlPrepare.DataSource = tablePrepare;
+            gridControlPrepare.EndUpdate();
+
+            //if (radioButton2.Checked == true)
+            //{
+            gridControlOutput.BeginUpdate();
+            gridViewOutput.Columns.Clear();
+            tableOutput = new DataTable();
+            tableOutput.Columns.Add("ProductCode");
+            tableOutput.Columns.Add("Description");
+            tableOutput.Columns.Add("Quantity");
+            tableOutput.Columns.Add("Barcode");
+            gridControlOutput.DataSource = null;
+            gridControlOutput.DataSource = tableOutput;
+            gridControlOutput.EndUpdate();
+            //}
+        }
+        private void txtprodcat_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Database.display("SELECT SequenceNumber as #,Product,Description,Available,Cost,Barcode FROM Inventory WHERE Branch='" + Login.assignedBranch + "' and isWarehouse=1 and Available > 0 and IsStock=1 and SUBSTRING(Product,1,2)='" + Classes.Product.getProductCategoryCode(txtprodcat.Text) + "' ", gridControlDisplay, gridViewDisplay);
+        }
+
+        
         void displayProdCat()
         {
             Classes.Product.displayProductCategoryComboBoxItems(txtprodcat);
@@ -402,37 +433,7 @@ namespace SalesInventorySystem.HOFormsDevEx
 
         }
 
-        void displayGrid()
-        {
-            gridControlPrepare.BeginUpdate();
-            gridViewPrepare.Columns.Clear();
-            tablePrepare = new DataTable();
-            tablePrepare.Columns.Add("#");
-            tablePrepare.Columns.Add("ProductCode");
-            tablePrepare.Columns.Add("Description");
-            tablePrepare.Columns.Add("Quantity");
-            tablePrepare.Columns.Add("Cost");
-            tablePrepare.Columns.Add("ActualQty");
-            tablePrepare.Columns.Add("Variance");
-            tablePrepare.Columns.Add("Barcode");
-            gridControlPrepare.DataSource = null;
-            gridControlPrepare.DataSource = tablePrepare;
-            gridControlPrepare.EndUpdate();
-
-            //if (radioButton2.Checked == true)
-            //{
-                gridControlOutput.BeginUpdate();
-                gridViewOutput.Columns.Clear();
-                tableOutput = new DataTable();
-                tableOutput.Columns.Add("ProductCode");
-                tableOutput.Columns.Add("Description");
-                tableOutput.Columns.Add("Quantity");
-                tableOutput.Columns.Add("Barcode");
-                gridControlOutput.DataSource = null;
-                gridControlOutput.DataSource = tableOutput;
-                gridControlOutput.EndUpdate();
-            //}
-        }
+        
         private void simpleButton5_Click(object sender, EventArgs e)
         {
             if(radioButton2.Checked==true)

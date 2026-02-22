@@ -396,12 +396,7 @@ namespace SalesInventorySystem.HOFormsDevEx
 
         private void gridView3_DoubleClick(object sender, EventArgs e)
         {
-            action = "VIEWAPPROVED";
-            viewPODetails(gridView3);
-            //string shipmentno = gridView3.GetRowCellValue(gridView3.FocusedRowHandle, "ShipmentNo").ToString();
-            //HOForms.ViewShipmentDashBoardDetails voerord = new HOForms.ViewShipmentDashBoardDetails();
-            //Database.display("SELECT ProductCategory,OrderCode,Description,Quantity FROM view_PODETAILS WHERE ShipmentNo='" + shipmentno + "'", voerord.gridControl1, voerord.gridView1);
-            //voerord.ShowDialog(this);
+            
         }
 
         private void btnForApprovalProd_Click(object sender, EventArgs e)
@@ -434,6 +429,19 @@ namespace SalesInventorySystem.HOFormsDevEx
             string query = $"SELECT * FROM view_POSUMMARYREP WHERE Status='CONFIRMED' And OrderType='P'  AND CAST(DateOrder as date) between '{dateFromConfirmedProd.Text}' and '{dateToConfirmedProd.Text}' ORDER BY ShipmentNo DESC";
             HelperFunction.ShowWaitAndDisplay(query, gridControlConfirmedProducts, gridViewConfirmedProducts, "Please wait", "Populating data into the database...");
             gridViewConfirmedProducts.Focus();
+        }
+
+        private void toolStripMenuItem9_Click(object sender, EventArgs e)
+        {
+            action = "VIEWAPPROVED";
+            viewPODetails(gridView3);
+            
+        }
+
+        private void gridControl3_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+                contextMenuStripApproved.Show(gridControl3, e.Location);
         }
 
         private void tabControlApproved_SelectedIndexChanged(object sender, EventArgs e)

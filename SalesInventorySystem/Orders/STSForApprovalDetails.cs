@@ -101,7 +101,7 @@ namespace SalesInventorySystem.Orders
             string branchname = Database.getSingleQuery("Branches", "BranchCode='" + InitiatingBranch + "'", "BranchName");
             string branchaddress = Database.getSingleQuery("Branches", "BranchCode='" + InitiatingBranch + "'", "Address");
 
-
+            xct.xrdateprocessed.Text = DateTime.Today.ToShortDateString();
             xct.xrbranchname.Text = branchname;
             xct.xrbranchaddress.Text = branchaddress;
             xct.xrdate.Text = Convert.ToDateTime(effecitivitydate).ToShortDateString();//dt.ToShortDateString();

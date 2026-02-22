@@ -206,5 +206,15 @@ namespace SalesInventorySystem.Reporting
             }
             
         }
+
+        private void gridView1_RowCellStyle(object sender, RowCellStyleEventArgs e)
+        {
+            GridView view = sender as GridView;
+            if (e.Column.FieldName == "Variance")
+            {
+                e.Appearance.BackColor = Color.Red;
+                e.Appearance.BackColor2 = Color.LightPink;
+            }
+        }
     }
 }

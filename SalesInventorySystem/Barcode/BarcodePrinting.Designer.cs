@@ -31,20 +31,20 @@
             DevExpress.XtraPrinting.BarCode.QRCodeGenerator qrCodeGenerator1 = new DevExpress.XtraPrinting.BarCode.QRCodeGenerator();
             this.Detail = new DevExpress.XtraReports.UI.DetailBand();
             this.TopMargin = new DevExpress.XtraReports.UI.TopMarginBand();
+            this.xrLabel5 = new DevExpress.XtraReports.UI.XRLabel();
+            this.lbltotalkilos = new DevExpress.XtraReports.UI.XRLabel();
             this.lblxpirydate = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel4 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel1 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel2 = new DevExpress.XtraReports.UI.XRLabel();
             this.lblmanufdate = new DevExpress.XtraReports.UI.XRLabel();
-            this.lblprodtype = new DevExpress.XtraReports.UI.XRLabel();
-            this.xrLabel5 = new DevExpress.XtraReports.UI.XRLabel();
-            this.lbltotalkilos = new DevExpress.XtraReports.UI.XRLabel();
             this.xrBarCode2 = new DevExpress.XtraReports.UI.XRBarCode();
-            this.BottomMargin = new DevExpress.XtraReports.UI.BottomMarginBand();
             this.xrLabel3 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrshipno = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel6 = new DevExpress.XtraReports.UI.XRLabel();
-            this.xrbatchcode = new DevExpress.XtraReports.UI.XRLabel();
+            this.xrpalletno = new DevExpress.XtraReports.UI.XRLabel();
+            this.lblprodtype = new DevExpress.XtraReports.UI.XRLabel();
+            this.BottomMargin = new DevExpress.XtraReports.UI.BottomMarginBand();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             // 
             // Detail
@@ -69,13 +69,39 @@
             this.xrLabel3,
             this.xrshipno,
             this.xrLabel6,
-            this.xrbatchcode,
+            this.xrpalletno,
             this.lblprodtype});
-            this.TopMargin.HeightF = 200F;
+            this.TopMargin.HeightF = 172.0834F;
             this.TopMargin.Name = "TopMargin";
             this.TopMargin.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100F);
             this.TopMargin.SnapLinePadding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100F);
             this.TopMargin.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft;
+            // 
+            // xrLabel5
+            // 
+            this.xrLabel5.Font = new System.Drawing.Font("Arial Black", 14.75F);
+            this.xrLabel5.LocationFloat = new DevExpress.Utils.PointFloat(140.8333F, 87.08338F);
+            this.xrLabel5.Name = "xrLabel5";
+            this.xrLabel5.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100F);
+            this.xrLabel5.SizeF = new System.Drawing.SizeF(144.7918F, 17.79169F);
+            this.xrLabel5.StylePriority.UseFont = false;
+            this.xrLabel5.StylePriority.UsePadding = false;
+            this.xrLabel5.StylePriority.UseTextAlignment = false;
+            this.xrLabel5.Text = "Total Kilos";
+            this.xrLabel5.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
+            // 
+            // lbltotalkilos
+            // 
+            this.lbltotalkilos.Font = new System.Drawing.Font("Arial Black", 14.75F);
+            this.lbltotalkilos.LocationFloat = new DevExpress.Utils.PointFloat(140.8333F, 104.8751F);
+            this.lbltotalkilos.Name = "lbltotalkilos";
+            this.lbltotalkilos.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100F);
+            this.lbltotalkilos.SizeF = new System.Drawing.SizeF(144.7918F, 20.29169F);
+            this.lbltotalkilos.StylePriority.UseFont = false;
+            this.lbltotalkilos.StylePriority.UsePadding = false;
+            this.lbltotalkilos.StylePriority.UseTextAlignment = false;
+            this.lbltotalkilos.Text = "88.888";
+            this.lbltotalkilos.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
             // 
             // lblxpirydate
             // 
@@ -130,42 +156,6 @@
             this.lblmanufdate.StylePriority.UseFont = false;
             this.lblmanufdate.Text = "12/12/2016";
             // 
-            // lblprodtype
-            // 
-            this.lblprodtype.Font = new System.Drawing.Font("Tahoma", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblprodtype.LocationFloat = new DevExpress.Utils.PointFloat(17.70833F, 32.37502F);
-            this.lblprodtype.Name = "lblprodtype";
-            this.lblprodtype.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
-            this.lblprodtype.SizeF = new System.Drawing.SizeF(354.5417F, 18.29164F);
-            this.lblprodtype.StylePriority.UseFont = false;
-            this.lblprodtype.Text = "Large Intestine";
-            // 
-            // xrLabel5
-            // 
-            this.xrLabel5.Font = new System.Drawing.Font("Arial Black", 14.75F);
-            this.xrLabel5.LocationFloat = new DevExpress.Utils.PointFloat(140.8333F, 87.08338F);
-            this.xrLabel5.Name = "xrLabel5";
-            this.xrLabel5.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100F);
-            this.xrLabel5.SizeF = new System.Drawing.SizeF(144.7918F, 17.79169F);
-            this.xrLabel5.StylePriority.UseFont = false;
-            this.xrLabel5.StylePriority.UsePadding = false;
-            this.xrLabel5.StylePriority.UseTextAlignment = false;
-            this.xrLabel5.Text = "Total Kilos";
-            this.xrLabel5.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
-            // 
-            // lbltotalkilos
-            // 
-            this.lbltotalkilos.Font = new System.Drawing.Font("Arial Black", 14.75F);
-            this.lbltotalkilos.LocationFloat = new DevExpress.Utils.PointFloat(140.8333F, 104.8751F);
-            this.lbltotalkilos.Name = "lbltotalkilos";
-            this.lbltotalkilos.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100F);
-            this.lbltotalkilos.SizeF = new System.Drawing.SizeF(144.7918F, 20.29169F);
-            this.lbltotalkilos.StylePriority.UseFont = false;
-            this.lbltotalkilos.StylePriority.UsePadding = false;
-            this.lbltotalkilos.StylePriority.UseTextAlignment = false;
-            this.lbltotalkilos.Text = "88.888";
-            this.lbltotalkilos.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
-            // 
             // xrBarCode2
             // 
             this.xrBarCode2.AutoModule = true;
@@ -180,14 +170,6 @@
             this.xrBarCode2.Symbology = qrCodeGenerator1;
             this.xrBarCode2.Text = "A010000110015000111123";
             this.xrBarCode2.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
-            // 
-            // BottomMargin
-            // 
-            this.BottomMargin.HeightF = 0F;
-            this.BottomMargin.Name = "BottomMargin";
-            this.BottomMargin.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100F);
-            this.BottomMargin.SnapLinePadding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100F);
-            this.BottomMargin.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft;
             // 
             // xrLabel3
             // 
@@ -225,21 +207,39 @@
             this.xrLabel6.StylePriority.UseFont = false;
             this.xrLabel6.StylePriority.UsePadding = false;
             this.xrLabel6.StylePriority.UseTextAlignment = false;
-            this.xrLabel6.Text = "BatchCode:";
+            this.xrLabel6.Text = "PalletNo:";
             this.xrLabel6.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
             // 
-            // xrbatchcode
+            // xrpalletno
             // 
-            this.xrbatchcode.Font = new System.Drawing.Font("Arial Black", 10.75F);
-            this.xrbatchcode.LocationFloat = new DevExpress.Utils.PointFloat(240.2083F, 68.45835F);
-            this.xrbatchcode.Name = "xrbatchcode";
-            this.xrbatchcode.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100F);
-            this.xrbatchcode.SizeF = new System.Drawing.SizeF(99.37502F, 18.62503F);
-            this.xrbatchcode.StylePriority.UseFont = false;
-            this.xrbatchcode.StylePriority.UsePadding = false;
-            this.xrbatchcode.StylePriority.UseTextAlignment = false;
-            this.xrbatchcode.Text = "12345";
-            this.xrbatchcode.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
+            this.xrpalletno.Font = new System.Drawing.Font("Arial Black", 10.75F);
+            this.xrpalletno.LocationFloat = new DevExpress.Utils.PointFloat(240.2083F, 68.45835F);
+            this.xrpalletno.Name = "xrpalletno";
+            this.xrpalletno.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100F);
+            this.xrpalletno.SizeF = new System.Drawing.SizeF(99.37502F, 18.62503F);
+            this.xrpalletno.StylePriority.UseFont = false;
+            this.xrpalletno.StylePriority.UsePadding = false;
+            this.xrpalletno.StylePriority.UseTextAlignment = false;
+            this.xrpalletno.Text = "12345";
+            this.xrpalletno.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
+            // 
+            // lblprodtype
+            // 
+            this.lblprodtype.Font = new System.Drawing.Font("Tahoma", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblprodtype.LocationFloat = new DevExpress.Utils.PointFloat(17.70833F, 32.37502F);
+            this.lblprodtype.Name = "lblprodtype";
+            this.lblprodtype.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.lblprodtype.SizeF = new System.Drawing.SizeF(354.5417F, 18.29164F);
+            this.lblprodtype.StylePriority.UseFont = false;
+            this.lblprodtype.Text = "Large Intestine";
+            // 
+            // BottomMargin
+            // 
+            this.BottomMargin.HeightF = 0F;
+            this.BottomMargin.Name = "BottomMargin";
+            this.BottomMargin.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100F);
+            this.BottomMargin.SnapLinePadding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100F);
+            this.BottomMargin.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft;
             // 
             // BarcodePrinting
             // 
@@ -247,13 +247,11 @@
             this.Detail,
             this.TopMargin,
             this.BottomMargin});
-            this.Margins = new System.Drawing.Printing.Margins(0, 0, 200, 0);
+            this.Margins = new System.Drawing.Printing.Margins(0, 0, 172, 0);
             this.PageHeight = 190;
             this.PageWidth = 400;
             this.PaperKind = System.Drawing.Printing.PaperKind.Custom;
-            this.ShowPrintMarginsWarning = false;
-            this.ShowPrintStatusDialog = false;
-            this.Version = "18.1";
+            this.Version = "19.2";
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
 
         }
@@ -272,9 +270,9 @@
         public DevExpress.XtraReports.UI.XRLabel lbltotalkilos;
         public DevExpress.XtraReports.UI.XRLabel lblxpirydate;
         private DevExpress.XtraReports.UI.XRLabel xrLabel4;
-        private DevExpress.XtraReports.UI.XRLabel xrLabel3;
         public DevExpress.XtraReports.UI.XRLabel xrshipno;
-        private DevExpress.XtraReports.UI.XRLabel xrLabel6;
-        public DevExpress.XtraReports.UI.XRLabel xrbatchcode;
+        public DevExpress.XtraReports.UI.XRLabel xrpalletno;
+        public DevExpress.XtraReports.UI.XRLabel xrLabel3;
+        public DevExpress.XtraReports.UI.XRLabel xrLabel6;
     }
 }

@@ -117,5 +117,11 @@ namespace SalesInventorySystem.Branches
             string filename = "BRANCHINVENTORY_"+searchLookUpEdit1.Text+ DateTime.Now.ToShortDateString().Replace(@"/", "-");
             HelperFunction.exporttoexcel(gridView1, filename);
         }
+
+        private void simpleButton2_Click(object sender, EventArgs e)
+        {
+            Reporting.BranchInventoryProductSummary branchsum = new Reporting.BranchInventoryProductSummary();
+            branchsum.Show();
+        }
     }
 }

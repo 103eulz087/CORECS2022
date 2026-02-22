@@ -24,9 +24,10 @@ namespace SalesInventorySystem.Reporting
         private void ConversionReports_Load(object sender, EventArgs e)
         {
             
-            loadBranch();
+          
             if (Login.assignedBranch == "888")
             {
+                loadBranch();
                 labelControl1.Visible = true;
                 txtbrcode.Visible = true;
             }
@@ -40,7 +41,7 @@ namespace SalesInventorySystem.Reporting
 
         void loadBranch()
         {
-            Database.displaySearchlookupEdit("SELECT BranchCode,BranchName FROM Branches", txtbrcode, "BranchCode", "BranchCode");
+            Database.displaySearchlookupEdit("SELECT BranchCode,BranchName FROM Branches with(nolock) ", txtbrcode, "BranchCode", "BranchCode");
         }
 
         private void simpleButton1_Click(object sender, EventArgs e)
@@ -95,6 +96,7 @@ namespace SalesInventorySystem.Reporting
             if (ok)
             {
                 roolback();
+                display();
             }
             else
             {
@@ -169,8 +171,8 @@ namespace SalesInventorySystem.Reporting
         private void confirmToolStripMenuItem_Click(object sender, EventArgs e)
         {
             bool sure = HelperFunction.ConfirmDialog("Are you sure?", "Confirm Conversion");
-            if (sure)
-                confirm();
+            if (sure) { confirm(); display(); }
+              
             else
                 return;
         }
@@ -188,7 +190,7 @@ namespace SalesInventorySystem.Reporting
                 com.CommandType = CommandType.StoredProcedure;
                 com.CommandText = query;
                 com.ExecuteNonQuery();
-                XtraMessageBox.Show("Converted Operation Successfully Executed!");
+                XtraMessageBox.Show("Comversion Successfully Executed!");
             }
             catch (SqlException ex)
             {
@@ -212,6 +214,7 @@ namespace SalesInventorySystem.Reporting
             if (ok)
             {
                 execute();
+                display();
             }
             else
             {
@@ -235,13 +238,18 @@ namespace SalesInventorySystem.Reporting
             //    e.Cancel = true;
         }
 
-        private void gridView1_DoubleClick(object sender, EventArgs e)
+        private void viewConversionDetailsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             contype = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "ConversionType").ToString();
             conid = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "ConID").ToString();
             Reporting.ConversionReportDetails conrep = new ConversionReportDetails();
             Database.display("SELECT * FROM view_ConversionDetails WHERE ConID='" + conid + "'", conrep.gridControl1, conrep.gridView1);
             conrep.ShowDialog(this);
+        }
+
+        private void gridView1_DoubleClick(object sender, EventArgs e)
+        {
+            
         }
 
         //private void dataGridView1_DoubleClick(object sender, EventArgs e)

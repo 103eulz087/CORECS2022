@@ -552,11 +552,11 @@ namespace SalesInventorySystem
         {
             Orders.OrderCheckerDevEx oread = new Orders.OrderCheckerDevEx();
 
-            Database.display("SELECT ProductName,ActualQty FROM DeliveryDetails WHERE PONumber='" + txtpono.Text + "'", oread.gridControl1, oread.gridView1); 
+            Database.display("SELECT ProductName,ActualQty FROM DeliveryDetails WHERE PONumber='" + txtpono.Text + "'", oread.gridControlDelivByComm, oread.gridViewDelivByComm); 
             //Database.display("SELECT ProductName,QtyDelivered FROM DeliveryDetails WHERE PONumber='" + txtponum.Text + "'", oread.gridControl2, oread.gridView2);
-            Database.display("SELECT ProductName,SUM(Qty) as TotalKilos,COUNT(distinct Barcode) as TotalBox FROM ReceivedOrderDetails WHERE PONumber='" + txtpono.Text + "' GROUP BY ProductName", oread.gridControl2, oread.gridView2);
+            Database.display("SELECT ProductName,SUM(Qty) as TotalKilos,COUNT(distinct Barcode) as TotalBox FROM ReceivedOrderDetails WHERE PONumber='" + txtpono.Text + "' GROUP BY ProductName", oread.gridControlActualRcvd, oread.gridViewActualRcvd);
             //Database.display("SELECT ProductName,SUM(QtyDelivered) as TotalKilos,COUNT(distinct BarcodeNo) as TotalBox FROM DeliveryDetails WHERE PONumber='" + txtpono.Text + "' GROUP BY ProductName", oread.gridControl2, oread.gridView2);
-            Database.display("SELECT ProductName,ActualQty FROM DeliveryDetails WHERE ProductNo not in (Select ProductCode FROM ReceivedOrderDetails WHERE PONumber='" + txtpono.Text + "') AND PONumber='" + txtpono.Text + "' ", oread.gridControl3, oread.gridView3);
+            Database.display("SELECT ProductName,ActualQty FROM DeliveryDetails WHERE ProductNo not in (Select ProductCode FROM ReceivedOrderDetails WHERE PONumber='" + txtpono.Text + "') AND PONumber='" + txtpono.Text + "' ", oread.gridControlMyStsReq, oread.gridViewMyStsReq);
             //Database.display("SELECT ProductName,Qty FROM TransferOrderDetails WHERE ProductCode not in (Select ProductNo FROM DeliveryDetails WHERE PONumber='" + txtpono.Text + "') AND PONumber='" + txtpono.Text + "' ", oread.gridControl3, oread.gridView3);
 
             oread.ShowDialog(this);

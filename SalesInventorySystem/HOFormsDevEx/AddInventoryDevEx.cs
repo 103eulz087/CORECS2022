@@ -39,6 +39,8 @@ namespace SalesInventorySystem.HOFormsDevEx
             txtrefno.Text = IDGenerator.getIDNumberSP("sp_GetReferenceNumber", "ReferenceNumber");
             loadgridview1();
             txtdestination.Text = "Commissary";
+            txtinvoicedate.Text = DateTime.Today.ToShortDateString();
+            txtduedate.Text = DateTime.Today.AddYears(1).ToShortDateString();
             populateProductCategory();
         }
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
@@ -69,6 +71,11 @@ namespace SalesInventorySystem.HOFormsDevEx
             if (checkBox3.Checked == true && String.IsNullOrEmpty(txtcost.Text))
             {
                 XtraMessageBox.Show("Please Input Cost Field!");
+                return;
+            }
+            if (String.IsNullOrEmpty(txtpalletno.Text))
+            {
+                XtraMessageBox.Show("Please Input Pallet Number!");
                 return;
             }
             if (txtbarcode.Text == "")
@@ -485,12 +492,17 @@ namespace SalesInventorySystem.HOFormsDevEx
         private void simpleButton5_Click(object sender, EventArgs e)
         {
             Barcode.BarcodePrinting bprint = new Barcode.BarcodePrinting();
+            bprint.xrshipno.Text = txtshipmentno.Text;
             bprint.lblmanufdate.Text = DateTime.Now.ToShortDateString();
             bprint.lblprodtype.Text = productname.ToString();
             bprint.lbltotalkilos.Text = txtweight.Text;
+            bprint.xrpalletno.Text = txtpalletno.Text;
             bprint.lblxpirydate.Text = Convert.ToDateTime(txtduedate.Text).ToShortDateString();//DateTime.Now.AddYears(1).ToShortDateString();
             bprint.xrBarCode2.Text = txtbarcode.Text.Trim(); //productcategorycode + primalcode + txtweight.Text.Remove(2, 1);
+           
             ReportPrintTool report = new ReportPrintTool(bprint);
+            //report.ShowRibbonPreviewDialog();
+            //report.PrintDialog();
             report.Print();
         }
 
@@ -504,13 +516,22 @@ namespace SalesInventorySystem.HOFormsDevEx
 
         private void btnchecker_Click(object sender, EventArgs e)
         {
-            Orders.OrderCheckerDevEx oread = new Orders.OrderCheckerDevEx();
+            //Orders.OrderCheckerDevEx oread = new Orders.OrderCheckerDevEx();
 
-            Database.display("SELECT Description,Quantity FROM view_PODETAILS WHERE ShipmentNo='" + txtshipmentno.Text + "'", oread.gridControl1, oread.gridView1);
-            Database.display("SELECT Description,SUM(Quantity) as TotalKilos,COUNT(distinct Product) as TotalBox FROM TempInventory WHERE ShipmentNo='" + txtshipmentno.Text + "' GROUP BY Description", oread.gridControl2, oread.gridView2);
-            Database.display("SELECT Description,Quantity FROM view_PODETAILS WHERE OrderCode not in (Select Product FROM TempInventory WHERE ShipmentNo='" + txtshipmentno.Text + "') AND ShipmentNo='" + txtshipmentno.Text + "' ", oread.gridControl3, oread.gridView3);
+            ////Database.display("SELECT Description,Quantity FROM view_PODETAILS WHERE ShipmentNo='" + txtshipmentno.Text + "'", oread.gridControlDelivByComm, oread.gridViewDelivByComm);
+            ////Database.display("SELECT Description,SUM(Quantity) as TotalKilos,COUNT(distinct Product) as TotalBox FROM TempInventory WHERE ShipmentNo='" + txtshipmentno.Text + "' GROUP BY Description", oread.gridControlActualRcvd, oread.gridViewActualRcvd);
+            ////Database.display("SELECT Description,Quantity FROM view_PODETAILS WHERE OrderCode not in (Select Product FROM TempInventory WHERE ShipmentNo='" + txtshipmentno.Text + "') AND ShipmentNo='" + txtshipmentno.Text + "' ", oread.gridControlMyStsReq, oread.gridViewMyStsReq);
+            //////MY STS REQUEST ITEMS
+            ////Database.display("SELECT ProductCode,ProductName,Qty FROM TransferOrderDetails WHERE PONumber= ORDER BY ProductCode ASC", oread.gridControlMyStsReq, oread.gridViewMyStsReq);
 
-            oread.ShowDialog(this);
+
+            //////DELIVERED BY COMMISSARY
+            ////Database.display("SELECT ProductNo,ProductName,QtyDelivered FROM DeliveryDetails WHERE PONumber='" + oread.gridViewMyReq.GetRowCellValue(oread.gridViewMyReq.FocusedRowHandle, "PONumber").ToString() + "' ORDER BY ProductNo ASC", oread.gridControlDelivByComm, oread.gridViewDelivByComm);
+
+            //////ACTUAL RECEIVED
+            ////Database.display("SELECT ProductCode,ProductName,SUM(Qty) as TotalKilos FROM ReceivedOrderDetails WHERE PONumber='" + oread.gridViewMyReq.GetRowCellValue(oread.gridViewMyReq.FocusedRowHandle, "PONumber").ToString() + "' GROUP BY ProductCode,ProductName  ORDER BY ProductCode ASC", oread.gridControlActualRcvd, oread.gridViewActualRcvd);
+
+            //oread.ShowDialog(this);
         }
 
         private void txtsrchprod_EditValueChanged(object sender, EventArgs e)
@@ -521,6 +542,7 @@ namespace SalesInventorySystem.HOFormsDevEx
             productcode = SearchLookUpClass.getSingleValue(txtsrchprod, "ProductCode");
             categorycode = SearchLookUpClass.getSingleValue(txtsrchprod, "CategoryCode");
             productname = SearchLookUpClass.getSingleValue(txtsrchprod, "Description");
+            txtpalletno.Text = "";
             txtweight.Focus();
         }
     }

@@ -21,23 +21,24 @@ namespace SalesInventorySystem.HOFormsDevEx
         // string prodnum, desc, qty, seqnum, barcode, datereceived,cost;
         public static bool isdone = false;
       
+        //TRANSFER TO BIGBLUE
         void executeTransfer()
         {
             try
             {
-                GridView view = gridControl1.FocusedView as GridView;
-                view.SortInfo.Clear();
+                //GridView view = gridControl1.FocusedView as GridView;
+                //view.SortInfo.Clear();
 
-                int[] selectedRows = gridView1.GetSelectedRows();
+                //int[] selectedRows = gridView1.GetSelectedRows();
 
-                foreach (int rowHandle in selectedRows)
-                {
-                    string barcode = gridView1.GetRowCellValue(rowHandle, "Barcode").ToString();//dataGridView1.Rows[0].Cells["Barcode"].Value.ToString(); 
-                    if (rowHandle >= 0)
-                    {
-                        Database.ExecuteQuery("Update TempInventoryPrimal SET isWarehouse=0 WHERE Barcode='" + barcode + "'");
-                    }
-                }
+                //foreach (int rowHandle in selectedRows)
+                //{
+                //    string barcode = gridView1.GetRowCellValue(rowHandle, "Barcode").ToString();//dataGridView1.Rows[0].Cells["Barcode"].Value.ToString(); 
+                //    if (rowHandle >= 0)
+                //    {
+                //        Database.ExecuteQuery("Update TempInventoryPrimal SET isWarehouse=0 WHERE Barcode='" + barcode + "'");
+                //    }
+                //}
               
                 //spTransfer();
                 spUpload();
@@ -168,23 +169,25 @@ namespace SalesInventorySystem.HOFormsDevEx
         void display()
         {
             Database.display("Select SequenceNumber" +
-                ",Product" +
+                ",PalletNo" +
+                 ",Product" +
                 ",Description" +
                 ",Barcode" +
                 ",Quantity" +
                 ",Available" +
-                ",DateReceived " +
-                "FROM TempInventory " +
+                ",DateProcessed " +
+                "FROM TempInventoryPrimal " +
                 "WHERE BatchCode='" + txtbatchcode.Text + "' " +
-                "and isStock=1 " +
-                "and isProcess=0", gridControl1, gridView1);
+                "and isDone=0", gridControl1, gridView1);
         }
 
         private void simpleButton1_Click(object sender, EventArgs e)
         {
             executeTransfer();
+            isdone = true;
+            XtraMessageBox.Show("Successfully");
             this.Close();
-            XtraMessageBox.Show("Successfully Transfered");
+           
             //BigBlueTemplate();
 
         }

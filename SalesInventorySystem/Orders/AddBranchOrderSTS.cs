@@ -264,23 +264,25 @@ namespace SalesInventorySystem.Orders
 
         private void add()
         {
+            if (barcodescanning.Checked == true)
+            {
+                addbyBarcode();
+            }
+            else
+            {
+                addBranchOrder();
+            }
+        }
+
+        void addBranchOrder()
+        {
+            string sourceseqnum = "";
+            sourceseqnum = txtseqno.Text;
             SqlConnection con = Database.getConnection();
             con.Open();
             string query = "sp_AddBranchOrder";
             try
             {
-                bool isbarcodscanning = false;
-                string sourceseqnum = "";
-                if (barcodescanning.Checked == true)
-                {
-                    isbarcodscanning = true;
-                    primalproductcode = globalproductcode;
-                    productcategorycode = primalproductcode.Substring(0, 2);
-                }
-                else
-                {
-                    sourceseqnum = txtseqno.Text;
-                }
                 SqlCommand com = new SqlCommand(query, con);
                 com.Parameters.AddWithValue("@parmdevno", txtdevno.Text);
                 com.Parameters.AddWithValue("@parmrefno", txtrefno.Text);
@@ -295,7 +297,34 @@ namespace SalesInventorySystem.Orders
                 com.Parameters.AddWithValue("@preparedby", Login.Fullname);
                 //com.Parameters.AddWithValue("@parmeffectivitydate", txteffectivedate.Text);
                 com.Parameters.AddWithValue("@parmsourceseqno", sourceseqnum);
-                com.Parameters.AddWithValue("@parmbarcodescanning", isbarcodscanning);
+                com.Parameters.AddWithValue("@parmbarcodescanning", "");
+                com.CommandType = CommandType.StoredProcedure;
+                com.CommandText = query;
+                com.ExecuteNonQuery();
+            }
+            catch (SqlException ex)
+            {
+                XtraMessageBox.Show(ex.Message.ToString() + "XYZ");
+            }
+            con.Close();
+        }
+
+        void addbyBarcode()
+        {
+            SqlConnection con = Database.getConnection();
+            con.Open();
+            string query = "sp_AddBranchOrderByBarcode";
+            try
+            {
+                SqlCommand com = new SqlCommand(query, con);
+                com.Parameters.AddWithValue("@parmdevno", txtdevno.Text);
+                com.Parameters.AddWithValue("@parmrefno", txtrefno.Text);
+                com.Parameters.AddWithValue("@parmpono", txtponum.Text);
+               
+                com.Parameters.AddWithValue("@parmbarcode", txtsku.Text);
+                com.Parameters.AddWithValue("@parmbranchcode", txtbrcode.Text); //initiating branhc
+                com.Parameters.AddWithValue("@parmorigin", Login.assignedBranch);
+                com.Parameters.AddWithValue("@preparedby", Login.Fullname); 
                 com.CommandType = CommandType.StoredProcedure;
                 com.CommandText = query;
                 com.ExecuteNonQuery();
@@ -600,7 +629,7 @@ namespace SalesInventorySystem.Orders
             {
                 bool checkifexists = Database.checkifExist($"SELECT TOP(1) Barcode " +
                     $"FROM Inventory WHERE Barcode='{txtbarcodescanning.Text}' " +
-                    $"and Available > 0 and Branch='{Login.assignedBranch}'");
+                    $"and Available > 0 and isWarehouse=1 and Branch='{Login.assignedBranch}'");
                 if(!checkifexists)
                 {
                     XtraMessageBox.Show("Barcode Not Exist in Inventory!...");
@@ -631,10 +660,12 @@ namespace SalesInventorySystem.Orders
                 globaltxtbarcodescanning = "";
                 globaltxtbarcodescanning = txtbarcodescanning.Text;
 
-                var rows = Database.getMultipleQuery($"SELECT * FROM dbo.funcTable_DecryptBarcode('{txtbarcodescanning.Text}')", "ProductCode,Quantity");
+                //var rows = Database.getMultipleQuery($"SELECT * FROM dbo.funcTable_DecryptBarcode('{txtbarcodescanning.Text}')", "ProductCode,Quantity");
+                var rows = Database.getMultipleQuery($"SELECT TOP(1) Product,Available,Barcode FROM dbo.Inventory WHERE Barcode='{txtbarcodescanning.Text}' and isWarehouse=1 and Available > 0 ", "Product,Available");
+
                 string ProductCode, Quantity;
-                ProductCode = rows["ProductCode"].ToString();
-                Quantity = rows["Quantity"].ToString();
+                ProductCode = rows["Product"].ToString();
+                Quantity = rows["Available"].ToString();
                 pcode = ProductCode;
                 qty = Quantity;
                 barcode = txtbarcodescanning.Text;
@@ -748,9 +779,9 @@ namespace SalesInventorySystem.Orders
         {
             Orders.OrderCheckerDevEx oread = new Orders.OrderCheckerDevEx();
 
-            Database.display("SELECT ProductName,Qty FROM TransferOrderDetails WHERE PONumber='" + txtponum.Text + "'", oread.gridControl1, oread.gridView1);
-            Database.display("SELECT ProductName,QtyDelivered FROM DeliveryDetails WHERE PONumber='" + txtponum.Text + "'", oread.gridControl2, oread.gridView2);
-            Database.display("SELECT ProductName,Qty FROM TransferOrderDetails WHERE ProductCode not in (Select ProductNo FROM DeliveryDetails WHERE PONumber='" + txtponum.Text + "') AND PONumber='" + txtponum.Text + "' ", oread.gridControl3, oread.gridView3);
+            Database.display("SELECT ProductName,Qty FROM TransferOrderDetails WHERE PONumber='" + txtponum.Text + "'", oread.gridControlDelivByComm, oread.gridViewDelivByComm);
+            Database.display("SELECT ProductName,QtyDelivered FROM DeliveryDetails WHERE PONumber='" + txtponum.Text + "'", oread.gridControlActualRcvd, oread.gridViewActualRcvd);
+            Database.display("SELECT ProductName,Qty FROM TransferOrderDetails WHERE ProductCode not in (Select ProductNo FROM DeliveryDetails WHERE PONumber='" + txtponum.Text + "') AND PONumber='" + txtponum.Text + "' ", oread.gridControlMyStsReq, oread.gridViewMyStsReq);
 
             oread.ShowDialog(this);
         }
@@ -786,7 +817,7 @@ namespace SalesInventorySystem.Orders
                 decimal quantity;
                 string strquantity;
                 string productcode = "";
-                if (txtcomport.Text == "")
+                if (txtcomport.Text == "" || txtcomport.Text == null)
                 {
                     XtraMessageBox.Show("Please Select COM-PORT");
                 }
@@ -796,8 +827,6 @@ namespace SalesInventorySystem.Orders
                     {
                         ctr2++;
                     }
-                    Random rand = new Random();
-                    int ctr = rand.Next(0, 9);
                     txtweight.Invoke(this.myDelegate, new Object[] { wieght2 });
 
                     quantity = Decimal.Parse(txtweight.Text);
@@ -811,7 +840,11 @@ namespace SalesInventorySystem.Orders
                     else
                     {
                         productcode = pcode.ToString();//getProductCode();
-                        txtsku.Text = Database.getSingleQuery("Products", "BranchCode='" + Login.assignedBranch + "' AND ProductCode='" + pcode + "' ", "Barcode");
+                        //txtsku.Text = Database.getSingleQuery("Products", "BranchCode='" + Login.assignedBranch + "' AND ProductCode='" + pcode + "' ", "Barcode");
+                        string barcode = Database.getSingleResultSet($"SELECT dbo.func_GenerateBarcode" +
+                $"('{Login.assignedBranch}',0,'{txtponum.Text}','{productcode.ToString()}','{strquantity}','2') ");
+
+                        txtsku.Text = barcode;
                         //if (isBarcodeLong == true)
                         //{
                         //    txtsku.Text = "33333" + productcode + strquantity.Replace(".", "") + Classes.Utilities.sequencePadding(ctr2.ToString());
@@ -829,7 +862,7 @@ namespace SalesInventorySystem.Orders
                         //{
                         //    simpleButton1.Focus();
                         //}
-                        txtsku.Focus();
+                        btnadd.Focus();
                     }
 
 
@@ -873,35 +906,36 @@ namespace SalesInventorySystem.Orders
                         productcategorycode = Database.getSingleQuery("Products",$"ProductCode='{primalproductcode}' AND BranchCode='{Login.assignedBranch}'","ProductCategoryCode");//primalproductcode.Substring(0, 2);
 
                     }
-                    bool requestedProductExist = false;
-                    for (int j = 0; j <= gridView1.RowCount - 1; j++)
-                    {
-                        if (gridView1.GetRowCellValue(j, "ProductCode").ToString() == primalproductcode)
-                            requestedProductExist = true;
-                        if (requestedProductExist)
-                            break;
-                    }
-                    bool inventoryExist = Database.checkifExist("SELECT TOP(1) Product FROM Inventory WHERE Product='" + primalproductcode + "' AND Branch='" + Login.assignedBranch + "' AND IsStock='1'");
+                    //bool requestedProductExist = false;
+                    //for (int j = 0; j <= gridView1.RowCount - 1; j++)
+                    //{
+                    //    if (gridView1.GetRowCellValue(j, "ProductCode").ToString() == primalproductcode)
+                    //        requestedProductExist = true;
+                    //    if (requestedProductExist)
+                    //        break;
+                    //}
+                    bool inventoryExist = Database.checkifExist("SELECT TOP(1) Product FROM Inventory WHERE Product='" + primalproductcode + "' AND Branch='" + Login.assignedBranch + "' AND Available > 0 and isWarehouse=1 ");
 
-                    if (!requestedProductExist && txtbrcode.Text!="999")
-                    {
-                        XtraMessageBox.Show("You cant add this Product because it is not available in Purchase Order List!");
-                        txtsku.Text = "";
-                    }
-                    else if (!inventoryExist)
+                    //if (!requestedProductExist && txtbrcode.Text!="999")
+                    //{
+                    //    XtraMessageBox.Show("You cant add this Product because it is not available in Purchase Order List!");
+                    //    txtsku.Text = "";
+                    //}
+                    if (!inventoryExist)
                     {
                         XtraMessageBox.Show("No Product Inventory");
                         txtsku.Text = "";
                     }
                     //kung imong gi encode na quantity is greater than sa total quantity sa imong Inventory sa commisary
-                    else if (Convert.ToDouble(txtweight.Text) > Database.getTotalSummation2("Inventory", "Product = '" + primalproductcode + "' AND Branch='" + Login.assignedBranch + "' AND IsStock='1' and Available > 0 ", "Available")) //Database.getTotalSummation("Inventory", "Product", txtsku.Text.Substring(1, 6), "Quantity"))
+                    else if (Convert.ToDouble(txtweight.Text) > Database.getTotalSummation2("Inventory", "Product = '" + primalproductcode + "' AND Branch='" + Login.assignedBranch + "' AND isWarehouse=1 and Available > 0 ", "Available")) //Database.getTotalSummation("Inventory", "Product", txtsku.Text.Substring(1, 6), "Quantity"))
                     {
-                        string mark = Database.getTotalSummation2("Inventory", "Product = '" + primalproductcode + "' AND Branch='" + Login.assignedBranch + "' AND IsStock='1'  and Available > 0 ", "Available").ToString();
+                        string mark = Database.getTotalSummation2("Inventory", "Product = '" + primalproductcode + "' AND Branch='" + Login.assignedBranch + "' AND isWarehouse=1  and Available > 0 ", "Available").ToString();
                         XtraMessageBox.Show("Insuficient Stocks for this Product.. Your Available Quantity is " + mark);
                     }
                     else
                     {
                         add();
+                      
                         displayForDelivery();
                         //if(isFifo==false)
                         //{
@@ -1010,11 +1044,11 @@ namespace SalesInventorySystem.Orders
         {
             Orders.OrderCheckerDevEx oread = new Orders.OrderCheckerDevEx();
 
-            Database.display("SELECT ProductName,Qty FROM TransferOrderDetails WHERE PONumber='" + txtponum.Text + "'", oread.gridControl1, oread.gridView1); 
+            Database.display("SELECT ProductName,Qty FROM TransferOrderDetails WHERE PONumber='" + txtponum.Text + "'", oread.gridControlDelivByComm, oread.gridViewDelivByComm); 
 
-            Database.display("SELECT ProductName,SUM(QtyDelivered) as TotalKilos,COUNT(distinct BarcodeNo) as TotalBox FROM DeliveryDetails WHERE PONumber='" + txtponum.Text + "' GROUP BY ProductName", oread.gridControl2, oread.gridView2);
+            Database.display("SELECT ProductName,SUM(QtyDelivered) as TotalKilos,COUNT(distinct BarcodeNo) as TotalBox FROM DeliveryDetails WHERE PONumber='" + txtponum.Text + "' GROUP BY ProductName", oread.gridControlActualRcvd, oread.gridViewActualRcvd);
            
-            Database.display("SELECT ProductName,Qty FROM TransferOrderDetails WHERE ProductCode not in (Select ProductNo FROM DeliveryDetails WHERE PONumber='" + txtponum.Text + "') AND PONumber='" + txtponum.Text + "' ", oread.gridControl3, oread.gridView3);
+            Database.display("SELECT ProductName,Qty FROM TransferOrderDetails WHERE ProductCode not in (Select ProductNo FROM DeliveryDetails WHERE PONumber='" + txtponum.Text + "') AND PONumber='" + txtponum.Text + "' ", oread.gridControlMyStsReq, oread.gridViewMyStsReq);
 
             oread.ShowDialog(this);
         }
@@ -1028,6 +1062,8 @@ namespace SalesInventorySystem.Orders
                 {
                     //string qtydel = gridView2.GetRowCellValue(i, "QtyDelivered").ToString();
                     Barcode.BarcodePrinting bprint = new Barcode.BarcodePrinting();
+                    bprint.xrLabel3.Text = "PONumber:";
+                    bprint.xrLabel6.Text = "";
                     bprint.lblmanufdate.Text = DateTime.Now.ToShortDateString();
                     bprint.lblprodtype.Text = gridView2.GetRowCellValue(i, "ProductName").ToString();
                     bprint.lbltotalkilos.Text = gridView2.GetRowCellValue(i, "QtyDelivered").ToString();

@@ -648,6 +648,7 @@ namespace SalesInventorySystem
             CashSalesReport cashreps = new CashSalesReport();
             cashreps.MdiParent = this;
             cashreps.Show();
+
         }
 
         private void barStaticItem1_ItemClick(object sender, ItemClickEventArgs e)
@@ -657,7 +658,7 @@ namespace SalesInventorySystem
 
         private void barButtonItem19_ItemClick(object sender, ItemClickEventArgs e)
         {
-           
+
             //foreach (Form form in Application.OpenForms)
             //{
             //    if (form.GetType() == typeof(HOForms.ProcessPrimalCutForm))
@@ -669,7 +670,7 @@ namespace SalesInventorySystem
             HOForms.SetBatchCodeFrm setbarcho = new HOForms.SetBatchCodeFrm();
 
             setbarcho.Show();
-            setbarcho.TopMost = true;
+            //setbarcho.TopMost = true;
             //AddPrimalCuts pcutfmr = new AddPrimalCuts();
             //pcutfmr.Show();
 
@@ -677,6 +678,9 @@ namespace SalesInventorySystem
             //pcutform.Show();
 
             //HOForms.AddPrimalCutInventory pcutform = new HOForms.AddPrimalCutInventory();
+            //pcutform.Show();
+
+            //HOFormsDevEx.AddPrimalCutDevEx pcutform = new HOFormsDevEx.AddPrimalCutDevEx();
             //pcutform.Show();
 
         }
@@ -991,15 +995,25 @@ namespace SalesInventorySystem
             //    HOConversion hocn = new HOConversion();
             //    hocn.Show();
             //}
+            //foreach (Form form in Application.OpenForms)
+            //{
+            //    if (form.GetType() == typeof(HOConversionPOS))
+            //    {
+            //        form.Activate();
+            //        return;
+            //    }
+            //}
+            //HOConversionPOS hocn = new HOConversionPOS();
+            //hocn.Show();
             foreach (Form form in Application.OpenForms)
             {
-                if (form.GetType() == typeof(HOConversionPOS))
+                if (form.GetType() == typeof(HOConversion))
                 {
                     form.Activate();
                     return;
                 }
             }
-            HOConversionPOS hocn = new HOConversionPOS();
+            HOConversion hocn = new HOConversion();
             hocn.Show();
         }
 
@@ -1262,15 +1276,26 @@ namespace SalesInventorySystem
 
         private void barButtonItem59_ItemClick(object sender, ItemClickEventArgs e)
         {
+            //foreach (Form form in Application.OpenForms)
+            //{
+            //    if (form.GetType() == typeof(HOFormsDevEx.CarcassCostingDevEx))
+            //    {
+            //        form.Activate();
+            //        return;
+            //    }
+            //}
+            //HOFormsDevEx.CarcassCostingDevEx pcusatfsmr = new HOFormsDevEx.CarcassCostingDevEx();
+            //pcusatfsmr.MdiParent = this;
+            //pcusatfsmr.Show();
             foreach (Form form in Application.OpenForms)
             {
-                if (form.GetType() == typeof(HOFormsDevEx.CarcassCostingDevEx))
+                if (form.GetType() == typeof(HOFormsDevEx.PrimalCutCosting))
                 {
                     form.Activate();
                     return;
                 }
             }
-            HOFormsDevEx.CarcassCostingDevEx pcusatfsmr = new HOFormsDevEx.CarcassCostingDevEx();
+            HOFormsDevEx.PrimalCutCosting pcusatfsmr = new HOFormsDevEx.PrimalCutCosting();
             pcusatfsmr.MdiParent = this;
             pcusatfsmr.Show();
         }
@@ -1360,16 +1385,16 @@ namespace SalesInventorySystem
             //}
             //HOForms.TransferInventoryUpdate pcusatfsmr = new HOForms.TransferInventoryUpdate();
             //pcusatfsmr.Show();
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form.GetType() == typeof(HOForms.TransferInventoryUpdate))
-                {
-                    form.Activate();
-                    return;
-                }
-            }
-            HOForms.TransferInventoryUpdate pcusatfsmr = new HOForms.TransferInventoryUpdate();
-            pcusatfsmr.Show();
+            //foreach (Form form in Application.OpenForms)
+            //{
+            //    if (form.GetType() == typeof(HOForms.TransferInventoryUpdate))
+            //    {
+            //        form.Activate();
+            //        return;
+            //    }
+            //}
+            //HOForms.TransferInventoryUpdate pcusatfsmr = new HOForms.TransferInventoryUpdate();
+            //pcusatfsmr.Show();
         }
 
         private void barButtonItem63_ItemClick(object sender, ItemClickEventArgs e)
@@ -2798,14 +2823,18 @@ namespace SalesInventorySystem
 
         private void btnTransferPerPallet_ItemClick(object sender, ItemClickEventArgs e)
         {
-            HOFormsDevEx.TransferPerPalletDevEx ads = new HOFormsDevEx.TransferPerPalletDevEx();
+            HOFormsDevEx.TransferPerPalletDevExFixed ads = new HOFormsDevEx.TransferPerPalletDevExFixed();
             ads.Show();
+            //HOFormsDevEx.TransferPerPalletDevEx ads = new HOFormsDevEx.TransferPerPalletDevEx();
+            //ads.Show();
         }
 
         private void btnTransferPerBarcode_ItemClick(object sender, ItemClickEventArgs e)
         {
-            HOFormsDevEx.TransferPerBarcodeDevEx ads = new HOFormsDevEx.TransferPerBarcodeDevEx();
+            HOFormsDevEx.TransferByBarcode ads = new HOFormsDevEx.TransferByBarcode();
             ads.Show();
+            //HOFormsDevEx.TransferPerBarcodeDevEx ads = new HOFormsDevEx.TransferPerBarcodeDevEx();
+            //ads.Show();
         }
 
         private void barButtonItem24_ItemClick_1(object sender, ItemClickEventArgs e)

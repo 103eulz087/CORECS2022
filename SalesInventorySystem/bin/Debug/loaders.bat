@@ -1,3 +1,3 @@
-taskkill /pid 14372 /f
-                    CD "C:\CORECSPROJECT-GENERAL_VERSION\corecs\SalesInventorySystem\bin\Debug"
+taskkill /pid 47860 /f
+                    CD "C:\Users\avanc\Downloads\CORECS2022\SalesInventorySystem\bin\Debug"
                     START exeUpdater.exe 

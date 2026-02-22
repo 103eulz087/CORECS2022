@@ -57,6 +57,12 @@ namespace SalesInventorySystem.Reporting
                 "and InvoiceDate <= '" + txtdateto.Text + "'", gridControl1, gridView1);
         }
 
+        private void gridControl1_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+                contextMenuStrip1.Show(gridControl1, e.Location);
+        }
+
         void displayShipmentReports(string shipno)
         {
             CarcassReports carrep = new CarcassReports();
@@ -101,12 +107,18 @@ namespace SalesInventorySystem.Reporting
                 carrep.gridControl1.EndUpdate();
             }
         }
-        private void gridView1_DoubleClick(object sender, EventArgs e)
+
+        private void showDetailsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            showItems();
+        }
+
+        void showItems()
         {
             shipmentno = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "ShipmentNo").ToString();
             supplierid = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "SupplierID").ToString();
             invoinceno = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "InvoiceNo").ToString();
-          
+
             CarcassReports carrep = new CarcassReports();
             carrep.Show();
             if (carrep.radgroup.Checked == true)
@@ -149,10 +161,14 @@ namespace SalesInventorySystem.Reporting
 
                 Classes.DevXGridViewSettings.ShowFooterTotal(carrep.gridView1, "Quantity");
                 Classes.DevXGridViewSettings.ShowFooterTotal(carrep.gridView1, "TotalCost");
-                
+
                 carrep.gridView1.BestFitColumns();
                 carrep.gridControl1.EndUpdate();
             }
+        }
+        private void gridView1_DoubleClick(object sender, EventArgs e)
+        {
+            showItems();
         }
 
         private void simpleButton1_Click(object sender, EventArgs e)

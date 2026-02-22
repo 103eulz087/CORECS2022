@@ -8,6 +8,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms;
+using System.Windows.Forms;
 
 namespace SalesInventorySystem.HOForms
 {
@@ -33,8 +35,10 @@ namespace SalesInventorySystem.HOForms
                 {
                     batchcode = txtbatchcode.Text;
                     AddPrimalCutInventory addprim = new AddPrimalCutInventory();
-                    addprim.Show();
+                    addprim.txtbatchcode.Text = txtbatchcode.Text;
                     addprim.txtshipmentno.Text = shipno;
+                    addprim.Show();
+                   
                     this.Close();
                 }
                 else

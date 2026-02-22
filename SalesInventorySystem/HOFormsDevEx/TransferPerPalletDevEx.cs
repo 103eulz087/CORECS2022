@@ -57,52 +57,124 @@ namespace SalesInventorySystem.HOFormsDevEx
             }
             con.Close();
         }
+
+        private void CallTransferByPallet(string option)
+        {
+            // Derive source/destination
+            string source = radtobigblue.Checked ? "Commissary" : "BigBlue";
+            string destination = radtobigblue.Checked ? "BigBlue" : "Commissary";
+
+            using (var con = Database.getConnection())
+            using (var cmd = new SqlCommand("dbo.sp_TransferByPallet", con))
+            {
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                // Typed parameters with reasonable sizes
+                cmd.Parameters.Add("@parmshipmentno", SqlDbType.VarChar, 50).Value = txtshipmentno.Text?.Trim();
+                cmd.Parameters.Add("@parmprodcode", SqlDbType.VarChar, 50).Value = var.ToString() ?? "";
+                cmd.Parameters.Add("@parmpalletno", SqlDbType.VarChar, 50).Value = txtpalletno.Text?.Trim();
+                cmd.Parameters.Add("@parmbatchnumber", SqlDbType.VarChar, 50).Value = txtbatchno.Text?.Trim();
+                cmd.Parameters.Add("@parmdispatchno", SqlDbType.VarChar, 50).Value = txtdispatchno.Text?.Trim();
+                cmd.Parameters.Add("@parmsource", SqlDbType.VarChar, 30).Value = source;
+                cmd.Parameters.Add("@parmdestination", SqlDbType.VarChar, 30).Value = destination;
+                cmd.Parameters.Add("@parmuser", SqlDbType.VarChar, 100).Value = Login.Fullname;
+                cmd.Parameters.Add("@parmoption", SqlDbType.VarChar, 20).Value = option;
+                cmd.Parameters.Add("@parmbranch", SqlDbType.VarChar, 50).Value = Login.assignedBranch; // NEW
+
+                con.Open();
+
+                if (option == "ADD")
+                {
+                    using (var adapter = new SqlDataAdapter(cmd))
+                    {
+                        var table = new DataTable();
+                        adapter.Fill(table);
+                        gridControl1.DataSource = table;
+                        gridView1.BestFitColumns();
+                    }
+                }
+                else // "SAVE"
+                {
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
         private void btnadd_Click(object sender, EventArgs e)
         {
-            string source = "", destination = "";
-            bool isExist = false;
-            if (radtobigblue.Checked == true) //transfer to bigblue
-            {
-                source = "Commissary";
-                destination = "BigBlue";
-                isExist = Database.checkifExist("SELECT TOP(1) Branch FROM Inventory " +
-                    "WHERE ShipmentNo='" + txtshipmentno.Text + "' " +
-                    "AND Description='" + txtproduct.Text + "' " +
-                    "AND PalletNo='" + txtpalletno.Text + "'" +
-                     "AND isWarehouse=0 " +
-                    "AND Branch='" + Login.assignedBranch + "' ORDER BY SequenceNumber");
-            }
-            else //transfer to comm
-            {
-                source = "BigBlue";
-                destination = "Commissary";
-                isExist = Database.checkifExist("SELECT TOP(1) Branch FROM Inventory " +
-                    "WHERE ShipmentNo='" + txtshipmentno.Text + "' " +
-                    "AND Description='" + txtproduct.Text + "' " +
-                    "AND PalletNo='" + txtpalletno.Text + "'" +
-                     "AND isWarehouse=1 " +
-                    "AND Branch='" + Login.assignedBranch + "' ORDER BY SequenceNumber");
-            }
-            if (String.IsNullOrEmpty(txtdispatchno.Text))
+
+            if (string.IsNullOrWhiteSpace(txtdispatchno.Text))
             {
                 XtraMessageBox.Show("Add Dispatch No first.");
                 txtdispatchno.Focus();
                 return;
             }
-            if (radtobigblue.Checked == false && radtocomm.Checked == false)
+            if (!radtobigblue.Checked && !radtocomm.Checked)
             {
-                XtraMessageBox.Show("Please Select Transfer Type");
+                XtraMessageBox.Show("Please select Transfer Type.");
                 return;
             }
-            if (!isExist)
+            if (string.IsNullOrWhiteSpace(txtshipmentno.Text) ||
+                string.IsNullOrWhiteSpace(var.ToString()) ||
+                string.IsNullOrWhiteSpace(txtpalletno.Text))
             {
-                sp_Transfer(source, destination, "ADD");
-            }
-            else
-            {
-                XtraMessageBox.Show("Already Exist to Destination Table");
+                XtraMessageBox.Show("Please complete Shipment, Product, and Pallet.");
                 return;
             }
+
+            try
+            {
+                CallTransferByPallet("ADD");
+            }
+            catch (SqlException ex)
+            {
+                XtraMessageBox.Show(ex.Message, "Stage failed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
+            //string source = "", destination = "";
+            //bool isExist = false;
+            //if (radtobigblue.Checked == true) //transfer to bigblue
+            //{
+            //    source = "Commissary";
+            //    destination = "BigBlue";
+            //    isExist = Database.checkifExist("SELECT TOP(1) Branch FROM Inventory " +
+            //        "WHERE ShipmentNo='" + txtshipmentno.Text + "' " +
+            //        "AND Description='" + txtproduct.Text + "' " +
+            //        "AND PalletNo='" + txtpalletno.Text + "'" +
+            //         "AND isWarehouse=0 " +
+            //        "AND Branch='" + Login.assignedBranch + "' ORDER BY SequenceNumber");
+            //}
+            //else //transfer to comm
+            //{
+            //    source = "BigBlue";
+            //    destination = "Commissary";
+            //    isExist = Database.checkifExist("SELECT TOP(1) Branch FROM Inventory " +
+            //        "WHERE ShipmentNo='" + txtshipmentno.Text + "' " +
+            //        "AND Description='" + txtproduct.Text + "' " +
+            //        "AND PalletNo='" + txtpalletno.Text + "'" +
+            //         "AND isWarehouse=1 " +
+            //        "AND Branch='" + Login.assignedBranch + "' ORDER BY SequenceNumber");
+            //}
+            //if (String.IsNullOrEmpty(txtdispatchno.Text))
+            //{
+            //    XtraMessageBox.Show("Add Dispatch No first.");
+            //    txtdispatchno.Focus();
+            //    return;
+            //}
+            //if (radtobigblue.Checked == false && radtocomm.Checked == false)
+            //{
+            //    XtraMessageBox.Show("Please Select Transfer Type");
+            //    return;
+            //}
+            //if (!isExist)
+            //{
+            //    sp_Transfer(source, destination, "ADD");
+            //}
+            //else
+            //{
+            //    XtraMessageBox.Show("Already Exist to Destination Table");
+            //    return;
+            //}
         }
         void radchanged()
         {
@@ -132,6 +204,7 @@ namespace SalesInventorySystem.HOFormsDevEx
 
         private void txtproduct_EditValueChanged(object sender, EventArgs e)
         {
+
             var = SearchLookUpClass.getSingleValue(txtproduct, "Product");
             if (radtobigblue.Checked == true) //source is commissary
             {

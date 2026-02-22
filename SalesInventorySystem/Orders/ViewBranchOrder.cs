@@ -153,6 +153,10 @@ namespace SalesInventorySystem
 
                 addbrorder.gridView1.Columns["PONumber"].Summary.Add(DevExpress.Data.SummaryItemType.Count, "PONumber", "{0:n2}");
                 addbrorder.gridView2.Columns["SeqNo"].Summary.Add(DevExpress.Data.SummaryItemType.Count, "SeqNo", "{0:n2}");
+
+                Database.displaySearchlookupEdit($"SELECT * FROM dbo.funcview_populateProducts('{Login.assignedBranch}') " +
+                 $"WHERE ProductCode in (Select distinct ProductCode FROM PurchaseOrderDetails WHERE PONumber='{ponumber}')", addbrorder.txtsearchlookupproduct, "Description", "Description");
+
             }
             else
             {

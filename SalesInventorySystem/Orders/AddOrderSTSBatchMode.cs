@@ -23,6 +23,8 @@ namespace SalesInventorySystem.Orders
         private void AddOrderSTSBatchMode_Load(object sender, EventArgs e)
         {
             panelControl2.Visible = true;
+            ordertype.SelectedIndex = 0;
+            //txtgroup.SelectedIndex = 0;
         }
 
         private void btnnew_Click(object sender, EventArgs e)
@@ -30,6 +32,12 @@ namespace SalesInventorySystem.Orders
             textEdit1.Text = IDGenerator.getIDNumberSP("sp_GetPurchaseOrderNumber", "PONumber"); //IDGenerator.getPONumber();
             txtgroup.Enabled = true;
             Database.displayComboBoxItems("Select CategoryName FROM GroupCategory", "CategoryName", txtgroup);
+
+            btnnew.Enabled = false;
+            btnadd.Enabled = true;
+            btnsave.Enabled = false;
+            btncancel.Enabled = false;
+            btnclose.Enabled = true;
         }
         
         void saveAll()
@@ -85,6 +93,7 @@ namespace SalesInventorySystem.Orders
                 XtraMessageBox.Show("Order Number must not Empty...");
                 return;
             }
+            txtgroup.Text = "INVENTORYTRANSFER";
             if (String.IsNullOrEmpty(txtgroup.Text))
             {
                 XtraMessageBox.Show("Group Category Must Not Empty!...");
@@ -186,12 +195,19 @@ namespace SalesInventorySystem.Orders
             {
                 Orders.SearchProductBatchMode orderko = new SearchProductBatchMode();
                 orderko.txtpono.Text = textEdit1.Text;
+                
                 orderko.ShowDialog(this);
                 if (Orders.SearchProductBatchMode.isdone == true)
                 {
                     Orders.SearchProductBatchMode.isdone = false;
                     orderko.Dispose();
                     display();
+
+                    btnnew.Enabled = false;
+                    btnadd.Enabled = true;
+                    btnsave.Enabled = true;
+                    btncancel.Enabled = true;
+                    btnclose.Enabled = true;
                 }
             }
         }

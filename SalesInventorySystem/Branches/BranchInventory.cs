@@ -21,7 +21,7 @@ namespace SalesInventorySystem
         private void BranchInventory_Load(object sender, EventArgs e)
         {
            // Database.display("SELECT * FROM view_BranchInventory", gridControl1, gridView1);
-            display();
+           
         }
 
         private void display()
@@ -113,6 +113,11 @@ namespace SalesInventorySystem
         {
             string filename = "BRANCHINVENTORY_" + DateTime.Now.ToShortDateString().Replace(@"/", "-");
             HelperFunction.exporttoexcel(gridView1, filename);
+        }
+
+        private void simpleButton1_Click(object sender, EventArgs e)
+        {
+            display();
         }
     }
 }

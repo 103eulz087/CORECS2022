@@ -106,10 +106,10 @@ namespace SalesInventorySystem.HOFormsDevEx
         {
             try
             {
-                GridView view = gridControl1.FocusedView as GridView;
+                GridView view = gridControlRcvd.FocusedView as GridView;
                 view.SortInfo.Clear();
 
-                int[] selectedRows = gridView1.GetSelectedRows();
+                int[] selectedRows = gridViewRcvd.GetSelectedRows();
 
                 // Create DataTable for TVP
                 DataTable inventoryItems = new DataTable();
@@ -121,10 +121,10 @@ namespace SalesInventorySystem.HOFormsDevEx
 
                 foreach (int rowHandle in selectedRows)
                 {
-                    string productCode = gridView1.GetRowCellValue(rowHandle, "ProductNo").ToString();
-                    string barcode = gridView1.GetRowCellValue(rowHandle, "BarcodeNo").ToString();
-                    float qty = Convert.ToSingle(gridView1.GetRowCellValue(rowHandle, "ActualQty"));
-                    decimal sellingPrice = Convert.ToDecimal(gridView1.GetRowCellValue(rowHandle, "SellingPrice"));
+                    string productCode = gridViewRcvd.GetRowCellValue(rowHandle, "ProductNo").ToString();
+                    string barcode = gridViewRcvd.GetRowCellValue(rowHandle, "BarcodeNo").ToString();
+                    float qty = Convert.ToSingle(gridViewRcvd.GetRowCellValue(rowHandle, "ActualQty"));
+                    decimal sellingPrice = Convert.ToDecimal(gridViewRcvd.GetRowCellValue(rowHandle, "SellingPrice"));
                     bool isScan = false; // Set this based on your logic or UI checkbox
 
                     inventoryItems.Rows.Add(productCode, barcode, qty, sellingPrice, isScan);
@@ -163,6 +163,11 @@ namespace SalesInventorySystem.HOFormsDevEx
             int totalorders = Database.getCountData("SELECT COUNT(ProductNo) as Counter FROM DeliveryDetails  WHERE PONumber=" + txtshipmentno.Text + "", "Counter");
              
             bool confirmRcv = HelperFunction.ConfirmDialog("Are you sure you want to save this Inventory?", "Confirm Inventory Entry");
+            //if(totalreceive <= 0)
+            //{
+            //    XtraMessageBox.Show("You did not received any items..");
+            //    return;
+            //}
             if (confirmRcv)
             {
                 executeTransfer();
@@ -214,6 +219,34 @@ namespace SalesInventorySystem.HOFormsDevEx
         private void ReceivedSTSBatchMode_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void gridControlRcvd_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+                contextMenuStrip1.Show(gridControlRcvd, e.Location);
+        }
+
+        private void cancelLineToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            gridViewRcvd.DeleteRow(gridViewRcvd.FocusedRowHandle);
+        }
+
+        private void gridViewRcvd_RowCellStyle(object sender, RowCellStyleEventArgs e)
+        {
+            GridView view = sender as GridView;
+            if (e.Column.FieldName == "ActualQty")
+            {
+                e.Appearance.BackColor = Color.Salmon;
+                e.Appearance.BackColor2 = Color.LightSalmon;
+            }
+        }
+
+        private void gridViewRcvd_ShowingEditor(object sender, CancelEventArgs e)
+        {
+            GridView view = sender as GridView;
+            if (view.FocusedColumn.FieldName != "ActualQty")
+                e.Cancel = true;
         }
     }
 }

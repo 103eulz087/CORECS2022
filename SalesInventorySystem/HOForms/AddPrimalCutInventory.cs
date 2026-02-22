@@ -26,6 +26,7 @@ namespace SalesInventorySystem.HOForms
         double existingqty = 0.0;
         bool isexistingqty = false;
         object categorycode, productcode;
+
         public AddPrimalCutInventory()
         {
             InitializeComponent();
@@ -43,14 +44,15 @@ namespace SalesInventorySystem.HOForms
         {
             try
             {
-                txtbatchcode.Text = HOForms.SetBatchCodeFrm.batchcode;
+               
                 //string _getProdcode = Database.getSingleQuery("Inventory", "BatchCode='" + txtbatchcode.Text + "' and Branch='888'", "Product"); //assumen only one product code at a time
                 //string _getproductCategorycode = _getProdcode.Substring(0, 2);
                 //string _getProdCatName = Classes.Product.getProductCategoryName(_getproductCategorycode);
 
-                radchanged();
+                //radchanged();
 
-                Database.displayComboBoxItems("SELECT Description FROM ProductCategory", "Description", txtprodcat);
+                Database.displayComboBoxItems("SELECT Description FROM ProductCategory with(nolock)", "Description", txtprodcat);
+                Database.displaySearchlookupEdit($"Select ProductCode,Description,ProductCategoryCode FROM dbo.Products with(nolock) WHERE BranchCode='{Login.assignedBranch}' AND ProductCategoryCode IN (10,11,12) ", txtsrchprod, "Description", "Description");
                 getAvailablePort();
 
                 isprimalcuts.Checked = true;
@@ -59,7 +61,7 @@ namespace SalesInventorySystem.HOForms
                 display();
                 txtprodcat.Focus();
 
-                Classes.DevXGridViewSettings.ShowFooterCountTotal(gridView1, "Description");
+                //Classes.DevXGridViewSettings.ShowFooterCountTotal(gridView1, "Description");
                 Classes.DevXGridViewSettings.ShowFooterTotal(gridView1, "Quantity");
                 Classes.DevXGridViewSettings.ShowFooterTotal(gridView1, "Available");
             }
@@ -69,30 +71,29 @@ namespace SalesInventorySystem.HOForms
             }
         }
 
-        void radchanged()
-        {
-            if (isprimalcuts.Checked == true)
-            {
-                Database.displaySearchlookupEdit("SELECT a.ProductCategoryCode as CategoryCode" +
-                  ",b.Description as CategoryName,a.ProductCode,a.Description FROM Products as a INNER JOIN " +
-                  "ProductCategory as b ON a.ProductCategoryCode=b.ProductCategoryID WHERE a.BranchCode='" + Login.assignedBranch + "' " +
-                  "AND a.isPrimalCut=1", txtsrchprod, "Description", "Description");
-            }
-            else
-            {
-                Database.displaySearchlookupEdit("SELECT a.ProductCategoryCode as CategoryCode" +
-                  ",b.Description as CategoryName,a.ProductCode,a.Description FROM Products as a INNER JOIN " +
-                  "ProductCategory as b ON a.ProductCategoryCode=b.ProductCategoryID WHERE a.BranchCode='" + Login.assignedBranch + "' " +
-                  "AND a.isPrimalCut=0", txtsrchprod, "Description", "Description");
-            }
-        }
+        //void radchanged()
+        //{
+        //    if (isprimalcuts.Checked == true)
+        //    {
+        //        Database.displaySearchlookupEdit("SELECT a.ProductCategoryCode as CategoryCode" +
+        //          ",b.Description as CategoryName,a.ProductCode,a.Description FROM Products with(nolock) as a INNER JOIN " +
+        //          "ProductCategory with(nolock) as b ON a.ProductCategoryCode=b.ProductCategoryID WHERE a.BranchCode='" + Login.assignedBranch + "' " +
+        //          "AND a.isPrimalCut=1", txtsrchprod, "Description", "Description");
+        //    }
+        //    else
+        //    {
+        //        Database.displaySearchlookupEdit("SELECT a.ProductCategoryCode as CategoryCode" +
+        //          ",b.Description as CategoryName,a.ProductCode,a.Description FROM Products with(nolock) as a INNER JOIN " +
+        //          "ProductCategory with(nolock) as b ON a.ProductCategoryCode=b.ProductCategoryID WHERE a.BranchCode='" + Login.assignedBranch + "' " +
+        //          "AND a.isPrimalCut=0", txtsrchprod, "Description", "Description");
+        //    }
+        //}
 
         void display()
         {
             Database.display("SELECT * FROM view_ProcessToPrimal " +
                 "WHERE BatchCode='" + txtbatchcode.Text + "' " +
-                "and Available > 0 " +
-                "and isDone = 0", gridControl1, gridView1);
+                "and Available > 0 ", gridControl1, gridView1);
         }
 
         private void getAvailablePort()
@@ -200,26 +201,26 @@ namespace SalesInventorySystem.HOForms
             try
             {
                  
-                bool ifexist = Database.checkifExist("SELECT top 1 ShipmentNo FROM TempCosting WHERE ShipmentNo='" + txtshipmentno.Text + "'");
-                string cost;
+                //bool ifexist = Database.checkifExist("SELECT 1 FROM TempCosting with(nolock) WHERE ShipmentNo='" + txtshipmentno.Text + "'");
+                string cost="0";
                 if (String.IsNullOrEmpty(txtshipmentno.Text))
                 {
                     XtraMessageBox.Show("Please Indicate what Shipment Number you process!");
                     return;
                 }
-                if (ifexist)
-                {
-                    cost = Database.getSingleQuery("TempCosting", "ItemCode='" + productcode + "' and ShipmentNo='" + txtshipmentno.Text + "'", "CostPerKg"); //get from excel anna uploading
-                }
-                else
-                {
-                    //cost = Database.getSingleQuery("Products", "ProductCode='" + productcode + "' and BranchCode='888'", "LandingCost"); //get to product table landing cost
-                    XtraMessageBox.Show("Primal Cut Costing Not Yet Uploaded..");
-                    return;
-                }
+                //if (ifexist)
+                //{
+                //    cost = Database.getSingleQuery("TempCosting", "ItemCode='" + productcode + "' and ShipmentNo='" + txtshipmentno.Text + "'", "CostPerKg"); //get from excel anna uploading
+                //}
+                //else
+                //{
+                //    //cost = Database.getSingleQuery("Products", "ProductCode='" + productcode + "' and BranchCode='888'", "LandingCost"); //get to product table landing cost
+                //    XtraMessageBox.Show("Primal Cut Costing Not Yet Uploaded..");
+                //    return;
+                //}
 
                 string finalqty = txtweight.Text;
-                string seqno = Convert.ToInt32(txtskuno.Text.Substring(13, 4)).ToString();
+                int seqno = Database.getLastID("TempInventoryPrimal", "SequenceNumber")+1;
                 Database.ExecuteQuery("INSERT INTO TempInventoryPrimal " +
                     "VALUES ('" + seqno + "'" +
                     ",'" + Login.assignedBranch + "'" +
@@ -233,7 +234,7 @@ namespace SalesInventorySystem.HOForms
                     ",'" + finalqty + "'" +
                     ",0" + //iswarehouse
                     ",0" +
-                    ",'" + Login.isglobalUserID + "','" + DateTime.Now.ToString() + "')");
+                    ",'" + Login.isglobalUserID + "','" + DateTime.Now.ToString() + "','"+txtpalletno.Text+"')");
                 display();
                 txtweight.Text = "";
                 txtskuno.Text = "";
@@ -345,7 +346,7 @@ namespace SalesInventorySystem.HOForms
         {
             try
             {
-                bool isexist = Database.checkifExist("SELECT BatchCode FROM BatchShortageOverageList WHERE BatchCode='" + txtbatchcode.Text + "'");
+                bool isexist = Database.checkifExist("SELECT BatchCode FROM BatchShortageOverageList with(nolock) WHERE BatchCode='" + txtbatchcode.Text + "'");
                 if (!isexist)
                 {
                     if (isexistingqty)//(isexistingqty)//overage cya
@@ -433,7 +434,7 @@ namespace SalesInventorySystem.HOForms
         {
             if (e.KeyCode == Keys.Enter)
             {
-                bool isexist = Database.checkifExist("Select BatchCode FROM TempInventory WHERE BatchCode='" + txtbatchcode.Text + "'");
+                bool isexist = Database.checkifExist("Select BatchCode FROM TempInventory with(nolock) WHERE BatchCode='" + txtbatchcode.Text + "'");
                 if (isexist)
                 {
                     display();
@@ -556,6 +557,11 @@ namespace SalesInventorySystem.HOForms
                     txtskuno.Text = "";
                     txtskuno.Focus();
                 }
+                else if(String.IsNullOrEmpty(txtpalletno.Text))
+                {
+                    XtraMessageBox.Show("Pallet Number must not Empty");
+                    txtpalletno.Focus();
+                }
 
                 else
                 {
@@ -598,24 +604,70 @@ namespace SalesInventorySystem.HOForms
         }
         void saveAndTransfer()
         {
-            HOFormsDevEx.PrimalTransferDevEx asd = new HOFormsDevEx.PrimalTransferDevEx();
-            asd.txtbatchcode.Text = txtbatchcode.Text;
-            asd.ShowDialog(this);
-            if (HOFormsDevEx.PrimalTransferDevEx.isdone == true)
-            {
-                asd.Dispose();
-                HOFormsDevEx.PrimalTransferDevEx.isdone = false;
-                display();
-            }
-
-            //TransferInventory transinv = new TransferInventory();
-            //Database.display("Select SequenceNumber,Product,Description,Barcode,Quantity,Available,DateReceived FROM TempInventory WHERE BatchCode='" + txtbatchcode.Text + "' and isStock=1", transinv.gridControl1, transinv.gridView1);
-            //transinv.Show();
+            bool confirm = HelperFunction.ConfirmDialog("Are you sure you want to save this Production?", "Confirm Save");
+            if (confirm) { spUpload(); XtraMessageBox.Show("Successfully Uploaded!"); this.Close(); }
+            else
+                return;
+            //HOFormsDevEx.PrimalTransferDevEx asd = new HOFormsDevEx.PrimalTransferDevEx();
+            //asd.txtbatchcode.Text = txtbatchcode.Text;
+            //asd.ShowDialog(this);
+            //if (HOFormsDevEx.PrimalTransferDevEx.isdone == true)
+            //{
+            //    asd.Dispose();
+            //    HOFormsDevEx.PrimalTransferDevEx.isdone = false;
+            //    display();
+            //}
+ 
         }
+
+        void spUpload()
+        {
+            SqlConnection con = Database.getConnection();
+            con.Open();
+            try
+            {
+                string query = "sp_BatchPrimalCutProcess";
+                SqlCommand com = new SqlCommand(query, con);
+                com.Parameters.AddWithValue("@parmbatchcode", txtbatchcode.Text);
+                com.Parameters.AddWithValue("@parmshipmentno", txtshipmentno.Text);
+                com.Parameters.AddWithValue("@parmprocessby", Login.isglobalUserID);
+                com.CommandType = CommandType.StoredProcedure;
+                com.CommandText = query;
+                com.ExecuteNonQuery();
+
+            }
+            catch (SqlException ex)
+            {
+                XtraMessageBox.Show(ex.Message.ToString());
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+
+
         private void buttonSaveAndTransfer_Click(object sender, EventArgs e)
         {
-            saveAndTransfer();
-            button2.PerformClick();
+            if (gridView1.RowCount <= 0)
+            {
+                XtraMessageBox.Show("No Data to print");
+                return;
+            }
+            else if(String.IsNullOrEmpty(txtdispatchno.Text))
+            {
+                XtraMessageBox.Show("Please Enter Dispatch Number!..");
+                return;
+            }
+            else
+            {
+                BigBlueTemplate();
+                saveAndTransfer();
+            }
+            
+           
+            //button2.PerformClick();
         }
 
         void getWeight()
@@ -632,15 +684,21 @@ namespace SalesInventorySystem.HOForms
                         XtraMessageBox.Show("Please Select COM-PORT!");
                         txtports.Focus();
                     }
+                    else if(String.IsNullOrEmpty(txtsrchprod.Text))
+                    {
+                        XtraMessageBox.Show("Please Select Product Items");
+                        txtsrchprod.Focus();
+                    }
                     else
                     {
 
                         txtweight.Invoke(this.myDelegate, new Object[] { wieght2 });
                         quantity = Decimal.Parse(txtweight.Text);
                         strquantity = String.Format("{0:00.000}", quantity);
+                        
 
-                        string barcode = Database.getSingleResultSet($"SELECT dbo.func_GenerateBarcode" +
-                  $"('{Login.assignedBranch}','{txtbatchcode.Text}','{txtshipmentno.Text}','{productcode}','{strquantity}','2') ");
+                        string barcode = Database.getSingleResultSet($"SELECT dbo.func_GeneratePrimalCutBarcode" +
+                $"('{Login.assignedBranch}','{txtbatchcode.Text}','{productcode}','{strquantity}') "); 
 
                         txtskuno.Text = barcode;
                         txtskuno.Focus();
@@ -651,8 +709,8 @@ namespace SalesInventorySystem.HOForms
 
                     quantity = Decimal.Parse(txtweight.Text);
                     strquantity = String.Format("{0:00.000}", quantity);
-                    string barcode = Database.getSingleResultSet($"SELECT dbo.func_GenerateBarcode" +
-                  $"('{Login.assignedBranch}','{txtbatchcode.Text}','{txtshipmentno.Text}','{productcode}','{strquantity}','2') ");
+                    string barcode = Database.getSingleResultSet($"SELECT dbo.func_GeneratePrimalCutBarcode" +
+                $"('{Login.assignedBranch}','{txtbatchcode.Text}','{productcode}','{strquantity}') ");
                     txtskuno.Text = barcode;
                     txtskuno.Focus();
                 }
@@ -721,13 +779,18 @@ namespace SalesInventorySystem.HOForms
 
         }
 
+        private void autoprintbarcode_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
         private void txtsrchprod_EditValueChanged(object sender, EventArgs e)
         {
             categorycode = null;
             productcode = null;
-            categorycode = SearchLookUpClass.getSingleValue(txtsrchprod, "CategoryCode");
+            categorycode = SearchLookUpClass.getSingleValue(txtsrchprod, "ProductCategoryCode");
             productcode = SearchLookUpClass.getSingleValue(txtsrchprod, "ProductCode");
-            txtprodcat.Text = SearchLookUpClass.getSingleValue(txtsrchprod, "CategoryName").ToString();
+            //txtprodcat.Text = SearchLookUpClass.getSingleValue(txtsrchprod, "CategoryName").ToString();
             this.ActiveControl = txtweight;
             txtweight.Focus();
         }

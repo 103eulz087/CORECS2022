@@ -2399,6 +2399,7 @@
             this.btnInventoryMapping.Id = 200;
             this.btnInventoryMapping.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("btnInventoryMapping.ImageOptions.LargeImage")));
             this.btnInventoryMapping.Name = "btnInventoryMapping";
+            this.btnInventoryMapping.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
             this.btnInventoryMapping.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnInventoryMapping_ItemClick);
             // 
             // barButtonItem24
@@ -2472,6 +2473,7 @@
             this.btnInventoryPerBranch.Id = 211;
             this.btnInventoryPerBranch.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("btnInventoryPerBranch.ImageOptions.LargeImage")));
             this.btnInventoryPerBranch.Name = "btnInventoryPerBranch";
+            this.btnInventoryPerBranch.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
             this.btnInventoryPerBranch.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnInventoryPerBranch_ItemClick);
             // 
             // btnCashierSalesCollectionSummary

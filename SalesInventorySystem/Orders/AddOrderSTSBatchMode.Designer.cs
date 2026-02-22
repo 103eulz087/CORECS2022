@@ -224,6 +224,7 @@
             this.txtgroup.Name = "txtgroup";
             this.txtgroup.Size = new System.Drawing.Size(250, 39);
             this.txtgroup.TabIndex = 76;
+            this.txtgroup.Visible = false;
             // 
             // labelControl12
             // 
@@ -235,6 +236,7 @@
             this.labelControl12.Size = new System.Drawing.Size(86, 30);
             this.labelControl12.TabIndex = 75;
             this.labelControl12.Text = "Group:";
+            this.labelControl12.Visible = false;
             // 
             // radothers
             // 
@@ -246,6 +248,7 @@
             this.radothers.TabIndex = 28;
             this.radothers.Text = "Other Branch";
             this.radothers.UseVisualStyleBackColor = true;
+            this.radothers.Visible = false;
             this.radothers.CheckedChanged += new System.EventHandler(this.radothers_CheckedChanged);
             // 
             // panelControl3
@@ -257,6 +260,7 @@
             this.panelControl3.Name = "panelControl3";
             this.panelControl3.Size = new System.Drawing.Size(706, 83);
             this.panelControl3.TabIndex = 74;
+            this.panelControl3.Visible = false;
             // 
             // txtbranch
             // 
@@ -311,6 +315,7 @@
             this.radho.TabStop = true;
             this.radho.Text = "Head Office";
             this.radho.UseVisualStyleBackColor = true;
+            this.radho.Visible = false;
             this.radho.CheckedChanged += new System.EventHandler(this.radho_CheckedChanged);
             // 
             // labelControl5
@@ -323,6 +328,7 @@
             this.labelControl5.Size = new System.Drawing.Size(149, 30);
             this.labelControl5.TabIndex = 26;
             this.labelControl5.Text = "Request To:";
+            this.labelControl5.Visible = false;
             // 
             // labelControl3
             // 

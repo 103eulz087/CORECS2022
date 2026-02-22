@@ -370,7 +370,7 @@
             this.btnsaveasdraft.Location = new System.Drawing.Point(1330, 96);
             this.btnsaveasdraft.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
             this.btnsaveasdraft.Name = "btnsaveasdraft";
-            this.btnsaveasdraft.Size = new System.Drawing.Size(502, 50);
+            this.btnsaveasdraft.Size = new System.Drawing.Size(268, 50);
             this.btnsaveasdraft.TabIndex = 84;
             this.btnsaveasdraft.Text = "Save as Draft";
             this.btnsaveasdraft.Click += new System.EventHandler(this.btnsaveasdraft_Click);

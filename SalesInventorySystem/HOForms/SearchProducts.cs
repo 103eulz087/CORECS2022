@@ -60,12 +60,12 @@ namespace SalesInventorySystem.HOForms
                 
                 if(HOConversionPOS.isConversion==true && txtbox.Text != "ADDORDER")
                 {
-                    Database.displayLocalGrid("SELECT ProductCategoryCode,ProductCode ,Description FROM dbo.Products WHERE BranchCode='" + Login.assignedBranch + "' and Description like '%" + textBox1.Text + "%' ORDER BY Description ASC ", dataGridView1);
+                    Database.displayLocalGrid("SELECT TOP(10) ProductCategoryCode,ProductCode ,Description FROM dbo.Products with(nolock) WHERE BranchCode='" + Login.assignedBranch + "' and Description like '%" + textBox1.Text + "%' ORDER BY Description ASC ", dataGridView1);
                     dataGridView1.Focus();
                 }
                 else if (HOConversionPOS.isConversion == false && txtbox.Text != "ADDORDER")
                 {
-                    Database.displayLocalGrid("SELECT ProductCode,Description,ProductCategoryCode FROM dbo.Products WHERE Description like '%" + textBox1.Text + "%' ORDER BY Description ASC ", dataGridView1);
+                    Database.displayLocalGrid("SELECT TOP(10) ProductCode,Description,ProductCategoryCode FROM dbo.Products with(nolock) WHERE BranchCode='" + Login.assignedBranch + "' and Description like '%" + textBox1.Text + "%' ORDER BY Description ASC ", dataGridView1);
                     dataGridView1.Focus();
                 }
                 if (txtbox.Text == "ADDORDER")

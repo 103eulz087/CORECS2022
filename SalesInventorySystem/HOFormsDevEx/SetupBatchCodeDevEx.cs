@@ -34,7 +34,7 @@ namespace SalesInventorySystem.HOFormsDevEx
 
         void display()
         {
-            Database.display("SELECT PalletNo,Product,Description,Barcode,Quantity,Available FROM Inventory WHERE BatchCode='" + txtbatchcodeno.Text + "' and Available > 0 and isStock=1", gridControl1, gridView1);
+            Database.display("SELECT PalletNo,Product,Description,Barcode,Quantity,Available FROM Inventory with(nolock) WHERE BatchCode='" + txtbatchcodeno.Text + "' and Available > 0 and isWarehouse=1", gridControl1, gridView1);
         }
 
         void radChanged()
@@ -53,17 +53,17 @@ namespace SalesInventorySystem.HOFormsDevEx
 
         private void txtshipmentno_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Database.displayDevComboBoxItems("Select distinct Description FROM Inventory WHERE isStock=1 and Available > 0 and ShipmentNo='"+txtshipmentno.Text+"'", "Description", txtproduct);
+            Database.displayDevComboBoxItems("Select distinct Description FROM Inventory with(nolock) WHERE Available > 0 and ShipmentNo='" + txtshipmentno.Text+ "'  and isWarehouse=1", "Description", txtproduct);
         }
 
         private void txtproduct_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Database.displayDevComboBoxItems("Select distinct PalletNo FROM Inventory WHERE isStock=1 and Available > 0 and ShipmentNo='" + txtshipmentno.Text + "' and Description='"+txtproduct.Text+"' and BatchCode=0 ", "PalletNo", txtpalletno);
+            Database.displayDevComboBoxItems("Select distinct PalletNo FROM Inventory with(nolock) WHERE Available > 0 and ShipmentNo='" + txtshipmentno.Text + "' and Description='"+txtproduct.Text+"' and BatchCode=0 and isWarehouse=1", "PalletNo", txtpalletno);
         }
 
         private void simpleButton1_Click(object sender, EventArgs e)
         {
-            Database.ExecuteQuery("UPDATE Inventory SET BatchCode='" + txtbatchcodeno.Text + "' WHERE ShipmentNo='" + txtshipmentno.Text + "' AND Description='" + txtproduct.Text + "' AND PalletNo='" + txtpalletno.Text + "' and BatchCode=0 and Available > 0 and isStock=1");
+            Database.ExecuteQuery("UPDATE Inventory SET BatchCode='" + txtbatchcodeno.Text + "' WHERE ShipmentNo='" + txtshipmentno.Text + "' AND Description='" + txtproduct.Text + "' AND PalletNo='" + txtpalletno.Text + "' and BatchCode=0 and Available > 0  ");
             display();
         }
 
@@ -75,14 +75,16 @@ namespace SalesInventorySystem.HOFormsDevEx
         private void radioButton2_CheckedChanged(object sender, EventArgs e)
         {
             radChanged();
-            Database.displayDevComboBoxItems("Select distinct ShipmentNo FROM Inventory WHERE isStock=1 and Available > 0 and (BatchCode < 1 OR BatchCode is null) order by ShipmentNo", "ShipmentNo", txtshipmentno);
+            Database.displayDevComboBoxItems("Select distinct ShipmentNo FROM Inventory with(nolock) WHERE isWarehouse=1 and Available > 0 and (BatchCode < 1 OR BatchCode is null) order by ShipmentNo", "ShipmentNo", txtshipmentno);
         }
 
         private void txtbarcode_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
-                Database.ExecuteQuery("UPDATE Inventory SET BatchCode='" + txtbatchcodeno.Text + "' WHERE Barcode='" + txtbarcode.Text + "' and isStock=1 and Available > 0 ");
+                Database.ExecuteQuery("UPDATE Inventory SET BatchCode='" + txtbatchcodeno.Text + "' WHERE Barcode='" + txtbarcode.Text + "' and Available > 0 ");
+                txtbarcode.Text = "";
+                txtbarcode.Focus();
             }
             display();
         }

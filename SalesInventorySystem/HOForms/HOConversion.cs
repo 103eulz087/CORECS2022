@@ -22,6 +22,8 @@ namespace SalesInventorySystem
         //bool isoverage = false;
         double totalqtysource = 0.0, totalqtyconverted = 0.0;
         public static bool isConversion = false;
+        object objprod, objprodname,objprodforcodemanytoone;
+        private bool _conversionItemsLoaded;
         public HOConversion()
         {
             InitializeComponent();
@@ -29,14 +31,11 @@ namespace SalesInventorySystem
 
         private void HOConversion_Load(object sender, EventArgs e)
         {
-
-           
+             
 
             txtrefcode.Text = IDGenerator.getIDNumberSP("sp_GetConversionNumber", "conversionnumber");
             displayProdCat();
-            loadcomb();
-
-           
+            Database.displaySearchlookupEdit($"SELECT ProductCode,Description FROM Products with(nolock) WHERE BranchCode='{Login.assignedBranch}'", txtsrchprdctmanytoone, "Description", "Description");
 
         }
 
@@ -72,14 +71,11 @@ namespace SalesInventorySystem
 
         void displayProdCat()
         {
-            Classes.Product.displayProductCategoryComboBoxItems(txtprodcat);
-            Classes.Product.displayProductCategoryComboBoxItems(txtprodcatcon);
+            //Classes.Product.displayProductCategoryComboBoxItems(txtprodcat);
+            Database.displaySearchlookupEdit("Select ProductCategoryID,Description FROM ProductCategory with(nolock)", txtsrchprodcat, "Description", "Description");
+           
         }
 
-        void loadcomb()
-        {
-            Database.displayComboBoxItems("SELECT Description FROM dbo.Products WHERE BranchCode='888' AND ProductCategoryCode='"+Classes.Product.getProductCategoryCode(txtprodcatcon.Text)+"' ORDER BY Description ASC", "Description",comboBox1);
-        }
 
         private void add()
         {
@@ -153,19 +149,7 @@ namespace SalesInventorySystem
             minvalue = value - range;
             return minvalue;
         }
-
-        String getProductCategoryCode()
-        {
-            string str = "";
-            str = Database.getSingleQuery("ProductCategory", "Description='" + txtprodcatcon.Text + "'", "ProductCategoryID");
-            return str;
-        }
-        String getProductCode()
-        {
-            string str = "";
-            str = Database.getSingleQuery("Products", "Description='" + comboBox1.Text + "' and ProductCategoryCode='"+getProductCategoryCode()+"'", "ProductCode");
-            return str;
-        }
+        
 
         void addEntry()
         {
@@ -281,7 +265,7 @@ namespace SalesInventorySystem
                         totalSourceQuantity += Convert.ToDouble(sourceAvailableGrid2);
 
                         conversionType = "ManyToOne";
-                        Database.ExecuteQuery("INSERT INTO TempConversionDetails VALUES('" + Login.assignedBranch + "','" + txtrefcode.Text + "','" + sourceSeqNum1 + "','" + sourceProd1 + "','" + sourceDesc1 + "','" + sourceAvailableGrid2 + "','0',0,'" + txtprodcode.Text + "','" + comboBox1.Text + "','" + gridView3.GetRowCellValue(i, "Quantity").ToString() + "','" + txtactualqty.Text + "','0','" + percentagePerPart2 + "',0,0,'" + sourceAmountPerPart2 + "','" + gridView3.GetRowCellValue(i, "Barcode").ToString() + "')");
+                        Database.ExecuteQuery("INSERT INTO TempConversionDetails VALUES('" + Login.assignedBranch + "','" + txtrefcode.Text + "','" + sourceSeqNum1 + "','" + sourceProd1 + "','" + sourceDesc1 + "','" + sourceAvailableGrid2 + "','0',0,'" + objprodforcodemanytoone.ToString() + "','" + txtsrchprdctmanytoone.Text+ "','" + gridView3.GetRowCellValue(i, "Quantity").ToString() + "','" + txtactualqty.Text + "','0','" + percentagePerPart2 + "',0,0,'" + sourceAmountPerPart2 + "','" + gridView3.GetRowCellValue(i, "Barcode").ToString() + "')");
 
 
                     }
@@ -329,41 +313,7 @@ namespace SalesInventorySystem
             }
             return ok;
         }
-
-        private void save()
-        {
-            
-            string prodcode = "";
-            string prodcatcode = Classes.Product.getProductCategoryCode(txtprodcatcon.Text);
-            prodcode = Classes.Product.getProductCode(comboBox1.Text, prodcatcode);
-            string barcode = prodcatcode + prodcode + txttotalweight.Text + '1';
-            
-            SqlConnection con = Database.getConnection();
-            con.Open();
-                try
-                {
-                    string query = "sp_Conversion";
-                    SqlCommand com = new SqlCommand(query, con);
-                    com.Parameters.AddWithValue("@parmbranchcode", Login.assignedBranch);
-                    com.Parameters.AddWithValue("@refcode", txtrefcode.Text);
-                    com.Parameters.AddWithValue("@parmconvertto", comboBox1.Text);
-                    com.Parameters.AddWithValue("@parmconvertprodcode", prodcode);
-                    com.CommandType = CommandType.StoredProcedure;
-                    com.CommandText = query;
-                    com.ExecuteNonQuery();
-                    XtraMessageBox.Show("Successfully Converted");
-                }
-                catch (SqlException ex)
-                {
-                    XtraMessageBox.Show(ex.Message.ToString());
-                }
-                finally
-                {
-                    con.Close();
-                }
-            this.Close();
-        }
-
+        
         private void conversionProcess()
         {
             SqlConnection con = Database.getConnection();
@@ -415,9 +365,9 @@ namespace SalesInventorySystem
         {
             if(radioButton1.Checked==true)
             {
-                if (Convert.ToDouble(txttotalactualweight.Text) > Database.getTotalSummation2("Inventory", "Product = '" + labeleulz.Text + "' AND Branch='" + Login.assignedBranch + "' AND Available > 0 AND IsStock='1' ", "Available")) //Database.getTotalSummation("Inventory", "Product", txtsku.Text.Substring(1, 6), "Quantity"))
+                if (Convert.ToDouble(txttotalactualweight.Text) > Database.getTotalSummation2("Inventory", "Product = '" + labeleulz.Text + "' AND Branch='" + Login.assignedBranch + "' AND Available > 0 and isWarehouse=1 ", "Available")) //Database.getTotalSummation("Inventory", "Product", txtsku.Text.Substring(1, 6), "Quantity"))
                 {
-                    string mark = Database.getTotalSummation2("Inventory", "Product = '" + labeleulz.Text + "' AND Branch='" + Login.assignedBranch + "' AND IsStock='1' AND Available > 0", "Available").ToString();
+                    string mark = Database.getTotalSummation2("Inventory", "Product = '" + labeleulz.Text + "' AND Branch='" + Login.assignedBranch + "' AND isWarehouse=1 AND Available > 0", "Available").ToString();
                     XtraMessageBox.Show("Insuficient Stocks for this Product.. Your Available Quantity is " + mark);
                     return;
                 }
@@ -429,7 +379,7 @@ namespace SalesInventorySystem
             }
             if (radioButton2.Checked==true)
             {
-                if(String.IsNullOrEmpty(txtprodcode.Text) || String.IsNullOrEmpty(txtprodcatcode.Text))
+                if(String.IsNullOrEmpty(objprodforcodemanytoone.ToString())) 
                 {
                     XtraMessageBox.Show("Product Category Code or Product Code must not Empty!!!...");
                     return;
@@ -444,18 +394,7 @@ namespace SalesInventorySystem
            
         }
         
-        private void txtprodcat_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            
-            Database.display("SELECT Product,Description,SUM(Available) as Available " +
-                "FROM Inventory " +
-                "WHERE Branch='" + Login.assignedBranch+"' " +
-                "and IsStock=1 " +
-                "and Available > 0 " +
-                "and Product in (Select ProductCode FROM Products WHERE BranchCode='"+Login.assignedBranch+"' AND ProductCategoryCode='"+Classes.Product.getProductCategoryCode(txtprodcat.Text)+ "') " +
-                "GROUP BY Product,Description", gridControl1, gridView1);
-        }
-
+    
 
         private void simpleButton3_Click(object sender, EventArgs e)
         {
@@ -604,15 +543,7 @@ namespace SalesInventorySystem
             }
         }
 
-        private void txtprodcatcon_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            loadcomb();
-            string prodcatcode = "";
-            prodcatcode = Database.getSingleQuery("ProductCategory", "Description='" + txtprodcatcon.Text + "'", "ProductCategoryID");
-            txtprodcatcode.Text = prodcatcode;
-            comboBox1.Text = "";
-            txtprodcode.Text = "";
-        }
+      
 
         private void cancelLineToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -621,7 +552,7 @@ namespace SalesInventorySystem
         
         private void gridView1_DoubleClick(object sender, EventArgs e)
         {
-            addItemEntry();
+            
         }
 
         private void gridView1_RowCellStyle(object sender, RowCellStyleEventArgs e)
@@ -657,7 +588,7 @@ namespace SalesInventorySystem
         private void gridView3_CustomRowCellEdit(object sender, CustomRowCellEditEventArgs e)
         {
             if (e.Column.FieldName == "Description")
-                e.RepositoryItem = repositoryItemBtnSearch;
+                e.RepositoryItem = repositoryItemBtnSearch; //repositoryItemSearchLookUpEditConversionItems;//
         }
 
         private void printBarcodeToolStripMenuItem_Click(object sender, EventArgs e)
@@ -685,11 +616,159 @@ namespace SalesInventorySystem
 
         }
 
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+      
+
+        private void repositoryItemSearchLookUpEditConversionItems_Click(object sender, EventArgs e)
         {
-            string prodcode = "";
-            prodcode = Database.getSingleQuery("Products", "ProductCategoryCode='"+txtprodcatcode.Text+"' and BranchCode='"+Login.assignedBranch+"' and Description='"+comboBox1.Text+"'", "ProductCode");
-            txtprodcode.Text = prodcode;
+            Database.displayRepositorySearchlookupEdit($"SELECT ProductCode,Description FROM Products with(nolock) WHERE BranchCode='{Login.assignedBranch}' ", repositoryItemSearchLookUpEditConversionItems, "Description", "Description");
+        }
+
+        private void gridView1_CustomRowCellEditForEditing(object sender, CustomRowCellEditEventArgs e)
+        {
+
+         
+
+        }
+
+        private void gridControl3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void gridView3_CustomRowCellEditForEditing(object sender, CustomRowCellEditEventArgs e)
+        {
+            //if (e.Column.FieldName == "Description")
+            //{
+            //    e.RepositoryItem = repositoryItemSearchLookUpEditConversionItems;
+            //}
+        }
+
+        private void LoadConversionItemsDataSource()
+        {
+            var sql = $"SELECT ProductCode, Description FROM Products WITH (NOLOCK) WHERE BranchCode = @Branch";
+            var dt = new System.Data.DataTable();
+            SqlConnection con = Database.getConnection();
+            using (var cmd = new SqlCommand(sql, con))
+            using (var da = new SqlDataAdapter(cmd))
+            {
+                cmd.Parameters.AddWithValue("@Branch", Login.assignedBranch);
+                con.Open();
+                da.Fill(dt);
+            }
+            repositoryItemSearchLookUpEditConversionItems.DataSource = dt;
+        }
+
+        private void repositoryItemSearchLookUpEditConversionItems_QueryPopUp(object sender, CancelEventArgs e)
+        {
+
+            if (_conversionItemsLoaded) return;
+            LoadConversionItemsDataSource();
+            _conversionItemsLoaded = true;
+
+        }
+
+        private void gridView3_ShownEditor(object sender, EventArgs e)
+        {
+            //var view = sender as DevExpress.XtraGrid.Views.Grid.GridView;
+            //if (view == null) return;
+
+            //if (view.FocusedColumn.FieldName == "Description")
+            //{
+            //    var editor = view.ActiveEditor as DevExpress.XtraEditors.SearchLookUpEdit;
+            //    if (editor != null)
+            //    {
+            //        editor.Properties.ImmediatePopup = true; // redundant but explicit
+            //        editor.ShowPopup();
+            //    }
+            //}
+
+        }
+
+        private void repositoryItemSearchLookUpEditConversionItems_CloseUp(object sender, DevExpress.XtraEditors.Controls.CloseUpEventArgs e)
+        {
+
+            // If canceled (ESC or clicked away), ignore
+            if (e.CloseMode == DevExpress.XtraEditors.PopupCloseMode.Cancel) return;
+
+            var repo = sender as DevExpress.XtraEditors.Repository.RepositoryItemSearchLookUpEdit;
+            var gridView = gridView3; // your main grid view
+            if (repo == null || gridView == null) return;
+
+            // Active editor is the SearchLookUpEdit instance hosting this repo
+            var editor = gridView.ActiveEditor as DevExpress.XtraEditors.SearchLookUpEdit;
+            var view = repo.View as DevExpress.XtraGrid.Views.Grid.GridView;
+            if (editor == null || view == null) return;
+
+            // Selected row in the popup view
+            int rowHandle = view.FocusedRowHandle;
+            if (!view.IsDataRow(rowHandle)) return;
+
+            var productCode = view.GetRowCellValue(rowHandle, "ProductCode");
+            var description = view.GetRowCellValue(rowHandle, "Description");
+
+            // Commit to current data row in grid
+            int rowHandleMain = gridView.FocusedRowHandle;
+            if (!gridView.IsDataRow(rowHandleMain)) return;
+
+            // If your data source has both fields:
+            gridView.SetRowCellValue(rowHandleMain, "ProductCode", productCode);
+            gridView.SetRowCellValue(rowHandleMain, "Description", description);
+
+            // Optionally move focus to next column
+            // gridView.FocusedColumn = gridView.Columns["NextColumnName"];
+
+        }
+
+        private void gridControl1_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+                contextMenuStripSourceProd.Show(gridControl1, e.Location);
+        }
+
+        private void toolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            addItemEntry();
+        }
+
+        private void txtsrchprdctmanytoone_EditValueChanged(object sender, EventArgs e)
+        {
+            objprodforcodemanytoone = SearchLookUpClass.getSingleValue(txtsrchprdctmanytoone, "ProductCode");
+        }
+
+        private void txtsrchprodcat_EditValueChanged(object sender, EventArgs e)
+        {
+            objprod = SearchLookUpClass.getSingleValue(txtsrchprodcat, "ProductCategoryID");
+            Database.display("SELECT Product,Description,SUM(Available) as Available " +
+             "FROM Inventory with(nolock)" +
+             "WHERE Branch='" + Login.assignedBranch + "' " +
+             "and Available > 0 " +
+             "and Product in (Select ProductCode FROM Products with(nolock) WHERE BranchCode='" + Login.assignedBranch + "' AND ProductCategoryCode='" + objprod + "') " +
+             "GROUP BY Product,Description", gridControl1, gridView1);
+        }
+
+        private void repositoryItemSearchLookUpEditConversionItems_EditValueChanged(object sender, EventArgs e)
+        {
+            //objprod = SearchLookUpClass.GetSingleValueRepositoryItem(repositoryItemSearchLookUpEditConversionItems, "ProductCode");
+            //objprodname = SearchLookUpClass.GetSingleValueRepositoryItem(repositoryItemSearchLookUpEditConversionItems, "Description");
+            //gridView3.SetRowCellValue(gridView3.FocusedRowHandle, "ProductCode", objprod.ToString());
+            //gridView3.SetRowCellValue(gridView3.FocusedRowHandle, "Description", objprodname.ToString());
+            //gridView3.FocusedColumn = gridView3.Columns[gridView3.Columns.Count - 2];
+
+            var editor = sender as DevExpress.XtraEditors.SearchLookUpEdit;
+            if (editor == null) return;
+
+            var view = editor.Properties.View as DevExpress.XtraGrid.Views.Grid.GridView;
+            if (view == null) return;
+
+            int rowHandle = view.FocusedRowHandle;
+            if (!view.IsDataRow(rowHandle)) return;
+
+            var productCode = view.GetRowCellValue(rowHandle, "ProductCode");
+            var description = view.GetRowCellValue(rowHandle, "Description");
+
+            gridView3.SetRowCellValue(gridView3.FocusedRowHandle, "ProductCode", productCode);
+            gridView3.SetRowCellValue(gridView3.FocusedRowHandle, "Description", description);
+
         }
 
         void searchProd_FormClosed(object sender, FormClosedEventArgs e)
@@ -765,7 +844,7 @@ namespace SalesInventorySystem
             }
             txttotalweight.Text = totalqty.ToString();
             txttotalactualweight.Text = totalactualqty.ToString();
-            if(radioButton1.Checked==true)
+            if (radioButton1.Checked == true)
             {
                 if (e.Column.FieldName == "Quantity")
                 {
@@ -784,7 +863,7 @@ namespace SalesInventorySystem
                 strquantity = String.Format("{0:00.000}", quantity);
                 if (isBarcodeLong == true) //long barcode type
                 {
-                    barcode = "44444"+gridView3.GetRowCellValue(gridView3.FocusedRowHandle, "ProductCode").ToString() + strquantity.Replace(".", "") + sequencePadding(gridView3.GetRowHandle(gridView3.FocusedRowHandle).ToString());
+                    barcode = "44444" + gridView3.GetRowCellValue(gridView3.FocusedRowHandle, "ProductCode").ToString() + strquantity.Replace(".", "") + sequencePadding(gridView3.GetRowHandle(gridView3.FocusedRowHandle).ToString());
                 }
                 else
                 {
@@ -796,12 +875,12 @@ namespace SalesInventorySystem
                     gridView3.SetRowCellValue(gridView3.FocusedRowHandle, "Barcode", barcode);
                 }
             }
-            if(radioButton2.Checked == true)
+            if (radioButton2.Checked == true)
             {
                 if (e.Column.FieldName == "Quantity")
                 {
                     double sourceqty = 0.0, destqty = 0.0;
-                    sourceqty = Convert.ToDouble(gridView3.GetRowCellValue(gridView3.FocusedRowHandle,"SourceQty"));
+                    sourceqty = Convert.ToDouble(gridView3.GetRowCellValue(gridView3.FocusedRowHandle, "SourceQty"));
                     destqty = Convert.ToDouble(gridView3.GetRowCellValue(gridView3.FocusedRowHandle, "Quantity"));
                     if (destqty > sourceqty)
                     {
@@ -839,8 +918,9 @@ namespace SalesInventorySystem
         private void repositoryItemBtnSearch_Click(object sender, EventArgs e)
         {
             isConversion = true;
-            string prodcatcode = Classes.Product.getProductCategoryCode(txtprodcat.Text);
-            HOForms.SearchProducts searchProd = new HOForms.SearchProducts(prodcatcode);
+            //string prodcatcode = Classes.Product.getProductCategoryCode(txtprodcat.Text);
+            //HOForms.SearchProducts searchProd = new HOForms.SearchProducts(prodcatcode);
+            HOForms.SearchProducts searchProd = new HOForms.SearchProducts();
             searchProd.FormClosed += new FormClosedEventHandler(searchProd_FormClosed);
             searchProd.Show();
         }

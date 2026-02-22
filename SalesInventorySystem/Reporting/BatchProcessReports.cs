@@ -155,9 +155,9 @@ namespace SalesInventorySystem.Reporting
             Database.display("SELECT * FROM view_BatchProcessReports WHERE BatchCode = '" + comboBox1.Text + "' AND  isSource='1'", gridControl1, gridView1);
             gridView1.BestFitColumns();
 
-            gridView1.Columns["TipWeight"].Summary.Clear();
+            
             gridView1.Columns["Quantity"].Summary.Clear();
-            gridView1.Columns["TipWeight"].Summary.Add(DevExpress.Data.SummaryItemType.Sum, "TipWeight", "{0}");
+           
             gridView1.Columns["Quantity"].Summary.Add(DevExpress.Data.SummaryItemType.Sum, "Quantity", "{0}");
             var a = gridView1.Columns["Quantity"].SummaryItem.SummaryValue;
             total1 = a.ToString();
@@ -169,7 +169,7 @@ namespace SalesInventorySystem.Reporting
 
            
             // Database.display("SELECT * FROM view_BatchProcessReports WHERE BatchCode BETWEEN'" + comboBox1.Text + "' AND '" + comboBox2.Text + "'  AND ReferenceCode <> ''", gridControl2, gridView2);
-            Database.display("SELECT BatchCode,Barcode,PalletNo,DateReceived,Description,TipWeight,Quantity,Product FROM TempInventory WHERE BatchCode = '" + comboBox1.Text + "' AND isSource='0'", gridControl2, gridView2);
+            Database.display("SELECT BatchCode,Barcode,PalletNo,Description,Quantity,Product FROM TempInventoryPrimal WHERE BatchCode = '" + comboBox1.Text + "' ", gridControl2, gridView2);
             gridView2.BestFitColumns();
 
             gridView2.Columns["Quantity"].Summary.Clear();
@@ -212,7 +212,7 @@ namespace SalesInventorySystem.Reporting
         String getProcessedBy()
         {
             string names="";
-            names = Database.getSingleQuery("InventoryLedger", "BatchCode='" + comboBox1.Text + "'", "ProcessedBy");
+            //names = Database.getSingleQuery("InventoryLedger", "BatchCode='" + comboBox1.Text + "'", "ProcessedBy");
             return names;
         }
 
