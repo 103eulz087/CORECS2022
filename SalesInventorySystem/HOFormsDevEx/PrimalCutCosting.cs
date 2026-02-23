@@ -76,6 +76,12 @@ namespace SalesInventorySystem.HOFormsDevEx
                     XtraMessageBox.Show("Successfully inserted.");
                 }
             }
+            Database.ExecuteQuery("UPDATE a SET a.Cost=b.CostperKg " +
+                "FROM Inventory a " +
+                "INNER JOIN TempCosting b " +
+                "On a.Product = b.ItemCode " +
+                "and a.ShipmentNo = b.ShipmentNo " +
+                $"WHERE a.Branch = '{Login.assignedBranch}' and a.isWarehouse = 0 ", "All Items of this ShipmentNo are Successfully Executed.");
         }
 
         private void gridView1_RowCellStyle(object sender, DevExpress.XtraGrid.Views.Grid.RowCellStyleEventArgs e)

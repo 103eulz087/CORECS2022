@@ -90,64 +90,167 @@ namespace SalesInventorySystem
             return -1;
         }
 
-        private void Login_Load(object sender, EventArgs e)
+        //public static int getCTRVersionAs(String name)
+        //{
+        //    int num1 = 0;
+        //    SqlConnection connection = Database.getConnection(@"Enzo\ConnSettingsUpdater");
+        //    connection.Open();
+        //    SqlDataReader sqlDataReader = new SqlCommand($"SELECT TOP 1 CAST(Versions as int) AS CC FROM UploaderLookUp WHERE Company='{ name }';", connection).ExecuteReader();
+        //    try
+        //    {
+        //        if (sqlDataReader != null)
+        //        {
+        //            while (sqlDataReader.Read())
+        //                num1 = Convert.ToInt32(sqlDataReader["CC"].ToString());
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        int num2 = (int)MessageBox.Show(ex.StackTrace.ToString());
+        //    }
+        //    finally
+        //    {
+        //        connection.Close();
+        //    }
+        //    return num1;
+        //}
+
+        // 1. Change the return type to Task<int> and add the 'async' keyword
+        public static async Task<int> getCTRVersionAsAsync(String name)
+        {
+            int num1 = -1; // Default to -1 so if the internet is down, the app knows to skip the update
+
+            try
+            {
+                // 2. Use 'using' blocks to automatically close connections even if an error happens
+                using (SqlConnection connection = Database.getConnection(@"Enzo\ConnSettingsUpdater"))
+                {
+                    // 3. Await the connection so the UI doesn't freeze
+                    await connection.OpenAsync();
+
+                    string query = "SELECT TOP 1 CAST(Versions as int) AS CC FROM UploaderLookUp WHERE Company = @CompanyName;";
+
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        // 4. Secure the query with a parameter
+                        command.Parameters.AddWithValue("@CompanyName", name);
+
+                        // 5. Await the reader
+                        using (SqlDataReader sqlDataReader = await command.ExecuteReaderAsync())
+                        {
+                            if (sqlDataReader != null && await sqlDataReader.ReadAsync())
+                            {
+                                num1 = Convert.ToInt32(sqlDataReader["CC"]);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                // If the internet is down, it will safely land here.
+                // I removed the MessageBox because you don't want an error popping up 
+                // every time the user has a bad connection. It will just return -1 and continue!
+            }
+
+            return num1;
+        }
+
+        private async void Login_Load(object sender, EventArgs e)
         {
             //Thread.Sleep(3000);
             //********RYAN VIAJEDOR*****************************************************************************
+            //try
+            //{
+            //    int server_version = getCTRVersionAs(file["Company"]);//GetCTRVersion().Result;
+            //    int client_version = Convert.ToInt32(file["Version"]);
+            //    if (server_version != -1 && client_version < server_version)
+            //    {
+            //        MessageBox.Show("A New Updates Available\nGet the latest application update now.");
+            //        //System.IO.File.WriteAllText("loaders.bat", @"taskkill /pid " + Process.GetCurrentProcess().Id + @" /f start " + Application.StartupPath + @"\exeUpdater.exe");
+            //        System.IO.File.WriteAllText("loaders.bat", @"taskkill /pid " + Process.GetCurrentProcess().Id + @" /f
+            //        CD """ + Application.StartupPath + @"""
+            //        START exeUpdater.exe ");
+            //        Process.Start("loaders.bat");
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show(ex.Message.ToString());
+            //}
+            //try
+            //{
+            //    regkey = Registry.CurrentUser.CreateSubKey(@"AAITCRE\ConnSettingsMain");
+            //    if (regkey.GetValue("dbconn") == null)
+            //    {
+            //        Connection C = new Connection();
+            //        C.lblservername.Text = "Main Server";
+            //        C.txtconnsettingsname.Text = @"AAITCRE\ConnSettingsMain";
+            //        C.ShowDialog();
+            //        this.Opacity = 0;
+            //        return;
+            //    }
+            //    else
+            //    {
+            //        // constr = regkey.GetValue("dbconn").ToString();
+            //        userid = regkey.GetValue("serverid").ToString();
+            //        serverpassword = regkey.GetValue("serverpassword").ToString();
+            //        dbname = regkey.GetValue("dbname").ToString();
+            //        servername = regkey.GetValue("servername").ToString();
+            //    }
+            //    //regkey = Registry.CurrentUser.CreateSubKey(@"AAITCRE\ConnSettingsCloud");
+            //    //if (regkey.GetValue("dbconn") == null)
+            //    //{
+            //    //    Connection C = new Connection();
+            //    //    C.lblservername.Text = "Cloud Server";
+            //    //    C.txtconnsettingsname.Text = @"AAITCRE\ConnSettingsCloud";
+            //    //    C.ShowDialog();
+            //    //    this.Opacity = 0;
+            //    //    return;
+            //    //}
+            //}
+            //catch(SqlException ex)
+            //{
+            //    XtraMessageBox.Show(ex.Message.ToString());
+            //}
+            //********/RYAN VIAJEDOR****************************************************************************
             try
             {
-                int server_version  = GetCTRVersion().Result;
+                // 2. Await the new async method! The UI will stay smooth while this runs.
+                int server_version = await getCTRVersionAsAsync(file["Company"].ToString());
                 int client_version = Convert.ToInt32(file["Version"]);
+
+                // If server_version is -1, it means the internet was down, so we just skip this safely
                 if (server_version != -1 && client_version < server_version)
                 {
-                    MessageBox.Show("A New Updates Available\nGet the latest application update now.");
-                    //System.IO.File.WriteAllText("loaders.bat", @"taskkill /pid " + Process.GetCurrentProcess().Id + @" /f start " + Application.StartupPath + @"\exeUpdater.exe");
-                    System.IO.File.WriteAllText("loaders.bat", @"taskkill /pid " + Process.GetCurrentProcess().Id + @" /f
-                    CD """ + Application.StartupPath + @"""
-                    START exeUpdater.exe ");
-                    Process.Start("loaders.bat");
+                    MessageBox.Show("A New Update is Available\nGet the latest application update now.");
+
+                    // Generate a bulletproof update script
+                    string batScript = $@"
+                                    @echo off
+                                    taskkill /pid {Process.GetCurrentProcess().Id} /f
+                                    timeout /t 2 /nobreak > NUL
+                                    cd /d ""{Application.StartupPath}""
+                                    start """" ""exeUpdater.exe""
+                                    del ""%~f0""
+                                    ";
+                    System.IO.File.WriteAllText("loaders.bat", batScript);
+
+                    System.Diagnostics.ProcessStartInfo psi = new System.Diagnostics.ProcessStartInfo()
+                    {
+                        FileName = "loaders.bat",
+                        WorkingDirectory = Application.StartupPath,
+                        UseShellExecute = true
+                    };
+                    Process.Start(psi);
+
+                    return; // Stop loading the login screen since we are updating!
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message.ToString());
             }
-            try
-            {
-                regkey = Registry.CurrentUser.CreateSubKey(@"AAITCRE\ConnSettingsMain");
-                if (regkey.GetValue("dbconn") == null)
-                {
-                    Connection C = new Connection();
-                    C.lblservername.Text = "Main Server";
-                    C.txtconnsettingsname.Text = @"AAITCRE\ConnSettingsMain";
-                    C.ShowDialog();
-                    this.Opacity = 0;
-                    return;
-                }
-                else
-                {
-                    // constr = regkey.GetValue("dbconn").ToString();
-                    userid = regkey.GetValue("serverid").ToString();
-                    serverpassword = regkey.GetValue("serverpassword").ToString();
-                    dbname = regkey.GetValue("dbname").ToString();
-                    servername = regkey.GetValue("servername").ToString();
-                }
-                //regkey = Registry.CurrentUser.CreateSubKey(@"AAITCRE\ConnSettingsCloud");
-                //if (regkey.GetValue("dbconn") == null)
-                //{
-                //    Connection C = new Connection();
-                //    C.lblservername.Text = "Cloud Server";
-                //    C.txtconnsettingsname.Text = @"AAITCRE\ConnSettingsCloud";
-                //    C.ShowDialog();
-                //    this.Opacity = 0;
-                //    return;
-                //}
-            }
-            catch(SqlException ex)
-            {
-                XtraMessageBox.Show(ex.Message.ToString());
-            }
-            //********/RYAN VIAJEDOR****************************************************************************
         }
 
         private void simpleButton1_Click(object sender, EventArgs e)

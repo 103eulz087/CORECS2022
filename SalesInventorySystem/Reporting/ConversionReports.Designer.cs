@@ -42,6 +42,7 @@
             this.gridControl1 = new DevExpress.XtraGrid.GridControl();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.viewConversionDetailsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.errorCorrectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.confirmToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl1 = new System.Windows.Forms.TabControl();
@@ -52,7 +53,6 @@
             this.gridView2 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.viewConversionDetailsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
             this.groupControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtbrcode.Properties)).BeginInit();
@@ -85,7 +85,7 @@
             this.groupControl1.Controls.Add(this.labelControl1);
             this.groupControl1.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupControl1.Location = new System.Drawing.Point(0, 0);
-            this.groupControl1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.groupControl1.Margin = new System.Windows.Forms.Padding(6);
             this.groupControl1.Name = "groupControl1";
             this.groupControl1.Size = new System.Drawing.Size(1760, 178);
             this.groupControl1.TabIndex = 2;
@@ -93,7 +93,7 @@
             // txtbrcode
             // 
             this.txtbrcode.Location = new System.Drawing.Point(490, 50);
-            this.txtbrcode.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.txtbrcode.Margin = new System.Windows.Forms.Padding(6);
             this.txtbrcode.Name = "txtbrcode";
             this.txtbrcode.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtbrcode.Properties.Appearance.Options.UseFont = true;
@@ -117,7 +117,7 @@
             // 
             this.simpleButton1.ImageOptions.Image = global::SalesInventorySystem.Properties.Resources.GenerateData_32x32;
             this.simpleButton1.Location = new System.Drawing.Point(938, 47);
-            this.simpleButton1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.simpleButton1.Margin = new System.Windows.Forms.Padding(6);
             this.simpleButton1.Name = "simpleButton1";
             this.simpleButton1.Size = new System.Drawing.Size(226, 97);
             this.simpleButton1.TabIndex = 6;
@@ -128,7 +128,7 @@
             // 
             this.dateto.EditValue = null;
             this.dateto.Location = new System.Drawing.Point(130, 103);
-            this.dateto.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.dateto.Margin = new System.Windows.Forms.Padding(6);
             this.dateto.Name = "dateto";
             this.dateto.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dateto.Properties.Appearance.Options.UseFont = true;
@@ -143,7 +143,7 @@
             // 
             this.datefrom.EditValue = null;
             this.datefrom.Location = new System.Drawing.Point(130, 50);
-            this.datefrom.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.datefrom.Margin = new System.Windows.Forms.Padding(6);
             this.datefrom.Name = "datefrom";
             this.datefrom.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.datefrom.Properties.Appearance.Options.UseFont = true;
@@ -159,7 +159,7 @@
             this.labelControl3.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelControl3.Appearance.Options.UseFont = true;
             this.labelControl3.Location = new System.Drawing.Point(78, 109);
-            this.labelControl3.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.labelControl3.Margin = new System.Windows.Forms.Padding(6);
             this.labelControl3.Name = "labelControl3";
             this.labelControl3.Size = new System.Drawing.Size(35, 29);
             this.labelControl3.TabIndex = 3;
@@ -170,7 +170,7 @@
             this.labelControl2.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelControl2.Appearance.Options.UseFont = true;
             this.labelControl2.Location = new System.Drawing.Point(46, 56);
-            this.labelControl2.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.labelControl2.Margin = new System.Windows.Forms.Padding(6);
             this.labelControl2.Name = "labelControl2";
             this.labelControl2.Size = new System.Drawing.Size(63, 29);
             this.labelControl2.TabIndex = 2;
@@ -181,7 +181,7 @@
             this.labelControl1.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelControl1.Appearance.Options.UseFont = true;
             this.labelControl1.Location = new System.Drawing.Point(396, 58);
-            this.labelControl1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.labelControl1.Margin = new System.Windows.Forms.Padding(6);
             this.labelControl1.Name = "labelControl1";
             this.labelControl1.Size = new System.Drawing.Size(81, 29);
             this.labelControl1.TabIndex = 0;
@@ -192,9 +192,9 @@
             this.groupBox1.Controls.Add(this.gridControl1);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.Location = new System.Drawing.Point(6, 6);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(6);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(6);
             this.groupBox1.Size = new System.Drawing.Size(1732, 731);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
@@ -202,10 +202,10 @@
             // gridControl1
             // 
             this.gridControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridControl1.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.gridControl1.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(6);
             this.gridControl1.Location = new System.Drawing.Point(6, 34);
             this.gridControl1.MainView = this.gridView1;
-            this.gridControl1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.gridControl1.Margin = new System.Windows.Forms.Padding(6);
             this.gridControl1.Name = "gridControl1";
             this.gridControl1.Size = new System.Drawing.Size(1720, 691);
             this.gridControl1.TabIndex = 1;
@@ -240,6 +240,13 @@
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(348, 156);
             // 
+            // viewConversionDetailsToolStripMenuItem
+            // 
+            this.viewConversionDetailsToolStripMenuItem.Name = "viewConversionDetailsToolStripMenuItem";
+            this.viewConversionDetailsToolStripMenuItem.Size = new System.Drawing.Size(347, 36);
+            this.viewConversionDetailsToolStripMenuItem.Text = "View Conversion Details";
+            this.viewConversionDetailsToolStripMenuItem.Click += new System.EventHandler(this.viewConversionDetailsToolStripMenuItem_Click);
+            // 
             // errorCorrectToolStripMenuItem
             // 
             this.errorCorrectToolStripMenuItem.Name = "errorCorrectToolStripMenuItem";
@@ -261,7 +268,7 @@
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F, System.Drawing.FontStyle.Bold);
             this.tabControl1.Location = new System.Drawing.Point(0, 178);
-            this.tabControl1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.tabControl1.Margin = new System.Windows.Forms.Padding(6);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(1760, 794);
@@ -272,9 +279,9 @@
             this.FORAPPROVAL.Controls.Add(this.groupBox1);
             this.FORAPPROVAL.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FORAPPROVAL.Location = new System.Drawing.Point(8, 43);
-            this.FORAPPROVAL.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.FORAPPROVAL.Margin = new System.Windows.Forms.Padding(6);
             this.FORAPPROVAL.Name = "FORAPPROVAL";
-            this.FORAPPROVAL.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.FORAPPROVAL.Padding = new System.Windows.Forms.Padding(6);
             this.FORAPPROVAL.Size = new System.Drawing.Size(1744, 743);
             this.FORAPPROVAL.TabIndex = 0;
             this.FORAPPROVAL.Text = "FOR APPROVAL";
@@ -285,9 +292,9 @@
             this.APPROVED.Controls.Add(this.groupBox2);
             this.APPROVED.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.APPROVED.Location = new System.Drawing.Point(8, 43);
-            this.APPROVED.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.APPROVED.Margin = new System.Windows.Forms.Padding(6);
             this.APPROVED.Name = "APPROVED";
-            this.APPROVED.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.APPROVED.Padding = new System.Windows.Forms.Padding(6);
             this.APPROVED.Size = new System.Drawing.Size(1744, 743);
             this.APPROVED.TabIndex = 1;
             this.APPROVED.Text = "APPROVED";
@@ -298,9 +305,9 @@
             this.groupBox2.Controls.Add(this.gridControl2);
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox2.Location = new System.Drawing.Point(6, 6);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(6);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(6);
             this.groupBox2.Size = new System.Drawing.Size(1732, 731);
             this.groupBox2.TabIndex = 4;
             this.groupBox2.TabStop = false;
@@ -308,10 +315,10 @@
             // gridControl2
             // 
             this.gridControl2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridControl2.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.gridControl2.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(6);
             this.gridControl2.Location = new System.Drawing.Point(6, 34);
             this.gridControl2.MainView = this.gridView2;
-            this.gridControl2.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.gridControl2.Margin = new System.Windows.Forms.Padding(6);
             this.gridControl2.Name = "gridControl2";
             this.gridControl2.Size = new System.Drawing.Size(1720, 691);
             this.gridControl2.TabIndex = 1;
@@ -350,13 +357,6 @@
             this.toolStripMenuItem1.Text = "Error Correct";
             this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
             // 
-            // viewConversionDetailsToolStripMenuItem
-            // 
-            this.viewConversionDetailsToolStripMenuItem.Name = "viewConversionDetailsToolStripMenuItem";
-            this.viewConversionDetailsToolStripMenuItem.Size = new System.Drawing.Size(347, 36);
-            this.viewConversionDetailsToolStripMenuItem.Text = "View Conversion Details";
-            this.viewConversionDetailsToolStripMenuItem.Click += new System.EventHandler(this.viewConversionDetailsToolStripMenuItem_Click);
-            // 
             // ConversionReports
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
@@ -364,7 +364,7 @@
             this.ClientSize = new System.Drawing.Size(1760, 972);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.groupControl1);
-            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "ConversionReports";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ConversionReports";

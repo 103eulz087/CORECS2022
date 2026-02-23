@@ -52,7 +52,11 @@
             this.txtdiffkg = new DevExpress.XtraEditors.TextEdit();
             this.txtdiff = new DevExpress.XtraEditors.TextEdit();
             this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
+            this.txtsrchprodcat = new DevExpress.XtraEditors.SearchLookUpEdit();
+            this.searchLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.txtsrchprdctmanytoone = new DevExpress.XtraEditors.SearchLookUpEdit();
+            this.gridView2 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.txtactualqty = new DevExpress.XtraEditors.TextEdit();
             this.labelControl12 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl13 = new DevExpress.XtraEditors.LabelControl();
@@ -86,10 +90,6 @@
             this.repositoryItemSearchLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.contextMenuStripSourceProd = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.txtsrchprodcat = new DevExpress.XtraEditors.SearchLookUpEdit();
-            this.searchLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.txtsrchprdctmanytoone = new DevExpress.XtraEditors.SearchLookUpEdit();
-            this.gridView2 = new DevExpress.XtraGrid.Views.Grid.GridView();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.spinEdit1.Properties)).BeginInit();
@@ -103,7 +103,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtdiff.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
             this.groupControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtsrchprodcat.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).BeginInit();
             this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtsrchprdctmanytoone.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtactualqty.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtsrcqty.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtrefcode.Properties)).BeginInit();
@@ -119,10 +123,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemSearchLookUpEditConversionItems)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemSearchLookUpEdit1View)).BeginInit();
             this.contextMenuStripSourceProd.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtsrchprodcat.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtsrchprdctmanytoone.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView2)).BeginInit();
             this.SuspendLayout();
             // 
             // gridControl1
@@ -383,6 +383,30 @@
             this.groupControl1.TabIndex = 25;
             this.groupControl1.Text = "Conversion Process";
             // 
+            // txtsrchprodcat
+            // 
+            this.txtsrchprodcat.Location = new System.Drawing.Point(256, 45);
+            this.txtsrchprodcat.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.txtsrchprodcat.Name = "txtsrchprodcat";
+            this.txtsrchprodcat.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 9.8F);
+            this.txtsrchprodcat.Properties.Appearance.Options.UseFont = true;
+            this.txtsrchprodcat.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.txtsrchprodcat.Properties.NullText = "";
+            this.txtsrchprodcat.Properties.PopupView = this.searchLookUpEdit1View;
+            this.txtsrchprodcat.Size = new System.Drawing.Size(468, 46);
+            this.txtsrchprodcat.TabIndex = 106;
+            this.txtsrchprodcat.EditValueChanged += new System.EventHandler(this.txtsrchprodcat_EditValueChanged);
+            // 
+            // searchLookUpEdit1View
+            // 
+            this.searchLookUpEdit1View.DetailHeight = 547;
+            this.searchLookUpEdit1View.FixedLineWidth = 3;
+            this.searchLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
+            this.searchLookUpEdit1View.Name = "searchLookUpEdit1View";
+            this.searchLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = false;
+            this.searchLookUpEdit1View.OptionsView.ShowGroupPanel = false;
+            // 
             // panel2
             // 
             this.panel2.Controls.Add(this.txtsrchprdctmanytoone);
@@ -395,6 +419,30 @@
             this.panel2.Size = new System.Drawing.Size(924, 173);
             this.panel2.TabIndex = 37;
             this.panel2.Visible = false;
+            // 
+            // txtsrchprdctmanytoone
+            // 
+            this.txtsrchprdctmanytoone.Location = new System.Drawing.Point(171, 0);
+            this.txtsrchprdctmanytoone.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.txtsrchprdctmanytoone.Name = "txtsrchprdctmanytoone";
+            this.txtsrchprdctmanytoone.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 9.8F);
+            this.txtsrchprdctmanytoone.Properties.Appearance.Options.UseFont = true;
+            this.txtsrchprdctmanytoone.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.txtsrchprdctmanytoone.Properties.NullText = "";
+            this.txtsrchprdctmanytoone.Properties.PopupView = this.gridView2;
+            this.txtsrchprdctmanytoone.Size = new System.Drawing.Size(460, 46);
+            this.txtsrchprdctmanytoone.TabIndex = 107;
+            this.txtsrchprdctmanytoone.EditValueChanged += new System.EventHandler(this.txtsrchprdctmanytoone_EditValueChanged);
+            // 
+            // gridView2
+            // 
+            this.gridView2.DetailHeight = 547;
+            this.gridView2.FixedLineWidth = 3;
+            this.gridView2.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
+            this.gridView2.Name = "gridView2";
+            this.gridView2.OptionsSelection.EnableAppearanceFocusedCell = false;
+            this.gridView2.OptionsView.ShowGroupPanel = false;
             // 
             // txtactualqty
             // 
@@ -773,54 +821,6 @@
             this.toolStripMenuItem1.Text = "Add this Item for Entry -->";
             this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
             // 
-            // txtsrchprodcat
-            // 
-            this.txtsrchprodcat.Location = new System.Drawing.Point(256, 45);
-            this.txtsrchprodcat.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
-            this.txtsrchprodcat.Name = "txtsrchprodcat";
-            this.txtsrchprodcat.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 9.8F);
-            this.txtsrchprodcat.Properties.Appearance.Options.UseFont = true;
-            this.txtsrchprodcat.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.txtsrchprodcat.Properties.NullText = "";
-            this.txtsrchprodcat.Properties.PopupView = this.searchLookUpEdit1View;
-            this.txtsrchprodcat.Size = new System.Drawing.Size(468, 46);
-            this.txtsrchprodcat.TabIndex = 106;
-            this.txtsrchprodcat.EditValueChanged += new System.EventHandler(this.txtsrchprodcat_EditValueChanged);
-            // 
-            // searchLookUpEdit1View
-            // 
-            this.searchLookUpEdit1View.DetailHeight = 547;
-            this.searchLookUpEdit1View.FixedLineWidth = 3;
-            this.searchLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
-            this.searchLookUpEdit1View.Name = "searchLookUpEdit1View";
-            this.searchLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = false;
-            this.searchLookUpEdit1View.OptionsView.ShowGroupPanel = false;
-            // 
-            // txtsrchprdctmanytoone
-            // 
-            this.txtsrchprdctmanytoone.Location = new System.Drawing.Point(171, 0);
-            this.txtsrchprdctmanytoone.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
-            this.txtsrchprdctmanytoone.Name = "txtsrchprdctmanytoone";
-            this.txtsrchprdctmanytoone.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 9.8F);
-            this.txtsrchprdctmanytoone.Properties.Appearance.Options.UseFont = true;
-            this.txtsrchprdctmanytoone.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.txtsrchprdctmanytoone.Properties.NullText = "";
-            this.txtsrchprdctmanytoone.Properties.PopupView = this.gridView2;
-            this.txtsrchprdctmanytoone.Size = new System.Drawing.Size(460, 46);
-            this.txtsrchprdctmanytoone.TabIndex = 107;
-            this.txtsrchprdctmanytoone.EditValueChanged += new System.EventHandler(this.txtsrchprdctmanytoone_EditValueChanged);
-            // 
-            // gridView2
-            // 
-            this.gridView2.DetailHeight = 547;
-            this.gridView2.FixedLineWidth = 3;
-            this.gridView2.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
-            this.gridView2.Name = "gridView2";
-            this.gridView2.OptionsSelection.EnableAppearanceFocusedCell = false;
-            this.gridView2.OptionsView.ShowGroupPanel = false;
-            // 
             // HOConversion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
@@ -848,8 +848,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).EndInit();
             this.groupControl1.ResumeLayout(false);
             this.groupControl1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtsrchprodcat.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtsrchprdctmanytoone.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtactualqty.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtsrcqty.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtrefcode.Properties)).EndInit();
@@ -866,10 +870,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemSearchLookUpEditConversionItems)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemSearchLookUpEdit1View)).EndInit();
             this.contextMenuStripSourceProd.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.txtsrchprodcat.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtsrchprdctmanytoone.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView2)).EndInit();
             this.ResumeLayout(false);
 
         }

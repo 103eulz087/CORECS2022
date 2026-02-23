@@ -348,7 +348,7 @@
             // txtreporttypeposreading
             // 
             this.txtreporttypeposreading.Location = new System.Drawing.Point(206, 56);
-            this.txtreporttypeposreading.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.txtreporttypeposreading.Margin = new System.Windows.Forms.Padding(6);
             this.txtreporttypeposreading.Name = "txtreporttypeposreading";
             this.txtreporttypeposreading.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9.75F);
             this.txtreporttypeposreading.Properties.Appearance.Options.UseFont = true;
@@ -749,9 +749,9 @@
             this.groupBox1.Controls.Add(this.radtypevatex);
             this.groupBox1.Controls.Add(this.radtypeall);
             this.groupBox1.Location = new System.Drawing.Point(1610, 227);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox1.Size = new System.Drawing.Size(658, 79);
             this.groupBox1.TabIndex = 38;
             this.groupBox1.TabStop = false;
@@ -760,7 +760,7 @@
             // 
             this.radtypevatable.AutoSize = true;
             this.radtypevatable.Location = new System.Drawing.Point(302, 33);
-            this.radtypevatable.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.radtypevatable.Margin = new System.Windows.Forms.Padding(2);
             this.radtypevatable.Name = "radtypevatable";
             this.radtypevatable.Size = new System.Drawing.Size(127, 32);
             this.radtypevatable.TabIndex = 39;
@@ -771,7 +771,7 @@
             // 
             this.radtypevatex.AutoSize = true;
             this.radtypevatex.Location = new System.Drawing.Point(114, 33);
-            this.radtypevatex.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.radtypevatex.Margin = new System.Windows.Forms.Padding(2);
             this.radtypevatex.Name = "radtypevatex";
             this.radtypevatex.Size = new System.Drawing.Size(164, 32);
             this.radtypevatex.TabIndex = 38;
@@ -783,7 +783,7 @@
             this.radtypeall.AutoSize = true;
             this.radtypeall.Checked = true;
             this.radtypeall.Location = new System.Drawing.Point(18, 33);
-            this.radtypeall.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.radtypeall.Margin = new System.Windows.Forms.Padding(2);
             this.radtypeall.Name = "radtypeall";
             this.radtypeall.Size = new System.Drawing.Size(72, 32);
             this.radtypeall.TabIndex = 37;
@@ -1110,7 +1110,7 @@
             // 
             this.xtraTabPage3.Controls.Add(this.groupControl5);
             this.xtraTabPage3.Controls.Add(this.groupControl6);
-            this.xtraTabPage3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.xtraTabPage3.Margin = new System.Windows.Forms.Padding(4);
             this.xtraTabPage3.Name = "xtraTabPage3";
             this.xtraTabPage3.Size = new System.Drawing.Size(2638, 1311);
             this.xtraTabPage3.Text = "Manage Data VAT";
@@ -1527,7 +1527,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(2642, 1363);
             this.Controls.Add(this.xtraTabControl1);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "POSManagementReport";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "POSManagementReport";

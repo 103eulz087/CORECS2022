@@ -62,6 +62,8 @@
             this.gridControl1 = new DevExpress.XtraGrid.GridControl();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.lblProgress = new DevExpress.XtraEditors.LabelControl();
             this.gridControl2 = new DevExpress.XtraGrid.GridControl();
             this.gridView2 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.simpleButton2 = new DevExpress.XtraEditors.SimpleButton();
@@ -431,7 +433,7 @@
             this.grouppendingtran.Margin = new System.Windows.Forms.Padding(4);
             this.grouppendingtran.Name = "grouppendingtran";
             this.grouppendingtran.Padding = new System.Windows.Forms.Padding(4);
-            this.grouppendingtran.Size = new System.Drawing.Size(0, 346);
+            this.grouppendingtran.Size = new System.Drawing.Size(0, 418);
             this.grouppendingtran.TabIndex = 123656;
             this.grouppendingtran.TabStop = false;
             this.grouppendingtran.Text = "There are Cashier Transactions that not yet Closed.";
@@ -446,7 +448,7 @@
             this.gridControl1.MainView = this.gridView1;
             this.gridControl1.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.gridControl1.Name = "gridControl1";
-            this.gridControl1.Size = new System.Drawing.Size(0, 314);
+            this.gridControl1.Size = new System.Drawing.Size(0, 386);
             this.gridControl1.TabIndex = 1;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
@@ -472,6 +474,8 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.Black;
+            this.panel1.Controls.Add(this.progressBar1);
+            this.panel1.Controls.Add(this.lblProgress);
             this.panel1.Controls.Add(this.gridControl2);
             this.panel1.Controls.Add(this.simpleButton2);
             this.panel1.Controls.Add(this.txttransactiondate);
@@ -485,8 +489,27 @@
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(620, 346);
+            this.panel1.Size = new System.Drawing.Size(620, 418);
             this.panel1.TabIndex = 123657;
+            // 
+            // progressBar1
+            // 
+            this.progressBar1.Location = new System.Drawing.Point(20, 334);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(576, 35);
+            this.progressBar1.TabIndex = 123640;
+            // 
+            // lblProgress
+            // 
+            this.lblProgress.Appearance.Font = new System.Drawing.Font("Tahoma", 9.875F);
+            this.lblProgress.Appearance.ForeColor = System.Drawing.Color.White;
+            this.lblProgress.Appearance.Options.UseFont = true;
+            this.lblProgress.Appearance.Options.UseForeColor = true;
+            this.lblProgress.Location = new System.Drawing.Point(20, 375);
+            this.lblProgress.Name = "lblProgress";
+            this.lblProgress.Size = new System.Drawing.Size(39, 31);
+            this.lblProgress.TabIndex = 123639;
+            this.lblProgress.Text = "0%";
             // 
             // gridControl2
             // 
@@ -538,7 +561,7 @@
             this.panel2.Location = new System.Drawing.Point(620, 0);
             this.panel2.Margin = new System.Windows.Forms.Padding(4);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(0, 346);
+            this.panel2.Size = new System.Drawing.Size(0, 418);
             this.panel2.TabIndex = 123658;
             // 
             // POSEndOfDay
@@ -546,7 +569,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(616, 346);
+            this.ClientSize = new System.Drawing.Size(616, 418);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.gridControlPOSEOD);
@@ -643,5 +666,7 @@
         private DevExpress.XtraEditors.SimpleButton simpleButton2;
         public DevExpress.XtraGrid.GridControl gridControl2;
         public DevExpress.XtraGrid.Views.Grid.GridView gridView2;
+        private DevExpress.XtraEditors.LabelControl lblProgress;
+        private System.Windows.Forms.ProgressBar progressBar1;
     }
 }

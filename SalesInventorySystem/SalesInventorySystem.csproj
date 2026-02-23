@@ -613,6 +613,8 @@
     <Compile Include="Classes\Inventory.cs" />
     <Compile Include="Classes\ListItems.cs" />
     <Compile Include="Classes\Locations.cs" />
+    <Compile Include="Classes\PosDataUploader.cs" />
+    <Compile Include="Classes\POSDownloadUpdates.cs" />
     <Compile Include="Classes\POSTransaction.cs" />
     <Compile Include="Classes\POSTransactionZ.cs" />
     <Compile Include="Classes\Printing.cs" />
@@ -1613,6 +1615,12 @@
     </Compile>
     <Compile Include="HOForms\HeadOfficeInventory.Designer.cs">
       <DependentUpon>HeadOfficeInventory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HOForms\HRIConversion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HOForms\HRIConversion.Designer.cs">
+      <DependentUpon>HRIConversion.cs</DependentUpon>
     </Compile>
     <Compile Include="HOForms\HOConversionPOS.cs">
       <SubType>Form</SubType>
@@ -3786,6 +3794,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="HOForms\HeadOfficeInventory.resx">
       <DependentUpon>HeadOfficeInventory.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HOForms\HRIConversion.resx">
+      <DependentUpon>HRIConversion.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="HOForms\HOConversionPOS.resx">

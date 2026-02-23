@@ -53,7 +53,7 @@
             this.btnDeliveryReport = new DevExpress.XtraBars.BarButtonItem();
             this.barHeaderItem1 = new DevExpress.XtraBars.BarHeaderItem();
             this.btnProcessToPrimalCuts = new DevExpress.XtraBars.BarButtonItem();
-            this.btnProcessOrder = new DevExpress.XtraBars.BarButtonItem();
+            this.btnProcessSalesOrder = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem21 = new DevExpress.XtraBars.BarButtonItem();
             this.btnAddPurchaseOrder = new DevExpress.XtraBars.BarButtonItem();
             this.btnGeneralInventory = new DevExpress.XtraBars.BarButtonItem();
@@ -107,7 +107,7 @@
             this.btnStocksOrder = new DevExpress.XtraBars.BarButtonItem();
             this.btnPrinter = new DevExpress.XtraBars.BarButtonItem();
             this.btnSalesTicketing = new DevExpress.XtraBars.BarButtonItem();
-            this.btnUpdateTransfer = new DevExpress.XtraBars.BarButtonItem();
+            this.btnStockTransfer = new DevExpress.XtraBars.BarButtonItem();
             this.popupMenuInvTransfer = new DevExpress.XtraBars.PopupMenu(this.components);
             this.btnTransferPerPallet = new DevExpress.XtraBars.BarButtonItem();
             this.btnTransferPerBarcode = new DevExpress.XtraBars.BarButtonItem();
@@ -334,7 +334,7 @@
             this.btnDeliveryReport,
             this.barHeaderItem1,
             this.btnProcessToPrimalCuts,
-            this.btnProcessOrder,
+            this.btnProcessSalesOrder,
             this.barButtonItem21,
             this.btnAddPurchaseOrder,
             this.btnGeneralInventory,
@@ -388,7 +388,7 @@
             this.btnStocksOrder,
             this.btnPrinter,
             this.btnSalesTicketing,
-            this.btnUpdateTransfer,
+            this.btnStockTransfer,
             this.btnBackupDB,
             this.barButtonItem66,
             this.btnCheckVoucher,
@@ -730,15 +730,15 @@
             this.btnProcessToPrimalCuts.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
             this.btnProcessToPrimalCuts.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem19_ItemClick);
             // 
-            // btnProcessOrder
+            // btnProcessSalesOrder
             // 
-            this.btnProcessOrder.Caption = "Process Sales Order";
-            this.btnProcessOrder.CategoryGuid = new System.Guid("6ffddb2b-9015-4d97-a4c1-91613e0ef537");
-            this.btnProcessOrder.Id = 24;
-            this.btnProcessOrder.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("btnProcessOrder.ImageOptions.LargeImage")));
-            this.btnProcessOrder.Name = "btnProcessOrder";
-            this.btnProcessOrder.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
-            this.btnProcessOrder.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem20_ItemClick);
+            this.btnProcessSalesOrder.Caption = "Process Sales Order";
+            this.btnProcessSalesOrder.CategoryGuid = new System.Guid("6ffddb2b-9015-4d97-a4c1-91613e0ef537");
+            this.btnProcessSalesOrder.Id = 24;
+            this.btnProcessSalesOrder.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("btnProcessSalesOrder.ImageOptions.LargeImage")));
+            this.btnProcessSalesOrder.Name = "btnProcessSalesOrder";
+            this.btnProcessSalesOrder.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+            this.btnProcessSalesOrder.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem20_ItemClick);
             // 
             // barButtonItem21
             // 
@@ -1209,17 +1209,17 @@
             this.btnSalesTicketing.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
             this.btnSalesTicketing.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem63_ItemClick);
             // 
-            // btnUpdateTransfer
+            // btnStockTransfer
             // 
-            this.btnUpdateTransfer.ButtonStyle = DevExpress.XtraBars.BarButtonStyle.DropDown;
-            this.btnUpdateTransfer.Caption = "Stock Transfer";
-            this.btnUpdateTransfer.CategoryGuid = new System.Guid("6ffddb2b-9015-4d97-a4c1-91613e0ef537");
-            this.btnUpdateTransfer.DropDownControl = this.popupMenuInvTransfer;
-            this.btnUpdateTransfer.Id = 80;
-            this.btnUpdateTransfer.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("btnUpdateTransfer.ImageOptions.LargeImage")));
-            this.btnUpdateTransfer.Name = "btnUpdateTransfer";
-            this.btnUpdateTransfer.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
-            this.btnUpdateTransfer.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem64_ItemClick);
+            this.btnStockTransfer.ButtonStyle = DevExpress.XtraBars.BarButtonStyle.DropDown;
+            this.btnStockTransfer.Caption = "Stock Transfer";
+            this.btnStockTransfer.CategoryGuid = new System.Guid("6ffddb2b-9015-4d97-a4c1-91613e0ef537");
+            this.btnStockTransfer.DropDownControl = this.popupMenuInvTransfer;
+            this.btnStockTransfer.Id = 80;
+            this.btnStockTransfer.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("btnStockTransfer.ImageOptions.LargeImage")));
+            this.btnStockTransfer.Name = "btnStockTransfer";
+            this.btnStockTransfer.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+            this.btnStockTransfer.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem64_ItemClick);
             // 
             // popupMenuInvTransfer
             // 
@@ -2593,7 +2593,7 @@
             // 
             this.ribbonPageGroup1.ItemLinks.Add(this.btnRequestOrder);
             this.ribbonPageGroup1.ItemLinks.Add(this.btnViewRequestOrder);
-            this.ribbonPageGroup1.ItemLinks.Add(this.btnProcessOrder);
+            this.ribbonPageGroup1.ItemLinks.Add(this.btnProcessSalesOrder);
             this.ribbonPageGroup1.Name = "ribbonPageGroup1";
             this.ribbonPageGroup1.Text = "SALES ORDER";
             // 
@@ -2612,9 +2612,9 @@
             this.ribbonPageGroupInventoryProcess.ItemLinks.Add(this.btnReceiveInventory);
             this.ribbonPageGroupInventoryProcess.ItemLinks.Add(this.btnSetupBatchCode);
             this.ribbonPageGroupInventoryProcess.ItemLinks.Add(this.btnProcessToPrimalCuts);
-            this.ribbonPageGroupInventoryProcess.ItemLinks.Add(this.btnProcessOrder);
+            this.ribbonPageGroupInventoryProcess.ItemLinks.Add(this.btnProcessSalesOrder);
             this.ribbonPageGroupInventoryProcess.ItemLinks.Add(this.btnRequestTransfer);
-            this.ribbonPageGroupInventoryProcess.ItemLinks.Add(this.btnUpdateTransfer);
+            this.ribbonPageGroupInventoryProcess.ItemLinks.Add(this.btnStockTransfer);
             this.ribbonPageGroupInventoryProcess.ItemLinks.Add(this.btnConversion);
             this.ribbonPageGroupInventoryProcess.ItemLinks.Add(this.btnReturnInventory);
             this.ribbonPageGroupInventoryProcess.ItemLinks.Add(this.btnInventoryIN);
@@ -2961,7 +2961,7 @@
             this.Ribbon = this.ribbonControl;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.StatusBar = this.ribbonStatusBar;
-            this.Text = "ITCORE-CORE CS ver 8.0.1";
+            this.Text = "ITCORE-CORE CS ver 8.0.2";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Main_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Main_FormClosed);
@@ -3006,7 +3006,7 @@
         private DevExpress.XtraBars.BarButtonItem btnDeliveryReport;
         private DevExpress.XtraBars.BarHeaderItem barHeaderItem1;
         private DevExpress.XtraBars.BarButtonItem btnProcessToPrimalCuts;
-        private DevExpress.XtraBars.BarButtonItem btnProcessOrder;
+        private DevExpress.XtraBars.BarButtonItem btnProcessSalesOrder;
         private DevExpress.XtraBars.BarButtonItem barButtonItem21;
         private DevExpress.XtraBars.BarButtonItem btnAddPurchaseOrder;
         private DevExpress.XtraBars.BarButtonItem btnGeneralInventory;
@@ -3071,7 +3071,7 @@
         private DevExpress.XtraBars.BarButtonItem btnStocksOrder;
         private DevExpress.XtraBars.BarButtonItem btnPrinter;
         private DevExpress.XtraBars.BarButtonItem btnSalesTicketing;
-        private DevExpress.XtraBars.BarButtonItem btnUpdateTransfer;
+        private DevExpress.XtraBars.BarButtonItem btnStockTransfer;
         private DevExpress.XtraBars.BarButtonItem btnBackupDB;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup22;
         private DevExpress.XtraBars.BarButtonItem barButtonItem66;

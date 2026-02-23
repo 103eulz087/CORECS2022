@@ -123,7 +123,7 @@
             this.groupControl2.Location = new System.Drawing.Point(3, 303);
             this.groupControl2.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
             this.groupControl2.Name = "groupControl2";
-            this.groupControl2.Size = new System.Drawing.Size(2731, 558);
+            this.groupControl2.Size = new System.Drawing.Size(2731, 589);
             this.groupControl2.TabIndex = 24;
             // 
             // gridControl1
@@ -134,7 +134,7 @@
             this.gridControl1.MainView = this.gridView1;
             this.gridControl1.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
             this.gridControl1.Name = "gridControl1";
-            this.gridControl1.Size = new System.Drawing.Size(2725, 510);
+            this.gridControl1.Size = new System.Drawing.Size(2725, 541);
             this.gridControl1.TabIndex = 18;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
@@ -718,10 +718,10 @@
             this.panelControl1.Controls.Add(this.groupControl2);
             this.panelControl1.Controls.Add(this.groupControl1);
             this.panelControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelControl1.Location = new System.Drawing.Point(0, 543);
+            this.panelControl1.Location = new System.Drawing.Point(0, 512);
             this.panelControl1.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
             this.panelControl1.Name = "panelControl1";
-            this.panelControl1.Size = new System.Drawing.Size(2737, 864);
+            this.panelControl1.Size = new System.Drawing.Size(2737, 895);
             this.panelControl1.TabIndex = 25;
             // 
             // dockManager1
@@ -744,7 +744,7 @@
             this.groupControl3.Location = new System.Drawing.Point(0, 0);
             this.groupControl3.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
             this.groupControl3.Name = "groupControl3";
-            this.groupControl3.Size = new System.Drawing.Size(2737, 543);
+            this.groupControl3.Size = new System.Drawing.Size(2737, 512);
             this.groupControl3.TabIndex = 26;
             this.groupControl3.Text = "Purchase Order Details";
             // 
@@ -756,7 +756,7 @@
             this.gridControl2.MainView = this.gridView2;
             this.gridControl2.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
             this.gridControl2.Name = "gridControl2";
-            this.gridControl2.Size = new System.Drawing.Size(2731, 495);
+            this.gridControl2.Size = new System.Drawing.Size(2731, 464);
             this.gridControl2.TabIndex = 2;
             this.gridControl2.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView2,

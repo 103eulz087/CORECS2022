@@ -371,7 +371,7 @@
             this.contextMenuStripMyRequest.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuItem1});
             this.contextMenuStripMyRequest.Name = "contextMenuStripForReceiving";
-            this.contextMenuStripMyRequest.Size = new System.Drawing.Size(320, 84);
+            this.contextMenuStripMyRequest.Size = new System.Drawing.Size(320, 40);
             // 
             // toolStripMenuItem1
             // 

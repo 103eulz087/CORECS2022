@@ -28,14 +28,83 @@ namespace SalesInventorySystem
         public static bool isbatchupload = false;
         public static string program = "";
         bool isadmin = false, issales = false, isinv = false, isaccounting = false, ishotel = false, ispayroll = false, isreporting = false, isforwarding = false;
+        private Form lockScreen;
+        private System.Windows.Forms.Timer eodTimer;
         public Main()
         {
             InitializeComponent();
+            InitializeEODTimer();
             //DevExpress.UserSkins.BonusSkins.Register();
             //DevExpress.Skins.SkinManager.EnableFormSkins();
             //DevExpress.XtraBars.Helpers.SkinHelper.InitSkinGallery(skinRibbonGalleryBarItem1, true, true);
         }
-        
+
+        private void InitializeEODTimer()
+        {
+            eodTimer = new System.Windows.Forms.Timer();
+            eodTimer.Interval = 30000; // Check every 30 seconds
+            eodTimer.Tick += EodTimer_Tick;
+            eodTimer.Start();
+        }
+
+        private void EodTimer_Tick(object sender, EventArgs e)
+        {
+            // Get the current time of day
+            TimeSpan now = DateTime.Now.TimeOfDay;
+
+            // Define the lockout window: 11:55 PM to 11:59:59 PM
+            TimeSpan startLock = new TimeSpan(23, 45, 0);
+            TimeSpan endLock = new TimeSpan(23, 59, 59);
+
+            // Check if we are inside the restricted 5 minutes
+            if (now >= startLock && now <= endLock)
+            {
+                LockApplication();
+            }
+            else
+            {
+                UnlockApplication();
+            }
+        }
+
+        private void LockApplication()
+        {
+            // If it's already locked, do nothing
+            if (lockScreen != null) return;
+
+            // Create a full-screen or modal block screen
+            lockScreen = new Form();
+            lockScreen.Text = "System Locked";
+            lockScreen.FormBorderStyle = FormBorderStyle.None; // Hide close buttons
+            lockScreen.WindowState = FormWindowState.Maximized; // Cover the screen
+            lockScreen.TopMost = true; // Keep it on top
+            lockScreen.BackColor = Color.DarkRed;
+
+            Label lblMessage = new Label()
+            {
+                Text = "End of Day Inventory is running.\nSystem will unlock at 12:00 AM.",
+                ForeColor = Color.White,
+                Font = new Font("Arial", 24, FontStyle.Bold),
+                AutoSize = true,
+                Location = new Point(100, 100)
+            };
+            lockScreen.Controls.Add(lblMessage);
+
+            // Show the lock screen as a dialog so they can't click the main app behind it
+            lockScreen.ShowDialog();
+        }
+
+        private void UnlockApplication()
+        {
+            if (lockScreen != null)
+            {
+                // The 5 minutes are over, destroy the lock screen
+                lockScreen.Close();
+                lockScreen.Dispose();
+                lockScreen = null;
+            }
+        }
+
         //public void DoWork()
         //{
         //    byte[] bytes = new byte[1024];
