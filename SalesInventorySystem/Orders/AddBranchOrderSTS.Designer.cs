@@ -142,7 +142,7 @@
             this.groupControl2.Location = new System.Drawing.Point(6, 31);
             this.groupControl2.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
             this.groupControl2.Name = "groupControl2";
-            this.groupControl2.Size = new System.Drawing.Size(2894, 732);
+            this.groupControl2.Size = new System.Drawing.Size(2574, 732);
             this.groupControl2.TabIndex = 5;
             this.groupControl2.Text = "Add Order";
             // 
@@ -154,7 +154,7 @@
             this.gridControl2.MainView = this.gridView2;
             this.gridControl2.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
             this.gridControl2.Name = "gridControl2";
-            this.gridControl2.Size = new System.Drawing.Size(2888, 461);
+            this.gridControl2.Size = new System.Drawing.Size(2568, 461);
             this.gridControl2.TabIndex = 3;
             this.gridControl2.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView2,
@@ -276,7 +276,7 @@
             this.groupBox2.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(6, 5, 6, 5);
-            this.groupBox2.Size = new System.Drawing.Size(2888, 223);
+            this.groupBox2.Size = new System.Drawing.Size(2568, 223);
             this.groupBox2.TabIndex = 0;
             this.groupBox2.TabStop = false;
             // 
@@ -885,7 +885,7 @@
             this.groupControl1.Location = new System.Drawing.Point(6, 31);
             this.groupControl1.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
             this.groupControl1.Name = "groupControl1";
-            this.groupControl1.Size = new System.Drawing.Size(2894, 634);
+            this.groupControl1.Size = new System.Drawing.Size(2574, 634);
             this.groupControl1.TabIndex = 4;
             this.groupControl1.Text = "Order Details";
             // 
@@ -897,7 +897,7 @@
             this.gridControl1.MainView = this.gridView1;
             this.gridControl1.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
             this.gridControl1.Name = "gridControl1";
-            this.gridControl1.Size = new System.Drawing.Size(2888, 586);
+            this.gridControl1.Size = new System.Drawing.Size(2568, 586);
             this.gridControl1.TabIndex = 2;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1,
@@ -976,7 +976,7 @@
             this.groupBox1.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(6, 5, 6, 5);
-            this.groupBox1.Size = new System.Drawing.Size(2906, 670);
+            this.groupBox1.Size = new System.Drawing.Size(2586, 670);
             this.groupBox1.TabIndex = 6;
             this.groupBox1.TabStop = false;
             // 
@@ -988,7 +988,7 @@
             this.groupBox3.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Padding = new System.Windows.Forms.Padding(6, 5, 6, 5);
-            this.groupBox3.Size = new System.Drawing.Size(2906, 768);
+            this.groupBox3.Size = new System.Drawing.Size(2586, 768);
             this.groupBox3.TabIndex = 7;
             this.groupBox3.TabStop = false;
             // 
@@ -1010,7 +1010,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(2906, 1438);
+            this.ClientSize = new System.Drawing.Size(2586, 1438);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox1);
             this.IconOptions.Icon = ((System.Drawing.Icon)(resources.GetObject("AddBranchOrderSTS.IconOptions.Icon")));

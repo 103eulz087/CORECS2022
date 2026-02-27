@@ -43,6 +43,10 @@
             this.advBandedGridView2 = new DevExpress.XtraGrid.Views.BandedGrid.AdvBandedGridView();
             this.gridBand2 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.labelControl15 = new DevExpress.XtraEditors.LabelControl();
+            this.txtsearchlookupproduct = new DevExpress.XtraEditors.SearchLookUpEdit();
+            this.searchLookUpEdit2View = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.simpleButton3 = new DevExpress.XtraEditors.SimpleButton();
             this.simpleButton2 = new DevExpress.XtraEditors.SimpleButton();
             this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
@@ -91,10 +95,6 @@
             this.serialPort1 = new System.IO.Ports.SerialPort(this.components);
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.printBarcodeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.labelControl15 = new DevExpress.XtraEditors.LabelControl();
-            this.txtsearchlookupproduct = new DevExpress.XtraEditors.SearchLookUpEdit();
-            this.searchLookUpEdit2View = new DevExpress.XtraGrid.Views.Grid.GridView();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
             this.groupControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
@@ -108,6 +108,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.bandedGridView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.advBandedGridView2)).BeginInit();
             this.groupBox2.SuspendLayout();
+            this.panel4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtsearchlookupproduct.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit2View)).BeginInit();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtbarcodescanning.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txteffectivedate.Properties)).BeginInit();
@@ -123,9 +126,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
-            this.panel4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtsearchlookupproduct.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit2View)).BeginInit();
             this.SuspendLayout();
             // 
             // groupControl1
@@ -368,6 +368,57 @@
             this.groupBox2.TabIndex = 0;
             this.groupBox2.TabStop = false;
             this.groupBox2.Enter += new System.EventHandler(this.groupBox2_Enter);
+            // 
+            // panel4
+            // 
+            this.panel4.Controls.Add(this.labelControl15);
+            this.panel4.Controls.Add(this.txtsearchlookupproduct);
+            this.panel4.Location = new System.Drawing.Point(4, 17);
+            this.panel4.Margin = new System.Windows.Forms.Padding(6, 4, 6, 4);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(762, 121);
+            this.panel4.TabIndex = 90;
+            // 
+            // labelControl15
+            // 
+            this.labelControl15.Appearance.Font = new System.Drawing.Font("Tahoma", 8.75F, System.Drawing.FontStyle.Bold);
+            this.labelControl15.Appearance.Options.UseFont = true;
+            this.labelControl15.Location = new System.Drawing.Point(26, 46);
+            this.labelControl15.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
+            this.labelControl15.Name = "labelControl15";
+            this.labelControl15.Size = new System.Drawing.Size(213, 28);
+            this.labelControl15.TabIndex = 89;
+            this.labelControl15.Text = "SELECT PRODUCT:";
+            // 
+            // txtsearchlookupproduct
+            // 
+            this.txtsearchlookupproduct.Location = new System.Drawing.Point(288, 42);
+            this.txtsearchlookupproduct.Margin = new System.Windows.Forms.Padding(6, 4, 6, 4);
+            this.txtsearchlookupproduct.Name = "txtsearchlookupproduct";
+            this.txtsearchlookupproduct.Properties.Appearance.Options.UseFont = true;
+            this.txtsearchlookupproduct.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.txtsearchlookupproduct.Properties.NullText = "";
+            this.txtsearchlookupproduct.Properties.PopupView = this.searchLookUpEdit2View;
+            this.txtsearchlookupproduct.Size = new System.Drawing.Size(440, 40);
+            this.txtsearchlookupproduct.TabIndex = 88;
+            this.txtsearchlookupproduct.EditValueChanged += new System.EventHandler(this.txtsearchlookupproduct_EditValueChanged);
+            // 
+            // searchLookUpEdit2View
+            // 
+            this.searchLookUpEdit2View.ColumnPanelRowHeight = 0;
+            this.searchLookUpEdit2View.DetailHeight = 546;
+            this.searchLookUpEdit2View.FixedLineWidth = 4;
+            this.searchLookUpEdit2View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
+            this.searchLookUpEdit2View.FooterPanelHeight = 0;
+            this.searchLookUpEdit2View.GroupRowHeight = 0;
+            this.searchLookUpEdit2View.LevelIndent = 0;
+            this.searchLookUpEdit2View.Name = "searchLookUpEdit2View";
+            this.searchLookUpEdit2View.OptionsSelection.EnableAppearanceFocusedCell = false;
+            this.searchLookUpEdit2View.OptionsView.ShowGroupPanel = false;
+            this.searchLookUpEdit2View.PreviewIndent = 0;
+            this.searchLookUpEdit2View.RowHeight = 0;
+            this.searchLookUpEdit2View.ViewCaptionHeight = 0;
             // 
             // simpleButton3
             // 
@@ -913,56 +964,6 @@
             this.printBarcodeToolStripMenuItem.Text = "Print Barcode";
             this.printBarcodeToolStripMenuItem.Click += new System.EventHandler(this.printBarcodeToolStripMenuItem_Click);
             // 
-            // panel4
-            // 
-            this.panel4.Controls.Add(this.labelControl15);
-            this.panel4.Controls.Add(this.txtsearchlookupproduct);
-            this.panel4.Location = new System.Drawing.Point(4, 17);
-            this.panel4.Margin = new System.Windows.Forms.Padding(6, 4, 6, 4);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(762, 121);
-            this.panel4.TabIndex = 90;
-            // 
-            // labelControl15
-            // 
-            this.labelControl15.Appearance.Font = new System.Drawing.Font("Tahoma", 8.75F, System.Drawing.FontStyle.Bold);
-            this.labelControl15.Appearance.Options.UseFont = true;
-            this.labelControl15.Location = new System.Drawing.Point(26, 46);
-            this.labelControl15.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
-            this.labelControl15.Name = "labelControl15";
-            this.labelControl15.Size = new System.Drawing.Size(213, 28);
-            this.labelControl15.TabIndex = 89;
-            this.labelControl15.Text = "SELECT PRODUCT:";
-            // 
-            // txtsearchlookupproduct
-            // 
-            this.txtsearchlookupproduct.Location = new System.Drawing.Point(288, 42);
-            this.txtsearchlookupproduct.Margin = new System.Windows.Forms.Padding(6, 4, 6, 4);
-            this.txtsearchlookupproduct.Name = "txtsearchlookupproduct";
-            this.txtsearchlookupproduct.Properties.Appearance.Options.UseFont = true;
-            this.txtsearchlookupproduct.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.txtsearchlookupproduct.Properties.NullText = "";
-            this.txtsearchlookupproduct.Properties.PopupView = this.searchLookUpEdit2View;
-            this.txtsearchlookupproduct.Size = new System.Drawing.Size(440, 40);
-            this.txtsearchlookupproduct.TabIndex = 88;
-            // 
-            // searchLookUpEdit2View
-            // 
-            this.searchLookUpEdit2View.ColumnPanelRowHeight = 0;
-            this.searchLookUpEdit2View.DetailHeight = 546;
-            this.searchLookUpEdit2View.FixedLineWidth = 4;
-            this.searchLookUpEdit2View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
-            this.searchLookUpEdit2View.FooterPanelHeight = 0;
-            this.searchLookUpEdit2View.GroupRowHeight = 0;
-            this.searchLookUpEdit2View.LevelIndent = 0;
-            this.searchLookUpEdit2View.Name = "searchLookUpEdit2View";
-            this.searchLookUpEdit2View.OptionsSelection.EnableAppearanceFocusedCell = false;
-            this.searchLookUpEdit2View.OptionsView.ShowGroupPanel = false;
-            this.searchLookUpEdit2View.PreviewIndent = 0;
-            this.searchLookUpEdit2View.RowHeight = 0;
-            this.searchLookUpEdit2View.ViewCaptionHeight = 0;
-            // 
             // AddBranchOrder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
@@ -991,6 +992,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.advBandedGridView2)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.panel4.ResumeLayout(false);
+            this.panel4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtsearchlookupproduct.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit2View)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtbarcodescanning.Properties)).EndInit();
@@ -1008,10 +1013,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
-            this.panel4.ResumeLayout(false);
-            this.panel4.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtsearchlookupproduct.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit2View)).EndInit();
             this.ResumeLayout(false);
 
         }

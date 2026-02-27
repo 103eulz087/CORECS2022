@@ -73,7 +73,7 @@ namespace SalesInventorySystem
         void displayProdCat()
         {
             //Classes.Product.displayProductCategoryComboBoxItems(txtprodcat);
-            Database.displaySearchlookupEdit("Select ProductCategoryID,Description FROM ProductCategory with(nolock)", txtsrchprodcat, "Description", "Description");
+            //Database.displaySearchlookupEdit("Select ProductCategoryID,Description FROM ProductCategory with(nolock)", txtsrchprodcat, "Description", "Description");
            
         }
 
@@ -736,33 +736,33 @@ namespace SalesInventorySystem
             objprodforcodemanytoone = SearchLookUpClass.getSingleValue(txtsrchprdctmanytoone, "ProductCode");
         }
 
-        void addItemByBarcode()
-        {
-            //one to many
-            if(radioButton1.Checked==true)
-            {
-                var rowz = Database.getMultipleQuery($"SELECT Product,Description,Cost,Available FROM dbo.Inventory WHERE Branch='{Login.assignedBranch}' and Barcode='{txtbarcode.Text}' AND Available > 0 and isWarehouse=1", "Product,Description,Cost,Available");
-                string Product, Description, Cost, Available;
-                Product = rowz["Product"].ToString();
-                Description = rowz["Description"].ToString();
-                Cost = rowz["Cost"].ToString();
-                Available = rowz["Available"].ToString();
-                if (gridView1.RowCount > 0 && gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "Product").ToString() != Product)
-                {
-                    XtraMessageBox.Show("Product Items must have the same Product Code!");
-                    return;
-                }
-                else
-                {
-                    Database.ExecuteQuery("INSERT INTO TempConversionDetails VALUES('" + Login.assignedBranch + "','" + txtrefcode.Text + "',1,'" + Product + "','" + Description + "','" + txtsrcqty.Text + "',0,0,'" + gridView3.GetRowCellValue(i, "ProductCode").ToString() + "','" + gridView3.GetRowCellValue(i, "Description").ToString() + "','" + gridView3.GetRowCellValue(i, "ActualQty").ToString() + "','" + gridView3.GetRowCellValue(i, "ActualQty").ToString() + "','" + 0 + "','" + 0 + "',0,0,'0','" + gridView3.GetRowCellValue(i, "Barcode").ToString() + "')");
-                }
+        //void addItemByBarcode()
+        //{
+        //    //one to many
+        //    if(radioButton1.Checked==true)
+        //    {
+        //        var rowz = Database.getMultipleQuery($"SELECT Product,Description,Cost,Available FROM dbo.Inventory WHERE Branch='{Login.assignedBranch}' and Barcode='{txtbarcode.Text}' AND Available > 0 and isWarehouse=1", "Product,Description,Cost,Available");
+        //        string Product, Description, Cost, Available;
+        //        Product = rowz["Product"].ToString();
+        //        Description = rowz["Description"].ToString();
+        //        Cost = rowz["Cost"].ToString();
+        //        Available = rowz["Available"].ToString();
+        //        if (gridView1.RowCount > 0 && gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "Product").ToString() != Product)
+        //        {
+        //            XtraMessageBox.Show("Product Items must have the same Product Code!");
+        //            return;
+        //        }
+        //        else
+        //        {
+        //            Database.ExecuteQuery("INSERT INTO TempConversionDetails VALUES('" + Login.assignedBranch + "','" + txtrefcode.Text + "',1,'" + Product + "','" + Description + "','" + txtsrcqty.Text + "',0,0,'" + gridView3.GetRowCellValue(i, "ProductCode").ToString() + "','" + gridView3.GetRowCellValue(i, "Description").ToString() + "','" + gridView3.GetRowCellValue(i, "ActualQty").ToString() + "','" + gridView3.GetRowCellValue(i, "ActualQty").ToString() + "','" + 0 + "','" + 0 + "',0,0,'0','" + gridView3.GetRowCellValue(i, "Barcode").ToString() + "')");
+        //        }
 
-            }
-            else
-            {
+        //    }
+        //    else
+        //    {
 
-            }
-        }
+        //    }
+        //}
 
         private void txtbarcode_KeyDown(object sender, KeyEventArgs e)
         {
@@ -771,7 +771,7 @@ namespace SalesInventorySystem
 
         private void txtsrchprodcat_EditValueChanged(object sender, EventArgs e)
         {
-            objprod = SearchLookUpClass.getSingleValue(txtsrchprodcat, "ProductCategoryID");
+            //objprod = SearchLookUpClass.getSingleValue(txtsrchprodcat, "ProductCategoryID");
             Database.display("SELECT Product,Description,SUM(Available) as Available " +
              "FROM Inventory with(nolock)" +
              "WHERE Branch='" + Login.assignedBranch + "' " +

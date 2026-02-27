@@ -790,24 +790,24 @@ namespace SalesInventorySystem
                 string full = qty1 + " @ " + sel1 + " = " + total1;
                 int desclength = desc1.Length;
                 string description = "";
-                if (desclength > 20)
-                {
-                    description = desc1.Substring(0, 19);
-                }
-                else
-                {
-                    description = desc1;
-                }
-                if (txtcomport.Text == "")
-                {
-                    XtraMessageBox.Show("Please Select COM-PORT");
-                }
-                else if(serialPort1.IsOpen && chckdisplaypool.Checked==true)
-                {
-                    serialPort1.Write(Convert.ToString((char)12));
-                    serialPort1.WriteLine(description);
-                    serialPort1.WriteLine((char)13 + "Amount: " + total1);
-                }
+                //if (desclength > 20)
+                //{
+                //    description = desc1.Substring(0, 19);
+                //}
+                //else
+                //{
+                //    description = desc1;
+                //}
+                //if (txtcomport.Text == "")
+                //{
+                //    XtraMessageBox.Show("Please Select COM-PORT");
+                //}
+                //else if(serialPort1.IsOpen && chckdisplaypool.Checked==true)
+                //{
+                //    serialPort1.Write(Convert.ToString((char)12));
+                //    serialPort1.WriteLine(description);
+                //    serialPort1.WriteLine((char)13 + "Amount: " + total1);
+                //}
              
             }
             catch (SqlException ex)
@@ -2303,7 +2303,10 @@ namespace SalesInventorySystem
                 com.Parameters.Add("@parmbeginrettransno", SqlDbType.VarChar, 20).Direction = ParameterDirection.Output;
                 com.Parameters.Add("@parmendrettransno", SqlDbType.VarChar, 20).Direction = ParameterDirection.Output;
 
-                com.Parameters.Add("@parmbeginningcash", SqlDbType.Money).Direction = ParameterDirection.Output;
+           
+                com.Parameters.Add("@parmbeginningcash", SqlDbType.Decimal, 12).Direction = ParameterDirection.Output;
+                com.Parameters["@parmbeginningcash"].Precision = 12;
+                com.Parameters["@parmbeginningcash"].Scale = 2;
 
                 com.Parameters.Add("@parmnoofsolditem", SqlDbType.Int).Direction = ParameterDirection.Output;
                 com.Parameters.Add("@parmnoofcancelleditem", SqlDbType.Int).Direction = ParameterDirection.Output;
@@ -2364,13 +2367,6 @@ namespace SalesInventorySystem
                 com.Parameters["@parmtotalofspdisc"].Precision = 12;
                 com.Parameters["@parmtotalofspdisc"].Scale = 2;
                 ///////////////////////////
-
-
-
-
-
-
-
 
 
                 com.Parameters.Add("@parmtotalofregdisc", SqlDbType.Decimal, 12).Direction = ParameterDirection.Output;

@@ -78,14 +78,6 @@ namespace SalesInventorySystem
             return functionReturnValue;
         }
 
-        private void display()
-        {
-            Database.displayLocalGrid("SELECT ProductCode,Description,Barcode,FORMAT(SellingPrice,'N', 'en-us') as SellingPrice,FORMAT(Price1,'N', 'en-us') as Price1,FORMAT(Price2,'N', 'en-us') as Price2,FORMAT(Price3,'N', 'en-us') as Price3,FORMAT(Price4,'N', 'en-us') as Price4 " +
-                "FROM Products " +
-                "WHERE BranchCode='" + Login.assignedBranch + "' AND ProdType IN ('1','3') " +
-                "ORDER BY Description", dataGridView1);
-        }
-
         private void dataGridView1_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -129,74 +121,8 @@ namespace SalesInventorySystem
         {
             if (e.KeyCode == Keys.Enter)
             {
-                bool isLinkedServer = Database.checkifExist("Select isnull(isLinkedServer,0) FROM POSType WHERE isLinkedServer=1");
-                
-                if (isLinkedServer) //if they used linkedserver
-                {
-                    string linkedServerName = Database.getSingleQuery("POSType", "isLinkedServer is not null", "linkedServerName"); //linkedservername
-                    string conLink = Database.getSingleResultSet("exec checkLinkedServer  "+ linkedServerName + "  "); //check connection
-                    string tableName = "";
-                    if (conLink=="1")
-                    {
-                        tableName = linkedServerName+"."+Database.getDBName()+".dbo.Products";
-                        Database.displayLocalGrid("SELECT TOP(100) BranchCode" +
-                       ",ProductCode" +
-                       ",Description" +
-                       ",Barcode" +
-                       ",SellingPrice" +
-                       ",Price1" +
-                       ",Price2" +
-                       ",Price3" +
-                       ",Price4" +
-                       //",Price5 " +
-                       " FROM "+ tableName + " " +
-                       "WHERE Description like '%" + textBox1.Text + "%'  " +
-                       "AND ProdType IN ('1','3') " +
-                       "and BranchCode='" + Login.assignedBranch + "' " +
-                       "or Barcode like '%" + textBox1.Text + "%' " +
-                       "and BranchCode='" + Login.assignedBranch + "' ORDER BY Description", dataGridView1);
-                    }
-                    else
-                    {
-                        tableName = Database.getDBName() + ".dbo.Products";
-                        Database.displayLocalGrid("SELECT TOP 100 BranchCode" +
-                   ",ProductCode" +
-                   ",Description" +
-                   ",Barcode" +
-                   ",SellingPrice" +
-                   ",Price1" +
-                   ",Price2" +
-                   ",Price3" +
-                   ",Price4" +
-                   //",Price5 " +
-                    " FROM " + tableName + " " +
-                   "WHERE Description like '%" + textBox1.Text + "%'  AND ProdType IN ('1','3') " +
-                   "and BranchCode='" + Login.assignedBranch + "' " +
-                   "or Barcode like '%" + textBox1.Text + "%' " +
-                   "and BranchCode='" + Login.assignedBranch + "' ORDER BY Description", dataGridView1);
-                    }
-                }
-                else
-                {
-                    Database.displayLocalGrid("SELECT TOP 100 BranchCode" +
-                  ",ProductCode" +
-                  ",Description" +
-                  ",Barcode" +
-                  ",SellingPrice" +
-                  ",Price1" +
-                  ",Price2" +
-                  ",Price3" +
-                  ",Price4" +
-                  //",Price5 " +
-                   " FROM Products " +
-                  "WHERE Description like '%" + textBox1.Text + "%'  AND ProdType IN ('1','3') " +
-                  "and BranchCode='" + Login.assignedBranch + "' " +
-                  //"or Barcode like '%" + textBox1.Text + "%' " +
-                  "and BranchCode='" + Login.assignedBranch + "' ORDER BY Description", dataGridView1);
-                }
-               
+                Database.displayLocalGrid($"SELECT * FROM dbo.funcview_POSSearchProduct('{Login.assignedBranch}','{textBox1.Text}')", dataGridView1);
                 dataGridView1.Focus();
-                //textBox1.Focus();
             }
         }
 
@@ -224,8 +150,6 @@ namespace SalesInventorySystem
             {   str = "price4";
                 unitprice = Database.getSingleQuery("Products", $"BranchCode='{Login.assignedBranch}' AND ProductCode='{prodcode}'", "Price4");
             }
-            //else if (radioButton6.Checked == true)
-            //    str = "price5";
             else
                 str = "mainprice";
             return str;

@@ -2654,9 +2654,9 @@ namespace SalesInventorySystem
 
         void OpenPOSTransaction()
         {
-            bool isUserExistToday = Database.checkifExist("SELECT BranchCode FROM SalesTransactionSummary WHERE BranchCode='" + Login.assignedBranch + "' and DateOpen='" + DateTime.Now.ToShortDateString() + "' AND isOpen='1' and UserID='" + Login.isglobalUserID + "'");
+            bool isUserExistToday = Database.checkifExist("SELECT 1 FROM SalesTransactionSummary WHERE BranchCode='" + Login.assignedBranch + "' and DateOpen='" + DateTime.Now.ToShortDateString() + "' AND isOpen='1' and UserID='" + Login.isglobalUserID + "'");
             bool isoverride = false;
-            isoverride = Database.checkifExist("SELECT isnull(isOverride,0) FROM POSFunctions WHERE FunctionName='CASHBEGIN' AND isOverride=1");
+            isoverride = Database.checkifExist("SELECT 1 FROM POSFunctions WHERE FunctionName='CASHBEGIN' AND isOverride=1");
             if (!isoverride)
             {
                 if (!isUserExistToday)

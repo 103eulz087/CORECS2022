@@ -29,9 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(POSErrrorCorrect));
             this.labelControl6 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
@@ -211,37 +208,14 @@
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.AllowUserToDeleteRows = false;
             this.dataGridView1.BackgroundColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(4, 28);
+            this.dataGridView1.Location = new System.Drawing.Point(4, 30);
             this.dataGridView1.Margin = new System.Windows.Forms.Padding(6);
             this.dataGridView1.Name = "dataGridView1";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
-            this.dataGridView1.Size = new System.Drawing.Size(1118, 339);
+            this.dataGridView1.Size = new System.Drawing.Size(1118, 337);
             this.dataGridView1.TabIndex = 15;
+            this.dataGridView1.Visible = false;
             this.dataGridView1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.dataGridView1_MouseUp);
             // 
             // contextMenuStrip1
@@ -262,13 +236,14 @@
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.dataGridView1);
-            this.groupBox2.Location = new System.Drawing.Point(42, 162);
+            this.groupBox2.Location = new System.Drawing.Point(1184, 54);
             this.groupBox2.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(4);
             this.groupBox2.Size = new System.Drawing.Size(1126, 371);
             this.groupBox2.TabIndex = 27;
             this.groupBox2.TabStop = false;
+            this.groupBox2.Visible = false;
             // 
             // labelControl7
             // 
@@ -288,6 +263,7 @@
             this.groupControl1.Appearance.Options.UseBackColor = true;
             this.groupControl1.Controls.Add(this.btnClose);
             this.groupControl1.Controls.Add(this.btnReturnALL);
+            this.groupControl1.Controls.Add(this.groupBox2);
             this.groupControl1.Controls.Add(this.txtremarks);
             this.groupControl1.Controls.Add(this.labelControl2);
             this.groupControl1.Controls.Add(this.btnReturnSelected);
@@ -360,12 +336,12 @@
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.gridControlMaster);
-            this.groupBox1.Location = new System.Drawing.Point(42, 550);
+            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox1.Location = new System.Drawing.Point(0, 163);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1728, 501);
+            this.groupBox1.Size = new System.Drawing.Size(1826, 937);
             this.groupBox1.TabIndex = 34;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "groupBox1";
             // 
             // gridControlMaster
             // 
@@ -384,7 +360,7 @@
             this.repositoryItemSearchLookUpEditoffsetdebitglcode,
             this.repositoryItemSearchLookUpEditdiscountglcode,
             this.repositoryItemSearchLookUpEditoffsetCreditGLCode});
-            this.gridControlMaster.Size = new System.Drawing.Size(1722, 471);
+            this.gridControlMaster.Size = new System.Drawing.Size(1820, 907);
             this.gridControlMaster.TabIndex = 9;
             this.gridControlMaster.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewMaster});
@@ -521,7 +497,6 @@
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1826, 1100);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupControl1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Margin = new System.Windows.Forms.Padding(6);

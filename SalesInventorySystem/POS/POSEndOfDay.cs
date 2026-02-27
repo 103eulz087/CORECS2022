@@ -1094,7 +1094,7 @@ namespace SalesInventorySystem.POS
 
         }
 
-        async void EODwithUpload()
+        async void EODwithUpload(DateTime transDate)
         {
             // Reset your progress bar (assuming you have a control named progressBar1)
             progressBar1.Value = 0;
@@ -1114,7 +1114,7 @@ namespace SalesInventorySystem.POS
 
             try
             {
-                DateTime transDate = DateTime.Today;
+                //DateTime transDate = DateTime.Today;
                 string branchCode = Login.assignedBranch;
                 string machineName = Environment.MachineName;
 
@@ -1169,7 +1169,7 @@ namespace SalesInventorySystem.POS
 
 
 
-                EODwithUpload();
+                EODwithUpload(Convert.ToDateTime(txttransactiondate.Text));
                 executeEOD();
                 pushit();
                 //AuthorizedConfirmationFrm authfrm = new AuthorizedConfirmationFrm();

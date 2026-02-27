@@ -32,6 +32,7 @@
             this.TopMargin = new DevExpress.XtraReports.UI.TopMarginBand();
             this.BottomMargin = new DevExpress.XtraReports.UI.BottomMarginBand();
             this.ReportHeader = new DevExpress.XtraReports.UI.ReportHeaderBand();
+            this.xrcontrolno = new DevExpress.XtraReports.UI.XRLabel();
             this.xrterms = new DevExpress.XtraReports.UI.XRLabel();
             this.xrbusinessstyle = new DevExpress.XtraReports.UI.XRLabel();
             this.xrdate = new DevExpress.XtraReports.UI.XRLabel();
@@ -52,7 +53,8 @@
             this.xrlbdiscount = new DevExpress.XtraReports.UI.XRLabel();
             this.xrlbllessvat = new DevExpress.XtraReports.UI.XRLabel();
             this.xrlbltotalsales = new DevExpress.XtraReports.UI.XRLabel();
-            this.xrcontrolno = new DevExpress.XtraReports.UI.XRLabel();
+            this.xrLabel1 = new DevExpress.XtraReports.UI.XRLabel();
+            this.xrLabel2 = new DevExpress.XtraReports.UI.XRLabel();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             // 
             // Detail
@@ -87,6 +89,16 @@
             this.xraddress});
             this.ReportHeader.HeightF = 101.6667F;
             this.ReportHeader.Name = "ReportHeader";
+            // 
+            // xrcontrolno
+            // 
+            this.xrcontrolno.Font = new System.Drawing.Font("Century Gothic", 9.2F);
+            this.xrcontrolno.LocationFloat = new DevExpress.Utils.PointFloat(698.0001F, 36.00001F);
+            this.xrcontrolno.Name = "xrcontrolno";
+            this.xrcontrolno.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100F);
+            this.xrcontrolno.SizeF = new System.Drawing.SizeF(223.3334F, 18F);
+            this.xrcontrolno.StylePriority.UseFont = false;
+            this.xrcontrolno.StylePriority.UsePadding = false;
             // 
             // xrterms
             // 
@@ -151,6 +163,8 @@
             // PageFooter
             // 
             this.PageFooter.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
+            this.xrLabel2,
+            this.xrLabel1,
             this.xrlblvatablesales,
             this.xrlblamountdue,
             this.xrlbladdvat,
@@ -170,7 +184,7 @@
             // xrlblvatablesales
             // 
             this.xrlblvatablesales.Font = new System.Drawing.Font("Times New Roman", 8.8F);
-            this.xrlblvatablesales.LocationFloat = new DevExpress.Utils.PointFloat(725.8334F, 16.74947F);
+            this.xrlblvatablesales.LocationFloat = new DevExpress.Utils.PointFloat(725.8334F, 0F);
             this.xrlblvatablesales.Name = "xrlblvatablesales";
             this.xrlblvatablesales.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100F);
             this.xrlblvatablesales.SizeF = new System.Drawing.SizeF(113.3334F, 11.5002F);
@@ -241,7 +255,7 @@
             // xrlblvatexemptsales
             // 
             this.xrlblvatexemptsales.Font = new System.Drawing.Font("Times New Roman", 8.8F);
-            this.xrlblvatexemptsales.LocationFloat = new DevExpress.Utils.PointFloat(725.8334F, 28.24966F);
+            this.xrlblvatexemptsales.LocationFloat = new DevExpress.Utils.PointFloat(725.8334F, 9.999996F);
             this.xrlblvatexemptsales.Name = "xrlblvatexemptsales";
             this.xrlblvatexemptsales.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100F);
             this.xrlblvatexemptsales.SizeF = new System.Drawing.SizeF(113.3334F, 11.5002F);
@@ -254,7 +268,7 @@
             // xrlblvatamount
             // 
             this.xrlblvatamount.Font = new System.Drawing.Font("Times New Roman", 8.8F);
-            this.xrlblvatamount.LocationFloat = new DevExpress.Utils.PointFloat(725.8334F, 51.25005F);
+            this.xrlblvatamount.LocationFloat = new DevExpress.Utils.PointFloat(725.8334F, 33.0004F);
             this.xrlblvatamount.Name = "xrlblvatamount";
             this.xrlblvatamount.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100F);
             this.xrlblvatamount.SizeF = new System.Drawing.SizeF(113.3334F, 11.5002F);
@@ -267,7 +281,7 @@
             // xrlblzeroratedsales
             // 
             this.xrlblzeroratedsales.Font = new System.Drawing.Font("Times New Roman", 8.8F);
-            this.xrlblzeroratedsales.LocationFloat = new DevExpress.Utils.PointFloat(725.8334F, 39.74986F);
+            this.xrlblzeroratedsales.LocationFloat = new DevExpress.Utils.PointFloat(725.8334F, 21.5002F);
             this.xrlblzeroratedsales.Name = "xrlblzeroratedsales";
             this.xrlblzeroratedsales.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100F);
             this.xrlblzeroratedsales.SizeF = new System.Drawing.SizeF(113.3334F, 11.5002F);
@@ -280,7 +294,7 @@
             // xrlblnetofvat
             // 
             this.xrlblnetofvat.Font = new System.Drawing.Font("Times New Roman", 8.8F);
-            this.xrlblnetofvat.LocationFloat = new DevExpress.Utils.PointFloat(725.8333F, 85.75068F);
+            this.xrlblnetofvat.LocationFloat = new DevExpress.Utils.PointFloat(725.8333F, 67.501F);
             this.xrlblnetofvat.Name = "xrlblnetofvat";
             this.xrlblnetofvat.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100F);
             this.xrlblnetofvat.SizeF = new System.Drawing.SizeF(113.3334F, 11.5002F);
@@ -293,7 +307,7 @@
             // xrlbdiscount
             // 
             this.xrlbdiscount.Font = new System.Drawing.Font("Times New Roman", 8.8F);
-            this.xrlbdiscount.LocationFloat = new DevExpress.Utils.PointFloat(725.8334F, 97.25088F);
+            this.xrlbdiscount.LocationFloat = new DevExpress.Utils.PointFloat(725.8334F, 79.00121F);
             this.xrlbdiscount.Name = "xrlbdiscount";
             this.xrlbdiscount.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100F);
             this.xrlbdiscount.SizeF = new System.Drawing.SizeF(113.3334F, 11.5002F);
@@ -306,7 +320,7 @@
             // xrlbllessvat
             // 
             this.xrlbllessvat.Font = new System.Drawing.Font("Times New Roman", 8.8F);
-            this.xrlbllessvat.LocationFloat = new DevExpress.Utils.PointFloat(725.8334F, 74.25049F);
+            this.xrlbllessvat.LocationFloat = new DevExpress.Utils.PointFloat(725.8334F, 56.00084F);
             this.xrlbllessvat.Name = "xrlbllessvat";
             this.xrlbllessvat.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100F);
             this.xrlbllessvat.SizeF = new System.Drawing.SizeF(113.3334F, 11.5002F);
@@ -319,7 +333,7 @@
             // xrlbltotalsales
             // 
             this.xrlbltotalsales.Font = new System.Drawing.Font("Times New Roman", 8.8F);
-            this.xrlbltotalsales.LocationFloat = new DevExpress.Utils.PointFloat(725.8334F, 62.75024F);
+            this.xrlbltotalsales.LocationFloat = new DevExpress.Utils.PointFloat(725.8334F, 44.5006F);
             this.xrlbltotalsales.Name = "xrlbltotalsales";
             this.xrlbltotalsales.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100F);
             this.xrlbltotalsales.SizeF = new System.Drawing.SizeF(113.3334F, 11.5002F);
@@ -329,15 +343,31 @@
             this.xrlbltotalsales.Text = "99,99,999.00";
             this.xrlbltotalsales.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleJustify;
             // 
-            // xrcontrolno
+            // xrLabel1
             // 
-            this.xrcontrolno.Font = new System.Drawing.Font("Century Gothic", 9.2F);
-            this.xrcontrolno.LocationFloat = new DevExpress.Utils.PointFloat(698.0001F, 36.00001F);
-            this.xrcontrolno.Name = "xrcontrolno";
-            this.xrcontrolno.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100F);
-            this.xrcontrolno.SizeF = new System.Drawing.SizeF(223.3334F, 18F);
-            this.xrcontrolno.StylePriority.UseFont = false;
-            this.xrcontrolno.StylePriority.UsePadding = false;
+            this.xrLabel1.Font = new System.Drawing.Font("Times New Roman", 8.8F);
+            this.xrLabel1.LocationFloat = new DevExpress.Utils.PointFloat(725.8333F, 90.5014F);
+            this.xrLabel1.Name = "xrLabel1";
+            this.xrLabel1.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100F);
+            this.xrLabel1.SizeF = new System.Drawing.SizeF(113.3334F, 11.5002F);
+            this.xrLabel1.StylePriority.UseFont = false;
+            this.xrLabel1.StylePriority.UsePadding = false;
+            this.xrLabel1.StylePriority.UseTextAlignment = false;
+            this.xrLabel1.Text = "0.00";
+            this.xrLabel1.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleJustify;
+            // 
+            // xrLabel2
+            // 
+            this.xrLabel2.Font = new System.Drawing.Font("Times New Roman", 8.8F);
+            this.xrLabel2.LocationFloat = new DevExpress.Utils.PointFloat(725.8334F, 96.4993F);
+            this.xrLabel2.Name = "xrLabel2";
+            this.xrLabel2.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100F);
+            this.xrLabel2.SizeF = new System.Drawing.SizeF(113.3334F, 11.5002F);
+            this.xrLabel2.StylePriority.UseFont = false;
+            this.xrLabel2.StylePriority.UsePadding = false;
+            this.xrLabel2.StylePriority.UseTextAlignment = false;
+            this.xrLabel2.Text = "0.00";
+            this.xrLabel2.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleJustify;
             // 
             // SalesInvoice
             // 
@@ -385,5 +415,7 @@
         public DevExpress.XtraReports.UI.XRLabel xrdate;
         public DevExpress.XtraReports.UI.XRLabel xrterms;
         public DevExpress.XtraReports.UI.XRLabel xrcontrolno;
+        public DevExpress.XtraReports.UI.XRLabel xrLabel2;
+        public DevExpress.XtraReports.UI.XRLabel xrLabel1;
     }
 }

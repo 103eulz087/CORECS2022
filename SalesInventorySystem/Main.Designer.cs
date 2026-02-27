@@ -539,7 +539,7 @@
             this.ribbonControl.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonControlStyle.Office2013;
             this.ribbonControl.ShowApplicationButton = DevExpress.Utils.DefaultBoolean.False;
             this.ribbonControl.ShowPageHeadersMode = DevExpress.XtraBars.Ribbon.ShowPageHeadersMode.Show;
-            this.ribbonControl.Size = new System.Drawing.Size(2906, 308);
+            this.ribbonControl.Size = new System.Drawing.Size(2586, 308);
             this.ribbonControl.StatusBar = this.ribbonStatusBar;
             this.ribbonControl.SelectedPageChanged += new System.EventHandler(this.ribbonControl_SelectedPageChanged);
             this.ribbonControl.Click += new System.EventHandler(this.ribbon_Click);
@@ -2876,7 +2876,7 @@
             this.ribbonStatusBar.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.ribbonStatusBar.Name = "ribbonStatusBar";
             this.ribbonStatusBar.Ribbon = this.ribbonControl;
-            this.ribbonStatusBar.Size = new System.Drawing.Size(2906, 48);
+            this.ribbonStatusBar.Size = new System.Drawing.Size(2586, 48);
             // 
             // barAndDockingController1
             // 
@@ -2952,7 +2952,7 @@
             this.Appearance.Options.UseBackColor = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(2906, 1269);
+            this.ClientSize = new System.Drawing.Size(2586, 1269);
             this.Controls.Add(this.ribbonStatusBar);
             this.Controls.Add(this.ribbonControl);
             this.IsMdiContainer = true;
@@ -2961,7 +2961,7 @@
             this.Ribbon = this.ribbonControl;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.StatusBar = this.ribbonStatusBar;
-            this.Text = "ITCORE-CORE CS ver 8.0.2";
+            this.Text = "ITCORE-CORE CS ver 8.0.9";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Main_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Main_FormClosed);

@@ -98,6 +98,9 @@ namespace SalesInventorySystem.POS
 
                     com.Parameters.Add("@parmnoofscdisc", SqlDbType.Int).Direction = ParameterDirection.Output;
                     com.Parameters.Add("@parmnoofpwddisc", SqlDbType.Int).Direction = ParameterDirection.Output;
+                    com.Parameters.Add("@parmnoofnaacdisc", SqlDbType.Int).Direction = ParameterDirection.Output;
+                    com.Parameters.Add("@parmnoofmovdisc", SqlDbType.Int).Direction = ParameterDirection.Output;
+                    com.Parameters.Add("@parmnoofspdisc", SqlDbType.Int).Direction = ParameterDirection.Output;
                     com.Parameters.Add("@parmnoofregdisc", SqlDbType.Int).Direction = ParameterDirection.Output;
 
                     com.Parameters.Add("@parmtotalofcancelleditem", SqlDbType.Decimal, 12).Direction = ParameterDirection.Output;
@@ -128,6 +131,23 @@ namespace SalesInventorySystem.POS
                     com.Parameters.Add("@parmtotalofpwddisc", SqlDbType.Decimal, 12).Direction = ParameterDirection.Output;
                     com.Parameters["@parmtotalofpwddisc"].Precision = 12;
                     com.Parameters["@parmtotalofpwddisc"].Scale = 2;
+
+
+                    ////////////////////
+                    com.Parameters.Add("@parmtotalofnaacdisc", SqlDbType.Decimal, 12).Direction = ParameterDirection.Output;
+                    com.Parameters["@parmtotalofnaacdisc"].Precision = 12;
+                    com.Parameters["@parmtotalofnaacdisc"].Scale = 2;
+
+
+                    com.Parameters.Add("@parmtotalofmovdisc", SqlDbType.Decimal, 12).Direction = ParameterDirection.Output;
+                    com.Parameters["@parmtotalofmovdisc"].Precision = 12;
+                    com.Parameters["@parmtotalofmovdisc"].Scale = 2;
+
+                    com.Parameters.Add("@parmtotalofspdisc", SqlDbType.Decimal, 12).Direction = ParameterDirection.Output;
+                    com.Parameters["@parmtotalofspdisc"].Precision = 12;
+                    com.Parameters["@parmtotalofspdisc"].Scale = 2;
+                    ///////////////////////////
+
 
                     com.Parameters.Add("@parmtotalofregdisc", SqlDbType.Decimal, 12).Direction = ParameterDirection.Output;
                     com.Parameters["@parmtotalofregdisc"].Precision = 12;

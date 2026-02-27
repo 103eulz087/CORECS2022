@@ -168,6 +168,9 @@ namespace SalesInventorySystem
                 //TOTAL COUNT
                 com.Parameters.AddWithValue("@parmnoofscdiscitems", txtnoofscdisc.Text); 
                 com.Parameters.AddWithValue("@parmnoofpwddiscitems", txtnoofpwddisc.Text);
+                com.Parameters.AddWithValue("@parmnoofnaacdisc", txtnoofnaacdisc.Text);
+                com.Parameters.AddWithValue("@parmnoofmovdisc", txtnoofmovdisc.Text);
+                com.Parameters.AddWithValue("@parmnoofspdisc", txtnoofspdisc.Text);
                 com.Parameters.AddWithValue("@parmnoofregdiscitems", txtnoofregdisc.Text);
 
                 com.Parameters.AddWithValue("@parmvatadjustment", txtvatadjustment.Text);
@@ -181,6 +184,9 @@ namespace SalesInventorySystem
                 //TOTAL SUM AMOUNT
                 com.Parameters.AddWithValue("@parmtotalofscdiscitems", txttotalofscdisc.Text);
                 com.Parameters.AddWithValue("@parmtotalofpwddiscitems", txttotalofpwddisc.Text);
+                com.Parameters.AddWithValue("@parmtotalofmovdisc", txttotalofmovdisc.Text);
+                com.Parameters.AddWithValue("@parmtotalofnaacdisc", txttotalofnaacdisc.Text);
+                com.Parameters.AddWithValue("@parmtotalofspdisc", txttotalofspdisc.Text);
                 com.Parameters.AddWithValue("@parmtotalofregdiscitems", txttotalofregdisc.Text);
 
                 com.Parameters.AddWithValue("@parmvatablesale", txtvatablesales.Text);

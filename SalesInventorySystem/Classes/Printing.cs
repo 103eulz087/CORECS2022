@@ -479,11 +479,11 @@ namespace SalesInventorySystem
                         categoryOrderData[CategoryName].AppendLine($"Order ID: {refno}");
                         categoryOrderData[CategoryName].AppendLine($"Transaction No.: {location}");
                         categoryOrderData[CategoryName].AppendLine("" + (Char)27 + (Char)112 + (Char)0 + (Char)25 + "");
-                        categoryOrderData[CategoryName].AppendLine(HelperFunction.PrintLeftRigthText("Table #:" + tableno, "Waiter:" + waiterid) + Environment.NewLine);
+                        categoryOrderData[CategoryName].AppendLine(HelperFunction.PrintLeftRigthText("Table #:" + tableno,"") + Environment.NewLine);
                         categoryOrderData[CategoryName].AppendLine(HelperFunction.PrintCenterText(CategoryName.ToUpper()) + Environment.NewLine);
                     }
-                    categoryOrderData[CategoryName].AppendLine(HelperFunction.PrintLeftRigthText(Description, QtySold.ToString()) + Environment.NewLine);
-                    consolidatedOrder.AppendLine(HelperFunction.PrintLeftRigthText(Description, QtySold.ToString()) + Environment.NewLine);
+                    categoryOrderData[CategoryName].AppendLine(HelperFunction.PrintLeftText(QtySold.ToString()+" - " + Description + Environment.NewLine));
+                    consolidatedOrder.AppendLine(HelperFunction.PrintLeftText(QtySold.ToString() + " - " + Description + Environment.NewLine));
                 }
             }
             reader.Close(); 
@@ -517,20 +517,7 @@ namespace SalesInventorySystem
                     ex.StackTrace.ToString();
                     //Console.WriteLine($"Error writing order for category '{category.ToUpper()}': {ex.Message}");
                 }
-                //--=====================================================================================================
-                // --- NEW NETWORK PRINTER METHOD ---
-
-                // 1. Fetch the IP and Port dynamically from the database
-                var consolidatedConfig = GetConsolidatedPrinterConfig();
-                string consolidatedPrinterIP = consolidatedConfig.Item1;
-                int consolidatedPrinterPort = consolidatedConfig.Item2;
-
-                // 2. Send the raw string data over the network
-                if (consolidatedOrder.Length > 0 && consolidatedPrinterIP != "127.0.0.1")
-                {
-                    SendRawDataAsync(consolidatedPrinterIP, consolidatedPrinterPort, consolidatedOrder.ToString());
-                }
-                //--=====================================================================================================
+             
 
                 ////////////////////////////////////////////////////////////////////////////////////////////////
                 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -547,7 +534,7 @@ namespace SalesInventorySystem
 
             //////////////////////////////////////////////////////////////////////////////////////////
             ////CONSOLIDATEDORDERS FILE//////////////////////////////////////////////////////////
-            
+
             string consolidatedFolderPath = Path.Combine(baseFolderPath, "ConsolidatedOrders",refno);
             if (!Directory.Exists(consolidatedFolderPath))
             {
@@ -567,7 +554,23 @@ namespace SalesInventorySystem
                 ex.StackTrace.ToString();
             }
             printTextFile(consolidatedFilePath); //print to main printer
-           
+
+            // =========================================================================
+            // === INSERT THE NEW NETWORK PRINTER METHOD HERE (OUTSIDE ALL LOOPS) ===
+            // =========================================================================
+
+            // 1. Fetch the IP and Port dynamically from the database
+            var consolidatedConfig = GetConsolidatedPrinterConfig();
+            string consolidatedPrinterIP = consolidatedConfig.Item1;
+            int consolidatedPrinterPort = consolidatedConfig.Item2;
+
+            // 2. Send the raw string data over the network
+            if (consolidatedOrder.Length > 0 && consolidatedPrinterIP != "127.0.0.1")
+            {
+                SendRawDataAsync(consolidatedPrinterIP, consolidatedPrinterPort, consolidatedOrder.ToString());
+            }
+            // =========================================================================
+
             //////////////////////////////////////////////////////////////////////////////////////////
             //////////////////////////////////////////////////////////////////////////////////////////
         }

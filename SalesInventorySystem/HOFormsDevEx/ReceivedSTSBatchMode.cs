@@ -119,12 +119,24 @@ namespace SalesInventorySystem.HOFormsDevEx
                 inventoryItems.Columns.Add("SellingPrice", typeof(decimal));
                 inventoryItems.Columns.Add("IsScan", typeof(bool));
 
-                foreach (int rowHandle in selectedRows)
+                //foreach (int rowHandle in selectedRows)
+                //{
+                //    string productCode = gridViewRcvd.GetRowCellValue(rowHandle, "ProductNo").ToString();
+                //    string barcode = gridViewRcvd.GetRowCellValue(rowHandle, "BarcodeNo").ToString();
+                //    float qty = Convert.ToSingle(gridViewRcvd.GetRowCellValue(rowHandle, "ActualQty"));
+                //    decimal sellingPrice = Convert.ToDecimal(gridViewRcvd.GetRowCellValue(rowHandle, "SellingPrice"));
+                //    bool isScan = false; // Set this based on your logic or UI checkbox
+
+                //    inventoryItems.Rows.Add(productCode, barcode, qty, sellingPrice, isScan);
+                //}
+
+
+                for(int i=0; i<= gridViewRcvd.RowCount-1;i++)
                 {
-                    string productCode = gridViewRcvd.GetRowCellValue(rowHandle, "ProductNo").ToString();
-                    string barcode = gridViewRcvd.GetRowCellValue(rowHandle, "BarcodeNo").ToString();
-                    float qty = Convert.ToSingle(gridViewRcvd.GetRowCellValue(rowHandle, "ActualQty"));
-                    decimal sellingPrice = Convert.ToDecimal(gridViewRcvd.GetRowCellValue(rowHandle, "SellingPrice"));
+                    string productCode = gridViewRcvd.GetRowCellValue(i, "ProductNo").ToString();
+                    string barcode = gridViewRcvd.GetRowCellValue(i, "BarcodeNo").ToString();
+                    float qty = Convert.ToSingle(gridViewRcvd.GetRowCellValue(i, "ActualQty"));
+                    decimal sellingPrice = Convert.ToDecimal(gridViewRcvd.GetRowCellValue(i, "SellingPrice"));
                     bool isScan = false; // Set this based on your logic or UI checkbox
 
                     inventoryItems.Rows.Add(productCode, barcode, qty, sellingPrice, isScan);
