@@ -331,7 +331,7 @@
             this.printPOToolStripMenuItem,
             this.editPurchaseOrderToolStripMenuItem});
             this.contextMenuStripForApprovalProducts.Name = "contextMenuStrip1";
-            this.contextMenuStripForApprovalProducts.Size = new System.Drawing.Size(391, 112);
+            this.contextMenuStripForApprovalProducts.Size = new System.Drawing.Size(391, 156);
             // 
             // confirmOrderToolStripMenuItem
             // 

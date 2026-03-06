@@ -52,6 +52,7 @@
             this.txtdiffkg = new DevExpress.XtraEditors.TextEdit();
             this.txtdiff = new DevExpress.XtraEditors.TextEdit();
             this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
+            this.txtbarcode = new DevExpress.XtraEditors.TextEdit();
             this.panel2 = new System.Windows.Forms.Panel();
             this.txtsrchprdctmanytoone = new DevExpress.XtraEditors.SearchLookUpEdit();
             this.gridView2 = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -88,7 +89,6 @@
             this.repositoryItemSearchLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.contextMenuStripSourceProd = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.txtbarcode = new DevExpress.XtraEditors.TextEdit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.spinEdit1.Properties)).BeginInit();
@@ -102,6 +102,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtdiff.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
             this.groupControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtbarcode.Properties)).BeginInit();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtsrchprdctmanytoone.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView2)).BeginInit();
@@ -120,7 +121,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemSearchLookUpEditConversionItems)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemSearchLookUpEdit1View)).BeginInit();
             this.contextMenuStripSourceProd.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtbarcode.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // gridControl1
@@ -380,6 +380,18 @@
             this.groupControl1.Size = new System.Drawing.Size(2552, 233);
             this.groupControl1.TabIndex = 25;
             this.groupControl1.Text = "Conversion Process";
+            // 
+            // txtbarcode
+            // 
+            this.txtbarcode.EditValue = "";
+            this.txtbarcode.Location = new System.Drawing.Point(256, 46);
+            this.txtbarcode.Margin = new System.Windows.Forms.Padding(6);
+            this.txtbarcode.Name = "txtbarcode";
+            this.txtbarcode.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtbarcode.Properties.Appearance.Options.UseFont = true;
+            this.txtbarcode.Size = new System.Drawing.Size(504, 44);
+            this.txtbarcode.TabIndex = 39;
+            this.txtbarcode.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtbarcode_KeyDown);
             // 
             // panel2
             // 
@@ -795,18 +807,6 @@
             this.toolStripMenuItem1.Text = "Add this Item for Entry -->";
             this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
             // 
-            // txtbarcode
-            // 
-            this.txtbarcode.EditValue = "";
-            this.txtbarcode.Location = new System.Drawing.Point(256, 46);
-            this.txtbarcode.Margin = new System.Windows.Forms.Padding(6);
-            this.txtbarcode.Name = "txtbarcode";
-            this.txtbarcode.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtbarcode.Properties.Appearance.Options.UseFont = true;
-            this.txtbarcode.Size = new System.Drawing.Size(504, 44);
-            this.txtbarcode.TabIndex = 39;
-            this.txtbarcode.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtbarcode_KeyDown);
-            // 
             // HRIConversion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
@@ -834,6 +834,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).EndInit();
             this.groupControl1.ResumeLayout(false);
             this.groupControl1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtbarcode.Properties)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtsrchprdctmanytoone.Properties)).EndInit();
@@ -854,7 +855,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemSearchLookUpEditConversionItems)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemSearchLookUpEdit1View)).EndInit();
             this.contextMenuStripSourceProd.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.txtbarcode.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }

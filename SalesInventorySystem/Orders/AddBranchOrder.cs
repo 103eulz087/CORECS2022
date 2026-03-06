@@ -175,7 +175,7 @@ namespace SalesInventorySystem
             sourceseqnum = txtseqno.Text;
             SqlConnection con = Database.getConnection();
             con.Open();
-            string query = "sp_AddBranchOrder";
+            string query = "sp_AddBranchOrderHRI";
             try
             {
                 SqlCommand com = new SqlCommand(query, con);

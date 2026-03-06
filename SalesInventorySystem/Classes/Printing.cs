@@ -1520,7 +1520,8 @@ namespace SalesInventorySystem
                     ///////////////////////////////////////////////////////////////////////////////////////////////////////
                     details += HelperFunction.createDottedLine() + Environment.NewLine;
                     details += HelperFunction.PrintLeftRigthText("AMOUNT DUE:", HelperFunction.convertToNumericFormat(Convert.ToDouble(POS.POSConfirmPayment.netamountpayable))) + Environment.NewLine + Environment.NewLine;
-                   
+
+                    //newdiscitems = Convert.ToDouble(total) - Convert.ToDouble(POS.POSConfirmPayment.discamount);
                 } 
                 //else if (POS.POSConfirmPayment.isPwdDiscount == true)
                 else if (disctype == "PWD")
@@ -1552,6 +1553,7 @@ namespace SalesInventorySystem
                     ///////////////////////////////////////////////////////////////////////////////////////////////////////
                     details += HelperFunction.createDottedLine() + Environment.NewLine;
                     details += HelperFunction.PrintLeftRigthText("AMOUNT DUE:", HelperFunction.convertToNumericFormat(Convert.ToDouble(POS.POSConfirmPayment.netamountpayable))) + Environment.NewLine + Environment.NewLine;
+                    //newdiscitems = Convert.ToDouble(total) - Convert.ToDouble(POS.POSConfirmPayment.discamount);
                 }
                 else if (disctype == "NAAC")
                 {
@@ -1582,6 +1584,7 @@ namespace SalesInventorySystem
                     ///////////////////////////////////////////////////////////////////////////////////////////////////////
                     details += HelperFunction.createDottedLine() + Environment.NewLine;
                     details += HelperFunction.PrintLeftRigthText("AMOUNT DUE:", HelperFunction.convertToNumericFormat(Convert.ToDouble(POS.POSConfirmPayment.netamountpayable))) + Environment.NewLine + Environment.NewLine;
+                    //newdiscitems = Convert.ToDouble(total) - Convert.ToDouble(POS.POSConfirmPayment.discamount);
                 }
                 else if (disctype == "SOLOPARENT")
                 {
@@ -1612,6 +1615,7 @@ namespace SalesInventorySystem
                     ///////////////////////////////////////////////////////////////////////////////////////////////////////
                     details += HelperFunction.createDottedLine() + Environment.NewLine;
                     details += HelperFunction.PrintLeftRigthText("AMOUNT DUE:", HelperFunction.convertToNumericFormat(Convert.ToDouble(POS.POSConfirmPayment.netamountpayable))) + Environment.NewLine + Environment.NewLine;
+                   // newdiscitems = Convert.ToDouble(total) - Convert.ToDouble(POS.POSConfirmPayment.discamount);
                 }
                 else if (disctype == "MOV")
                 {
@@ -1642,6 +1646,7 @@ namespace SalesInventorySystem
                     ///////////////////////////////////////////////////////////////////////////////////////////////////////
                     details += HelperFunction.createDottedLine() + Environment.NewLine;
                     details += HelperFunction.PrintLeftRigthText("AMOUNT DUE:", HelperFunction.convertToNumericFormat(Convert.ToDouble(POS.POSConfirmPayment.netamountpayable))) + Environment.NewLine + Environment.NewLine;
+                    //newdiscitems = Convert.ToDouble(total) - Convert.ToDouble(POS.POSConfirmPayment.discamount);
                 }
                 //else if (POS.POSConfirmPayment.isOthersDiscount == true)
                 else if (disctype == "REGULAR")
@@ -1672,7 +1677,7 @@ namespace SalesInventorySystem
                     ///////////////////////////////////////////////////////////////////////////////////////////////////////
                     //details += HelperFunction.PrintLeftRigthText("AMOUNT DUE:", HelperFunction.convertToNumericFormat(Convert.ToDouble(POS.POSConfirmPayment.netamountpayable))) + Environment.NewLine + Environment.NewLine;
                     details += HelperFunction.PrintLeftRigthText("AMOUNT DUE:", HelperFunction.convertToNumericFormat(Convert.ToDouble(total)-Convert.ToDouble(POS.POSConfirmPayment.discamount))) + Environment.NewLine + Environment.NewLine;
-                    newdiscitems = Convert.ToDouble(total) - Convert.ToDouble(POS.POSConfirmPayment.discamount);
+                    //newdiscitems = Convert.ToDouble(total) - Convert.ToDouble(POS.POSConfirmPayment.discamount);
                 }
 
             }
@@ -1686,7 +1691,7 @@ namespace SalesInventorySystem
                 details += HelperFunction.PrintLeftRigthText("CHANGE  :", "0.00") + Environment.NewLine + Environment.NewLine;
             }
             details += HelperFunction.PrintLeftRigthText("TENDERED:", cash) + Environment.NewLine;
-            details += HelperFunction.PrintLeftRigthText("CHANGE  :", HelperFunction.convertToNumericFormat(Convert.ToDouble(cash)- newdiscitems)) + Environment.NewLine + Environment.NewLine;
+            details += HelperFunction.PrintLeftRigthText("CHANGE  :", HelperFunction.convertToNumericFormat(Convert.ToDouble(cash)- Convert.ToDouble(POS.POSConfirmPayment.netamountpayable))) + Environment.NewLine + Environment.NewLine;
 
             double totalvatableSales = netofscdisc + netofnonscdisc;
             double totalVatInputSale = 0.0;

@@ -126,24 +126,28 @@ namespace SalesInventorySystem.Reporting
 
         void showSTSDetails()
         {
-            branchcode = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "BranchCode").ToString();
-            effectivitydate = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "EffectivityDate").ToString();
-            requestedby = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "PreparedBy").ToString();
-
             ponum = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "PONumber").ToString();
-            StocksOrder devrepfrm = new StocksOrder();
-            devrepfrm.txtpono.Text = ponum;
-            devrepfrm.txtbranch.Text = branchcode;
-            devrepfrm.txteffectivitydate.Text = Convert.ToDateTime(effectivitydate).ToShortDateString();
-            devrepfrm.txtpreparedby.Text = requestedby;
-            analyze("spr_STSSummary", ponum, devrepfrm.gridControl1, devrepfrm.gridView1);
-            devrepfrm.Show();
+            DeliverySummaryReports delivsum = new DeliverySummaryReports();
+            Database.display($"SELECT * FROM dbo.funcview_DeliveryDetailsSummary('{ponum}')", delivsum.gridControl1, delivsum.gridView1);
+            delivsum.ShowDialog(this);
+            //branchcode = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "BranchCode").ToString();
+            //effectivitydate = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "EffectivityDate").ToString();
+            //requestedby = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "PreparedBy").ToString();
 
-            GridView view = devrepfrm.gridControl1.FocusedView as GridView;
-            view.SortInfo.ClearAndAddRange(new GridColumnSortInfo[] {
-                new GridColumnSortInfo(view.Columns["Description"],DevExpress.Data.ColumnSortOrder.Ascending)
-                }, 1);
-            devrepfrm.gridView1.ExpandAllGroups();
+            //ponum = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "PONumber").ToString();
+            //StocksOrder devrepfrm = new StocksOrder();
+            //devrepfrm.txtpono.Text = ponum;
+            //devrepfrm.txtbranch.Text = branchcode;
+            //devrepfrm.txteffectivitydate.Text = Convert.ToDateTime(effectivitydate).ToShortDateString();
+            //devrepfrm.txtpreparedby.Text = requestedby;
+            //analyze("spr_STSSummary", ponum, devrepfrm.gridControl1, devrepfrm.gridView1);
+            //devrepfrm.Show();
+
+            //GridView view = devrepfrm.gridControl1.FocusedView as GridView;
+            //view.SortInfo.ClearAndAddRange(new GridColumnSortInfo[] {
+            //    new GridColumnSortInfo(view.Columns["Description"],DevExpress.Data.ColumnSortOrder.Ascending)
+            //    }, 1);
+            //devrepfrm.gridView1.ExpandAllGroups();
         }
 
         private void showSTSDetailsToolStripMenuItem_Click(object sender, EventArgs e)

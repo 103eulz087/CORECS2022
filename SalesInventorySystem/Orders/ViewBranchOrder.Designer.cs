@@ -163,7 +163,7 @@
             this.tabMain.AppearancePage.HeaderActive.Options.UseFont = true;
             this.tabMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabMain.Location = new System.Drawing.Point(0, 0);
-            this.tabMain.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.tabMain.Margin = new System.Windows.Forms.Padding(6);
             this.tabMain.Name = "tabMain";
             this.tabMain.SelectedTabPage = this.tabPending;
             this.tabMain.Size = new System.Drawing.Size(2508, 1441);
@@ -179,7 +179,7 @@
             this.tabPending.Controls.Add(this.gridControl1);
             this.tabPending.Controls.Add(this.groupBox3);
             this.tabPending.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("tabPending.ImageOptions.Image")));
-            this.tabPending.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.tabPending.Margin = new System.Windows.Forms.Padding(6);
             this.tabPending.Name = "tabPending";
             this.tabPending.Size = new System.Drawing.Size(2504, 1387);
             this.tabPending.Text = "Pending";
@@ -187,10 +187,10 @@
             // gridControl1
             // 
             this.gridControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridControl1.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.gridControl1.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(6);
             this.gridControl1.Location = new System.Drawing.Point(0, 97);
             this.gridControl1.MainView = this.gridView1;
-            this.gridControl1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.gridControl1.Margin = new System.Windows.Forms.Padding(6);
             this.gridControl1.Name = "gridControl1";
             this.gridControl1.Size = new System.Drawing.Size(2504, 1290);
             this.gridControl1.TabIndex = 5;
@@ -251,9 +251,9 @@
             this.groupBox3.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox3.Font = new System.Drawing.Font("Tahoma", 7.75F);
             this.groupBox3.Location = new System.Drawing.Point(0, 0);
-            this.groupBox3.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.groupBox3.Margin = new System.Windows.Forms.Padding(6);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.groupBox3.Padding = new System.Windows.Forms.Padding(6);
             this.groupBox3.Size = new System.Drawing.Size(2504, 97);
             this.groupBox3.TabIndex = 6;
             this.groupBox3.TabStop = false;
@@ -264,7 +264,7 @@
             this.btnPendingGenerate.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnPendingGenerate.ImageOptions.Image")));
             this.btnPendingGenerate.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
             this.btnPendingGenerate.Location = new System.Drawing.Point(680, 33);
-            this.btnPendingGenerate.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btnPendingGenerate.Margin = new System.Windows.Forms.Padding(6);
             this.btnPendingGenerate.Name = "btnPendingGenerate";
             this.btnPendingGenerate.Size = new System.Drawing.Size(172, 44);
             this.btnPendingGenerate.TabIndex = 6;
@@ -276,7 +276,7 @@
             this.datetopending.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold);
             this.datetopending.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.datetopending.Location = new System.Drawing.Point(432, 33);
-            this.datetopending.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.datetopending.Margin = new System.Windows.Forms.Padding(6);
             this.datetopending.Name = "datetopending";
             this.datetopending.Size = new System.Drawing.Size(232, 39);
             this.datetopending.TabIndex = 3;
@@ -286,7 +286,7 @@
             this.datefrompending.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold);
             this.datefrompending.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.datefrompending.Location = new System.Drawing.Point(116, 33);
-            this.datefrompending.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.datefrompending.Margin = new System.Windows.Forms.Padding(6);
             this.datefrompending.Name = "datefrompending";
             this.datefrompending.Size = new System.Drawing.Size(232, 39);
             this.datefrompending.TabIndex = 2;
@@ -318,7 +318,7 @@
             this.tabForDelivery.Controls.Add(this.gridControl2);
             this.tabForDelivery.Controls.Add(this.groupBox1);
             this.tabForDelivery.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("tabForDelivery.ImageOptions.Image")));
-            this.tabForDelivery.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.tabForDelivery.Margin = new System.Windows.Forms.Padding(6);
             this.tabForDelivery.Name = "tabForDelivery";
             this.tabForDelivery.Size = new System.Drawing.Size(2504, 1387);
             this.tabForDelivery.Text = "For Delivery";
@@ -326,10 +326,10 @@
             // gridControl2
             // 
             this.gridControl2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridControl2.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.gridControl2.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(6);
             this.gridControl2.Location = new System.Drawing.Point(0, 97);
             this.gridControl2.MainView = this.gridView2;
-            this.gridControl2.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.gridControl2.Margin = new System.Windows.Forms.Padding(6);
             this.gridControl2.Name = "gridControl2";
             this.gridControl2.Size = new System.Drawing.Size(2504, 1290);
             this.gridControl2.TabIndex = 6;
@@ -389,9 +389,9 @@
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox1.Font = new System.Drawing.Font("Tahoma", 7.75F);
             this.groupBox1.Location = new System.Drawing.Point(0, 0);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(6);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(6);
             this.groupBox1.Size = new System.Drawing.Size(2504, 97);
             this.groupBox1.TabIndex = 7;
             this.groupBox1.TabStop = false;
@@ -402,7 +402,7 @@
             this.btnGenerateDelivery.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnGenerateDelivery.ImageOptions.Image")));
             this.btnGenerateDelivery.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
             this.btnGenerateDelivery.Location = new System.Drawing.Point(680, 33);
-            this.btnGenerateDelivery.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btnGenerateDelivery.Margin = new System.Windows.Forms.Padding(6);
             this.btnGenerateDelivery.Name = "btnGenerateDelivery";
             this.btnGenerateDelivery.Size = new System.Drawing.Size(172, 44);
             this.btnGenerateDelivery.TabIndex = 7;
@@ -414,7 +414,7 @@
             this.datetofordev.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold);
             this.datetofordev.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.datetofordev.Location = new System.Drawing.Point(432, 33);
-            this.datetofordev.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.datetofordev.Margin = new System.Windows.Forms.Padding(6);
             this.datetofordev.Name = "datetofordev";
             this.datetofordev.Size = new System.Drawing.Size(232, 39);
             this.datetofordev.TabIndex = 3;
@@ -424,7 +424,7 @@
             this.datefromfordev.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold);
             this.datefromfordev.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.datefromfordev.Location = new System.Drawing.Point(116, 33);
-            this.datefromfordev.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.datefromfordev.Margin = new System.Windows.Forms.Padding(6);
             this.datefromfordev.Name = "datefromfordev";
             this.datefromfordev.Size = new System.Drawing.Size(232, 39);
             this.datefromfordev.TabIndex = 2;
@@ -456,7 +456,7 @@
             this.tabRejected.Controls.Add(this.gridControl3);
             this.tabRejected.Controls.Add(this.groupBox2);
             this.tabRejected.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("tabRejected.ImageOptions.Image")));
-            this.tabRejected.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.tabRejected.Margin = new System.Windows.Forms.Padding(6);
             this.tabRejected.Name = "tabRejected";
             this.tabRejected.Size = new System.Drawing.Size(2504, 1387);
             this.tabRejected.Text = "Rejected Request";
@@ -464,10 +464,10 @@
             // gridControl3
             // 
             this.gridControl3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridControl3.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.gridControl3.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(6);
             this.gridControl3.Location = new System.Drawing.Point(0, 97);
             this.gridControl3.MainView = this.gridView3;
-            this.gridControl3.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.gridControl3.Margin = new System.Windows.Forms.Padding(6);
             this.gridControl3.Name = "gridControl3";
             this.gridControl3.Size = new System.Drawing.Size(2504, 1290);
             this.gridControl3.TabIndex = 7;
@@ -526,9 +526,9 @@
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox2.Font = new System.Drawing.Font("Tahoma", 7.75F);
             this.groupBox2.Location = new System.Drawing.Point(0, 0);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(6);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(6);
             this.groupBox2.Size = new System.Drawing.Size(2504, 97);
             this.groupBox2.TabIndex = 8;
             this.groupBox2.TabStop = false;
@@ -538,7 +538,7 @@
             // 
             this.btnGenerateRejected.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
             this.btnGenerateRejected.Location = new System.Drawing.Point(680, 33);
-            this.btnGenerateRejected.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btnGenerateRejected.Margin = new System.Windows.Forms.Padding(6);
             this.btnGenerateRejected.Name = "btnGenerateRejected";
             this.btnGenerateRejected.Size = new System.Drawing.Size(172, 44);
             this.btnGenerateRejected.TabIndex = 8;
@@ -550,7 +550,7 @@
             this.datetorej.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold);
             this.datetorej.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.datetorej.Location = new System.Drawing.Point(432, 33);
-            this.datetorej.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.datetorej.Margin = new System.Windows.Forms.Padding(6);
             this.datetorej.Name = "datetorej";
             this.datetorej.Size = new System.Drawing.Size(232, 39);
             this.datetorej.TabIndex = 3;
@@ -560,7 +560,7 @@
             this.datefromrej.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold);
             this.datefromrej.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.datefromrej.Location = new System.Drawing.Point(116, 33);
-            this.datefromrej.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.datefromrej.Margin = new System.Windows.Forms.Padding(6);
             this.datefromrej.Name = "datefromrej";
             this.datefromrej.Size = new System.Drawing.Size(232, 39);
             this.datefromrej.TabIndex = 2;
@@ -594,7 +594,7 @@
             this.ClientSize = new System.Drawing.Size(2508, 1441);
             this.Controls.Add(this.tabMain);
             this.IconOptions.Icon = ((System.Drawing.Icon)(resources.GetObject("ViewBranchOrder.IconOptions.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "ViewBranchOrder";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ViewBranchOrder";

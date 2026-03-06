@@ -13,6 +13,7 @@ using DevExpress.XtraGrid.Columns;
 using System.IO.Ports;
 using System.Data.SqlClient;
 using DevExpress.XtraReports.UI;
+using DevExpress.XtraGrid;
 
 namespace SalesInventorySystem.Orders
 {
@@ -103,7 +104,7 @@ namespace SalesInventorySystem.Orders
             }
             if (keyData == Keys.F1)
             {
-                simpleButton3.PerformClick();
+                btnfind.PerformClick();
             }
             if (keyData == Keys.F5)
             {
@@ -143,10 +144,36 @@ namespace SalesInventorySystem.Orders
         {
             gridControl2.BeginUpdate();
             //     Database.display("SELECT QtyDelivered,BarcodeNo,ProductNo,ProductName,FORMAT(Cost,'N','en-us')AS Cost,SequenceNo FROM DeliveryDetails WHERE DeliveryNo='" + txtdevno.Text + "'", gridControl2, gridView2);
-            Database.display("SELECT SeqNo,ProductNo,ProductName,BarcodeNo,QtyDelivered FROM DeliveryDetails WHERE DeliveryNo='" + txtdevno.Text + "' AND Status='PENDING'", gridControl2, gridView2);
-            gridView2.Columns["SeqNo"].Visible = false;
+            Database.display("SELECT SeqNo,ProductNo,ProductName,BarcodeNo,QtyDelivered FROM dbo.DeliveryDetails with(nolock) WHERE PONumber='"+txtponum.Text+"' AND DeliveryNo='" + txtdevno.Text + "' AND Status='PENDING' ORDER BY SeqNo DESC", gridControl2, gridView2);
+
+            //gridView2.Columns[0].Visible = false;
+
+            //GridView view = gridControl2.FocusedView as GridView;
+            //view.SortInfo.ClearAndAddRange(new GridColumnSortInfo[] {
+            //    new GridColumnSortInfo(view.Columns["ProductName"],DevExpress.Data.ColumnSortOrder.Ascending)
+            //    }, 1); 
+            //gridView2.ExpandAllGroups();
+
+
+            //GridGroupSummaryItem itez = new GridGroupSummaryItem();
+            //itez.FieldName = "ProductNo";
+            //itez.SummaryType = DevExpress.Data.SummaryItemType.Count;
+            //itez.ShowInGroupColumnFooter = gridView2.Columns["ProductNo"];
+            //gridView2.GroupSummary.Add(itez);
+            //gridView2.Focus();
+
+            //GridGroupSummaryItem ite = new GridGroupSummaryItem();
+            //ite.FieldName = "QtyDelivered";
+            //ite.SummaryType = DevExpress.Data.SummaryItemType.Sum;
+            //ite.ShowInGroupColumnFooter = gridView2.Columns["QtyDelivered"];
+            //gridView2.GroupSummary.Add(ite);
+            //gridView2.Focus();
+
+
             gridView2.Columns["ProductNo"].Summary.Clear();
             gridView2.Columns["ProductNo"].Summary.Add(DevExpress.Data.SummaryItemType.Count, "ProductNo", "{0:n2}");
+            gridView2.Columns["QtyDelivered"].Summary.Clear();
+            gridView2.Columns["QtyDelivered"].Summary.Add(DevExpress.Data.SummaryItemType.Sum, "QtyDelivered", "{0:n2}");
             gridControl2.EndUpdate();
         }
 
@@ -272,6 +299,10 @@ namespace SalesInventorySystem.Orders
             {
                 addBranchOrder();
             }
+            gridView2.Columns["SeqNo"].Summary.Clear();
+            gridView2.Columns["SeqNo"].Summary.Add(DevExpress.Data.SummaryItemType.Count, "SeqNo", "{0}");
+            gridView2.Columns["QtyDelivered"].Summary.Clear();
+            gridView2.Columns["QtyDelivered"].Summary.Add(DevExpress.Data.SummaryItemType.Sum, "QtyDelivered", "{0}");
         }
 
         void addBranchOrder()
@@ -396,6 +427,32 @@ namespace SalesInventorySystem.Orders
             }
             con.Close();
         }
+        void returnOrderByBarcode()
+        {
+            SqlConnection con = Database.getConnection();
+            con.Open();
+            string query = "sp_CancelDeliveryByBarcode";
+            try
+            {
+                SqlCommand com = new SqlCommand(query, con);
+                com.Parameters.AddWithValue("@parmbranchcode", txtbrcode.Text);
+                com.Parameters.AddWithValue("@parmorigin", Login.assignedBranch);
+                com.Parameters.AddWithValue("@parmdevno", txtdevno.Text);
+                com.Parameters.AddWithValue("@parmrefno", txtrefno.Text);
+                com.Parameters.AddWithValue("@parmpono", txtponum.Text);
+                com.Parameters.AddWithValue("@parmbarcode", gridView2.GetRowCellValue(gridView2.FocusedRowHandle, "BarcodeNo").ToString());
+                com.Parameters.AddWithValue("@preparedby", Login.Fullname);
+                com.CommandType = CommandType.StoredProcedure;
+                com.CommandText = query;
+                com.ExecuteNonQuery();
+                XtraMessageBox.Show("Successfully Deleted");
+            }
+            catch (SqlException ex)
+            {
+                XtraMessageBox.Show(ex.Message);
+            }
+            con.Close();
+        }
         String getProductCategoryCode()
         {
             string str;
@@ -505,7 +562,7 @@ namespace SalesInventorySystem.Orders
         private void txtproduct_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
-                simpleButton3.PerformClick();
+                btnfind.PerformClick();
         }
 
         private void txtsearch_Click(object sender, EventArgs e)
@@ -613,12 +670,14 @@ namespace SalesInventorySystem.Orders
                 panel3.Visible = false;
                 panel1.Visible = false;
                 txtbarcodescanning.Focus();
+                btnfind.Visible = false;
             }
             else
             {
                 panel2.Visible = false;
                 panel3.Visible = true;
                 panel1.Visible = true;
+                btnfind.Visible = true;
             }
         }
 
@@ -627,14 +686,14 @@ namespace SalesInventorySystem.Orders
             ///OLD
             if (e.KeyCode == Keys.Enter)
             {
-                bool checkifexists = Database.checkifExist($"SELECT TOP(1) Barcode " +
-                    $"FROM Inventory WHERE Barcode='{txtbarcodescanning.Text}' " +
-                    $"and Available > 0 and isWarehouse=1 and Branch='{Login.assignedBranch}'");
-                if(!checkifexists)
-                {
-                    XtraMessageBox.Show("Barcode Not Exist in Inventory!...");
-                    return;
-                }
+                //bool checkifexists = Database.checkifExist($"SELECT 1 " +
+                //    $"FROM dbo.Inventory WHERE Branch='{Login.assignedBranch}' " +
+                //    $"and Available > 0 and Barcode='{txtbarcodescanning.Text}' and isWarehouse=1");
+                //if(!checkifexists)
+                //{
+                //    XtraMessageBox.Show("Barcode Not Exist in Inventory!...");
+                //    return;
+                //}
                 //bool isBarcodeLong = false;
                 //isBarcodeLong = Database.checkifExist("SELECT isLong FROM BarcodeSettings WHERE isLong=1");
                 string pcode = "",  qty = "", barcode = "";// qty1 = "", qty2 = "";desc = "",
@@ -661,7 +720,7 @@ namespace SalesInventorySystem.Orders
                 globaltxtbarcodescanning = txtbarcodescanning.Text;
 
                 //var rows = Database.getMultipleQuery($"SELECT * FROM dbo.funcTable_DecryptBarcode('{txtbarcodescanning.Text}')", "ProductCode,Quantity");
-                var rows = Database.getMultipleQuery($"SELECT TOP(1) Product,Available,Barcode FROM dbo.Inventory WHERE Barcode='{txtbarcodescanning.Text}' and isWarehouse=1 and Available > 0 ", "Product,Available");
+                var rows = Database.getMultipleQuery($"SELECT TOP(1) Product,Available,Barcode FROM dbo.Inventory WHERE Barcode='{txtbarcodescanning.Text}' ", "Product,Available");
 
                 string ProductCode, Quantity;
                 ProductCode = rows["Product"].ToString();
@@ -914,20 +973,20 @@ namespace SalesInventorySystem.Orders
                     //    if (requestedProductExist)
                     //        break;
                     //}
-                    bool inventoryExist = Database.checkifExist("SELECT TOP(1) Product FROM Inventory WHERE Product='" + primalproductcode + "' AND Branch='" + Login.assignedBranch + "' AND Available > 0 and isWarehouse=1 ");
+                   // bool inventoryExist = false;// Database.checkifExist("SELECT TOP(1) Product FROM Inventory WHERE Product='" + primalproductcode + "' AND Branch='" + Login.assignedBranch + "' AND Available > 0 and isWarehouse=1 ");
 
                     //if (!requestedProductExist && txtbrcode.Text!="999")
                     //{
                     //    XtraMessageBox.Show("You cant add this Product because it is not available in Purchase Order List!");
                     //    txtsku.Text = "";
                     //}
-                    if (!inventoryExist)
-                    {
-                        XtraMessageBox.Show("No Product Inventory");
-                        txtsku.Text = "";
-                    }
+                    //if (!inventoryExist)
+                    //{
+                    //    XtraMessageBox.Show("No Product Inventory");
+                    //    txtsku.Text = "";
+                    //}
                     //kung imong gi encode na quantity is greater than sa total quantity sa imong Inventory sa commisary
-                    else if (Convert.ToDouble(txtweight.Text) > Database.getTotalSummation2("Inventory", "Product = '" + primalproductcode + "' AND Branch='" + Login.assignedBranch + "' AND isWarehouse=1 and Available > 0 ", "Available")) //Database.getTotalSummation("Inventory", "Product", txtsku.Text.Substring(1, 6), "Quantity"))
+                    if (Convert.ToDouble(txtweight.Text) > Database.getTotalSummation2("Inventory", "Product = '" + primalproductcode + "' AND Branch='" + Login.assignedBranch + "' AND isWarehouse=1 and Available > 0 ", "Available")) //Database.getTotalSummation("Inventory", "Product", txtsku.Text.Substring(1, 6), "Quantity"))
                     {
                         string mark = Database.getTotalSummation2("Inventory", "Product = '" + primalproductcode + "' AND Branch='" + Login.assignedBranch + "' AND isWarehouse=1  and Available > 0 ", "Available").ToString();
                         XtraMessageBox.Show("Insuficient Stocks for this Product.. Your Available Quantity is " + mark);
@@ -937,6 +996,7 @@ namespace SalesInventorySystem.Orders
                         add();
                       
                         displayForDelivery();
+
                         //if(isFifo==false)
                         //{
                         //    searchLookUpEdit1.Text = "";
@@ -984,7 +1044,14 @@ namespace SalesInventorySystem.Orders
 
         private void btncancel_Click(object sender, EventArgs e)
         {
-            returnOrder();
+            if(barcodescanning.Checked == true)
+            {
+                returnOrderByBarcode();
+            }
+            else
+            {
+                returnOrder();
+            }
             displayForDelivery();
         }
 
@@ -1044,11 +1111,36 @@ namespace SalesInventorySystem.Orders
         {
             Orders.OrderCheckerDevEx oread = new Orders.OrderCheckerDevEx();
 
-            Database.display("SELECT ProductName,Qty FROM TransferOrderDetails WHERE PONumber='" + txtponum.Text + "'", oread.gridControlDelivByComm, oread.gridViewDelivByComm); 
+            Database.display("SELECT ProductName,Qty FROM dbo.TransferOrderDetails WHERE PONumber='" + txtponum.Text + "'  ORDER BY ProductCode ", oread.gridControlMyStsReq, oread.gridViewMyStsReq);
 
-            Database.display("SELECT ProductName,SUM(QtyDelivered) as TotalKilos,COUNT(distinct BarcodeNo) as TotalBox FROM DeliveryDetails WHERE PONumber='" + txtponum.Text + "' GROUP BY ProductName", oread.gridControlActualRcvd, oread.gridViewActualRcvd);
-           
-            Database.display("SELECT ProductName,Qty FROM TransferOrderDetails WHERE ProductCode not in (Select ProductNo FROM DeliveryDetails WHERE PONumber='" + txtponum.Text + "') AND PONumber='" + txtponum.Text + "' ", oread.gridControlMyStsReq, oread.gridViewMyStsReq);
+            Database.display("SELECT ProductName,QtyDelivered FROM dbo.DeliveryDetails WHERE PONumber='" + txtponum.Text + "' AND Status='PENDING' ORDER BY ProductNo", oread.gridControlDelivByComm, oread.gridViewDelivByComm);
+            GridView view = oread.gridControlDelivByComm.FocusedView as GridView;
+            view.SortInfo.ClearAndAddRange(new GridColumnSortInfo[] {
+                new GridColumnSortInfo(view.Columns["ProductName"],DevExpress.Data.ColumnSortOrder.Ascending)
+                }, 1);
+            oread.gridViewDelivByComm.ExpandAllGroups();
+
+
+            GridGroupSummaryItem itez = new GridGroupSummaryItem();
+            itez.FieldName = "ProductNo";
+            itez.SummaryType = DevExpress.Data.SummaryItemType.Count;
+            itez.ShowInGroupColumnFooter = oread.gridViewDelivByComm.Columns["ProductNo"];
+            oread.gridViewDelivByComm.GroupSummary.Add(itez);
+            oread.gridViewDelivByComm.Focus();
+
+            GridGroupSummaryItem ite = new GridGroupSummaryItem();
+            ite.FieldName = "QtyDelivered";
+            ite.SummaryType = DevExpress.Data.SummaryItemType.Sum;
+            ite.ShowInGroupColumnFooter = oread.gridViewDelivByComm.Columns["QtyDelivered"];
+            oread.gridViewDelivByComm.GroupSummary.Add(ite);
+            oread.gridViewDelivByComm.Focus();
+
+            oread.gridViewDelivByComm.Columns["QtyDelivered"].Summary.Clear();
+            oread.gridViewDelivByComm.Columns["QtyDelivered"].Summary.Add(DevExpress.Data.SummaryItemType.Sum, "QtyDelivered", "{0:n2}");
+
+
+            // Database.display("SELECT ProductName,SUM(QtyDelivered) as TotalKilos,COUNT(distinct BarcodeNo) as TotalBox FROM DeliveryDetails WHERE PONumber='" + txtponum.Text + "' GROUP BY ProductName", oread.gridControlActualRcvd, oread.gridViewActualRcvd);
+
 
             oread.ShowDialog(this);
         }

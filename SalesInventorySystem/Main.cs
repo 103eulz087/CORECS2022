@@ -3222,6 +3222,21 @@ namespace SalesInventorySystem
             pfoap.Show();
         }
 
+        private void btnTransferInventoryHO_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            foreach (Form form in Application.OpenForms)
+            {
+                if (form.GetType() == typeof(Reporting.TransferInventoryHO))
+                {
+                    form.Activate();
+                    return;
+                }
+            }
+            Reporting.TransferInventoryHO pfoap = new Reporting.TransferInventoryHO();
+            pfoap.MdiParent = this;
+            pfoap.Show();
+        }
+
         private void Main_FormClosing(object sender, FormClosingEventArgs e)
         {
             //bool confirm = HelperFunction.ConfirmDialog("Are you want to close the Main Window?", "Close Main Window");

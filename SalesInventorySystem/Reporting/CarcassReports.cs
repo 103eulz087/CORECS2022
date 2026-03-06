@@ -42,7 +42,7 @@ namespace SalesInventorySystem.Reporting
                 gridView1.Columns.Clear();
                 gridControl1.DataSource = null;
                 Database.display("SELECT DateReceived,Description,SUM(Quantity) as Quantity,Cost,FORMAT((Quantity*Cost), 'N', 'en-us') as TotalCost " +
-                    "FROm TempInventoryBatchUpload " +
+                    "FROm dbo.Inventory with(nolock) " +
                     "WHERE ShipmentNo='" + BatchProcessMasterDevEx.shipmentno + "' " +
                     "and Branch='"+Login.assignedBranch+ "' " +
                     "and isSource=1 " +
@@ -65,7 +65,7 @@ namespace SalesInventorySystem.Reporting
                 gridView1.Columns.Clear();
                 gridControl1.DataSource = null;
                 //Database.display("SELECT DateReceived,Barcode,PalletNo,Description,TipWeight,Quantity AS ActualWeight,ROUND((TipWeight-Quantity),2) AS Variance,Cost FROm TempInventoryBatchUpload WHERE ShipmentNo='" + BatchProcessMasterDevEx.shipmentno + "' and Branch='"+Login.assignedBranch+"' and isSource=1 ORDER BY Description,PalletNo,Cost", gridControl1, gridView1); 
-                Database.display("SELECT SequenceNumber,DateReceived,Barcode,Description,Quantity,Cost FROm Inventory with(nolock) WHERE ShipmentNo='" + BatchProcessMasterDevEx.shipmentno + "' and Branch='" + Login.assignedBranch + "' ORDER BY Description ASC", gridControl1, gridView1);
+                Database.display("SELECT SequenceNumber,DateReceived,Barcode,Description,Quantity,Cost From dbo.Inventory with(nolock) WHERE ShipmentNo='" + BatchProcessMasterDevEx.shipmentno + "' and Branch='" + Login.assignedBranch + "' ORDER BY Description ASC", gridControl1, gridView1);
                 GridView view = gridControl1.FocusedView as GridView;
                 view.SortInfo.ClearAndAddRange(new GridColumnSortInfo[] {
             
@@ -74,6 +74,13 @@ namespace SalesInventorySystem.Reporting
 
                 },2);
                 view.ExpandAllGroups();
+
+                GridGroupSummaryItem ite = new GridGroupSummaryItem();
+                ite.FieldName = "Quantity";
+                ite.SummaryType = DevExpress.Data.SummaryItemType.Sum;
+                ite.ShowInGroupColumnFooter = gridView1.Columns["Quantity"];
+                gridView1.GroupSummary.Add(ite);
+                gridView1.Focus();
 
                 //Classes.DevXGridViewSettings.ShowFooterTotal(gridView1, "TipWeight");
                 //Classes.DevXGridViewSettings.ShowFooterTotal(gridView1, "ActualWeight");
@@ -121,6 +128,9 @@ namespace SalesInventorySystem.Reporting
            
             xct.Bands[BandKind.Detail].Controls.Add(HelperFunction.CopyGridControl(this.gridControl1));
             xct.Bands[BandKind.Detail].Font = new System.Drawing.Font("Tahoma", 10);
+
+            gridView1.Columns["Cost"].OptionsColumn.Printable = DevExpress.Utils.DefaultBoolean.False;
+
             ReportPrintTool report = new ReportPrintTool(xct);
             report.ShowRibbonPreviewDialog();
         }

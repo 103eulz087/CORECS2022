@@ -29,7 +29,7 @@ namespace SalesInventorySystem.HOFormsDevEx
         void newButton()
         {
             int id = IDGenerator.getIDNumber("Customers", "CustomerKey", 1);
-            txtcustkey.Text = HelperFunction.sequencePadding1(id.ToString(), 6);
+            txtcustkey.Text = HelperFunction.sequencePadding1(id.ToString(), 8);
             txtcustid.Text = txtcustkey.Text;
             //txtsupplierid.Text = "000"+IDGenerator.getSupplierNumber().ToString();
             simpleButton2.Enabled = false;

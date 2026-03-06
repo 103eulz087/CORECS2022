@@ -622,6 +622,7 @@
     <Compile Include="Classes\Productss.cs" />
     <Compile Include="Classes\ReceiptSetup.cs" />
     <Compile Include="Classes\SearchLookUpClass.cs" />
+    <Compile Include="Classes\SoundPlayer.cs" />
     <Compile Include="Classes\Suppliers.cs" />
     <Compile Include="Classes\User.cs" />
     <Compile Include="Classes\Utilities.cs" />
@@ -2897,6 +2898,12 @@
     <Compile Include="Reporting\DeliveryReportsFrm.Designer.cs">
       <DependentUpon>DeliveryReportsFrm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reporting\DeliverySummaryReports.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reporting\DeliverySummaryReports.Designer.cs">
+      <DependentUpon>DeliverySummaryReports.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reporting\DepreciationReports.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -2956,6 +2963,18 @@
     </Compile>
     <Compile Include="Reporting\STSSummaryReport.Designer.cs">
       <DependentUpon>STSSummaryReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reporting\TransferInventoryDetailsHO.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reporting\TransferInventoryDetailsHO.Designer.cs">
+      <DependentUpon>TransferInventoryDetailsHO.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reporting\TransferInventoryHO.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reporting\TransferInventoryHO.Designer.cs">
+      <DependentUpon>TransferInventoryHO.cs</DependentUpon>
     </Compile>
     <Compile Include="Reporting\ViewTicketDevExRep.cs">
       <SubType>Form</SubType>
@@ -4458,6 +4477,9 @@
     <EmbeddedResource Include="Reporting\DeliveryReportsFrm.resx">
       <DependentUpon>DeliveryReportsFrm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reporting\DeliverySummaryReports.resx">
+      <DependentUpon>DeliverySummaryReports.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reporting\DepreciationReports.resx">
       <DependentUpon>DepreciationReports.cs</DependentUpon>
     </EmbeddedResource>
@@ -4496,6 +4518,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reporting\STSSummaryReport.resx">
       <DependentUpon>STSSummaryReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reporting\TransferInventoryDetailsHO.resx">
+      <DependentUpon>TransferInventoryDetailsHO.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reporting\TransferInventoryHO.resx">
+      <DependentUpon>TransferInventoryHO.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reporting\ViewTicketDevExRep.resx">
       <DependentUpon>ViewTicketDevExRep.cs</DependentUpon>

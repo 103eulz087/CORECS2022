@@ -11083,3 +11083,6 @@ C:\Users\avanc\Downloads\CORECS2022\SalesInventorySystem\obj\Debug\SalesInventor
 C:\Users\avanc\Downloads\CORECS2022\SalesInventorySystem\obj\Debug\SalesInventorySystem.HOFormsDevEx.AddPrimalCutDevEx.resources
 C:\Users\avanc\Downloads\CORECS2022\SalesInventorySystem\obj\Debug\SalesInventorySystem.Reporting.BranchInventoryProductSummary.resources
 C:\Users\avanc\Downloads\CORECS2022\SalesInventorySystem\obj\Debug\SalesInventorySystem.HRIConversion.resources
+C:\Users\avanc\Downloads\CORECS2022\SalesInventorySystem\obj\Debug\SalesInventorySystem.Reporting.TransferInventoryDetailsHO.resources
+C:\Users\avanc\Downloads\CORECS2022\SalesInventorySystem\obj\Debug\SalesInventorySystem.Reporting.TransferInventoryHO.resources
+C:\Users\avanc\Downloads\CORECS2022\SalesInventorySystem\obj\Debug\SalesInventorySystem.Reporting.DeliverySummaryReports.resources

@@ -238,7 +238,7 @@
             this.errorCorrectToolStripMenuItem,
             this.confirmToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(348, 156);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(348, 112);
             // 
             // viewConversionDetailsToolStripMenuItem
             // 

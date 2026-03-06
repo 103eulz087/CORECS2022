@@ -145,7 +145,7 @@
             this.Margin = new System.Windows.Forms.Padding(4, 8, 4, 8);
             this.Name = "Login";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "IT CORE SYSTEM Inc. version 1.0"; 
+            this.Text = "IT CORE SYSTEM Inc. version 1.0";
             this.Load += new System.EventHandler(this.Login_Load);
             ((System.ComponentModel.ISupportInitialize)(this.txtuserid.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtpassword.Properties)).EndInit();

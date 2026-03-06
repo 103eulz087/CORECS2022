@@ -32,6 +32,7 @@
             this.gridControl1 = new DevExpress.XtraGrid.GridControl();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
+            this.simpleButton2 = new DevExpress.XtraEditors.SimpleButton();
             this.searchLookUpEdit1 = new DevExpress.XtraEditors.SearchLookUpEdit();
             this.searchLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
@@ -40,7 +41,6 @@
             this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.btnforapprovalsalesorderexcel = new DevExpress.XtraEditors.SimpleButton();
             this.label1 = new System.Windows.Forms.Label();
-            this.simpleButton2 = new DevExpress.XtraEditors.SimpleButton();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
@@ -115,6 +115,18 @@
             this.groupControl1.Name = "groupControl1";
             this.groupControl1.Size = new System.Drawing.Size(1600, 171);
             this.groupControl1.TabIndex = 14;
+            // 
+            // simpleButton2
+            // 
+            this.simpleButton2.ImageOptions.Image = global::SalesInventorySystem.Properties.Resources.ExportToExcel_16x16;
+            this.simpleButton2.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
+            this.simpleButton2.Location = new System.Drawing.Point(1000, 62);
+            this.simpleButton2.Margin = new System.Windows.Forms.Padding(6);
+            this.simpleButton2.Name = "simpleButton2";
+            this.simpleButton2.Size = new System.Drawing.Size(283, 81);
+            this.simpleButton2.TabIndex = 15;
+            this.simpleButton2.Text = "All Branch Product List";
+            this.simpleButton2.Click += new System.EventHandler(this.simpleButton2_Click);
             // 
             // searchLookUpEdit1
             // 
@@ -215,18 +227,6 @@
             this.label1.Size = new System.Drawing.Size(165, 29);
             this.label1.TabIndex = 0;
             this.label1.Text = "Select Branch:";
-            // 
-            // simpleButton2
-            // 
-            this.simpleButton2.ImageOptions.Image = global::SalesInventorySystem.Properties.Resources.ExportToExcel_16x16;
-            this.simpleButton2.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.simpleButton2.Location = new System.Drawing.Point(1000, 62);
-            this.simpleButton2.Margin = new System.Windows.Forms.Padding(6);
-            this.simpleButton2.Name = "simpleButton2";
-            this.simpleButton2.Size = new System.Drawing.Size(283, 81);
-            this.simpleButton2.TabIndex = 15;
-            this.simpleButton2.Text = "All Branch Product List";
-            this.simpleButton2.Click += new System.EventHandler(this.simpleButton2_Click);
             // 
             // BranchGenInventory
             // 

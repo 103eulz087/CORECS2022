@@ -448,7 +448,9 @@ namespace SalesInventorySystem
                 {
                     gridView3.Columns["SourceQty"].Summary.Clear();
                     gridView3.Columns["SourceQty"].Summary.Add(DevExpress.Data.SummaryItemType.Sum, "SourceQty", "{0}");
-                    
+                    gridView3.Columns["Quantity"].Summary.Clear();
+                    gridView3.Columns["Quantity"].Summary.Add(DevExpress.Data.SummaryItemType.Sum, "Quantity", "{0}");
+
                 }
                 if (radioButton1.Checked == true)
                 {
@@ -826,6 +828,10 @@ namespace SalesInventorySystem
                 if (radioButton1.Checked == true)
                 {
                     totalactualqty += Math.Round(Convert.ToDouble(gridView3.GetRowCellValue(i, "ActualQty").ToString()), 3);
+                }
+                if (radioButton2.Checked == true)
+                {
+                    totalactualqty += Math.Round(Convert.ToDouble(gridView3.GetRowCellValue(i, "Quantity").ToString()), 3);
                 }
 
             }

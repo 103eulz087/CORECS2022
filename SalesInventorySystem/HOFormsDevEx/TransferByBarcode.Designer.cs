@@ -269,7 +269,9 @@
             this.Controls.Add(this.panelControl1);
             this.Controls.Add(this.groupControl1);
             this.Name = "TransferByBarcode";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "TransferByBarcode";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.TransferByBarcode_Load);
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).EndInit();

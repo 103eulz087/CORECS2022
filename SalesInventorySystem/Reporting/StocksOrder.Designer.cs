@@ -74,9 +74,9 @@
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox1.Location = new System.Drawing.Point(0, 0);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(6);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(6);
             this.groupBox1.Size = new System.Drawing.Size(1930, 104);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
@@ -84,7 +84,7 @@
             // txtdevno
             // 
             this.txtdevno.Location = new System.Drawing.Point(1260, 83);
-            this.txtdevno.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtdevno.Margin = new System.Windows.Forms.Padding(4);
             this.txtdevno.Name = "txtdevno";
             this.txtdevno.Size = new System.Drawing.Size(188, 40);
             this.txtdevno.TabIndex = 469;
@@ -97,7 +97,7 @@
             this.simpleButton1.ImageOptions.Image = global::SalesInventorySystem.Properties.Resources.Delete_16x16__6_;
             this.simpleButton1.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
             this.simpleButton1.Location = new System.Drawing.Point(204, 29);
-            this.simpleButton1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.simpleButton1.Margin = new System.Windows.Forms.Padding(4);
             this.simpleButton1.Name = "simpleButton1";
             this.simpleButton1.Size = new System.Drawing.Size(196, 48);
             this.simpleButton1.TabIndex = 468;
@@ -107,7 +107,7 @@
             // txtrequestedby
             // 
             this.txtrequestedby.Location = new System.Drawing.Point(1670, 127);
-            this.txtrequestedby.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtrequestedby.Margin = new System.Windows.Forms.Padding(4);
             this.txtrequestedby.Name = "txtrequestedby";
             this.txtrequestedby.Size = new System.Drawing.Size(188, 40);
             this.txtrequestedby.TabIndex = 467;
@@ -116,7 +116,7 @@
             // txtpreparedby
             // 
             this.txtpreparedby.Location = new System.Drawing.Point(1670, 83);
-            this.txtpreparedby.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtpreparedby.Margin = new System.Windows.Forms.Padding(4);
             this.txtpreparedby.Name = "txtpreparedby";
             this.txtpreparedby.Size = new System.Drawing.Size(188, 40);
             this.txtpreparedby.TabIndex = 466;
@@ -125,7 +125,7 @@
             // txteffectivitydate
             // 
             this.txteffectivitydate.Location = new System.Drawing.Point(1472, 83);
-            this.txteffectivitydate.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txteffectivitydate.Margin = new System.Windows.Forms.Padding(4);
             this.txteffectivitydate.Name = "txteffectivitydate";
             this.txteffectivitydate.Size = new System.Drawing.Size(188, 40);
             this.txteffectivitydate.TabIndex = 465;
@@ -134,7 +134,7 @@
             // txtbranch
             // 
             this.txtbranch.Location = new System.Drawing.Point(1670, 38);
-            this.txtbranch.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtbranch.Margin = new System.Windows.Forms.Padding(4);
             this.txtbranch.Name = "txtbranch";
             this.txtbranch.Size = new System.Drawing.Size(188, 40);
             this.txtbranch.TabIndex = 464;
@@ -143,7 +143,7 @@
             // txtpono
             // 
             this.txtpono.Location = new System.Drawing.Point(1472, 38);
-            this.txtpono.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtpono.Margin = new System.Windows.Forms.Padding(4);
             this.txtpono.Name = "txtpono";
             this.txtpono.Size = new System.Drawing.Size(188, 40);
             this.txtpono.TabIndex = 463;
@@ -156,7 +156,7 @@
             this.btnsearch.ImageOptions.Image = global::SalesInventorySystem.Properties.Resources.Print_16x16__4_;
             this.btnsearch.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
             this.btnsearch.Location = new System.Drawing.Point(18, 29);
-            this.btnsearch.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnsearch.Margin = new System.Windows.Forms.Padding(4);
             this.btnsearch.Name = "btnsearch";
             this.btnsearch.Size = new System.Drawing.Size(178, 48);
             this.btnsearch.TabIndex = 462;
@@ -167,7 +167,7 @@
             // 
             this.comboBox2.FormattingEnabled = true;
             this.comboBox2.Location = new System.Drawing.Point(1206, 37);
-            this.comboBox2.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.comboBox2.Margin = new System.Windows.Forms.Padding(6);
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(238, 33);
             this.comboBox2.TabIndex = 9;
@@ -178,7 +178,7 @@
             // 
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Location = new System.Drawing.Point(712, 37);
-            this.comboBox1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.comboBox1.Margin = new System.Windows.Forms.Padding(6);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(238, 33);
             this.comboBox1.TabIndex = 8;
@@ -215,9 +215,9 @@
             this.groupBox2.Controls.Add(this.gridControl1);
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox2.Location = new System.Drawing.Point(0, 104);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(6);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(6);
             this.groupBox2.Size = new System.Drawing.Size(1930, 958);
             this.groupBox2.TabIndex = 3;
             this.groupBox2.TabStop = false;
@@ -225,7 +225,7 @@
             // txtbranchdestination
             // 
             this.txtbranchdestination.Location = new System.Drawing.Point(1064, -21);
-            this.txtbranchdestination.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtbranchdestination.Margin = new System.Windows.Forms.Padding(4);
             this.txtbranchdestination.Name = "txtbranchdestination";
             this.txtbranchdestination.Size = new System.Drawing.Size(188, 40);
             this.txtbranchdestination.TabIndex = 470;
@@ -234,10 +234,10 @@
             // gridControl1
             // 
             this.gridControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridControl1.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.gridControl1.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(6);
             this.gridControl1.Location = new System.Drawing.Point(6, 30);
             this.gridControl1.MainView = this.gridView1;
-            this.gridControl1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.gridControl1.Margin = new System.Windows.Forms.Padding(6);
             this.gridControl1.Name = "gridControl1";
             this.gridControl1.Size = new System.Drawing.Size(1918, 922);
             this.gridControl1.TabIndex = 1;
@@ -279,7 +279,7 @@
             this.ClientSize = new System.Drawing.Size(1930, 1062);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
-            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "StocksOrder";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "StocksOrder";

@@ -44,7 +44,7 @@
             this.txtinvoiceno = new DevExpress.XtraEditors.TextEdit();
             this.txtdestination = new DevExpress.XtraEditors.ComboBoxEdit();
             this.simpleButton4 = new DevExpress.XtraEditors.SimpleButton();
-            this.simpleButton5 = new DevExpress.XtraEditors.SimpleButton();
+            this.btnprintbarcode = new DevExpress.XtraEditors.SimpleButton();
             this.btnclear = new DevExpress.XtraEditors.SimpleButton();
             this.simpleButton3 = new DevExpress.XtraEditors.SimpleButton();
             this.simpleButton2 = new DevExpress.XtraEditors.SimpleButton();
@@ -123,7 +123,7 @@
             this.groupControl2.Location = new System.Drawing.Point(3, 303);
             this.groupControl2.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
             this.groupControl2.Name = "groupControl2";
-            this.groupControl2.Size = new System.Drawing.Size(2731, 589);
+            this.groupControl2.Size = new System.Drawing.Size(2580, 589);
             this.groupControl2.TabIndex = 24;
             // 
             // gridControl1
@@ -134,7 +134,7 @@
             this.gridControl1.MainView = this.gridView1;
             this.gridControl1.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
             this.gridControl1.Name = "gridControl1";
-            this.gridControl1.Size = new System.Drawing.Size(2725, 541);
+            this.gridControl1.Size = new System.Drawing.Size(2574, 541);
             this.gridControl1.TabIndex = 18;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
@@ -164,7 +164,7 @@
             this.groupControl1.Controls.Add(this.txtinvoiceno);
             this.groupControl1.Controls.Add(this.txtdestination);
             this.groupControl1.Controls.Add(this.simpleButton4);
-            this.groupControl1.Controls.Add(this.simpleButton5);
+            this.groupControl1.Controls.Add(this.btnprintbarcode);
             this.groupControl1.Controls.Add(this.btnclear);
             this.groupControl1.Controls.Add(this.simpleButton3);
             this.groupControl1.Controls.Add(this.simpleButton2);
@@ -199,7 +199,7 @@
             this.groupControl1.Location = new System.Drawing.Point(3, 3);
             this.groupControl1.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
             this.groupControl1.Name = "groupControl1";
-            this.groupControl1.Size = new System.Drawing.Size(2731, 300);
+            this.groupControl1.Size = new System.Drawing.Size(2580, 300);
             this.groupControl1.TabIndex = 23;
             this.groupControl1.Text = "Receive PO/Inventory";
             // 
@@ -332,16 +332,16 @@
             this.simpleButton4.Text = "Get Weight";
             this.simpleButton4.Click += new System.EventHandler(this.simpleButton4_Click);
             // 
-            // simpleButton5
+            // btnprintbarcode
             // 
-            this.simpleButton5.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("simpleButton5.ImageOptions.Image")));
-            this.simpleButton5.Location = new System.Drawing.Point(1235, 168);
-            this.simpleButton5.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
-            this.simpleButton5.Name = "simpleButton5";
-            this.simpleButton5.Size = new System.Drawing.Size(239, 50);
-            this.simpleButton5.TabIndex = 94;
-            this.simpleButton5.Text = "Print Barcode (F8)";
-            this.simpleButton5.Click += new System.EventHandler(this.simpleButton5_Click);
+            this.btnprintbarcode.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("simpleButton5.ImageOptions.Image")));
+            this.btnprintbarcode.Location = new System.Drawing.Point(1235, 168);
+            this.btnprintbarcode.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
+            this.btnprintbarcode.Name = "btnprintbarcode";
+            this.btnprintbarcode.Size = new System.Drawing.Size(239, 50);
+            this.btnprintbarcode.TabIndex = 94;
+            this.btnprintbarcode.Text = "Print Barcode (F8)";
+            this.btnprintbarcode.Click += new System.EventHandler(this.simpleButton5_Click);
             // 
             // btnclear
             // 
@@ -721,7 +721,7 @@
             this.panelControl1.Location = new System.Drawing.Point(0, 512);
             this.panelControl1.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
             this.panelControl1.Name = "panelControl1";
-            this.panelControl1.Size = new System.Drawing.Size(2737, 895);
+            this.panelControl1.Size = new System.Drawing.Size(2586, 895);
             this.panelControl1.TabIndex = 25;
             // 
             // dockManager1
@@ -744,7 +744,7 @@
             this.groupControl3.Location = new System.Drawing.Point(0, 0);
             this.groupControl3.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
             this.groupControl3.Name = "groupControl3";
-            this.groupControl3.Size = new System.Drawing.Size(2737, 512);
+            this.groupControl3.Size = new System.Drawing.Size(2586, 512);
             this.groupControl3.TabIndex = 26;
             this.groupControl3.Text = "Purchase Order Details";
             // 
@@ -756,7 +756,7 @@
             this.gridControl2.MainView = this.gridView2;
             this.gridControl2.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
             this.gridControl2.Name = "gridControl2";
-            this.gridControl2.Size = new System.Drawing.Size(2731, 464);
+            this.gridControl2.Size = new System.Drawing.Size(2580, 464);
             this.gridControl2.TabIndex = 2;
             this.gridControl2.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView2,
@@ -812,7 +812,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(2737, 1407);
+            this.ClientSize = new System.Drawing.Size(2586, 1407);
             this.Controls.Add(this.panelControl1);
             this.Controls.Add(this.groupControl3);
             this.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
@@ -893,7 +893,7 @@
         private DevExpress.XtraEditors.SimpleButton simpleButton2;
         private DevExpress.XtraEditors.SimpleButton simpleButton1;
         private DevExpress.XtraEditors.SimpleButton simpleButton4;
-        private DevExpress.XtraEditors.SimpleButton simpleButton5;
+        private DevExpress.XtraEditors.SimpleButton btnprintbarcode;
         private DevExpress.XtraEditors.ComboBoxEdit txtdestination;
         private DevExpress.XtraEditors.TextEdit txtinvoiceno;
         private DevExpress.XtraEditors.SpinEdit txtcost;

@@ -10,6 +10,9 @@ using System.Windows.Forms;
 using DevExpress.XtraEditors;
 using System.Data.SqlClient;
 using DevExpress.XtraReports.UI;
+using DevExpress.XtraGrid.Views.Grid;
+using DevExpress.XtraGrid.Columns;
+using DevExpress.XtraGrid;
 
 namespace SalesInventorySystem.HOFormsDevEx
 {
@@ -28,13 +31,13 @@ namespace SalesInventorySystem.HOFormsDevEx
             if (radtobigblue.Checked == true)
             {
                 //clear();
-                Database.displaySearchlookupEdit("SELECT distinct ShipmentNo FROM Inventory " +
+                Database.displaySearchlookupEdit("SELECT distinct ShipmentNo FROM dbo.Inventory " +
                     "WHERE Available > 0 and isWarehouse=1 order by ShipmentNo ASC", txtshipmentno, "ShipmentNo", "ShipmentNo");
             }
             else
             {
                 //clear();
-                Database.displaySearchlookupEdit("SELECT distinct ShipmentNo FROM Inventory " +
+                Database.displaySearchlookupEdit("SELECT distinct ShipmentNo FROM dbo.Inventory " +
                     "WHERE Available > 0 and isWarehouse=0 order by ShipmentNo ASC", txtshipmentno, "ShipmentNo", "ShipmentNo");
             }
         }
@@ -116,11 +119,11 @@ namespace SalesInventorySystem.HOFormsDevEx
 
             //DevExReportTemplate.CustomerRequest xct = new DevExReportTemplate.CustomerRequest();
             DevExReportTemplate.TransferInventory xct = new DevExReportTemplate.TransferInventory();
+
             xct.Landscape = false;
             xct.Landscape = false;
             xct.PaperKind = System.Drawing.Printing.PaperKind.A4;
             xct.Margins = new System.Drawing.Printing.Margins(100, 100, 100, 100);
-
 
             xct.xrdate.Text = DateTime.Now.ToShortDateString();
             xct.xrpreparedby.Text = Login.Fullname;
@@ -131,10 +134,16 @@ namespace SalesInventorySystem.HOFormsDevEx
             //xct.xrrequestedby.Text = Login.Fullname;
             //xct.xrdaterequest.Text = String.Format("{0:MM/dd/yyyy HH:mm:ss}", DateTime.Now);
             //xct.xrdateneeded.Text = String.Format("{0:MM/dd/yyyy HH:mm:ss}", dateTimePicker1.Value);
-
-
+            
             xct.Bands[BandKind.Detail].Controls.Add(HelperFunction.CopyGridControl(this.gridControl1));
             xct.Bands[BandKind.Detail].Font = new System.Drawing.Font("Tahoma", 10);
+
+            gridView1.Columns["SequenceNo"].OptionsColumn.Printable = DevExpress.Utils.DefaultBoolean.False;
+            gridView1.Columns["SequenceInventoryNumber"].OptionsColumn.Printable = DevExpress.Utils.DefaultBoolean.False;
+            gridView1.Columns["Status"].OptionsColumn.Printable = DevExpress.Utils.DefaultBoolean.False;
+            gridView1.Columns["Barcode"].OptionsColumn.Printable = DevExpress.Utils.DefaultBoolean.False;
+            gridView1.Columns["ShipmentNo"].OptionsColumn.Printable = DevExpress.Utils.DefaultBoolean.False;
+
             ReportPrintTool report = new ReportPrintTool(xct);
             report.ShowRibbonPreviewDialog();
         }
@@ -166,6 +175,13 @@ namespace SalesInventorySystem.HOFormsDevEx
 
             xct.Bands[BandKind.Detail].Controls.Add(HelperFunction.CopyGridControl(this.gridControl1));
             xct.Bands[BandKind.Detail].Font = new System.Drawing.Font("Tahoma", 10);
+
+            gridView1.Columns["SequenceNo"].OptionsColumn.Printable = DevExpress.Utils.DefaultBoolean.False;
+            gridView1.Columns["SequenceInventoryNumber"].OptionsColumn.Printable = DevExpress.Utils.DefaultBoolean.False;
+            gridView1.Columns["Status"].OptionsColumn.Printable = DevExpress.Utils.DefaultBoolean.False;
+            gridView1.Columns["Barcode"].OptionsColumn.Printable = DevExpress.Utils.DefaultBoolean.False;
+            gridView1.Columns["ShipmentNo"].OptionsColumn.Printable = DevExpress.Utils.DefaultBoolean.False;
+
             ReportPrintTool report = new ReportPrintTool(xct);
             report.ShowRibbonPreviewDialog();
         }
@@ -236,6 +252,21 @@ namespace SalesInventorySystem.HOFormsDevEx
                 gridControl1.DataSource = table;
                 gridView1.BestFitColumns();
             }
+            GridView view = gridControl1.FocusedView as GridView;
+            view.SortInfo.ClearAndAddRange(new GridColumnSortInfo[] {
+                new GridColumnSortInfo(view.Columns["Description"],DevExpress.Data.ColumnSortOrder.Ascending),
+                //new GridColumnSortInfo(view.Columns["PalletNo"],DevExpress.Data.ColumnSortOrder.Ascending)
+
+                },1);
+            view.ExpandAllGroups();
+
+            GridGroupSummaryItem ite = new GridGroupSummaryItem();
+            ite.FieldName = "Qty";
+            ite.SummaryType = DevExpress.Data.SummaryItemType.Sum;
+            ite.ShowInGroupColumnFooter = gridView1.Columns["Qty"];
+            gridView1.GroupSummary.Add(ite);
+            gridView1.Focus();
+
             txtshipmentno.Text = "";
             txtproduct.Text = "";
             txtpalletno.Text = "";
