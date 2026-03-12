@@ -47,9 +47,11 @@ namespace SalesInventorySystem.Reporting
             this.gridView4.Columns["Unit"].Width = 78;
             this.gridView4.Columns["ProductName"].Width = 300;
             this.gridView4.Columns["Price"].Width = 110;
-            this.gridView4.Columns["Amount"].Width = 145;
+            this.gridView4.Columns["Amount"].Width = 155;
 
             this.gridView4.Columns["Unit"].AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+
+            this.gridView4.Columns["Cost"].Visible=false;
 
             xct.xrcustname.Text = txtcustname.Text;
             xct.xrcontrolno.Text = controlno;

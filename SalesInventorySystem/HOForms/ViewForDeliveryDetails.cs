@@ -184,6 +184,7 @@ namespace SalesInventorySystem.HOForms
             viewdet.Show();
 
             analyze("spview_SalesInvoice", txtpono.Text, viewdet.gridControl4, viewdet.gridView4);
+            
 
             viewdet.txtpono.Text = txtpono.Text;
             double vatablesales = 0.0, vatexemptsale = 0.0, vatamount = 0.0, totalsales = 0.0, lessvat = 0.0, netofvat = 0.0, amountdue = 0.0, addvat = 0.0, vatsales = 0.0, totalamountdue = 0.0;

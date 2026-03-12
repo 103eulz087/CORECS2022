@@ -359,6 +359,7 @@ namespace SalesInventorySystem
                     return;
                 }
             }
+            //MANY TO ONE
             else if (radioButton2.Checked==true)
             {
                 if(String.IsNullOrEmpty(objprodforcodemanytoone.ToString())) 
@@ -366,7 +367,9 @@ namespace SalesInventorySystem
                     XtraMessageBox.Show("Product Category Code or Product Code must not Empty!!!...");
                     return;
                 }
-                if (Convert.ToDouble(txttotalactualweight.Text) != Convert.ToDouble(txtactualqty.Text))
+               // double actqty = Convert.ToDouble(txtactualqty.Text) + Convert.ToDouble(txtdriplossqty.Text);
+                decimal actqty = Convert.ToDecimal(txtactualqty.Text) + Convert.ToDecimal(txtdriplossqty.Text);
+                if (Convert.ToDecimal(txttotalactualweight.Text) != actqty)
                 {
                     XtraMessageBox.Show("MANY TO ONE --Source Quantity must Equal to Total Qty of Converted items!");
                     return;

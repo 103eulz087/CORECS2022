@@ -72,6 +72,13 @@ namespace SalesInventorySystem
             return new DateTime(year, previousMonth, day);
         }
 
+        public static string readFileVersion()
+        {
+            string filepath = (Application.StartupPath + "\\checkVersion.txt");
+            string firstLine = File.ReadLines(filepath).First();
+            return firstLine;
+        }
+
 
         public static string convertToNumericFormat(double value)
         {

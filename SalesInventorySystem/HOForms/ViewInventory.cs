@@ -164,24 +164,41 @@ namespace SalesInventorySystem
         {
             try
             {
+                //    DateTime petsa = Convert.ToDateTime(gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "DateReceived").ToString());
+                //    DateTime petsaExpired = Convert.ToDateTime(gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "ExpiryDate").ToString());
+                //    string newdate = petsa.ToShortDateString();
+                //    string dateexpired = petsaExpired.ToShortDateString();
+                //    Barcode.CarcassBarcodePrinting bprint = new Barcode.CarcassBarcodePrinting();
+                //    bprint.lblshipmentno.Text = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "ShipmentNo").ToString();
+                //    bprint.lblpalletnum.Text = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "PalletNo").ToString();
+                //    //bprint.xrBarCode2.Text = lblshipmentno.Text + "1" + txtweight.Text.Remove(2, 1) + ctr.ToString();
+                //    bprint.xrBarCode2.Text = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "Barcode").ToString();
+                //    bprint.lblmanufdate.Text = newdate;
+                //    bprint.lblxpirydate.Text = dateexpired;//petsa.AddYears(1).ToShortDateString();
+                //    bprint.lblprodtype.Text = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "Description").ToString();
+                //    bprint.lblseqnum.Text = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "SequenceNumber").ToString();
+                ////    bprint.lbltipweight.Text = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "TipWeight").ToString();
+                //    bprint.lblactualweight.Text = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "Quantity").ToString();
+                //    ReportPrintTool report = new ReportPrintTool(bprint);
+                //    report.Print();
+                //    report.Dispose();
                 DateTime petsa = Convert.ToDateTime(gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "DateReceived").ToString());
                 DateTime petsaExpired = Convert.ToDateTime(gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "ExpiryDate").ToString());
                 string newdate = petsa.ToShortDateString();
-                string dateexpired = petsaExpired.ToShortDateString();
-                Barcode.CarcassBarcodePrinting bprint = new Barcode.CarcassBarcodePrinting();
-                bprint.lblshipmentno.Text = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "ShipmentNo").ToString();
-                bprint.lblpalletnum.Text = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "PalletNo").ToString();
-                //bprint.xrBarCode2.Text = lblshipmentno.Text + "1" + txtweight.Text.Remove(2, 1) + ctr.ToString();
-                bprint.xrBarCode2.Text = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "Barcode").ToString();
+                Barcode.BarcodePrinting bprint = new Barcode.BarcodePrinting();
+                bprint.xrshipno.Text = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "ShipmentNo").ToString();
                 bprint.lblmanufdate.Text = newdate;
-                bprint.lblxpirydate.Text = dateexpired;//petsa.AddYears(1).ToShortDateString();
                 bprint.lblprodtype.Text = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "Description").ToString();
-                bprint.lblseqnum.Text = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "SequenceNumber").ToString();
-            //    bprint.lbltipweight.Text = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "TipWeight").ToString();
-                bprint.lblactualweight.Text = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "Quantity").ToString();
+                bprint.lbltotalkilos.Text = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "Quantity").ToString();
+                bprint.xrpalletno.Text = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "PalletNo").ToString();
+                bprint.xrsku.Text = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "Product").ToString();
+                bprint.lblxpirydate.Text = petsaExpired.ToShortDateString();
+                bprint.xrBarCode2.Text = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "Barcode").ToString();
+
                 ReportPrintTool report = new ReportPrintTool(bprint);
+                //report.ShowRibbonPreviewDialog();
+                //report.PrintDialog();
                 report.Print();
-                report.Dispose();
             }
             catch (Exception ex)
             {

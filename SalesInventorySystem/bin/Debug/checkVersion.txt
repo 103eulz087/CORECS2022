@@ -1,2 +1,6 @@
-Company=ENZO
-Version=15
+Version=6
+Filename=updated.zip
+Launcher=SalesInventorySystem.exe
+VersionCheckerUrl=https://check-uploader.uat-ph.com/ODU2NDE4OTA3
+DownloadUrlFormat=https://file-uploader.uat-ph.com/ODU2NDE4OTA3/file.zip
+DownloadUrl=https://file-uploader.uat-ph.com/ODU2NDE4OTA3/file-v6.zip

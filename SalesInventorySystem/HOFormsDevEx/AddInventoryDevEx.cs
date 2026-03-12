@@ -338,7 +338,7 @@ namespace SalesInventorySystem.HOFormsDevEx
         private void display()
         {
             Database.display("SELECT PalletNo,Product,Description,Barcode,Quantity,Cost,IsVat,(Quantity*Cost) as TotalCost " +
-                "FROM dbo.TempInventory WHERE ShipmentNo='" + txtshipmentno.Text + "' " +
+                "FROM dbo.TempInventory WHERE ShipmentNo='" + txtshipmentno.Text + "' AND isProcess=0 " +
                 "ORDER BY SequenceNumber DESC", gridControl1, gridView1);
 
             GridView view = gridControl1.FocusedView as GridView;
@@ -423,7 +423,8 @@ namespace SalesInventorySystem.HOFormsDevEx
         private void simpleButton3_Click(object sender, EventArgs e)
         {
             //Database.ExecuteQuery("DELETE FROM TempInventory WHERE SequenceNumber='" + gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "SequenceNumber").ToString() + "'");
-            Database.ExecuteQuery("DELETE FROM TempInventory WHERE Barcode='" + gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "Barcode").ToString() + "'");
+            //Database.ExecuteQuery("DELETE FROM TempInventory WHERE Barcode='" + gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "Barcode").ToString() + "'");
+            Database.ExecuteQuery("UPDATE dbo.TempInventory SET isProcess=1 WHERE Barcode='" + gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "Barcode").ToString() + "'");
             gridView1.DeleteSelectedRows();
         }
         

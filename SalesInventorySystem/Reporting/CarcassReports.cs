@@ -46,6 +46,7 @@ namespace SalesInventorySystem.Reporting
                     "WHERE ShipmentNo='" + BatchProcessMasterDevEx.shipmentno + "' " +
                     "and Branch='"+Login.assignedBranch+ "' " +
                     "and isSource=1 " +
+                    "and isProcess=0 " +
                     "GROUP BY DateReceived,Description,Cost,Quantity", gridControl1, gridView1);
                 GridView viewz = gridControl1.FocusedView as GridView;
                 viewz.SortInfo.ClearAndAddRange(new GridColumnSortInfo[] {
@@ -65,7 +66,12 @@ namespace SalesInventorySystem.Reporting
                 gridView1.Columns.Clear();
                 gridControl1.DataSource = null;
                 //Database.display("SELECT DateReceived,Barcode,PalletNo,Description,TipWeight,Quantity AS ActualWeight,ROUND((TipWeight-Quantity),2) AS Variance,Cost FROm TempInventoryBatchUpload WHERE ShipmentNo='" + BatchProcessMasterDevEx.shipmentno + "' and Branch='"+Login.assignedBranch+"' and isSource=1 ORDER BY Description,PalletNo,Cost", gridControl1, gridView1); 
-                Database.display("SELECT SequenceNumber,DateReceived,Barcode,Description,Quantity,Cost From dbo.Inventory with(nolock) WHERE ShipmentNo='" + BatchProcessMasterDevEx.shipmentno + "' and Branch='" + Login.assignedBranch + "' ORDER BY Description ASC", gridControl1, gridView1);
+                Database.display("SELECT SequenceNumber,DateReceived,Barcode,Description,Quantity,Cost " +
+                    "From dbo.Inventory with(nolock) " +
+                    "WHERE ShipmentNo='" + BatchProcessMasterDevEx.shipmentno + "' " +
+                    "and Branch='" + Login.assignedBranch + "' " +
+                    "and isProcess=0 " +
+                    "ORDER BY Description ASC", gridControl1, gridView1);
                 GridView view = gridControl1.FocusedView as GridView;
                 view.SortInfo.ClearAndAddRange(new GridColumnSortInfo[] {
             

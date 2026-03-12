@@ -46,24 +46,26 @@ namespace SalesInventorySystem.Orders
         {
             getAvailablePort();
 
-            if (isFifo == true)
-            {
-                barcodescanning.Checked = false;
-                panel1.Visible = false;
-                panel2.Visible = false;
-                panel3.Visible = false;
-                panel4.Visible = true;
-            }
-            else
-            {
-                barcodescanning.Checked = true;
-                panel1.Visible = true;
+            //if (isFifo == true)
+            //{
+            //    barcodescanning.Checked = false;
+            //    panel1.Visible = false;
+            //    panel2.Visible = false;
+            //    panel3.Visible = false;
+            //    panel4.Visible = true;
+            //}
+            //else
+            //{
+            //    barcodescanning.Checked = true;
+            //    panel1.Visible = true;
 
-            }
-
+            //}
+            barcodescanning.Checked = true;
+            panel1.Visible = true;
+            txtbarcodescanning.Focus();
             Database.displayComboBoxItems("SELECT Description FROM ProductCategory", "Description", txtprodcat);
 
-            bool fExst = Database.checkifExist("SELECT PONumber FROM DeliveryDetails WHERE PONumber='" + ViewBranchOrderSTS.ponumber + "'");
+            bool fExst = Database.checkifExist("SELECT 1 FROM DeliveryDetails WHERE PONumber='" + ViewBranchOrderSTS.ponumber + "'");
             string getID = Database.getSingleData("DeliveryDetails", "PONumber", ViewBranchOrderSTS.ponumber, "DeliveryNo");
             if (fExst)
             {
@@ -674,10 +676,15 @@ namespace SalesInventorySystem.Orders
             }
             else
             {
+                //panel2.Visible = false;
+                //panel3.Visible = true;
+                //panel1.Visible = true;
+                //btnfind.Visible = true;
+                barcodescanning.Checked = false;
+                panel1.Visible = false;
                 panel2.Visible = false;
-                panel3.Visible = true;
-                panel1.Visible = true;
-                btnfind.Visible = true;
+                panel3.Visible = false;
+                panel4.Visible = true;
             }
         }
 

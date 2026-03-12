@@ -613,6 +613,7 @@
     <Compile Include="Classes\Inventory.cs" />
     <Compile Include="Classes\ListItems.cs" />
     <Compile Include="Classes\Locations.cs" />
+    <Compile Include="Classes\PosDataDownloader.cs" />
     <Compile Include="Classes\PosDataUploader.cs" />
     <Compile Include="Classes\POSDownloadUpdates.cs" />
     <Compile Include="Classes\POSTransaction.cs" />
@@ -1383,6 +1384,18 @@
     <Compile Include="HOFormsDevEx\ReceivedSTSBatchMode.Designer.cs">
       <DependentUpon>ReceivedSTSBatchMode.cs</DependentUpon>
     </Compile>
+    <Compile Include="HOFormsDevEx\ReceivedTransferBranchInventory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HOFormsDevEx\ReceivedTransferBranchInventory.Designer.cs">
+      <DependentUpon>ReceivedTransferBranchInventory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HOFormsDevEx\ReceivedTransferInventoryBatchMode.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HOFormsDevEx\ReceivedTransferInventoryBatchMode.Designer.cs">
+      <DependentUpon>ReceivedTransferInventoryBatchMode.cs</DependentUpon>
+    </Compile>
     <Compile Include="HOFormsDevEx\ReplicateInventoryDevEx.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1436,6 +1449,12 @@
     </Compile>
     <Compile Include="HOFormsDevEx\SupplierPaymentDevEx.Designer.cs">
       <DependentUpon>SupplierPaymentDevEx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HOFormsDevEx\TransferBranchToBranchInvDevEx.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HOFormsDevEx\TransferBranchToBranchInvDevEx.Designer.cs">
+      <DependentUpon>TransferBranchToBranchInvDevEx.cs</DependentUpon>
     </Compile>
     <Compile Include="HOFormsDevEx\TransferByBarcode.cs">
       <SubType>Form</SubType>
@@ -2266,6 +2285,12 @@
     <Compile Include="POSDevEx\POSShowCreditDetails.Designer.cs">
       <DependentUpon>POSShowCreditDetails.cs</DependentUpon>
     </Compile>
+    <Compile Include="POSDevEx\POSSyncAll.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="POSDevEx\POSSyncAll.Designer.cs">
+      <DependentUpon>POSSyncAll.cs</DependentUpon>
+    </Compile>
     <Compile Include="POSDevEx\POSXReadReportDevEx.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -2915,6 +2940,12 @@
     </Compile>
     <Compile Include="Reporting\InventoryCostingRep.Designer.cs">
       <DependentUpon>InventoryCostingRep.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reporting\InventoryDailyActivityPivot.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reporting\InventoryDailyActivityPivot.Designer.cs">
+      <DependentUpon>InventoryDailyActivityPivot.cs</DependentUpon>
     </Compile>
     <Compile Include="Reporting\InventoryLedgerDevEx.cs">
       <SubType>Form</SubType>
@@ -3695,6 +3726,12 @@
     <EmbeddedResource Include="HOFormsDevEx\ReceivedSTSBatchMode.resx">
       <DependentUpon>ReceivedSTSBatchMode.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="HOFormsDevEx\ReceivedTransferBranchInventory.resx">
+      <DependentUpon>ReceivedTransferBranchInventory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HOFormsDevEx\ReceivedTransferInventoryBatchMode.resx">
+      <DependentUpon>ReceivedTransferInventoryBatchMode.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="HOFormsDevEx\ReplicateInventoryDevEx.resx">
       <DependentUpon>ReplicateInventoryDevEx.cs</DependentUpon>
     </EmbeddedResource>
@@ -3721,6 +3758,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="HOFormsDevEx\SupplierPaymentDevEx.resx">
       <DependentUpon>SupplierPaymentDevEx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HOFormsDevEx\TransferBranchToBranchInvDevEx.resx">
+      <DependentUpon>TransferBranchToBranchInvDevEx.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="HOFormsDevEx\TransferByBarcode.resx">
       <DependentUpon>TransferByBarcode.cs</DependentUpon>
@@ -4150,6 +4190,9 @@
     <EmbeddedResource Include="POSDevEx\POSShowCreditDetails.resx">
       <DependentUpon>POSShowCreditDetails.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="POSDevEx\POSSyncAll.resx">
+      <DependentUpon>POSSyncAll.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="POSDevEx\POSXReadReportDevEx.resx">
       <DependentUpon>POSXReadReportDevEx.cs</DependentUpon>
     </EmbeddedResource>
@@ -4485,6 +4528,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reporting\InventoryCostingRep.resx">
       <DependentUpon>InventoryCostingRep.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reporting\InventoryDailyActivityPivot.resx">
+      <DependentUpon>InventoryDailyActivityPivot.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reporting\InventoryLedgerDevEx.resx">
       <DependentUpon>InventoryLedgerDevEx.cs</DependentUpon>

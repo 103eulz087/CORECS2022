@@ -790,6 +790,12 @@ namespace SalesInventorySystem
                 string full = qty1 + " @ " + sel1 + " = " + total1;
                 int desclength = desc1.Length;
                 string description = "";
+                if (serialPort1.IsOpen && chckdisplaypool.Checked == true)
+                {
+                    serialPort1.Write(Convert.ToString((char)12));
+                    serialPort1.WriteLine(description);
+                    serialPort1.WriteLine((char)13 + "Amount: " + total1);
+                }
                 //if (desclength > 20)
                 //{
                 //    description = desc1.Substring(0, 19);
@@ -808,7 +814,7 @@ namespace SalesInventorySystem
                 //    serialPort1.WriteLine(description);
                 //    serialPort1.WriteLine((char)13 + "Amount: " + total1);
                 //}
-             
+
             }
             catch (SqlException ex)
             {

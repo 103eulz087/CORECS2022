@@ -26,7 +26,7 @@ namespace SalesInventorySystem
 {
     public partial class Login : DevExpress.XtraEditors.XtraForm
     {
-        public static string assignedBranch, Fullname,isMaker,isChecker,isglobalPOS,isglobalAccounting, iscashBegin, isglobalUserID,isglobalAdmin,isglobalOfficer,isglobalBranchOfficer,isglobalWarehouseOfficer,isCashier,isglobalApprover,glacctcode,cashinlimit,cashendlimit;
+        public static string assignedBranch, Fullname, isMaker, isChecker, isglobalPOS, isglobalAccounting, iscashBegin, isglobalUserID, isglobalAdmin, isglobalOfficer, isglobalBranchOfficer, isglobalWarehouseOfficer, isCashier, isglobalApprover, glacctcode, cashinlimit, cashendlimit;
         RegistryKey regkey;
         string password;
         string encryptedpassword;
@@ -38,7 +38,7 @@ namespace SalesInventorySystem
         public static string servername;
         public static string dbname;
         public static string connsettings;
-        private int passwordctr=0;
+        private int passwordctr = 0;
         string user = "";
 
         private static string localhost = "http://itcore-apps.com:1101/";
@@ -48,6 +48,8 @@ namespace SalesInventorySystem
         {
 
         }
+
+       
 
         public Login()
         {
@@ -68,9 +70,13 @@ namespace SalesInventorySystem
                 C.ShowDialog(this);
                 this.Opacity = 0;
             }
+            if (keyData == Keys.Escape) //PAYMENT
+            {
+                btnclose.PerformClick();
+            }
             return functionReturnValue;
         }
-        
+
 
         // 1. Change the return type to Task<int> and add the 'async' keyword
         public static async Task<int> getCTRVersionAsAsync(String name)
@@ -123,7 +129,65 @@ namespace SalesInventorySystem
             return num1;
         }
 
+        private void btnclose_Click(object sender, EventArgs e)
+        {
+            this.Dispose();
+        }
+
         private async void Login_Load(object sender, EventArgs e)
+        {
+            tryCheckUpdate(); //#tryCheckUpdateV1();
+            labelversion.Text= HelperFunction.readFileVersion();
+        }
+
+        static async Task<int> GetCTRVersion()
+        {
+            try
+            {
+                string urlChecker = file["VersionCheckerUrl"];
+                using (var client = new HttpClient())
+                {
+                    var content = await client.GetStringAsync(urlChecker).ConfigureAwait(false);
+                    return Convert.ToInt32(content);
+                }
+            }
+            catch { }
+            return -1;
+        }
+        private void tryCheckUpdate()
+        {
+            try
+            {
+                if (String.IsNullOrEmpty(file["Version"])) return;
+                int client_version = Convert.ToInt32(file["Version"]);
+                int server_version = GetCTRVersion().Result;
+                if (server_version != -1 && client_version < server_version)
+                {
+                    if (!String.IsNullOrEmpty(file["DownloadUrlFormat"]))
+                    {
+                        file["DownloadUrl"] = file["DownloadUrlFormat"].Replace("file.zip", "file-v" + server_version + ".zip");
+                        file.Update();
+                    }
+                    MessageBox.Show("A New Updates Available\nGet the latest application update now.");
+                    string batCmdLaunch = $"bat_{ DateTime.Now.ToString("yyyyMMdd.HHmmss") }.bat";
+                    System.IO.File.WriteAllText(batCmdLaunch, @"
+@echo off
+taskkill /pid " + Process.GetCurrentProcess().Id + @" /f
+START exeUpdater.exe 
+del ""%~f0""
+exit /b
+                    ");
+                    ProcessStart(batCmdLaunch).WaitForExit();
+                    Application.Exit();
+                    return;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message.ToString());
+            }
+        }
+        private async void tryCheckUpdateV1()
         {
             try
             {
@@ -433,7 +497,16 @@ namespace SalesInventorySystem
 
         }
 
-
-        
+        private static Process ProcessStart(string batLocation)
+        {
+            //var process = Process.Start(batCmd);
+            Process p = new Process();
+            p.StartInfo.UseShellExecute = false;
+            p.StartInfo.RedirectStandardOutput = true;
+            p.StartInfo.CreateNoWindow = true;
+            p.StartInfo.FileName = batLocation;
+            p.Start();
+            return p;
+        }
     }
 }

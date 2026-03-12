@@ -239,10 +239,11 @@ namespace SalesInventorySystem
 
         private void Main_Load(object sender, EventArgs e)
         {
+            this.Text = HelperFunction.readFileVersion();
             //Login login = new Login();
             //login.ShowDialog(this);
 
-           // enzowarehouse.Visible = false;
+            // enzowarehouse.Visible = false;
             validate_userAccess();
             //checkAccess();
             //  ribbonPage1.Visible = false;
@@ -3234,6 +3235,42 @@ namespace SalesInventorySystem
             }
             Reporting.TransferInventoryHO pfoap = new Reporting.TransferInventoryHO();
             pfoap.MdiParent = this;
+            pfoap.Show();
+        }
+
+        private void barButtonItem27_ItemClick_2(object sender, ItemClickEventArgs e)
+        {
+            foreach (Form form in Application.OpenForms)
+            {
+                if (form.GetType() == typeof(HOFormsDevEx.TransferBranchToBranchInvDevEx))
+                {
+                    form.Activate();
+                    return;
+                }
+            }
+            HOFormsDevEx.TransferBranchToBranchInvDevEx pfoap = new HOFormsDevEx.TransferBranchToBranchInvDevEx();
+            pfoap.MdiParent = this;
+            pfoap.Show();
+        }
+
+        private void barButtonItemRcvdReturnInv_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            foreach (Form form in Application.OpenForms)
+            {
+                if (form.GetType() == typeof(HOFormsDevEx.ReceivedTransferBranchInventory))
+                {
+                    form.Activate();
+                    return;
+                }
+            }
+            HOFormsDevEx.ReceivedTransferBranchInventory pfoap = new HOFormsDevEx.ReceivedTransferBranchInventory();
+            pfoap.MdiParent = this;
+            pfoap.Show();
+        }
+
+        private void barButtonItemInvDailyActivity_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            Reporting.InventoryDailyActivityPivot pfoap = new Reporting.InventoryDailyActivityPivot();
             pfoap.Show();
         }
 

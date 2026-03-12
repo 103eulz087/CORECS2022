@@ -133,8 +133,8 @@ namespace SalesInventorySystem
                 string rs =Database.getSingleResultSet("SELECT dbo.func_checkLapseInvoice('" + custid + "')");
 
 
-                if (Login.assignedBranch == "888")
-                {
+                //if (Login.assignedBranch == "888")
+                //{
                     if(checkBox1.Checked==true)
                     {
                         reamrks = richTextBox1.Text.Trim();
@@ -145,7 +145,7 @@ namespace SalesInventorySystem
                     }
                     //check if item exist in customer table
                     // bool prodexist = Database.checkifExist("SELECT * FROM Customers WHERE ItemCode = '" + itemcode + "' AND CustomerID='" + custid + "' ");// Database.getSingleQuery("Customers","ItemCode = '"+Classes.Product.getProductCode(txtprodname.Text,prodcatcode)+"',"sdd");
-                    bool prodexist = Database.checkifExist("SELECT TOP(1) ProductCode FROM view_custprodsettings WHERE ProductCode = '" + itemcode + "' AND CustID='" + custid + "' ");// Database.getSingleQuery("Customers","ItemCode = '"+Classes.Product.getProductCode(txtprodname.Text,prodcatcode)+"',"sdd");
+                    bool prodexist = Database.checkifExist("SELECT 1 FROM view_custprodsettings WHERE ProductCode = '" + itemcode + "' AND CustID='" + custid + "' ");// Database.getSingleQuery("Customers","ItemCode = '"+Classes.Product.getProductCode(txtprodname.Text,prodcatcode)+"',"sdd");
 
                     //reamrks = Database.getSingleQuery("Customers", "ItemCode = '" + itemcode + "' AND CustomerID='" + custid + "' ", "Remarks");
                     //specialprice = Database.getSingleQuery("Customers", "ItemCode = '" + itemcode + "' AND CustomerID='" + custid + "' ", "SpecialPriceAmount");
@@ -189,12 +189,12 @@ namespace SalesInventorySystem
                     //{
                     //    sellingprice = Database.getSingleQuery("Products", "ProductCode = '" + itemcode + "' AND BranchCode='" + Login.assignedBranch + "' ", "SellingPrice");
                     //}
-                }
-                else
-                {
-                    reamrks = richTextBox1.Text.Trim();
-                    sellingprice = Database.getSingleQuery("Products", "ProductCode = '" + itemcode + "' AND BranchCode='" + Login.assignedBranch + "' ", "SellingPrice");
-                }
+                //}
+                //else
+                //{
+                //    reamrks = richTextBox1.Text.Trim();
+                //    sellingprice = Database.getSingleQuery("Products", "ProductCode = '" + itemcode + "' AND BranchCode='" + Login.assignedBranch + "' ", "SellingPrice");
+                //}
                 //if realtime inventory.. global settings
                 if(chckfinal.Checked.Equals(true))
                 {
