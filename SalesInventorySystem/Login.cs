@@ -100,8 +100,7 @@ namespace SalesInventorySystem
                 int client_version = Convert.ToInt32(file["Version"]);
                 if (server_version != -1 && client_version < server_version)
                 {
-                    MessageBox.Show("A New Updates Available\nGet the latest application update now.");
-                    //System.IO.File.WriteAllText("loaders.bat", @"taskkill /pid " + Process.GetCurrentProcess().Id + @" /f start " + Application.StartupPath + @"\exeUpdater.exe");
+                    MessageBox.Show("A New Updates Available\nGet the latest application update now."); 
                     System.IO.File.WriteAllText("loaders.bat", @"taskkill /pid " + Process.GetCurrentProcess().Id + @" /f
                     CD """ + Application.StartupPath + @"""
                     START exeUpdater.exe ");
@@ -126,22 +125,11 @@ namespace SalesInventorySystem
                 }
                 else
                 {
-                    // constr = regkey.GetValue("dbconn").ToString();
                     userid = regkey.GetValue("serverid").ToString();
                     serverpassword = regkey.GetValue("serverpassword").ToString();
                     dbname = regkey.GetValue("dbname").ToString();
                     servername = regkey.GetValue("servername").ToString();
                 }
-                //regkey = Registry.CurrentUser.CreateSubKey(@"AAITCRE\ConnSettingsCloud");
-                //if (regkey.GetValue("dbconn") == null)
-                //{
-                //    Connection C = new Connection();
-                //    C.lblservername.Text = "Cloud Server";
-                //    C.txtconnsettingsname.Text = @"AAITCRE\ConnSettingsCloud";
-                //    C.ShowDialog();
-                //    this.Opacity = 0;
-                //    return;
-                //}
             }
             catch(SqlException ex)
             {
