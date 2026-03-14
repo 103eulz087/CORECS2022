@@ -34,6 +34,7 @@ namespace SalesInventorySystem
         public AddBranchOrder()
         {
             InitializeComponent();
+            HelperFunction.AllowNumbersAndPeriod(txtweight);
             serialPort1.WriteTimeout = 500;
             serialPort1.ReadTimeout = 500;
             this.myDelegate = new AddDataDelegate(AddDataMethod);
@@ -945,7 +946,7 @@ namespace SalesInventorySystem
                         if (requestedProductExist)
                             break;
                     }
-                    //bool inventoryExist = Database.checkifExist("SELECT top 1 Product FROM Inventory WHERE Product='" + primalproductcode + "' AND Branch='" + Login.assignedBranch + "' AND IsStock='1' ");
+                    bool inventoryExist = Database.checkifExist("SELECT 1 FROM dbo.Inventory WHERE Product='" + primalproductcode + "' AND Branch='" + Login.assignedBranch + "' AND Available > 0 and isWarehouse=1 ");
                     // if ((txtsku.Text.Substring(0, 2).Trim() != getProductCategoryCode()) && barcodescanning.Checked==false)//!isnvalidproduct)
                     //if ((txtsku.Text.Substring(0, 2).Trim() != getProductCategoryCode()) && barcodescanning.Checked == false)//!isnvalidproduct)
                     //{
@@ -959,17 +960,17 @@ namespace SalesInventorySystem
                         XtraMessageBox.Show("You cant add this Product because it is not available in Purchase Order List!");
                         txtsku.Text = "";
                     }
-                    //else if (!inventoryExist)
-                    //{
-                    //    XtraMessageBox.Show("No Product Inventory");
-                    //    txtsku.Text = "";
-                    //}
-                    ////kung imong gi encode na quantity is greater than sa total quantity sa imong Inventory sa commisary
-                    //else if (Convert.ToDouble(txtweight.Text) > Database.getTotalSummation2("Inventory", "Product = '" + primalproductcode + "' AND Branch='" + Login.assignedBranch + "' AND IsStock='1' and Available > 0 ", "Available")) //Database.getTotalSummation("Inventory", "Product", txtsku.Text.Substring(1, 6), "Quantity"))
-                    //{
-                    //    string mark = Database.getTotalSummation2("Inventory", "Product = '" + primalproductcode + "' AND Branch='" + Login.assignedBranch + "' AND IsStock='1'  and Available > 0 ", "Available").ToString();
-                    //    XtraMessageBox.Show("Insuficient Stocks for this Product.. Your Available Quantity is " + mark);
-                    //}
+                    else if (!inventoryExist)
+                    {
+                        XtraMessageBox.Show("No Product Inventory");
+                        txtsku.Text = "";
+                    }
+                    //kung imong gi encode na quantity is greater than sa total quantity sa imong Inventory sa commisary
+                    else if (Convert.ToDouble(txtweight.Text) > Database.getTotalSummation2("Inventory", "Product = '" + primalproductcode + "' AND Branch='" + Login.assignedBranch + "' AND isWarehouse='1' and Available > 0 ", "Available")) //Database.getTotalSummation("Inventory", "Product", txtsku.Text.Substring(1, 6), "Quantity"))
+                    {
+                        string mark = Database.getTotalSummation2("Inventory", "Product = '" + primalproductcode + "' AND Branch='" + Login.assignedBranch + "' AND isWarehouse='1'  and Available > 0 ", "Available").ToString();
+                        XtraMessageBox.Show("Insuficient Stocks for this Product.. Your Available Quantity is " + mark);
+                    }
                     else
                     {
                         add();

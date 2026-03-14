@@ -11905,3 +11905,4 @@ C:\Users\User\Downloads\CORECS2022\SalesInventorySystem\obj\Debug\SalesInventory
 C:\Users\User\Downloads\CORECS2022\SalesInventorySystem\obj\Debug\SalesInventorySystem.HOFormsDevEx.ReceivedTransferInventoryBatchMode.resources
 C:\Users\User\Downloads\CORECS2022\SalesInventorySystem\obj\Debug\SalesInventorySystem.Reporting.InventoryDailyActivityPivot.resources
 C:\Users\User\Downloads\CORECS2022\SalesInventorySystem\obj\Debug\SalesInventorySystem.POSDevEx.POSSyncAll.resources
+C:\Users\User\Downloads\CORECS2022\SalesInventorySystem\obj\Debug\SalesInventorySystem.LiveTrends.STSMonitoring.resources

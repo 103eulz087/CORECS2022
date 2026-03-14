@@ -25,13 +25,15 @@ namespace SalesInventorySystem.HOFormsDevEx
         public TransferBranchToBranchInvDevEx()
         {
             InitializeComponent();
+            HelperFunction.AllowNumbersAndPeriod(txtweight);
+
         }
 
         private void TransferBranchToBranchInvDevEx_Load(object sender, EventArgs e)
         {
            
-            bool fExst = Database.checkifExist("SELECT 1 FROM TransferInventoryDetails WHERE TransferNo=' '");
-            string getID = Database.getSingleData("TransferInventoryDetails", "TransferNo",  "", "TransferNo");
+            bool fExst = Database.checkifExist($"SELECT 1 FROM TransferInventoryDetails WHERE TransferNo='{txttransferno.Text}'");
+            string getID = Database.getSingleData("TransferInventoryDetails", "TransferNo", $"{txttransferno.Text}", "TransferNo");
             if (fExst)
             {
                 txttransferno.Text = getID;
@@ -40,9 +42,11 @@ namespace SalesInventorySystem.HOFormsDevEx
             {
                 txttransferno.Text = IDGenerator.getIDNumberSP("sp_GetTransferInventoryNumber", "TransferNo");
             }
-            Database.displaySearchlookupEdit($"SELECT DISTINCT Product,Description FROM dbo.Inventory WHERE Branch='{Login.assignedBranch}' and isAvailable > 0", txtsearchlookupproduct);
-            Database.displaySearchlookupEdit($"SELECT BranchCode,BranchName FROM dbo.Branch ", txtbranch);
+
+            Database.displaySearchlookupEdit($"SELECT DISTINCT Product,Description FROM dbo.Inventory WHERE Branch='{Login.assignedBranch}' and Available > 0", txtsearchlookupproduct, "Description", "Description");
+            Database.displaySearchlookupEdit($"SELECT BranchCode,BranchName FROM dbo.Branches ", txtbranch);
             radchanged();
+            txtsearchlookupproduct.Focus();
         }
 
         void radchanged()
@@ -69,29 +73,24 @@ namespace SalesInventorySystem.HOFormsDevEx
             try
             {
 
-                int ctr2 = 1;
+                //int ctr2 = 1;
                 decimal quantity;
                 string strquantity;
                
-                 
-                    for (int i = 0; i <= gridView2.RowCount - 1; i++)
-                    {
-                        ctr2++;
-                    }
-                    txtweight.Invoke(this.myDelegate, new Object[] { wieght2 });
+                    //for (int i = 0; i <= gridView2.RowCount - 1; i++)
+                    //{
+                    //    ctr2++;
+                    //}
+                    //txtweight.Invoke(this.myDelegate, new Object[] { wieght2 });
 
                     quantity = Decimal.Parse(txtweight.Text);
                     strquantity = String.Format("{0:00.000}", quantity);
 
-
-                            
-                        string barcode = Database.getSingleResultSet($"SELECT dbo.func_GenerateBarcodeReturnTransfer" +
-                $"('{Login.assignedBranch}',{txtbranch.Text},'{txttransferno.Text}','{globalprodcode}','{strquantity}') ");
-
-                        txtsku.Text = barcode;
-                   
-                        btnadd.Focus();
-                    
+                    string barcode = Database.getSingleResultSet($"SELECT dbo.func_GenerateBarcodeReturnTransfer" +
+                          $"('{Login.assignedBranch}','{globalbranchcode}','{txttransferno.Text}','{globalprodcode}','{strquantity}') ");
+                    txtsku.Text = barcode;
+                    btnadd.Focus();
+               
                 
 
             }
@@ -190,7 +189,7 @@ namespace SalesInventorySystem.HOFormsDevEx
 
         private void btnadd_Click(object sender, EventArgs e)
         {
-            if(radho.Checked==false || radothers.Checked==false)
+            if(radho.Checked==false && radothers.Checked==false)
             {
                 XtraMessageBox.Show("Please select Destination for your Transfer!.. ");
                 return;
@@ -269,6 +268,48 @@ namespace SalesInventorySystem.HOFormsDevEx
         {
             cancelLine();
             displayForDelivery();
+        }
+
+        private void radho_CheckedChanged(object sender, EventArgs e)
+        {
+            radchanged();
+        }
+
+        private void radothers_CheckedChanged(object sender, EventArgs e)
+        {
+            radchanged();
+        }
+
+        private void printBarcodeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string qtydel = gridView2.GetRowCellValue(gridView2.FocusedRowHandle, "QtyDelivered").ToString();
+            Barcode.BarcodePrinting bprint = new Barcode.BarcodePrinting();
+            bprint.xrshipno.Text = "TRANSFER#:" + txttransferno.Text;
+            bprint.xrpalletno.Text = "n/a";
+            bprint.lblmanufdate.Text = DateTime.Now.ToShortDateString();
+            bprint.lblprodtype.Text = gridView2.GetRowCellValue(gridView2.FocusedRowHandle, "ProductName").ToString();
+            bprint.lbltotalkilos.Text = qtydel;
+            bprint.xrBarCode2.Text = gridView2.GetRowCellValue(gridView2.FocusedRowHandle, "BarcodeNo").ToString();
+            bprint.lblxpirydate.Text = DateTime.Now.AddYears(1).ToShortDateString();
+            ReportPrintTool report = new ReportPrintTool(bprint);
+            report.Print();
+        }
+
+        private void gridControl2_KeyDown(object sender, KeyEventArgs e)
+        {
+            
+        }
+
+        private void gridControl2_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+                contextMenuStrip1.Show(gridControl2, e.Location);
+        }
+
+        private void txtweight_KeyPress(object sender, KeyPressEventArgs e)
+        {
+          
+
         }
 
         private void simpleButton11_Click(object sender, EventArgs e)

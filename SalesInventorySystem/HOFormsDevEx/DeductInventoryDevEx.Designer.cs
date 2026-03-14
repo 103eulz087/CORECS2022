@@ -70,22 +70,19 @@
             // 
             this.groupControl2.Controls.Add(this.gridControl1);
             this.groupControl2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupControl2.Location = new System.Drawing.Point(0, 196);
-            this.groupControl2.Margin = new System.Windows.Forms.Padding(6, 4, 6, 4);
+            this.groupControl2.Location = new System.Drawing.Point(0, 125);
             this.groupControl2.Name = "groupControl2";
-            this.groupControl2.Size = new System.Drawing.Size(1536, 739);
+            this.groupControl2.Size = new System.Drawing.Size(896, 473);
             this.groupControl2.TabIndex = 15;
             this.groupControl2.Text = "Result Set";
             // 
             // gridControl1
             // 
             this.gridControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridControl1.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
-            this.gridControl1.Location = new System.Drawing.Point(3, 45);
+            this.gridControl1.Location = new System.Drawing.Point(2, 28);
             this.gridControl1.MainView = this.gridView1;
-            this.gridControl1.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
             this.gridControl1.Name = "gridControl1";
-            this.gridControl1.Size = new System.Drawing.Size(1530, 691);
+            this.gridControl1.Size = new System.Drawing.Size(892, 443);
             this.gridControl1.TabIndex = 3;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1,
@@ -105,8 +102,8 @@
             this.gridView1.Appearance.Row.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gridView1.Appearance.Row.Options.UseFont = true;
             this.gridView1.ColumnPanelRowHeight = 0;
-            this.gridView1.DetailHeight = 673;
-            this.gridView1.FixedLineWidth = 4;
+            this.gridView1.DetailHeight = 431;
+            this.gridView1.FixedLineWidth = 3;
             this.gridView1.FooterPanelHeight = 0;
             this.gridView1.GridControl = this.gridControl1;
             this.gridView1.GroupRowHeight = 0;
@@ -126,8 +123,8 @@
             // 
             this.bandedGridView1.BandPanelRowHeight = 0;
             this.bandedGridView1.ColumnPanelRowHeight = 0;
-            this.bandedGridView1.DetailHeight = 673;
-            this.bandedGridView1.FixedLineWidth = 4;
+            this.bandedGridView1.DetailHeight = 431;
+            this.bandedGridView1.FixedLineWidth = 3;
             this.bandedGridView1.FooterPanelHeight = 0;
             this.bandedGridView1.GridControl = this.gridControl1;
             this.bandedGridView1.GroupRowHeight = 0;
@@ -143,8 +140,8 @@
             this.advBandedGridView1.Bands.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.GridBand[] {
             this.gridBand1});
             this.advBandedGridView1.ColumnPanelRowHeight = 0;
-            this.advBandedGridView1.DetailHeight = 673;
-            this.advBandedGridView1.FixedLineWidth = 4;
+            this.advBandedGridView1.DetailHeight = 431;
+            this.advBandedGridView1.FixedLineWidth = 3;
             this.advBandedGridView1.FooterPanelHeight = 0;
             this.advBandedGridView1.GridControl = this.gridControl1;
             this.advBandedGridView1.GroupRowHeight = 0;
@@ -157,16 +154,16 @@
             // gridBand1
             // 
             this.gridBand1.Caption = "gridBand1";
-            this.gridBand1.MinWidth = 22;
+            this.gridBand1.MinWidth = 13;
             this.gridBand1.Name = "gridBand1";
             this.gridBand1.VisibleIndex = 0;
-            this.gridBand1.Width = 160;
+            this.gridBand1.Width = 93;
             // 
             // gridView3
             // 
             this.gridView3.ColumnPanelRowHeight = 0;
-            this.gridView3.DetailHeight = 673;
-            this.gridView3.FixedLineWidth = 4;
+            this.gridView3.DetailHeight = 431;
+            this.gridView3.FixedLineWidth = 3;
             this.gridView3.FooterPanelHeight = 0;
             this.gridView3.GridControl = this.gridControl1;
             this.gridView3.GroupRowHeight = 0;
@@ -187,16 +184,14 @@
             this.groupControl1.Controls.Add(this.txtdate);
             this.groupControl1.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupControl1.Location = new System.Drawing.Point(0, 0);
-            this.groupControl1.Margin = new System.Windows.Forms.Padding(6, 4, 6, 4);
             this.groupControl1.Name = "groupControl1";
-            this.groupControl1.Size = new System.Drawing.Size(1536, 196);
+            this.groupControl1.Size = new System.Drawing.Size(896, 125);
             this.groupControl1.TabIndex = 14;
             this.groupControl1.Text = "Inventory Analysis";
             // 
             // txtbranch
             // 
-            this.txtbranch.Location = new System.Drawing.Point(134, 62);
-            this.txtbranch.Margin = new System.Windows.Forms.Padding(6, 4, 6, 4);
+            this.txtbranch.Location = new System.Drawing.Point(78, 40);
             this.txtbranch.Name = "txtbranch";
             this.txtbranch.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 9.8F);
             this.txtbranch.Properties.Appearance.Options.UseFont = true;
@@ -204,14 +199,14 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.txtbranch.Properties.NullText = "";
             this.txtbranch.Properties.PopupView = this.searchLookUpEdit1View;
-            this.txtbranch.Size = new System.Drawing.Size(274, 46);
+            this.txtbranch.Size = new System.Drawing.Size(160, 26);
             this.txtbranch.TabIndex = 43;
             // 
             // searchLookUpEdit1View
             // 
             this.searchLookUpEdit1View.ColumnPanelRowHeight = 0;
-            this.searchLookUpEdit1View.DetailHeight = 546;
-            this.searchLookUpEdit1View.FixedLineWidth = 4;
+            this.searchLookUpEdit1View.DetailHeight = 349;
+            this.searchLookUpEdit1View.FixedLineWidth = 3;
             this.searchLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
             this.searchLookUpEdit1View.FooterPanelHeight = 0;
             this.searchLookUpEdit1View.GroupRowHeight = 0;
@@ -227,10 +222,9 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(22, 65);
-            this.label1.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.label1.Location = new System.Drawing.Point(13, 42);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(94, 29);
+            this.label1.Size = new System.Drawing.Size(58, 18);
             this.label1.TabIndex = 42;
             this.label1.Text = "Branch:";
             // 
@@ -238,10 +232,9 @@
             // 
             this.btnDeduct.Enabled = false;
             this.btnDeduct.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnDeduct.ImageOptions.Image")));
-            this.btnDeduct.Location = new System.Drawing.Point(620, 104);
-            this.btnDeduct.Margin = new System.Windows.Forms.Padding(6, 4, 6, 4);
+            this.btnDeduct.Location = new System.Drawing.Point(362, 67);
             this.btnDeduct.Name = "btnDeduct";
-            this.btnDeduct.Size = new System.Drawing.Size(224, 54);
+            this.btnDeduct.Size = new System.Drawing.Size(131, 35);
             this.btnDeduct.TabIndex = 41;
             this.btnDeduct.Text = "Deduct Inventory";
             this.btnDeduct.Click += new System.EventHandler(this.btnDeduct_Click);
@@ -249,31 +242,28 @@
             // btnAnalyze
             // 
             this.btnAnalyze.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnAnalyze.ImageOptions.Image")));
-            this.btnAnalyze.Location = new System.Drawing.Point(420, 104);
-            this.btnAnalyze.Margin = new System.Windows.Forms.Padding(6, 4, 6, 4);
+            this.btnAnalyze.Location = new System.Drawing.Point(245, 67);
             this.btnAnalyze.Name = "btnAnalyze";
-            this.btnAnalyze.Size = new System.Drawing.Size(190, 54);
+            this.btnAnalyze.Size = new System.Drawing.Size(111, 35);
             this.btnAnalyze.TabIndex = 40;
             this.btnAnalyze.Text = "Analyze Data";
             this.btnAnalyze.Click += new System.EventHandler(this.btnAnalyze_Click);
             // 
             // progressBarControl1
             // 
-            this.progressBarControl1.Location = new System.Drawing.Point(858, 104);
-            this.progressBarControl1.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
+            this.progressBarControl1.Location = new System.Drawing.Point(500, 67);
             this.progressBarControl1.Name = "progressBarControl1";
             this.progressBarControl1.ShowProgressInTaskBar = true;
-            this.progressBarControl1.Size = new System.Drawing.Size(404, 54);
+            this.progressBarControl1.Size = new System.Drawing.Size(236, 35);
             this.progressBarControl1.TabIndex = 39;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(22, 121);
-            this.label3.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.label3.Location = new System.Drawing.Point(13, 77);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(71, 29);
+            this.label3.Size = new System.Drawing.Size(44, 18);
             this.label3.TabIndex = 16;
             this.label3.Text = "Date:";
             // 
@@ -282,10 +272,9 @@
             this.txtdate.CustomFormat = "";
             this.txtdate.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtdate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.txtdate.Location = new System.Drawing.Point(134, 112);
-            this.txtdate.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
+            this.txtdate.Location = new System.Drawing.Point(78, 72);
             this.txtdate.Name = "txtdate";
-            this.txtdate.Size = new System.Drawing.Size(274, 36);
+            this.txtdate.Size = new System.Drawing.Size(161, 26);
             this.txtdate.TabIndex = 19;
             // 
             // backgroundWorker1
@@ -303,30 +292,29 @@
             this.inventoryQtyAdjustmentToolStripMenuItem,
             this.convertToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(367, 76);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(247, 52);
             // 
             // inventoryQtyAdjustmentToolStripMenuItem
             // 
             this.inventoryQtyAdjustmentToolStripMenuItem.Name = "inventoryQtyAdjustmentToolStripMenuItem";
-            this.inventoryQtyAdjustmentToolStripMenuItem.Size = new System.Drawing.Size(366, 36);
+            this.inventoryQtyAdjustmentToolStripMenuItem.Size = new System.Drawing.Size(246, 24);
             this.inventoryQtyAdjustmentToolStripMenuItem.Text = "Inventory Qty Adjustment";
             this.inventoryQtyAdjustmentToolStripMenuItem.Click += new System.EventHandler(this.inventoryQtyAdjustmentToolStripMenuItem_Click);
             // 
             // convertToolStripMenuItem
             // 
             this.convertToolStripMenuItem.Name = "convertToolStripMenuItem";
-            this.convertToolStripMenuItem.Size = new System.Drawing.Size(366, 36);
+            this.convertToolStripMenuItem.Size = new System.Drawing.Size(246, 24);
             this.convertToolStripMenuItem.Text = "Convert";
             this.convertToolStripMenuItem.Click += new System.EventHandler(this.convertToolStripMenuItem_Click);
             // 
             // DeductInventoryDevEx
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1536, 935);
+            this.ClientSize = new System.Drawing.Size(896, 598);
             this.Controls.Add(this.groupControl2);
             this.Controls.Add(this.groupControl1);
-            this.Margin = new System.Windows.Forms.Padding(6, 4, 6, 4);
             this.Name = "DeductInventoryDevEx";
             this.Text = "DeductInventoryDevEx";
             this.Load += new System.EventHandler(this.DeductInventoryDevEx_Load);

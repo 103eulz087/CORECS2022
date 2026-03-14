@@ -77,6 +77,11 @@ namespace SalesInventorySystem
         //    //exitProg:
         //    return num1;
         //}
+        public static String getConnectionServerName()
+        {
+            regkey = Registry.CurrentUser.CreateSubKey(@"AAITCRE\ConnSettingsMain");
+            return constring = regkey.GetValue("servername").ToString();
+        }
 
         public static SqlConnection getConnection()
         {

@@ -37,6 +37,7 @@ namespace SalesInventorySystem.Orders
         {         
             this.myDelegate = new AddDataDelegate(AddDataMethod);
             InitializeComponent();
+            HelperFunction.AllowNumbersAndPeriod(txtweight); 
         }
         public void AddDataMethod(String myString)
         {

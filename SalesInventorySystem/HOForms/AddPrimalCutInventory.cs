@@ -30,6 +30,9 @@ namespace SalesInventorySystem.HOForms
         public AddPrimalCutInventory()
         {
             InitializeComponent();
+            HelperFunction.AllowNumbersAndPeriod(txtweight);
+            HelperFunction.AllowNumbersAndPeriodDevEx(txtpalletno);
+           
             serialPort1.WriteTimeout = 500;
             serialPort1.ReadTimeout = 500;
             this.myDelegate = new AddDataDelegate(AddDataMethod);

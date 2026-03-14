@@ -250,6 +250,7 @@
             this.btnTransferInventoryHO = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem27 = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItemRcvdReturnInv = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItemInvDailyActivity = new DevExpress.XtraBars.BarButtonItem();
             this.ribbonPage1 = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup20 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup2 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -296,7 +297,8 @@
             this.barButtonItem103 = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem5 = new DevExpress.XtraBars.BarButtonItem();
-            this.barButtonItemInvDailyActivity = new DevExpress.XtraBars.BarButtonItem();
+            this.ribbonPageGroup28 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.btnLiveTrendsSts = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.popupMenuInvTransfer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.popupMenu1)).BeginInit();
@@ -529,10 +531,11 @@
             this.btnTransferInventoryHO,
             this.barButtonItem27,
             this.barButtonItemRcvdReturnInv,
-            this.barButtonItemInvDailyActivity});
+            this.barButtonItemInvDailyActivity,
+            this.btnLiveTrendsSts});
             this.ribbonControl.Location = new System.Drawing.Point(0, 0);
             this.ribbonControl.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
-            this.ribbonControl.MaxItemId = 221;
+            this.ribbonControl.MaxItemId = 222;
             this.ribbonControl.Name = "ribbonControl";
             this.ribbonControl.PageHeaderItemLinks.Add(this.barStaticItem2);
             this.ribbonControl.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
@@ -2541,6 +2544,15 @@
             this.barButtonItemRcvdReturnInv.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
             this.barButtonItemRcvdReturnInv.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemRcvdReturnInv_ItemClick);
             // 
+            // barButtonItemInvDailyActivity
+            // 
+            this.barButtonItemInvDailyActivity.Caption = "Inventory Daily Activity";
+            this.barButtonItemInvDailyActivity.Id = 220;
+            this.barButtonItemInvDailyActivity.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barButtonItemInvDailyActivity.ImageOptions.Image")));
+            this.barButtonItemInvDailyActivity.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barButtonItemInvDailyActivity.ImageOptions.LargeImage")));
+            this.barButtonItemInvDailyActivity.Name = "barButtonItemInvDailyActivity";
+            this.barButtonItemInvDailyActivity.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemInvDailyActivity_ItemClick);
+            // 
             // ribbonPage1
             // 
             this.ribbonPage1.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
@@ -2762,7 +2774,8 @@
             this.REPORTING.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
             this.ribbonPageGroup24,
             this.ribbonPageGroup11,
-            this.ribbonPageGroup4});
+            this.ribbonPageGroup4,
+            this.ribbonPageGroup28});
             this.REPORTING.Name = "REPORTING";
             this.REPORTING.Text = "REPORTING";
             // 
@@ -2994,14 +3007,20 @@
             this.barButtonItem5.Name = "barButtonItem5";
             this.barButtonItem5.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
             // 
-            // barButtonItemInvDailyActivity
+            // ribbonPageGroup28
             // 
-            this.barButtonItemInvDailyActivity.Caption = "Inventory Daily Activity";
-            this.barButtonItemInvDailyActivity.Id = 220;
-            this.barButtonItemInvDailyActivity.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barButtonItemInvDailyActivity.ImageOptions.Image")));
-            this.barButtonItemInvDailyActivity.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barButtonItemInvDailyActivity.ImageOptions.LargeImage")));
-            this.barButtonItemInvDailyActivity.Name = "barButtonItemInvDailyActivity";
-            this.barButtonItemInvDailyActivity.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemInvDailyActivity_ItemClick);
+            this.ribbonPageGroup28.ItemLinks.Add(this.btnLiveTrendsSts);
+            this.ribbonPageGroup28.Name = "ribbonPageGroup28";
+            this.ribbonPageGroup28.Text = "LIVE TRENDS";
+            // 
+            // btnLiveTrendsSts
+            // 
+            this.btnLiveTrendsSts.Caption = "STS Monitoring Tool";
+            this.btnLiveTrendsSts.Id = 221;
+            this.btnLiveTrendsSts.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnLiveTrendsSts.ImageOptions.Image")));
+            this.btnLiveTrendsSts.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("btnLiveTrendsSts.ImageOptions.LargeImage")));
+            this.btnLiveTrendsSts.Name = "btnLiveTrendsSts";
+            this.btnLiveTrendsSts.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnLiveTrendsSts_ItemClick);
             // 
             // Main
             // 
@@ -3311,5 +3330,7 @@
         private DevExpress.XtraBars.BarButtonItem barButtonItem27;
         private DevExpress.XtraBars.BarButtonItem barButtonItemRcvdReturnInv;
         private DevExpress.XtraBars.BarButtonItem barButtonItemInvDailyActivity;
+        private DevExpress.XtraBars.BarButtonItem btnLiveTrendsSts;
+        private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup28;
     }
 }

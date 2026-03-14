@@ -54,6 +54,63 @@ namespace SalesInventorySystem
             }
         }
 
+        public static void AllowNumbersAndPeriod(TextBox textBox)
+        {
+            textBox.KeyPress += TextBox_KeyPress;
+        }
+        public static void AllowNumbersAndPeriodDevEx(TextEdit textEdit)
+        {
+            textEdit.KeyPress += TextEdit_KeyPress;
+        }
+        private static void TextEdit_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Allow control keys (Backspace, Delete, etc.)
+            if (char.IsControl(e.KeyChar))
+            {
+                return;
+            }
+
+            // Allow digits
+            if (char.IsDigit(e.KeyChar))
+            {
+                return;
+            }
+
+            // Allow only one period
+            if (e.KeyChar == '.' && !((TextEdit)sender).Text.Contains("."))
+            {
+                return;
+            }
+
+            // Block everything else
+            e.Handled = true;
+        }
+
+
+        private static void TextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Allow control keys (Backspace, Delete, etc.)
+            if (char.IsControl(e.KeyChar))
+            {
+                return;
+            }
+
+            // Allow digits
+            if (char.IsDigit(e.KeyChar))
+            {
+                return;
+            }
+
+            // Allow only one period
+            if (e.KeyChar == '.' && !((TextBox)sender).Text.Contains("."))
+            {
+                return;
+            }
+
+            // Block everything else
+            e.Handled = true;
+        }
+
 
         public static DateTime GetPreviousMonthSameDay(DateTime inputDate)
         {

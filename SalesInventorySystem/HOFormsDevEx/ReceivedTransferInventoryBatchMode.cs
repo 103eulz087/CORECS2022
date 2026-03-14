@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using DevExpress.XtraEditors;
 using DevExpress.XtraGrid.Views.Grid;
 using System.Data.SqlClient;
+using DevExpress.XtraReports.UI;
 
 namespace SalesInventorySystem.HOFormsDevEx
 {
@@ -154,6 +155,27 @@ namespace SalesInventorySystem.HOFormsDevEx
             GridView view = sender as GridView;
             if (view.FocusedColumn.FieldName != "ActualQty")
                 e.Cancel = true;
+        }
+
+        private void gridControlRcvd_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+                contextMenuStrip1.Show(gridControlRcvd, e.Location);
+        }
+
+        private void cancelLineToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string qtydel = gridViewRcvd.GetRowCellValue(gridViewRcvd.FocusedRowHandle, "QtyDelivered").ToString();
+            Barcode.BarcodePrinting bprint = new Barcode.BarcodePrinting();
+            bprint.xrshipno.Text = "TRANSFER#:" + gridViewRcvd.GetRowCellValue(gridViewRcvd.FocusedRowHandle, "TransferNo").ToString();
+            bprint.xrpalletno.Text = "n/a";
+            bprint.lblmanufdate.Text = DateTime.Now.ToShortDateString();
+            bprint.lblprodtype.Text = gridViewRcvd.GetRowCellValue(gridViewRcvd.FocusedRowHandle, "ProductName").ToString();
+            bprint.lbltotalkilos.Text = qtydel;
+            bprint.xrBarCode2.Text = gridViewRcvd.GetRowCellValue(gridViewRcvd.FocusedRowHandle, "BarcodeNo").ToString();
+            bprint.lblxpirydate.Text = DateTime.Now.AddYears(1).ToShortDateString();
+            ReportPrintTool report = new ReportPrintTool(bprint);
+            report.Print();
         }
     }
 }
