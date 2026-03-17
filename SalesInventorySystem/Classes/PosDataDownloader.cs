@@ -9,8 +9,9 @@ namespace SalesInventorySystem.Classes
 {
     public class PosDataDownloader
     {
-        private readonly string _cloudConnString = "YOUR_CLOUD_CONNECTION_STRING";
-        private readonly string _localConnString = "YOUR_LOCAL_CONNECTION_STRING";
+        //@"AAITCRE\ConnSettingsMain"
+        private readonly string _cloudConnString = Database.getConnectionString(@"AAITCRE\ConnSettingsServer");
+        private readonly string _localConnString = Database.getConnectionString(@"AAITCRE\ConnSettingsMain");
 
         // =================================================================================
         // PUBLIC METHODS - These are beautifully simple because the helper does the work!

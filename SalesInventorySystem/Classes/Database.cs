@@ -83,6 +83,12 @@ namespace SalesInventorySystem
             return constring = regkey.GetValue("servername").ToString();
         }
 
+        public static String getConnectionString(string regkeypath)
+        {
+            regkey = Registry.CurrentUser.CreateSubKey(regkeypath);
+            return constring = regkey.GetValue("dbconn").ToString();
+        }
+
         public static SqlConnection getConnection()
         {
             //regkey = Registry.CurrentUser.CreateSubKey(@"Enzo\ConnSettings");

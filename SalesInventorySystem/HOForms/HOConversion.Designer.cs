@@ -1,6 +1,6 @@
 ﻿namespace SalesInventorySystem
 {
-    partial class HOConversion
+    partial class HOConversion 
     {
         /// <summary>
         /// Required designer variable.

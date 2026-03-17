@@ -593,6 +593,7 @@
       <DependentUpon>BadOrder.cs</DependentUpon>
     </Compile>
     <Compile Include="Classes\BarcodeSettings.cs" />
+    <Compile Include="Classes\BigAlert.cs" />
     <Compile Include="Classes\Branch.cs" />
     <Compile Include="Classes\ClientAccount.cs" />
     <Compile Include="Classes\CompanyProfile.cs" />
@@ -1539,6 +1540,12 @@
     </Compile>
     <Compile Include="HOFormsDevEx\ViewNonTradeOrdersDevEx.Designer.cs">
       <DependentUpon>ViewNonTradeOrdersDevEx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HOFormsDevEx\VIEWPODETAILSUpdateCost.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HOFormsDevEx\VIEWPODETAILSUpdateCost.Designer.cs">
+      <DependentUpon>VIEWPODETAILSUpdateCost.cs</DependentUpon>
     </Compile>
     <Compile Include="HOFormsDevEx\ViewStockOutRequest.cs">
       <SubType>Form</SubType>
@@ -3809,6 +3816,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="HOFormsDevEx\ViewNonTradeOrdersDevEx.resx">
       <DependentUpon>ViewNonTradeOrdersDevEx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HOFormsDevEx\VIEWPODETAILSUpdateCost.resx">
+      <DependentUpon>VIEWPODETAILSUpdateCost.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="HOFormsDevEx\ViewStockOutRequest.resx">
       <DependentUpon>ViewStockOutRequest.cs</DependentUpon>

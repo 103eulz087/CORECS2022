@@ -10,6 +10,7 @@ using System.Data.SqlClient;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraEditors.Repository;
 using DevExpress.XtraReports.UI;
+using SalesInventorySystem.Classes;
 
 namespace SalesInventorySystem
 {
@@ -35,7 +36,7 @@ namespace SalesInventorySystem
 
             txtrefcode.Text = IDGenerator.getIDNumberSP("sp_GetConversionNumber", "conversionnumber");
             displayProdCat();
-            Database.displaySearchlookupEdit($"SELECT ProductCode,Description FROM Products with(nolock) WHERE BranchCode='{Login.assignedBranch}'", txtsrchprdctmanytoone, "Description", "Description");
+            Database.displaySearchlookupEdit($"SELECT ProductCode,Description FROM dbo.Products with(nolock) WHERE BranchCode='{Login.assignedBranch}'", txtsrchprdctmanytoone, "Description", "Description");
 
         }
 
@@ -196,7 +197,11 @@ namespace SalesInventorySystem
                         //ONE TO MANY
                         if (String.IsNullOrEmpty(gridView3.GetRowCellValue(i, "ProductCode").ToString()) || String.IsNullOrEmpty(gridView3.GetRowCellValue(i, "Description").ToString()))
                         {
-                            XtraMessageBox.Show("The System found out that one of your Converted Items is No ProductCode or No Description!...");
+                            //XtraMessageBox.Show("The System found out that one of your Converted Items is No ProductCode or No Description!...");
+                            BigAlert.Show(
+                              "NO PRODUCT CODE",
+                              "The System found out that one of your Converted Items is No ProductCode or No Description!...",
+                              MessageBoxIcon.Warning);
                             return;
                         }
                         conversionType = "OneToMany";
@@ -204,7 +209,11 @@ namespace SalesInventorySystem
                         //if total quantity converted greater than source quantity
                         if (Convert.ToDouble(txttotalweight.Text) > Convert.ToDouble(txttotalavailableqty.Text))
                         {
-                            XtraMessageBox.Show("Quantity must not greater than SourceQty");
+                            //XtraMessageBox.Show("Quantity must not greater than SourceQty");
+                            BigAlert.Show(
+                              "QUANTITY NOT EQUAL",
+                              "Quantity must not greater than SourceQty",
+                              MessageBoxIcon.Warning);
                             return;
                         }
 
@@ -304,7 +313,11 @@ namespace SalesInventorySystem
                 com.CommandText = query;
                 com.CommandTimeout = 180;
                 com.ExecuteNonQuery();
-                XtraMessageBox.Show("Successfully Converted");
+                //XtraMessageBox.Show("Successfully Converted");
+                BigAlert.Show(
+                   "SUCCESS",
+                   "Conversion Succesfully Process, Please proceed to Approval for Validation",
+                   MessageBoxIcon.Information);
             }
             catch (SqlException ex)
             {
@@ -345,17 +358,30 @@ namespace SalesInventorySystem
                 if (Convert.ToDouble(txttotalactualweight.Text) > Database.getTotalSummation2("Inventory", "Product = '" + labeleulz.Text + "' AND Branch='" + Login.assignedBranch + "' AND Available > 0 and isWarehouse=1 ", "Available")) //Database.getTotalSummation("Inventory", "Product", txtsku.Text.Substring(1, 6), "Quantity"))
                 {
                     string mark = Database.getTotalSummation2("Inventory", "Product = '" + labeleulz.Text + "' AND Branch='" + Login.assignedBranch + "' AND isWarehouse=1 AND Available > 0", "Available").ToString();
-                    XtraMessageBox.Show("Insuficient Stocks for this Product.. Your Available Quantity is " + mark);
+                  //  XtraMessageBox.Show("Insuficient Stocks for this Product.. Your Available Quantity is " + mark);
+                    BigAlert.Show(
+                       "NOT ENOUGH STOCKS",
+                       "Insuficient Stocks for this Product.. Your Available Quantity is " + mark,
+                       MessageBoxIcon.Warning);
                     return;
                 }
                 if (String.IsNullOrEmpty(txtsrcqty.Text))
                 {
-                    XtraMessageBox.Show("Source Quantity must not Equal to Zero or EMpty!");
+                    //XtraMessageBox.Show("Source Quantity must not Equal to Zero or EMpty!");
+                    //Classes.BigAlert.Show("Zero Quantity", "Source Quantity must not Equal to Zero or EMpty!", MessageBoxIcon.Warning);
+                    BigAlert.Show(
+                      "EMPTY OR ZERO SOURCE QTY",
+                      "Source Quantity must not Equal to Zero or Empty Fields!",
+                      MessageBoxIcon.Warning);
                     return;
                 }
                 if(Convert.ToDouble(txttotalactualweight.Text) != Convert.ToDouble(txtsrcqty.Text))
                 {
-                    XtraMessageBox.Show("ONE TO MANY --Source Quantity must Equal to Total Qty of Converted items!");
+                    //XtraMessageBox.Show("ONE TO MANY --Source Quantity must Equal to Total Qty of Converted items!");
+                    BigAlert.Show(
+                     "NOT EQUAL QUANTITY",
+                     "ONE TO MANY --Source Quantity must be Equal to Total Qty of all Converted items!",
+                     MessageBoxIcon.Warning);
                     return;
                 }
             }
@@ -364,14 +390,22 @@ namespace SalesInventorySystem
             {
                 if(String.IsNullOrEmpty(objprodforcodemanytoone.ToString())) 
                 {
-                    XtraMessageBox.Show("Product Category Code or Product Code must not Empty!!!...");
+                    //XtraMessageBox.Show("Product Category Code or Product Code must not Empty!!!...");
+                    BigAlert.Show(
+                    "PRODUCT EMPTY FIELDS",
+                    "Product Category Code or Product Code must not Empty!!!...!",
+                    MessageBoxIcon.Warning);
                     return;
                 }
                // double actqty = Convert.ToDouble(txtactualqty.Text) + Convert.ToDouble(txtdriplossqty.Text);
                 decimal actqty = Convert.ToDecimal(txtactualqty.Text) + Convert.ToDecimal(txtdriplossqty.Text);
                 if (Convert.ToDecimal(txttotalactualweight.Text) != actqty)
                 {
-                    XtraMessageBox.Show("MANY TO ONE --Source Quantity must Equal to Total Qty of Converted items!");
+                    //XtraMessageBox.Show("MANY TO ONE --Source Quantity must Equal to Total Qty of Converted items!");
+                    BigAlert.Show(
+                   "NOT EQUAL QUANTITY",
+                   "MANY TO ONE --Source Quantity must be Equal to Total Qty of Converted item!",
+                   MessageBoxIcon.Warning);
                     return;
                 }
 
@@ -588,14 +622,17 @@ namespace SalesInventorySystem
             try
             {
 
-                    Barcode.BarcodePrinting bprint = new Barcode.BarcodePrinting();
-                    bprint.lblmanufdate.Text = DateTime.Now.ToShortDateString();
-                    bprint.lblxpirydate.Text = DateTime.Now.AddYears(1).ToShortDateString();
-                    bprint.lblprodtype.Text = gridView3.GetRowCellValue(gridView3.FocusedRowHandle, "Description").ToString();
-                    bprint.lbltotalkilos.Text = gridView3.GetRowCellValue(gridView3.FocusedRowHandle, "ActualQty").ToString();
-                    bprint.xrBarCode2.Text = gridView3.GetRowCellValue(gridView3.FocusedRowHandle, "Barcode").ToString(); ;
-                    ReportPrintTool report = new ReportPrintTool(bprint);
-                    report.Print();
+                Barcode.BarcodePrinting bprint = new Barcode.BarcodePrinting();
+                bprint.xrshipno.Text = "CONVERSION";
+                bprint.xrpalletno.Text = "N/A";
+                bprint.xrsku.Text = gridView3.GetRowCellValue(gridView3.FocusedRowHandle, "ProductCode").ToString();
+                bprint.lblmanufdate.Text = DateTime.Now.ToShortDateString();
+                bprint.lblxpirydate.Text = DateTime.Now.AddYears(1).ToShortDateString();
+                bprint.lblprodtype.Text = gridView3.GetRowCellValue(gridView3.FocusedRowHandle, "Description").ToString();
+                bprint.lbltotalkilos.Text = gridView3.GetRowCellValue(gridView3.FocusedRowHandle, "ActualQty").ToString();
+                bprint.xrBarCode2.Text = gridView3.GetRowCellValue(gridView3.FocusedRowHandle, "Barcode").ToString();
+                ReportPrintTool report = new ReportPrintTool(bprint);
+                report.Print();
             }
             catch (Exception ex)
             {
@@ -612,7 +649,7 @@ namespace SalesInventorySystem
 
         private void repositoryItemSearchLookUpEditConversionItems_Click(object sender, EventArgs e)
         {
-            Database.displayRepositorySearchlookupEdit($"SELECT ProductCode,Description FROM Products with(nolock) WHERE BranchCode='{Login.assignedBranch}' ", repositoryItemSearchLookUpEditConversionItems, "Description", "Description");
+            Database.displayRepositorySearchlookupEdit($"SELECT ProductCode,Description FROM dbo.Products with(nolock) WHERE BranchCode='{Login.assignedBranch}' ", repositoryItemSearchLookUpEditConversionItems, "Description", "Description");
         }
 
         private void gridView1_CustomRowCellEditForEditing(object sender, CustomRowCellEditEventArgs e)
@@ -637,7 +674,7 @@ namespace SalesInventorySystem
 
         private void LoadConversionItemsDataSource()
         {
-            var sql = $"SELECT ProductCode, Description FROM Products WITH (NOLOCK) WHERE BranchCode = @Branch";
+            var sql = $"SELECT ProductCode, Description FROM dbo.Products WITH (NOLOCK) WHERE BranchCode = @Branch";
             var dt = new System.Data.DataTable();
             SqlConnection con = Database.getConnection();
             using (var cmd = new SqlCommand(sql, con))
@@ -817,9 +854,11 @@ namespace SalesInventorySystem
 
         private void gridView3_CellValueChanged(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
         {
-            bool isBarcodeLong = false;
+            string productcode = "";
+            string timeWithoutColons = "";
+            //bool isBarcodeLong = false;
             string barcode = "";
-            isBarcodeLong = Database.checkifExist("SELECT isLong FROM BarcodeSettings WHERE isLong=1");
+            //isBarcodeLong = Database.checkifExist("SELECT isLong FROM BarcodeSettings WHERE isLong=1");
             double totalqty = 0.0, totalactualqty = 0.0;
             int count = 0;
             int ctr2 = 0;
@@ -840,7 +879,7 @@ namespace SalesInventorySystem
             }
             txttotalweight.Text = totalqty.ToString();
             txttotalactualweight.Text = totalactualqty.ToString();
-            if (radioButton1.Checked == true)
+            if (radioButton1.Checked == true) //ONE TO MANY
             {
                 if (e.Column.FieldName == "Quantity")
                 {
@@ -857,21 +896,20 @@ namespace SalesInventorySystem
                 string strquantity;
                 quantity = Decimal.Parse(gridView3.GetRowCellValue(gridView3.FocusedRowHandle, "ActualQty").ToString());
                 strquantity = String.Format("{0:00.000}", quantity);
-                if (isBarcodeLong == true) //long barcode type
-                {
-                    barcode = "44444" + gridView3.GetRowCellValue(gridView3.FocusedRowHandle, "ProductCode").ToString() + strquantity.Replace(".", "") + sequencePadding(gridView3.GetRowHandle(gridView3.FocusedRowHandle).ToString());
-                }
-                else
-                {
-                    barcode = gridView3.GetRowCellValue(gridView3.FocusedRowHandle, "ProductCode").ToString() + strquantity.Replace(".", "") + sequencePadding(gridView3.GetRowHandle(gridView3.FocusedRowHandle).ToString());
-                }
+
+                productcode = gridView3.GetRowCellValue(gridView3.FocusedRowHandle, "ProductCode").ToString();
+                timeWithoutColons = DateTime.Now.ToString("HHmmss");
+                //CODING branchcode,productcode,conversionID(5Digits),timeadded (6digits),Qty
+                barcode = Database.getSingleResultSet($"SELECT dbo.func_GenerateBarcodeConversion" +
+               $"('{Login.assignedBranch}','{productcode}','{txtrefcode.Text}'," +
+               $"'{timeWithoutColons}','{strquantity}') ");
 
                 if (e.Column.FieldName == "ActualQty")
                 {
                     gridView3.SetRowCellValue(gridView3.FocusedRowHandle, "Barcode", barcode);
                 }
             }
-            if (radioButton2.Checked == true)
+            if (radioButton2.Checked == true) //MANY TO ONE
             {
                 if (e.Column.FieldName == "Quantity")
                 {
@@ -888,14 +926,15 @@ namespace SalesInventorySystem
                 string strquantity;
                 quantity = Decimal.Parse(gridView3.GetRowCellValue(gridView3.FocusedRowHandle, "Quantity").ToString());
                 strquantity = String.Format("{0:00.000}", quantity);
-                if (isBarcodeLong == true) //long barcode type
-                {
-                    barcode = "44444" + gridView3.GetRowCellValue(gridView3.FocusedRowHandle, "ProductCode").ToString() + strquantity.Replace(".", "") + sequencePadding(gridView3.GetRowHandle(gridView3.FocusedRowHandle).ToString());
-                }
-                else
-                {
-                    barcode = gridView3.GetRowCellValue(gridView3.FocusedRowHandle, "ProductCode").ToString() + strquantity.Replace(".", "") + sequencePadding(gridView3.GetRowHandle(gridView3.FocusedRowHandle).ToString());
-                }
+
+                productcode = gridView3.GetRowCellValue(gridView3.FocusedRowHandle, "ProductCode").ToString();
+                timeWithoutColons = DateTime.Now.ToString("HHmmss");
+                
+                //CODING branchcode,productcode,conversionID(5Digits),timeadded (6digits),Qty
+                barcode = Database.getSingleResultSet($"SELECT dbo.func_GenerateBarcodeConversion" +
+               $"('{Login.assignedBranch}','{productcode}','{txtrefcode.Text}'," +
+               $"'{timeWithoutColons}','{strquantity}') ");
+
                 if (e.Column.FieldName == "Quantity")// if (e.Column.FieldName == "ActualQty")
                 {
                     gridView3.SetRowCellValue(gridView3.FocusedRowHandle, "Barcode", barcode);

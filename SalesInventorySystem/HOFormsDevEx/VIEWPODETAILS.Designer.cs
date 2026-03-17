@@ -28,7 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DevExpress.XtraGrid.GridLevelNode gridLevelNode1 = new DevExpress.XtraGrid.GridLevelNode();
+            this.components = new System.ComponentModel.Container();
+            DevExpress.XtraGrid.GridLevelNode gridLevelNode2 = new DevExpress.XtraGrid.GridLevelNode();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(VIEWPODETAILS));
             this.gridView5 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridControl2 = new DevExpress.XtraGrid.GridControl();
@@ -54,6 +55,8 @@
             this.txtsupplierid = new DevExpress.XtraEditors.TextEdit();
             this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
             this.groupControl2 = new DevExpress.XtraEditors.GroupControl();
+            this.contextMenuStripUpdateCost = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.updateCostToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.gridView5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView2)).BeginInit();
@@ -77,6 +80,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtsupplierid.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).BeginInit();
             this.groupControl2.SuspendLayout();
+            this.contextMenuStripUpdateCost.SuspendLayout();
             this.SuspendLayout();
             // 
             // gridView5
@@ -92,10 +96,10 @@
             // 
             this.gridControl2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gridControl2.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            gridLevelNode1.LevelTemplate = this.gridView5;
-            gridLevelNode1.RelationName = "Level1";
+            gridLevelNode2.LevelTemplate = this.gridView5;
+            gridLevelNode2.RelationName = "Level1";
             this.gridControl2.LevelTree.Nodes.AddRange(new DevExpress.XtraGrid.GridLevelNode[] {
-            gridLevelNode1});
+            gridLevelNode2});
             this.gridControl2.Location = new System.Drawing.Point(2, 28);
             this.gridControl2.MainView = this.gridView2;
             this.gridControl2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -108,11 +112,12 @@
             this.repositoryItemSearchLookUpEditOffsetCreditGLCode,
             this.repositoryItemSearchLookUpEditEWTDebitGLCode,
             this.repositoryItemSearchLookUpEditEWTCreditGLCode});
-            this.gridControl2.Size = new System.Drawing.Size(1128, 550);
+            this.gridControl2.Size = new System.Drawing.Size(1128, 558);
             this.gridControl2.TabIndex = 8;
             this.gridControl2.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView2,
             this.gridView5});
+            this.gridControl2.MouseUp += new System.Windows.Forms.MouseEventHandler(this.gridControl2_MouseUp);
             // 
             // gridView2
             // 
@@ -235,18 +240,18 @@
             this.groupControl1.Controls.Add(this.simpleButton1);
             this.groupControl1.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupControl1.Location = new System.Drawing.Point(0, 0);
-            this.groupControl1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupControl1.Margin = new System.Windows.Forms.Padding(2);
             this.groupControl1.Name = "groupControl1";
-            this.groupControl1.Size = new System.Drawing.Size(1132, 100);
+            this.groupControl1.Size = new System.Drawing.Size(1132, 92);
             this.groupControl1.TabIndex = 0;
             // 
             // simpleButton3
             // 
             this.simpleButton3.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("simpleButton3.ImageOptions.Image")));
             this.simpleButton3.Location = new System.Drawing.Point(237, 36);
-            this.simpleButton3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.simpleButton3.Margin = new System.Windows.Forms.Padding(2);
             this.simpleButton3.Name = "simpleButton3";
-            this.simpleButton3.Size = new System.Drawing.Size(127, 50);
+            this.simpleButton3.Size = new System.Drawing.Size(127, 42);
             this.simpleButton3.TabIndex = 6;
             this.simpleButton3.Text = "DisApproved";
             this.simpleButton3.Visible = false;
@@ -256,9 +261,9 @@
             // 
             this.simpleButton2.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("simpleButton2.ImageOptions.Image")));
             this.simpleButton2.Location = new System.Drawing.Point(125, 36);
-            this.simpleButton2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.simpleButton2.Margin = new System.Windows.Forms.Padding(2);
             this.simpleButton2.Name = "simpleButton2";
-            this.simpleButton2.Size = new System.Drawing.Size(107, 50);
+            this.simpleButton2.Size = new System.Drawing.Size(107, 42);
             this.simpleButton2.TabIndex = 5;
             this.simpleButton2.Text = "Approved";
             this.simpleButton2.Visible = false;
@@ -267,7 +272,7 @@
             // txtbrcode
             // 
             this.txtbrcode.Location = new System.Drawing.Point(965, 32);
-            this.txtbrcode.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtbrcode.Margin = new System.Windows.Forms.Padding(2);
             this.txtbrcode.Name = "txtbrcode";
             this.txtbrcode.Size = new System.Drawing.Size(141, 22);
             this.txtbrcode.TabIndex = 4;
@@ -276,7 +281,7 @@
             // txtordertype
             // 
             this.txtordertype.Location = new System.Drawing.Point(813, 32);
-            this.txtordertype.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtordertype.Margin = new System.Windows.Forms.Padding(2);
             this.txtordertype.Name = "txtordertype";
             this.txtordertype.Size = new System.Drawing.Size(141, 22);
             this.txtordertype.TabIndex = 3;
@@ -285,7 +290,7 @@
             // txtshipmentno
             // 
             this.txtshipmentno.Location = new System.Drawing.Point(666, 32);
-            this.txtshipmentno.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtshipmentno.Margin = new System.Windows.Forms.Padding(2);
             this.txtshipmentno.Name = "txtshipmentno";
             this.txtshipmentno.Size = new System.Drawing.Size(141, 22);
             this.txtshipmentno.TabIndex = 2;
@@ -294,7 +299,7 @@
             // txtsupplierid
             // 
             this.txtsupplierid.Location = new System.Drawing.Point(503, 32);
-            this.txtsupplierid.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtsupplierid.Margin = new System.Windows.Forms.Padding(2);
             this.txtsupplierid.Name = "txtsupplierid";
             this.txtsupplierid.Size = new System.Drawing.Size(141, 22);
             this.txtsupplierid.TabIndex = 1;
@@ -304,9 +309,9 @@
             // 
             this.simpleButton1.ImageOptions.Image = global::SalesInventorySystem.Properties.Resources.Print_32x32__2_;
             this.simpleButton1.Location = new System.Drawing.Point(13, 36);
-            this.simpleButton1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.simpleButton1.Margin = new System.Windows.Forms.Padding(2);
             this.simpleButton1.Name = "simpleButton1";
-            this.simpleButton1.Size = new System.Drawing.Size(107, 50);
+            this.simpleButton1.Size = new System.Drawing.Size(107, 42);
             this.simpleButton1.TabIndex = 0;
             this.simpleButton1.Text = "Print";
             this.simpleButton1.Click += new System.EventHandler(this.simpleButton1_Click);
@@ -315,11 +320,26 @@
             // 
             this.groupControl2.Controls.Add(this.gridControl2);
             this.groupControl2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupControl2.Location = new System.Drawing.Point(0, 100);
-            this.groupControl2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupControl2.Location = new System.Drawing.Point(0, 92);
+            this.groupControl2.Margin = new System.Windows.Forms.Padding(2);
             this.groupControl2.Name = "groupControl2";
-            this.groupControl2.Size = new System.Drawing.Size(1132, 580);
+            this.groupControl2.Size = new System.Drawing.Size(1132, 588);
             this.groupControl2.TabIndex = 1;
+            // 
+            // contextMenuStripUpdateCost
+            // 
+            this.contextMenuStripUpdateCost.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.contextMenuStripUpdateCost.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.updateCostToolStripMenuItem});
+            this.contextMenuStripUpdateCost.Name = "contextMenuStripUpdateCost";
+            this.contextMenuStripUpdateCost.Size = new System.Drawing.Size(211, 56);
+            // 
+            // updateCostToolStripMenuItem
+            // 
+            this.updateCostToolStripMenuItem.Name = "updateCostToolStripMenuItem";
+            this.updateCostToolStripMenuItem.Size = new System.Drawing.Size(210, 24);
+            this.updateCostToolStripMenuItem.Text = "Update Cost";
+            this.updateCostToolStripMenuItem.Click += new System.EventHandler(this.updateCostToolStripMenuItem_Click);
             // 
             // VIEWPODETAILS
             // 
@@ -328,7 +348,7 @@
             this.ClientSize = new System.Drawing.Size(1132, 680);
             this.Controls.Add(this.groupControl2);
             this.Controls.Add(this.groupControl1);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "VIEWPODETAILS";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "VIEWPODETAILS";
@@ -356,6 +376,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtsupplierid.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).EndInit();
             this.groupControl2.ResumeLayout(false);
+            this.contextMenuStripUpdateCost.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -386,5 +407,7 @@
         public DevExpress.XtraEditors.SimpleButton simpleButton1;
         public DevExpress.XtraEditors.SimpleButton simpleButton3;
         public DevExpress.XtraEditors.SimpleButton simpleButton2;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStripUpdateCost;
+        private System.Windows.Forms.ToolStripMenuItem updateCostToolStripMenuItem;
     }
 }

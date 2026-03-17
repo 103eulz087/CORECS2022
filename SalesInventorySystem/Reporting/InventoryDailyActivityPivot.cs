@@ -115,10 +115,15 @@ namespace SalesInventorySystem.Reporting
                     {
                         // 1. Highlight TOTALIN, TOTALOUT, EndingQty columns (Your existing logic)
                         if (e.DataField.FieldName == "TOTALIN" ||
-                            e.DataField.FieldName == "TOTALOUT" ||
-                            e.DataField.FieldName == "EndingQty")
+                            e.DataField.FieldName == "TOTALOUT" )
                         {
                             e.Appearance.BackColor = Color.LightYellow;
+                            e.Appearance.Font = new Font(e.Appearance.Font, FontStyle.Bold);
+                        }
+
+                        if (e.DataField.FieldName == "EndingQty")
+                        {
+                            e.Appearance.BackColor = Color.Yellow;
                             e.Appearance.Font = new Font(e.Appearance.Font, FontStyle.Bold);
                         }
 
@@ -178,8 +183,8 @@ namespace SalesInventorySystem.Reporting
                 pivotGridControl1.Appearance.Cell.Font = new Font("Segoe UI", 9f, FontStyle.Regular);
 
                 // 2. Column and Row Headers (The gray areas): Slightly larger and Bold
-                pivotGridControl1.Appearance.HeaderArea.Font = new Font("Segoe UI", 9.75f, FontStyle.Bold);
-                pivotGridControl1.Appearance.FieldValue.Font = new Font("Segoe UI", 9.75f, FontStyle.Bold);
+                pivotGridControl1.Appearance.HeaderArea.Font = new Font("Segoe UI", 8.75f, FontStyle.Bold);
+                pivotGridControl1.Appearance.FieldValue.Font = new Font("Segoe UI", 8.75f, FontStyle.Bold);
 
                 // 3. Grand Totals: Keep the same size as data, but make them Bold
                 pivotGridControl1.Appearance.GrandTotalCell.Font = new Font("Segoe UI", 9f, FontStyle.Bold);
