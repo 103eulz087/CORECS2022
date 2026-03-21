@@ -624,6 +624,7 @@
             this.txtconversiondate.Name = "txtconversiondate";
             this.txtconversiondate.Size = new System.Drawing.Size(160, 26);
             this.txtconversiondate.TabIndex = 40;
+            this.txtconversiondate.Visible = false;
             // 
             // labeleulz
             // 

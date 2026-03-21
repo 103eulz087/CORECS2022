@@ -166,7 +166,7 @@ namespace SalesInventorySystem.HOFormsDevEx
 
         private void btnDeduct_Click(object sender, EventArgs e)
         {
-            bool check = Database.checkifExist("SELECT 1 BranchCode FROM dbo.ReInventoryMonitoring " +
+            bool check = Database.checkifExist("SELECT 1 FROM dbo.ReInventoryMonitoring " +
                 "WHERE BranchCode='" + txtbranch.Text + "'  and CAST(DateExecute as date)='" + txtdate.Text + "' and isAnalyze=1 ");
             var rows = Database.getMultipleQuery("ReInventoryMonitoring", "BranchCode='" + txtbranch.Text + "' and CAST(DateExecute as date)='" + txtdate.Text + "' ", "isAnalyze,isDeducted");
             string isAnalyze = rows["isAnalyze"].ToString();

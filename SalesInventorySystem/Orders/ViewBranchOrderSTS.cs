@@ -324,8 +324,9 @@ namespace SalesInventorySystem.Orders
              
             addbrorder.gridView2.Columns["ProductNo"].Summary.Add(DevExpress.Data.SummaryItemType.Count, "ProductNo", "{0:n2}");
  
-            Database.displaySearchlookupEdit($"SELECT * FROM dbo.funcview_populateProducts('{Login.assignedBranch}') " +
-              $"WHERE ProductCode in (Select distinct ProductCode FROM PurchaseOrderDetails WHERE PONumber in (SELECT PONumber FROM PurchaseOrderSummary WHERE EffectivityDate='{addbrorder.txteffectivedate.Text}') )", addbrorder.txtsearchlookupproduct, "Description", "Description");
+            //Database.displaySearchlookupEdit($"SELECT * FROM dbo.funcview_populateProducts('{Login.assignedBranch}') " +
+            //  $"WHERE CategoryCode NOT IN(10,11,12) AND ProductCode in (Select distinct ProductCode FROM PurchaseOrderDetails WHERE PONumber in (SELECT PONumber FROM PurchaseOrderSummary WHERE EffectivityDate='{addbrorder.txteffectivedate.Text}') )", addbrorder.txtsearchlookupproduct, "Description", "Description");
+            Database.displaySearchlookupEdit($"SELECT * FROM dbo.funcview_populateProductsInPO('{Login.assignedBranch}','{addbrorder.txteffectivedate.Text}')", addbrorder.txtsearchlookupproduct, "Description", "Description");
 
             if (Orders.AddBranchOrderSTS.isdone == true)
             {
@@ -369,8 +370,9 @@ namespace SalesInventorySystem.Orders
                 //Database.displaySearchlookupEdit("SELECT ProductCode,Barcode,Description FROM Products WHERE BranchCode='888' " +
                 // "AND ProductCode in (SELECT ProductCode FROM TransferOrderDetails WHERE PONumber='" + ponumber + "' )", addbrorder.txtsearchlookupproduct, "Description", "Description");
 
-                Database.displaySearchlookupEdit($"SELECT * FROM dbo.funcview_populateProducts('{Login.assignedBranch}') " +
-                  $"WHERE ProductCode in (Select distinct ProductCode FROM TransferOrderDetails WHERE PONumber='{ponumber}')", addbrorder.txtsearchlookupproduct, "Description", "Description");
+                //Database.displaySearchlookupEdit($"SELECT * FROM dbo.funcview_populateProducts('{Login.assignedBranch}') " +
+                //  $"WHERE ProductCode in (Select distinct ProductCode FROM TransferOrderDetails WHERE PONumber='{ponumber}')", addbrorder.txtsearchlookupproduct, "Description", "Description");
+                Database.displaySearchlookupEdit($"SELECT * FROM dbo.funcview_populateProductsInPO('{Login.assignedBranch}','{addbrorder.txteffectivedate.Text}')", addbrorder.txtsearchlookupproduct, "Description", "Description");
 
                 if (Orders.AddBranchOrderSTS.isdone == true)
                 {

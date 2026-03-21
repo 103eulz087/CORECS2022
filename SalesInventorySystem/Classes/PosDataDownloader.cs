@@ -76,6 +76,68 @@ namespace SalesInventorySystem.Classes
             progress?.Report(100);
         }
 
+        // NEW METHOD: Routes the sync based on the Combo Box selection
+        public async Task SyncSpecificTableAsync(string selectedTable, string branchCode, IProgress<int> progress, IProgress<string> status)
+        {
+            // Ensure the progress bar starts at 0
+            progress?.Report(0);
+
+            switch (selectedTable)
+            {
+                case "Products":
+                    await SyncTableAsync("Products", new[] { "BranchCode", "ProductCode" }, new[] {
+                "BranchCode", "ProductCode", "Description", "LongDescription",
+                "LandingCost", "SellingPrice", "ProductCategoryCode",
+                "Price1", "Price2", "Price3", "Price4",
+                "isRegular", "isPrice1", "isPrice2", "isPrice3", "isPrice4", "isDiscount",
+                "haveBarcode", "Barcode", "ReOrderLevel", "isVat", "ProdType"
+            }, branchCode, progress, status);
+                    break;
+
+                case "Users":
+                    await SyncTableAsync("Users", new[] { "UserID" }, new[] {
+                "UserID", "FullName", "Designation", "EmailAddress", "Password", "AssignedBranch",
+                "isAdmin", "isGlobalOfficer", "isBranchOfficer", "isWarehouseOfficer", "isCashier",
+                "isMaker", "isChecker", "isApprover", "isAccounting", "DateRegister",
+                "LastUpdated", "CashEndLimit", "CashInLimit", "ReceivableLimit", "GLAccount"
+            }, null, progress, status);
+                    break;
+
+                case "Customers":
+                    await SyncTableAsync("Customers", new[] { "CustomerKey" }, new[] {
+                "CustomerKey", "CustomerID", "CustomerName", "CustomerEmail", "CustomerContactNo",
+                "CustomerAddress", "CustomerBirthDate", "CustomerCreditLimit", "BranchCode",
+                "Term", "isActive", "DateAdded", "AddedBy", "UpdatedBy", "AccountOfficer", "TinNo"
+            }, branchCode, progress, status);
+                    break;
+
+                case "Branches":
+                    await SyncTableAsync("Branches", new[] { "BranchCode" }, new[] {
+                "BranchCode", "BranchName", "Address", "SignatoryManager", "SignatoryCashier"
+            }, null, progress, status);
+                    break;
+
+                case "Categories & Types":
+                    // We can group smaller related tables together!
+                    await SyncTableAsync("ProductCategory", new[] { "ProductCategoryID" }, new[] { "ProductCategoryID", "Description", "isVat", "PrinterID", "Port" }, null, progress, status);
+                    await SyncTableAsync("ProductType", new[] { "TypeCode" }, new[] { "TypeCode", "TypeDescription" }, null, progress, status);
+                    break;
+
+                case "Sync ALL Data":
+                    // If they select "ALL", just call the method we already wrote!
+                    await SyncAllReferenceDataAsync(branchCode, progress, status);
+                    break;
+
+                default:
+                    status?.Report("Invalid selection.");
+                    break;
+            }
+
+            // Ensure the progress bar fills to 100% when finished
+            progress?.Report(100);
+            status?.Report($"{selectedTable} sync complete!");
+        }
+
         // =================================================================================
         // THE ENGINE - This handles ALL tables dynamically!
         // =================================================================================
@@ -129,14 +191,42 @@ namespace SalesInventorySystem.Classes
                             }
                         }
 
+                        //    // 4. DYNAMICALLY BUILD THE MERGE STATEMENT
+                        //    string mergeOn = string.Join(" AND ", primaryKeys.Select(pk => $"Target.[{pk}] = Source.[{pk}]"));
+
+                        //    // Exclude Primary Keys from the UPDATE SET clause
+                        //    var updateCols = allColumns.Where(c => !primaryKeys.Contains(c)).ToList();
+                        //    string updateSet = updateCols.Any()
+                        //        ? "WHEN MATCHED THEN UPDATE SET " + string.Join(", ", updateCols.Select(c => $"Target.[{c}] = Source.[{c}]"))
+                        //        : ""; // If table ONLY has primary keys, don't update anything
+
+                        //    string insertCols = string.Join(", ", allColumns.Select(c => $"[{c}]"));
+                        //    string insertVals = string.Join(", ", allColumns.Select(c => $"Source.[{c}]"));
+
+                        //    string deleteFilter = string.IsNullOrEmpty(filterBranchCode)
+                        //        ? ""
+                        //        : "AND Target.BranchCode = @BranchCode";
+
+                        //    string mergeQuery = $@"
+                        //    MERGE INTO [dbo].[{tableName}] AS Target
+                        //    USING {tempTable} AS Source
+                        //    ON {mergeOn}
+
+                        //    {updateSet}
+
+                        //    WHEN NOT MATCHED BY TARGET THEN 
+                        //        INSERT ({insertCols}) VALUES ({insertVals})
+
+                        //    WHEN NOT MATCHED BY SOURCE {deleteFilter} THEN 
+                        //        DELETE;
+                        //";
                         // 4. DYNAMICALLY BUILD THE MERGE STATEMENT
                         string mergeOn = string.Join(" AND ", primaryKeys.Select(pk => $"Target.[{pk}] = Source.[{pk}]"));
 
-                        // Exclude Primary Keys from the UPDATE SET clause
                         var updateCols = allColumns.Where(c => !primaryKeys.Contains(c)).ToList();
                         string updateSet = updateCols.Any()
                             ? "WHEN MATCHED THEN UPDATE SET " + string.Join(", ", updateCols.Select(c => $"Target.[{c}] = Source.[{c}]"))
-                            : ""; // If table ONLY has primary keys, don't update anything
+                            : "";
 
                         string insertCols = string.Join(", ", allColumns.Select(c => $"[{c}]"));
                         string insertVals = string.Join(", ", allColumns.Select(c => $"Source.[{c}]"));
@@ -145,7 +235,11 @@ namespace SalesInventorySystem.Classes
                             ? ""
                             : "AND Target.BranchCode = @BranchCode";
 
+                        // ADDED: DISABLE AND ENABLE TRIGGERS
                         string mergeQuery = $@"
+                        -- Turn off the encryption trigger temporarily
+                        ALTER TABLE [dbo].[{tableName}] DISABLE TRIGGER ALL;
+
                         MERGE INTO [dbo].[{tableName}] AS Target
                         USING {tempTable} AS Source
                         ON {mergeOn}
@@ -157,6 +251,9 @@ namespace SalesInventorySystem.Classes
                         
                         WHEN NOT MATCHED BY SOURCE {deleteFilter} THEN 
                             DELETE;
+
+                        -- Turn the triggers back on immediately!
+                        ALTER TABLE [dbo].[{tableName}] ENABLE TRIGGER ALL;
                     ";
 
                         // 5. EXECUTE MERGE

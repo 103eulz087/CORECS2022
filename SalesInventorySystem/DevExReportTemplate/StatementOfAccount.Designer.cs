@@ -90,7 +90,7 @@
             // 
             // xrPictureBox1
             // 
-            this.xrPictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("xrPictureBox1.Image")));
+            this.xrPictureBox1.ImageSource = new DevExpress.XtraPrinting.Drawing.ImageSource("img", resources.GetString("xrPictureBox1.ImageSource"));
             this.xrPictureBox1.LocationFloat = new DevExpress.Utils.PointFloat(692.6042F, 20.83336F);
             this.xrPictureBox1.Name = "xrPictureBox1";
             this.xrPictureBox1.SizeF = new System.Drawing.SizeF(100.0001F, 84.16663F);
@@ -98,7 +98,7 @@
             // 
             // xrPictureBox2
             // 
-            this.xrPictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("xrPictureBox2.Image")));
+            this.xrPictureBox2.ImageSource = new DevExpress.XtraPrinting.Drawing.ImageSource("img", resources.GetString("xrPictureBox2.ImageSource"));
             this.xrPictureBox2.LocationFloat = new DevExpress.Utils.PointFloat(0F, 10.00001F);
             this.xrPictureBox2.Name = "xrPictureBox2";
             this.xrPictureBox2.SizeF = new System.Drawing.SizeF(832F, 94.58329F);
@@ -123,7 +123,7 @@
             this.xrLabel28.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
             this.xrLabel28.SizeF = new System.Drawing.SizeF(296.25F, 15.70831F);
             this.xrLabel28.StylePriority.UseFont = false;
-            this.xrLabel28.Text = "Ochoa Avenue Butuan City";
+            this.xrLabel28.Text = "Big Blue Logistics Corp., Zuellig Avenue, NRA,";
             // 
             // xrLabel29
             // 
@@ -133,7 +133,7 @@
             this.xrLabel29.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
             this.xrLabel29.SizeF = new System.Drawing.SizeF(317.0833F, 15.70827F);
             this.xrLabel29.StylePriority.UseFont = false;
-            this.xrLabel29.Text = "Agusan Del Norte";
+            this.xrLabel29.Text = "Mandaue City, Philippines";
             // 
             // xrLabel30
             // 
@@ -143,7 +143,7 @@
             this.xrLabel30.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
             this.xrLabel30.SizeF = new System.Drawing.SizeF(165.625F, 15.70834F);
             this.xrLabel30.StylePriority.UseFont = false;
-            this.xrLabel30.Text = "Tel No.: (085) 342-1934";
+            this.xrLabel30.Text = "Tel No.: (032) 272 4682";
             // 
             // xrLabel27
             // 
@@ -492,7 +492,7 @@
             this.ShowPreviewMarginLines = false;
             this.ShowPrintMarginsWarning = false;
             this.ShowPrintStatusDialog = false;
-            this.Version = "18.1";
+            this.Version = "19.2";
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
 

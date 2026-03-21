@@ -251,6 +251,7 @@
             this.barButtonItem27 = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItemRcvdReturnInv = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItemInvDailyActivity = new DevExpress.XtraBars.BarButtonItem();
+            this.btnLiveTrendsSts = new DevExpress.XtraBars.BarButtonItem();
             this.ribbonPage1 = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup20 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup2 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -277,6 +278,7 @@
             this.ribbonPageGroup24 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup11 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup4 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.ribbonPageGroup28 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.HOTELMANAGEMENT = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup7 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup21 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -297,8 +299,6 @@
             this.barButtonItem103 = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem5 = new DevExpress.XtraBars.BarButtonItem();
-            this.ribbonPageGroup28 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
-            this.btnLiveTrendsSts = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.popupMenuInvTransfer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.popupMenu1)).BeginInit();
@@ -2553,6 +2553,15 @@
             this.barButtonItemInvDailyActivity.Name = "barButtonItemInvDailyActivity";
             this.barButtonItemInvDailyActivity.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemInvDailyActivity_ItemClick);
             // 
+            // btnLiveTrendsSts
+            // 
+            this.btnLiveTrendsSts.Caption = "STS Monitoring Tool";
+            this.btnLiveTrendsSts.Id = 221;
+            this.btnLiveTrendsSts.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnLiveTrendsSts.ImageOptions.Image")));
+            this.btnLiveTrendsSts.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("btnLiveTrendsSts.ImageOptions.LargeImage")));
+            this.btnLiveTrendsSts.Name = "btnLiveTrendsSts";
+            this.btnLiveTrendsSts.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnLiveTrendsSts_ItemClick);
+            // 
             // ribbonPage1
             // 
             this.ribbonPage1.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
@@ -2822,6 +2831,12 @@
             this.ribbonPageGroup4.Name = "ribbonPageGroup4";
             this.ribbonPageGroup4.Text = "SALES";
             // 
+            // ribbonPageGroup28
+            // 
+            this.ribbonPageGroup28.ItemLinks.Add(this.btnLiveTrendsSts);
+            this.ribbonPageGroup28.Name = "ribbonPageGroup28";
+            this.ribbonPageGroup28.Text = "LIVE TRENDS";
+            // 
             // HOTELMANAGEMENT
             // 
             this.HOTELMANAGEMENT.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
@@ -3006,21 +3021,6 @@
             this.barButtonItem5.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barButtonItem5.ImageOptions.Image")));
             this.barButtonItem5.Name = "barButtonItem5";
             this.barButtonItem5.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
-            // 
-            // ribbonPageGroup28
-            // 
-            this.ribbonPageGroup28.ItemLinks.Add(this.btnLiveTrendsSts);
-            this.ribbonPageGroup28.Name = "ribbonPageGroup28";
-            this.ribbonPageGroup28.Text = "LIVE TRENDS";
-            // 
-            // btnLiveTrendsSts
-            // 
-            this.btnLiveTrendsSts.Caption = "STS Monitoring Tool";
-            this.btnLiveTrendsSts.Id = 221;
-            this.btnLiveTrendsSts.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnLiveTrendsSts.ImageOptions.Image")));
-            this.btnLiveTrendsSts.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("btnLiveTrendsSts.ImageOptions.LargeImage")));
-            this.btnLiveTrendsSts.Name = "btnLiveTrendsSts";
-            this.btnLiveTrendsSts.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnLiveTrendsSts_ItemClick);
             // 
             // Main
             // 

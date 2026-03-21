@@ -43,10 +43,28 @@ namespace SalesInventorySystem.Reporting
             display();
         }
 
+        //void display()
+        //{
+        //    if (reweigh.Checked == true)
+        //        Database.display("Select * FROM CreditMemo WHERE CAST(DateAdded as date) between '" + dateFrom.Text + "' AND '" + dateTo.Text + "' AND PONumber='" + searchLookUpEdit1.Text + "' ", gridControl1, gridView1);
+        //    else
+        //        Database.display("Select ProductName" +
+        //            ",QtyDelivered" +
+        //            ",SellingPrice" +
+        //            ",(QtyDelivered*SellingPrice) as TotalAmount " +
+        //            "FROM ReturnedOrderDetails " +
+        //            "WHERE PONumber='" + searchLookUpEdit1.Text + "'  ", gridControl1, gridView1);
+        //}
         void display()
         {
             if (reweigh.Checked == true)
-                Database.display("Select * FROM CreditMemo WHERE CAST(DateAdded as date) between '" + dateFrom.Text + "' AND '" + dateTo.Text + "' AND PONumber='" + searchLookUpEdit1.Text + "' ", gridControl1, gridView1);
+            {
+                Database.display("Select ActualQty,FORMAT(TotalAmount,'N','en-us') AS TotalAmount," +
+                    "FORMAT(DiscountAmount,'N','en-us') as DiscountAmount,ProductCode,Description,FORMAT(SellingPrice,'N','en-us') AS SellingPrice," +
+                    "Qty,FORMAT((Qty*SellingPrice),'N','en-us') as TotalOrigAmount" +
+                    " FROM dbo.CreditMemo WHERE CAST(DateAdded as date) between '" + dateFrom.Text + "' AND '" + dateTo.Text + "' AND PONumber='" + searchLookUpEdit1.Text + "' ", gridControl4, gridView4);
+                Database.display("Select * FROM dbo.CreditMemo WHERE CAST(DateAdded as date) between '" + dateFrom.Text + "' AND '" + dateTo.Text + "' AND PONumber='" + searchLookUpEdit1.Text + "' ", gridControl1, gridView1);
+            }
             else
                 Database.display("Select ProductName" +
                     ",QtyDelivered" +
@@ -55,6 +73,7 @@ namespace SalesInventorySystem.Reporting
                     "FROM ReturnedOrderDetails " +
                     "WHERE PONumber='" + searchLookUpEdit1.Text + "'  ", gridControl1, gridView1);
         }
+
 
         private void searchLookUpEdit1_EditValueChanged(object sender, EventArgs e)
         {
@@ -123,6 +142,60 @@ namespace SalesInventorySystem.Reporting
             xct.xrPreparedBy.Text = Login.Fullname;
             xct.Bands[BandKind.Detail].Controls.Add(HelperFunction.CopyGridControl(gridControl1));
             xct.Bands[BandKind.Detail].Font = new System.Drawing.Font("Tahoma", 10);
+
+            xct.PageWidth = (int)Math.Round(210.0 / 25.4 * 300); // 2480 px
+          
+            ReportPrintTool report = new ReportPrintTool(xct);
+            report.ShowRibbonPreviewDialog();
+        }
+        void printNew()
+        {
+            
+            DevExReportTemplate.CreditMemoNew xct = new DevExReportTemplate.CreditMemoNew();
+
+            // Disable automatic column resizing so widths are exact
+            this.gridView4.OptionsView.ColumnAutoWidth = false;
+
+            // Set column widths (pixels)
+            this.gridView4.Columns["Description"].Width = 591;
+            this.gridView4.Columns["ProductCode"].Width = 260;
+            this.gridView4.Columns["SellingPrice"].Width = 236;
+            this.gridView4.Columns["Qty"].Width = 283;
+            this.gridView4.Columns["ActualQty"].Width = 213;
+            this.gridView4.Columns["TotalAmount"].Width = 295;
+            this.gridView4.Columns["TotalOrigAmount"].Width = 275;
+            this.gridView4.Columns["DiscountAmount"].Width = 165;
+
+            // Make the grid control match printable width (approx @300 DPI)
+            this.gridControl4.Width = 2338;
+            this.gridView4.Columns["Qty"].AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridView4.Columns["ActualQty"].AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridView4.Columns["TotalAmount"].AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridView4.Columns["SellingPrice"].AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridView4.Columns["DiscountAmount"].AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridView4.Columns["ProductCode"].AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridView4.Columns["Description"].AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            //this.gridView4.Columns["TotalOrigAmount"].AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+
+            // Add padding so text doesn't touch column borders
+            //this.gridView4.Columns["Qty"].AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+
+
+            string custkey = Database.getSingleQuery("PurchaseOrderSummary", " PONumber='" + searchLookUpEdit1.Text + "'", "Customer");
+            string custname = Database.getSingleQuery("Customers", " CustomerKey='" + custkey + "'", "CustomerName");
+
+            var row = Database.getMultipleQuery("DeliverySummary", "PONumber='" + searchLookUpEdit1.Text + "' ", "InvoiceNo");
+             
+            string invoiceno = row["InvoiceNo"].ToString();
+
+            xct.xrcustname.Text = custname;
+            xct.xrinvoiceno.Text = invoiceno;
+            xct.xrdate.Text = DateTime.Now.ToShortDateString();
+            xct.xrpreparedby.Text = Login.Fullname; 
+
+ 
+            xct.Bands[BandKind.Detail].Controls.Add(HelperFunction.CopyGridControl(this.gridControl4));
+            xct.Bands[BandKind.Detail].Font = new System.Drawing.Font("Tahoma", 10);
             ReportPrintTool report = new ReportPrintTool(xct);
             report.ShowRibbonPreviewDialog();
         }
@@ -136,7 +209,8 @@ namespace SalesInventorySystem.Reporting
         {
             bool isfilterbypo = Database.checkifExist("Select top 1 PONumber FROM CreditMemo WHERE PONumber='" + searchLookUpEdit1.Text + "'");
             if (isfilterbypo)
-                print();
+                //print();
+                printNew();
             else
                 return;
         }

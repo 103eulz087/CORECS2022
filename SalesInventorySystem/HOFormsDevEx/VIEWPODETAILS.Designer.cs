@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            DevExpress.XtraGrid.GridLevelNode gridLevelNode2 = new DevExpress.XtraGrid.GridLevelNode();
+            DevExpress.XtraGrid.GridLevelNode gridLevelNode1 = new DevExpress.XtraGrid.GridLevelNode();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(VIEWPODETAILS));
             this.gridView5 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridControl2 = new DevExpress.XtraGrid.GridControl();
@@ -96,10 +96,10 @@
             // 
             this.gridControl2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gridControl2.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            gridLevelNode2.LevelTemplate = this.gridView5;
-            gridLevelNode2.RelationName = "Level1";
+            gridLevelNode1.LevelTemplate = this.gridView5;
+            gridLevelNode1.RelationName = "Level1";
             this.gridControl2.LevelTree.Nodes.AddRange(new DevExpress.XtraGrid.GridLevelNode[] {
-            gridLevelNode2});
+            gridLevelNode1});
             this.gridControl2.Location = new System.Drawing.Point(2, 28);
             this.gridControl2.MainView = this.gridView2;
             this.gridControl2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -332,12 +332,12 @@
             this.contextMenuStripUpdateCost.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.updateCostToolStripMenuItem});
             this.contextMenuStripUpdateCost.Name = "contextMenuStripUpdateCost";
-            this.contextMenuStripUpdateCost.Size = new System.Drawing.Size(211, 56);
+            this.contextMenuStripUpdateCost.Size = new System.Drawing.Size(161, 28);
             // 
             // updateCostToolStripMenuItem
             // 
             this.updateCostToolStripMenuItem.Name = "updateCostToolStripMenuItem";
-            this.updateCostToolStripMenuItem.Size = new System.Drawing.Size(210, 24);
+            this.updateCostToolStripMenuItem.Size = new System.Drawing.Size(160, 24);
             this.updateCostToolStripMenuItem.Text = "Update Cost";
             this.updateCostToolStripMenuItem.Click += new System.EventHandler(this.updateCostToolStripMenuItem_Click);
             // 

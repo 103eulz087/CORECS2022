@@ -258,12 +258,12 @@ namespace SalesInventorySystem
                 if (radioButton1.Checked == true)
                 {
                     //ONE TO MANY (BranchCode,CONID,SourceSequenceNUmber,SourceQty,SourceCost,SourceTotalAmount,TotalItemsConverted,TotalQtyConverted,ActualQty,ConversionType,DateConverted,ConvertedBy)
-                    Database.ExecuteQuery("INSERT INTO TempConversionSummary VALUES('" + Login.assignedBranch + "','" + txtrefcode.Text + "','"+sourceSeqNum+"','" + txtsrcqty.Text + "','"+sourceCost+"','" + sourceTotalAmount + "','" + ctr + "','" + totalActualQuantity + "','"+ totalActualQuantity + "','" + conversionType + "','" + txtconversiondate.Text + "','" + Login.Fullname + "','0',0)");
+                    Database.ExecuteQuery("INSERT INTO TempConversionSummary VALUES('" + Login.assignedBranch + "','" + txtrefcode.Text + "','"+sourceSeqNum+"','" + txtsrcqty.Text + "','"+sourceCost+"','" + sourceTotalAmount + "','" + ctr + "','" + totalActualQuantity + "','"+ totalActualQuantity + "','" + conversionType + "','" +DateTime.Now.ToString() + "','" + Login.Fullname + "','0',0)");
                 }
                 else
                 {
                     //MANY TO ONE 
-                    Database.ExecuteQuery("INSERT INTO TempConversionSummary VALUES('" + Login.assignedBranch + "','" + txtrefcode.Text + "','','" + totalSourceQuantity + "','','" + txtsrcqty.Text + "','" + ctr + "','" + txttotalweight.Text + "','" + txtactualqty.Text + "','" + conversionType + "','" + txtconversiondate.Text + "','" + Login.Fullname + "','0',0)");
+                    Database.ExecuteQuery("INSERT INTO TempConversionSummary VALUES('" + Login.assignedBranch + "','" + txtrefcode.Text + "','','" + totalSourceQuantity + "','','" + txtsrcqty.Text + "','" + ctr + "','" + txttotalweight.Text + "','" + txtactualqty.Text + "','" + conversionType + "','" + DateTime.Now.ToString() + "','" + Login.Fullname + "','0',0)");
                 }
                 // save();
                 conversionProcess();
@@ -352,6 +352,15 @@ namespace SalesInventorySystem
 
         private void simpleButton2_Click(object sender, EventArgs e)
         {
+            bool checkifDeducted = Database.checkifExist($"SELECT 1 FROM dbo.Reinventorymonitoring WHERE BranchCode='{Login.assignedBranch}' AND DateExecute='{DateTime.Now.ToShortDateString()}' AND isDeducted=1 ");
+            if(checkifDeducted)
+            {
+                BigAlert.Show(
+                          "ALREADY EXECUTE INVENTORY EOD",
+                          "You Already Execute END OF DAY Deduct Inventory ",
+                          MessageBoxIcon.Warning);
+                return;
+            }
             //ONE TO MANY
             if(radioButton1.Checked==true)
             {

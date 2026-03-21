@@ -63,15 +63,15 @@
             this.gridControl1 = new DevExpress.XtraGrid.GridControl();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
+            this.btnuploadsales = new DevExpress.XtraEditors.SimpleButton();
+            this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.lblProgress = new DevExpress.XtraEditors.LabelControl();
             this.gridControl2 = new DevExpress.XtraGrid.GridControl();
             this.gridView2 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.simpleButton2 = new DevExpress.XtraEditors.SimpleButton();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
-            this.btnuploadsales = new DevExpress.XtraEditors.SimpleButton();
-            this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
             ((System.ComponentModel.ISupportInitialize)(this.txttransactiondate.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txttransactionno.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.progressBarControl1.Properties)).BeginInit();
@@ -181,11 +181,11 @@
             // 
             // progressBarControl1
             // 
-            this.progressBarControl1.Location = new System.Drawing.Point(6, 442);
+            this.progressBarControl1.Location = new System.Drawing.Point(15, 385);
             this.progressBarControl1.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.progressBarControl1.Name = "progressBarControl1";
             this.progressBarControl1.ShowProgressInTaskBar = true;
-            this.progressBarControl1.Size = new System.Drawing.Size(384, 32);
+            this.progressBarControl1.Size = new System.Drawing.Size(380, 32);
             this.progressBarControl1.TabIndex = 123636;
             // 
             // backgroundWorker1
@@ -411,7 +411,7 @@
             this.grouppendingtran.Dock = System.Windows.Forms.DockStyle.Fill;
             this.grouppendingtran.Location = new System.Drawing.Point(0, 0);
             this.grouppendingtran.Name = "grouppendingtran";
-            this.grouppendingtran.Size = new System.Drawing.Size(0, 391);
+            this.grouppendingtran.Size = new System.Drawing.Size(0, 440);
             this.grouppendingtran.TabIndex = 123656;
             this.grouppendingtran.TabStop = false;
             this.grouppendingtran.Text = "There are Cashier Transactions that not yet Closed.";
@@ -426,7 +426,7 @@
             this.gridControl1.MainView = this.gridView1;
             this.gridControl1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.gridControl1.Name = "gridControl1";
-            this.gridControl1.Size = new System.Drawing.Size(0, 370);
+            this.gridControl1.Size = new System.Drawing.Size(0, 419);
             this.gridControl1.TabIndex = 1;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
@@ -469,13 +469,49 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(413, 391);
+            this.panel1.Size = new System.Drawing.Size(413, 440);
             this.panel1.TabIndex = 123657;
+            // 
+            // labelControl2
+            // 
+            this.labelControl2.Appearance.Font = new System.Drawing.Font("Tahoma", 9.8F, System.Drawing.FontStyle.Bold);
+            this.labelControl2.Appearance.ForeColor = System.Drawing.Color.DodgerBlue;
+            this.labelControl2.Appearance.Options.UseFont = true;
+            this.labelControl2.Appearance.Options.UseForeColor = true;
+            this.labelControl2.Location = new System.Drawing.Point(15, 264);
+            this.labelControl2.Name = "labelControl2";
+            this.labelControl2.Size = new System.Drawing.Size(350, 19);
+            this.labelControl2.TabIndex = 123643;
+            this.labelControl2.Text = "Step 2 - Execute EOD and Generate ZREAD";
+            // 
+            // btnuploadsales
+            // 
+            this.btnuploadsales.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnuploadsales.ImageOptions.Image")));
+            this.btnuploadsales.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
+            this.btnuploadsales.Location = new System.Drawing.Point(15, 154);
+            this.btnuploadsales.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.btnuploadsales.Name = "btnuploadsales";
+            this.btnuploadsales.Size = new System.Drawing.Size(382, 54);
+            this.btnuploadsales.TabIndex = 123642;
+            this.btnuploadsales.Text = "UPLOAD POS SALES";
+            this.btnuploadsales.Click += new System.EventHandler(this.btnuploadsales_Click);
+            // 
+            // labelControl1
+            // 
+            this.labelControl1.Appearance.Font = new System.Drawing.Font("Tahoma", 9.8F, System.Drawing.FontStyle.Bold);
+            this.labelControl1.Appearance.ForeColor = System.Drawing.Color.DodgerBlue;
+            this.labelControl1.Appearance.Options.UseFont = true;
+            this.labelControl1.Appearance.Options.UseForeColor = true;
+            this.labelControl1.Location = new System.Drawing.Point(17, 128);
+            this.labelControl1.Name = "labelControl1";
+            this.labelControl1.Size = new System.Drawing.Size(174, 19);
+            this.labelControl1.TabIndex = 123641;
+            this.labelControl1.Text = "Step 1 - Upload Sales";
             // 
             // progressBar1
             // 
             this.progressBar1.Location = new System.Drawing.Point(15, 214);
-            this.progressBar1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.progressBar1.Margin = new System.Windows.Forms.Padding(2);
             this.progressBar1.Name = "progressBar1";
             this.progressBar1.Size = new System.Drawing.Size(382, 22);
             this.progressBar1.TabIndex = 123640;
@@ -487,7 +523,7 @@
             this.lblProgress.Appearance.Options.UseFont = true;
             this.lblProgress.Appearance.Options.UseForeColor = true;
             this.lblProgress.Location = new System.Drawing.Point(16, 240);
-            this.lblProgress.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.lblProgress.Margin = new System.Windows.Forms.Padding(2);
             this.lblProgress.Name = "lblProgress";
             this.lblProgress.Size = new System.Drawing.Size(25, 19);
             this.lblProgress.TabIndex = 123639;
@@ -541,51 +577,15 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(413, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(0, 391);
+            this.panel2.Size = new System.Drawing.Size(0, 440);
             this.panel2.TabIndex = 123658;
-            // 
-            // labelControl1
-            // 
-            this.labelControl1.Appearance.Font = new System.Drawing.Font("Tahoma", 9.8F, System.Drawing.FontStyle.Bold);
-            this.labelControl1.Appearance.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.labelControl1.Appearance.Options.UseFont = true;
-            this.labelControl1.Appearance.Options.UseForeColor = true;
-            this.labelControl1.Location = new System.Drawing.Point(17, 128);
-            this.labelControl1.Name = "labelControl1";
-            this.labelControl1.Size = new System.Drawing.Size(174, 19);
-            this.labelControl1.TabIndex = 123641;
-            this.labelControl1.Text = "Step 1 - Upload Sales";
-            // 
-            // btnuploadsales
-            // 
-            this.btnuploadsales.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("simpleButton3.ImageOptions.Image")));
-            this.btnuploadsales.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnuploadsales.Location = new System.Drawing.Point(15, 154);
-            this.btnuploadsales.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
-            this.btnuploadsales.Name = "btnuploadsales";
-            this.btnuploadsales.Size = new System.Drawing.Size(382, 54);
-            this.btnuploadsales.TabIndex = 123642;
-            this.btnuploadsales.Text = "UPLOAD POS SALES";
-            this.btnuploadsales.Click += new System.EventHandler(this.btnuploadsales_Click);
-            // 
-            // labelControl2
-            // 
-            this.labelControl2.Appearance.Font = new System.Drawing.Font("Tahoma", 9.8F, System.Drawing.FontStyle.Bold);
-            this.labelControl2.Appearance.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.labelControl2.Appearance.Options.UseFont = true;
-            this.labelControl2.Appearance.Options.UseForeColor = true;
-            this.labelControl2.Location = new System.Drawing.Point(15, 264);
-            this.labelControl2.Name = "labelControl2";
-            this.labelControl2.Size = new System.Drawing.Size(350, 19);
-            this.labelControl2.TabIndex = 123643;
-            this.labelControl2.Text = "Step 2 - Execute EOD and Generate ZREAD";
             // 
             // POSEndOfDay
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(410, 391);
+            this.ClientSize = new System.Drawing.Size(409, 440);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.gridControlPOSEOD);

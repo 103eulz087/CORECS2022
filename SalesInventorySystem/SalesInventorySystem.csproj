@@ -683,6 +683,12 @@
     <Compile Include="DevExReportTemplate\Creditmemo.Designer.cs">
       <DependentUpon>Creditmemo.cs</DependentUpon>
     </Compile>
+    <Compile Include="DevExReportTemplate\CreditMemoNew.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DevExReportTemplate\CreditMemoNew.Designer.cs">
+      <DependentUpon>CreditMemoNew.cs</DependentUpon>
+    </Compile>
     <Compile Include="DevExReportTemplate\CustomerRequest.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -3390,6 +3396,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DevExReportTemplate\Creditmemo.resx">
       <DependentUpon>Creditmemo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DevExReportTemplate\CreditMemoNew.resx">
+      <DependentUpon>CreditMemoNew.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DevExReportTemplate\CustomerRequest.resx">
       <DependentUpon>CustomerRequest.cs</DependentUpon>

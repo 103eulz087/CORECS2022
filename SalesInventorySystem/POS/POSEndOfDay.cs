@@ -49,13 +49,13 @@ namespace SalesInventorySystem.POS
         void checker()
         {
             //THERE ARE CASHIERS TRANSACTION THAT NOT YET CLOSED
-            bool isNotClosedTransaction = Database.checkifExist("SELECT TOP(1) BranchCode " +
+            bool isNotClosedTransaction = Database.checkifExist("SELECT 1 " +
                                                                "FROM dbo.SalesTransactionSummary " +
                                                                "WHERE BranchCode='" + Login.assignedBranch + "' AND MachineUsed='"+Environment.MachineName+"' " +
                                                                "and isOpen=1 "); //all transaction must be closed, no filtering of date
             if (isNotClosedTransaction)
             {
-                this.Size = new Size(900, 219);
+                //this.Size = new Size(900, 219);
                 this.StartPosition = FormStartPosition.CenterScreen;
                 // lblchecker.Text = "There are cashier transactions that not yet closed!..";
 
@@ -74,7 +74,7 @@ namespace SalesInventorySystem.POS
             else
             {
                
-                this.Size = new Size(323, 219);
+                //this.Size = new Size(323, 219);
                 this.StartPosition = FormStartPosition.CenterScreen;
                 //lblchecker.Text = "All Cashier Transactions are Completed!...";
                 grouppendingtran.Visible = false;
@@ -88,15 +88,15 @@ namespace SalesInventorySystem.POS
         void executeEOD()
         {
             //check if one or more cashier transaction is not yet closed
-            bool EODEmailConfirm = Database.checkifExist("SELECT isnull(EODEmailNotification,0) FROM dbo.POSType WHERE EODEmailNotification=1");
+            bool EODEmailConfirm = Database.checkifExist("SELECT 1 FROM dbo.POSType WHERE EODEmailNotification=1");
 
-            bool isNotClosedTransaction = Database.checkifExist("SELECT TOP(1) BranchCode " +
+            bool isNotClosedTransaction = Database.checkifExist("SELECT 1 " +
                                                                 "FROM dbo.SalesTransactionSummary " +
                                                                 "WHERE BranchCode='" + Login.assignedBranch + "' " +
                                                                 " AND MachineUsed='"+Environment.MachineName+"'" +
                                                                 "and isOpen=1 "); //all transaction must be closed, no filtering of date
             //check if END OF DAY is already EXECUTED
-            bool isExists = Database.checkifExist("SELECT TOP(1) MachineUsed " +
+            bool isExists = Database.checkifExist("SELECT 1 " +
                                                     "FROM dbo.POSZReadingTransactions " +
                                                     "WHERE MachineUsed='" + Environment.MachineName + "' " +
                                                     "and DateExecute='" + txttransactiondate.Text + "' ");
@@ -134,7 +134,8 @@ namespace SalesInventorySystem.POS
                 Thread.Sleep(600);
                 progressBarControl1.Position = 100;
                 Thread.Sleep(1000);
-                XtraMessageBox.Show("END OF DAY PROCESS SUCCESSFULLY EXECUTED!!!...");
+                //XtraMessageBox.Show("END OF DAY PROCESS SUCCESSFULLY EXECUTED!!!...");
+                BigAlert.Show("END OF DAY SUCCESS", "END OF DAY PROCESS SUCCESFULLY EXECUTED!!..", MessageBoxIcon.Information);
 
             }
         }
@@ -933,7 +934,7 @@ namespace SalesInventorySystem.POS
                     if (confirm == DialogResult.Yes)
                     {
                         executeEOD();
-                        pushit();
+                        //pushit();
                     }
                     else
                     {

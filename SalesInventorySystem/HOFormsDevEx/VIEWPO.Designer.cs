@@ -286,7 +286,7 @@
             this.fordelivery.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.fordelivery.Name = "fordelivery";
             this.fordelivery.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.fordelivery.Size = new System.Drawing.Size(1162, 602);
+            this.fordelivery.Size = new System.Drawing.Size(1122, 604);
             this.fordelivery.TabIndex = 1;
             this.fordelivery.Text = "Services";
             this.fordelivery.UseVisualStyleBackColor = true;
@@ -299,7 +299,7 @@
             this.gridControl1.MainView = this.gridView1;
             this.gridControl1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.gridControl1.Name = "gridControl1";
-            this.gridControl1.Size = new System.Drawing.Size(1156, 594);
+            this.gridControl1.Size = new System.Drawing.Size(1116, 596);
             this.gridControl1.TabIndex = 5;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
@@ -436,7 +436,7 @@
             this.xtraTabPageApproved.Controls.Add(this.tabControlApproved);
             this.xtraTabPageApproved.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.xtraTabPageApproved.Name = "xtraTabPageApproved";
-            this.xtraTabPageApproved.Size = new System.Drawing.Size(1170, 635);
+            this.xtraTabPageApproved.Size = new System.Drawing.Size(1130, 635);
             this.xtraTabPageApproved.Text = "APPROVED";
             // 
             // tabControlApproved
@@ -449,7 +449,7 @@
             this.tabControlApproved.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tabControlApproved.Name = "tabControlApproved";
             this.tabControlApproved.SelectedIndex = 0;
-            this.tabControlApproved.Size = new System.Drawing.Size(1170, 635);
+            this.tabControlApproved.Size = new System.Drawing.Size(1130, 635);
             this.tabControlApproved.TabIndex = 3;
             this.tabControlApproved.SelectedIndexChanged += new System.EventHandler(this.tabControlApproved_SelectedIndexChanged);
             // 
@@ -461,7 +461,7 @@
             this.tabPage1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.tabPage1.Size = new System.Drawing.Size(1162, 604);
+            this.tabPage1.Size = new System.Drawing.Size(1122, 604);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Products";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -474,7 +474,7 @@
             this.gridControl3.MainView = this.gridView3;
             this.gridControl3.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.gridControl3.Name = "gridControl3";
-            this.gridControl3.Size = new System.Drawing.Size(1156, 535);
+            this.gridControl3.Size = new System.Drawing.Size(1116, 535);
             this.gridControl3.TabIndex = 5;
             this.gridControl3.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView3});
@@ -514,7 +514,7 @@
             this.groupBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.groupBox1.Size = new System.Drawing.Size(1156, 61);
+            this.groupBox1.Size = new System.Drawing.Size(1116, 61);
             this.groupBox1.TabIndex = 7;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Filter Date";
@@ -578,7 +578,7 @@
             this.tabPage2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.tabPage2.Size = new System.Drawing.Size(1162, 604);
+            this.tabPage2.Size = new System.Drawing.Size(1122, 604);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Services";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -591,7 +591,7 @@
             this.gridControl4.MainView = this.gridView4;
             this.gridControl4.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.gridControl4.Name = "gridControl4";
-            this.gridControl4.Size = new System.Drawing.Size(1156, 596);
+            this.gridControl4.Size = new System.Drawing.Size(1116, 596);
             this.gridControl4.TabIndex = 5;
             this.gridControl4.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView4});
@@ -617,7 +617,7 @@
             // 
             this.xtraTabPageForConfirmation.Controls.Add(this.tabControlForConfirmation);
             this.xtraTabPageForConfirmation.Name = "xtraTabPageForConfirmation";
-            this.xtraTabPageForConfirmation.Size = new System.Drawing.Size(1170, 635);
+            this.xtraTabPageForConfirmation.Size = new System.Drawing.Size(1130, 635);
             this.xtraTabPageForConfirmation.Text = "FOR CONFIRMATION";
             // 
             // tabControlForConfirmation
@@ -630,7 +630,7 @@
             this.tabControlForConfirmation.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tabControlForConfirmation.Name = "tabControlForConfirmation";
             this.tabControlForConfirmation.SelectedIndex = 0;
-            this.tabControlForConfirmation.Size = new System.Drawing.Size(1170, 635);
+            this.tabControlForConfirmation.Size = new System.Drawing.Size(1130, 635);
             this.tabControlForConfirmation.TabIndex = 2;
             this.tabControlForConfirmation.SelectedIndexChanged += new System.EventHandler(this.tabControlForConfirmation_SelectedIndexChanged);
             // 
@@ -642,7 +642,7 @@
             this.tabPageForConfirmationProducts.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tabPageForConfirmationProducts.Name = "tabPageForConfirmationProducts";
             this.tabPageForConfirmationProducts.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.tabPageForConfirmationProducts.Size = new System.Drawing.Size(1162, 604);
+            this.tabPageForConfirmationProducts.Size = new System.Drawing.Size(1122, 604);
             this.tabPageForConfirmationProducts.TabIndex = 0;
             this.tabPageForConfirmationProducts.Text = "Products";
             this.tabPageForConfirmationProducts.UseVisualStyleBackColor = true;
@@ -655,7 +655,7 @@
             this.gridControlProductForConfirmation.MainView = this.gridViewProductForConfirmation;
             this.gridControlProductForConfirmation.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.gridControlProductForConfirmation.Name = "gridControlProductForConfirmation";
-            this.gridControlProductForConfirmation.Size = new System.Drawing.Size(1156, 535);
+            this.gridControlProductForConfirmation.Size = new System.Drawing.Size(1116, 535);
             this.gridControlProductForConfirmation.TabIndex = 5;
             this.gridControlProductForConfirmation.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewProductForConfirmation});
@@ -693,7 +693,7 @@
             this.groupBox2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.groupBox2.Size = new System.Drawing.Size(1156, 61);
+            this.groupBox2.Size = new System.Drawing.Size(1116, 61);
             this.groupBox2.TabIndex = 7;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Filter Date";
@@ -757,7 +757,7 @@
             this.tabPageForConfirmationServices.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tabPageForConfirmationServices.Name = "tabPageForConfirmationServices";
             this.tabPageForConfirmationServices.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.tabPageForConfirmationServices.Size = new System.Drawing.Size(1162, 604);
+            this.tabPageForConfirmationServices.Size = new System.Drawing.Size(1122, 604);
             this.tabPageForConfirmationServices.TabIndex = 1;
             this.tabPageForConfirmationServices.Text = "Services";
             this.tabPageForConfirmationServices.UseVisualStyleBackColor = true;
@@ -770,7 +770,7 @@
             this.gridControlServicesForConfirmation.MainView = this.gridViewServicesForConfirmation;
             this.gridControlServicesForConfirmation.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.gridControlServicesForConfirmation.Name = "gridControlServicesForConfirmation";
-            this.gridControlServicesForConfirmation.Size = new System.Drawing.Size(1156, 596);
+            this.gridControlServicesForConfirmation.Size = new System.Drawing.Size(1116, 596);
             this.gridControlServicesForConfirmation.TabIndex = 5;
             this.gridControlServicesForConfirmation.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewServicesForConfirmation});
@@ -797,7 +797,7 @@
             // 
             this.xtraTabPageConfirmed.Controls.Add(this.tabControlConfirmed);
             this.xtraTabPageConfirmed.Name = "xtraTabPageConfirmed";
-            this.xtraTabPageConfirmed.Size = new System.Drawing.Size(1170, 635);
+            this.xtraTabPageConfirmed.Size = new System.Drawing.Size(1130, 635);
             this.xtraTabPageConfirmed.Text = "CONFIRMED";
             // 
             // tabControlConfirmed
@@ -810,7 +810,7 @@
             this.tabControlConfirmed.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tabControlConfirmed.Name = "tabControlConfirmed";
             this.tabControlConfirmed.SelectedIndex = 0;
-            this.tabControlConfirmed.Size = new System.Drawing.Size(1170, 635);
+            this.tabControlConfirmed.Size = new System.Drawing.Size(1130, 635);
             this.tabControlConfirmed.TabIndex = 2;
             this.tabControlConfirmed.SelectedIndexChanged += new System.EventHandler(this.tabControlConfirmed_SelectedIndexChanged);
             // 
@@ -822,7 +822,7 @@
             this.tabPageConfirmedProducts.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tabPageConfirmedProducts.Name = "tabPageConfirmedProducts";
             this.tabPageConfirmedProducts.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.tabPageConfirmedProducts.Size = new System.Drawing.Size(1162, 604);
+            this.tabPageConfirmedProducts.Size = new System.Drawing.Size(1122, 604);
             this.tabPageConfirmedProducts.TabIndex = 0;
             this.tabPageConfirmedProducts.Text = "Products";
             this.tabPageConfirmedProducts.UseVisualStyleBackColor = true;
@@ -835,7 +835,7 @@
             this.gridControlConfirmedProducts.MainView = this.gridViewConfirmedProducts;
             this.gridControlConfirmedProducts.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.gridControlConfirmedProducts.Name = "gridControlConfirmedProducts";
-            this.gridControlConfirmedProducts.Size = new System.Drawing.Size(1156, 535);
+            this.gridControlConfirmedProducts.Size = new System.Drawing.Size(1116, 535);
             this.gridControlConfirmedProducts.TabIndex = 5;
             this.gridControlConfirmedProducts.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewConfirmedProducts});
@@ -872,7 +872,7 @@
             this.groupBox4.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.groupBox4.Size = new System.Drawing.Size(1156, 61);
+            this.groupBox4.Size = new System.Drawing.Size(1116, 61);
             this.groupBox4.TabIndex = 7;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Filter Date";
@@ -936,7 +936,7 @@
             this.tabPageConfirmedServices.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tabPageConfirmedServices.Name = "tabPageConfirmedServices";
             this.tabPageConfirmedServices.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.tabPageConfirmedServices.Size = new System.Drawing.Size(1162, 604);
+            this.tabPageConfirmedServices.Size = new System.Drawing.Size(1122, 604);
             this.tabPageConfirmedServices.TabIndex = 1;
             this.tabPageConfirmedServices.Text = "Services";
             this.tabPageConfirmedServices.UseVisualStyleBackColor = true;
@@ -949,7 +949,7 @@
             this.gridControlConfirmedServices.MainView = this.gridViewConfirmedServices;
             this.gridControlConfirmedServices.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.gridControlConfirmedServices.Name = "gridControlConfirmedServices";
-            this.gridControlConfirmedServices.Size = new System.Drawing.Size(1156, 596);
+            this.gridControlConfirmedServices.Size = new System.Drawing.Size(1116, 596);
             this.gridControlConfirmedServices.TabIndex = 5;
             this.gridControlConfirmedServices.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewConfirmedServices});
@@ -977,12 +977,12 @@
             this.contextMenuStripForConfirmationProducts.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuItem2});
             this.contextMenuStripForConfirmationProducts.Name = "contextMenuStrip1";
-            this.contextMenuStripForConfirmationProducts.Size = new System.Drawing.Size(174, 28);
+            this.contextMenuStripForConfirmationProducts.Size = new System.Drawing.Size(211, 56);
             // 
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(173, 24);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(210, 24);
             this.toolStripMenuItem2.Text = "Confirm Order";
             this.toolStripMenuItem2.Click += new System.EventHandler(this.toolStripMenuItem2_Click);
             // 
@@ -1007,7 +1007,7 @@
             this.contextMenuStripApproved.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuItem9});
             this.contextMenuStripApproved.Name = "contextMenuStrip1";
-            this.contextMenuStripApproved.Size = new System.Drawing.Size(265, 56);
+            this.contextMenuStripApproved.Size = new System.Drawing.Size(265, 28);
             // 
             // toolStripMenuItem9
             // 
