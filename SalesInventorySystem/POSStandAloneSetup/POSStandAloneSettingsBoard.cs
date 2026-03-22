@@ -80,15 +80,25 @@ namespace SalesInventorySystem.POSStandAloneSetup
 
         private void button11_Click(object sender, EventArgs e)
         {
+            //foreach (Form form in Application.OpenForms)
+            //{
+            //    if (form.GetType() == typeof(Branches.SyncPrize))
+            //    {
+            //        form.Activate();
+            //        return;
+            //    }
+            //}
+            //Branches.SyncPrize pcusatfsmr = new Branches.SyncPrize();
+            //pcusatfsmr.Show();
             foreach (Form form in Application.OpenForms)
             {
-                if (form.GetType() == typeof(Branches.SyncPrize))
+                if (form.GetType() == typeof(POSDevEx.POSSyncAll))
                 {
                     form.Activate();
                     return;
                 }
             }
-            Branches.SyncPrize pcusatfsmr = new Branches.SyncPrize();
+            POSDevEx.POSSyncAll pcusatfsmr = new POSDevEx.POSSyncAll();
             pcusatfsmr.Show();
         }
 

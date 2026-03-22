@@ -207,7 +207,7 @@ namespace SalesInventorySystem.HOFormsDevEx
                             ",'" + barcode + "'" +
                             ",'" + txtreorderlevel.Text + "'" +
                             ",'" + isvat + "'" +
-                            ",'" + txtprodtypeobject.ToString() + "')");
+                            ",'3')");
 
                         string caption = "Add New Product with Description name of "+txtdesc.Text+" and Product Code="+txtprodcode.Text+" ";
                         Database.ExecuteQuery("INSERT INTO dbo.HistoryLogs VALUES('"+Login.isglobalUserID+"'" +

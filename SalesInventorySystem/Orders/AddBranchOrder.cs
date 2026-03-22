@@ -29,6 +29,7 @@ namespace SalesInventorySystem
         string globaltxtbarcodescanning = "",globalproductcode="";
         bool isFifo = Database.checkifExist("SELECT isFifo FROM InventorySettings WHERE isFifo=1");
         bool isusedSearch = false;
+        object objprodcode = null;
         // string reamrks = "", specialprice = "", sellingprice = "";
         public AddBranchOrder()
         {
@@ -174,7 +175,7 @@ namespace SalesInventorySystem
             sourceseqnum = txtseqno.Text;
             SqlConnection con = Database.getConnection();
             con.Open();
-            string query = "sp_AddBranchOrder";
+            string query = "sp_AddBranchOrderHRI";
             try
             {
                 SqlCommand com = new SqlCommand(query, con);
@@ -498,7 +499,7 @@ namespace SalesInventorySystem
                     
                    
                 }
-                
+                btnadd.Focus();
             }
             catch (SqlException ex)
             {
@@ -926,7 +927,7 @@ namespace SalesInventorySystem
                     if (barcodescanning.Checked == false)
                     {
                         productcategorycode = Classes.Product.getProductCategoryCode(txtprodcat.Text);//Database.getSingleQuery("Products", "ProductCode='" + primalproductcode + "' AND BranchCode='" + Login.assignedBranch + "' ", "ProductCategoryCode");
-                        primalproductcode = Classes.Product.getProductCode(txtproduct.Text, productcategorycode);//Classes.BarcodeSettings.getBarcodePrimalProductCode(txtsku.Text);
+                        primalproductcode = globalproductcode;//Classes.Product.getProductCode(txtproduct.Text, productcategorycode);//Classes.BarcodeSettings.getBarcodePrimalProductCode(txtsku.Text);
                     }
                     else
                     {
@@ -1080,6 +1081,13 @@ namespace SalesInventorySystem
         private void simpleButton1_Click_1(object sender, EventArgs e)
         {
             displayweight();
+        }
+
+        private void txtsearchlookupproduct_EditValueChanged(object sender, EventArgs e)
+        {
+            objprodcode = SearchLookUpClass.getSingleValue(txtsearchlookupproduct, "ProductCode");
+            globalproductcode = objprodcode.ToString();
+            txtweight.Focus();
         }
 
         private void simpleButton2_Click_1(object sender, EventArgs e)

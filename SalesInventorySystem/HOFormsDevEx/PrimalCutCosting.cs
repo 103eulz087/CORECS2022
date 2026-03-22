@@ -57,7 +57,7 @@ namespace SalesInventorySystem.HOFormsDevEx
                         string costperkg = gridView1.GetRowCellValue(i, "Cost").ToString();
                         string productcode = gridView1.GetRowCellValue(i, "ProductCode").ToString();
                        
-                        Database.ExecuteQuery($"UPDATE SET CostPerKg='{costperkg}' dbo.TempCosting WHERE ShipmentNo='{txtshipmentno.Text}' and ItemCode='{productcode}'");
+                        Database.ExecuteQuery($"UPDATE dbo.TempCosting SET CostPerKg='{costperkg}' WHERE ShipmentNo='{txtshipmentno.Text}' and ItemCode='{productcode}'");
                     }
                     XtraMessageBox.Show("Successfully Updated.");
                 }
@@ -76,6 +76,12 @@ namespace SalesInventorySystem.HOFormsDevEx
                     XtraMessageBox.Show("Successfully inserted.");
                 }
             }
+            Database.ExecuteQuery("UPDATE a SET a.Cost=b.CostperKg " +
+                "FROM dbo.Inventory a " +
+                "INNER JOIN dbo.TempCosting b " +
+                "On a.Product = b.ItemCode " +
+                "and a.ShipmentNo = b.ShipmentNo " +
+                $"WHERE a.Branch = '{Login.assignedBranch}' and a.isWarehouse = 0 ", "All Items of this ShipmentNo are Successfully Executed.");
         }
 
         private void gridView1_RowCellStyle(object sender, DevExpress.XtraGrid.Views.Grid.RowCellStyleEventArgs e)

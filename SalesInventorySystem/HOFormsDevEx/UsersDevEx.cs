@@ -227,7 +227,7 @@ namespace SalesInventorySystem.HOFormsDevEx
                     scashier = false;
                 }
 
-                if (HelperFunction.isTextfieldEmpty(txtcashendlimit, txtcashinlimit, txtdesignation, txtemailadd, txtfullname, txtglaccount, txtpass, txtreceivablelimit, txtuserid))
+                if (HelperFunction.isTextfieldEmpty( txtdesignation, txtfullname, txtpass, txtuserid))
                 {
                     XtraMessageBox.Show("Please Input All Valid Fields");
                 }

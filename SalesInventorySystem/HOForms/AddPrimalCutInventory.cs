@@ -93,7 +93,7 @@ namespace SalesInventorySystem.HOForms
         {
             Database.display("SELECT * FROM view_ProcessToPrimal " +
                 "WHERE BatchCode='" + txtbatchcode.Text + "' " +
-                "and Available > 0 ", gridControl1, gridView1);
+                "and Available > 0 ORDER BY SequenceNumber DESC", gridControl1, gridView1);
         }
 
         private void getAvailablePort()

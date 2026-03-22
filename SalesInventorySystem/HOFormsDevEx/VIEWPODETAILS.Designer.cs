@@ -81,6 +81,8 @@
             // 
             // gridView5
             // 
+            this.gridView5.DetailHeight = 224;
+            this.gridView5.FixedLineWidth = 1;
             this.gridView5.GridControl = this.gridControl2;
             this.gridView5.LevelIndent = 0;
             this.gridView5.Name = "gridView5";
@@ -89,14 +91,14 @@
             // gridControl2
             // 
             this.gridControl2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridControl2.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.gridControl2.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             gridLevelNode1.LevelTemplate = this.gridView5;
             gridLevelNode1.RelationName = "Level1";
             this.gridControl2.LevelTree.Nodes.AddRange(new DevExpress.XtraGrid.GridLevelNode[] {
             gridLevelNode1});
-            this.gridControl2.Location = new System.Drawing.Point(3, 45);
+            this.gridControl2.Location = new System.Drawing.Point(2, 28);
             this.gridControl2.MainView = this.gridView2;
-            this.gridControl2.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.gridControl2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.gridControl2.Name = "gridControl2";
             this.gridControl2.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemComboBox1,
@@ -106,7 +108,7 @@
             this.repositoryItemSearchLookUpEditOffsetCreditGLCode,
             this.repositoryItemSearchLookUpEditEWTDebitGLCode,
             this.repositoryItemSearchLookUpEditEWTCreditGLCode});
-            this.gridControl2.Size = new System.Drawing.Size(2654, 1325);
+            this.gridControl2.Size = new System.Drawing.Size(1128, 550);
             this.gridControl2.TabIndex = 8;
             this.gridControl2.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView2,
@@ -118,6 +120,8 @@
             this.gridView2.Appearance.HeaderPanel.Options.UseFont = true;
             this.gridView2.Appearance.Row.Font = new System.Drawing.Font("Tahoma", 9.25F);
             this.gridView2.Appearance.Row.Options.UseFont = true;
+            this.gridView2.DetailHeight = 224;
+            this.gridView2.FixedLineWidth = 1;
             this.gridView2.GridControl = this.gridControl2;
             this.gridView2.LevelIndent = 0;
             this.gridView2.Name = "gridView2";
@@ -148,8 +152,6 @@
             // 
             // repositoryItemSearchLookUpEdit1View
             // 
-            this.repositoryItemSearchLookUpEdit1View.DetailHeight = 547;
-            this.repositoryItemSearchLookUpEdit1View.FixedLineWidth = 3;
             this.repositoryItemSearchLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
             this.repositoryItemSearchLookUpEdit1View.Name = "repositoryItemSearchLookUpEdit1View";
             this.repositoryItemSearchLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = false;
@@ -165,8 +167,6 @@
             // 
             // gridView1
             // 
-            this.gridView1.DetailHeight = 547;
-            this.gridView1.FixedLineWidth = 3;
             this.gridView1.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
             this.gridView1.Name = "gridView1";
             this.gridView1.OptionsSelection.EnableAppearanceFocusedCell = false;
@@ -189,8 +189,6 @@
             // 
             // gridView4
             // 
-            this.gridView4.DetailHeight = 547;
-            this.gridView4.FixedLineWidth = 3;
             this.gridView4.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
             this.gridView4.Name = "gridView4";
             this.gridView4.OptionsSelection.EnableAppearanceFocusedCell = false;
@@ -206,8 +204,6 @@
             // 
             // gridView6
             // 
-            this.gridView6.DetailHeight = 547;
-            this.gridView6.FixedLineWidth = 3;
             this.gridView6.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
             this.gridView6.Name = "gridView6";
             this.gridView6.OptionsSelection.EnableAppearanceFocusedCell = false;
@@ -223,8 +219,6 @@
             // 
             // gridView7
             // 
-            this.gridView7.DetailHeight = 547;
-            this.gridView7.FixedLineWidth = 3;
             this.gridView7.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
             this.gridView7.Name = "gridView7";
             this.gridView7.OptionsSelection.EnableAppearanceFocusedCell = false;
@@ -241,18 +235,18 @@
             this.groupControl1.Controls.Add(this.simpleButton1);
             this.groupControl1.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupControl1.Location = new System.Drawing.Point(0, 0);
-            this.groupControl1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.groupControl1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.groupControl1.Name = "groupControl1";
-            this.groupControl1.Size = new System.Drawing.Size(2660, 157);
+            this.groupControl1.Size = new System.Drawing.Size(1132, 100);
             this.groupControl1.TabIndex = 0;
             // 
             // simpleButton3
             // 
             this.simpleButton3.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("simpleButton3.ImageOptions.Image")));
-            this.simpleButton3.Location = new System.Drawing.Point(406, 57);
-            this.simpleButton3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.simpleButton3.Location = new System.Drawing.Point(237, 36);
+            this.simpleButton3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.simpleButton3.Name = "simpleButton3";
-            this.simpleButton3.Size = new System.Drawing.Size(218, 78);
+            this.simpleButton3.Size = new System.Drawing.Size(127, 50);
             this.simpleButton3.TabIndex = 6;
             this.simpleButton3.Text = "DisApproved";
             this.simpleButton3.Visible = false;
@@ -261,10 +255,10 @@
             // simpleButton2
             // 
             this.simpleButton2.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("simpleButton2.ImageOptions.Image")));
-            this.simpleButton2.Location = new System.Drawing.Point(214, 57);
-            this.simpleButton2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.simpleButton2.Location = new System.Drawing.Point(125, 36);
+            this.simpleButton2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.simpleButton2.Name = "simpleButton2";
-            this.simpleButton2.Size = new System.Drawing.Size(184, 78);
+            this.simpleButton2.Size = new System.Drawing.Size(107, 50);
             this.simpleButton2.TabIndex = 5;
             this.simpleButton2.Text = "Approved";
             this.simpleButton2.Visible = false;
@@ -272,47 +266,47 @@
             // 
             // txtbrcode
             // 
-            this.txtbrcode.Location = new System.Drawing.Point(1654, 50);
-            this.txtbrcode.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.txtbrcode.Location = new System.Drawing.Point(965, 32);
+            this.txtbrcode.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtbrcode.Name = "txtbrcode";
-            this.txtbrcode.Size = new System.Drawing.Size(242, 40);
+            this.txtbrcode.Size = new System.Drawing.Size(141, 22);
             this.txtbrcode.TabIndex = 4;
             this.txtbrcode.Visible = false;
             // 
             // txtordertype
             // 
-            this.txtordertype.Location = new System.Drawing.Point(1394, 50);
-            this.txtordertype.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.txtordertype.Location = new System.Drawing.Point(813, 32);
+            this.txtordertype.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtordertype.Name = "txtordertype";
-            this.txtordertype.Size = new System.Drawing.Size(242, 40);
+            this.txtordertype.Size = new System.Drawing.Size(141, 22);
             this.txtordertype.TabIndex = 3;
             this.txtordertype.Visible = false;
             // 
             // txtshipmentno
             // 
-            this.txtshipmentno.Location = new System.Drawing.Point(1142, 50);
-            this.txtshipmentno.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.txtshipmentno.Location = new System.Drawing.Point(666, 32);
+            this.txtshipmentno.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtshipmentno.Name = "txtshipmentno";
-            this.txtshipmentno.Size = new System.Drawing.Size(242, 40);
+            this.txtshipmentno.Size = new System.Drawing.Size(141, 22);
             this.txtshipmentno.TabIndex = 2;
             this.txtshipmentno.Visible = false;
             // 
             // txtsupplierid
             // 
-            this.txtsupplierid.Location = new System.Drawing.Point(862, 50);
-            this.txtsupplierid.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.txtsupplierid.Location = new System.Drawing.Point(503, 32);
+            this.txtsupplierid.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtsupplierid.Name = "txtsupplierid";
-            this.txtsupplierid.Size = new System.Drawing.Size(242, 40);
+            this.txtsupplierid.Size = new System.Drawing.Size(141, 22);
             this.txtsupplierid.TabIndex = 1;
             this.txtsupplierid.Visible = false;
             // 
             // simpleButton1
             // 
             this.simpleButton1.ImageOptions.Image = global::SalesInventorySystem.Properties.Resources.Print_32x32__2_;
-            this.simpleButton1.Location = new System.Drawing.Point(22, 57);
-            this.simpleButton1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.simpleButton1.Location = new System.Drawing.Point(13, 36);
+            this.simpleButton1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.simpleButton1.Name = "simpleButton1";
-            this.simpleButton1.Size = new System.Drawing.Size(184, 78);
+            this.simpleButton1.Size = new System.Drawing.Size(107, 50);
             this.simpleButton1.TabIndex = 0;
             this.simpleButton1.Text = "Print";
             this.simpleButton1.Click += new System.EventHandler(this.simpleButton1_Click);
@@ -321,20 +315,20 @@
             // 
             this.groupControl2.Controls.Add(this.gridControl2);
             this.groupControl2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupControl2.Location = new System.Drawing.Point(0, 157);
-            this.groupControl2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.groupControl2.Location = new System.Drawing.Point(0, 100);
+            this.groupControl2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.groupControl2.Name = "groupControl2";
-            this.groupControl2.Size = new System.Drawing.Size(2660, 1373);
+            this.groupControl2.Size = new System.Drawing.Size(1132, 580);
             this.groupControl2.TabIndex = 1;
             // 
             // VIEWPODETAILS
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(2660, 1530);
+            this.ClientSize = new System.Drawing.Size(1132, 680);
             this.Controls.Add(this.groupControl2);
             this.Controls.Add(this.groupControl1);
-            this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "VIEWPODETAILS";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "VIEWPODETAILS";

@@ -601,7 +601,7 @@
             this.groupBox1.Margin = new System.Windows.Forms.Padding(8, 6, 8, 6);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(8, 6, 8, 6);
-            this.groupBox1.Size = new System.Drawing.Size(2714, 150);
+            this.groupBox1.Size = new System.Drawing.Size(2586, 150);
             this.groupBox1.TabIndex = 104;
             this.groupBox1.TabStop = false;
             // 
@@ -766,7 +766,7 @@
             this.groupBox2.Margin = new System.Windows.Forms.Padding(8, 6, 8, 6);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(8, 6, 8, 6);
-            this.groupBox2.Size = new System.Drawing.Size(2714, 1058);
+            this.groupBox2.Size = new System.Drawing.Size(2586, 1058);
             this.groupBox2.TabIndex = 105;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "List of Tables";
@@ -840,7 +840,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(2714, 1208);
+            this.ClientSize = new System.Drawing.Size(2586, 1208);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Margin = new System.Windows.Forms.Padding(8, 6, 8, 6);

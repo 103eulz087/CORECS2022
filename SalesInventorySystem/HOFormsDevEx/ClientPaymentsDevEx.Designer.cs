@@ -248,7 +248,7 @@
             this.repositoryItemSearchLookUpEditEWTDebitGLCode,
             this.repositoryItemSearchLookUpEditEWTCreditGLCode,
             this.repositoryItemCheckEditPayCharge});
-            this.gridControl2.Size = new System.Drawing.Size(2724, 772);
+            this.gridControl2.Size = new System.Drawing.Size(2572, 772);
             this.gridControl2.TabIndex = 6;
             this.gridControl2.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView2,
@@ -410,7 +410,7 @@
             this.repositoryItemSearchLookUpEdit3,
             this.repositoryItemSearchLookUpEdit4,
             this.repositoryItemSearchLookUpEdit5});
-            this.gridControl1.Size = new System.Drawing.Size(2728, 1200);
+            this.gridControl1.Size = new System.Drawing.Size(2576, 1200);
             this.gridControl1.TabIndex = 7;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView9,
@@ -543,7 +543,7 @@
             this.xtraTabControl1.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
             this.xtraTabControl1.Name = "xtraTabControl1";
             this.xtraTabControl1.SelectedTabPage = this.xtraTabPage1;
-            this.xtraTabControl1.Size = new System.Drawing.Size(2738, 1441);
+            this.xtraTabControl1.Size = new System.Drawing.Size(2586, 1441);
             this.xtraTabControl1.TabIndex = 0;
             this.xtraTabControl1.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
             this.xtraTabPage1,
@@ -554,7 +554,7 @@
             this.xtraTabPage1.Controls.Add(this.panel1);
             this.xtraTabPage1.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
             this.xtraTabPage1.Name = "xtraTabPage1";
-            this.xtraTabPage1.Size = new System.Drawing.Size(2734, 1387);
+            this.xtraTabPage1.Size = new System.Drawing.Size(2582, 1387);
             this.xtraTabPage1.Text = "Invoice w/Balances";
             // 
             // panel1
@@ -565,7 +565,7 @@
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(2734, 1387);
+            this.panel1.Size = new System.Drawing.Size(2582, 1387);
             this.panel1.TabIndex = 0;
             // 
             // groupBox2
@@ -577,7 +577,7 @@
             this.groupBox2.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(5, 6, 5, 6);
-            this.groupBox2.Size = new System.Drawing.Size(2734, 810);
+            this.groupBox2.Size = new System.Drawing.Size(2582, 810);
             this.groupBox2.TabIndex = 20;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Transaction with Balances";
@@ -624,7 +624,7 @@
             this.groupBox1.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(5, 6, 5, 6);
-            this.groupBox1.Size = new System.Drawing.Size(2734, 577);
+            this.groupBox1.Size = new System.Drawing.Size(2582, 577);
             this.groupBox1.TabIndex = 19;
             this.groupBox1.TabStop = false;
             // 
@@ -1431,7 +1431,7 @@
             this.xtraTabPage2.Controls.Add(this.panel2);
             this.xtraTabPage2.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
             this.xtraTabPage2.Name = "xtraTabPage2";
-            this.xtraTabPage2.Size = new System.Drawing.Size(2734, 1387);
+            this.xtraTabPage2.Size = new System.Drawing.Size(2582, 1387);
             this.xtraTabPage2.Text = "FullyPaid Invoice";
             // 
             // panel2
@@ -1442,7 +1442,7 @@
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(2734, 1387);
+            this.panel2.Size = new System.Drawing.Size(2582, 1387);
             this.panel2.TabIndex = 1;
             // 
             // groupControl2
@@ -1452,7 +1452,7 @@
             this.groupControl2.Location = new System.Drawing.Point(0, 139);
             this.groupControl2.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
             this.groupControl2.Name = "groupControl2";
-            this.groupControl2.Size = new System.Drawing.Size(2734, 1248);
+            this.groupControl2.Size = new System.Drawing.Size(2582, 1248);
             this.groupControl2.TabIndex = 1;
             // 
             // groupControl1
@@ -1467,7 +1467,7 @@
             this.groupControl1.Location = new System.Drawing.Point(0, 0);
             this.groupControl1.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
             this.groupControl1.Name = "groupControl1";
-            this.groupControl1.Size = new System.Drawing.Size(2734, 139);
+            this.groupControl1.Size = new System.Drawing.Size(2582, 139);
             this.groupControl1.TabIndex = 0;
             // 
             // simpleButton5
@@ -1595,7 +1595,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(2738, 1441);
+            this.ClientSize = new System.Drawing.Size(2586, 1441);
             this.Controls.Add(this.xtraTabControl1);
             this.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
             this.Name = "ClientPaymentsDevEx";

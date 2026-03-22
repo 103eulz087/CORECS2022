@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TransferPerPalletDevExFixed));
             this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
+            this.btnprint = new DevExpress.XtraEditors.SimpleButton();
             this.txtshipmentno = new DevExpress.XtraEditors.SearchLookUpEdit();
             this.gridView2 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.btnsave = new DevExpress.XtraEditors.SimpleButton();
@@ -49,7 +50,6 @@
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
             this.gridControl1 = new DevExpress.XtraGrid.GridControl();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.btnprint = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
             this.groupControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtshipmentno.Properties)).BeginInit();
@@ -88,6 +88,18 @@
             this.groupControl1.Name = "groupControl1";
             this.groupControl1.Size = new System.Drawing.Size(1974, 264);
             this.groupControl1.TabIndex = 0;
+            // 
+            // btnprint
+            // 
+            this.btnprint.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnprint.ImageOptions.Image")));
+            this.btnprint.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
+            this.btnprint.Location = new System.Drawing.Point(1408, 104);
+            this.btnprint.Margin = new System.Windows.Forms.Padding(6, 4, 6, 4);
+            this.btnprint.Name = "btnprint";
+            this.btnprint.Size = new System.Drawing.Size(186, 94);
+            this.btnprint.TabIndex = 54;
+            this.btnprint.Text = "Print";
+            this.btnprint.Click += new System.EventHandler(this.btnprint_Click);
             // 
             // txtshipmentno
             // 
@@ -290,10 +302,10 @@
             // gridControl1
             // 
             this.gridControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridControl1.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.gridControl1.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(6);
             this.gridControl1.Location = new System.Drawing.Point(3, 3);
             this.gridControl1.MainView = this.gridView1;
-            this.gridControl1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.gridControl1.Margin = new System.Windows.Forms.Padding(6);
             this.gridControl1.Name = "gridControl1";
             this.gridControl1.Size = new System.Drawing.Size(1968, 876);
             this.gridControl1.TabIndex = 20;
@@ -316,19 +328,7 @@
             this.gridView1.OptionsView.RowAutoHeight = true;
             this.gridView1.OptionsView.ShowFooter = true;
             // 
-            // btnprint
-            // 
-            this.btnprint.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("simpleButton1.ImageOptions.Image")));
-            this.btnprint.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnprint.Location = new System.Drawing.Point(1408, 104);
-            this.btnprint.Margin = new System.Windows.Forms.Padding(6, 4, 6, 4);
-            this.btnprint.Name = "btnprint";
-            this.btnprint.Size = new System.Drawing.Size(186, 94);
-            this.btnprint.TabIndex = 54;
-            this.btnprint.Text = "Print";
-            this.btnprint.Click += new System.EventHandler(this.btnprint_Click);
-            // 
-            // TransferPerPalletDevEx
+            // TransferPerPalletDevExFixed
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;

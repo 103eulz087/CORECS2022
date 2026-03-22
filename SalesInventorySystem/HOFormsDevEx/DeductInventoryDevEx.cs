@@ -166,7 +166,7 @@ namespace SalesInventorySystem.HOFormsDevEx
 
         private void btnDeduct_Click(object sender, EventArgs e)
         {
-            bool check = Database.checkifExist("SELECT TOP(1) BranchCode FROM dbo.ReInventoryMonitoring " +
+            bool check = Database.checkifExist("SELECT 1 BranchCode FROM dbo.ReInventoryMonitoring " +
                 "WHERE BranchCode='" + txtbranch.Text + "'  and CAST(DateExecute as date)='" + txtdate.Text + "' and isAnalyze=1 ");
             var rows = Database.getMultipleQuery("ReInventoryMonitoring", "BranchCode='" + txtbranch.Text + "' and CAST(DateExecute as date)='" + txtdate.Text + "' ", "isAnalyze,isDeducted");
             string isAnalyze = rows["isAnalyze"].ToString();
@@ -174,6 +174,11 @@ namespace SalesInventorySystem.HOFormsDevEx
             if (!check)
             {
                 XtraMessageBox.Show("You Cant Proceed this Inventory is Not Yet Analyze.. No Records in Monitorings");
+                return;
+            }
+            if(gridView1.RowCount==0)
+            {
+                XtraMessageBox.Show("No Data Displayed");
                 return;
             }
             if (Convert.ToBoolean(isAnalyze) == false)
@@ -200,33 +205,29 @@ namespace SalesInventorySystem.HOFormsDevEx
                 doFIFO();
 
                 progressBarControl1.Position = 80;
-                //Thread.Sleep(300);
-                //Database.ExecuteQuery("UPDATE ReInventoryMonitoring set isDeducted=1,DeductedBy='"+Login.Fullname+"' WHERE isAnalyze=1 and BranchCode='" + Login.assignedBranch + "' and CAST(DateExecute as date)='" + txtdate.Text + "' ");
-                //Database.display("SELECT Branch,Product,Description,SUM(Available) as Available " +
-                //    "FROM Inventory " +
-                //    "WHERE Branch='" + txtbranch.Text + "' " +
-                //    "and Available > 0 " +
-                //    "AND isStock=1 " +
-                //    "GROUP BY Branch,Product,Description", gridControl1, gridView1);
-                displayInventoryUnitActivity();
+
+                //displayInventoryUnitActivity();
+
+                /*
                 DateTime dt = new DateTime();
                 dt = Convert.ToDateTime(txtdate.Text);
                 string filepath = "C:\\ENDOFDAY_INVENTORY_REPORTS\\" + dt.ToString("yyyyMMdd") + "\\";
                 Utilities.createDirectoryFolder(filepath);
-                //DateTime dt = new DateTime();
-                //dt = Convert.ToDateTime(txtdate.Text);
-                //string filename = txtbranch.Text + "_" + dt.ToShortDateString().Replace("/",) + ".xls";
-                string filename = Branch.getBranchName(txtbranch.Text) + "_" + dt.ToString("yyyyMMdd") + ".xls";
-                string file = filepath + filename;
-                gridControl1.ExportToXls(file);
+                */
 
-                sendMailNotification(file, txtbranch.Text);
+                //string filename = Branch.getBranchName(txtbranch.Text) + "_" + dt.ToString("yyyyMMdd") + ".xls";
+                //string file = filepath + filename;
+                //gridControl1.ExportToXls(file);
+
+               // sendMailNotification(file, txtbranch.Text);
                 
                 progressBarControl1.Position = 90;
-                XtraMessageBox.Show("Export Success");
+                XtraMessageBox.Show("Succesfully Executed");
                 btnDeduct.Enabled = false;
 
                 progressBarControl1.Position = 100;
+                gridControl1.DataSource = null;
+                gridView1.Columns.Clear();
             }
             
         }
@@ -295,7 +296,7 @@ namespace SalesInventorySystem.HOFormsDevEx
             con.Open();
             try
             {
-                string sp = "sp_FiFoMapping";
+                string sp = "sp_FiFoMappingSalesInvDeduct";
                 SqlCommand com = new SqlCommand(sp, con);
                 com.Parameters.AddWithValue("@parmtransdate", txtdate.Text);
                 com.Parameters.AddWithValue("@parmbranchcode", txtbranch.Text);

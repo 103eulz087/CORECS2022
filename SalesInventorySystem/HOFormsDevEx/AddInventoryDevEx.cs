@@ -11,6 +11,9 @@ using DevExpress.XtraEditors;
 using System.Data.SqlClient;
 using System.IO.Ports;
 using DevExpress.XtraReports.UI;
+using DevExpress.XtraGrid.Views.Grid;
+using DevExpress.XtraGrid.Columns;
+using DevExpress.XtraGrid;
 
 namespace SalesInventorySystem.HOFormsDevEx
 {
@@ -94,7 +97,7 @@ namespace SalesInventorySystem.HOFormsDevEx
             {
                 if (chckboxbarcode.Checked == true)
                 {
-                    simpleButton5.PerformClick();
+                    btnprintbarcode.PerformClick();
                     InsertData();
                     display();
                     txtbarcode.Text = "";
@@ -109,8 +112,8 @@ namespace SalesInventorySystem.HOFormsDevEx
                     txtweight.Text = "";
                     txtweight.Focus();
                 }
-                Classes.DevXGridViewSettings.ShowFooterCountTotal(gridView1, "PalletNo");
-                Classes.DevXGridViewSettings.ShowFooterTotal(gridView1, "TotalCost");
+                //Classes.DevXGridViewSettings.ShowFooterCountTotal(gridView1, "PalletNo");
+                //Classes.DevXGridViewSettings.ShowFooterTotal(gridView1, "TotalCost");
             }
 
         }
@@ -335,8 +338,31 @@ namespace SalesInventorySystem.HOFormsDevEx
         private void display()
         {
             Database.display("SELECT PalletNo,Product,Description,Barcode,Quantity,Cost,IsVat,(Quantity*Cost) as TotalCost " +
-                "FROM dbo.TempInventory WHERE ShipmentNo='" + txtshipmentno.Text + "' " +
+                "FROM dbo.TempInventory WHERE ShipmentNo='" + txtshipmentno.Text + "' AND isProcess=0 " +
                 "ORDER BY SequenceNumber DESC", gridControl1, gridView1);
+
+            GridView view = gridControl1.FocusedView as GridView;
+            view.SortInfo.ClearAndAddRange(new GridColumnSortInfo[] {
+                new GridColumnSortInfo(view.Columns["Description"],DevExpress.Data.ColumnSortOrder.Ascending)
+                }, 1);
+            gridView1.ExpandAllGroups();
+
+            GridGroupSummaryItem itemCount = new GridGroupSummaryItem();
+            itemCount.FieldName = "PalletNo";
+            itemCount.SummaryType = DevExpress.Data.SummaryItemType.Count;
+            itemCount.ShowInGroupColumnFooter = gridView1.Columns["PalletNo"];
+            gridView1.GroupSummary.Add(itemCount);
+            gridView1.Focus();
+
+            GridGroupSummaryItem ite = new GridGroupSummaryItem();
+            ite.FieldName = "Quantity";
+            ite.SummaryType = DevExpress.Data.SummaryItemType.Sum;
+            ite.ShowInGroupColumnFooter = gridView1.Columns["Quantity"];
+            gridView1.GroupSummary.Add(ite);
+            gridView1.Focus();
+
+            Classes.DevXGridViewSettings.ShowFooterCountTotal(gridView1, "PalletNo");
+            Classes.DevXGridViewSettings.ShowFooterTotal(gridView1, "Quantity");
         }
 
      
@@ -397,7 +423,8 @@ namespace SalesInventorySystem.HOFormsDevEx
         private void simpleButton3_Click(object sender, EventArgs e)
         {
             //Database.ExecuteQuery("DELETE FROM TempInventory WHERE SequenceNumber='" + gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "SequenceNumber").ToString() + "'");
-            Database.ExecuteQuery("DELETE FROM TempInventory WHERE Barcode='" + gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "Barcode").ToString() + "'");
+            //Database.ExecuteQuery("DELETE FROM TempInventory WHERE Barcode='" + gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "Barcode").ToString() + "'");
+            Database.ExecuteQuery("UPDATE dbo.TempInventory SET isProcess=1 WHERE Barcode='" + gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "Barcode").ToString() + "'");
             gridView1.DeleteSelectedRows();
         }
         
@@ -497,9 +524,10 @@ namespace SalesInventorySystem.HOFormsDevEx
             bprint.lblprodtype.Text = productname.ToString();
             bprint.lbltotalkilos.Text = txtweight.Text;
             bprint.xrpalletno.Text = txtpalletno.Text;
+            bprint.xrsku.Text = productcode.ToString();
             bprint.lblxpirydate.Text = Convert.ToDateTime(txtduedate.Text).ToShortDateString();//DateTime.Now.AddYears(1).ToShortDateString();
             bprint.xrBarCode2.Text = txtbarcode.Text.Trim(); //productcategorycode + primalcode + txtweight.Text.Remove(2, 1);
-           
+            
             ReportPrintTool report = new ReportPrintTool(bprint);
             //report.ShowRibbonPreviewDialog();
             //report.PrintDialog();

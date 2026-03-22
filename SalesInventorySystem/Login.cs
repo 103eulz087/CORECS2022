@@ -20,12 +20,13 @@ using SalesInventorySystem.Classes;
 using Newtonsoft.Json;
 using System.Net;
 using System.Net.Http;
+using System.Net.NetworkInformation;
 
 namespace SalesInventorySystem
 {
     public partial class Login : DevExpress.XtraEditors.XtraForm
     {
-        public static string assignedBranch, Fullname,isMaker,isChecker,isglobalPOS,isglobalAccounting, iscashBegin, isglobalUserID,isglobalAdmin,isglobalOfficer,isglobalBranchOfficer,isglobalWarehouseOfficer,isCashier,isglobalApprover,glacctcode,cashinlimit,cashendlimit;
+        public static string assignedBranch, Fullname, isMaker, isChecker, isglobalPOS, isglobalAccounting, iscashBegin, isglobalUserID, isglobalAdmin, isglobalOfficer, isglobalBranchOfficer, isglobalWarehouseOfficer, isCashier, isglobalApprover, glacctcode, cashinlimit, cashendlimit;
         RegistryKey regkey;
         string password;
         string encryptedpassword;
@@ -37,7 +38,7 @@ namespace SalesInventorySystem
         public static string servername;
         public static string dbname;
         public static string connsettings;
-        private int passwordctr=0;
+        private int passwordctr = 0;
         string user = "";
 
         private static string localhost = "http://itcore-apps.com:1101/";
@@ -47,6 +48,8 @@ namespace SalesInventorySystem
         {
 
         }
+
+       
 
         public Login()
         {
@@ -67,178 +70,334 @@ namespace SalesInventorySystem
                 C.ShowDialog(this);
                 this.Opacity = 0;
             }
+            if (keyData == Keys.Escape) //PAYMENT
+            {
+                btnclose.PerformClick();
+            }
             return functionReturnValue;
         }
 
+
+        // 1. Change the return type to Task<int> and add the 'async' keyword
+        public static async Task<int> getCTRVersionAsAsync(String name)
+        {
+            // 1. INSTANT CHECK: Is the computer even connected to a network?
+            // If there is no internet/network, instantly return -1 and skip the update check!
+            if (!NetworkInterface.GetIsNetworkAvailable())
+            {
+                return -1;
+            }
+
+            int num1 = -1;
+
+            try
+            {
+                using (SqlConnection connection = Database.getConnection(@"Enzo\ConnSettingsUpdater"))
+                {
+                    // 2. THE 3-SECOND RULE (Fail Fast)
+                    // By default, SQL waits 15 to 30 seconds. We change it to 3 seconds.
+                    SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder(connection.ConnectionString);
+                    builder.ConnectTimeout = 3;
+                    connection.ConnectionString = builder.ConnectionString;
+
+                    // Try to connect. If the server is unreachable, it will fail in exactly 3 seconds.
+                    await connection.OpenAsync();
+
+                    string query = "SELECT TOP 1 CAST(Versions as int) AS CC FROM UploaderLookUp WHERE Company = @CompanyName;";
+
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@CompanyName", name);
+
+                        using (SqlDataReader sqlDataReader = await command.ExecuteReaderAsync())
+                        {
+                            if (sqlDataReader != null && await sqlDataReader.ReadAsync())
+                            {
+                                num1 = Convert.ToInt32(sqlDataReader["CC"]);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                // 3. SILENT FAIL
+                // If the 3 seconds run out, or the server is down, it safely lands here.
+                // It returns -1, skipping the update and letting the user log in normally!
+            }
+
+            return num1;
+        }
+
+        private void btnclose_Click(object sender, EventArgs e)
+        {
+            this.Dispose();
+        }
+
+        private async void Login_Load(object sender, EventArgs e)
+        {
+            tryCheckUpdate(); //#tryCheckUpdateV1();
+            labelversion.Text= HelperFunction.readFileVersion();
+        }
 
         static async Task<int> GetCTRVersion()
         {
             try
             {
-                string uriString = $"{ localhost }?version={ file["Company"] }";
+                string urlChecker = file["VersionCheckerUrl"];
                 using (var client = new HttpClient())
                 {
-                    var content = await client.GetStringAsync(uriString).ConfigureAwait(false);
-                    Dictionary<string, object> response = JsonConvert.DeserializeObject<Dictionary<string, object>>(content);
-                    if (response.ContainsKey("Version"))
-                    {
-                        return Convert.ToInt32(response["Version"]);
-                    }
+                    var content = await client.GetStringAsync(urlChecker).ConfigureAwait(false);
+                    return Convert.ToInt32(content);
                 }
             }
             catch { }
             return -1;
         }
-
-        private void Login_Load(object sender, EventArgs e)
+        private void tryCheckUpdate()
         {
-            //Thread.Sleep(3000);
-            //********RYAN VIAJEDOR*****************************************************************************
             try
             {
-                int server_version  = GetCTRVersion().Result;
+                if (String.IsNullOrEmpty(file["Version"])) return;
                 int client_version = Convert.ToInt32(file["Version"]);
+                int server_version = GetCTRVersion().Result;
                 if (server_version != -1 && client_version < server_version)
                 {
-                    MessageBox.Show("A New Updates Available\nGet the latest application update now."); 
-                    System.IO.File.WriteAllText("loaders.bat", @"taskkill /pid " + Process.GetCurrentProcess().Id + @" /f
-                    CD """ + Application.StartupPath + @"""
-                    START exeUpdater.exe ");
-                    Process.Start("loaders.bat");
+                    if (!String.IsNullOrEmpty(file["DownloadUrlFormat"]))
+                    {
+                        file["DownloadUrl"] = file["DownloadUrlFormat"].Replace("file.zip", "file-v" + server_version + ".zip");
+                        file.Update();
+                    }
+                    MessageBox.Show("A New Updates Available\nGet the latest application update now.");
+                    string batCmdLaunch = $"bat_{ DateTime.Now.ToString("yyyyMMdd.HHmmss") }.bat";
+                    System.IO.File.WriteAllText(batCmdLaunch, @"
+@echo off
+taskkill /pid " + Process.GetCurrentProcess().Id + @" /f
+START exeUpdater.exe 
+del ""%~f0""
+exit /b
+                    ");
+                    ProcessStart(batCmdLaunch).WaitForExit();
+                    Application.Exit();
+                    return;
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message.ToString());
             }
+        }
+        private async void tryCheckUpdateV1()
+        {
             try
             {
-                regkey = Registry.CurrentUser.CreateSubKey(@"AAITCRE\ConnSettingsMain");
-                if (regkey.GetValue("dbconn") == null)
+                // 2. Await the new async method! The UI will stay smooth while this runs.
+                int server_version = await getCTRVersionAsAsync(file["Company"].ToString());
+                int client_version = Convert.ToInt32(file["Version"]);
+
+                // If server_version is -1, it means the internet was down, so we just skip this safely
+                if (server_version != -1 && client_version < server_version)
                 {
-                    Connection C = new Connection();
-                    C.lblservername.Text = "Main Server";
-                    C.txtconnsettingsname.Text = @"AAITCRE\ConnSettingsMain";
-                    C.ShowDialog();
-                    this.Opacity = 0;
-                    return;
-                }
-                else
-                {
-                    userid = regkey.GetValue("serverid").ToString();
-                    serverpassword = regkey.GetValue("serverpassword").ToString();
-                    dbname = regkey.GetValue("dbname").ToString();
-                    servername = regkey.GetValue("servername").ToString();
+                    MessageBox.Show("A New Update is Available\nGet the latest application update now.");
+
+                    // Generate a bulletproof update script
+                    string batScript = $@"
+                                    @echo off
+                                    taskkill /pid {Process.GetCurrentProcess().Id} /f
+                                    timeout /t 2 /nobreak > NUL
+                                    cd /d ""{Application.StartupPath}""
+                                    start """" ""exeUpdater.exe""
+                                    del ""%~f0""
+                                    ";
+                    System.IO.File.WriteAllText("loaders.bat", batScript);
+
+                    System.Diagnostics.ProcessStartInfo psi = new System.Diagnostics.ProcessStartInfo()
+                    {
+                        FileName = "loaders.bat",
+                        WorkingDirectory = Application.StartupPath,
+                        UseShellExecute = true
+                    };
+                    Process.Start(psi);
+
+                    return; // Stop loading the login screen since we are updating!
                 }
             }
-            catch(SqlException ex)
+            catch (Exception ex)
             {
-                XtraMessageBox.Show(ex.Message.ToString());
+                MessageBox.Show(ex.Message.ToString());
             }
-            //********/RYAN VIAJEDOR****************************************************************************
         }
 
-        private void simpleButton1_Click(object sender, EventArgs e)
+        private async void buttonLogin_Click(object sender, EventArgs e)
         {
-            if (txtuserid.Text.Trim() == "")
+            // 1. Instant Network Check
+            if (!System.Net.NetworkInformation.NetworkInterface.GetIsNetworkAvailable())
             {
-                XtraMessageBox.Show("User id is required.");
+                MessageBox.Show("No network connection detected. Please check your Wi-Fi or cable.", "No Internet", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            if (txtpassword.Text.Trim() == "")
+
+            // 2. Basic UI Validation
+            if (string.IsNullOrWhiteSpace(txtuserid.Text))
+            {
+                XtraMessageBox.Show("User ID is required.");
+                return;
+            }
+            if (string.IsNullOrWhiteSpace(txtpassword.Text))
             {
                 XtraMessageBox.Show("Password is required.");
                 return;
             }
-           
-            get_password();
-            //validate_user();
-        }
 
-        private void get_password()
-        {
-            SqlConnection con = Database.getConnection();
-            con.Open();
-            SqlCommand com = new SqlCommand("Select TOP(1) Password from Users where UserID = '" + txtuserid.Text + "'", con);
-            SqlDataReader reader = com.ExecuteReader();
-            try
-            {
-                if (reader != null)
-                {
-                    while (reader.Read())
-                    {
-                        password = reader["Password"].ToString();
-                        decrypt_password();
-                        return;
-                    }
-                }
-                XtraMessageBox.Show("Invalid User ID.", "IT Core Solutions Inc.", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
-                txtpassword.Focus();
-                txtpassword.SelectionStart = 0;
-                txtpassword.SelectionLength = txtpassword.Text.Length;
-            }
-            catch (Exception ex)
-            {
-                XtraMessageBox.Show(ex.Message.ToString());
-            }
-            finally
-            {
-                con.Close();
-            }
-        }
+            // 3. Lock the UI
+            btnLogin.Enabled = false;
+            btnLogin.Text = "Connecting...";
+            Cursor = Cursors.WaitCursor;
 
-        private void decrypt_password()
-        {
-            SqlConnection con = Database.getConnection();
-            con.Open();
-            SqlCommand com = new SqlCommand("declare @pwd varchar(50) exec master..xp_aes_decrypt '" + password + "','0123456789ABCDEF0123456789ABCDEF',@pwd output select @pwd result", con);
-            SqlDataReader reader = com.ExecuteReader();
             try
             {
-                if (reader != null)
+                // 4. Run the single, unified database check!
+                string loginStatus = await ProcessLoginAsync(txtuserid.Text.Trim(), txtpassword.Text);
+
+                // 5. Handle the result cleanly
+                if (loginStatus == "SUCCESS")
                 {
-                    while (reader.Read())
-                    {
-                        decryptedpassword = reader["result"].ToString();
-                        validate_user();
-                    }
+                    this.Hide();
+                    Main m = new Main();
+                    m.Show();
                 }
+                else if (loginStatus == "DEFAULT_PASSWORD")
+                {
+                    XtraMessageBox.Show("The System found out that you have a default Password. Please Change your Password!");
+                    HOForms.ChangePassword pcusatfsmr = new HOForms.ChangePassword();
+                    pcusatfsmr.ShowDialog(this);
+                }
+                else
+                {
+                    // Fails (Wrong Password or Invalid User)
+                    XtraMessageBox.Show(loginStatus, "IT Core Solutions Inc.", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    txtpassword.Focus();
+                    txtpassword.SelectAll();
+                }
+            }
+            catch (SqlException ex)
+            {
+                // Temporarily show the EXACT error from SQL Server so we can debug it
+                MessageBox.Show("SQL Error Details:\n\n" + ex.Message, "Debugging SQL Exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (Exception ex)
             {
-                XtraMessageBox.Show(ex.Message.ToString());
+                XtraMessageBox.Show("Error: " + ex.Message);
             }
             finally
             {
-                con.Close();
+                // Unlock UI
+                btnLogin.Enabled = true;
+                btnLogin.Text = "Login";
+                Cursor = Cursors.Default;
             }
+
         }
-        private void encrypt()
+        
+        private async Task<string> ProcessLoginAsync(string userId, string inputPassword)
         {
-            SqlConnection con = Database.getConnection();
-            con.Open();
-            SqlCommand com = new SqlCommand("exec master..xp_aes_encrypt '" + txtpassword.Text + "','0123456789ABCDEF0123456789ABCDEF'", con);
-            SqlDataReader reader = com.ExecuteReader();
-            try
+            using (SqlConnection con = Database.getConnection())
             {
-                if (reader != null)
+                // Enforce the 3-second Fail Fast rule
+                SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder(con.ConnectionString) { ConnectTimeout = 3 };
+                con.ConnectionString = builder.ConnectionString;
+                await con.OpenAsync();
+
+                string encryptedDbPassword = null;
+
+                // --- PHASE 1: Fetch the User Data ---
+                using (SqlCommand cmd = new SqlCommand("SELECT TOP(1) * FROM dbo.Users WHERE UserID = @UserID", con))
                 {
-                    while (reader.Read())
+                    cmd.Parameters.AddWithValue("@UserID", userId);
+                    using (SqlDataReader reader = await cmd.ExecuteReaderAsync())
                     {
-                        encryptedpassword = reader["result"].ToString();
-                        validate_user();
+                        if (await reader.ReadAsync())
+                        {
+                            // Grab the encrypted password
+                            encryptedDbPassword = reader["Password"].ToString();
+
+                            // Assign all your global variables here!
+                            user = userId;
+                            Fullname = reader["FullName"].ToString();
+                            isglobalAdmin = reader["isAdmin"].ToString();
+                            isglobalOfficer = reader["isGlobalOfficer"].ToString();
+                            isglobalBranchOfficer = reader["isBranchOfficer"].ToString();
+                            isglobalWarehouseOfficer = reader["isWarehouseOfficer"].ToString();
+                            isMaker = reader["isMaker"].ToString();
+                            isChecker = reader["isChecker"].ToString();
+                            isCashier = reader["isCashier"].ToString();
+                            isglobalApprover = reader["isApprover"].ToString();
+                            isglobalUserID = reader["UserID"].ToString();
+                            assignedBranch = reader["AssignedBranch"].ToString();
+                            cashinlimit = reader["CashInLimit"].ToString();
+                            cashendlimit = reader["CashEndLimit"].ToString();
+                            glacctcode = reader["GLAccount"].ToString();
+                            isglobalAccounting = reader["isAccounting"].ToString();
+                            // ... (Add the rest of your variable assignments here: isMaker, isChecker, etc.)
+                        }
+                        else
+                        {
+                            return "Invalid User ID or Password given."; // User doesn't exist
+                        }
                     }
                 }
-            }
-            catch (Exception ex)
-            {
-                XtraMessageBox.Show(ex.Message.ToString());
-            }
-            finally
-            {
-                con.Close();
+
+                // --- PHASE 2: Decrypt the Password ---
+                // --- PHASE 2: Decrypt the Password ---
+                string decryptedPassword = null;
+
+                // We inject the encryptedDbPassword directly to ensure SQL treats it as VARCHAR,
+                // exactly matching your original code's behavior to keep the decryption happy!
+                string decryptQuery = $@"
+            DECLARE @pwd varchar(50); 
+            EXEC master..xp_aes_decrypt '{encryptedDbPassword}', '0123456789ABCDEF0123456789ABCDEF', @pwd OUTPUT; 
+            SELECT @pwd AS result;";
+
+                using (SqlCommand cmd = new SqlCommand(decryptQuery, con))
+                {
+                    var result = await cmd.ExecuteScalarAsync();
+                    decryptedPassword = result?.ToString();
+                }
+
+                // --- PHASE 3: Validate and Handle Locks ---
+                if (inputPassword == decryptedPassword)
+                {
+                    // SUCCESS: Clear any lockout records
+                    using (SqlCommand cmd = new SqlCommand("DELETE FROM dbo.UsersLocked WHERE UserID = @UserID", con))
+                    {
+                        cmd.Parameters.AddWithValue("@UserID", userId);
+                        await cmd.ExecuteNonQueryAsync();
+                    }
+
+                    if (inputPassword == "123456") return "DEFAULT_PASSWORD";
+                    return "SUCCESS";
+                }
+                else
+                {
+                    // FAILED: Update the lockout table (using an efficient IF EXISTS script)
+                    string lockQuery = @"
+                IF EXISTS (SELECT 1 FROM dbo.UsersLocked WHERE UserID = @UserID)
+                    UPDATE dbo.UsersLocked SET LoginAttempts = LoginAttempts + 1, dateLogin = @Date WHERE UserID = @UserID;
+                ELSE
+                    INSERT INTO dbo.UsersLocked (UserID, LoginAttempts, dateLogin) VALUES (@UserID, 1, @Date);";
+
+                    using (SqlCommand cmd = new SqlCommand(lockQuery, con))
+                    {
+                        cmd.Parameters.AddWithValue("@UserID", userId);
+                        cmd.Parameters.AddWithValue("@Date", DateTime.Now.ToShortDateString());
+                        await cmd.ExecuteNonQueryAsync();
+                    }
+
+                    return "Wrong Password.";
+                }
             }
         }
+     
         public void readMenu(string strMenu, RibbonPage currentPage)
         {
             if (strMenu == "<empty>")
@@ -277,148 +436,14 @@ namespace SalesInventorySystem
                 }
             }
         }
-        private void validate_user()
-        {   
-            SqlConnection con = Database.getConnection();
-            con.Open();
-            //SqlCommand com = new SqlCommand("Select TOP(1) UserID,Password from dbo.UserMenuAccess where UserID= '" + txtuserid.Text + "' and Password = '" + password + "'", con);
-            SqlCommand com = new SqlCommand($"Select TOP(1) * from dbo.Users where UserID='{txtuserid.Text}' and Password='{password}'", con);
-            //SqlCommand com = new SqlCommand("Select * from UserMenuAccess2 where UserID= '"+txtuserid.Text+"'  ", con);
-            SqlDataReader reader = com.ExecuteReader();
-
-
-            try
-            {
-
-                //string company = Database.getSingleQuery("CompanyProfile", "CompanyName <> ''", "CompanyName");
-                bool isUserExists = Database.checkifExist($"SELECT TOP(1) UserID FROM dbo.Users WHERE UserID='{txtuserid.Text}' ");
-                user = txtuserid.Text;
-                if (reader != null)
-                {
-                    while (reader.Read())
-                    {
-                        isglobalAdmin = reader["isAdmin"].ToString();
-                        Fullname = reader["FullName"].ToString();
-                        isglobalOfficer = reader["isGlobalOfficer"].ToString();
-                        isglobalBranchOfficer = reader["isBranchOfficer"].ToString();
-                        isglobalWarehouseOfficer = reader["isWarehouseOfficer"].ToString();
-                        isMaker = reader["isMaker"].ToString();
-                        isChecker = reader["isChecker"].ToString();
-                        isCashier = reader["isCashier"].ToString();
-                        isglobalApprover = reader["isApprover"].ToString();
-                        isglobalUserID = reader["UserID"].ToString();
-                        assignedBranch = reader["AssignedBranch"].ToString();
-                        cashinlimit = reader["CashInLimit"].ToString();
-                        cashendlimit = reader["CashEndLimit"].ToString();
-                        glacctcode = reader["GLAccount"].ToString();
-                        isglobalAccounting = reader["isAccounting"].ToString();
-
-                        if ((txtpassword.Text == decryptedpassword) && txtpassword.Text == "123456")
-                        {
-                            XtraMessageBox.Show("The System found out that you have a default Password.. Please Change your Password!...");
-                            HOForms.ChangePassword pcusatfsmr = new HOForms.ChangePassword();
-                            pcusatfsmr.ShowDialog(this);
-                            return;
-                        }
-                        if ((isUserExists) && txtpassword.Text != decryptedpassword) //user exists and wrong password
-                        {
-                            bool isExists = Database.checkifExist($"SELECT TOP(1) UserID FROM dbo.UsersLocked WHERE UserID='{txtuserid.Text}'");
-                            if (!isExists)
-                            {
-                                passwordctr = 1;
-                                Database.ExecuteQuery($"INSERT INTO dbo.UsersLocked VALUES('{txtuserid.Text}','{passwordctr}','{DateTime.Now.ToShortDateString()}')");
-                            }
-                            else
-                            {
-                                string getLastAttempt = Database.getSingleQuery("UsersLocked", $"UserID='{txtuserid.Text}'", "LoginAttempts");
-                                passwordctr = Convert.ToInt32(getLastAttempt) + 1;
-                                Database.ExecuteQuery($"UPDATE dbo.UsersLocked SET LoginAttempts='{passwordctr}',dateLogin='{DateTime.Now.ToShortDateString()}' WHERE UserID='{txtuserid.Text}'");
-                            }
-                            XtraMessageBox.Show("Wrong Password.", "IT Core Solutions Inc.", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
-                            txtuserid.Text = "";
-                            txtpassword.Text = "";
-                            txtuserid.Focus();
-                            return;
-                        }
-                        else
-                        {
-                            Database.ExecuteQuery($"DELETE FROM dbo.UsersLocked WHERE UserID='{txtuserid.Text}'");
-                            this.Hide();
-                            Main m = new Main();
-                            m.Show();
-                            return;
-                        }
-                    }
-                }
-                else
-                {
-                    if (isUserExists)
-                    {
-                        bool isExists = Database.checkifExist($"SELECT TOP(1) UserID FROM dbo.UsersLocked WHERE UserID='{txtuserid.Text}'");
-                        if (!isExists)
-                        {
-                            passwordctr = 1;
-                            Database.ExecuteQuery($"INSERT INTO dbo.UsersLocked VALUES('{txtuserid.Text}','{passwordctr}','{DateTime.Now.ToShortDateString()}')");
-                        }
-                        else
-                        {
-                            string getLastAttempt = Database.getSingleQuery("UsersLocked", $"UserID='{txtuserid.Text}'", "LoginAttempts");
-                            passwordctr = Convert.ToInt32(getLastAttempt) + 1;
-                            Database.ExecuteQuery($"UPDATE dbo.UsersLocked SET LoginAttempts='{passwordctr}',dateLogin='{DateTime.Now.ToShortDateString()}' WHERE UserID='{txtuserid.Text}'");
-                        }
-                        XtraMessageBox.Show("Wrong Password.", "IT Core Solutions Inc.", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
-                        txtpassword.Focus();
-                        txtpassword.SelectionStart = 0;
-                        txtpassword.SelectionLength = txtpassword.Text.Length;
-                        return;
-                    }
-                    else
-                    {
-                        XtraMessageBox.Show("Invalid User ID or Password given.", "IT Core Solutions Inc.", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
-                        txtpassword.Focus();
-                        txtpassword.SelectionStart = 0;
-                        txtpassword.SelectionLength = txtpassword.Text.Length;
-                        return;
-                    }
-                }
-            }
-            catch (SqlException ex)
-            {
-                XtraMessageBox.Show(ex.Message.ToString());
-            }
-            finally
-            {
-                con.Close();
-            }
-        }
-
+        
         private void txtpassword_KeyDown(object sender, KeyEventArgs e)
         {
             try
             {
                 if (e.KeyCode == Keys.Enter)
                 {
-                    string mark = password;
-                    bool isLocked = Database.checkifExist($"SELECT TOP(1) UserID FROM dbo.UsersLocked WHERE UserID='{txtuserid.Text}' AND LoginAttempts >= 3");
-                    //bool isipexist = Database.checkifExist("SELECT * FROM BranchIPAddresses WHERE IPAddress='" + HelperFunction.GetLocalIPAddress() + "'");
-                    if (txtuserid.Text.Trim() == "")
-                    {
-                        XtraMessageBox.Show("User ID is required.", "ITCore Solutions Inc.");
-                        return;
-                    }
-                    if (txtpassword.Text.Trim() == "")
-                    {
-                        XtraMessageBox.Show("Password is required.", "ITCore Solutions Inc.");
-                        return;
-                    }
-                    if(isLocked)
-                    {
-                        XtraMessageBox.Show("Your Account is Temporarily Locked!..You've reached a maximum of 3 wrong password attempt.. Please Contact IT to Reset your Password..", "ITCore Solutions Inc.");
-                        return;
-                    }
-                   
-                    get_password();
-
+                    buttonLogin.PerformClick();
                 }
             }
             catch (Exception ex)
@@ -452,18 +477,6 @@ namespace SalesInventorySystem
         {
             if (e.KeyCode == Keys.Enter)
             {
-                
-                //if (txtuserid.Text.Trim() == "")
-                //{
-                //    XtraMessageBox.Show("User id is required.", "IT Core Solutions Inc.");
-                //    return;
-                //}
-                //if (txtpassword.Text.Trim() == "")
-                //{
-                //    XtraMessageBox.Show("Password is required.", "IT Core Solutions Inc.");
-                //    return;
-                //}
-                //get_password();
                 txtpassword.Focus();
             }
         }
@@ -472,26 +485,7 @@ namespace SalesInventorySystem
         {
 
         }
-
-        private void Login_Activated(object sender, EventArgs e)
-        {
-            //for(int i=0;i<=Application.OpenForms.Count-1;i+=1)
-            //{
-            //    if(!object.ReferenceEquals(Application.OpenForms[i],this))
-            //    {
-            //        Application.OpenForms[i].Close();
-            //    }
-            //}
-        }
-           //foreach (Form form in Application.OpenForms)
-//            {
-//                if (form.GetType() == typeof(Login))
-//                {
-//                    form.Activate();
-//                    return;
-//                }
-//}
-//Application.Run(new Login());
+        
 
         private void txtuserid_EditValueChanged(object sender, EventArgs e)
         {
@@ -503,7 +497,16 @@ namespace SalesInventorySystem
 
         }
 
-
-        
+        private static Process ProcessStart(string batLocation)
+        {
+            //var process = Process.Start(batCmd);
+            Process p = new Process();
+            p.StartInfo.UseShellExecute = false;
+            p.StartInfo.RedirectStandardOutput = true;
+            p.StartInfo.CreateNoWindow = true;
+            p.StartInfo.FileName = batLocation;
+            p.Start();
+            return p;
+        }
     }
 }

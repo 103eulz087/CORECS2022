@@ -7,6 +7,8 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using DevExpress.XtraEditors;
+using DevExpress.XtraGrid;
+using DevExpress.XtraGrid.Columns;
 using DevExpress.XtraGrid.Views.Grid;
 
 namespace SalesInventorySystem
@@ -40,9 +42,24 @@ namespace SalesInventorySystem
                 }
                 else if (radioButton2.Checked == true) //SUMMARY
                 {
-                    //Database.display($"SELECT * FROM func_view_BranchInventory('{Login.assignedBranch}') ", gridControl1, gridView1);
-                    string query = $"SELECT * FROM func_view_BranchInventory('{Login.assignedBranch}') ";
+                    //string query = $"SELECT * FROM func_view_BranchInventory('{Login.assignedBranch}') ";
+                    string query = "SELECT * FROM view_BranchInventory WHERE Branch='" + Login.assignedBranch + "' ";
                     HelperFunction.ShowWaitAndDisplay(query, gridControl1, gridView1, "Please wait", "Populating data into the database...");
+
+                    GridView view = gridControl1.FocusedView as GridView;
+                    view.SortInfo.ClearAndAddRange(new GridColumnSortInfo[] {
+                new GridColumnSortInfo(view.Columns["Category"],DevExpress.Data.ColumnSortOrder.Ascending)
+                }, 1);
+                    gridView1.ExpandAllGroups();
+
+                    GridGroupSummaryItem ite = new GridGroupSummaryItem();
+                    ite.FieldName = "Available";
+                    ite.SummaryType = DevExpress.Data.SummaryItemType.Sum;
+                    ite.ShowInGroupColumnFooter = gridView1.Columns["Available"];
+                    gridView1.GroupSummary.Add(ite);
+                    gridView1.Focus();
+
+
                     gridView1.Focus();
                 }
                 // Database.GridMasterDetail("view_BranchInventory", "view_BranchInventoryDetails", "Branch='" + Login.assignedBranch + "'", "Branch='" + Login.assignedBranch + "'", "Product", "Product", "InventoryBreakdownDetails", gridControl1);

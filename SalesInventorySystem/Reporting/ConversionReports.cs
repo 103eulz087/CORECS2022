@@ -23,8 +23,9 @@ namespace SalesInventorySystem.Reporting
 
         private void ConversionReports_Load(object sender, EventArgs e)
         {
-            
-          
+            datefrom.Text = DateTime.Today.ToShortDateString();
+            dateto.Text = DateTime.Today.ToShortDateString();
+
             if (Login.assignedBranch == "888")
             {
                 loadBranch();

@@ -115,6 +115,23 @@ namespace SalesInventorySystem.Reporting
 
             xct.Bands[BandKind.Detail].Controls.Add(HelperFunction.CopyGridControl(this.gridControl1));
             xct.Bands[BandKind.Detail].Font = new System.Drawing.Font("Tahoma", 10);
+
+
+
+            // Disable the checkbox selector in print/export
+            // (Optional) also hide the selector column from the UI if you don't want it visible at all
+            gridView1.OptionsSelection.MultiSelect = false;
+            gridView1.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.RowSelect;
+
+
+
+            gridView1.Columns["SeqNo"].OptionsColumn.Printable = DevExpress.Utils.DefaultBoolean.False;
+            gridView1.Columns["BarcodeNo"].OptionsColumn.Printable = DevExpress.Utils.DefaultBoolean.False;
+         
+            gridView1.Columns["Variance"].OptionsColumn.Printable = DevExpress.Utils.DefaultBoolean.False;
+            gridView1.Columns["Cost"].OptionsColumn.Printable = DevExpress.Utils.DefaultBoolean.False;
+            gridView1.Columns["TotalCost"].OptionsColumn.Printable = DevExpress.Utils.DefaultBoolean.False;
+
             ReportPrintTool report = new ReportPrintTool(xct);
             report.ShowRibbonPreviewDialog();
         }

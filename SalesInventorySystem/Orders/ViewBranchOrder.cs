@@ -125,7 +125,7 @@ namespace SalesInventorySystem
             stat = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "WareHouseStatus").ToString();
             effectivedate = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "EffectivityDate").ToString();
             custname = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "CustomerName").ToString();
-            bool ok = Database.checkifExist("SELECT isProcess FROM view_BranchOrder WHERE isProcess = '0' " +
+            bool ok = Database.checkifExist("SELECT 1 FROM view_BranchOrder WHERE isProcess = '0' " +
                 "AND Status='APPROVED' " +
                 "AND (WareHouseStatus='PENDING' OR WareHouseStatus is null) " +
                 "AND (OrderType='MAIN' OR OrderType='ADD-ONS') " +

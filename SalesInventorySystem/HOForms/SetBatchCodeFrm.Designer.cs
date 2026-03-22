@@ -80,7 +80,7 @@
             this.Controls.Add(this.labelControl1);
             this.Controls.Add(this.txtbatchcode);
             this.ForeColor = System.Drawing.Color.Black;
-            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "SetBatchCodeFrm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "SetBatchCodeFrm";

@@ -1,5 +1,6 @@
 ﻿using DevExpress.XtraEditors;
 using Newtonsoft.Json;
+using SalesInventorySystem.Classes;
 using SalesInventorySystem.SalesModel;
 using System;
 using System.Collections.Generic;
@@ -1093,14 +1094,82 @@ namespace SalesInventorySystem.POS
 
         }
 
+        async void EODwithUpload(DateTime transDate)
+        {
+            // Reset your progress bar (assuming you have a control named progressBar1)
+            progressBar1.Value = 0;
+            progressBar1.Maximum = 100; // We use 0-100 percentage
 
-        private void simpleButton1_Click(object sender, EventArgs e)
+            // 1. Create the Progress handlers. 
+            // These run ON THE UI THREAD whenever the background thread calls .Report()
+            IProgress<int> progressHandler = new Progress<int>(p =>
+            {
+                progressBar1.Value = Math.Min(p, 100);
+            });
+
+            IProgress<string> statusHandler = new Progress<string>(msg =>
+            {
+                lblProgress.Text = msg;
+            });
+
+            try
+            {
+                //DateTime transDate = DateTime.Today;
+                string branchCode = Login.assignedBranch;
+                string machineName = Environment.MachineName;
+
+                PosDataUploader uploader = new PosDataUploader();
+               
+                statusHandler.Report("Starting upload process...");
+
+                // 2. Pass the handlers into the background task!
+                await Task.Run(async () =>
+                {
+                    statusHandler.Report("Starting Sales Summary upload...");
+                    await uploader.UploadBatchSalesSummaryAsync(transDate, branchCode, machineName, progressHandler, statusHandler);
+
+                    // If you have more tables, you would do this:
+                    statusHandler.Report("Starting Sales Details upload...");
+                    await uploader.UploadBatchSalesDetailsAsync(transDate, branchCode, machineName, progressHandler, statusHandler);
+
+                    statusHandler.Report("Starting Sales Transaction Summary upload...");
+                    await uploader.UploadBatchSalesTransactionSummaryAsync(transDate, branchCode, machineName, progressHandler, statusHandler);
+                    
+                    statusHandler.Report("Starting POSZReading Transaction upload...");
+                    await uploader.UploadBatchZReadingTransactionsAsync(transDate, branchCode, machineName, progressHandler, statusHandler);
+
+                    statusHandler.Report("Starting Sales Discount upload...");
+                    await uploader.UploadBatchSalesDiscountAsync(transDate, branchCode, machineName, progressHandler, statusHandler);
+
+                    statusHandler.Report("Starting POSSales Summary upload...");
+                    await uploader.UploadBatchPOSSalesSummaryAsync(transDate, branchCode, machineName, progressHandler, statusHandler);
+                });
+
+                MessageBox.Show("All end-of-day data uploaded seamlessly!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                lblProgress.Text = "Error during upload.";
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                
+            }
+        }
+
+        private async void simpleButton1_Click(object sender, EventArgs e)
         {
             simpleButton1.Enabled = false;
             progressBarControl1.Position = 0;
             bool confirm = HelperFunction.ConfirmDialog("Are you Sure you want to Execute END OF DAY Transaction?", "End Of Day");
             if (confirm)
             {
+
+
+
+
+                EODwithUpload(Convert.ToDateTime(txttransactiondate.Text));
                 executeEOD();
                 pushit();
                 //AuthorizedConfirmationFrm authfrm = new AuthorizedConfirmationFrm();

@@ -399,20 +399,55 @@ namespace SalesInventorySystem
                     Console.WriteLine($"Error loading printer mappings: {ex.Message}");
                     // Handle the error appropriately (e.g., use default mappings or log)
                 }
-            
-
-            //// Example fallback mappings if database loading fails or for categories not in the DB
-            //if (!printerMappings.ContainsKey("beverages"))
-            //{
-            //    printerMappings["beverages"] = Tuple.Create("192.168.0.101", 9100);
-            //}
-            //if (!printerMappings.ContainsKey("grill"))
-            //{
-            //    printerMappings["grill"] = Tuple.Create("192.168.0.102", 9100);
-            //}
-            // Add more fallback mappings as needed
         }
+        private Tuple<string, int> GetConsolidatedPrinterConfig()
+        {
+            // Set default fallback values just in case the database query fails
+            string ip = "127.0.0.1";
+            int port = 9100;
 
+            // Use a single query to get both settings at once
+            string query = "SELECT SettingName, SettingValue FROM dbo.POSPrinterSettings WHERE SettingName IN ('ConsolidatedPrinterIP', 'ConsolidatedPrinterPort')";
+
+            try
+            {
+                // Using blocks ensure the connection and reader are closed immediately after use
+                using (SqlConnection connection = Database.getConnection())
+                {
+                    connection.Open();
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                string settingName = reader.GetString(0);
+                                string settingValue = reader.GetString(1);
+
+                                if (settingName == "ConsolidatedPrinterIP")
+                                {
+                                    ip = settingValue;
+                                }
+                                else if (settingName == "ConsolidatedPrinterPort")
+                                {
+                                    // Try to parse the port, fallback to 9100 if someone typed letters in the DB
+                                    if (!int.TryParse(settingValue, out port))
+                                    {
+                                        port = 9100;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error loading consolidated printer config: {ex.Message}");
+            }
+
+            return Tuple.Create(ip, port);
+        }
         public async void PrintOrderToFileTestAsync(string refno, string waiterid, string tableno, string location, DataGridView gridview)
         {
             LoadPrinterMappings();
@@ -444,11 +479,11 @@ namespace SalesInventorySystem
                         categoryOrderData[CategoryName].AppendLine($"Order ID: {refno}");
                         categoryOrderData[CategoryName].AppendLine($"Transaction No.: {location}");
                         categoryOrderData[CategoryName].AppendLine("" + (Char)27 + (Char)112 + (Char)0 + (Char)25 + "");
-                        categoryOrderData[CategoryName].AppendLine(HelperFunction.PrintLeftRigthText("Table #:" + tableno, "Waiter:" + waiterid) + Environment.NewLine);
+                        categoryOrderData[CategoryName].AppendLine(HelperFunction.PrintLeftRigthText("Table #:" + tableno,"") + Environment.NewLine);
                         categoryOrderData[CategoryName].AppendLine(HelperFunction.PrintCenterText(CategoryName.ToUpper()) + Environment.NewLine);
                     }
-                    categoryOrderData[CategoryName].AppendLine(HelperFunction.PrintLeftRigthText(Description, QtySold.ToString()) + Environment.NewLine);
-                    consolidatedOrder.AppendLine(HelperFunction.PrintLeftRigthText(Description, QtySold.ToString()) + Environment.NewLine);
+                    categoryOrderData[CategoryName].AppendLine(HelperFunction.PrintLeftText(QtySold.ToString()+" - " + Description + Environment.NewLine));
+                    consolidatedOrder.AppendLine(HelperFunction.PrintLeftText(QtySold.ToString() + " - " + Description + Environment.NewLine));
                 }
             }
             reader.Close(); 
@@ -482,6 +517,8 @@ namespace SalesInventorySystem
                     ex.StackTrace.ToString();
                     //Console.WriteLine($"Error writing order for category '{category.ToUpper()}': {ex.Message}");
                 }
+             
+
                 ////////////////////////////////////////////////////////////////////////////////////////////////
                 ///////////////////////////////////////////////////////////////////////////////////////////////////
                 if (categoryOrderData[category].Length > ($"Order ID: {refno}\n----- {category.ToUpper()} -----\n").Length && printerMappings.ContainsKey(category))
@@ -497,7 +534,7 @@ namespace SalesInventorySystem
 
             //////////////////////////////////////////////////////////////////////////////////////////
             ////CONSOLIDATEDORDERS FILE//////////////////////////////////////////////////////////
-            
+
             string consolidatedFolderPath = Path.Combine(baseFolderPath, "ConsolidatedOrders",refno);
             if (!Directory.Exists(consolidatedFolderPath))
             {
@@ -517,7 +554,23 @@ namespace SalesInventorySystem
                 ex.StackTrace.ToString();
             }
             printTextFile(consolidatedFilePath); //print to main printer
-           
+
+            // =========================================================================
+            // === INSERT THE NEW NETWORK PRINTER METHOD HERE (OUTSIDE ALL LOOPS) ===
+            // =========================================================================
+
+            // 1. Fetch the IP and Port dynamically from the database
+            var consolidatedConfig = GetConsolidatedPrinterConfig();
+            string consolidatedPrinterIP = consolidatedConfig.Item1;
+            int consolidatedPrinterPort = consolidatedConfig.Item2;
+
+            // 2. Send the raw string data over the network
+            if (consolidatedOrder.Length > 0 && consolidatedPrinterIP != "127.0.0.1")
+            {
+                SendRawDataAsync(consolidatedPrinterIP, consolidatedPrinterPort, consolidatedOrder.ToString());
+            }
+            // =========================================================================
+
             //////////////////////////////////////////////////////////////////////////////////////////
             //////////////////////////////////////////////////////////////////////////////////////////
         }
@@ -1467,7 +1520,8 @@ namespace SalesInventorySystem
                     ///////////////////////////////////////////////////////////////////////////////////////////////////////
                     details += HelperFunction.createDottedLine() + Environment.NewLine;
                     details += HelperFunction.PrintLeftRigthText("AMOUNT DUE:", HelperFunction.convertToNumericFormat(Convert.ToDouble(POS.POSConfirmPayment.netamountpayable))) + Environment.NewLine + Environment.NewLine;
-                   
+
+                    //newdiscitems = Convert.ToDouble(total) - Convert.ToDouble(POS.POSConfirmPayment.discamount);
                 } 
                 //else if (POS.POSConfirmPayment.isPwdDiscount == true)
                 else if (disctype == "PWD")
@@ -1499,6 +1553,7 @@ namespace SalesInventorySystem
                     ///////////////////////////////////////////////////////////////////////////////////////////////////////
                     details += HelperFunction.createDottedLine() + Environment.NewLine;
                     details += HelperFunction.PrintLeftRigthText("AMOUNT DUE:", HelperFunction.convertToNumericFormat(Convert.ToDouble(POS.POSConfirmPayment.netamountpayable))) + Environment.NewLine + Environment.NewLine;
+                    //newdiscitems = Convert.ToDouble(total) - Convert.ToDouble(POS.POSConfirmPayment.discamount);
                 }
                 else if (disctype == "NAAC")
                 {
@@ -1529,6 +1584,7 @@ namespace SalesInventorySystem
                     ///////////////////////////////////////////////////////////////////////////////////////////////////////
                     details += HelperFunction.createDottedLine() + Environment.NewLine;
                     details += HelperFunction.PrintLeftRigthText("AMOUNT DUE:", HelperFunction.convertToNumericFormat(Convert.ToDouble(POS.POSConfirmPayment.netamountpayable))) + Environment.NewLine + Environment.NewLine;
+                    //newdiscitems = Convert.ToDouble(total) - Convert.ToDouble(POS.POSConfirmPayment.discamount);
                 }
                 else if (disctype == "SOLOPARENT")
                 {
@@ -1559,6 +1615,7 @@ namespace SalesInventorySystem
                     ///////////////////////////////////////////////////////////////////////////////////////////////////////
                     details += HelperFunction.createDottedLine() + Environment.NewLine;
                     details += HelperFunction.PrintLeftRigthText("AMOUNT DUE:", HelperFunction.convertToNumericFormat(Convert.ToDouble(POS.POSConfirmPayment.netamountpayable))) + Environment.NewLine + Environment.NewLine;
+                   // newdiscitems = Convert.ToDouble(total) - Convert.ToDouble(POS.POSConfirmPayment.discamount);
                 }
                 else if (disctype == "MOV")
                 {
@@ -1589,6 +1646,7 @@ namespace SalesInventorySystem
                     ///////////////////////////////////////////////////////////////////////////////////////////////////////
                     details += HelperFunction.createDottedLine() + Environment.NewLine;
                     details += HelperFunction.PrintLeftRigthText("AMOUNT DUE:", HelperFunction.convertToNumericFormat(Convert.ToDouble(POS.POSConfirmPayment.netamountpayable))) + Environment.NewLine + Environment.NewLine;
+                    //newdiscitems = Convert.ToDouble(total) - Convert.ToDouble(POS.POSConfirmPayment.discamount);
                 }
                 //else if (POS.POSConfirmPayment.isOthersDiscount == true)
                 else if (disctype == "REGULAR")
@@ -1619,7 +1677,7 @@ namespace SalesInventorySystem
                     ///////////////////////////////////////////////////////////////////////////////////////////////////////
                     //details += HelperFunction.PrintLeftRigthText("AMOUNT DUE:", HelperFunction.convertToNumericFormat(Convert.ToDouble(POS.POSConfirmPayment.netamountpayable))) + Environment.NewLine + Environment.NewLine;
                     details += HelperFunction.PrintLeftRigthText("AMOUNT DUE:", HelperFunction.convertToNumericFormat(Convert.ToDouble(total)-Convert.ToDouble(POS.POSConfirmPayment.discamount))) + Environment.NewLine + Environment.NewLine;
-                    newdiscitems = Convert.ToDouble(total) - Convert.ToDouble(POS.POSConfirmPayment.discamount);
+                    //newdiscitems = Convert.ToDouble(total) - Convert.ToDouble(POS.POSConfirmPayment.discamount);
                 }
 
             }
@@ -1633,7 +1691,7 @@ namespace SalesInventorySystem
                 details += HelperFunction.PrintLeftRigthText("CHANGE  :", "0.00") + Environment.NewLine + Environment.NewLine;
             }
             details += HelperFunction.PrintLeftRigthText("TENDERED:", cash) + Environment.NewLine;
-            details += HelperFunction.PrintLeftRigthText("CHANGE  :", HelperFunction.convertToNumericFormat(Convert.ToDouble(cash)- newdiscitems)) + Environment.NewLine + Environment.NewLine;
+            details += HelperFunction.PrintLeftRigthText("CHANGE  :", HelperFunction.convertToNumericFormat(Convert.ToDouble(cash)- Convert.ToDouble(POS.POSConfirmPayment.netamountpayable))) + Environment.NewLine + Environment.NewLine;
 
             double totalvatableSales = netofscdisc + netofnonscdisc;
             double totalVatInputSale = 0.0;

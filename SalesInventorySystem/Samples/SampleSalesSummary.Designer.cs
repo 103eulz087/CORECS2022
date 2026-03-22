@@ -74,9 +74,9 @@
             this.groupBox2.Controls.Add(this.pivotGridControl1);
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox2.Location = new System.Drawing.Point(3, 3);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(4);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(4);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.groupBox2.Size = new System.Drawing.Size(2086, 1086);
             this.groupBox2.TabIndex = 8;
             this.groupBox2.TabStop = false;
@@ -120,7 +120,7 @@
             this.pivotGridControl1.DataMember = "CustomSqlQuery";
             this.pivotGridControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pivotGridControl1.Location = new System.Drawing.Point(4, 30);
-            this.pivotGridControl1.Margin = new System.Windows.Forms.Padding(4);
+            this.pivotGridControl1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pivotGridControl1.Name = "pivotGridControl1";
             this.pivotGridControl1.OptionsBehavior.BestFitMode = ((DevExpress.XtraPivotGrid.PivotGridBestFitMode)((DevExpress.XtraPivotGrid.PivotGridBestFitMode.FieldValue | DevExpress.XtraPivotGrid.PivotGridBestFitMode.FieldHeader)));
             this.pivotGridControl1.OptionsView.FilterSeparatorBarPadding = 2;

@@ -32,22 +32,22 @@
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.repoMetrics = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
             this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
+            this.txtsrchprodcat = new DevExpress.XtraEditors.SearchLookUpEdit();
+            this.searchLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
             this.txtpono = new DevExpress.XtraEditors.TextEdit();
             this.btnsave = new DevExpress.XtraEditors.SimpleButton();
             this.txtsearchprod = new DevExpress.XtraEditors.TextEdit();
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
-            this.txtsrchprodcat = new DevExpress.XtraEditors.SearchLookUpEdit();
-            this.searchLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repoMetrics)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
             this.groupControl1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtpono.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtsearchprod.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtsrchprodcat.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtpono.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtsearchprod.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // gridControl1
@@ -117,6 +117,41 @@
             this.groupControl1.TabIndex = 7;
             this.groupControl1.Text = "Press Extract Button to show All Items";
             // 
+            // txtsrchprodcat
+            // 
+            this.txtsrchprodcat.Location = new System.Drawing.Point(200, 59);
+            this.txtsrchprodcat.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.txtsrchprodcat.Name = "txtsrchprodcat";
+            this.txtsrchprodcat.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 9.8F);
+            this.txtsrchprodcat.Properties.Appearance.Options.UseFont = true;
+            this.txtsrchprodcat.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.txtsrchprodcat.Properties.NullText = "";
+            this.txtsrchprodcat.Properties.PopupView = this.searchLookUpEdit1View;
+            this.txtsrchprodcat.Size = new System.Drawing.Size(366, 46);
+            this.txtsrchprodcat.TabIndex = 108;
+            this.txtsrchprodcat.EditValueChanged += new System.EventHandler(this.txtsrchprodcat_EditValueChanged);
+            // 
+            // searchLookUpEdit1View
+            // 
+            this.searchLookUpEdit1View.DetailHeight = 547;
+            this.searchLookUpEdit1View.FixedLineWidth = 3;
+            this.searchLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
+            this.searchLookUpEdit1View.Name = "searchLookUpEdit1View";
+            this.searchLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = false;
+            this.searchLookUpEdit1View.OptionsView.ShowGroupPanel = false;
+            // 
+            // labelControl2
+            // 
+            this.labelControl2.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelControl2.Appearance.Options.UseFont = true;
+            this.labelControl2.Location = new System.Drawing.Point(15, 68);
+            this.labelControl2.Margin = new System.Windows.Forms.Padding(6);
+            this.labelControl2.Name = "labelControl2";
+            this.labelControl2.Size = new System.Drawing.Size(174, 29);
+            this.labelControl2.TabIndex = 107;
+            this.labelControl2.Text = "Select Category:";
+            // 
             // txtpono
             // 
             this.txtpono.Location = new System.Drawing.Point(15, 149);
@@ -163,41 +198,6 @@
             this.labelControl1.Text = "Search Product:";
             this.labelControl1.Visible = false;
             // 
-            // txtsrchprodcat
-            // 
-            this.txtsrchprodcat.Location = new System.Drawing.Point(200, 59);
-            this.txtsrchprodcat.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
-            this.txtsrchprodcat.Name = "txtsrchprodcat";
-            this.txtsrchprodcat.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 9.8F);
-            this.txtsrchprodcat.Properties.Appearance.Options.UseFont = true;
-            this.txtsrchprodcat.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.txtsrchprodcat.Properties.NullText = "";
-            this.txtsrchprodcat.Properties.PopupView = this.searchLookUpEdit1View;
-            this.txtsrchprodcat.Size = new System.Drawing.Size(366, 46);
-            this.txtsrchprodcat.TabIndex = 108;
-            this.txtsrchprodcat.EditValueChanged += new System.EventHandler(this.txtsrchprodcat_EditValueChanged);
-            // 
-            // searchLookUpEdit1View
-            // 
-            this.searchLookUpEdit1View.DetailHeight = 547;
-            this.searchLookUpEdit1View.FixedLineWidth = 3;
-            this.searchLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
-            this.searchLookUpEdit1View.Name = "searchLookUpEdit1View";
-            this.searchLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = false;
-            this.searchLookUpEdit1View.OptionsView.ShowGroupPanel = false;
-            // 
-            // labelControl2
-            // 
-            this.labelControl2.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelControl2.Appearance.Options.UseFont = true;
-            this.labelControl2.Location = new System.Drawing.Point(15, 68);
-            this.labelControl2.Margin = new System.Windows.Forms.Padding(6);
-            this.labelControl2.Name = "labelControl2";
-            this.labelControl2.Size = new System.Drawing.Size(174, 29);
-            this.labelControl2.TabIndex = 107;
-            this.labelControl2.Text = "Select Category:";
-            // 
             // SearchProductBatchMode
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
@@ -217,10 +217,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).EndInit();
             this.groupControl1.ResumeLayout(false);
             this.groupControl1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtpono.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtsearchprod.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtsrchprodcat.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtpono.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtsearchprod.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }

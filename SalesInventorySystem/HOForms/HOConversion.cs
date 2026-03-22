@@ -185,62 +185,34 @@ namespace SalesInventorySystem
                     srcprodcode = gridView3.GetRowCellValue(i, "SourceProductCode").ToString();
                     sourceProd1 = gridView3.GetRowCellValue(i, "ProductCode").ToString();
                     sourceDesc1 = gridView3.GetRowCellValue(i, "Description").ToString();
+                    //ONE TO MANY
                     if(radioButton1.Checked==true)
                     {
                         actualqty = gridView3.GetRowCellValue(i, "ActualQty").ToString();
-                    }
-
-                    if (radioButton1.Checked == true) //one to many
-                    {
                         percentagePerPart = Convert.ToDouble(actualqty) / Convert.ToDouble(txttotalavailableqty.Text);/// Convert.ToDouble(sourceAvailable);
-                    }
-                    else
-                    {
-                        percentagePerPart = Convert.ToDouble(txtactualqty.Text) / Convert.ToDouble(txttotalavailableqty.Text);
-                    }
-                    sourceAmountPerPart = percentagePerPart * sourceTotalAmount;
-
-                    totalqtyconverted += Convert.ToDouble(gridView3.GetRowCellValue(i, "Quantity").ToString()); //Total Quantity sa gi convert
-                    if (radioButton1.Checked == true)
-                    {
+                        sourceAmountPerPart = percentagePerPart * sourceTotalAmount;
                         totalActualQuantity += Convert.ToDouble(gridView3.GetRowCellValue(i, "ActualQty").ToString());
-                    }
-                    else
-                    {
-                        totalActualQuantity = Convert.ToDouble(txtactualqty.Text);
-                    }
-
-                    if(radioButton1.Checked==true)
-                    {
                         newcostkg = sourceAmountPerPart / Convert.ToDouble(actualqty);
-                    }
-                   else
-                    {
-                        newcostkg = sourceAmountPerPart / Convert.ToDouble(txtactualqty.Text);
-                    }
-
-                    if (radioButton1.Checked == true)
-                    {
                         //ONE TO MANY
-                        if(String.IsNullOrEmpty(gridView3.GetRowCellValue(i,"ProductCode").ToString()) || String.IsNullOrEmpty(gridView3.GetRowCellValue(i, "Description").ToString()))
+                        if (String.IsNullOrEmpty(gridView3.GetRowCellValue(i, "ProductCode").ToString()) || String.IsNullOrEmpty(gridView3.GetRowCellValue(i, "Description").ToString()))
                         {
                             XtraMessageBox.Show("The System found out that one of your Converted Items is No ProductCode or No Description!...");
                             return;
                         }
                         conversionType = "OneToMany";
-                        string srcdesc = Database.getSingleQuery("Products", "BranchCode='" + Login.assignedBranch + "' and ProductCode='"+srcprodcode+"'", "Description");
-                         //if total quantity converted greater than source quantity
+                        string srcdesc = Database.getSingleQuery("Products", "BranchCode='" + Login.assignedBranch + "' and ProductCode='" + srcprodcode + "'", "Description");
+                        //if total quantity converted greater than source quantity
                         if (Convert.ToDouble(txttotalweight.Text) > Convert.ToDouble(txttotalavailableqty.Text))
                         {
                             XtraMessageBox.Show("Quantity must not greater than SourceQty");
                             return;
                         }
-                        
-                       
+
+
                         else if (Convert.ToDouble(txttotalactualweight.Text) > Convert.ToDouble(txttotalweight.Text))
                         {
 
-                             //ang sobra na quantity or overrage
+                            //ang sobra na quantity or overrage
                             existingqty = Convert.ToDouble(txttotalavailableqty.Text) - totalActualQuantity;
                             string mark1 = newcostkg.ToString();
                             string mark2 = percentagePerPart.ToString();
@@ -253,8 +225,13 @@ namespace SalesInventorySystem
                             Database.ExecuteQuery("INSERT INTO TempConversionDetails VALUES('" + Login.assignedBranch + "','" + txtrefcode.Text + "','" + sourceSeqNum + " ','" + srcprodcode + "','" + srcdesc + "','" + txtsrcqty.Text + "','" + sourceCost + "',0,'" + gridView3.GetRowCellValue(i, "ProductCode").ToString() + "','" + gridView3.GetRowCellValue(i, "Description").ToString() + "','" + gridView3.GetRowCellValue(i, "ActualQty").ToString() + "','" + gridView3.GetRowCellValue(i, "ActualQty").ToString() + "','" + newcostkg + "','" + percentagePerPart + "',0,0,'" + sourceAmountPerPart + "','" + gridView3.GetRowCellValue(i, "Barcode").ToString() + "')");
                         }
                     }
-                    else //MANY TO ONE
+                    else  //MANY TO ONE
                     {
+                        percentagePerPart = Convert.ToDouble(txtactualqty.Text) / Convert.ToDouble(txttotalavailableqty.Text);
+                        sourceAmountPerPart = percentagePerPart * sourceTotalAmount;
+                        totalActualQuantity = Convert.ToDouble(txtactualqty.Text);
+                        newcostkg = sourceAmountPerPart / Convert.ToDouble(txtactualqty.Text);
+
                         sourceSeqNum1 = "222";
                         sourceAvailableGrid2 = gridView3.GetRowCellValue(i, "SourceQty").ToString(); //ang original quantity sa product nga e convert
                         sourceTotalAmount2 = 0 * Convert.ToDouble(sourceAvailableGrid2);
@@ -265,10 +242,9 @@ namespace SalesInventorySystem
                         totalSourceQuantity += Convert.ToDouble(sourceAvailableGrid2);
 
                         conversionType = "ManyToOne";
-                        Database.ExecuteQuery("INSERT INTO TempConversionDetails VALUES('" + Login.assignedBranch + "','" + txtrefcode.Text + "','" + sourceSeqNum1 + "','" + sourceProd1 + "','" + sourceDesc1 + "','" + sourceAvailableGrid2 + "','0',0,'" + objprodforcodemanytoone.ToString() + "','" + txtsrchprdctmanytoone.Text+ "','" + gridView3.GetRowCellValue(i, "Quantity").ToString() + "','" + txtactualqty.Text + "','0','" + percentagePerPart2 + "',0,0,'" + sourceAmountPerPart2 + "','" + gridView3.GetRowCellValue(i, "Barcode").ToString() + "')");
-
-
+                        Database.ExecuteQuery("INSERT INTO TempConversionDetails VALUES('" + Login.assignedBranch + "','" + txtrefcode.Text + "','" + sourceSeqNum1 + "','" + sourceProd1 + "','" + sourceDesc1 + "','" + sourceAvailableGrid2 + "','0',0,'" + objprodforcodemanytoone.ToString() + "','" + txtsrchprdctmanytoone.Text + "','" + gridView3.GetRowCellValue(i, "Quantity").ToString() + "','" + txtactualqty.Text + "','0','" + percentagePerPart2 + "',0,0,'" + sourceAmountPerPart2 + "','" + gridView3.GetRowCellValue(i, "Barcode").ToString() + "')");
                     }
+                    totalqtyconverted += Convert.ToDouble(gridView3.GetRowCellValue(i, "Quantity").ToString()); //Total Quantity sa gi convert
                 }
                 if (radioButton1.Checked == true)
                 {
@@ -363,6 +339,7 @@ namespace SalesInventorySystem
 
         private void simpleButton2_Click(object sender, EventArgs e)
         {
+            //ONE TO MANY
             if(radioButton1.Checked==true)
             {
                 if (Convert.ToDouble(txttotalactualweight.Text) > Database.getTotalSummation2("Inventory", "Product = '" + labeleulz.Text + "' AND Branch='" + Login.assignedBranch + "' AND Available > 0 and isWarehouse=1 ", "Available")) //Database.getTotalSummation("Inventory", "Product", txtsku.Text.Substring(1, 6), "Quantity"))
@@ -376,15 +353,28 @@ namespace SalesInventorySystem
                     XtraMessageBox.Show("Source Quantity must not Equal to Zero or EMpty!");
                     return;
                 }
+                if(Convert.ToDouble(txttotalactualweight.Text) != Convert.ToDouble(txtsrcqty.Text))
+                {
+                    XtraMessageBox.Show("ONE TO MANY --Source Quantity must Equal to Total Qty of Converted items!");
+                    return;
+                }
             }
-            if (radioButton2.Checked==true)
+            //MANY TO ONE
+            else if (radioButton2.Checked==true)
             {
                 if(String.IsNullOrEmpty(objprodforcodemanytoone.ToString())) 
                 {
                     XtraMessageBox.Show("Product Category Code or Product Code must not Empty!!!...");
                     return;
                 }
-                
+               // double actqty = Convert.ToDouble(txtactualqty.Text) + Convert.ToDouble(txtdriplossqty.Text);
+                decimal actqty = Convert.ToDecimal(txtactualqty.Text) + Convert.ToDecimal(txtdriplossqty.Text);
+                if (Convert.ToDecimal(txttotalactualweight.Text) != actqty)
+                {
+                    XtraMessageBox.Show("MANY TO ONE --Source Quantity must Equal to Total Qty of Converted items!");
+                    return;
+                }
+
             }
             addEntry();
         }
@@ -461,7 +451,9 @@ namespace SalesInventorySystem
                 {
                     gridView3.Columns["SourceQty"].Summary.Clear();
                     gridView3.Columns["SourceQty"].Summary.Add(DevExpress.Data.SummaryItemType.Sum, "SourceQty", "{0}");
-                    
+                    gridView3.Columns["Quantity"].Summary.Clear();
+                    gridView3.Columns["Quantity"].Summary.Add(DevExpress.Data.SummaryItemType.Sum, "Quantity", "{0}");
+
                 }
                 if (radioButton1.Checked == true)
                 {
@@ -839,6 +831,10 @@ namespace SalesInventorySystem
                 if (radioButton1.Checked == true)
                 {
                     totalactualqty += Math.Round(Convert.ToDouble(gridView3.GetRowCellValue(i, "ActualQty").ToString()), 3);
+                }
+                if (radioButton2.Checked == true)
+                {
+                    totalactualqty += Math.Round(Convert.ToDouble(gridView3.GetRowCellValue(i, "Quantity").ToString()), 3);
                 }
 
             }

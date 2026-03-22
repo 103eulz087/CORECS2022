@@ -552,7 +552,7 @@ namespace SalesInventorySystem.POS
                 discounttype = "REGULAR";
             }
             spSaveTransaction(discounttype, invno);
-            pushit();
+            //pushit();
         }
         bool haveOneTimeDiscount()
         {
@@ -778,6 +778,7 @@ namespace SalesInventorySystem.POS
                 XtraMessageBox.Show(ex.Message.ToString());
             }
         }
+
         void analyze(string spname, string pono, GridControl cont, GridView view)
         {
             SqlConnection con = Database.getConnection();

@@ -48,7 +48,8 @@ namespace SalesInventorySystem.Reporting
                 }
                 else
                 {
-                    txtsrcqty.Text = getTotal("SourceQty").ToString();
+                    //txtsrcqty.Text = getTotal("SourceQty").ToString();
+                    txtsrcqty.Text = getTotal("Quantity").ToString();
                     gridView1.OptionsView.AllowCellMerge = true;
                     if (gridView1.Columns[i].FieldName == "BranchCode" || gridView1.Columns[i].FieldName == "ConID" || gridView1.Columns[i].FieldName == "Description" || gridView1.Columns[i].FieldName == "Variance" || gridView1.Columns[i].FieldName == "Cost" || gridView1.Columns[i].FieldName == "ActualQty")
                         gridView1.Columns[i].OptionsColumn.AllowMerge = DevExpress.Utils.DefaultBoolean.True;
