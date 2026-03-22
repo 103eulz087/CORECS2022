@@ -993,6 +993,7 @@ namespace SalesInventorySystem.Orders
                     //    txtsku.Text = "";
                     //}
                     //kung imong gi encode na quantity is greater than sa total quantity sa imong Inventory sa commisary
+
                     if (Convert.ToDouble(txtweight.Text) > Database.getTotalSummation2("Inventory", "Product = '" + primalproductcode + "' AND Branch='" + Login.assignedBranch + "' AND isWarehouse=1 and Available > 0 ", "Available")) //Database.getTotalSummation("Inventory", "Product", txtsku.Text.Substring(1, 6), "Quantity"))
                     {
                         string mark = Database.getTotalSummation2("Inventory", "Product = '" + primalproductcode + "' AND Branch='" + Login.assignedBranch + "' AND isWarehouse=1  and Available > 0 ", "Available").ToString();

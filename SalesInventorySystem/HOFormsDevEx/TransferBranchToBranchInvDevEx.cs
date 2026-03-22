@@ -40,7 +40,7 @@ namespace SalesInventorySystem.HOFormsDevEx
             {
                 txttransferno.Text = IDGenerator.getIDNumberSP("sp_GetTransferInventoryNumber", "TransferNo");
             }
-            Database.displaySearchlookupEdit($"SELECT DISTINCT Product,Description FROM dbo.Inventory WHERE Branch='{Login.assignedBranch}' and isAvailable > 0", txtsearchlookupproduct);
+            Database.displaySearchlookupEdit($"SELECT DISTINCT Product,Description FROM dbo.Inventory WHERE Branch='{Login.assignedBranch}' and Available > 0", txtsearchlookupproduct);
             Database.displaySearchlookupEdit($"SELECT BranchCode,BranchName FROM dbo.Branch ", txtbranch);
             radchanged();
         }

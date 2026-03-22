@@ -29,7 +29,7 @@ namespace SalesInventorySystem.HOFormsDevEx
 
         private void simpleButton1_Click(object sender, EventArgs e)
         {
-            bool confirm = HelperFunction.ConfirmDialog("Are you sure that all data is correct?", "Confirm Order");
+             bool confirm = HelperFunction.ConfirmDialog("Are you sure that all data is correct?", "Confirm Order");
             if (confirm)
             {
                 confirmOrder();

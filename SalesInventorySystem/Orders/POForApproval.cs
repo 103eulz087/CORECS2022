@@ -830,6 +830,11 @@ namespace SalesInventorySystem
             addCharges(gridView5);
         }
 
+        private void toolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+
+        }
+
         private void toolStripMenuItem13_Click(object sender, EventArgs e)
         {
             devno = gridView5.GetRowCellValue(gridView5.FocusedRowHandle, "DeliveryNo").ToString();
