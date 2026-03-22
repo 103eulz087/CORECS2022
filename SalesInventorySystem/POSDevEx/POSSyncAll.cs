@@ -21,11 +21,19 @@ namespace SalesInventorySystem.POSDevEx
 
         private async void btnsync_Click(object sender, EventArgs e)
         {
+            if (String.IsNullOrEmpty(txtcombotables.Text))
+            {
+                BigAlert.Show("SELECTION REQUIRED", "Please select what you want to sync from the dropdown menu.", MessageBoxIcon.Warning);
+                return;
+            }
+            string selectedSyncType = txtcombotables.Text; // Grab the text from the DevExpress Combo Box
+            string currentBranchCode = Login.assignedBranch;
             try
             {
                 // 1. LOCK THE UI AND SHOW SPINNER
                 // This prevents the cashier from clicking the button twice
                 btnsync.Enabled = false;
+                txtcombotables.Enabled = false;
                 progressSpinner.Visible = true;
                 progressBar.EditValue = 0;
                 lblStatus.Text = "Connecting to cloud server...";
@@ -44,19 +52,20 @@ namespace SalesInventorySystem.POSDevEx
                 });
 
                 // Grab the branch code (you likely have this saved in a global static variable)
-                string currentBranchCode = Login.assignedBranch;
+              
 
                 // 3. EXECUTE THE DOWNLOADER IN THE BACKGROUND
                 PosDataDownloader downloader = new PosDataDownloader();
-
-                // We wrap it in Task.Run to guarantee the UI thread stays 100% responsive
+                // 2. PASS THE COMBO BOX SELECTION TO THE NEW METHOD
                 await Task.Run(async () =>
                 {
-                    await downloader.SyncAllReferenceDataAsync(currentBranchCode, progressHandler, statusHandler);
+                    await downloader.SyncSpecificTableAsync(selectedSyncType, currentBranchCode, progressHandler, statusHandler);
                 });
+                // We wrap it in Task.Run to guarantee the UI thread stays 100% responsive
+
 
                 // 4. SUCCESS!
-                lblStatus.Text = "Sync complete. Ready to open store.";
+                BigAlert.Show("SYNC COMPLETE", $"Successfully synchronized: {selectedSyncType}", MessageBoxIcon.Information);
                 progressBar.EditValue = 100;
 
                 XtraMessageBox.Show("Morning sync complete! All prices, products, and users are up to date.",
@@ -70,16 +79,21 @@ namespace SalesInventorySystem.POSDevEx
             {
                 // 5. HANDLE FAILURES GRACEFULLY
                 lblStatus.Text = "Sync failed.";
-                XtraMessageBox.Show($"Could not synchronize data. Please check the internet connection.\n\nError: {ex.Message}",
-                    "Network Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                BigAlert.Show("SYNC ERROR", $"Could not synchronize data.\n\nError: {ex.Message}", MessageBoxIcon.Error);
             }
             finally
             {
                 // 6. UNLOCK THE UI
                 // This runs no matter what (success or crash), so the app never gets stuck
                 btnsync.Enabled = true;
+                txtcombotables.Enabled = true; // Unlock the dropdown
                 progressSpinner.Visible = false;
             }
+        }
+
+        private void POSSyncAll_Load(object sender, EventArgs e)
+        {
+            
         }
     }
 }

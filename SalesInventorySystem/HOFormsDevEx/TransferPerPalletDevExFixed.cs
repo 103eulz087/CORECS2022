@@ -13,6 +13,7 @@ using DevExpress.XtraReports.UI;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraGrid.Columns;
 using DevExpress.XtraGrid;
+using SalesInventorySystem.Classes;
 
 namespace SalesInventorySystem.HOFormsDevEx
 {
@@ -211,7 +212,10 @@ namespace SalesInventorySystem.HOFormsDevEx
         {
             if (string.IsNullOrWhiteSpace(txtdispatchno.Text))
             {
-                XtraMessageBox.Show("Add Dispatch No first.");
+                BigAlert.Show(
+               "NO DISPATCH NUMBER",
+               "Please Provide Dispatch Number",
+               MessageBoxIcon.Warning);
                 txtdispatchno.Focus();
                 return;
             }
@@ -224,7 +228,11 @@ namespace SalesInventorySystem.HOFormsDevEx
                 string.IsNullOrWhiteSpace(SelectedProductCode) ||
                 string.IsNullOrWhiteSpace(txtpalletno.Text))
             {
-                XtraMessageBox.Show("Please complete Shipment, Product, and Pallet.");
+                //XtraMessageBox.Show("Please complete Shipment, Product, and Pallet.");
+                BigAlert.Show(
+               "LACKING FIELDS",
+               "Please Provide Shipment, Product, and Pallet.",
+               MessageBoxIcon.Warning);
                 return;
             }
 
@@ -278,6 +286,10 @@ namespace SalesInventorySystem.HOFormsDevEx
             if (gridView1.RowCount == 0)
             {
                 XtraMessageBox.Show("Please stage (ADD) items before saving.");
+                BigAlert.Show(
+                 "NOTHING TO SAVE",
+                 "No items to be transferred",
+                 MessageBoxIcon.Warning);
                 return;
             }
 
@@ -302,7 +314,11 @@ namespace SalesInventorySystem.HOFormsDevEx
                 cmd.ExecuteNonQuery();
             }
 
-            XtraMessageBox.Show("Inventory Successfully Transferred.");
+            //XtraMessageBox.Show("Inventory Successfully Transferred.");
+            BigAlert.Show(
+                         "SUCCESS",
+                         "Inventory successfully transferred!..",
+                         MessageBoxIcon.Information);
             this.Dispose();
         }
 

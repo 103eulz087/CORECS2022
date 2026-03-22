@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TransferBranchToBranchInvDevEx));
             this.groupControl2 = new DevExpress.XtraEditors.GroupControl();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -47,7 +48,6 @@
             this.btngetweight = new DevExpress.XtraEditors.SimpleButton();
             this.simpleButton11 = new DevExpress.XtraEditors.SimpleButton();
             this.simpleButton10 = new DevExpress.XtraEditors.SimpleButton();
-            this.simpleButton9 = new DevExpress.XtraEditors.SimpleButton();
             this.btncancel = new DevExpress.XtraEditors.SimpleButton();
             this.btnadd = new DevExpress.XtraEditors.SimpleButton();
             this.labelControl10 = new DevExpress.XtraEditors.LabelControl();
@@ -71,6 +71,8 @@
             this.bandedGridView2 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridView();
             this.advBandedGridView2 = new DevExpress.XtraGrid.Views.BandedGrid.AdvBandedGridView();
             this.gridBand2 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.printBarcodeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).BeginInit();
             this.groupControl2.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -96,6 +98,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bandedGridView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.advBandedGridView2)).BeginInit();
+            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupControl2
@@ -105,7 +108,7 @@
             this.groupControl2.Location = new System.Drawing.Point(2, 2);
             this.groupControl2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.groupControl2.Name = "groupControl2";
-            this.groupControl2.Size = new System.Drawing.Size(1600, 183);
+            this.groupControl2.Size = new System.Drawing.Size(1600, 164);
             this.groupControl2.TabIndex = 6;
             this.groupControl2.Text = "Transfer/Return Item to Branch";
             // 
@@ -123,7 +126,6 @@
             this.groupBox2.Controls.Add(this.btngetweight);
             this.groupBox2.Controls.Add(this.simpleButton11);
             this.groupBox2.Controls.Add(this.simpleButton10);
-            this.groupBox2.Controls.Add(this.simpleButton9);
             this.groupBox2.Controls.Add(this.btncancel);
             this.groupBox2.Controls.Add(this.btnadd);
             this.groupBox2.Controls.Add(this.labelControl10);
@@ -181,13 +183,13 @@
             this.txtsearchlookupproduct.Location = new System.Drawing.Point(133, 55);
             this.txtsearchlookupproduct.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.txtsearchlookupproduct.Name = "txtsearchlookupproduct";
-            this.txtsearchlookupproduct.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 8.8F);
+            this.txtsearchlookupproduct.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 9.8F);
             this.txtsearchlookupproduct.Properties.Appearance.Options.UseFont = true;
             this.txtsearchlookupproduct.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.txtsearchlookupproduct.Properties.NullText = "";
             this.txtsearchlookupproduct.Properties.PopupView = this.searchLookUpEdit2View;
-            this.txtsearchlookupproduct.Size = new System.Drawing.Size(259, 24);
+            this.txtsearchlookupproduct.Size = new System.Drawing.Size(259, 26);
             this.txtsearchlookupproduct.TabIndex = 88;
             this.txtsearchlookupproduct.EditValueChanged += new System.EventHandler(this.txtsearchlookupproduct_EditValueChanged);
             // 
@@ -210,13 +212,14 @@
             // radothers
             // 
             this.radothers.AutoSize = true;
-            this.radothers.Location = new System.Drawing.Point(1009, 21);
+            this.radothers.Location = new System.Drawing.Point(1026, 22);
             this.radothers.Margin = new System.Windows.Forms.Padding(4);
             this.radothers.Name = "radothers";
             this.radothers.Size = new System.Drawing.Size(111, 21);
             this.radothers.TabIndex = 92;
             this.radothers.Text = "Other Branch";
             this.radothers.UseVisualStyleBackColor = true;
+            this.radothers.CheckedChanged += new System.EventHandler(this.radothers_CheckedChanged);
             // 
             // panelbranchselection
             // 
@@ -265,13 +268,14 @@
             // radho
             // 
             this.radho.AutoSize = true;
-            this.radho.Location = new System.Drawing.Point(903, 21);
+            this.radho.Location = new System.Drawing.Point(914, 23);
             this.radho.Margin = new System.Windows.Forms.Padding(4);
             this.radho.Name = "radho";
-            this.radho.Size = new System.Drawing.Size(98, 21);
+            this.radho.Size = new System.Drawing.Size(104, 21);
             this.radho.TabIndex = 91;
-            this.radho.Text = "Head Office";
+            this.radho.Text = "Commissary";
             this.radho.UseVisualStyleBackColor = true;
+            this.radho.CheckedChanged += new System.EventHandler(this.radho_CheckedChanged);
             // 
             // labelControl5
             // 
@@ -309,7 +313,7 @@
             // simpleButton11
             // 
             this.simpleButton11.ImageOptions.Image = global::SalesInventorySystem.Properties.Resources.Save_16x16__5_;
-            this.simpleButton11.Location = new System.Drawing.Point(497, 99);
+            this.simpleButton11.Location = new System.Drawing.Point(534, 95);
             this.simpleButton11.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.simpleButton11.Name = "simpleButton11";
             this.simpleButton11.Size = new System.Drawing.Size(104, 32);
@@ -320,27 +324,17 @@
             // simpleButton10
             // 
             this.simpleButton10.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("simpleButton10.ImageOptions.Image")));
-            this.simpleButton10.Location = new System.Drawing.Point(216, 99);
+            this.simpleButton10.Location = new System.Drawing.Point(253, 95);
             this.simpleButton10.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.simpleButton10.Name = "simpleButton10";
             this.simpleButton10.Size = new System.Drawing.Size(139, 32);
             this.simpleButton10.TabIndex = 81;
             this.simpleButton10.Text = "Print Barcode (F8)";
             // 
-            // simpleButton9
-            // 
-            this.simpleButton9.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("simpleButton9.ImageOptions.Image")));
-            this.simpleButton9.Location = new System.Drawing.Point(121, 99);
-            this.simpleButton9.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.simpleButton9.Name = "simpleButton9";
-            this.simpleButton9.Size = new System.Drawing.Size(88, 32);
-            this.simpleButton9.TabIndex = 80;
-            this.simpleButton9.Text = "Clear (F6)";
-            // 
             // btncancel
             // 
             this.btncancel.ImageOptions.Image = global::SalesInventorySystem.Properties.Resources.Cancel_16x16__2_;
-            this.btncancel.Location = new System.Drawing.Point(362, 99);
+            this.btncancel.Location = new System.Drawing.Point(399, 95);
             this.btncancel.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btncancel.Name = "btncancel";
             this.btncancel.Size = new System.Drawing.Size(128, 32);
@@ -351,10 +345,10 @@
             // btnadd
             // 
             this.btnadd.ImageOptions.Image = global::SalesInventorySystem.Properties.Resources.Add_16x16__2_;
-            this.btnadd.Location = new System.Drawing.Point(11, 99);
+            this.btnadd.Location = new System.Drawing.Point(133, 95);
             this.btnadd.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnadd.Name = "btnadd";
-            this.btnadd.Size = new System.Drawing.Size(104, 32);
+            this.btnadd.Size = new System.Drawing.Size(112, 32);
             this.btnadd.TabIndex = 78;
             this.btnadd.Text = "Add (Enter)";
             this.btnadd.Click += new System.EventHandler(this.btnadd_Click);
@@ -381,6 +375,7 @@
             this.txtweight.Size = new System.Drawing.Size(185, 27);
             this.txtweight.TabIndex = 46;
             this.txtweight.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtweight_KeyDown);
+            this.txtweight.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtweight_KeyPress);
             // 
             // labelControl9
             // 
@@ -540,16 +535,16 @@
             this.panelControl1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelControl1.Location = new System.Drawing.Point(0, 0);
             this.panelControl1.Name = "panelControl1";
-            this.panelControl1.Size = new System.Drawing.Size(1604, 187);
+            this.panelControl1.Size = new System.Drawing.Size(1604, 168);
             this.panelControl1.TabIndex = 7;
             // 
             // panelControl2
             // 
             this.panelControl2.Controls.Add(this.gridControl2);
             this.panelControl2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelControl2.Location = new System.Drawing.Point(0, 187);
+            this.panelControl2.Location = new System.Drawing.Point(0, 168);
             this.panelControl2.Name = "panelControl2";
-            this.panelControl2.Size = new System.Drawing.Size(1604, 514);
+            this.panelControl2.Size = new System.Drawing.Size(1604, 533);
             this.panelControl2.TabIndex = 8;
             // 
             // gridControl2
@@ -560,12 +555,14 @@
             this.gridControl2.MainView = this.gridView2;
             this.gridControl2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.gridControl2.Name = "gridControl2";
-            this.gridControl2.Size = new System.Drawing.Size(1600, 510);
+            this.gridControl2.Size = new System.Drawing.Size(1600, 529);
             this.gridControl2.TabIndex = 4;
             this.gridControl2.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView2,
             this.bandedGridView2,
             this.advBandedGridView2});
+            this.gridControl2.KeyDown += new System.Windows.Forms.KeyEventHandler(this.gridControl2_KeyDown);
+            this.gridControl2.MouseUp += new System.Windows.Forms.MouseEventHandler(this.gridControl2_MouseUp);
             // 
             // gridView2
             // 
@@ -636,6 +633,21 @@
             this.gridBand2.VisibleIndex = 0;
             this.gridBand2.Width = 82;
             // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.printBarcodeToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(168, 28);
+            // 
+            // printBarcodeToolStripMenuItem
+            // 
+            this.printBarcodeToolStripMenuItem.Name = "printBarcodeToolStripMenuItem";
+            this.printBarcodeToolStripMenuItem.Size = new System.Drawing.Size(167, 24);
+            this.printBarcodeToolStripMenuItem.Text = "Print Barcode";
+            this.printBarcodeToolStripMenuItem.Click += new System.EventHandler(this.printBarcodeToolStripMenuItem_Click);
+            // 
             // TransferBranchToBranchInvDevEx
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -674,6 +686,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridView2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bandedGridView2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.advBandedGridView2)).EndInit();
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -689,7 +702,6 @@
         private DevExpress.XtraEditors.SimpleButton btngetweight;
         private DevExpress.XtraEditors.SimpleButton simpleButton11;
         private DevExpress.XtraEditors.SimpleButton simpleButton10;
-        private DevExpress.XtraEditors.SimpleButton simpleButton9;
         private DevExpress.XtraEditors.SimpleButton btncancel;
         private DevExpress.XtraEditors.SimpleButton btnadd;
         private DevExpress.XtraEditors.LabelControl labelControl10;
@@ -722,5 +734,7 @@
         private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand2;
         private DevExpress.XtraEditors.LabelControl labelControl1;
         private DevExpress.XtraEditors.TextEdit txttransferno;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem printBarcodeToolStripMenuItem;
     }
 }

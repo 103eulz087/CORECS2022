@@ -12,6 +12,7 @@ using System.Data.SqlClient;
 using DevExpress.XtraReports.UI;
 using System.Media;
 using System.IO;
+using SalesInventorySystem.Classes;
 
 namespace SalesInventorySystem.HOFormsDevEx
 {
@@ -73,7 +74,7 @@ namespace SalesInventorySystem.HOFormsDevEx
                     // 2. Create a new SoundPlayer instance with the provided file path.
                     // The 'using' statement ensures that the SoundPlayer object is properly
                     // disposed of after it's no longer needed, releasing system resources.
-                    using (SoundPlayer player = new SoundPlayer(soundFilePath))
+                    using (System.Media.SoundPlayer player = new System.Media.SoundPlayer(soundFilePath))
                     {
                         // 3. Load the sound into memory. This operation can be synchronous
                         // but since it's inside Task.Run, it won't block the main thread.
@@ -108,7 +109,11 @@ namespace SalesInventorySystem.HOFormsDevEx
         {
             if (string.IsNullOrWhiteSpace(txtbarcodeno.Text))
             {
-                XtraMessageBox.Show("Please scan or enter a barcode.");
+                //XtraMessageBox.Show("Please scan or enter a barcode.");
+                BigAlert.Show(
+                  "BARCODE EMPTY",
+                  "Please scan or enter a barcode.",
+                  MessageBoxIcon.Warning);
                 txtbarcodeno.Focus();
                 return;
             }
@@ -144,7 +149,11 @@ namespace SalesInventorySystem.HOFormsDevEx
                 {
 
                     await PlayNotificationSoundAsync(Application.StartupPath + "\\error.wav");
-                    XtraMessageBox.Show(ex.Message, "Stage failed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    //XtraMessageBox.Show(ex.Message, "Stage failed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    BigAlert.Show(
+                     "STAGE FAILED",
+                     ex.Message.ToString(),
+                     MessageBoxIcon.Error);
                 }
             }
 
@@ -287,12 +296,20 @@ namespace SalesInventorySystem.HOFormsDevEx
         {
             if (gridView1.RowCount == 0)
             {
-                XtraMessageBox.Show("Nothing to save.");
+                //XtraMessageBox.Show("Nothing to save.");
+                BigAlert.Show(
+                 "NOTHING TO SAVE",
+                 "No items to be transferred",
+                 MessageBoxIcon.Warning);
                 return;
             }
             if (string.IsNullOrWhiteSpace(txtdispatchno.Text))
             {
-                XtraMessageBox.Show("Please provide Dispatch Number.");
+                //XtraMessageBox.Show("Please provide Dispatch Number.");
+                BigAlert.Show(
+                "NO DISPATCH NUMBER",
+                "Please Provide Dispatch Number",
+                MessageBoxIcon.Warning);
                 txtdispatchno.Focus();
                 return;
             }
@@ -315,12 +332,20 @@ namespace SalesInventorySystem.HOFormsDevEx
                 {
                     con.Open();
                     cmd.ExecuteNonQuery();
-                    XtraMessageBox.Show("Inventory successfully transferred.");
+                    //XtraMessageBox.Show("Inventory successfully transferred.");
+                    BigAlert.Show(
+                          "SUCCESS",
+                          "Inventory successfully transferred!..",
+                          MessageBoxIcon.Information);
                     this.Dispose();
                 }
                 catch (SqlException ex)
                 {
-                    XtraMessageBox.Show(ex.Message, "Commit failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    //XtraMessageBox.Show(ex.Message, "Commit failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    BigAlert.Show(
+                         "COMMIT FAILED",
+                         ex.Message.ToString(),
+                         MessageBoxIcon.Error);
                     RefreshGrid(); // show which lines are error/processed
                 }
             }

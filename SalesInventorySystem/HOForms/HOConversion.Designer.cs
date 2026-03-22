@@ -1,6 +1,6 @@
 ﻿namespace SalesInventorySystem
 {
-    partial class HOConversion
+    partial class HOConversion 
     {
         /// <summary>
         /// Required designer variable.
@@ -55,6 +55,8 @@
             this.txtsrchprodcat = new DevExpress.XtraEditors.SearchLookUpEdit();
             this.searchLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.txtdriplossqty = new DevExpress.XtraEditors.TextEdit();
+            this.labelControl15 = new DevExpress.XtraEditors.LabelControl();
             this.txtsrchprdctmanytoone = new DevExpress.XtraEditors.SearchLookUpEdit();
             this.gridView2 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.txtactualqty = new DevExpress.XtraEditors.TextEdit();
@@ -90,8 +92,6 @@
             this.repositoryItemSearchLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.contextMenuStripSourceProd = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.labelControl15 = new DevExpress.XtraEditors.LabelControl();
-            this.txtdriplossqty = new DevExpress.XtraEditors.TextEdit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.spinEdit1.Properties)).BeginInit();
@@ -108,6 +108,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtsrchprodcat.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).BeginInit();
             this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtdriplossqty.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtsrchprdctmanytoone.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtactualqty.Properties)).BeginInit();
@@ -125,7 +126,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemSearchLookUpEditConversionItems)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemSearchLookUpEdit1View)).BeginInit();
             this.contextMenuStripSourceProd.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtdriplossqty.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // gridControl1
@@ -420,6 +420,28 @@
             this.panel2.TabIndex = 37;
             this.panel2.Visible = false;
             // 
+            // txtdriplossqty
+            // 
+            this.txtdriplossqty.EditValue = "";
+            this.txtdriplossqty.Location = new System.Drawing.Point(100, 67);
+            this.txtdriplossqty.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtdriplossqty.Name = "txtdriplossqty";
+            this.txtdriplossqty.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtdriplossqty.Properties.Appearance.Options.UseFont = true;
+            this.txtdriplossqty.Size = new System.Drawing.Size(121, 24);
+            this.txtdriplossqty.TabIndex = 109;
+            // 
+            // labelControl15
+            // 
+            this.labelControl15.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelControl15.Appearance.Options.UseFont = true;
+            this.labelControl15.Location = new System.Drawing.Point(12, 68);
+            this.labelControl15.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.labelControl15.Name = "labelControl15";
+            this.labelControl15.Size = new System.Drawing.Size(59, 18);
+            this.labelControl15.TabIndex = 108;
+            this.labelControl15.Text = "DripLoss:";
+            // 
             // txtsrchprdctmanytoone
             // 
             this.txtsrchprdctmanytoone.Location = new System.Drawing.Point(100, 0);
@@ -602,6 +624,7 @@
             this.txtconversiondate.Name = "txtconversiondate";
             this.txtconversiondate.Size = new System.Drawing.Size(160, 26);
             this.txtconversiondate.TabIndex = 40;
+            this.txtconversiondate.Visible = false;
             // 
             // labeleulz
             // 
@@ -818,28 +841,6 @@
             this.toolStripMenuItem1.Text = "Add this Item for Entry -->";
             this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
             // 
-            // labelControl15
-            // 
-            this.labelControl15.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelControl15.Appearance.Options.UseFont = true;
-            this.labelControl15.Location = new System.Drawing.Point(12, 68);
-            this.labelControl15.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.labelControl15.Name = "labelControl15";
-            this.labelControl15.Size = new System.Drawing.Size(59, 18);
-            this.labelControl15.TabIndex = 108;
-            this.labelControl15.Text = "DripLoss:";
-            // 
-            // txtdriplossqty
-            // 
-            this.txtdriplossqty.EditValue = "";
-            this.txtdriplossqty.Location = new System.Drawing.Point(100, 67);
-            this.txtdriplossqty.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.txtdriplossqty.Name = "txtdriplossqty";
-            this.txtdriplossqty.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtdriplossqty.Properties.Appearance.Options.UseFont = true;
-            this.txtdriplossqty.Size = new System.Drawing.Size(121, 24);
-            this.txtdriplossqty.TabIndex = 109;
-            // 
             // HOConversion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
@@ -871,6 +872,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtdriplossqty.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtsrchprdctmanytoone.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtactualqty.Properties)).EndInit();
@@ -889,7 +891,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemSearchLookUpEditConversionItems)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemSearchLookUpEdit1View)).EndInit();
             this.contextMenuStripSourceProd.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.txtdriplossqty.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }

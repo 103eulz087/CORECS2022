@@ -38,9 +38,9 @@
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.txtshipmentno = new DevExpress.XtraEditors.TextEdit();
             this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
+            this.simpleButton2 = new DevExpress.XtraEditors.SimpleButton();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cancelLineToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.simpleButton2 = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).BeginInit();
             this.groupControl2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControlRcvd)).BeginInit();
@@ -76,6 +76,7 @@
             this.gridControlRcvd.TabIndex = 4;
             this.gridControlRcvd.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewRcvd});
+            this.gridControlRcvd.MouseUp += new System.Windows.Forms.MouseEventHandler(this.gridControlRcvd_MouseUp);
             // 
             // gridViewRcvd
             // 
@@ -171,20 +172,6 @@
             this.groupControl1.TabIndex = 29;
             this.groupControl1.Text = "Receive PO/Inventory";
             // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(32, 32);
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.cancelLineToolStripMenuItem});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(154, 28);
-            // 
-            // cancelLineToolStripMenuItem
-            // 
-            this.cancelLineToolStripMenuItem.Name = "cancelLineToolStripMenuItem";
-            this.cancelLineToolStripMenuItem.Size = new System.Drawing.Size(153, 24);
-            this.cancelLineToolStripMenuItem.Text = "Cancel Line";
-            // 
             // simpleButton2
             // 
             this.simpleButton2.ImageOptions.Image = global::SalesInventorySystem.Properties.Resources.Save_16x16__5_;
@@ -195,6 +182,21 @@
             this.simpleButton2.TabIndex = 91;
             this.simpleButton2.Text = "Save";
             this.simpleButton2.Click += new System.EventHandler(this.simpleButton2_Click);
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(32, 32);
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cancelLineToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(186, 28);
+            // 
+            // cancelLineToolStripMenuItem
+            // 
+            this.cancelLineToolStripMenuItem.Name = "cancelLineToolStripMenuItem";
+            this.cancelLineToolStripMenuItem.Size = new System.Drawing.Size(210, 24);
+            this.cancelLineToolStripMenuItem.Text = "Reprint Barcode";
+            this.cancelLineToolStripMenuItem.Click += new System.EventHandler(this.cancelLineToolStripMenuItem_Click);
             // 
             // ReceivedTransferInventoryBatchMode
             // 
@@ -233,8 +235,8 @@
         private DevExpress.XtraEditors.SimpleButton simpleButton2;
         private DevExpress.XtraEditors.LabelControl labelControl1;
         public DevExpress.XtraEditors.TextEdit txtshipmentno;
-        private DevExpress.XtraEditors.GroupControl groupControl1;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem cancelLineToolStripMenuItem;
+        public DevExpress.XtraEditors.GroupControl groupControl1;
     }
 }

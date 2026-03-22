@@ -209,10 +209,15 @@ namespace SalesInventorySystem.HOFormsDevEx
                     ",'" + view.GetRowCellValue(view.FocusedRowHandle, "SupplierID").ToString() + "'" +
                     ",'" + view.GetRowCellValue(view.FocusedRowHandle, "OrderType").ToString() + "')"
                     , viewpod.gridControl2, viewpod.gridView2);
-
+            HOFormsDevEx.VIEWPODETAILS.shipmentno = viewpod.txtshipmentno.Text;
+            HOFormsDevEx.VIEWPODETAILS.supplierid = viewpod.txtsupplierid.Text;
             viewpod.ShowDialog(this);
             if (VIEWPODETAILS.isdone == true)
             {
+                Database.display("SELECT * FROM funcview_PODetails('" + view.GetRowCellValue(view.FocusedRowHandle, "ShipmentNo").ToString() + "'" +
+                   ",'" + view.GetRowCellValue(view.FocusedRowHandle, "SupplierID").ToString() + "'" +
+                   ",'" + view.GetRowCellValue(view.FocusedRowHandle, "OrderType").ToString() + "')"
+                   , viewpod.gridControl2, viewpod.gridView2);
                 VIEWPODETAILS.isdone = false;
                 viewpod.Dispose();
                 filtertab();

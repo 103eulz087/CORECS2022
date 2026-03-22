@@ -283,7 +283,7 @@ namespace SalesInventorySystem
             barStaticItem3.Caption = HelperFunction.GetLocalIPAddress();
             barStaticItem2.Caption = Login.assignedBranch + " - " + getbranchname();
             barHeaderItem1.Caption = Login.isglobalUserID;
-            barHeaderItem3.Caption = Login.servername;
+            barHeaderItem3.Caption = Database.getConnectionServerName();
             barHeaderItem4.Caption = DateTime.Now.ToShortDateString();
              
             if (Convert.ToBoolean(Login.isCashier) == true)
@@ -3271,6 +3271,12 @@ namespace SalesInventorySystem
         private void barButtonItemInvDailyActivity_ItemClick(object sender, ItemClickEventArgs e)
         {
             Reporting.InventoryDailyActivityPivot pfoap = new Reporting.InventoryDailyActivityPivot();
+            pfoap.Show();
+        }
+
+        private void btnLiveTrendsSts_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            LiveTrends.STSMonitoring pfoap = new LiveTrends.STSMonitoring();
             pfoap.Show();
         }
 

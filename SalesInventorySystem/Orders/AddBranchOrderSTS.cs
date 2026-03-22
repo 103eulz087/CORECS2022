@@ -14,6 +14,7 @@ using System.IO.Ports;
 using System.Data.SqlClient;
 using DevExpress.XtraReports.UI;
 using DevExpress.XtraGrid;
+using SalesInventorySystem.Classes;
 
 namespace SalesInventorySystem.Orders
 {
@@ -37,6 +38,7 @@ namespace SalesInventorySystem.Orders
         {         
             this.myDelegate = new AddDataDelegate(AddDataMethod);
             InitializeComponent();
+            HelperFunction.AllowNumbersAndPeriod(txtweight); 
         }
         public void AddDataMethod(String myString)
         {
@@ -949,7 +951,11 @@ namespace SalesInventorySystem.Orders
             {
                 if (txtsku.Text == "")
                 {
-                    XtraMessageBox.Show("Please Input Valid Fields");
+                    //XtraMessageBox.Show("Please Input Valid Fields");
+                    BigAlert.Show(
+                      "BARCODE EMPTY",
+                      "Barcode/SKU must not Empty!..",
+                      MessageBoxIcon.Warning);
                     return;
                 }
                 else
@@ -997,7 +1003,11 @@ namespace SalesInventorySystem.Orders
                     if (Convert.ToDouble(txtweight.Text) > Database.getTotalSummation2("Inventory", "Product = '" + primalproductcode + "' AND Branch='" + Login.assignedBranch + "' AND isWarehouse=1 and Available > 0 ", "Available")) //Database.getTotalSummation("Inventory", "Product", txtsku.Text.Substring(1, 6), "Quantity"))
                     {
                         string mark = Database.getTotalSummation2("Inventory", "Product = '" + primalproductcode + "' AND Branch='" + Login.assignedBranch + "' AND isWarehouse=1  and Available > 0 ", "Available").ToString();
-                        XtraMessageBox.Show("Insuficient Stocks for this Product.. Your Available Quantity is " + mark);
+                        //XtraMessageBox.Show("Insuficient Stocks for this Product.. Your Available Quantity is " + mark);
+                        BigAlert.Show(
+                    "NO INVENTORY STOCKS",
+                    "Please check your Inventory Stock..Available Quantity is "+mark,
+                    MessageBoxIcon.Warning);
                     }
                     else
                     {
@@ -1068,6 +1078,10 @@ namespace SalesInventorySystem.Orders
             if (gridView2.RowCount == 0)
             {
                 XtraMessageBox.Show("Cant Save no Order to be Processed!");
+                BigAlert.Show(
+                   "NO STOCKS PROCESS",
+                   "No Records Found!...",
+                   MessageBoxIcon.Warning);
                 return;
             }
 
@@ -1081,7 +1095,11 @@ namespace SalesInventorySystem.Orders
             {
                 ConfirmBranchOrder();
                 isdone = true;
-                XtraMessageBox.Show("Transaction Successfully Saved!");
+                //XtraMessageBox.Show("Transaction Successfully Saved!");
+                BigAlert.Show(
+                  "SUCCESS",
+                  "Transaction Successfully Saved!...",
+                  MessageBoxIcon.Information);
                 this.Close();
             }
         }

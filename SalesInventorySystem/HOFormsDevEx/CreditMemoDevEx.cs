@@ -222,7 +222,7 @@ namespace SalesInventorySystem.HOFormsDevEx
             try
             {
                 bool isInvoiceUpdated = false;
-                isInvoiceUpdated = Database.checkifExist("Select isInvoiceUpdate FROM DeliverySummary WHERE PONumber='" + txtpono.Text + "' and isInvoiceUpdate=1");
+                isInvoiceUpdated = Database.checkifExist("Select 1 FROM DeliverySummary WHERE PONumber='" + txtpono.Text + "' and isInvoiceUpdate=1");
                 if (isInvoiceUpdated == false)
                 {
                     XtraMessageBox.Show("Invoice Number must be updated first..please go to Print Delivery Receipt Option!...");
@@ -319,7 +319,7 @@ namespace SalesInventorySystem.HOFormsDevEx
         }
         private void simpleButton2_Click(object sender, EventArgs e)
         {
-            
+            printCM();
         }
     }
 }

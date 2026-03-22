@@ -143,20 +143,21 @@ namespace SalesInventorySystem.HOFormsDevEx
         private void button1_Click(object sender, EventArgs e)
         {
             double getTotalPayments = 0.0, getTotalCredit = 0.0;
-            for (int i = 0; i <= gridView2.RowCount - 1; i++)
-            {
-                if (gridView2.GetRowCellValue(i, "TransCode").ToString() == "PYMT")
-                {
-                    getTotalPayments += Convert.ToDouble(gridView2.GetRowCellValue(i, "Credit").ToString());
-                }
+            //for (int i = 0; i <= gridView2.RowCount - 1; i++)
+            //{
+            //    if (gridView2.GetRowCellValue(i, "TransCode").ToString() == "PYMT")
+            //    {
+            //        getTotalPayments += Convert.ToDouble(gridView2.GetRowCellValue(i, "Credit").ToString());
+            //    }
 
-            }
+            //}
             for (int i = 0; i <= gridView2.RowCount - 1; i++)
             {
-                if (gridView2.GetRowCellValue(i, "TransCode").ToString() == "CHRG")
-                {
-                    getTotalCredit += Convert.ToDouble(gridView2.GetRowCellValue(i, "Debit").ToString());
-                }
+                getTotalCredit += Convert.ToDouble(gridView2.GetRowCellValue(i, "Debit").ToString());
+                //if (gridView2.GetRowCellValue(i, "TransCode").ToString() == "CHRG")
+                //{
+                //    getTotalCredit += Convert.ToDouble(gridView2.GetRowCellValue(i, "Debit").ToString());
+                //}
 
             }
             double minpay = 0.0;
@@ -220,20 +221,21 @@ namespace SalesInventorySystem.HOFormsDevEx
         private void simpleButton2_Click(object sender, EventArgs e)
         {
             double getTotalPayments = 0.0, getTotalCredit = 0.0;
-            for (int i = 0; i <= gridView2.RowCount - 1; i++)
-            {
-                if (gridView2.GetRowCellValue(i, "TransCode").ToString() == "PYMT")
-                {
-                    getTotalPayments += Convert.ToDouble(gridView2.GetRowCellValue(i, "Credit").ToString());
-                }
+            //for (int i = 0; i <= gridView2.RowCount - 1; i++)
+            //{
+            //    if (gridView2.GetRowCellValue(i, "TransCode").ToString() == "PYMT")
+            //    {
+            //        getTotalPayments += Convert.ToDouble(gridView2.GetRowCellValue(i, "Credit").ToString());
+            //    }
 
-            }
+            //}
             for (int i = 0; i <= gridView2.RowCount - 1; i++)
             {
-                if (gridView2.GetRowCellValue(i, "TransCode").ToString() == "CHRG")
-                {
-                    getTotalCredit += Convert.ToDouble(gridView2.GetRowCellValue(i, "Debit").ToString());
-                }
+                //if (gridView2.GetRowCellValue(i, "TransCode").ToString() == "CHRG")
+                //{
+                //    getTotalCredit += Convert.ToDouble(gridView2.GetRowCellValue(i, "Debit").ToString());
+                //}
+                getTotalCredit += Convert.ToDouble(gridView2.GetRowCellValue(i, "Debit").ToString());
 
             }
             double minpay = 0.0;

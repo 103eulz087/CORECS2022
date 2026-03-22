@@ -593,6 +593,7 @@
       <DependentUpon>BadOrder.cs</DependentUpon>
     </Compile>
     <Compile Include="Classes\BarcodeSettings.cs" />
+    <Compile Include="Classes\BigAlert.cs" />
     <Compile Include="Classes\Branch.cs" />
     <Compile Include="Classes\ClientAccount.cs" />
     <Compile Include="Classes\CompanyProfile.cs" />
@@ -681,6 +682,12 @@
     </Compile>
     <Compile Include="DevExReportTemplate\Creditmemo.Designer.cs">
       <DependentUpon>Creditmemo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DevExReportTemplate\CreditMemoNew.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DevExReportTemplate\CreditMemoNew.Designer.cs">
+      <DependentUpon>CreditMemoNew.cs</DependentUpon>
     </Compile>
     <Compile Include="DevExReportTemplate\CustomerRequest.cs">
       <SubType>Component</SubType>
@@ -1540,6 +1547,12 @@
     <Compile Include="HOFormsDevEx\ViewNonTradeOrdersDevEx.Designer.cs">
       <DependentUpon>ViewNonTradeOrdersDevEx.cs</DependentUpon>
     </Compile>
+    <Compile Include="HOFormsDevEx\VIEWPODETAILSUpdateCost.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HOFormsDevEx\VIEWPODETAILSUpdateCost.Designer.cs">
+      <DependentUpon>VIEWPODETAILSUpdateCost.cs</DependentUpon>
+    </Compile>
     <Compile Include="HOFormsDevEx\ViewStockOutRequest.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -2062,6 +2075,12 @@
     </Compile>
     <Compile Include="InventoryIN.Designer.cs">
       <DependentUpon>InventoryIN.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LiveTrends\STSMonitoring.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LiveTrends\STSMonitoring.Designer.cs">
+      <DependentUpon>STSMonitoring.cs</DependentUpon>
     </Compile>
     <Compile Include="Login.cs">
       <SubType>Form</SubType>
@@ -3378,6 +3397,9 @@
     <EmbeddedResource Include="DevExReportTemplate\Creditmemo.resx">
       <DependentUpon>Creditmemo.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="DevExReportTemplate\CreditMemoNew.resx">
+      <DependentUpon>CreditMemoNew.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="DevExReportTemplate\CustomerRequest.resx">
       <DependentUpon>CustomerRequest.cs</DependentUpon>
     </EmbeddedResource>
@@ -3804,6 +3826,9 @@
     <EmbeddedResource Include="HOFormsDevEx\ViewNonTradeOrdersDevEx.resx">
       <DependentUpon>ViewNonTradeOrdersDevEx.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="HOFormsDevEx\VIEWPODETAILSUpdateCost.resx">
+      <DependentUpon>VIEWPODETAILSUpdateCost.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="HOFormsDevEx\ViewStockOutRequest.resx">
       <DependentUpon>ViewStockOutRequest.cs</DependentUpon>
     </EmbeddedResource>
@@ -4072,6 +4097,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="InventoryIN.resx">
       <DependentUpon>InventoryIN.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LiveTrends\STSMonitoring.resx">
+      <DependentUpon>STSMonitoring.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.cs</DependentUpon>

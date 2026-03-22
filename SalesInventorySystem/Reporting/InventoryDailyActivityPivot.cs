@@ -17,7 +17,7 @@ namespace SalesInventorySystem.Reporting
     public partial class InventoryDailyActivityPivot : DevExpress.XtraEditors.XtraForm
     {
         object objbrcode = null;
-        string globalbrcode = "";
+        string globalbrcode;
         public InventoryDailyActivityPivot()
         {
             InitializeComponent();
@@ -42,7 +42,7 @@ namespace SalesInventorySystem.Reporting
                     using (SqlCommand com = new SqlCommand("sp_GenerateInventoryDailyReport", con))
                     {
                         com.CommandType = CommandType.StoredProcedure;
-                        com.Parameters.AddWithValue("@parmbrcode", objbrcode.ToString());
+                        com.Parameters.AddWithValue("@parmbrcode", globalbrcode);
                         com.Parameters.AddWithValue("@datefrom", datefrom.DateTime.Date); // Ensure you pass valid Dates, not strings
                         com.Parameters.AddWithValue("@dateto", dateto.DateTime.Date);
 
@@ -82,10 +82,119 @@ namespace SalesInventorySystem.Reporting
             fldbeginning, fldsts, fldconvin, fldtotalin,
             fldconvout, fldslsout, fldtotalout, fldending
         });
+                pivotGridControl1.OptionsView.ShowColumnGrandTotals = false;
+                pivotGridControl1.OptionsView.ShowRowGrandTotals = false;
 
+                //pivotGridControl1.CustomAppearance += (s, e) =>
+                //{
+                //    if (e.DataField != null)
+                //    {
+                //        // Highlight TOTALIN, TOTALOUT, EndingQty columns
+                //        if (e.DataField.FieldName == "TOTALIN" ||
+                //            e.DataField.FieldName == "TOTALOUT" ||
+                //            e.DataField.FieldName == "EndingQty")
+                //        {
+                //            e.Appearance.BackColor = Color.LightYellow;
+                //            e.Appearance.Font = new Font(e.Appearance.Font, FontStyle.Bold);
+                //        }
+
+                //        // Highlight ConversionOut and SalesOut values in red if not zero
+                //        if ((e.DataField.FieldName == "ConversionOut" ||
+                //             e.DataField.FieldName == "SalesOut") &&
+                //            e.Value != null && e.Value is decimal val && val != 0)
+                //        {
+                //            e.Appearance.ForeColor = Color.Red;
+                //            e.Appearance.Font = new Font(e.Appearance.Font, FontStyle.Bold);
+                //        }
+                //    }
+                //};
+
+                pivotGridControl1.CustomAppearance += (s, e) =>
+                {
+                    if (e.DataField != null)
+                    {
+                        // 1. Highlight TOTALIN, TOTALOUT, EndingQty columns (Your existing logic)
+                        if (e.DataField.FieldName == "TOTALIN" ||
+                            e.DataField.FieldName == "TOTALOUT" )
+                        {
+                            e.Appearance.BackColor = Color.LightYellow;
+                            e.Appearance.Font = new Font(e.Appearance.Font, FontStyle.Bold);
+                        }
+
+                        if (e.DataField.FieldName == "EndingQty")
+                        {
+                            e.Appearance.BackColor = Color.Yellow;
+                            e.Appearance.Font = new Font(e.Appearance.Font, FontStyle.Bold);
+                        }
+
+                        // 2. Highlight ConversionOut and SalesOut values in red if not zero (Your existing logic)
+                        if ((e.DataField.FieldName == "ConversionOut" ||
+                             e.DataField.FieldName == "SalesOut") &&
+                            e.Value != null)
+                        {
+                            // Safely convert to decimal regardless of underlying type
+                            decimal val = Convert.ToDecimal(e.Value);
+                            if (val != 0)
+                            {
+                                e.Appearance.ForeColor = Color.Red;
+                                e.Appearance.Font = new Font(e.Appearance.Font, FontStyle.Bold);
+                            }
+                        }
+
+                        // =================================================================================
+                        // 3. NEW: THE ANOMALY DETECTOR (Ending Qty vs Next Day's Beginning Qty)
+                        // =================================================================================
+
+                        // We only want to run this check when we are painting the "Beginning" cell
+                        if (e.DataField.FieldName == "Beginning")
+                        {
+                            int currentColumnIndex = e.ColumnIndex;
+
+                            // We can't check yesterday if today is the very first day in the grid
+                            if (currentColumnIndex > 0)
+                            {
+                                // LOOK BACK IN TIME: Just subtract 1 from the column index!
+                                // Because "EndingQty" is your last field and "Beginning" is your first field,
+                                // the column immediately to the left (-1) is ALWAYS yesterday's EndingQty.
+                                object yesterdayEndingObj = pivotGridControl1.GetCellValue(currentColumnIndex - 1, e.RowIndex);
+
+                                object todayBeginningObj = e.Value;
+
+                                // Safely convert both to decimals to avoid type mismatch crashes
+                                decimal yesterdayEnding = yesterdayEndingObj == null ? 0 : Convert.ToDecimal(yesterdayEndingObj);
+                                decimal todayBeginning = todayBeginningObj == null ? 0 : Convert.ToDecimal(todayBeginningObj);
+
+                                // TRIGGER THE ANOMALY HIGHLIGHT!
+                                if (yesterdayEnding != todayBeginning)
+                                {
+                                    // Paint the Beginning Qty cell RED with WHITE text to make it scream "ERROR"
+                                    e.Appearance.BackColor = Color.Firebrick;
+                                    e.Appearance.ForeColor = Color.White;
+                                    e.Appearance.Font = new Font(e.Appearance.Font, FontStyle.Bold);
+                                }
+                            }
+                        }
+                    }
+                };
+
+                // --- FONT OPTIMIZATION FOR REPORTING ---
+
+                // 1. Data Cells: Clean, readable, standard size
+                pivotGridControl1.Appearance.Cell.Font = new Font("Segoe UI", 9f, FontStyle.Regular);
+
+                // 2. Column and Row Headers (The gray areas): Slightly larger and Bold
+                pivotGridControl1.Appearance.HeaderArea.Font = new Font("Segoe UI", 8.75f, FontStyle.Bold);
+                pivotGridControl1.Appearance.FieldValue.Font = new Font("Segoe UI", 8.75f, FontStyle.Bold);
+
+                // 3. Grand Totals: Keep the same size as data, but make them Bold
+                pivotGridControl1.Appearance.GrandTotalCell.Font = new Font("Segoe UI", 9f, FontStyle.Bold);
+                pivotGridControl1.Appearance.TotalCell.Font = new Font("Segoe UI", 9f, FontStyle.Bold);
+
+                // Optional but highly recommended: Center the column headers for a cleaner look
+                pivotGridControl1.Appearance.HeaderArea.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
                 // 5. SKINNING
                 UserLookAndFeel.Default.Style = LookAndFeelStyle.Skin;
-                UserLookAndFeel.Default.SkinName = "Visual Studio 2013 Blue";
+                UserLookAndFeel.Default.SkinName = "Office 2019 Colorful";
             }
             catch (SqlException ee)
             {
@@ -184,6 +293,9 @@ namespace SalesInventorySystem.Reporting
                 // Add the fields to the control's field collection.         
                 pivotGridControl1.Fields.AddRange(new PivotGridField[] { fielddescription, fieldprodname, fieldtransdate, fldbeginning,fldsts,fldconvin,fldtotalin,fldconvout,fldslsout,fldtotalout,fldending });
 
+                pivotGridControl1.OptionsView.ShowColumnGrandTotals = false;
+                pivotGridControl1.OptionsView.ShowRowGrandTotals = false;
+
                 fielddescription.AreaIndex = 0;
                 fieldprodname.AreaIndex = 1;
                 pivotGridControl1.BestFit(fieldprodname);
@@ -202,7 +314,7 @@ namespace SalesInventorySystem.Reporting
         }
         private async void simpleButton1_Click(object sender, EventArgs e)
         {
-            if (String.IsNullOrEmpty(txtbranch.Text) || String.IsNullOrEmpty(datefrom.Text) || String.IsNullOrEmpty(dateto.Text))
+            if ((Login.assignedBranch == "888" && String.IsNullOrEmpty(txtbranch.Text) ) || String.IsNullOrEmpty(datefrom.Text) || String.IsNullOrEmpty(dateto.Text))
             {
                 XtraMessageBox.Show("Field must not Empty");
                 return;

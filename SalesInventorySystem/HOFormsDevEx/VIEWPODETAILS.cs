@@ -14,6 +14,7 @@ namespace SalesInventorySystem.HOFormsDevEx
 {
     public partial class VIEWPODETAILS : DevExpress.XtraEditors.XtraForm
     {
+        public static string shipmentno, supplierid;
         public static bool isdone = false;
         public VIEWPODETAILS()
         {
@@ -129,6 +130,31 @@ namespace SalesInventorySystem.HOFormsDevEx
                 simpleButton2.Visible = true;
                 simpleButton3.Visible = true;
             }
+        }
+
+      
+
+        private void updateCostToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            VIEWPODETAILSUpdateCost viewposde = new VIEWPODETAILSUpdateCost();
+            viewposde.txtshipmentno.Text = shipmentno;
+            viewposde.txtsupplierid.Text = supplierid;
+            viewposde.txtprodcode.Text = gridView2.GetRowCellValue(gridView2.FocusedRowHandle, "ProductCode").ToString();
+            viewposde.txtqty.Text = gridView2.GetRowCellValue(gridView2.FocusedRowHandle, "Quantity").ToString();
+            viewposde.txtcost.Text = gridView2.GetRowCellValue(gridView2.FocusedRowHandle, "Cost").ToString();
+            viewposde.ShowDialog(this);
+            if(VIEWPODETAILSUpdateCost.isdone==true)
+            {
+                isdone = true;
+                VIEWPODETAILSUpdateCost.isdone = false;
+                viewposde.Dispose();
+            }
+        }
+
+        private void gridControl2_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+                contextMenuStripUpdateCost.Show(gridControl2, e.Location);
         }
     }
 }

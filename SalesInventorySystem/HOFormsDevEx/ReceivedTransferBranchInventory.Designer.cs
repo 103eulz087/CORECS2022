@@ -41,8 +41,21 @@
             this.txtdatefromforrcvng = new System.Windows.Forms.DateTimePicker();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
+            this.tabReceived = new DevExpress.XtraTab.XtraTabPage();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.gridControlMyReq = new DevExpress.XtraGrid.GridControl();
+            this.gridViewMyReq = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.panelControl7 = new DevExpress.XtraEditors.PanelControl();
+            this.btnMyReqExcel = new DevExpress.XtraEditors.SimpleButton();
+            this.btnMyReq = new DevExpress.XtraEditors.SimpleButton();
+            this.label8 = new System.Windows.Forms.Label();
+            this.datetorcvd = new System.Windows.Forms.DateTimePicker();
+            this.datefromrcvd = new System.Windows.Forms.DateTimePicker();
+            this.label7 = new System.Windows.Forms.Label();
             this.contextMenuStripForReceiving = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.showForReceivingItemsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.contextMenuStripReceived = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.tabMain)).BeginInit();
             this.tabMain.SuspendLayout();
             this.tabForReceiving.SuspendLayout();
@@ -50,7 +63,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridControlForReceiving)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridViewForReceiving)).BeginInit();
             this.groupBox3.SuspendLayout();
+            this.tabReceived.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gridControlMyReq)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridViewMyReq)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl7)).BeginInit();
+            this.panelControl7.SuspendLayout();
             this.contextMenuStripForReceiving.SuspendLayout();
+            this.contextMenuStripReceived.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabMain
@@ -67,7 +87,8 @@
             this.tabMain.Size = new System.Drawing.Size(1434, 731);
             this.tabMain.TabIndex = 8;
             this.tabMain.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
-            this.tabForReceiving});
+            this.tabForReceiving,
+            this.tabReceived});
             // 
             // tabForReceiving
             // 
@@ -190,6 +211,133 @@
             this.label6.TabIndex = 0;
             this.label6.Text = "From:";
             // 
+            // tabReceived
+            // 
+            this.tabReceived.Controls.Add(this.groupBox2);
+            this.tabReceived.Controls.Add(this.panelControl7);
+            this.tabReceived.Name = "tabReceived";
+            this.tabReceived.Size = new System.Drawing.Size(1432, 699);
+            this.tabReceived.Text = "Received Items";
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.gridControlMyReq);
+            this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox2.Location = new System.Drawing.Point(0, 52);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.groupBox2.Size = new System.Drawing.Size(1432, 647);
+            this.groupBox2.TabIndex = 10;
+            this.groupBox2.TabStop = false;
+            // 
+            // gridControlMyReq
+            // 
+            this.gridControlMyReq.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gridControlMyReq.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.gridControlMyReq.Location = new System.Drawing.Point(3, 20);
+            this.gridControlMyReq.MainView = this.gridViewMyReq;
+            this.gridControlMyReq.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.gridControlMyReq.Name = "gridControlMyReq";
+            this.gridControlMyReq.Size = new System.Drawing.Size(1426, 623);
+            this.gridControlMyReq.TabIndex = 3;
+            this.gridControlMyReq.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gridViewMyReq});
+            this.gridControlMyReq.MouseUp += new System.Windows.Forms.MouseEventHandler(this.gridControlMyReq_MouseUp);
+            // 
+            // gridViewMyReq
+            // 
+            this.gridViewMyReq.Appearance.HeaderPanel.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gridViewMyReq.Appearance.HeaderPanel.Options.UseFont = true;
+            this.gridViewMyReq.Appearance.Row.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gridViewMyReq.Appearance.Row.Options.UseFont = true;
+            this.gridViewMyReq.DetailHeight = 431;
+            this.gridViewMyReq.GridControl = this.gridControlMyReq;
+            this.gridViewMyReq.Name = "gridViewMyReq";
+            this.gridViewMyReq.OptionsBehavior.Editable = false;
+            this.gridViewMyReq.OptionsBehavior.ReadOnly = true;
+            this.gridViewMyReq.OptionsView.ColumnAutoWidth = false;
+            this.gridViewMyReq.OptionsView.RowAutoHeight = true;
+            this.gridViewMyReq.OptionsView.ShowFooter = true;
+            // 
+            // panelControl7
+            // 
+            this.panelControl7.Controls.Add(this.btnMyReqExcel);
+            this.panelControl7.Controls.Add(this.btnMyReq);
+            this.panelControl7.Controls.Add(this.label8);
+            this.panelControl7.Controls.Add(this.datetorcvd);
+            this.panelControl7.Controls.Add(this.datefromrcvd);
+            this.panelControl7.Controls.Add(this.label7);
+            this.panelControl7.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelControl7.Location = new System.Drawing.Point(0, 0);
+            this.panelControl7.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.panelControl7.Name = "panelControl7";
+            this.panelControl7.Size = new System.Drawing.Size(1432, 52);
+            this.panelControl7.TabIndex = 9;
+            // 
+            // btnMyReqExcel
+            // 
+            this.btnMyReqExcel.ImageOptions.Image = global::SalesInventorySystem.Properties.Resources.ExportToExcel_16x16;
+            this.btnMyReqExcel.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
+            this.btnMyReqExcel.Location = new System.Drawing.Point(514, 10);
+            this.btnMyReqExcel.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnMyReqExcel.Name = "btnMyReqExcel";
+            this.btnMyReqExcel.Size = new System.Drawing.Size(138, 28);
+            this.btnMyReqExcel.TabIndex = 14;
+            this.btnMyReqExcel.Text = "Export to Excel";
+            // 
+            // btnMyReq
+            // 
+            this.btnMyReq.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnMyReq.ImageOptions.Image")));
+            this.btnMyReq.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
+            this.btnMyReq.Location = new System.Drawing.Point(407, 10);
+            this.btnMyReq.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnMyReq.Name = "btnMyReq";
+            this.btnMyReq.Size = new System.Drawing.Size(100, 28);
+            this.btnMyReq.TabIndex = 11;
+            this.btnMyReq.Text = "Generate";
+            this.btnMyReq.Click += new System.EventHandler(this.btnMyReq_Click);
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold);
+            this.label8.Location = new System.Drawing.Point(12, 16);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(60, 21);
+            this.label8.TabIndex = 4;
+            this.label8.Text = "From:";
+            // 
+            // datetorcvd
+            // 
+            this.datetorcvd.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold);
+            this.datetorcvd.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.datetorcvd.Location = new System.Drawing.Point(262, 10);
+            this.datetorcvd.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.datetorcvd.Name = "datetorcvd";
+            this.datetorcvd.Size = new System.Drawing.Size(137, 27);
+            this.datetorcvd.TabIndex = 7;
+            // 
+            // datefromrcvd
+            // 
+            this.datefromrcvd.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold);
+            this.datefromrcvd.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.datefromrcvd.Location = new System.Drawing.Point(78, 10);
+            this.datefromrcvd.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.datefromrcvd.Name = "datefromrcvd";
+            this.datefromrcvd.Size = new System.Drawing.Size(137, 27);
+            this.datefromrcvd.TabIndex = 6;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold);
+            this.label7.Location = new System.Drawing.Point(223, 16);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(37, 21);
+            this.label7.TabIndex = 5;
+            this.label7.Text = "To:";
+            // 
             // contextMenuStripForReceiving
             // 
             this.contextMenuStripForReceiving.ImageScalingSize = new System.Drawing.Size(32, 32);
@@ -204,6 +352,21 @@
             this.showForReceivingItemsToolStripMenuItem.Size = new System.Drawing.Size(245, 24);
             this.showForReceivingItemsToolStripMenuItem.Text = "Show for Receiving Items";
             this.showForReceivingItemsToolStripMenuItem.Click += new System.EventHandler(this.showForReceivingItemsToolStripMenuItem_Click);
+            // 
+            // contextMenuStripReceived
+            // 
+            this.contextMenuStripReceived.ImageScalingSize = new System.Drawing.Size(32, 32);
+            this.contextMenuStripReceived.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem1});
+            this.contextMenuStripReceived.Name = "contextMenuStripForReceiving";
+            this.contextMenuStripReceived.Size = new System.Drawing.Size(219, 28);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(218, 24);
+            this.toolStripMenuItem1.Text = "Show Received Items";
+            this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
             // 
             // ReceivedTransferBranchInventory
             // 
@@ -221,7 +384,15 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridViewForReceiving)).EndInit();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
+            this.tabReceived.ResumeLayout(false);
+            this.groupBox2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.gridControlMyReq)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridViewMyReq)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl7)).EndInit();
+            this.panelControl7.ResumeLayout(false);
+            this.panelControl7.PerformLayout();
             this.contextMenuStripForReceiving.ResumeLayout(false);
+            this.contextMenuStripReceived.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -241,5 +412,18 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.ContextMenuStrip contextMenuStripForReceiving;
         private System.Windows.Forms.ToolStripMenuItem showForReceivingItemsToolStripMenuItem;
+        private DevExpress.XtraTab.XtraTabPage tabReceived;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private DevExpress.XtraGrid.GridControl gridControlMyReq;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridViewMyReq;
+        private DevExpress.XtraEditors.PanelControl panelControl7;
+        private DevExpress.XtraEditors.SimpleButton btnMyReqExcel;
+        private DevExpress.XtraEditors.SimpleButton btnMyReq;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.DateTimePicker datetorcvd;
+        private System.Windows.Forms.DateTimePicker datefromrcvd;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStripReceived;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
     }
 }

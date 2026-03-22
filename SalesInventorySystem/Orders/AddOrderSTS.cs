@@ -21,6 +21,7 @@ namespace SalesInventorySystem.Orders
         public AddOrderSTS()
         {
             InitializeComponent();
+            HelperFunction.AllowNumbersAndPeriod(txtqty);
         }
 
         private void AddOrderSTS_Load(object sender, EventArgs e)

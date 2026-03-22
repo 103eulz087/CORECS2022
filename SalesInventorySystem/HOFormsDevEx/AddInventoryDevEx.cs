@@ -31,6 +31,8 @@ namespace SalesInventorySystem.HOFormsDevEx
         public AddInventoryDevEx()
         {
             InitializeComponent();
+            HelperFunction.AllowNumbersAndPeriodDevEx(txtweight);
+            HelperFunction.AllowNumbersAndPeriod(txtpalletno);
         }
 
         private void AddInventoryDevEx_Load(object sender, EventArgs e)

@@ -369,11 +369,12 @@ namespace SalesInventorySystem
 
         void printSalesInvoice(GridView view)
         {
-            string custname = "", custaddress = "", custterm = "";
+            string custname = "", custaddress = "", custterm = "",tinno="";
             custname = view.GetRowCellValue(view.FocusedRowHandle, "CustomerName").ToString();
-            var row = Database.getMultipleQuery("Customers", "CustomerName='" + custname + "'", "CustomerAddress,Term");
+            var row = Database.getMultipleQuery("Customers", "CustomerName='" + custname + "'", "CustomerAddress,Term,TinNo");
             custaddress = row["CustomerAddress"].ToString();//Database.getSingleQuery("Customers", "CustomerName='" + custname + "'", "CustomerAddress");
             custterm = row["Term"].ToString();// Database.getSingleQuery("Customers", "CustomerName='" + custname + "'", "Term");
+            tinno = row["TinNo"].ToString();// Database.getSingleQuery("Customers", "CustomerName='" + custname + "'", "Term");
             refno1 = view.GetRowCellValue(view.FocusedRowHandle, "PONumber").ToString();
             Reporting.SalesInvoiceDexEx viewdet = new Reporting.SalesInvoiceDexEx();
             viewdet.Show();
@@ -381,6 +382,7 @@ namespace SalesInventorySystem
             analyze("spview_SalesInvoice", refno1, viewdet.gridControl4, viewdet.gridView4);
 
             viewdet.txtpono.Text = refno1;
+            viewdet.txtcusttin.Text = tinno;
             double vatablesales = 0.0, vatexemptsale = 0.0, vatamount = 0.0, totalsales = 0.0, lessvat = 0.0, netofvat = 0.0, amountdue = 0.0, addvat = 0.0, vatsales = 0.0, totalamountdue = 0.0;
             for (int i = 0; i <= viewdet.gridView4.RowCount - 1; i++)
             {
