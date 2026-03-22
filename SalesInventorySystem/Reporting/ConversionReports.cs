@@ -1,5 +1,6 @@
 ﻿using DevExpress.XtraEditors;
 using DevExpress.XtraGrid.Views.Grid;
+using SalesInventorySystem.Classes;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -62,12 +63,12 @@ namespace SalesInventorySystem.Reporting
                 //Database.display("SELECT * FROM view_ConversionSummary WHERE DateConverted >= '" + datefrom.Text + "' and DateConverted <= '" + dateto.Text + "' and isErrorCorrect ='0' and BranchCode='" + txtbrcode.Text + "'", gridControl1,gridView1);
                 if (tabControl1.SelectedTab.Equals(FORAPPROVAL))
                 {
-                    Database.display("SELECT * FROM view_ConversionSummary WHERE DateConverted >= '" + datefrom.Text + "' and DateConverted <= '" + dateto.Text + "' and isErrorCorrect ='0' and isConfirm='0' and BranchCode='" + txtbrcode.Text + "'", gridControl1, gridView1);
+                    Database.display("SELECT * FROM view_ConversionSummary WHERE BranchCode='" + Login.assignedBranch + "' AND CAST(DateConverted as date) BETWEEN '" + datefrom.Text + "' and  '" + dateto.Text + "' and isErrorCorrect ='0' and isConfirm='0' ", gridControl1, gridView1);
                     gridView1.Focus();
                 }
                 else if (tabControl1.SelectedTab.Equals(APPROVED))
                 {
-                    Database.display("SELECT * FROM view_ConversionSummary WHERE DateConverted >= '" + datefrom.Text + "' and DateConverted <= '" + dateto.Text + "' and isErrorCorrect ='0' and isConfirm='1' and BranchCode='" + txtbrcode.Text + "'", gridControl2, gridView2);
+                    Database.display("SELECT * FROM view_ConversionSummary WHERE BranchCode='" + Login.assignedBranch + "' AND CAST(DateConverted as date) BETWEEN '" + datefrom.Text + "' and  '" + dateto.Text + "' and isErrorCorrect ='0' and isConfirm='1' ", gridControl2, gridView2);
                     gridView1.Focus();
                 }
             }
@@ -75,12 +76,12 @@ namespace SalesInventorySystem.Reporting
             {
                 if (tabControl1.SelectedTab.Equals(FORAPPROVAL))
                 {
-                    Database.display("SELECT * FROM view_ConversionSummary WHERE DateConverted >= '" + datefrom.Text + "' and DateConverted <= '" + dateto.Text + "' and isErrorCorrect ='0' and isConfirm='0' and BranchCode='" + Login.assignedBranch + "'", gridControl1, gridView1);
+                    Database.display("SELECT * FROM view_ConversionSummary WHERE BranchCode='" + Login.assignedBranch + "' AND CAST(DateConverted as date) BETWEEN '" + datefrom.Text + "' and '" + dateto.Text + "' and isErrorCorrect ='0' and isConfirm='0' ", gridControl1, gridView1);
                     gridView2.Focus();
                 }
                 else if (tabControl1.SelectedTab.Equals(APPROVED))
                 {
-                    Database.display("SELECT * FROM view_ConversionSummary WHERE DateConverted >= '" + datefrom.Text + "' and DateConverted <= '" + dateto.Text + "' and isErrorCorrect ='0' and isConfirm='1' and BranchCode='" + Login.assignedBranch + "'", gridControl2, gridView2);
+                    Database.display("SELECT * FROM view_ConversionSummary WHERE BranchCode='" + Login.assignedBranch + "' AND CAST(DateConverted as date) BETWEEN '" + datefrom.Text + "' and '" + dateto.Text + "' and isErrorCorrect ='0' and isConfirm='1' ", gridControl2, gridView2);
                     gridView2.Focus();
                 }
             }
@@ -93,8 +94,12 @@ namespace SalesInventorySystem.Reporting
 
         private void errorCorrectToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            bool ok = HelperFunction.ConfirmDialog("Are you sure you want to Discard this operation?", "Discard Converted Items");
-            if (ok)
+            DialogResult confirm = BigAlert.Show(
+                       "CANCEL CONVERSION",
+                       "Are you sure you want to CANCEL this CONVERSION Process?",
+                       MessageBoxIcon.Warning,
+                       MessageBoxButtons.YesNo);
+            if (confirm == DialogResult.Yes)
             {
                 roolback();
                 display();
@@ -119,7 +124,11 @@ namespace SalesInventorySystem.Reporting
                 com.CommandType = CommandType.StoredProcedure;
                 com.CommandText = query;
                 com.ExecuteNonQuery();
-                XtraMessageBox.Show("Converted Operation Successfully Executed!");
+                //XtraMessageBox.Show("Converted Operation Successfully Executed!");
+                BigAlert.Show(
+                         "CONVERSION CANCELLED",
+                         "This Conversion has now been CANCELED",
+                         MessageBoxIcon.Information);
             }
             catch (SqlException ex)
             {
@@ -145,7 +154,10 @@ namespace SalesInventorySystem.Reporting
                 com.CommandType = CommandType.StoredProcedure;
                 com.CommandText = query;
                 com.ExecuteNonQuery();
-                XtraMessageBox.Show("Converted Operation Successfully Executed!");
+                BigAlert.Show(
+                        "ROLLBACK SUCCESS",
+                        "This Conversion is Successfully CANCELLED",
+                        MessageBoxIcon.Information);
             }
             catch (SqlException ex)
             {

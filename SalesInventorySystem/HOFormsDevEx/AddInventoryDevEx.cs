@@ -14,6 +14,7 @@ using DevExpress.XtraReports.UI;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraGrid.Columns;
 using DevExpress.XtraGrid;
+using SalesInventorySystem.Classes;
 
 namespace SalesInventorySystem.HOFormsDevEx
 {
@@ -80,18 +81,30 @@ namespace SalesInventorySystem.HOFormsDevEx
             }
             if (String.IsNullOrEmpty(txtpalletno.Text))
             {
-                XtraMessageBox.Show("Please Input Pallet Number!");
+                //XtraMessageBox.Show("Please Input Pallet Number!");
+                BigAlert.Show(
+                      "NO PALLET NUMBER",
+                      "Please Input Pallet Number!",
+                      MessageBoxIcon.Warning);
                 return;
             }
             if (txtbarcode.Text == "")
             {
-                XtraMessageBox.Show("Textfield must not empty");
+                //XtraMessageBox.Show("Textfield must not empty");
+                BigAlert.Show(
+                    "TEXTFIELD EMPTY",
+                    "Textfield must not empty",
+                    MessageBoxIcon.Warning);
                 txtbarcode.Text = "";
                 txtbarcode.Focus();
             }
             else if (!isproductexist)
             {
-                XtraMessageBox.Show("Product Not Exist in OrderDetails");
+                //XtraMessageBox.Show("Product Not Exist in OrderDetails");
+                BigAlert.Show(
+                   "PRODUCT NOT EXISTS",
+                   "Product Not Exist in your PO",
+                   MessageBoxIcon.Warning);
                 txtbarcode.Text = "";
                 txtbarcode.Focus();
             }
@@ -255,7 +268,11 @@ namespace SalesInventorySystem.HOFormsDevEx
             int totalreceive = Database.getCountData("SELECT COUNT(distinct(Product)) as Counter FROM TempInventory  WHERE ShipmentNo=" + txtshipmentno.Text + "", "Counter");
             if (txtdestination.Text == "" || txtinvoicedate.Text == "" || txtinvoiceno.Text == "" || txtduedate.Text == "")
             {
-                XtraMessageBox.Show("Please Input All Fields!");
+                //XtraMessageBox.Show("Please Input All Fields!");
+                BigAlert.Show(
+                        "SOME FIELDS ARE EMPTY",
+                        "Please Input All Fields!",
+                        MessageBoxIcon.Warning);
                 return;
             }
             bool confirmRcv = HelperFunction.ConfirmDialog("Are you sure you want to save this Inventory?","Confirm Inventory Entry");
@@ -267,7 +284,10 @@ namespace SalesInventorySystem.HOFormsDevEx
                     if (confirm)
                     {
                         uploadDB();
-                        XtraMessageBox.Show("Successfully Added!");
+                        BigAlert.Show(
+                        "SUCCESS",
+                        "Inventory Successfully Added!.. Please print now you PO Recieving Form",
+                        MessageBoxIcon.Information);
                         this.Close();
                     }
                     else
@@ -278,7 +298,10 @@ namespace SalesInventorySystem.HOFormsDevEx
                 else
                 {
                     uploadDB();
-                    XtraMessageBox.Show("Successfully Added!");
+                    BigAlert.Show(
+                       "SUCCESS",
+                       "Inventory Successfully Added!.. Please print now you PO Recieving Form",
+                       MessageBoxIcon.Information);
                     this.Close();
                 }
             }

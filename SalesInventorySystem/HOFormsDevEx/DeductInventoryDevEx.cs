@@ -166,30 +166,50 @@ namespace SalesInventorySystem.HOFormsDevEx
 
         private void btnDeduct_Click(object sender, EventArgs e)
         {
+            bool pendingConversion = Database.checkifExist("SELECT 1 FROM dbo.ConversionSummary " +
+                "WHERE BranchCode='" + txtbranch.Text + "'  and CAST(DateConverted as date) = '" + txtdate.Text + "' and isErrorCorrect=0 and isConfirm=0 ");
+           // var rowszz = Database.getMultipleQuery("ReInventoryMonitoring", "BranchCode='" + txtbranch.Text + "' and CAST(DateExecute as date)='" + txtdate.Text + "' ", "isAnalyze,isDeducted");
             bool check = Database.checkifExist("SELECT 1 FROM dbo.ReInventoryMonitoring " +
                 "WHERE BranchCode='" + txtbranch.Text + "'  and CAST(DateExecute as date)='" + txtdate.Text + "' and isAnalyze=1 ");
             var rows = Database.getMultipleQuery("ReInventoryMonitoring", "BranchCode='" + txtbranch.Text + "' and CAST(DateExecute as date)='" + txtdate.Text + "' ", "isAnalyze,isDeducted");
             string isAnalyze = rows["isAnalyze"].ToString();
             string isDeducted = rows["isDeducted"].ToString();
+            if (pendingConversion)
+            {
+                //XtraMessageBox.Show("You still have pending Conversion to be Approved.");
+                BigAlert.Show(
+                        "THERE IS A PENDING CONVERSION",
+                        "You still have pending Conversion to be Approved.",
+                        MessageBoxIcon.Warning);
+                return;
+            }
             if (!check)
             {
-                XtraMessageBox.Show("You Cant Proceed this Inventory is Not Yet Analyze.. No Records in Monitorings");
+                //XtraMessageBox.Show("You Cant Proceed this Inventory is Not Yet Analyze.. No Records in Monitorings");
+                BigAlert.Show(
+                      "ANALYZE FIRST",
+                      "You Cant Proceed this Inventory is Not Yet Analyze.. No Records in Monitorings",
+                      MessageBoxIcon.Warning);
                 return;
             }
-            if(gridView1.RowCount==0)
+            if (gridView1.RowCount==0)
             {
-                XtraMessageBox.Show("No Data Displayed");
+                //XtraMessageBox.Show("No Data Displayed");
+                BigAlert.Show(
+                      "Empty Records",
+                      "No Data Displayed",
+                      MessageBoxIcon.Warning);
                 return;
             }
-            if (Convert.ToBoolean(isAnalyze) == false)
+            if (Convert.ToBoolean(isAnalyze) == true && Convert.ToBoolean(isDeducted) == true)
             {
-                XtraMessageBox.Show("You Cant Proceed this Inventory is Not Yet Analyze");
+                //XtraMessageBox.Show("You Already Execute this Transaction");
+                BigAlert.Show(
+                     "Already Executed",
+                     "You Already Execute this Transaction",
+                     MessageBoxIcon.Warning);
                 return;
-            }
-            else if (Convert.ToBoolean(isAnalyze) == true && Convert.ToBoolean(isDeducted) == true)
-            {
-                XtraMessageBox.Show("You Already Execute this Transaction");
-                return;
+               
             }
             else if (Convert.ToBoolean(isAnalyze) == true && Convert.ToBoolean(isDeducted) == false)
             {
@@ -222,7 +242,11 @@ namespace SalesInventorySystem.HOFormsDevEx
                // sendMailNotification(file, txtbranch.Text);
                 
                 progressBarControl1.Position = 90;
-                XtraMessageBox.Show("Succesfully Executed");
+                //XtraMessageBox.Show("Succesfully Executed");
+                BigAlert.Show(
+                    "SUCCESS",
+                    "Succesfully Executed",
+                    MessageBoxIcon.Information);
                 btnDeduct.Enabled = false;
 
                 progressBarControl1.Position = 100;
