@@ -194,7 +194,7 @@
             // cancelLineToolStripMenuItem
             // 
             this.cancelLineToolStripMenuItem.Name = "cancelLineToolStripMenuItem";
-            this.cancelLineToolStripMenuItem.Size = new System.Drawing.Size(210, 24);
+            this.cancelLineToolStripMenuItem.Size = new System.Drawing.Size(185, 24);
             this.cancelLineToolStripMenuItem.Text = "Reprint Barcode";
             this.cancelLineToolStripMenuItem.Click += new System.EventHandler(this.cancelLineToolStripMenuItem_Click);
             // 

@@ -3280,6 +3280,12 @@ namespace SalesInventorySystem
             pfoap.Show();
         }
 
+        private void btnInventoryBranchSummary_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            Reporting.BranchInventoryProductSummary branchsum = new Reporting.BranchInventoryProductSummary();
+            branchsum.Show();
+        }
+
         private void Main_FormClosing(object sender, FormClosingEventArgs e)
         {
             //bool confirm = HelperFunction.ConfirmDialog("Are you want to close the Main Window?", "Close Main Window");

@@ -179,5 +179,41 @@ namespace SalesInventorySystem.LiveTrends
 
             timerLiveSync.Start();
         }
+
+        private void lblforapproval_Paint(object sender, PaintEventArgs e)
+        {
+            LabelControl lbl = sender as LabelControl;
+            e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+
+            using (Brush b = new SolidBrush(lbl.BackColor))
+            using (Pen p = new Pen(Color.Gray, 1))
+            {
+                int radius = 10; // corner radius
+                Rectangle rect = lbl.ClientRectangle;
+
+                using (System.Drawing.Drawing2D.GraphicsPath path = RoundedRect(rect, radius))
+                {
+                    e.Graphics.FillPath(b, path);
+                    e.Graphics.DrawPath(p, path);
+                }
+            }
+
+            // Draw the text
+            TextRenderer.DrawText(e.Graphics, lbl.Text, lbl.Font, lbl.ClientRectangle, lbl.ForeColor,
+                TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter);
+
+        }
+        private System.Drawing.Drawing2D.GraphicsPath RoundedRect(Rectangle bounds, int radius)
+        {
+            int diameter = radius * 2;
+            System.Drawing.Drawing2D.GraphicsPath path = new System.Drawing.Drawing2D.GraphicsPath();
+            path.AddArc(bounds.X, bounds.Y, diameter, diameter, 180, 90);
+            path.AddArc(bounds.Right - diameter, bounds.Y, diameter, diameter, 270, 90);
+            path.AddArc(bounds.Right - diameter, bounds.Bottom - diameter, diameter, diameter, 0, 90);
+            path.AddArc(bounds.X, bounds.Bottom - diameter, diameter, diameter, 90, 90);
+            path.CloseFigure();
+            return path;
+        }
+
     }
 }

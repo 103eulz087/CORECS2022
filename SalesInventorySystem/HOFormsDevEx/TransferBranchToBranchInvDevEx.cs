@@ -1,5 +1,6 @@
 ﻿using DevExpress.XtraEditors;
 using DevExpress.XtraReports.UI;
+using SalesInventorySystem.Classes;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -116,7 +117,7 @@ namespace SalesInventorySystem.HOFormsDevEx
             bprint.lbltotalkilos.Text = txtweight.Text;
             bprint.xrpalletno.Text = "n/a";
             bprint.xrsku.Text = globalprodcode;
-            bprint.lblxpirydate.Text = "n/a";
+            bprint.lblxpirydate.Text = DateTime.Now.AddYears(1).ToShortDateString();
             bprint.xrBarCode2.Text = txtsku.Text.Trim(); //productcategorycode + primalcode + txtweight.Text.Remove(2, 1);
 
             ReportPrintTool report = new ReportPrintTool(bprint);
@@ -189,6 +190,7 @@ namespace SalesInventorySystem.HOFormsDevEx
 
         private void btnadd_Click(object sender, EventArgs e)
         {
+           
             if(radho.Checked==false && radothers.Checked==false)
             {
                 XtraMessageBox.Show("Please select Destination for your Transfer!.. ");
@@ -201,10 +203,19 @@ namespace SalesInventorySystem.HOFormsDevEx
             }
             else
             {
-                btnprintbarcode.PerformClick();
-                add();
+                if (String.IsNullOrEmpty(txtsku.Text))
+                {
+                    BigAlert.Show("EMPTY SKU",
+                        "BARCODE NUMBER MUST NOT EMPTY.. PLEASE RE-PROCESS AGAIN",
+                        MessageBoxIcon.Warning);
+                    return;
+                }
+                else
+                {
+                    btnprintbarcode.PerformClick();
+                    add();
+                }
             }
-           
         }
         void ConfirmBranchTransferInventory()
         {

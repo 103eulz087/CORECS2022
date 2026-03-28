@@ -51,7 +51,7 @@
             this.labelControl2.Appearance.Options.UseBackColor = true;
             this.labelControl2.Appearance.Options.UseFont = true;
             this.labelControl2.Appearance.Options.UseForeColor = true;
-            this.labelControl2.Location = new System.Drawing.Point(108, 351);
+            this.labelControl2.Location = new System.Drawing.Point(115, 351);
             this.labelControl2.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
             this.labelControl2.Name = "labelControl2";
             this.labelControl2.Size = new System.Drawing.Size(77, 21);

@@ -42,7 +42,10 @@ namespace SalesInventorySystem.POS
                 if (btnexecuteEOD.Enabled == true) { this.Dispose(); }
                
             }
-           
+            if (keyData == (Keys.X | Keys.Control)) //PAYMENT
+            {
+                btnexecuteEOD.Enabled = true;
+            }
             return functionReturnValue;
         }
 
@@ -80,7 +83,7 @@ namespace SalesInventorySystem.POS
                 grouppendingtran.Visible = false;
                 //pictureEditcheck.Visible = true;
                 //pictureEditwrong.Visible = false;
-                btnexecuteEOD.Enabled = true;
+                //btnexecuteEOD.Enabled = true;
             }
                 
         }
@@ -448,7 +451,23 @@ namespace SalesInventorySystem.POS
 
         private void POSEndOfDay_Load(object sender, EventArgs e)
         {
-            btnexecuteEOD.Enabled = false;
+            bool checkifDataUploading = Database.checkifExist("SELECT 1 FROM dbo.POSType WHERE DataUploading=1");
+            if (!checkifDataUploading)
+            {
+                BigAlert.Show("SETUP NOT CONFIGURED FOR CLOUD UPLOADING",
+                    "Your POSTYPE CONFIGURATION has disabled DATA UPLOADING, YOU CAN PROCEED TO STEP 2 Directly.",
+                    MessageBoxIcon.Warning);
+                btnuploadsales.Enabled = false;
+                btnexecuteEOD.Enabled = true;
+              
+            }
+            else
+            {
+                btnuploadsales.Enabled = true;
+                btnexecuteEOD.Enabled = false;
+
+            }
+            
             //this.Text = this.Size.ToString();
             int refnumber = IDGenerator.getIDNumber("POSTransaction", "BranchCode='" + Login.assignedBranch + "'", "TransactionNo", 1);
             txttransactionno.Text = HelperFunction.sequencePadding1(refnumber.ToString(),10);
@@ -723,7 +742,7 @@ namespace SalesInventorySystem.POS
                 //DateTime transDate = DateTime.Today;
                 string branchCode = Login.assignedBranch;
                 string machineName = Environment.MachineName;
-
+                string dateTempforCC = "03/01/2026";
                 PosDataUploader uploader = new PosDataUploader();
                
                 statusHandler.Report("Starting upload process...");
@@ -749,6 +768,10 @@ namespace SalesInventorySystem.POS
 
                     statusHandler.Report("Starting POSSales Summary upload...");
                     await uploader.UploadBatchPOSSalesSummaryAsync(transDate, branchCode, machineName, progressHandler, statusHandler);
+
+                    statusHandler.Report("Starting CreditCard Transaction upload...");
+                    await uploader.UploadPOSCreditCardTransactionAsync(Convert.ToDateTime(dateTempforCC), branchCode, machineName, progressHandler, statusHandler);
+
                 });
 
                 MessageBox.Show("All end-of-day data uploaded seamlessly!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -787,8 +810,13 @@ namespace SalesInventorySystem.POS
 
         public async Task<bool> VerifySupervisorAnalysisAsync(string branchCode, DateTime shiftDate)
         {
-            // Make sure this points to your CLOUD database
-            string cloudConnString = Database.getConnectionString(@"AAITCRE\ConnSettingsServer");
+            string rawConnString = Database.getConnectionString(@"AAITCRE\ConnSettingsServer");
+
+            // Use a builder to inject a short timeout so it doesn't "hang"
+            SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder(rawConnString);
+            builder.ConnectTimeout = 5; // Fail fast after 5 seconds if no internet
+
+            string cloudConnString = builder.ConnectionString;
             bool isAnalyzed = false;
 
             try
@@ -797,7 +825,6 @@ namespace SalesInventorySystem.POS
                 {
                     await conn.OpenAsync();
 
-                    // Check if the supervisor has set the flag to 1 for this specific date
                     string query = @"
                 SELECT ISNULL(isDeducted, 0) 
                 FROM [dbo].[ReInventoryMonitoring] 
@@ -809,26 +836,34 @@ namespace SalesInventorySystem.POS
                         cmd.Parameters.AddWithValue("@ProcessDate", shiftDate.Date);
 
                         object result = await cmd.ExecuteScalarAsync();
-
                         if (result != null)
                         {
                             isAnalyzed = Convert.ToBoolean(result);
                         }
                     }
                 }
+                return isAnalyzed;
             }
-            catch (SqlException ex)
+            catch (SqlException)
             {
-                // If the internet is down, they can't check the cloud. 
-                // You have to decide your business rule here: Do you block them, or let them bypass?
-                BigAlert.Show("CLOUD CONNECTION ERROR",
-                    "Cannot connect to the cloud to verify supervisor status. Please check internet connection.\n\n" + ex.Message,
-                    MessageBoxIcon.Error);
-
-                return false; // Blocks EOD if there's no internet
+                // INTERNET IS DOWN: 
+                // We log this or show a small tray notification, but we return TRUE 
+                // to let the branch proceed with their local EOD.
+                BigAlert.Show(
+                          "NETWORK OFFLINE",
+                          "Please Coordinate your Supervisor / TL or Contact Head Office",
+                          MessageBoxIcon.Warning);
+                return true;
             }
-
-            return isAnalyzed;
+            catch (Exception)
+            {
+                // Any other weird error, we still let them proceed locally.
+                BigAlert.Show(
+                          "NETWORK OFFLINE",
+                          "Please Coordinate your Supervisor / TL or Contact Head Office",
+                          MessageBoxIcon.Warning);
+                return true;
+            }
         }
         private async void btnuploadsales_Click(object sender, EventArgs e)
         {
@@ -859,6 +894,8 @@ namespace SalesInventorySystem.POS
                            "Please Coordinate your Supervisor / TL or Contact Head Office",
                            MessageBoxIcon.Warning);
                     retryupload += 1;
+                    btnuploadsales.Enabled = true;
+                    btnexecuteEOD.Enabled = false;
                 }
                 else if (isUploadExists)
                 {
@@ -900,61 +937,8 @@ namespace SalesInventorySystem.POS
                 btnexecuteEOD.Enabled = true;
             }
         }
-        private async void simpleButton1_Click(object sender, EventArgs e)
-        {
-             
-            btnexecuteEOD.Enabled = false;
-            progressBarControl1.Position = 0;
-            // 2. If it reaches here, the supervisor did their job!
-            try
-            {
-
-                // 1. Check Cloud for Supervisor Approval
-                bool canProceed = await VerifySupervisorAnalysisAsync(Login.assignedBranch, Convert.ToDateTime(txttransactiondate.Text));
-                if (!canProceed)
-                {
-                    // Use our massive BigAlert class!
-
-                    BigAlert.Show(
-                        "SUPERVISOR APPROVAL REQUIRED",
-                        "You cannot execute End of Day.\n\nThe Supervisor has not yet analyzed and deducted today's inventory. Please notify the Supervisor to complete the Inventory deduction.",
-                        MessageBoxIcon.Warning);
-
-                    btnexecuteEOD.Enabled = true;
-                    return; // STOP EXECUTION HERE. They cannot proceed.
-                }
-                else
-                {
-                    //bool confirm = HelperFunction.ConfirmDialog("Are you Sure you want to Execute END OF DAY Transaction?", "End Of Day");
-                    DialogResult confirm = BigAlert.Show(
-                        "EXECUTE EOD AND GENERATE ZREAD",
-                        "Are you sure you want to Execute End of Day Transaction?",
-                        MessageBoxIcon.Warning,
-                        MessageBoxButtons.YesNo);
-                    if (confirm == DialogResult.Yes)
-                    {
-                        executeEOD();
-                        //pushit();
-                    }
-                    else
-                    {
-                        return;
-                    }
-                    BigAlert.Show("EOD SUCCESS", "End of Day completed successfully. You may now close the terminal.", MessageBoxIcon.Information);
-                }
-                // ... Execute your local Z-Reading printing ...
-                // ... Lock the local POS terminal ...
-            }
-            catch (Exception ex)
-            {
-                BigAlert.Show("EOD ERROR", ex.Message, MessageBoxIcon.Error);
-            }
-            finally
-            {
-                btnexecuteEOD.Enabled = true;
-            }
-            this.Dispose();
-        }
+    
+        
         //NOT USED
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
@@ -1026,6 +1010,59 @@ namespace SalesInventorySystem.POS
 
         }
 
-       
+        private async void btnexecuteEOD_Click(object sender, EventArgs e)
+        {
+            btnexecuteEOD.Enabled = false;
+            progressBarControl1.Position = 0;
+            // 2. If it reaches here, the supervisor did their job!
+            try
+            {
+
+                // 1. Check Cloud for Supervisor Approval
+                bool canProceed = await VerifySupervisorAnalysisAsync(Login.assignedBranch, Convert.ToDateTime(txttransactiondate.Text));
+                if (!canProceed)
+                {
+                    // Use our massive BigAlert class!
+
+                    BigAlert.Show(
+                        "SUPERVISOR APPROVAL REQUIRED",
+                        "You cannot execute End of Day.\n\nThe Supervisor has not yet analyzed and deducted today's inventory. Please notify the Supervisor to complete the Inventory deduction.",
+                        MessageBoxIcon.Warning);
+
+                    btnexecuteEOD.Enabled = true;
+                    return; // STOP EXECUTION HERE. They cannot proceed.
+                }
+                else
+                {
+                    //bool confirm = HelperFunction.ConfirmDialog("Are you Sure you want to Execute END OF DAY Transaction?", "End Of Day");
+                    DialogResult confirm = BigAlert.Show(
+                        "EXECUTE EOD AND GENERATE ZREAD",
+                        "Are you sure you want to Execute End of Day Transaction?",
+                        MessageBoxIcon.Warning,
+                        MessageBoxButtons.YesNo);
+                    if (confirm == DialogResult.Yes)
+                    {
+                        executeEOD();
+                        //pushit();
+                    }
+                    else
+                    {
+                        return;
+                    }
+                    BigAlert.Show("EOD SUCCESS", "End of Day completed successfully. You may now close the terminal.", MessageBoxIcon.Information);
+                }
+                // ... Execute your local Z-Reading printing ...
+                // ... Lock the local POS terminal ...
+            }
+            catch (Exception ex)
+            {
+                BigAlert.Show("EOD ERROR", ex.Message, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                btnexecuteEOD.Enabled = true;
+            }
+            this.Dispose();
+        }
     }
 }

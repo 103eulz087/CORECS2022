@@ -319,16 +319,17 @@ namespace SalesInventorySystem.POS
 
 
 
-        public SalesDataDto GetInsertedSalesData(string orderNo, string posId)
+        public SalesDataDto GetInsertedSalesData(string brcode, string orderNo, string posId)
         {
             SalesDataDto data = null;
 
             using (SqlConnection conn = Database.getConnection())
             {
-                string query = "SELECT * FROM BatchSalesSummary WHERE ReferenceNo = @OrderNo AND MachineUsed = @POSID";
+                string query = "SELECT * FROM BatchSalesSummary WHERE BranchCode=@BrCode ReferenceNo = @OrderNo AND MachineUsed = @POSID";
 
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
+                    cmd.Parameters.AddWithValue("@BrCode", brcode);
                     cmd.Parameters.AddWithValue("@OrderNo", orderNo);
                     cmd.Parameters.AddWithValue("@POSID", posId);
 
@@ -344,8 +345,8 @@ namespace SalesInventorySystem.POS
                             data = new SalesDataDto
                             {
 
-                                //TenantID = 1,//Convert.ToInt64(reader["TenantID"]),
-                                //POSID = reader["MachineUsed"].ToString(),//reader["POSID"].ToString(),
+                                TenantID = reader["BranchCode"].ToString(),//1,//Convert.ToInt64(reader["TenantID"]),
+                                POSID = reader["MachineUsed"].ToString(),//reader["POSID"].ToString(),
                                 OrderNo = reader["ReferenceNo"].ToString(),//reader["OrderNo"].ToString(),
                                 UserID = reader["CashierTransNo"].ToString(),
                                 CustomerName = reader["CustomerNo"].ToString(),//reader["CustomerName"].ToString(),
@@ -402,7 +403,7 @@ namespace SalesInventorySystem.POS
         {
             try
             {
-                var sale = GetInsertedSalesData(lblorderno.Text.Trim(), Environment.MachineName.ToString());
+                var sale = GetInsertedSalesData(Login.assignedBranch,lblorderno.Text.Trim(), Environment.MachineName.ToString());
 
                 if (sale != null)
                 {
@@ -423,7 +424,7 @@ namespace SalesInventorySystem.POS
                     errorMessage += $"\nInner Exception: {ex.InnerException.Message}";
                 }
 
-                MessageBox.Show(errorMessage);
+                //MessageBox.Show(errorMessage);
             }
 
 
@@ -552,7 +553,7 @@ namespace SalesInventorySystem.POS
                 discounttype = "REGULAR";
             }
             spSaveTransaction(discounttype, invno);
-            //pushit();
+            pushit();
         }
         bool haveOneTimeDiscount()
         {

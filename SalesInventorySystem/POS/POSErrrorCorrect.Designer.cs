@@ -93,10 +93,10 @@
             this.labelControl6.Appearance.ForeColor = System.Drawing.Color.Black;
             this.labelControl6.Appearance.Options.UseFont = true;
             this.labelControl6.Appearance.Options.UseForeColor = true;
-            this.labelControl6.Location = new System.Drawing.Point(20, 337);
-            this.labelControl6.Margin = new System.Windows.Forms.Padding(6);
+            this.labelControl6.Location = new System.Drawing.Point(13, 216);
+            this.labelControl6.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.labelControl6.Name = "labelControl6";
-            this.labelControl6.Size = new System.Drawing.Size(142, 29);
+            this.labelControl6.Size = new System.Drawing.Size(88, 18);
             this.labelControl6.TabIndex = 12;
             this.labelControl6.Text = "Branch Code:";
             // 
@@ -106,21 +106,21 @@
             this.labelControl1.Appearance.ForeColor = System.Drawing.Color.Yellow;
             this.labelControl1.Appearance.Options.UseFont = true;
             this.labelControl1.Appearance.Options.UseForeColor = true;
-            this.labelControl1.Location = new System.Drawing.Point(10, 54);
-            this.labelControl1.Margin = new System.Windows.Forms.Padding(6);
+            this.labelControl1.Location = new System.Drawing.Point(7, 35);
+            this.labelControl1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.labelControl1.Name = "labelControl1";
-            this.labelControl1.Size = new System.Drawing.Size(220, 33);
+            this.labelControl1.Size = new System.Drawing.Size(137, 21);
             this.labelControl1.TabIndex = 13;
             this.labelControl1.Text = "Enter OR Number:";
             // 
             // txttransno
             // 
             this.txttransno.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txttransno.Location = new System.Drawing.Point(614, 281);
-            this.txttransno.Margin = new System.Windows.Forms.Padding(6);
+            this.txttransno.Location = new System.Drawing.Point(409, 180);
+            this.txttransno.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txttransno.Name = "txttransno";
             this.txttransno.ReadOnly = true;
-            this.txttransno.Size = new System.Drawing.Size(192, 36);
+            this.txttransno.Size = new System.Drawing.Size(129, 26);
             this.txttransno.TabIndex = 30;
             // 
             // labelControl5
@@ -129,21 +129,21 @@
             this.labelControl5.Appearance.ForeColor = System.Drawing.Color.Black;
             this.labelControl5.Appearance.Options.UseFont = true;
             this.labelControl5.Appearance.Options.UseForeColor = true;
-            this.labelControl5.Location = new System.Drawing.Point(436, 287);
-            this.labelControl5.Margin = new System.Windows.Forms.Padding(6);
+            this.labelControl5.Location = new System.Drawing.Point(291, 184);
+            this.labelControl5.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.labelControl5.Name = "labelControl5";
-            this.labelControl5.Size = new System.Drawing.Size(156, 29);
+            this.labelControl5.Size = new System.Drawing.Size(97, 18);
             this.labelControl5.TabIndex = 29;
             this.labelControl5.Text = "Transaction #:";
             // 
             // txtreturntransno
             // 
             this.txtreturntransno.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtreturntransno.Location = new System.Drawing.Point(268, 281);
-            this.txtreturntransno.Margin = new System.Windows.Forms.Padding(6);
+            this.txtreturntransno.Location = new System.Drawing.Point(179, 180);
+            this.txtreturntransno.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtreturntransno.Name = "txtreturntransno";
             this.txtreturntransno.ReadOnly = true;
-            this.txtreturntransno.Size = new System.Drawing.Size(140, 36);
+            this.txtreturntransno.Size = new System.Drawing.Size(95, 26);
             this.txtreturntransno.TabIndex = 28;
             // 
             // labelControl4
@@ -152,19 +152,19 @@
             this.labelControl4.Appearance.ForeColor = System.Drawing.Color.Black;
             this.labelControl4.Appearance.Options.UseFont = true;
             this.labelControl4.Appearance.Options.UseForeColor = true;
-            this.labelControl4.Location = new System.Drawing.Point(20, 287);
-            this.labelControl4.Margin = new System.Windows.Forms.Padding(6);
+            this.labelControl4.Location = new System.Drawing.Point(13, 184);
+            this.labelControl4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.labelControl4.Name = "labelControl4";
-            this.labelControl4.Size = new System.Drawing.Size(235, 29);
+            this.labelControl4.Size = new System.Drawing.Size(145, 18);
             this.labelControl4.TabIndex = 27;
             this.labelControl4.Text = "Return Transaction #:";
             // 
             // txtremarks
             // 
-            this.txtremarks.Location = new System.Drawing.Point(210, 388);
-            this.txtremarks.Margin = new System.Windows.Forms.Padding(6);
+            this.txtremarks.Location = new System.Drawing.Point(140, 248);
+            this.txtremarks.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtremarks.Name = "txtremarks";
-            this.txtremarks.Size = new System.Drawing.Size(816, 116);
+            this.txtremarks.Size = new System.Drawing.Size(545, 76);
             this.txtremarks.TabIndex = 17;
             this.txtremarks.Text = "";
             this.txtremarks.Visible = false;
@@ -175,10 +175,10 @@
             this.labelControl2.Appearance.ForeColor = System.Drawing.Color.Black;
             this.labelControl2.Appearance.Options.UseFont = true;
             this.labelControl2.Appearance.Options.UseForeColor = true;
-            this.labelControl2.Location = new System.Drawing.Point(42, 423);
-            this.labelControl2.Margin = new System.Windows.Forms.Padding(6);
+            this.labelControl2.Location = new System.Drawing.Point(28, 271);
+            this.labelControl2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.labelControl2.Name = "labelControl2";
-            this.labelControl2.Size = new System.Drawing.Size(153, 39);
+            this.labelControl2.Size = new System.Drawing.Size(96, 24);
             this.labelControl2.TabIndex = 16;
             this.labelControl2.Text = "Remarks:";
             this.labelControl2.Visible = false;
@@ -186,21 +186,21 @@
             // txtorderno
             // 
             this.txtorderno.Font = new System.Drawing.Font("Tahoma", 12F);
-            this.txtorderno.Location = new System.Drawing.Point(238, 46);
-            this.txtorderno.Margin = new System.Windows.Forms.Padding(6);
+            this.txtorderno.Location = new System.Drawing.Point(159, 29);
+            this.txtorderno.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtorderno.Name = "txtorderno";
-            this.txtorderno.Size = new System.Drawing.Size(342, 46);
+            this.txtorderno.Size = new System.Drawing.Size(229, 32);
             this.txtorderno.TabIndex = 15;
             this.txtorderno.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox2_KeyDown);
             // 
             // txtbranch
             // 
             this.txtbranch.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtbranch.Location = new System.Drawing.Point(268, 331);
-            this.txtbranch.Margin = new System.Windows.Forms.Padding(6);
+            this.txtbranch.Location = new System.Drawing.Point(179, 212);
+            this.txtbranch.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtbranch.Name = "txtbranch";
             this.txtbranch.ReadOnly = true;
-            this.txtbranch.Size = new System.Drawing.Size(140, 36);
+            this.txtbranch.Size = new System.Drawing.Size(95, 26);
             this.txtbranch.TabIndex = 14;
             // 
             // dataGridView1
@@ -210,10 +210,10 @@
             this.dataGridView1.BackgroundColor = System.Drawing.Color.White;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(4, 30);
-            this.dataGridView1.Margin = new System.Windows.Forms.Padding(6);
+            this.dataGridView1.Location = new System.Drawing.Point(3, 19);
+            this.dataGridView1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(1118, 337);
+            this.dataGridView1.Size = new System.Drawing.Size(745, 215);
             this.dataGridView1.TabIndex = 15;
             this.dataGridView1.Visible = false;
             this.dataGridView1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.dataGridView1_MouseUp);
@@ -224,23 +224,21 @@
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.voidSelectedTransactionToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(291, 40);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(204, 28);
             // 
             // voidSelectedTransactionToolStripMenuItem
             // 
             this.voidSelectedTransactionToolStripMenuItem.Name = "voidSelectedTransactionToolStripMenuItem";
-            this.voidSelectedTransactionToolStripMenuItem.Size = new System.Drawing.Size(290, 36);
+            this.voidSelectedTransactionToolStripMenuItem.Size = new System.Drawing.Size(203, 24);
             this.voidSelectedTransactionToolStripMenuItem.Text = "Void Selected Item";
             this.voidSelectedTransactionToolStripMenuItem.Click += new System.EventHandler(this.voidSelectedTransactionToolStripMenuItem_Click);
             // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.dataGridView1);
-            this.groupBox2.Location = new System.Drawing.Point(1184, 54);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(4);
+            this.groupBox2.Location = new System.Drawing.Point(789, 35);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox2.Size = new System.Drawing.Size(1126, 371);
+            this.groupBox2.Size = new System.Drawing.Size(751, 237);
             this.groupBox2.TabIndex = 27;
             this.groupBox2.TabStop = false;
             this.groupBox2.Visible = false;
@@ -250,10 +248,10 @@
             this.labelControl7.Appearance.ForeColor = System.Drawing.Color.Yellow;
             this.labelControl7.Appearance.Options.UseFont = true;
             this.labelControl7.Appearance.Options.UseForeColor = true;
-            this.labelControl7.Location = new System.Drawing.Point(238, 108);
-            this.labelControl7.Margin = new System.Windows.Forms.Padding(6);
+            this.labelControl7.Location = new System.Drawing.Point(159, 69);
+            this.labelControl7.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.labelControl7.Name = "labelControl7";
-            this.labelControl7.Size = new System.Drawing.Size(325, 25);
+            this.labelControl7.Size = new System.Drawing.Size(197, 16);
             this.labelControl7.TabIndex = 32;
             this.labelControl7.Text = "Note: Enter the last whole number";
             // 
@@ -281,18 +279,16 @@
             this.groupControl1.Location = new System.Drawing.Point(0, 0);
             this.groupControl1.LookAndFeel.Style = DevExpress.LookAndFeel.LookAndFeelStyle.Flat;
             this.groupControl1.LookAndFeel.UseDefaultLookAndFeel = false;
-            this.groupControl1.Margin = new System.Windows.Forms.Padding(4);
             this.groupControl1.Name = "groupControl1";
-            this.groupControl1.Size = new System.Drawing.Size(1826, 163);
+            this.groupControl1.Size = new System.Drawing.Size(1217, 104);
             this.groupControl1.TabIndex = 33;
             // 
             // btnClose
             // 
             this.btnClose.ImageOptions.Image = global::SalesInventorySystem.Properties.Resources.Cancel_32x32;
-            this.btnClose.Location = new System.Drawing.Point(972, 46);
-            this.btnClose.Margin = new System.Windows.Forms.Padding(4);
+            this.btnClose.Location = new System.Drawing.Point(648, 29);
             this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(184, 90);
+            this.btnClose.Size = new System.Drawing.Size(123, 58);
             this.btnClose.TabIndex = 36;
             this.btnClose.Text = "Close";
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
@@ -300,10 +296,9 @@
             // btnReturnALL
             // 
             this.btnReturnALL.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnReturnALL.ImageOptions.Image")));
-            this.btnReturnALL.Location = new System.Drawing.Point(1604, 50);
-            this.btnReturnALL.Margin = new System.Windows.Forms.Padding(4);
+            this.btnReturnALL.Location = new System.Drawing.Point(1069, 32);
             this.btnReturnALL.Name = "btnReturnALL";
-            this.btnReturnALL.Size = new System.Drawing.Size(166, 88);
+            this.btnReturnALL.Size = new System.Drawing.Size(111, 56);
             this.btnReturnALL.TabIndex = 35;
             this.btnReturnALL.Text = "Return ALL";
             this.btnReturnALL.Visible = false;
@@ -314,10 +309,9 @@
             this.btnReturnSelected.Appearance.Options.UseTextOptions = true;
             this.btnReturnSelected.Appearance.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
             this.btnReturnSelected.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnReturnSelected.ImageOptions.Image")));
-            this.btnReturnSelected.Location = new System.Drawing.Point(720, 46);
-            this.btnReturnSelected.Margin = new System.Windows.Forms.Padding(4);
+            this.btnReturnSelected.Location = new System.Drawing.Point(480, 29);
             this.btnReturnSelected.Name = "btnReturnSelected";
-            this.btnReturnSelected.Size = new System.Drawing.Size(244, 90);
+            this.btnReturnSelected.Size = new System.Drawing.Size(163, 58);
             this.btnReturnSelected.TabIndex = 34;
             this.btnReturnSelected.Text = "Return Selected Item";
             this.btnReturnSelected.Click += new System.EventHandler(this.btnReturnSelected_Click);
@@ -325,10 +319,9 @@
             // simpleButton1
             // 
             this.simpleButton1.ImageOptions.Image = global::SalesInventorySystem.Properties.Resources.Refresh_16x16;
-            this.simpleButton1.Location = new System.Drawing.Point(592, 46);
-            this.simpleButton1.Margin = new System.Windows.Forms.Padding(4);
+            this.simpleButton1.Location = new System.Drawing.Point(395, 29);
             this.simpleButton1.Name = "simpleButton1";
-            this.simpleButton1.Size = new System.Drawing.Size(120, 46);
+            this.simpleButton1.Size = new System.Drawing.Size(80, 29);
             this.simpleButton1.TabIndex = 33;
             this.simpleButton1.Text = "GET";
             this.simpleButton1.Click += new System.EventHandler(this.simpleButton1_Click);
@@ -337,19 +330,21 @@
             // 
             this.groupBox1.Controls.Add(this.gridControlMaster);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox1.Location = new System.Drawing.Point(0, 163);
+            this.groupBox1.Location = new System.Drawing.Point(0, 104);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1826, 937);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Size = new System.Drawing.Size(1217, 600);
             this.groupBox1.TabIndex = 34;
             this.groupBox1.TabStop = false;
             // 
             // gridControlMaster
             // 
             this.gridControlMaster.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridControlMaster.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(6, 8, 6, 8);
-            this.gridControlMaster.Location = new System.Drawing.Point(3, 27);
+            this.gridControlMaster.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.gridControlMaster.Location = new System.Drawing.Point(2, 17);
             this.gridControlMaster.MainView = this.gridViewMaster;
-            this.gridControlMaster.Margin = new System.Windows.Forms.Padding(6, 8, 6, 8);
+            this.gridControlMaster.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.gridControlMaster.Name = "gridControlMaster";
             this.gridControlMaster.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemComboBox5,
@@ -360,7 +355,7 @@
             this.repositoryItemSearchLookUpEditoffsetdebitglcode,
             this.repositoryItemSearchLookUpEditdiscountglcode,
             this.repositoryItemSearchLookUpEditoffsetCreditGLCode});
-            this.gridControlMaster.Size = new System.Drawing.Size(1820, 907);
+            this.gridControlMaster.Size = new System.Drawing.Size(1213, 581);
             this.gridControlMaster.TabIndex = 9;
             this.gridControlMaster.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewMaster});
@@ -371,8 +366,8 @@
             this.gridViewMaster.Appearance.HeaderPanel.Options.UseFont = true;
             this.gridViewMaster.Appearance.Row.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gridViewMaster.Appearance.Row.Options.UseFont = true;
-            this.gridViewMaster.DetailHeight = 673;
-            this.gridViewMaster.FixedLineWidth = 4;
+            this.gridViewMaster.DetailHeight = 431;
+            this.gridViewMaster.FixedLineWidth = 3;
             this.gridViewMaster.GridControl = this.gridControlMaster;
             this.gridViewMaster.LevelIndent = 0;
             this.gridViewMaster.Name = "gridViewMaster";
@@ -402,8 +397,8 @@
             // 
             // gridView5
             // 
-            this.gridView5.DetailHeight = 546;
-            this.gridView5.FixedLineWidth = 4;
+            this.gridView5.DetailHeight = 349;
+            this.gridView5.FixedLineWidth = 3;
             this.gridView5.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
             this.gridView5.LevelIndent = 0;
             this.gridView5.Name = "gridView5";
@@ -443,8 +438,8 @@
             // 
             // repositoryItemSearchLookUpEdit1View
             // 
-            this.repositoryItemSearchLookUpEdit1View.DetailHeight = 546;
-            this.repositoryItemSearchLookUpEdit1View.FixedLineWidth = 4;
+            this.repositoryItemSearchLookUpEdit1View.DetailHeight = 349;
+            this.repositoryItemSearchLookUpEdit1View.FixedLineWidth = 3;
             this.repositoryItemSearchLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
             this.repositoryItemSearchLookUpEdit1View.LevelIndent = 0;
             this.repositoryItemSearchLookUpEdit1View.Name = "repositoryItemSearchLookUpEdit1View";
@@ -462,8 +457,8 @@
             // 
             // gridView1
             // 
-            this.gridView1.DetailHeight = 546;
-            this.gridView1.FixedLineWidth = 4;
+            this.gridView1.DetailHeight = 349;
+            this.gridView1.FixedLineWidth = 3;
             this.gridView1.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
             this.gridView1.LevelIndent = 0;
             this.gridView1.Name = "gridView1";
@@ -481,8 +476,8 @@
             // 
             // gridView2
             // 
-            this.gridView2.DetailHeight = 546;
-            this.gridView2.FixedLineWidth = 4;
+            this.gridView2.DetailHeight = 349;
+            this.gridView2.FixedLineWidth = 3;
             this.gridView2.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
             this.gridView2.LevelIndent = 0;
             this.gridView2.Name = "gridView2";
@@ -492,14 +487,14 @@
             // 
             // POSErrrorCorrect
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1826, 1100);
+            this.ClientSize = new System.Drawing.Size(1217, 704);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupControl1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(6);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "POSErrrorCorrect";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "POSErrrorCorrect";

@@ -21,6 +21,7 @@ using Newtonsoft.Json;
 using System.Net;
 using System.Net.Http;
 using System.Net.NetworkInformation;
+using SalesInventorySystem.V5;
 
 namespace SalesInventorySystem
 {
@@ -228,14 +229,35 @@ exit /b
             }
         }
 
+        public void SucessPayment(V5Pay form)
+        {
+            MessageBox.Show("Success Payment from receipt: " + JsonConvert.SerializeObject(form.receipt));
+        }
+        public void FailPayment(V5Pay form, string message)
+        {
+            MessageBox.Show("Fail Payment: " + message);
+            //#MessageBox.Show("Data from receipt " + JsonConvert.SerializeObject(form.receipt));
+        }
+
         private async void buttonLogin_Click(object sender, EventArgs e)
         {
-            // 1. Instant Network Check
-            if (!System.Net.NetworkInformation.NetworkInterface.GetIsNetworkAvailable())
-            {
-                MessageBox.Show("No network connection detected. Please check your Wi-Fi or cable.", "No Internet", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
+            Database.ExecuteQuery("UPDATE dbo.POSType SET DataUploading=1");
+            ////start loading
+            //HelperFunction.ShowWaitAndDisplay("PLEASE WAIT","LOADING DATA",3000);
+            //var referenceId = "001-POS1-000000000000000007"; 
+            //var amount = 2.22;
+            //var form = new V5Pay(this, referenceId, amount); //r form = new V5Pay(this); // POS
+            //await form.InitializeWebView();
+            //await form.CreatePayment();
+            ////hide loading
+            //if (!form.failed) form.Show(this); //form.ShowDialog();
+            //return;
+            //// 1. Instant Network Check
+            //if (!System.Net.NetworkInformation.NetworkInterface.GetIsNetworkAvailable())
+            //{
+            //    MessageBox.Show("No network connection detected. Please check your Wi-Fi or cable.", "No Internet", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            //    return;
+            //}
 
             // 2. Basic UI Validation
             if (string.IsNullOrWhiteSpace(txtuserid.Text))

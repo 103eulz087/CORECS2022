@@ -977,12 +977,12 @@
             this.contextMenuStripForConfirmationProducts.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuItem2});
             this.contextMenuStripForConfirmationProducts.Name = "contextMenuStrip1";
-            this.contextMenuStripForConfirmationProducts.Size = new System.Drawing.Size(211, 56);
+            this.contextMenuStripForConfirmationProducts.Size = new System.Drawing.Size(174, 28);
             // 
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(210, 24);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(173, 24);
             this.toolStripMenuItem2.Text = "Confirm Order";
             this.toolStripMenuItem2.Click += new System.EventHandler(this.toolStripMenuItem2_Click);
             // 

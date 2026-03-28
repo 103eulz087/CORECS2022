@@ -220,7 +220,7 @@
             this.tabMyRequest.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("tabMyRequest.ImageOptions.Image")));
             this.tabMyRequest.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tabMyRequest.Name = "tabMyRequest";
-            this.tabMyRequest.Size = new System.Drawing.Size(1485, 816);
+            this.tabMyRequest.Size = new System.Drawing.Size(1216, 648);
             this.tabMyRequest.Text = "My Request";
             // 
             // groupBox2
@@ -231,7 +231,7 @@
             this.groupBox2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.groupBox2.Size = new System.Drawing.Size(1485, 764);
+            this.groupBox2.Size = new System.Drawing.Size(1216, 596);
             this.groupBox2.TabIndex = 8;
             this.groupBox2.TabStop = false;
             // 
@@ -243,7 +243,7 @@
             this.gridControlMyReq.MainView = this.gridViewMyReq;
             this.gridControlMyReq.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.gridControlMyReq.Name = "gridControlMyReq";
-            this.gridControlMyReq.Size = new System.Drawing.Size(1479, 740);
+            this.gridControlMyReq.Size = new System.Drawing.Size(1210, 572);
             this.gridControlMyReq.TabIndex = 3;
             this.gridControlMyReq.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewMyReq});
@@ -277,7 +277,7 @@
             this.panelControl7.Location = new System.Drawing.Point(0, 0);
             this.panelControl7.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.panelControl7.Name = "panelControl7";
-            this.panelControl7.Size = new System.Drawing.Size(1485, 52);
+            this.panelControl7.Size = new System.Drawing.Size(1216, 52);
             this.panelControl7.TabIndex = 7;
             // 
             // btnMyReqExcel

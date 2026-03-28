@@ -8,7 +8,7 @@ namespace SalesInventorySystem.SalesModel
 {
     public class SalesDataDto
     {
-        public long TenantID { get; set; }
+        public string TenantID { get; set; }
         public string POSID { get; set; }
         public string OrderNo { get; set; }
         public string UserID { get; set; }

@@ -12043,3 +12043,10 @@ D:\Repos\CORECS2022\SalesInventorySystem\obj\Debug\SalesInventorySystem.Samples.
 D:\Repos\CORECS2022\SalesInventorySystem\obj\Debug\SalesInventorySystem.Samples.SampleMainRibbonForm2.resources
 D:\Repos\CORECS2022\SalesInventorySystem\obj\Debug\SalesInventorySystem.Samples.SamplePlayers.resources
 D:\Repos\CORECS2022\SalesInventorySystem\obj\Debug\SalesInventorySystem.Samples.SampleSalesSummary.resources
+C:\Users\User\Downloads\CORECS2022\SalesInventorySystem\obj\Debug\SalesInventorySystem.V5.V5Pay.resources
+C:\Users\User\Downloads\CORECS2022\SalesInventorySystem\bin\Debug\Microsoft.Web.WebView2.Core.dll
+C:\Users\User\Downloads\CORECS2022\SalesInventorySystem\bin\Debug\Microsoft.Web.WebView2.WinForms.dll
+C:\Users\User\Downloads\CORECS2022\SalesInventorySystem\bin\Debug\Microsoft.Web.WebView2.Wpf.dll
+C:\Users\User\Downloads\CORECS2022\SalesInventorySystem\bin\Debug\Microsoft.Web.WebView2.Core.xml
+C:\Users\User\Downloads\CORECS2022\SalesInventorySystem\bin\Debug\Microsoft.Web.WebView2.WinForms.xml
+C:\Users\User\Downloads\CORECS2022\SalesInventorySystem\bin\Debug\Microsoft.Web.WebView2.Wpf.xml

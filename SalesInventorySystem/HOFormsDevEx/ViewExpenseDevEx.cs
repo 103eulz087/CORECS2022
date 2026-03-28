@@ -39,7 +39,7 @@ namespace SalesInventorySystem.HOFormsDevEx
 
             dateFromPaid.Text = HelperFunction.GetPreviousMonthSameDay(today).ToShortDateString();
             dateToPaid.Text = today.ToShortDateString();
-            filtertab();
+            //filtertab();
         }
 
         private void filtertab()
@@ -48,28 +48,28 @@ namespace SalesInventorySystem.HOFormsDevEx
             if (xtraTabControl1.SelectedTabPage.Equals(xtraTabPageForApproval)) //FOR APPROVAL
             {
                 //Database.display($"SELECT * FROM view_ExpenseSummary WHERE Status='FOR APPROVAL' AND CAST(ExpenseDate as date) between '{txtdatefromforapproval.Text}' AND '{txtdatetoforapproval.Text}' ", gridControl2, gridView2);
-                string query = $"SELECT * FROM view_ExpenseSummary WHERE Status='FOR APPROVAL' AND CAST(ExpenseDate as date) between '{txtdatefromforapproval.Text}' AND '{txtdatetoforapproval.Text}' ";
+                string query = $"SELECT * FROM view_ExpenseSummary with(nolock) WHERE Status='FOR APPROVAL' AND CAST(ExpenseDate as date) between '{txtdatefromforapproval.Text}' AND '{txtdatetoforapproval.Text}' ";
                 HelperFunction.ShowWaitAndDisplay(query, gridControl2, gridView2, "Please wait", "Populating data into the database...");
                 gridView2.Focus();
             }
             else if (xtraTabControl1.SelectedTabPage.Equals(xtraTabPageApproved))  //APPROVED
             {
                 //Database.display($"SELECT * FROM view_ExpenseSummary WHERE Status='APPROVED' AND CAST(ExpenseDate as date) between '{datefromapproved.Text}' AND '{datetoapproved.Text}' ", gridControl1, gridView1);
-                string query = $"SELECT * FROM view_ExpenseSummary WHERE Status='APPROVED' AND CAST(ExpenseDate as date) between '{datefromapproved.Text}' AND '{datetoapproved.Text}' ";
+                string query = $"SELECT * FROM view_ExpenseSummary with(nolock) WHERE Status='APPROVED' AND CAST(ExpenseDate as date) between '{datefromapproved.Text}' AND '{datetoapproved.Text}' ";
                 HelperFunction.ShowWaitAndDisplay(query, gridControl1, gridView1, "Please wait", "Populating data into the database...");
                 gridView1.Focus();
             }
             else if (xtraTabControl1.SelectedTabPage.Equals(xtraTabPageCancelled))  //APPROVED
             {
                 //Database.display($"SELECT * FROM view_ExpenseSummary WHERE Status='CANCELLED'", gridControl3, gridView3);
-                string query = $"SELECT * FROM view_ExpenseSummary WHERE Status='CANCELLED' ";
+                string query = $"SELECT * FROM view_ExpenseSummary with(nolock) WHERE Status='CANCELLED' ";
                 HelperFunction.ShowWaitAndDisplay(query, gridControl3, gridView3, "Please wait", "Populating data into the database...");
                 gridView3.Focus();
             }
             else if (xtraTabControl1.SelectedTabPage.Equals(xtraTabPagePaid))  //APPROVED
             {
                 //Database.display($"SELECT * FROM view_ExpenseSummary WHERE Status='PAID' AND CAST(ExpenseDate as date) between '{dateFromPaid.Text}' AND '{dateToPaid.Text}' ", gridControl4, gridView4);
-                string query = $"SELECT * FROM view_ExpenseSummary WHERE Status='PAID' AND CAST(ExpenseDate as date) between '{dateFromPaid.Text}' AND '{dateToPaid.Text}' ";
+                string query = $"SELECT * FROM view_ExpenseSummary with(nolock) WHERE Status='PAID' AND CAST(ExpenseDate as date) between '{dateFromPaid.Text}' AND '{dateToPaid.Text}' ";
                 HelperFunction.ShowWaitAndDisplay(query, gridControl4, gridView4, "Please wait", "Populating data into the database...");
                 gridView4.Focus();
             }
@@ -145,7 +145,7 @@ namespace SalesInventorySystem.HOFormsDevEx
 
             }
 
-            Database.display($"SELECT * FROM dbo.ExpenseMaster " +
+            Database.display($"SELECT * FROM dbo.ExpenseMaster with(nolock) " +
                $"WHERE ReferenceNumber='{refno}' " +
                $"AND InvoiceNo='{invoiceno}' ", viewdetdevex.gridControl2, viewdetdevex.gridView2);
             //Database.display($"SELECT * FROM dbo.ExpenseDetails " +
@@ -156,7 +156,7 @@ namespace SalesInventorySystem.HOFormsDevEx
             viewdetdevex.ShowDialog(this);
             if (ViewExpenseDetailsDevEx.isdone == true)
             {
-                filtertab();
+                //filtertab();
                 ViewExpenseDetailsDevEx.isdone = false;
                 viewdetdevex.Dispose();
 
@@ -165,7 +165,7 @@ namespace SalesInventorySystem.HOFormsDevEx
 
         private void xtraTabControl1_SelectedPageChanged(object sender, DevExpress.XtraTab.TabPageChangedEventArgs e)
         {
-            filtertab();
+            //filtertab();
         }
 
         private void gridControl1_MouseUp(object sender, MouseEventArgs e)

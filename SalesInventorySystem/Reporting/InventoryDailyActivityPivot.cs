@@ -11,6 +11,9 @@ using DevExpress.XtraEditors;
 using System.Data.SqlClient;
 using DevExpress.LookAndFeel;
 using DevExpress.XtraPivotGrid;
+using System.Globalization;
+using DevExpress.XtraEditors.Controls;
+using SalesInventorySystem.Classes;
 
 namespace SalesInventorySystem.Reporting
 {
@@ -21,8 +24,40 @@ namespace SalesInventorySystem.Reporting
         public InventoryDailyActivityPivot()
         {
             InitializeComponent();
+            loadComboBoxValues();
         }
 
+
+        void loadComboBoxValues()
+        {
+            // 1. Populate Months (January - December)
+            cmbFromMonth.Properties.Items.Clear();
+            cmbToMonth.Properties.Items.Clear();
+            for (int i = 1; i <= 12; i++)
+            {
+                // This gets the localized month name (e.g., "March")
+                string monthName = CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(i);
+                cmbFromMonth.Properties.Items.Add(new ImageComboBoxItem(monthName, i));
+                cmbToMonth.Properties.Items.Add(new ImageComboBoxItem(monthName, i));
+            }
+
+            // 2. Populate Years (Dynamic range: 5 years back, 1 year forward)
+            int currentYear = DateTime.Now.Year; // It's 2026!
+            cmbFromYear.Properties.Items.Clear();
+            cmbToYear.Properties.Items.Clear();
+            for (int y = currentYear - 5; y <= currentYear + 1; y++)
+            {
+                cmbFromYear.Properties.Items.Add(y);
+                cmbToYear.Properties.Items.Add(y);
+            }
+
+            // 3. Set Defaults to the CURRENT Month and Year
+            // (Because users usually want to see the most recent data first)
+            cmbFromMonth.SelectedIndex = DateTime.Now.Month - 1;
+            cmbToMonth.SelectedIndex = DateTime.Now.Month - 1;
+            cmbFromYear.EditValue = currentYear;
+            cmbToYear.EditValue = currentYear;
+        }
         // 1. Made the method ASYNC so the UI never freezes
         private async Task ExecuteAsync()
         {
@@ -69,8 +104,10 @@ namespace SalesInventorySystem.Reporting
                 // Define Data Fields with formatting
                 PivotGridField fldbeginning = CreateDataField("Beginning");
                 PivotGridField fldsts = CreateDataField("STSQtyRcvd");
+                PivotGridField fldreturnin = CreateDataField("ReturnIN");
                 PivotGridField fldconvin = CreateDataField("ConversionIN");
                 PivotGridField fldtotalin = CreateDataField("TOTALIN");
+                PivotGridField fldreturnout = CreateDataField("ReturnOUT");
                 PivotGridField fldconvout = CreateDataField("ConversionOut");
                 PivotGridField fldslsout = CreateDataField("SalesOut");
                 PivotGridField fldtotalout = CreateDataField("TOTALOUT");
@@ -79,7 +116,7 @@ namespace SalesInventorySystem.Reporting
                 // Add all fields at once
                 pivotGridControl1.Fields.AddRange(new PivotGridField[] {
             fielddescription, fieldprodname, fieldtransdate,
-            fldbeginning, fldsts, fldconvin, fldtotalin,
+            fldbeginning, fldsts,fldreturnin, fldconvin, fldtotalin,fldreturnout,
             fldconvout, fldslsout, fldtotalout, fldending
         });
                 pivotGridControl1.OptionsView.ShowColumnGrandTotals = false;
@@ -128,7 +165,7 @@ namespace SalesInventorySystem.Reporting
                         }
 
                         // 2. Highlight ConversionOut and SalesOut values in red if not zero (Your existing logic)
-                        if ((e.DataField.FieldName == "ConversionOut" ||
+                        if ((e.DataField.FieldName == "ConversionOut" || e.DataField.FieldName == "ReturnOUT" ||
                              e.DataField.FieldName == "SalesOut") &&
                             e.Value != null)
                         {
@@ -210,6 +247,190 @@ namespace SalesInventorySystem.Reporting
                 // This forces exactly ONE single redraw, making it lightning fast.
                 pivotGridControl1.EndUpdate();
                 pivotGridControl1.BestFit(pivotGridControl1.Fields["Description"]);
+
+                // btnExecute.Enabled = true;
+            }
+        }
+
+        private async Task ExecuteAsyncMonthly()
+        {
+            DataTable table = new DataTable();
+            try
+            {
+                // 2. Extract Values Safely (Reads the visible text instead of casting objects)
+
+                // Converts "March" -> 3
+                int fromM = DateTime.ParseExact(cmbFromMonth.Text, "MMMM", System.Globalization.CultureInfo.CurrentCulture).Month;
+                int fromY = Convert.ToInt32(cmbFromYear.Text);
+
+                // Converts "June" -> 6
+                int toM = DateTime.ParseExact(cmbToMonth.Text, "MMMM", System.Globalization.CultureInfo.CurrentCulture).Month;
+                int toY = Convert.ToInt32(cmbToYear.Text);
+
+                // 3. Construct the exact dates
+                DateTime dateFrom = new DateTime(fromY, fromM, 1);
+                DateTime dateTo = new DateTime(toY, toM, 1).AddMonths(1).AddDays(-1);
+
+                // 4. Validate the range
+                if (dateFrom > dateTo)
+                {
+                    BigAlert.Show("Invalid Range", "'From' date cannot be after 'To' date.", MessageBoxIcon.Error);
+                    return;
+                }
+                // 2. OFFLOAD DATABASE WORK TO A BACKGROUND THREAD
+                // This keeps the UI perfectly smooth while SQL Server thinks
+                await Task.Run(() =>
+                {
+                    using (SqlConnection con = Database.getConnection())
+                    using (SqlCommand com = new SqlCommand("sp_GenerateInventoryMonthlyRangeReport", con))
+                    {
+                        com.CommandType = CommandType.StoredProcedure;
+                        com.Parameters.AddWithValue("@parmbrcode", globalbrcode);
+                        com.Parameters.AddWithValue("@datefrom", dateFrom); // Ensure you pass valid Dates, not strings
+                        com.Parameters.AddWithValue("@dateto", dateTo);
+
+                        using (SqlDataAdapter adapter = new SqlDataAdapter(com))
+                        {
+                            adapter.Fill(table);
+                        }
+                    }
+                });
+
+                // 3. UI PERFORMANCE LOCKS
+                // Lock the PivotGrid so it doesn't recalculate math while we build it
+                pivotGridControl2.BeginUpdate();
+
+                pivotGridControl2.Fields.Clear();
+                pivotGridControl2.DataSource = table;
+
+                // 4. BUILD THE FIELDS
+                PivotGridField fielddescription = new PivotGridField("Category", PivotArea.RowArea) { AreaIndex = 0 };
+                PivotGridField fieldprodname = new PivotGridField("Description", PivotArea.RowArea) { Caption = "PRODUCT NAME", AreaIndex = 1 };
+
+                //PivotGridField fieldtransdate = new PivotGridField("TransactionDate", PivotArea.ColumnArea) { Caption = "TRANSACTION DATE" };
+                PivotGridField fieldtransdate = new PivotGridField("ReportPeriod", PivotArea.ColumnArea) { Caption = "REPORT PERIOD" };
+                // Define Data Fields with formatting
+                PivotGridField fldbeginning = CreateDataField("Beginning");
+                PivotGridField fldsts = CreateDataField("STSQtyRcvd");
+                PivotGridField fldreturnin = CreateDataField("ReturnIN");
+                PivotGridField fldconvin = CreateDataField("ConversionIN");
+                PivotGridField fldtotalin = CreateDataField("TOTALIN");
+                PivotGridField fldreturnout = CreateDataField("ReturnOUT");
+                PivotGridField fldconvout = CreateDataField("ConversionOut");
+                PivotGridField fldslsout = CreateDataField("SalesOut");
+                PivotGridField fldtotalout = CreateDataField("TOTALOUT");
+                PivotGridField fldending = CreateDataField("EndingQty");
+
+                // Add all fields at once
+                pivotGridControl2.Fields.AddRange(new PivotGridField[] {
+            fielddescription, fieldprodname, fieldtransdate,
+            fldbeginning, fldsts,fldreturnin, fldconvin, fldtotalin,fldreturnout,
+            fldconvout, fldslsout, fldtotalout, fldending
+        });
+                pivotGridControl2.OptionsView.ShowColumnGrandTotals = false;
+                pivotGridControl2.OptionsView.ShowRowGrandTotals = false;
+
+                pivotGridControl2.CustomAppearance += (s, e) =>
+                {
+                    if (e.DataField != null)
+                    {
+                        // 1. Highlight TOTALIN, TOTALOUT, EndingQty columns (Your existing logic)
+                        if (e.DataField.FieldName == "TOTALIN" ||
+                            e.DataField.FieldName == "TOTALOUT")
+                        {
+                            e.Appearance.BackColor = Color.LightYellow;
+                            e.Appearance.Font = new Font(e.Appearance.Font, FontStyle.Bold);
+                        }
+
+                        if (e.DataField.FieldName == "EndingQty")
+                        {
+                            e.Appearance.BackColor = Color.Yellow;
+                            e.Appearance.Font = new Font(e.Appearance.Font, FontStyle.Bold);
+                        }
+
+                        // 2. Highlight ConversionOut and SalesOut values in red if not zero (Your existing logic)
+                        if ((e.DataField.FieldName == "ConversionOut" || e.DataField.FieldName == "ReturnOUT" ||
+                             e.DataField.FieldName == "SalesOut") &&
+                            e.Value != null)
+                        {
+                            // Safely convert to decimal regardless of underlying type
+                            decimal val = Convert.ToDecimal(e.Value);
+                            if (val != 0)
+                            {
+                                e.Appearance.ForeColor = Color.Red;
+                                e.Appearance.Font = new Font(e.Appearance.Font, FontStyle.Bold);
+                            }
+                        }
+
+                        // =================================================================================
+                        // 3. NEW: THE ANOMALY DETECTOR (Ending Qty vs Next Day's Beginning Qty)
+                        // =================================================================================
+
+                        // We only want to run this check when we are painting the "Beginning" cell
+                        if (e.DataField.FieldName == "Beginning")
+                        {
+                            int currentColumnIndex = e.ColumnIndex;
+
+                            // We can't check yesterday if today is the very first day in the grid
+                            if (currentColumnIndex > 0)
+                            {
+                                // LOOK BACK IN TIME: Just subtract 1 from the column index!
+                                // Because "EndingQty" is your last field and "Beginning" is your first field,
+                                // the column immediately to the left (-1) is ALWAYS yesterday's EndingQty.
+                                object yesterdayEndingObj = pivotGridControl2.GetCellValue(currentColumnIndex - 1, e.RowIndex);
+
+                                object todayBeginningObj = e.Value;
+
+                                // Safely convert both to decimals to avoid type mismatch crashes
+                                decimal yesterdayEnding = yesterdayEndingObj == null ? 0 : Convert.ToDecimal(yesterdayEndingObj);
+                                decimal todayBeginning = todayBeginningObj == null ? 0 : Convert.ToDecimal(todayBeginningObj);
+
+                                // TRIGGER THE ANOMALY HIGHLIGHT!
+                                if (yesterdayEnding != todayBeginning)
+                                {
+                                    // Paint the Beginning Qty cell RED with WHITE text to make it scream "ERROR"
+                                    e.Appearance.BackColor = Color.Firebrick;
+                                    e.Appearance.ForeColor = Color.White;
+                                    e.Appearance.Font = new Font(e.Appearance.Font, FontStyle.Bold);
+                                }
+                            }
+                        }
+                    }
+                };
+
+                // --- FONT OPTIMIZATION FOR REPORTING ---
+
+                // 1. Data Cells: Clean, readable, standard size
+                pivotGridControl2.Appearance.Cell.Font = new Font("Segoe UI", 9f, FontStyle.Regular);
+
+                // 2. Column and Row Headers (The gray areas): Slightly larger and Bold
+                pivotGridControl2.Appearance.HeaderArea.Font = new Font("Segoe UI", 8.75f, FontStyle.Bold);
+                pivotGridControl2.Appearance.FieldValue.Font = new Font("Segoe UI", 8.75f, FontStyle.Bold);
+
+                // 3. Grand Totals: Keep the same size as data, but make them Bold
+                pivotGridControl2.Appearance.GrandTotalCell.Font = new Font("Segoe UI", 9f, FontStyle.Bold);
+                pivotGridControl2.Appearance.TotalCell.Font = new Font("Segoe UI", 9f, FontStyle.Bold);
+
+                // Optional but highly recommended: Center the column headers for a cleaner look
+                pivotGridControl2.Appearance.HeaderArea.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+                // 5. SKINNING
+                UserLookAndFeel.Default.Style = LookAndFeelStyle.Skin;
+                UserLookAndFeel.Default.SkinName = "Office 2019 Colorful";
+            }
+            catch (SqlException ee)
+            {
+                XtraMessageBox.Show("Database Error: " + ee.Message, "Error", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error);
+            }
+            catch (Exception ex)
+            {
+                XtraMessageBox.Show("Application Error: " + ex.Message, "Error", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error);
+            }
+            finally
+            {
+                // 6. UNLOCK THE PIVOT GRID
+                // This forces exactly ONE single redraw, making it lightning fast.
+                pivotGridControl2.EndUpdate();
+                pivotGridControl2.BestFit(pivotGridControl2.Fields["Description"]);
 
                 // btnExecute.Enabled = true;
             }
@@ -330,6 +551,7 @@ namespace SalesInventorySystem.Reporting
             if (Login.assignedBranch == "888")
             {
                 Database.displaySearchlookupEdit("SELECT BranchCode,BranchName FROM dbo.Branches order by BranchCode", txtbranch, "BranchName", "BranchName");
+                Database.displaySearchlookupEdit("SELECT BranchCode,BranchName FROM dbo.Branches order by BranchCode", txtbranchmonthly, "BranchName", "BranchName");
             }
             else
             {
@@ -342,6 +564,31 @@ namespace SalesInventorySystem.Reporting
         private void txtbranch_EditValueChanged(object sender, EventArgs e)
         {
             objbrcode = SearchLookUpClass.getSingleValue(txtbranch, "BranchCode");
+            globalbrcode = objbrcode.ToString();
+        }
+
+        private async void simpleButton4_Click(object sender, EventArgs e)
+        {// 1. Validate selections
+            if (string.IsNullOrEmpty(cmbFromMonth.Text) || string.IsNullOrEmpty(cmbFromYear.Text) ||
+                string.IsNullOrEmpty(cmbToMonth.Text) || string.IsNullOrEmpty(cmbToYear.Text))
+            {
+                BigAlert.Show("Missing Filter", "Please select a full date range.", MessageBoxIcon.Warning);
+                return;
+            }
+            if ((Login.assignedBranch == "888" && String.IsNullOrEmpty(txtbranchmonthly.Text)) )
+            {
+                XtraMessageBox.Show("Field must not Empty");
+                return;
+            }
+            else
+            {
+                await ExecuteAsyncMonthly();
+            }
+        }
+
+        private void txtbranchmonthly_EditValueChanged(object sender, EventArgs e)
+        {
+            objbrcode = SearchLookUpClass.getSingleValue(txtbranchmonthly, "BranchCode");
             globalbrcode = objbrcode.ToString();
         }
     }

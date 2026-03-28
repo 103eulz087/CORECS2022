@@ -54,6 +54,29 @@ namespace SalesInventorySystem
             }
         }
 
+        public static void ShowWaitAndDisplay(string caption = "Please wait", string description = "Loading data...", int delayMs = 1000)
+        {
+            try
+            {
+                SplashScreenManager.ShowDefaultWaitForm();
+                SplashScreenManager.Default.SetWaitFormCaption(caption);
+                SplashScreenManager.Default.SetWaitFormDescription(description);
+
+                //Database.display(query, grid, view);
+
+                // Optional delay to keep the wait form visible
+                Thread.Sleep(delayMs);
+            }
+            catch (SqlException ex)
+            {
+                XtraMessageBox.Show("Error: " + ex.Message);
+            }
+            finally
+            {
+                SplashScreenManager.CloseDefaultWaitForm();
+            }
+        }
+
         public static void AllowNumbersAndPeriod(TextBox textBox)
         {
             textBox.KeyPress += TextBox_KeyPress;
