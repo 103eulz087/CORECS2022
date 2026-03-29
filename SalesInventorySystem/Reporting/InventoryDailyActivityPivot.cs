@@ -309,6 +309,10 @@ namespace SalesInventorySystem.Reporting
 
                 //PivotGridField fieldtransdate = new PivotGridField("TransactionDate", PivotArea.ColumnArea) { Caption = "TRANSACTION DATE" };
                 PivotGridField fieldtransdate = new PivotGridField("ReportPeriod", PivotArea.ColumnArea) { Caption = "REPORT PERIOD" };
+
+                // Tell DevExpress to format the Date as a Month/Year string 
+                fieldtransdate.ValueFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+                fieldtransdate.ValueFormat.FormatString = "MMMM yyyy"; // Will display as "March 2026", "April 2026", etc.
                 // Define Data Fields with formatting
                 PivotGridField fldbeginning = CreateDataField("Beginning");
                 PivotGridField fldsts = CreateDataField("STSQtyRcvd");
@@ -548,6 +552,7 @@ namespace SalesInventorySystem.Reporting
 
         private void InventoryDailyActivityPivot_Load(object sender, EventArgs e)
         {
+            //xtraTabPage2.PageVisible = false;
             if (Login.assignedBranch == "888")
             {
                 Database.displaySearchlookupEdit("SELECT BranchCode,BranchName FROM dbo.Branches order by BranchCode", txtbranch, "BranchName", "BranchName");
@@ -557,6 +562,9 @@ namespace SalesInventorySystem.Reporting
             {
                 labelbranch.Visible = false;
                 txtbranch.Visible = false;
+                //monthyl
+                labelControl4.Visible = false;
+                txtbranchmonthly.Visible = false;
                 globalbrcode = Login.assignedBranch;
             }
          }

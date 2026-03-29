@@ -223,8 +223,7 @@ namespace SalesInventorySystem.HOFormsDevEx
                 //    }
                 //}
                 doFIFO();
-
-                progressBarControl1.Position = 80;
+                
 
                 //displayInventoryUnitActivity();
 
@@ -241,17 +240,7 @@ namespace SalesInventorySystem.HOFormsDevEx
 
                // sendMailNotification(file, txtbranch.Text);
                 
-                progressBarControl1.Position = 90;
-                //XtraMessageBox.Show("Succesfully Executed");
-                BigAlert.Show(
-                    "SUCCESS",
-                    "Succesfully Executed",
-                    MessageBoxIcon.Information);
-                btnDeduct.Enabled = false;
-
-                progressBarControl1.Position = 100;
-                gridControl1.DataSource = null;
-                gridView1.Columns.Clear();
+              
             }
             
         }
@@ -331,10 +320,26 @@ namespace SalesInventorySystem.HOFormsDevEx
                 com.CommandTimeout = 3600;
                 com.CommandText = sp;
                 com.ExecuteNonQuery();
+                progressBarControl1.Position = 90;
+                //XtraMessageBox.Show("Succesfully Executed");
+                BigAlert.Show(
+                    "SUCCESS",
+                    "Succesfully Executed",
+                    MessageBoxIcon.Information);
+                btnDeduct.Enabled = false;
+
+                progressBarControl1.Position = 100;
+                gridControl1.DataSource = null;
+                gridView1.Columns.Clear();
             }
             catch (SqlException ex)
             {
-                XtraMessageBox.Show(ex.Message.ToString());
+                //XtraMessageBox.Show(ex.Message.ToString());
+                BigAlert.Show(
+                     "Empty Records",
+                     ex.Message.ToString(),
+                     MessageBoxIcon.Warning);
+                return;
             }
             finally
             {

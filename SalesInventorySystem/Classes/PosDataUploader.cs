@@ -15,6 +15,134 @@ namespace SalesInventorySystem.Classes
         //private readonly string _localConnString = "Server=localhost;Database=ITCOREPOSFORDEMO;Trusted_Connection=True;";
         //private readonly string _cloudConnString = "Server=ITCORE-APPS.COM,1882;Database=CORECSUPDATER;User Id=yourUser;Password=yourPassword;";
 
+            //DYNAMICALLY UPLOAD
+        public async Task UploadTableToCloudAsync(string tableName, string dateColumnName, DateTime transactionDate, string branchCode, string machineName, IProgress<int> progress, IProgress<string> statusText)
+        {
+            DateTime startDate = transactionDate.Date;
+            DateTime endDate = startDate.AddDays(1);
+
+            int maxRetries = 3;
+            int currentTry = 0;
+
+            while (currentTry < maxRetries)
+            {
+                try
+                {
+                    currentTry++;
+                    if (currentTry > 1)
+                        statusText?.Report($"Network drop detected. Retrying {tableName} ({currentTry}/{maxRetries})...");
+
+                    using (SqlConnection localConn = Database.getConnection())
+                    using (SqlConnection cloudConn = Database.getConnection(@"AAITCRE\ConnSettingsServer"))
+                    {
+                        await localConn.OpenAsync();
+                        await cloudConn.OpenAsync();
+
+                        // 1. DYNAMIC COUNT QUERY
+                        int totalRows = 0;
+                        string countQuery = $@"SELECT COUNT(*) FROM [dbo].[{tableName}] 
+                                      WHERE BranchCode = @BranchCode 
+                                      AND {dateColumnName} >= @StartDate AND {dateColumnName} < @EndDate 
+                                      AND MachineUsed = @MachineName;";
+
+                        using (SqlCommand countCmd = new SqlCommand(countQuery, localConn))
+                        {
+                            countCmd.Parameters.AddWithValue("@BranchCode", branchCode);
+                            countCmd.Parameters.AddWithValue("@StartDate", startDate);
+                            countCmd.Parameters.AddWithValue("@EndDate", endDate);
+                            countCmd.Parameters.AddWithValue("@MachineName", machineName);
+                            totalRows = (int)await countCmd.ExecuteScalarAsync();
+                        }
+
+                        if (totalRows == 0)
+                        {
+                            statusText?.Report($"No data in {tableName} to upload.");
+                            progress?.Report(100);
+                            return;
+                        }
+
+                        // 2. EXECUTE CLOUD TRANSACTION
+                        using (SqlTransaction cloudTx = cloudConn.BeginTransaction())
+                        {
+                            // A. Dynamic Remote Delete
+                            string deleteQuery = $@"DELETE FROM [dbo].[{tableName}] 
+                                            WHERE BranchCode = @BranchCode AND {dateColumnName} >= @StartDate 
+                                            AND {dateColumnName} < @EndDate AND MachineUsed = @MachineName;";
+
+                            using (SqlCommand deleteCmd = new SqlCommand(deleteQuery, cloudConn, cloudTx))
+                            {
+                                deleteCmd.CommandTimeout = 120;
+                                deleteCmd.Parameters.AddWithValue("@BranchCode", branchCode);
+                                deleteCmd.Parameters.AddWithValue("@StartDate", startDate);
+                                deleteCmd.Parameters.AddWithValue("@EndDate", endDate);
+                                deleteCmd.Parameters.AddWithValue("@MachineName", machineName);
+                                await deleteCmd.ExecuteNonQueryAsync();
+                            }
+
+                            // B. Dynamic Local Select
+                            string selectQuery = $@"SELECT * FROM [dbo].[{tableName}] 
+                                            WHERE BranchCode = @BranchCode AND {dateColumnName} >= @StartDate 
+                                            AND {dateColumnName} < @EndDate AND MachineUsed = @MachineName;";
+
+                            using (SqlCommand selectCmd = new SqlCommand(selectQuery, localConn))
+                            {
+                                selectCmd.CommandTimeout = 120;
+                                selectCmd.Parameters.AddWithValue("@BranchCode", branchCode);
+                                selectCmd.Parameters.AddWithValue("@StartDate", startDate);
+                                selectCmd.Parameters.AddWithValue("@EndDate", endDate);
+                                selectCmd.Parameters.AddWithValue("@MachineName", machineName);
+
+                                using (SqlDataReader reader = await selectCmd.ExecuteReaderAsync())
+                                {
+                                    using (SqlBulkCopy bulkCopy = new SqlBulkCopy(cloudConn, SqlBulkCopyOptions.Default, cloudTx))
+                                    {
+                                        bulkCopy.DestinationTableName = $"[dbo].[{tableName}]";
+                                        bulkCopy.BatchSize = 1000;
+                                        bulkCopy.BulkCopyTimeout = 300;
+
+                                        bulkCopy.NotifyAfter = 50;
+                                        bulkCopy.SqlRowsCopied += (sender, e) =>
+                                        {
+                                            int percent = (int)((e.RowsCopied * 100.0) / totalRows);
+                                            progress?.Report(percent);
+                                            statusText?.Report($"Uploading {tableName}: {e.RowsCopied} of {totalRows} records...");
+                                        };
+
+                                        await bulkCopy.WriteToServerAsync(reader);
+                                    }
+                                }
+                            }
+                            cloudTx.Commit();
+                        }
+
+                        // 3. Dynamic Local Update (Marking isUpload = 1)
+                        string updateLocalQuery = $@"UPDATE [dbo].[{tableName}] SET isUpload = 1 
+                                             WHERE BranchCode = @BranchCode AND {dateColumnName} >= @StartDate 
+                                             AND {dateColumnName} < @EndDate AND MachineUsed = @MachineName;";
+                        using (SqlCommand updateCmd = new SqlCommand(updateLocalQuery, localConn))
+                        {
+                            updateCmd.Parameters.AddWithValue("@BranchCode", branchCode);
+                            updateCmd.Parameters.AddWithValue("@StartDate", startDate);
+                            updateCmd.Parameters.AddWithValue("@EndDate", endDate);
+                            updateCmd.Parameters.AddWithValue("@MachineName", machineName);
+                            await updateCmd.ExecuteNonQueryAsync();
+                        }
+
+                        progress?.Report(100);
+                        statusText?.Report($"{tableName} Uploaded Successfully!");
+                        return; // Break retry loop
+                    }
+                }
+                catch (SqlException ex)
+                {
+                    if (currentTry >= maxRetries)
+                        throw new Exception($"Failed to upload {tableName} after {maxRetries} attempts. Details: {ex.Message}");
+
+                    await Task.Delay(2000);
+                }
+            }
+        }
+
         public async Task UploadBatchSalesSummaryAsync(DateTime transactionDate, string branchCode, string machineName, IProgress<int> progress, IProgress<string> statusText)
         {
             DateTime startDate = transactionDate.Date;
@@ -568,14 +696,14 @@ namespace SalesInventorySystem.Classes
 
                 // Send final completion status
                 progress?.Report(100);
-                statusText?.Report("Batch POSZReading Transactions Uploaded Successfully!");
+                statusText?.Report("Batch POSSalesSummary Transactions Uploaded Successfully!");
             }
         }
 
         public async Task UploadPOSCreditCardTransactionAsync(DateTime transactionDate, string branchCode, string machineName, IProgress<int> progress, IProgress<string> statusText)
         {
             DateTime startDate = transactionDate.Date;
-            DateTime endDate = startDate.AddDays(28);
+            DateTime endDate = startDate.AddDays(29);
 
             using (SqlConnection localConn = Database.getConnection())
             using (SqlConnection cloudConn = Database.getConnection(@"AAITCRE\ConnSettingsServer"))
@@ -587,7 +715,7 @@ namespace SalesInventorySystem.Classes
                 int totalRows = 0;
                 string countQuery = @"SELECT COUNT(*) FROM [dbo].[POSCreditCardTransactions] 
                                   WHERE BranchCode = @BranchCode 
-                                  AND DateOrder >= @StartDate AND DateOrder < @EndDate 
+                                  AND DateAdded >= @StartDate AND DateAdded < @EndDate 
                                   AND MachineUsed = @MachineName;";
                 using (SqlCommand countCmd = new SqlCommand(countQuery, localConn))
                 {
@@ -609,7 +737,7 @@ namespace SalesInventorySystem.Classes
                 using (SqlTransaction cloudTx = cloudConn.BeginTransaction())
                 {
                     // 1. Remote Delete (Same as before)
-                    string deleteQuery = "DELETE FROM [dbo].[POSCreditCardTransactions] WHERE BranchCode = @BranchCode AND DateOrder >= @StartDate AND DateOrder < @EndDate AND MachineUsed = @MachineName;";
+                    string deleteQuery = "DELETE FROM [dbo].[POSCreditCardTransactions] WHERE BranchCode = @BranchCode AND DateAdded >= @StartDate AND DateAdded < @EndDate AND MachineUsed = @MachineName;";
                     using (SqlCommand deleteCmd = new SqlCommand(deleteQuery, cloudConn, cloudTx))
                     {
                         // (Add parameters here like before...)
@@ -621,7 +749,7 @@ namespace SalesInventorySystem.Classes
                     }
 
                     // 2. Local Select
-                    string selectQuery = "SELECT * FROM [dbo].[POSCreditCardTransactions] WHERE BranchCode = @BranchCode AND DateOrder >= @StartDate AND DateOrder < @EndDate AND MachineUsed = @MachineName;";
+                    string selectQuery = "SELECT * FROM [dbo].[POSCreditCardTransactions] WHERE BranchCode = @BranchCode AND DateAdded >= @StartDate AND DateAdded < @EndDate AND MachineUsed = @MachineName;";
                     using (SqlCommand selectCmd = new SqlCommand(selectQuery, localConn))
                     {
                         // (Add parameters here like before...)

@@ -750,27 +750,52 @@ namespace SalesInventorySystem.POS
                 // 2. Pass the handlers into the background task!
                 await Task.Run(async () =>
                 {
+
+                    ///////////////////////////////////////// NEW
                     statusHandler.Report("Starting Sales Summary upload...");
-                    await uploader.UploadBatchSalesSummaryAsync(transDate, branchCode, machineName, progressHandler, statusHandler);
+                    await uploader.UploadTableToCloudAsync("BatchSalesSummary", "Transdate", transDate, branchCode, machineName, progressHandler, statusHandler);
 
-                    // If you have more tables, you would do this:
                     statusHandler.Report("Starting Sales Details upload...");
-                    await uploader.UploadBatchSalesDetailsAsync(transDate, branchCode, machineName, progressHandler, statusHandler);
+                    await uploader.UploadTableToCloudAsync("BatchSalesDetails", "DateOrder", transDate, branchCode, machineName, progressHandler, statusHandler);
 
-                    statusHandler.Report("Starting Sales Transaction Summary upload...");
-                    await uploader.UploadBatchSalesTransactionSummaryAsync(transDate, branchCode, machineName, progressHandler, statusHandler);
-                    
+                    statusHandler.Report("Starting Sales Transaction upload...");
+                    await uploader.UploadTableToCloudAsync("SalesTransactionSummary", "DateOpen", transDate, branchCode, machineName, progressHandler, statusHandler);
+
                     statusHandler.Report("Starting POSZReading Transaction upload...");
-                    await uploader.UploadBatchZReadingTransactionsAsync(transDate, branchCode, machineName, progressHandler, statusHandler);
+                    await uploader.UploadTableToCloudAsync("POSZReadingTransactions", "DateExecute", transDate, branchCode, machineName, progressHandler, statusHandler);
 
                     statusHandler.Report("Starting Sales Discount upload...");
-                    await uploader.UploadBatchSalesDiscountAsync(transDate, branchCode, machineName, progressHandler, statusHandler);
+                    await uploader.UploadTableToCloudAsync("SalesDiscount", "DateExecute", transDate, branchCode, machineName, progressHandler, statusHandler);
 
                     statusHandler.Report("Starting POSSales Summary upload...");
-                    await uploader.UploadBatchPOSSalesSummaryAsync(transDate, branchCode, machineName, progressHandler, statusHandler);
+                    await uploader.UploadTableToCloudAsync("POSSalesSummary", "DateOrder", transDate, branchCode, machineName, progressHandler, statusHandler);
 
                     statusHandler.Report("Starting CreditCard Transaction upload...");
-                    await uploader.UploadPOSCreditCardTransactionAsync(Convert.ToDateTime(dateTempforCC), branchCode, machineName, progressHandler, statusHandler);
+                    await uploader.UploadTableToCloudAsync("POSCreditCardTransactions","DateAdded",Convert.ToDateTime(dateTempforCC), branchCode, machineName, progressHandler, statusHandler);
+
+                    ///////////////////////////////////////
+
+                    //statusHandler.Report("Starting Sales Summary upload...");
+                    //await uploader.UploadBatchSalesSummaryAsync(transDate, branchCode, machineName, progressHandler, statusHandler);
+
+                    //// If you have more tables, you would do this:
+                    //statusHandler.Report("Starting Sales Details upload...");
+                    //await uploader.UploadBatchSalesDetailsAsync(transDate, branchCode, machineName, progressHandler, statusHandler);
+
+                    //statusHandler.Report("Starting Sales Transaction Summary upload...");
+                    //await uploader.UploadBatchSalesTransactionSummaryAsync(transDate, branchCode, machineName, progressHandler, statusHandler);
+                    
+                    //statusHandler.Report("Starting POSZReading Transaction upload...");
+                    //await uploader.UploadBatchZReadingTransactionsAsync(transDate, branchCode, machineName, progressHandler, statusHandler);
+
+                    //statusHandler.Report("Starting Sales Discount upload...");
+                    //await uploader.UploadBatchSalesDiscountAsync(transDate, branchCode, machineName, progressHandler, statusHandler);
+
+                    //statusHandler.Report("Starting POSSales Summary upload...");
+                    //await uploader.UploadBatchPOSSalesSummaryAsync(transDate, branchCode, machineName, progressHandler, statusHandler);
+
+                    //statusHandler.Report("Starting CreditCard Transaction upload...");
+                    //await uploader.UploadPOSCreditCardTransactionAsync(Convert.ToDateTime(dateTempforCC), branchCode, machineName, progressHandler, statusHandler);
 
                 });
 
@@ -1009,7 +1034,26 @@ namespace SalesInventorySystem.POS
         {
 
         }
+        void proccedToConfirm()
+        {
+            //bool confirm = HelperFunction.ConfirmDialog("Are you Sure you want to Execute END OF DAY Transaction?", "End Of Day");
+            DialogResult confirm = BigAlert.Show(
+                "EXECUTE EOD AND GENERATE ZREAD",
+                "Are you sure you want to Execute End of Day Transaction?",
+                MessageBoxIcon.Warning,
+                MessageBoxButtons.YesNo);
+            if (confirm == DialogResult.Yes)
+            {
+                executeEOD();
+                //pushit();
+            }
+            else
+            {
+                return;
+            }
+            BigAlert.Show("EOD SUCCESS", "End of Day completed successfully. You may now close the terminal.", MessageBoxIcon.Information);
 
+        }
         private async void btnexecuteEOD_Click(object sender, EventArgs e)
         {
             btnexecuteEOD.Enabled = false;
@@ -1017,40 +1061,34 @@ namespace SalesInventorySystem.POS
             // 2. If it reaches here, the supervisor did their job!
             try
             {
-
-                // 1. Check Cloud for Supervisor Approval
-                bool canProceed = await VerifySupervisorAnalysisAsync(Login.assignedBranch, Convert.ToDateTime(txttransactiondate.Text));
-                if (!canProceed)
+                //check linkedserver=1 IF TRUE it means SUPERVISOR DEDUCTION MATTER
+                bool islinked = Database.checkifExist("SELECT 1 FROM dbo.POSType WHERE isLinkedServer=1");
+                if(islinked)
                 {
-                    // Use our massive BigAlert class!
-
-                    BigAlert.Show(
-                        "SUPERVISOR APPROVAL REQUIRED",
-                        "You cannot execute End of Day.\n\nThe Supervisor has not yet analyzed and deducted today's inventory. Please notify the Supervisor to complete the Inventory deduction.",
-                        MessageBoxIcon.Warning);
-
-                    btnexecuteEOD.Enabled = true;
-                    return; // STOP EXECUTION HERE. They cannot proceed.
-                }
-                else
-                {
-                    //bool confirm = HelperFunction.ConfirmDialog("Are you Sure you want to Execute END OF DAY Transaction?", "End Of Day");
-                    DialogResult confirm = BigAlert.Show(
-                        "EXECUTE EOD AND GENERATE ZREAD",
-                        "Are you sure you want to Execute End of Day Transaction?",
-                        MessageBoxIcon.Warning,
-                        MessageBoxButtons.YesNo);
-                    if (confirm == DialogResult.Yes)
+                    // 1. Check Cloud for Supervisor Approval
+                    bool canProceed = await VerifySupervisorAnalysisAsync(Login.assignedBranch, Convert.ToDateTime(txttransactiondate.Text));
+                    if (!canProceed)
                     {
-                        executeEOD();
-                        //pushit();
+                        // Use our massive BigAlert class!
+
+                        BigAlert.Show(
+                            "SUPERVISOR APPROVAL REQUIRED",
+                            "You cannot execute End of Day.\n\nThe Supervisor has not yet analyzed and deducted today's inventory. Please notify the Supervisor to complete the Inventory deduction.",
+                            MessageBoxIcon.Warning);
+
+                        btnexecuteEOD.Enabled = true;
+                        return; // STOP EXECUTION HERE. They cannot proceed.
                     }
                     else
                     {
-                        return;
+                        proccedToConfirm();
                     }
-                    BigAlert.Show("EOD SUCCESS", "End of Day completed successfully. You may now close the terminal.", MessageBoxIcon.Information);
                 }
+                else
+                {
+                     proccedToConfirm();
+                }
+
                 // ... Execute your local Z-Reading printing ...
                 // ... Lock the local POS terminal ...
             }
