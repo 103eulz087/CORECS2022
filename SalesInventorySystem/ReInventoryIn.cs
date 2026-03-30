@@ -10,12 +10,15 @@ using System.Windows.Forms;
 using DevExpress.XtraEditors;
 using System.Data.SqlClient;
 using DevExpress.XtraGrid;
+using SalesInventorySystem.Classes;
+using System.IO;
 
 namespace SalesInventorySystem
 {
     public partial class ReInventoryIn : DevExpress.XtraEditors.XtraForm
     {
         //DataTable table;
+        object brcode = null;
         public static bool ispriceused = false, isusedbarcode = false;
         bool isusedsearchform = false;//, isusedbarcode = false;//, ispriceused=false;
         public static string seqno = "",branchcode="";
@@ -53,15 +56,16 @@ namespace SalesInventorySystem
       
         void display()
         {
-            Database.display("SELECT SequenceNumber,Product,Description,Quantity,Cost FROM TempInventoryIN WHERE EncodeBy='" + Login.isglobalUserID + "'", gridControl1, gridView1);
+            Database.display("SELECT SequenceNumber,Product,Description,Barcode,Quantity " +
+                "FROM InventoryIN with(nolock) WHERE ID='"+txtid.Text+"' ORDER BY SequenceNumber DESC", gridControl1, gridView1);
         }
 
         private void ReInventoryIn_Load(object sender, EventArgs e)
         {
             txtbarcodescanning.Focus();
-            Database.displayComboBoxItems("SELECT BranchName FROM Branches WHERE BranchCode='"+Login.assignedBranch+"'", "BranchName", comboBox1);
+            //Database.displayComboBoxItems("SELECT BranchName FROM Branches WHERE BranchCode='"+Login.assignedBranch+"'", "BranchName", comboBox1);
             string branchname = Database.getSingleQuery("Branches", "BranchCode='" + Login.assignedBranch + "'", "BranchName");
-            comboBox1.Text = branchname;
+           
             loadInvNum();
             populateBranch();
         }
@@ -74,20 +78,21 @@ namespace SalesInventorySystem
 
         void populateBranch()
         {
-            Database.displayComboBoxItems("Select BranchCode,BranchName FROM Branches", "BranchName", comboBox1);
+           
+            Database.displaySearchlookupEdit("Select BranchCode,BranchName FROM Branches", txtbranch,"BranchName","BranchName");
         }
 
      
 
         private void simpleButton1_Click(object sender, EventArgs e)
         {
-            if(String.IsNullOrEmpty(comboBox1.Text))
+            if(String.IsNullOrEmpty(txtbranch.Text))
             {
                 XtraMessageBox.Show("Branch must not empty");
                 return;
             }
             else
-            { AddEntry(); }
+            { AddEntryNew(); }
         }
 
         //void add()
@@ -236,24 +241,9 @@ namespace SalesInventorySystem
         //    txtbarcodescanning.Focus();
         //}
 
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (comboBox1.Text == "HEAD OFFICE")
-            {
-                panel1.Visible = true;
-                iswarehouse = true;
-            }
-            else
-            {
-                panel1.Visible = false;
-                iswarehouse = true;
-            }
-        }
+     
 
-        private String getBranchCode()
-        {
-            return Database.getSingleData("Branches", "BranchName", comboBox1.Text, "BranchCode");
-        }
+     
 
         private void btnclear_Click(object sender, EventArgs e)
         {
@@ -279,18 +269,42 @@ namespace SalesInventorySystem
 
         private void simpleButton3_Click(object sender, EventArgs e)
         {
-            Database.ExecuteQuery("DELETE FROM TempInventoryIN WHERE SequenceNumber='" + gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "SequenceNumber").ToString() + "'");
+            //Database.ExecuteQuery("DELETE FROM TempInventoryIN WHERE SequenceNumber='" + gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "SequenceNumber").ToString() + "'");
+            Database.ExecuteQuery("DELETE FROM InventoryIN WHERE SequenceNumber='" + gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "SequenceNumber").ToString() + "'");
             display();
         }
 
-        private void simpleButton4_Click(object sender, EventArgs e)
+        void recoverInventoryNew()
         {
             ReInventoryINRecovery revin = new ReInventoryINRecovery();
             revin.ShowDialog(this);
-            if(ReInventoryINRecovery.isdone == true)
+            if (ReInventoryINRecovery.isdone == true)
+            {
+                bool checkfirst = Database.checkifExist("SELECT ID FROM InventoryIN WHERE ID = '" + ReInventoryINRecovery.id + "'");
+                if (checkfirst)
+                {
+                    Database.display("SELECT * FROM InventoryIN WHERE ID='" + ReInventoryINRecovery.id + "'", gridControl1, gridView1);
+                    txtid.Text = ReInventoryINRecovery.id;
+                }
+                else
+                {
+                    XtraMessageBox.Show("Inventory ID Not Exist in Temporary Container, This Number is either not exist OR it is already Uploaded in Inventory Table");
+                    return;
+                }
+                ReInventoryINRecovery.isdone = false;
+                revin.Dispose();
+            }
+        }
+
+        //NOT USED
+        void recoverInventory()
+        {
+            ReInventoryINRecovery revin = new ReInventoryINRecovery();
+            revin.ShowDialog(this);
+            if (ReInventoryINRecovery.isdone == true)
             {
                 bool checkfirst = Database.checkifExist("SELECT ID FROM TempInventoryIN WHERE ID = '" + ReInventoryINRecovery.id + "'");
-                if(checkfirst)
+                if (checkfirst)
                 {
                     Database.display("SELECT * FROM TempInventoryIN WHERE ID='" + ReInventoryINRecovery.id + "'", gridControl1, gridView1);
                     txtid.Text = ReInventoryINRecovery.id;
@@ -304,8 +318,11 @@ namespace SalesInventorySystem
                 revin.Dispose();
             }
         }
-
-        private void simpleButton2_Click(object sender, EventArgs e)
+        private void simpleButton4_Click(object sender, EventArgs e)
+        {
+            recoverInventoryNew();
+        }
+        void save()
         {
             SqlConnection con = Database.getConnection();
             con.Open();
@@ -328,9 +345,13 @@ namespace SalesInventorySystem
             {
                 con.Close();
             }
-           
+
             XtraMessageBox.Show("Successfully Added!");
             this.Dispose();
+        }
+        private void simpleButton2_Click(object sender, EventArgs e)
+        {
+            
         }
 
         private void txtbarcodescanning_KeyDown(object sender, KeyEventArgs e)
@@ -353,7 +374,7 @@ namespace SalesInventorySystem
                 authfrm.ShowDialog(this);
                 if (AuthorizedConfirmationFrm.isconfirmedLogin == true)
                 {
-                    branchcode = Branch.getBranchCode(comboBox1.Text);
+                    branchcode = brcode.ToString();
                     ReInventoryAnalyzer asd = new ReInventoryAnalyzer();
                     asd.Show();
                     analyze();
@@ -386,7 +407,7 @@ namespace SalesInventorySystem
                 string sp = "sp_ReInventoryAnalyzer";
                 SqlCommand com = new SqlCommand(sp, con);
                 com.Parameters.AddWithValue("@parmbatchid", txtid.Text);
-                com.Parameters.AddWithValue("@parmbranchcode", Branch.getBranchCode(comboBox1.Text));
+                com.Parameters.AddWithValue("@parmbranchcode",brcode.ToString());
                 com.CommandType = CommandType.StoredProcedure;
                 com.CommandTimeout = 3600;
                 com.CommandText = sp;
@@ -501,6 +522,174 @@ namespace SalesInventorySystem
                 XtraMessageBox.Show(ex.Message.ToString());
             }
         }
+        public static async Task PlayNotificationSoundAsync(string soundFilePath)
+        {
+            // Use Task.Run to offload the sound loading and playback logic to a background thread.
+            // This prevents the main UI thread from becoming unresponsive, even if the sound file
+            // is large or there are delays in accessing it.
+            await Task.Run(() =>
+            {
+                try
+                {
+                    // 1. Check if the specified sound file actually exists.
+                    if (!File.Exists(soundFilePath))
+                    {
+                        Console.WriteLine($"Error: Sound file not found at '{soundFilePath}'. Please verify the path.");
+                        // Optionally, you could play a default system sound here if the file is missing.
+                        // SystemSounds.Exclamation.Play();
+                        return; // Exit the method if the file is not found.
+                    }
+
+                    // 2. Create a new SoundPlayer instance with the provided file path.
+                    // The 'using' statement ensures that the SoundPlayer object is properly
+                    // disposed of after it's no longer needed, releasing system resources.
+                    using (System.Media.SoundPlayer player = new System.Media.SoundPlayer(soundFilePath))
+                    {
+                        // 3. Load the sound into memory. This operation can be synchronous
+                        // but since it's inside Task.Run, it won't block the main thread.
+                        player.Load();
+
+                        // 4. Play the sound. The Play() method plays the sound asynchronously
+                        // on an internal thread managed by SoundPlayer, and returns immediately.
+                        player.Play();
+
+                        //Console.WriteLine($"Notification: Playing sound from '{soundFilePath}'");
+                    }
+                }
+                // 5. Implement robust error handling for common issues.
+                catch (FileNotFoundException)
+                {
+                    Console.WriteLine($"Error: The sound file was not found at '{soundFilePath}'. Double-check the file path and ensure it's accessible.");
+                }
+                catch (InvalidOperationException ex)
+                {
+                    // This typically occurs if the sound file is not a valid .wav format
+                    // or if there's an issue with the audio device.
+                    Console.WriteLine($"Error playing sound from '{soundFilePath}': {ex.Message}. Ensure the file is a valid .wav format and your audio device is working.");
+                }
+                catch (Exception ex)
+                {
+                    // Catch any other unexpected errors during sound playback.
+                    Console.WriteLine($"An unexpected error occurred while attempting to play sound from '{soundFilePath}': {ex.Message}");
+                }
+            });
+        }
+
+        private void Commit()
+        {
+            if (gridView1.RowCount == 0)
+            {
+                //XtraMessageBox.Show("Nothing to save.");
+                BigAlert.Show(
+                 "NOTHING TO SAVE",
+                 "No items to be transferred",
+                 MessageBoxIcon.Warning);
+                return;
+            }
+           
+         
+            using (var con = Database.getConnection())
+            using (var cmd = new SqlCommand("dbo.sp_CommitReInventoryIN", con))
+            {
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add("@parmid", SqlDbType.Int).Value = int.Parse(txtid.Text);
+
+                try
+                {
+                    con.Open();
+                    cmd.ExecuteNonQuery();
+                    //XtraMessageBox.Show("Inventory successfully transferred.");
+                    BigAlert.Show(
+                          "SUCCESS",
+                          "Inventory successfully transferred!..",
+                          MessageBoxIcon.Information);
+                    this.Dispose();
+                }
+                catch (SqlException ex)
+                {
+                    //XtraMessageBox.Show(ex.Message, "Commit failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    BigAlert.Show(
+                         "COMMIT FAILED",
+                         ex.Message.ToString(),
+                         MessageBoxIcon.Error);
+                    display(); // show which lines are error/processed
+                }
+            }
+        }
+
+        async void AddEntryNew() //STAGING
+        {
+            //bool ifExists = Database.checkifExist($"SELECT 1 FROM dbo.Inventory WHERE Branch='{Login.assignedBranch}' AND Barcode='{txtbarcodescanning.Text.Trim()}' ");
+            //var rowz = Database.getMultipleQuery($"SELECT TOP(1) Branch,Product,Description,Barcode,Quantity,Available " +
+            //    $"FROM dbo.Inventory with(nolock) WHERE Branch='{Login.assignedBranch}' AND Barcode='{txtbarcodescanning.Text.Trim()}'",
+            //    "Branch,Product,Description,Barcode,Quantity,Available");
+            //string Branch, Product, Description, Barcode, Quantity, Available;
+            //Branch = rowz["Branch"].ToString();
+            //Product = rowz["Product"].ToString();
+            //Description = rowz["Description"].ToString();
+            //Barcode = rowz["Barcode"].ToString();
+            //Quantity = rowz["Quantity"].ToString();
+            //Available = rowz["Available"].ToString();
+
+            //Database.ExecuteQuery("INSERT INTO dbo.TempInventoryIN (ID,Branch,DateReceived,ExpiryDate,Product,Description,Barcode,Quantity,Cost,isWarehouse,isVat,isDone,DateEncode,EncodeBy) " +
+            //    "VALUES('" + txtid.Text + "'" +
+            //    $",'888'" +
+            //    $",'{txtdatereceived.Text}'" +
+            //    $",'{txtxpirydate.Text}'" +
+            //    $",'{Product}'" +
+            //    $",'{Description}'" +
+            //    $",'{Barcode}'" +
+            //    $",'{Quantity}'" +
+            //    $",'{DateTime.Now.ToString()}'" +
+            //    $",'{Login.isglobalUserID}')", "Succesfully Added");
+            if (string.IsNullOrWhiteSpace(txtbarcodescanning.Text))
+            {
+                //XtraMessageBox.Show("Please scan or enter a barcode.");
+                BigAlert.Show(
+                  "BARCODE EMPTY",
+                  "Please scan or enter a barcode.",
+                  MessageBoxIcon.Warning);
+                txtbarcodescanning.Focus();
+                return;
+            }
+
+         
+            using (var con = Database.getConnection()) // assumes your helper returns SqlConnection
+            using (var cmd = new SqlCommand("dbo.sp_StageBarcodeForReInventoryIN", con))
+            {
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add("@parmid", SqlDbType.Int).Value = int.Parse(txtid.Text);
+                cmd.Parameters.Add("@parmbranch", SqlDbType.VarChar, 5).Value = brcode.ToString();
+                cmd.Parameters.Add("@parmbarcode", SqlDbType.VarChar, 120).Value = txtbarcodescanning.Text.Trim();
+                cmd.Parameters.Add("@parmuser", SqlDbType.VarChar, 50).Value = Login.isglobalUserID; 
+
+                try
+                {
+                    con.Open();
+                    cmd.ExecuteNonQuery();
+                    display();
+                    gridView1.BestFitColumns();
+                    //gridView1.Columns["SequenceNo"].Summary.Clear();
+                    //gridView1.Columns["SequenceNo"].Summary.Add(DevExpress.Data.SummaryItemType.Count, "SequenceNo", "{0}");
+                    //gridView1.Columns["Qty"].Summary.Clear();
+                    //gridView1.Columns["Qty"].Summary.Add(DevExpress.Data.SummaryItemType.Sum, "Qty", "{0}");
+
+                }
+                catch (SqlException ex)
+                {
+
+                    await PlayNotificationSoundAsync(Application.StartupPath + "\\error.wav");
+                    //XtraMessageBox.Show(ex.Message, "Stage failed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    BigAlert.Show(
+                     "STAGE FAILED",
+                     ex.Message.ToString(),
+                     MessageBoxIcon.Error);
+                }
+            }
+            gridView1.MoveLast();
+            txtbarcodescanning.Text = "";
+            txtbarcodescanning.Focus();
+        }
 
 
         void AddEntry()
@@ -513,102 +702,30 @@ namespace SalesInventorySystem
             {
                 pcode = Database.getSingleQuery("Products", "Barcode='" + txtbarcodescanning.Text + "' and BranchCode='" + Login.assignedBranch + "'", "ProductCode");
                 desc = Database.getSingleQuery("Products", "Barcode='" + txtbarcodescanning.Text + "' and BranchCode='" + Login.assignedBranch + "'", "Description");
-                //Database.getSingleQuery("Products", "ProductCode='" + pcode + "' and BranchCode='" + Branch.getBranchCode(comboBox1.Text) + "'", "Description");
+                //Database.getSingleQuery("Products", "ProductCode='" + pcode + "' and BranchCode='" + brcode.ToString() + "'", "Description");
             }else
             {
                 pcode = Database.getSingleQuery("Products", "ProductCode='" + txtbarcodescanning.Text + "' and BranchCode='" + Login.assignedBranch + "'", "ProductCode");
                 desc = Database.getSingleQuery("Products", "ProductCode='" + txtbarcodescanning.Text + "' and BranchCode='" + Login.assignedBranch + "'", "Description");
-                //Database.getSingleQuery("Products", "ProductCode='" + pcode + "' and BranchCode='" + Branch.getBranchCode(comboBox1.Text) + "'", "Description");
+                //Database.getSingleQuery("Products", "ProductCode='" + pcode + "' and BranchCode='" + brcode.ToString() + "'", "Description");
             }
 
             qty = "1";
-            validproductcode = Database.checkifExist("SELECT TOP(1) ProductCode FROM dbo.Products WHERE ProductCode='" + pcode + "' And BranchCode='"+ Branch.getBranchCode(comboBox1.Text) + "'");
+            validproductcode = Database.checkifExist("SELECT TOP(1) ProductCode FROM dbo.Products WHERE ProductCode='" + pcode + "' And BranchCode='"+ brcode.ToString() + "'");
             if (!validproductcode)
             {
                 XtraMessageBox.Show("Invalid Product Code!!..");
                 return;
             }
-            //if (isusedsearchform == true)
-            //{
-            //    //pcode = txtbarcodescanning.Text.Substring(2, 5).Trim();
-            //    pcode = txtbarcodescanning.Text.Trim();
-            //    qty = "1";// SearchProduct.qty; //"1";
-            //}
-            //else if (isusedsearchform == false) //Barcode field ang gigamit
-            //{
-            //    if(txtbarcodescanning.Text.Length < 19)
-            //    { 
-            //        barcode = txtbarcodescanning.Text.Trim();
-            //        pcode = Database.getSingleQuery("Products", "Barcode='" + txtbarcodescanning.Text + "' and BranchCode='" + Login.assignedBranch + "'", "ProductCode");
-            //        desc = Database.getSingleQuery("Products", "Barcode='" + txtbarcodescanning.Text + "' and BranchCode='" + Login.assignedBranch + "'", "Description");
-            //        //Database.getSingleQuery("Products", "ProductCode='" + pcode + "' and BranchCode='" + Branch.getBranchCode(comboBox1.Text) + "'", "Description");
-
-            //        qty = "1";
-            //    }
-            //    //CUSTOMIZED BARCODE -- NO STANDARD BARCODE IS EQUAL TO 19 FIGURES
-            //    //else if (txtbarcodescanning.Text.Length == 19) //tens 11111 10015 10123 0001 --10.123 kilos
-            //    //{
-            //    //    pcode = txtbarcodescanning.Text.Substring(5, 5);
-            //    //    qty1 = txtbarcodescanning.Text.Substring(10, 2); //1001512345
-            //    //    qty2 = txtbarcodescanning.Text.Substring(12, 3);
-            //    //    qty = qty1 + "." + qty2;
-            //    //    barcode = txtbarcodescanning.Text.Trim();
-            //    //}
-            //    //else if (txtbarcodescanning.Text.Length == 20) //hundred 11111 10015 100123 0001 --100.123 kilos
-            //    //{
-            //    //    pcode = txtbarcodescanning.Text.Substring(5, 5);
-            //    //    qty1 = txtbarcodescanning.Text.Substring(10, 3); //10015100345
-            //    //    qty2 = txtbarcodescanning.Text.Substring(13, 3);
-            //    //    qty = qty1 + "." + qty2;
-            //    //    barcode = txtbarcodescanning.Text.Trim();
-            //    //}
-            //    //else if (txtbarcodescanning.Text.Length == 21) //thousand  11111 10015 1000123 0001 --1000.123 kilos
-            //    //{
-            //    //    pcode = txtbarcodescanning.Text.Substring(5, 5);
-            //    //    qty1 = txtbarcodescanning.Text.Substring(10, 4); //10015100345
-            //    //    qty2 = txtbarcodescanning.Text.Substring(14, 3);
-            //    //    qty = qty1 + "." + qty2;
-            //    //    barcode = txtbarcodescanning.Text.Trim();
-            //    //}
-            //    validproductcode = Database.checkifExist("SELECT ProductCode FROM Products WHERE ProductCode='" + pcode + "'");
-            //    if(!validproductcode)
-            //    {
-            //        XtraMessageBox.Show("Invalid Product Code!!..");
-            //        return;
-            //    }
-            //}
+           
             finalqty = Convert.ToDouble(qty);
 
-            string prodcatcode = Database.getSingleQuery("Products", "BranchCode='" + Branch.getBranchCode(comboBox1.Text) + "' AND ProductCode='" + pcode + "'", "ProductCategoryCode");
+            string prodcatcode = Database.getSingleQuery("Products", "BranchCode='" + brcode.ToString() + "' AND ProductCode='" + pcode + "'", "ProductCategoryCode");
             string isvat = Database.getSingleQuery("ProductCategory", "ProductCategoryID='"+prodcatcode+"'", "isVat");
-            //Database.ExecuteQuery("INSERT INTO TempInventoryIN (ID" +
-            //            ",Branch" +
-            //            ",DateReceived" +
-            //            ",Product" +
-            //            ",Description" +
-            //            ",Barcode" +
-            //            ",Quantity" +
-            //            ",Cost" +
-            //            ",isWarehouse" +
-            //            ",isVat" +
-            //            ",DateEncode" +
-            //            ",EncodeBy) " +
-            //    "VALUES('" + txtid.Text + "'" +
-            //            ",'" + Branch.getBranchCode(comboBox1.Text) + "'" +
-            //            ",'" + txtdatereceived.Text + "'" +
-            //            ",'" + pcode + "'" +
-            //            ",'" + desc + "'" +
-            //            ",'" + barcode + "'" +
-            //            ",'" + finalqty + "'" +
-            //            ",'0'" +
-            //            ",'"+iswarehouse+"'" +
-            //            ",'"+ isvat + "'" +
-            //            ",'" + DateTime.Now.ToShortDateString() + "'" +
-            //            ",'" + Login.isglobalUserID + "')");
-
+         
             Database.ExecuteQuery("INSERT INTO dbo.TempInventoryIN (ID,Branch,DateReceived,ExpiryDate,Product,Description,Barcode,Quantity,Cost,isWarehouse,isVat,isDone,DateEncode,EncodeBy) " +
                 "VALUES('" + txtid.Text + "'" +
-                $",'{Branch.getBranchCode(comboBox1.Text)}'" +
+                $",'{brcode.ToString()}'" +
                 $",'{txtdatereceived.Text}'" +
                 $",'{txtxpirydate.Text}'" +
                 $",'{pcode}'" +
@@ -627,6 +744,11 @@ namespace SalesInventorySystem
             gridView1.MoveLast();
             txtbarcodescanning.Text = "";
             txtbarcodescanning.Focus();
+        }
+
+        private void txtbranch_EditValueChanged(object sender, EventArgs e)
+        {
+            brcode = SearchLookUpClass.getSingleValue(txtbranch, "BranchCode");
         }
 
         private void Commissary_CheckedChanged(object sender, EventArgs e)

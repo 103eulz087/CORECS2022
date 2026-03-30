@@ -74,14 +74,111 @@ namespace SalesInventorySystem.POS
         }
 
 
-        async void Reupload(string TableName)
-        {
-            // Reset your progress bar (assuming you have a control named progressBar1)
-            progressBar1.Value = 0;
-            progressBar1.Maximum = 100; // We use 0-100 percentage
+        //async void Reupload(string TableName)
+        //{
+        //    // Reset your progress bar (assuming you have a control named progressBar1)
+        //    progressBar1.Value = 0;
+        //    progressBar1.Maximum = 100; // We use 0-100 percentage
 
-            // 1. Create the Progress handlers. 
-            // These run ON THE UI THREAD whenever the background thread calls .Report()
+        //    // 1. Create the Progress handlers. 
+        //    // These run ON THE UI THREAD whenever the background thread calls .Report()
+        //    IProgress<int> progressHandler = new Progress<int>(p =>
+        //    {
+        //        progressBar1.Value = Math.Min(p, 100);
+        //    });
+
+        //    IProgress<string> statusHandler = new Progress<string>(msg =>
+        //    {
+        //        lblProgress.Text = msg;
+        //    });
+
+        //    try
+        //    {
+
+        //        string branchCode = Login.assignedBranch;
+        //        string machineName = Environment.MachineName;
+        //        string salesDate = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "TransactionDate").ToString();
+        //        DateTime transDate = Convert.ToDateTime(salesDate);
+        //        PosDataUploader uploader = new PosDataUploader();
+
+        //        statusHandler.Report("Starting upload process...");
+
+        //        // 2. Pass the handlers into the background task!
+        //        if (TableName == "BatchSalesSummary") {
+        //            await Task.Run(async () =>
+        //            {
+        //                statusHandler.Report("Starting Sales Summary upload...");
+        //                await uploader.UploadBatchSalesSummaryAsync(transDate, branchCode, machineName, progressHandler, statusHandler);
+        //            });
+        //        }
+        //        else if (TableName == "BatchSalesDetails")
+        //        {
+        //            await Task.Run(async () =>
+        //            {
+        //                statusHandler.Report("Starting Sales Details upload...");
+        //                await uploader.UploadBatchSalesDetailsAsync(transDate, branchCode, machineName, progressHandler, statusHandler);
+
+        //            });
+        //        }
+        //        else if(TableName == "SalesTransactionSummary(XREAD)")
+        //        {
+        //            await Task.Run(async () =>
+        //            {
+        //                statusHandler.Report("Starting Sales Transaction Summary upload...");
+        //                await uploader.UploadBatchSalesTransactionSummaryAsync(transDate, branchCode, machineName, progressHandler, statusHandler);
+        //            });
+        //        }
+        //        else if (TableName == "POSZReadingTransactions(ZREAD)")
+        //        {
+        //            await Task.Run(async () =>
+        //            {
+        //                statusHandler.Report("Starting POSZReading Transaction upload...");
+        //                await uploader.UploadBatchZReadingTransactionsAsync(transDate, branchCode, machineName, progressHandler, statusHandler);
+        //            });
+        //        }
+        //        else if (TableName == "SalesDiscount")
+        //        {
+        //            await Task.Run(async () =>
+        //            {
+        //                statusHandler.Report("Starting Sales Discount upload...");
+        //                await uploader.UploadBatchSalesDiscountAsync(transDate, branchCode, machineName, progressHandler, statusHandler);
+        //            });
+        //        }
+        //        else if (TableName == "POSSalesSummary(GroupSales)")
+        //        {
+        //            await Task.Run(async () =>
+        //            {
+        //                statusHandler.Report("Starting POSSales Summary upload...");
+        //                await uploader.UploadBatchPOSSalesSummaryAsync(transDate, branchCode, machineName, progressHandler, statusHandler);
+        //            });
+        //        }
+        //        else if (TableName == "POSCreditCardTransactions")
+        //        {
+        //            await Task.Run(async () =>
+        //            {
+        //                statusHandler.Report("Starting Credit Card Transaction upload...");
+        //                await uploader.UploadPOSCreditCardTransactionAsync(transDate, branchCode, machineName, progressHandler, statusHandler);
+        //            });
+        //        }
+
+        //        MessageBox.Show("Successfully uploaded seamlessly!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        lblProgress.Text = "Error during upload.";
+        //        MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        //    }
+        //    finally
+        //    {
+
+        //    }
+        //}
+
+        async void Reupload(string selectedUIString)
+        {
+            progressBar1.Value = 0;
+            progressBar1.Maximum = 100;
+
             IProgress<int> progressHandler = new Progress<int>(p =>
             {
                 progressBar1.Value = Math.Min(p, 100);
@@ -94,66 +191,69 @@ namespace SalesInventorySystem.POS
 
             try
             {
-                
                 string branchCode = Login.assignedBranch;
                 string machineName = Environment.MachineName;
                 string salesDate = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "TransactionDate").ToString();
                 DateTime transDate = Convert.ToDateTime(salesDate);
+
                 PosDataUploader uploader = new PosDataUploader();
 
-                statusHandler.Report("Starting upload process...");
+                // 1. Map the UI text to the actual Database Table and Date Column
+                string dbTableName = "";
+                string dbDateColumn = "";
+                string displayMessage = "";
 
-                // 2. Pass the handlers into the background task!
-                if (TableName == "BatchSalesSummary") {
-                    await Task.Run(async () =>
-                    {
-                        statusHandler.Report("Starting Sales Summary upload...");
-                        await uploader.UploadBatchSalesSummaryAsync(transDate, branchCode, machineName, progressHandler, statusHandler);
-                    });
-                }
-                else if (TableName == "BatchSalesDetails")
+                switch (selectedUIString)
                 {
-                    await Task.Run(async () =>
-                    {
-                        statusHandler.Report("Starting Sales Details upload...");
-                        await uploader.UploadBatchSalesDetailsAsync(transDate, branchCode, machineName, progressHandler, statusHandler);
-
-                    });
-                }
-                else if(TableName == "SalesTransactionSummary(XREAD)")
-                {
-                    await Task.Run(async () =>
-                    {
-                        statusHandler.Report("Starting Sales Transaction Summary upload...");
-                        await uploader.UploadBatchSalesTransactionSummaryAsync(transDate, branchCode, machineName, progressHandler, statusHandler);
-                    });
-                }
-                else if (TableName == "POSZReadingTransactions(ZREAD)")
-                {
-                    await Task.Run(async () =>
-                    {
-                        statusHandler.Report("Starting POSZReading Transaction upload...");
-                        await uploader.UploadBatchZReadingTransactionsAsync(transDate, branchCode, machineName, progressHandler, statusHandler);
-                    });
-                }
-                else if (TableName == "SalesDiscount")
-                {
-                    await Task.Run(async () =>
-                    {
-                        statusHandler.Report("Starting Sales Discount upload...");
-                        await uploader.UploadBatchSalesDiscountAsync(transDate, branchCode, machineName, progressHandler, statusHandler);
-                    });
-                }
-                else if (TableName == "POSSalesSummary(GroupSales)")
-                {
-                    await Task.Run(async () =>
-                    {
-                        statusHandler.Report("Starting POSSales Summary upload...");
-                        await uploader.UploadBatchPOSSalesSummaryAsync(transDate, branchCode, machineName, progressHandler, statusHandler);
-                    });
+                    case "BatchSalesSummary":
+                        dbTableName = "BatchSalesSummary";
+                        dbDateColumn = "Transdate";
+                        displayMessage = "Sales Summary";
+                        break;
+                    case "BatchSalesDetails":
+                        dbTableName = "BatchSalesDetails";
+                        dbDateColumn = "DateOrder";
+                        displayMessage = "Sales Details";
+                        break;
+                    case "SalesTransactionSummary(XREAD)":
+                        dbTableName = "SalesTransactionSummary";
+                        dbDateColumn = "DateOpen";
+                        displayMessage = "Sales Transaction Summary";
+                        break;
+                    case "POSZReadingTransactions(ZREAD)":
+                        dbTableName = "POSZReadingTransactions";
+                        dbDateColumn = "DateExecute";
+                        displayMessage = "POSZReading Transaction";
+                        break;
+                    case "SalesDiscount":
+                        dbTableName = "SalesDiscount";
+                        dbDateColumn = "DateExecute";
+                        displayMessage = "Sales Discount";
+                        break;
+                    case "POSSalesSummary(GroupSales)":
+                        dbTableName = "POSSalesSummary";
+                        dbDateColumn = "DateOrder";
+                        displayMessage = "POSSales Summary";
+                        break;
+                    case "POSCreditCardTransactions":
+                        dbTableName = "POSCreditCardTransactions";
+                        dbDateColumn = "DateAdded";
+                        displayMessage = "Credit Card Transaction";
+                        break;
+                    default:
+                        MessageBox.Show("Unknown table selected.", "Invalid Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return; // Stop execution if nothing matches
                 }
 
-                MessageBox.Show("Successfully uploaded seamlessly!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                statusHandler.Report($"Starting {displayMessage} upload...");
+
+                // 2. Pass variables into a SINGLE background task
+                await Task.Run(async () =>
+                {
+                    await uploader.UploadTableToCloudAsync(dbTableName, dbDateColumn, transDate, branchCode, machineName, progressHandler, statusHandler);
+                });
+
+                MessageBox.Show($"{displayMessage} successfully uploaded seamlessly!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
             {
@@ -162,11 +262,9 @@ namespace SalesInventorySystem.POS
             }
             finally
             {
-
+                // Re-enable any buttons if you disabled them at the top!
             }
         }
-
-
         private void reuploadThisTableToolStripMenuItem_Click(object sender, EventArgs e)
         {
             string tablename = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "TableName").ToString();
@@ -212,6 +310,8 @@ namespace SalesInventorySystem.POS
 
             // 2. We use ONE ultra-fast SQL script that gets all 8 counts at once.
             // Notice we use >= @Start and < @End to use your indexes properly!
+            // SELECT 'SalesIN(ManualEntry)', ISNULL(COUNT(*),0) FROM SalesIN WITH(NOLOCK) WHERE BranchCode = @parmbranchcode AND MachineUsed = @parmmachine AND SalesDate >= @Start AND SalesDate < @End UNION ALL
+
             string countScript = @"
             DECLARE @Start DATETIME = @parmdatefrom;
             DECLARE @End DATETIME = DATEADD(DAY, 1, @parmdatefrom);
@@ -222,7 +322,6 @@ namespace SalesInventorySystem.POS
             SELECT 'POSZReadingTransactions(ZREAD)', ISNULL(COUNT(*),0) FROM POSZReadingTransactions WITH(NOLOCK) WHERE BranchCode = @parmbranchcode AND MachineUsed = @parmmachine AND DateExecute >= @Start AND DateExecute < @End UNION ALL
             SELECT 'SalesDiscount', ISNULL(COUNT(*),0) FROM SalesDiscount WITH(NOLOCK) WHERE BranchCode = @parmbranchcode AND MachineUsed = @parmmachine AND DateExecute >= @Start AND DateExecute < @End UNION ALL
             SELECT 'POSSalesSummary(GroupSales)', ISNULL(COUNT(*),0) FROM POSSalesSummary WITH(NOLOCK) WHERE BranchCode = @parmbranchcode AND MachineUsed = @parmmachine AND DateOrder >= @Start AND DateOrder < @End UNION ALL
-            SELECT 'SalesIN(ManualEntry)', ISNULL(COUNT(*),0) FROM SalesIN WITH(NOLOCK) WHERE BranchCode = @parmbranchcode AND MachineUsed = @parmmachine AND SalesDate >= @Start AND SalesDate < @End UNION ALL
             SELECT 'POSCreditCardTransactions', ISNULL(COUNT(*),0) FROM POSCreditCardTransactions WITH(NOLOCK) WHERE BranchCode = @parmbranchcode AND MachineUsed = @parmmachine AND DateAdded >= @Start AND DateAdded < @End;
         ";
 
@@ -371,6 +470,10 @@ namespace SalesInventorySystem.POS
 
                                     case "POSSalesSummary(GroupSales)":
                                         await uploader.UploadBatchPOSSalesSummaryAsync(transDate, branchCode, machineName, progressHandler, statusHandler);
+                                        break;
+
+                                    case "POSCreditCardTransactions":
+                                        await uploader.UploadPOSCreditCardTransactionAsync(transDate, branchCode, machineName, progressHandler, statusHandler);
                                         break;
 
                                     // Add cases for the rest of your tables here...

@@ -42,11 +42,9 @@
             // 
             this.groupBox2.Controls.Add(this.pivotGridControl1);
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox2.Location = new System.Drawing.Point(0, 90);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(6, 4, 6, 4);
+            this.groupBox2.Location = new System.Drawing.Point(0, 58);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(6, 4, 6, 4);
-            this.groupBox2.Size = new System.Drawing.Size(1536, 845);
+            this.groupBox2.Size = new System.Drawing.Size(896, 540);
             this.groupBox2.TabIndex = 5;
             this.groupBox2.TabStop = false;
             // 
@@ -80,13 +78,12 @@
             this.pivotGridControl1.Appearance.TotalCell.Options.UseForeColor = true;
             this.pivotGridControl1.DataMember = "CustomSqlQuery";
             this.pivotGridControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pivotGridControl1.Location = new System.Drawing.Point(6, 30);
-            this.pivotGridControl1.Margin = new System.Windows.Forms.Padding(6, 4, 6, 4);
+            this.pivotGridControl1.Location = new System.Drawing.Point(3, 19);
             this.pivotGridControl1.Name = "pivotGridControl1";
             this.pivotGridControl1.OptionsBehavior.BestFitMode = ((DevExpress.XtraPivotGrid.PivotGridBestFitMode)((DevExpress.XtraPivotGrid.PivotGridBestFitMode.FieldValue | DevExpress.XtraPivotGrid.PivotGridBestFitMode.FieldHeader)));
-            this.pivotGridControl1.OptionsView.FilterSeparatorBarPadding = 2;
-            this.pivotGridControl1.Size = new System.Drawing.Size(1524, 811);
+            this.pivotGridControl1.Size = new System.Drawing.Size(890, 518);
             this.pivotGridControl1.TabIndex = 0;
+            this.pivotGridControl1.CellDoubleClick += new DevExpress.XtraPivotGrid.PivotCellEventHandler(this.pivotGridControl1_CellDoubleClick);
             // 
             // groupBox1
             // 
@@ -94,41 +91,36 @@
             this.groupBox1.Controls.Add(this.simpleButton1);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox1.Location = new System.Drawing.Point(0, 0);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(6, 4, 6, 4);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(6, 4, 6, 4);
-            this.groupBox1.Size = new System.Drawing.Size(1536, 90);
+            this.groupBox1.Size = new System.Drawing.Size(896, 58);
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             // 
             // simpleButton2
             // 
-            this.simpleButton2.Location = new System.Drawing.Point(167, 34);
-            this.simpleButton2.Margin = new System.Windows.Forms.Padding(6, 4, 6, 4);
+            this.simpleButton2.Location = new System.Drawing.Point(97, 22);
             this.simpleButton2.Name = "simpleButton2";
-            this.simpleButton2.Size = new System.Drawing.Size(142, 38);
+            this.simpleButton2.Size = new System.Drawing.Size(83, 24);
             this.simpleButton2.TabIndex = 5;
             this.simpleButton2.Text = "Print";
             this.simpleButton2.Click += new System.EventHandler(this.simpleButton2_Click);
             // 
             // simpleButton1
             // 
-            this.simpleButton1.Location = new System.Drawing.Point(15, 34);
-            this.simpleButton1.Margin = new System.Windows.Forms.Padding(6, 4, 6, 4);
+            this.simpleButton1.Location = new System.Drawing.Point(9, 22);
             this.simpleButton1.Name = "simpleButton1";
-            this.simpleButton1.Size = new System.Drawing.Size(142, 38);
+            this.simpleButton1.Size = new System.Drawing.Size(83, 24);
             this.simpleButton1.TabIndex = 2;
             this.simpleButton1.Text = "Extract";
             this.simpleButton1.Click += new System.EventHandler(this.simpleButton1_Click);
             // 
             // BranchInventoryProductSummary
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1536, 935);
+            this.ClientSize = new System.Drawing.Size(896, 598);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
-            this.Margin = new System.Windows.Forms.Padding(6, 4, 6, 4);
             this.Name = "BranchInventoryProductSummary";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Branch Inventory Product Summary";

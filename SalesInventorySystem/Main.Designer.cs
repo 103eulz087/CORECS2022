@@ -3043,6 +3043,7 @@
             this.btnInventoryBranchSummary.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnInventoryBranchSummary.ImageOptions.Image")));
             this.btnInventoryBranchSummary.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("btnInventoryBranchSummary.ImageOptions.LargeImage")));
             this.btnInventoryBranchSummary.Name = "btnInventoryBranchSummary";
+            this.btnInventoryBranchSummary.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
             this.btnInventoryBranchSummary.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnInventoryBranchSummary_ItemClick);
             // 
             // Main
