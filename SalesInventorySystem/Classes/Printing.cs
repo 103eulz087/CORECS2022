@@ -458,6 +458,7 @@ namespace SalesInventorySystem
             consolidatedOrder.AppendLine("" + (Char)27 + (Char)112 + (Char)0 + (Char)25 + "");
             consolidatedOrder.AppendLine(HelperFunction.PrintCenterText(location) + Environment.NewLine);
             consolidatedOrder.AppendLine(HelperFunction.PrintLeftRigthText("Table #:" + tableno, "Waiter:" + waiterid) + Environment.NewLine);
+            consolidatedOrder.AppendLine(HelperFunction.PrintLeftText("DateTime #: "+DateTime.Today.ToString()) + Environment.NewLine);
 
             string query = $"SELECT Description,QtySold,CategoryCode FROM dbo.BatchSalesDetails WHERE ReferenceNo='{refno}' AND Barcode='{location}' AND BranchCode='{Login.assignedBranch}' AND MachineUsed='{Environment.MachineName.ToString()}' AND isCancelled=0 and isVoid=0 AND isErrorCorrect=0";
             string CategoryName = "";
@@ -4642,103 +4643,105 @@ namespace SalesInventorySystem
             for (int i = 0; i <= gridview.RowCount - 1; i++)
             {
 
-                string a = "  - " + gridview.GetRowCellValue(i, "QtySold").ToString() + " @ " + gridview.GetRowCellValue(i, "SellingPrice").ToString();
-                string b = "-" + gridview.GetRowCellValue(i, "TotalAmount").ToString();
-                string c = gridview.GetRowCellValue(i, "isVat").ToString();
-
-                totalAmount += Convert.ToDouble(gridview.GetRowCellValue(i, "TotalAmount").ToString());
-
-                if (Convert.ToBoolean(c) == true)
+                if (gridview.GetRowCellValue(i, "Ret").ToString() == "True")
                 {
-                    isvat = "V";
-                    _totalvatablesales += Convert.ToDouble(gridview.GetRowCellValue(i, "TotalAmount").ToString());
-                }
-                else
-                {
-                    isvat = "";
-                    _totalvatexsales += Convert.ToDouble(gridview.GetRowCellValue(i, "TotalAmount").ToString());
-                }
+                    string a = "  - " + gridview.GetRowCellValue(i, "QtySold").ToString() + " @ " + gridview.GetRowCellValue(i, "SellingPrice").ToString();
+                    string b = "-" + gridview.GetRowCellValue(i, "TotalAmount").ToString();
+                    string c = gridview.GetRowCellValue(i, "isVat").ToString();
 
-                //--------------------------------------
-                //DISPLAY A,B AND C
-                details += HelperFunction.PrintLeftText(gridview.GetRowCellValue(i, "Description").ToString()) + Environment.NewLine;
-                details += HelperFunction.PrintLeftRigthText(a, b + isvat) + Environment.NewLine;
-                //--------------------------------------
-                if (isdiscounted) //there is a onetime discount either SC,PWD AND REGULAR
-                {
-                    bool isSCorPWDDiscountedVat = false, isSCorPWDDiscountedNonVat = false;
-                    //---------------VATABLE PRODUCT WITH SENIOR DISCOUNT ITEM
-                    isSCorPWDDiscountedVat = Database.checkifExist("SELECT TOP(1) ProductCode " +
-                                                               "FROM dbo.BatchSalesDetails " +
-                                                               "WHERE BranchCode='" + Login.assignedBranch + "' " +
-                                                               "AND Description='" + gridview.GetRowCellValue(i, "Description").ToString() + "' " +
-                                                               "AND ReferenceNo='" + ordercode + "' " +
-                                                               "AND DiscountTotal <= 0 " +
-                                                               "AND isVat = 1 " +
-                                                               "AND ProductCode in (SELECT ProductCode " +
-                                                                                       "FROM dbo.Products " +
-                                                                                       "WHERE BranchCode='" + Login.assignedBranch + "' " +
-                                                                                       "AND isDiscount=1)");
-                    //---------------NON VATABLE PRODUCT WITH SENIOR DISCOUNT ITEM
-                    isSCorPWDDiscountedNonVat = Database.checkifExist("SELECT TOP(1) ProductCode " +
-                                                              "FROM dbo.BatchSalesDetails " +
-                                                              "WHERE BranchCode='" + Login.assignedBranch + "' " +
-                                                              "AND Description='" + gridview.GetRowCellValue(i, "Description").ToString() + "' " +
-                                                              "AND ReferenceNo='" + ordercode + "' " +
-                                                              "AND DiscountTotal <= 0 " +
-                                                              "AND isVat = 0 " +
-                                                              "AND ProductCode in (SELECT ProductCode " +
-                                                                                      "FROM dbo.Products " +
-                                                                                      "WHERE BranchCode='" + Login.assignedBranch + "' " +
-                                                                                      "AND isDiscount=1)");
-                    //##############################################################
-                    if (disctype == "REGULAR")
+                    totalAmount += Convert.ToDouble(gridview.GetRowCellValue(i, "TotalAmount").ToString());
+
+                    if (Convert.ToBoolean(c) == true)
                     {
-                        details += HelperFunction.PrintLeftText("  - (Less: Discount: " + discpercentageamount.ToString() + "%)") + Environment.NewLine;
-                        discountAmount += (Convert.ToDouble(gridview.GetRowCellValue(i, "TotalAmount").ToString()) / 1.12) * Convert.ToDouble(discPercentage);
+                        isvat = "V";
+                        _totalvatablesales += Convert.ToDouble(gridview.GetRowCellValue(i, "TotalAmount").ToString());
                     }
                     else
                     {
-                        //---------------VATABLE PRODUCT WITH SENIOR DISCOUNT ITEM
-                        /*##*/
-                        if (isSCorPWDDiscountedVat == true && Convert.ToBoolean(c) == true)
-                        {
-                            vatableWithSCDiscount = Convert.ToDouble(gridview.GetRowCellValue(i, "TotalAmount").ToString());
-                            details += HelperFunction.PrintLeftText("  - (Less: Discount: " + discpercentageamount.ToString() + "%)") + Environment.NewLine;
-                            discountAmount += (vatableWithSCDiscount / 1.12) * Convert.ToDouble(discPercentage);
-                        }
-                        else if (isSCorPWDDiscountedVat == false && Convert.ToBoolean(c) == true)
-                        {
-                            vatableWithNoSCDiscount += Convert.ToDouble(gridview.GetRowCellValue(i, "TotalAmount").ToString());
-                        }
-                        //---------------VAT EXEMPT PRODUCT WITH SENIOR DISCOUNT ITEM
-                        /*##*/
-                        if (isSCorPWDDiscountedNonVat == true && Convert.ToBoolean(c) == false)
-                        {
-                            vatExWithSCDiscount = Convert.ToDouble(gridview.GetRowCellValue(i, "TotalAmount").ToString());
-                            details += HelperFunction.PrintLeftText("  - (Less: Discount: " + discpercentageamount.ToString() + "%)") + Environment.NewLine;
-                            discountAmount += (vatExWithSCDiscount) * Convert.ToDouble(discPercentage);
-
-                        }
-                        else if (isSCorPWDDiscountedNonVat == false && Convert.ToBoolean(c) == false)
-                        {
-                            vatExWithNoSCDiscount += Convert.ToDouble(gridview.GetRowCellValue(i, "TotalAmount").ToString());
-                        }
+                        isvat = "";
+                        _totalvatexsales += Convert.ToDouble(gridview.GetRowCellValue(i, "TotalAmount").ToString());
                     }
-                    totalDiscountAmountSC = Math.Round(discountAmount, 2);
-                }
-                else
-                {
-                    vatableWithNoSCDiscount += Convert.ToDouble(gridview.GetRowCellValue(i, "TotalAmount").ToString());
-                }
 
-                //--------------------------------------IF TRUE MEANING THERE IS PER ITEM DISCOUNT
-                if (Convert.ToDouble(gridview.GetRowCellValue(i, "DiscountTotal").ToString()) > 0)
-                {
-                    details += HelperFunction.PrintLeftRigthText(addD, "(" + gridview.GetRowCellValue(i, "DiscountTotal").ToString() + ")") + Environment.NewLine;
-                }
-                //--------------------------------------
+                    //--------------------------------------
+                    //DISPLAY A,B AND C
+                    details += HelperFunction.PrintLeftText(gridview.GetRowCellValue(i, "Description").ToString()) + Environment.NewLine;
+                    details += HelperFunction.PrintLeftRigthText(a, b + isvat) + Environment.NewLine;
+                    //--------------------------------------
+                    if (isdiscounted) //there is a onetime discount either SC,PWD AND REGULAR
+                    {
+                        bool isSCorPWDDiscountedVat = false, isSCorPWDDiscountedNonVat = false;
+                        //---------------VATABLE PRODUCT WITH SENIOR DISCOUNT ITEM
+                        isSCorPWDDiscountedVat = Database.checkifExist("SELECT TOP(1) ProductCode " +
+                                                                   "FROM dbo.BatchSalesDetails " +
+                                                                   "WHERE BranchCode='" + Login.assignedBranch + "' " +
+                                                                   "AND Description='" + gridview.GetRowCellValue(i, "Description").ToString() + "' " +
+                                                                   "AND ReferenceNo='" + ordercode + "' " +
+                                                                   "AND DiscountTotal <= 0 " +
+                                                                   "AND isVat = 1 " +
+                                                                   "AND ProductCode in (SELECT ProductCode " +
+                                                                                           "FROM dbo.Products " +
+                                                                                           "WHERE BranchCode='" + Login.assignedBranch + "' " +
+                                                                                           "AND isDiscount=1)");
+                        //---------------NON VATABLE PRODUCT WITH SENIOR DISCOUNT ITEM
+                        isSCorPWDDiscountedNonVat = Database.checkifExist("SELECT TOP(1) ProductCode " +
+                                                                  "FROM dbo.BatchSalesDetails " +
+                                                                  "WHERE BranchCode='" + Login.assignedBranch + "' " +
+                                                                  "AND Description='" + gridview.GetRowCellValue(i, "Description").ToString() + "' " +
+                                                                  "AND ReferenceNo='" + ordercode + "' " +
+                                                                  "AND DiscountTotal <= 0 " +
+                                                                  "AND isVat = 0 " +
+                                                                  "AND ProductCode in (SELECT ProductCode " +
+                                                                                          "FROM dbo.Products " +
+                                                                                          "WHERE BranchCode='" + Login.assignedBranch + "' " +
+                                                                                          "AND isDiscount=1)");
+                        //##############################################################
+                        if (disctype == "REGULAR")
+                        {
+                            details += HelperFunction.PrintLeftText("  - (Less: Discount: " + discpercentageamount.ToString() + "%)") + Environment.NewLine;
+                            discountAmount += (Convert.ToDouble(gridview.GetRowCellValue(i, "TotalAmount").ToString()) / 1.12) * Convert.ToDouble(discPercentage);
+                        }
+                        else
+                        {
+                            //---------------VATABLE PRODUCT WITH SENIOR DISCOUNT ITEM
+                            /*##*/
+                            if (isSCorPWDDiscountedVat == true && Convert.ToBoolean(c) == true)
+                            {
+                                vatableWithSCDiscount = Convert.ToDouble(gridview.GetRowCellValue(i, "TotalAmount").ToString());
+                                details += HelperFunction.PrintLeftText("  - (Less: Discount: " + discpercentageamount.ToString() + "%)") + Environment.NewLine;
+                                discountAmount += (vatableWithSCDiscount / 1.12) * Convert.ToDouble(discPercentage);
+                            }
+                            else if (isSCorPWDDiscountedVat == false && Convert.ToBoolean(c) == true)
+                            {
+                                vatableWithNoSCDiscount += Convert.ToDouble(gridview.GetRowCellValue(i, "TotalAmount").ToString());
+                            }
+                            //---------------VAT EXEMPT PRODUCT WITH SENIOR DISCOUNT ITEM
+                            /*##*/
+                            if (isSCorPWDDiscountedNonVat == true && Convert.ToBoolean(c) == false)
+                            {
+                                vatExWithSCDiscount = Convert.ToDouble(gridview.GetRowCellValue(i, "TotalAmount").ToString());
+                                details += HelperFunction.PrintLeftText("  - (Less: Discount: " + discpercentageamount.ToString() + "%)") + Environment.NewLine;
+                                discountAmount += (vatExWithSCDiscount) * Convert.ToDouble(discPercentage);
 
+                            }
+                            else if (isSCorPWDDiscountedNonVat == false && Convert.ToBoolean(c) == false)
+                            {
+                                vatExWithNoSCDiscount += Convert.ToDouble(gridview.GetRowCellValue(i, "TotalAmount").ToString());
+                            }
+                        }
+                        totalDiscountAmountSC = Math.Round(discountAmount, 2);
+                    }
+                    else
+                    {
+                        vatableWithNoSCDiscount += Convert.ToDouble(gridview.GetRowCellValue(i, "TotalAmount").ToString());
+                    }
+
+                    //--------------------------------------IF TRUE MEANING THERE IS PER ITEM DISCOUNT
+                    if (Convert.ToDouble(gridview.GetRowCellValue(i, "DiscountTotal").ToString()) > 0)
+                    {
+                        details += HelperFunction.PrintLeftRigthText(addD, "(" + gridview.GetRowCellValue(i, "DiscountTotal").ToString() + ")") + Environment.NewLine;
+                    }
+                    //--------------------------------------
+                }
             }//end of loop
             //--------------------------------------
             details += HelperFunction.PrinttoRight("----------") + Environment.NewLine;

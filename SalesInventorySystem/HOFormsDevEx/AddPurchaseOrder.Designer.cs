@@ -75,9 +75,9 @@
             this.groupBox2.Controls.Add(this.gridControl1);
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox2.Location = new System.Drawing.Point(0, 199);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox2.Size = new System.Drawing.Size(1132, 481);
             this.groupBox2.TabIndex = 66;
             this.groupBox2.TabStop = false;
@@ -129,9 +129,9 @@
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox1.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(0, 0);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox1.Size = new System.Drawing.Size(1132, 199);
             this.groupBox1.TabIndex = 65;
             this.groupBox1.TabStop = false;
@@ -215,7 +215,7 @@
             // txtremakrs
             // 
             this.txtremakrs.Location = new System.Drawing.Point(365, 41);
-            this.txtremakrs.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtremakrs.Margin = new System.Windows.Forms.Padding(2);
             this.txtremakrs.Name = "txtremakrs";
             this.txtremakrs.Size = new System.Drawing.Size(425, 128);
             this.txtremakrs.TabIndex = 74;

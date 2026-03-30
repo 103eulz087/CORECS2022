@@ -252,6 +252,7 @@
             this.barButtonItemRcvdReturnInv = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItemInvDailyActivity = new DevExpress.XtraBars.BarButtonItem();
             this.btnLiveTrendsSts = new DevExpress.XtraBars.BarButtonItem();
+            this.btnPurchaseCosting = new DevExpress.XtraBars.BarButtonItem();
             this.ribbonPage1 = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup20 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup2 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -299,6 +300,7 @@
             this.barButtonItem103 = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem5 = new DevExpress.XtraBars.BarButtonItem();
+            this.btnInventoryBranchSummary = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.popupMenuInvTransfer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.popupMenu1)).BeginInit();
@@ -532,10 +534,12 @@
             this.barButtonItem27,
             this.barButtonItemRcvdReturnInv,
             this.barButtonItemInvDailyActivity,
-            this.btnLiveTrendsSts});
+            this.btnLiveTrendsSts,
+            this.btnPurchaseCosting,
+            this.btnInventoryBranchSummary});
             this.ribbonControl.Location = new System.Drawing.Point(0, 0);
             this.ribbonControl.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
-            this.ribbonControl.MaxItemId = 222;
+            this.ribbonControl.MaxItemId = 224;
             this.ribbonControl.Name = "ribbonControl";
             this.ribbonControl.PageHeaderItemLinks.Add(this.barStaticItem2);
             this.ribbonControl.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
@@ -2562,6 +2566,14 @@
             this.btnLiveTrendsSts.Name = "btnLiveTrendsSts";
             this.btnLiveTrendsSts.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnLiveTrendsSts_ItemClick);
             // 
+            // btnPurchaseCosting
+            // 
+            this.btnPurchaseCosting.Caption = "Purchase Costing Details";
+            this.btnPurchaseCosting.Id = 222;
+            this.btnPurchaseCosting.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnPurchaseCosting.ImageOptions.Image")));
+            this.btnPurchaseCosting.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("btnPurchaseCosting.ImageOptions.LargeImage")));
+            this.btnPurchaseCosting.Name = "btnPurchaseCosting";
+            // 
             // ribbonPage1
             // 
             this.ribbonPage1.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
@@ -2709,6 +2721,7 @@
             this.ribbonPageGroupViewInventory.ItemLinks.Add(this.btnInventoryPerBranch);
             this.ribbonPageGroupViewInventory.ItemLinks.Add(this.barbtnInventoryMonitoring);
             this.ribbonPageGroupViewInventory.ItemLinks.Add(this.barButtonItemInvDailyActivity);
+            this.ribbonPageGroupViewInventory.ItemLinks.Add(this.btnInventoryBranchSummary);
             this.ribbonPageGroupViewInventory.Name = "ribbonPageGroupViewInventory";
             this.ribbonPageGroupViewInventory.Text = "VIEW INVENTORY";
             // 
@@ -2797,6 +2810,7 @@
             this.ribbonPageGroup24.ItemLinks.Add(this.btnAccountingAging);
             this.ribbonPageGroup24.ItemLinks.Add(this.btnCreditMemo);
             this.ribbonPageGroup24.ItemLinks.Add(this.btnARReports);
+            this.ribbonPageGroup24.ItemLinks.Add(this.btnPurchaseCosting);
             this.ribbonPageGroup24.Name = "ribbonPageGroup24";
             this.ribbonPageGroup24.Text = "ACCOUNTING REPORTS";
             // 
@@ -3021,6 +3035,15 @@
             this.barButtonItem5.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barButtonItem5.ImageOptions.Image")));
             this.barButtonItem5.Name = "barButtonItem5";
             this.barButtonItem5.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+            // 
+            // btnInventoryBranchSummary
+            // 
+            this.btnInventoryBranchSummary.Caption = "Inventory Branch Summary";
+            this.btnInventoryBranchSummary.Id = 223;
+            this.btnInventoryBranchSummary.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnInventoryBranchSummary.ImageOptions.Image")));
+            this.btnInventoryBranchSummary.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("btnInventoryBranchSummary.ImageOptions.LargeImage")));
+            this.btnInventoryBranchSummary.Name = "btnInventoryBranchSummary";
+            this.btnInventoryBranchSummary.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnInventoryBranchSummary_ItemClick);
             // 
             // Main
             // 
@@ -3332,5 +3355,7 @@
         private DevExpress.XtraBars.BarButtonItem barButtonItemInvDailyActivity;
         private DevExpress.XtraBars.BarButtonItem btnLiveTrendsSts;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup28;
+        private DevExpress.XtraBars.BarButtonItem btnPurchaseCosting;
+        private DevExpress.XtraBars.BarButtonItem btnInventoryBranchSummary;
     }
 }

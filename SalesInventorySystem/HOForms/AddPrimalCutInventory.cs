@@ -739,8 +739,11 @@ namespace SalesInventorySystem.HOForms
                     weightprint = txtweight.Text;
                     barcodeprint = txtskuno.Text.Trim();
                     Barcode.BarcodePrinting bprint = new Barcode.BarcodePrinting();
+                    bprint.xrshipno.Text = txtshipmentno.Text;
+                    bprint.xrpalletno.Text = txtpalletno.Text;
                     bprint.lblmanufdate.Text = DateTime.Now.ToShortDateString();
                     bprint.lblprodtype.Text = prodprint;
+                    bprint.xrsku.Text = productcode.ToString();
                     bprint.lbltotalkilos.Text = weightprint;
                     bprint.lblxpirydate.Text = DateTime.Now.AddYears(1).ToShortDateString();
                     bprint.xrBarCode2.Text = barcodeprint;//productcategorycode + primalcode + txtweight.Text.Remove(2, 1);

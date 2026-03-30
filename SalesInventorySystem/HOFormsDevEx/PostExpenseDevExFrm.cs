@@ -17,7 +17,7 @@ namespace SalesInventorySystem.HOFormsDevEx
     {
         DataTable table;
         bool ok = false;
-        object suppid;
+        object suppid,shipmentno;
         public PostExpenseDevExFrm()
         {
             InitializeComponent();
@@ -41,12 +41,14 @@ namespace SalesInventorySystem.HOFormsDevEx
             loadRepositoryItem();
             populateBranches2();
             displayvendor();
+            displayPurchaseList();
             table = new DataTable();
             table.Columns.Add("BranchCode");
             table.Columns.Add("TypeOfExpense");
             table.Columns.Add("Particulars");
             table.Columns.Add("Amount");
             gridControl1.DataSource = table;
+
         }
         void populateBranches2()
         {
@@ -55,6 +57,10 @@ namespace SalesInventorySystem.HOFormsDevEx
         void displayvendor()
         {
             Database.displaySearchlookupEdit("select SupplierID,SupplierName FROM Supplier", txtvendor, "SupplierName", "SupplierName");
+        }
+        void displayPurchaseList()
+        {
+            Database.displaySearchlookupEdit("select ShipmentNo, SupplierId, SupplierName FROM dbo.view_POSUMMARYREP WHERE Status <> 'CANCELLED'" , txtpo, "SupplierName", "SupplierName");
         }
         void loadRepositoryItem()
         {
@@ -129,7 +135,7 @@ namespace SalesInventorySystem.HOFormsDevEx
 
                         //int ledgeseqno = Database.getLastID("SupplierLedger", "SupplierID='" + txtvendor.Text + "'", "TRN_SEQ_NO")+1;
                         //int lastexpseqno = Database.getLastID("SupplierLedger", "SupplierID='" + txtvendor.Text + "'", "TRN_SEQ_NO") + 1;
-                        Database.ExecuteQuery("INSERT INTO ExpenseMaster VALUES ('" + ctr + "','" + branchcode + "','" + supplierkey + "','" + txtrefno.Text + "','" + txtinvoiceno.Text + "','" + expname + "','" + txtexpdate.Text + "','" + amount + "','" + particulars + "','UNPAID','" + amount + "',0,0,0,0,0,'"+txtbatchid.Text+"')");
+                        Database.ExecuteQuery("INSERT INTO ExpenseMaster VALUES ('" + ctr + "','" + branchcode + "','" + supplierkey + "','" + txtrefno.Text + "','" + txtinvoiceno.Text + "','" + expname + "','" + txtexpdate.Text + "','" + amount + "','" + particulars + "','UNPAID','" + amount + "',0,0,0,0,0,'"+txtbatchid.Text+"','"+ shipmentno .ToString()+ "')");
                         //Database.ExecuteQuery($"INSERT INTO ExpenseDetails VALUES('{ctr}','{branchcode}','{txtrefno.Text}','{txtinvoiceno.Text}','{expname}','{particulars}','{amount}')");
                         //Database.ExecuteQuery("INSERT INTO SupplierLedger VALUES ('" + supplierkey + "','" + txtvendor.Text + "','" + txtexpdate.Text + "','" + particulars + "','EXP','" + DateTime.Now.ToString() + "','" + txtinvoiceno.Text + "',0,0,'" + amount + "',0,'" + Login.Fullname + "','*',0,'UNPAID',0,' ','" + ledgeseqno + "')");
                         ctr += 1;
@@ -289,6 +295,18 @@ namespace SalesInventorySystem.HOFormsDevEx
         private void txtvendor_EditValueChanged(object sender, EventArgs e)
         {
             suppid = SearchLookUpClass.getSingleValue(txtvendor, "SupplierID");
+        }
+
+        private void chcklinktopo_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chcklinktopo.Checked == true)
+                txtpo.Enabled = true;
+            else txtpo.Enabled = false;
+        }
+
+        private void txtpo_EditValueChanged(object sender, EventArgs e)
+        {
+            shipmentno = SearchLookUpClass.getSingleValue(txtpo, "ShipmentNo");
         }
     }
 }

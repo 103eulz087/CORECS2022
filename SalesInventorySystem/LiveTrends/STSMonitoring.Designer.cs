@@ -434,6 +434,7 @@
             this.lblforapproval.Size = new System.Drawing.Size(386, 113);
             this.lblforapproval.TabIndex = 15;
             this.lblforapproval.Text = "0";
+            this.lblforapproval.Paint += new System.Windows.Forms.PaintEventHandler(this.lblforapproval_Paint);
             // 
             // labelControl9
             // 

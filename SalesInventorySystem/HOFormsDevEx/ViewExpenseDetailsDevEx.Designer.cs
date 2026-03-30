@@ -78,7 +78,8 @@
             // 
             // gridView5
             // 
-            this.gridView5.DetailHeight = 322;
+            this.gridView5.DetailHeight = 224;
+            this.gridView5.FixedLineWidth = 1;
             this.gridView5.GridControl = this.gridControl2;
             this.gridView5.LevelIndent = 0;
             this.gridView5.Name = "gridView5";
@@ -87,14 +88,14 @@
             // gridControl2
             // 
             this.gridControl2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridControl2.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            this.gridControl2.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             gridLevelNode1.LevelTemplate = this.gridView5;
             gridLevelNode1.RelationName = "Level1";
             this.gridControl2.LevelTree.Nodes.AddRange(new DevExpress.XtraGrid.GridLevelNode[] {
             gridLevelNode1});
-            this.gridControl2.Location = new System.Drawing.Point(3, 39);
+            this.gridControl2.Location = new System.Drawing.Point(2, 28);
             this.gridControl2.MainView = this.gridView2;
-            this.gridControl2.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            this.gridControl2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.gridControl2.Name = "gridControl2";
             this.gridControl2.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemComboBox1,
@@ -104,7 +105,7 @@
             this.repositoryItemSearchLookUpEditOffsetCreditGLCode,
             this.repositoryItemSearchLookUpEditEWTDebitGLCode,
             this.repositoryItemSearchLookUpEditEWTCreditGLCode});
-            this.gridControl2.Size = new System.Drawing.Size(2075, 1257);
+            this.gridControl2.Size = new System.Drawing.Size(1453, 627);
             this.gridControl2.TabIndex = 8;
             this.gridControl2.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView2,
@@ -116,7 +117,8 @@
             this.gridView2.Appearance.HeaderPanel.Options.UseFont = true;
             this.gridView2.Appearance.Row.Font = new System.Drawing.Font("Tahoma", 9.25F);
             this.gridView2.Appearance.Row.Options.UseFont = true;
-            this.gridView2.DetailHeight = 322;
+            this.gridView2.DetailHeight = 224;
+            this.gridView2.FixedLineWidth = 1;
             this.gridView2.GridControl = this.gridControl2;
             this.gridView2.LevelIndent = 0;
             this.gridView2.Name = "gridView2";
@@ -147,8 +149,6 @@
             // 
             // repositoryItemSearchLookUpEdit1View
             // 
-            this.repositoryItemSearchLookUpEdit1View.DetailHeight = 503;
-            this.repositoryItemSearchLookUpEdit1View.FixedLineWidth = 3;
             this.repositoryItemSearchLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
             this.repositoryItemSearchLookUpEdit1View.Name = "repositoryItemSearchLookUpEdit1View";
             this.repositoryItemSearchLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = false;
@@ -164,8 +164,6 @@
             // 
             // gridView1
             // 
-            this.gridView1.DetailHeight = 503;
-            this.gridView1.FixedLineWidth = 3;
             this.gridView1.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
             this.gridView1.Name = "gridView1";
             this.gridView1.OptionsSelection.EnableAppearanceFocusedCell = false;
@@ -188,8 +186,6 @@
             // 
             // gridView4
             // 
-            this.gridView4.DetailHeight = 503;
-            this.gridView4.FixedLineWidth = 3;
             this.gridView4.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
             this.gridView4.Name = "gridView4";
             this.gridView4.OptionsSelection.EnableAppearanceFocusedCell = false;
@@ -205,8 +201,6 @@
             // 
             // gridView6
             // 
-            this.gridView6.DetailHeight = 503;
-            this.gridView6.FixedLineWidth = 3;
             this.gridView6.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
             this.gridView6.Name = "gridView6";
             this.gridView6.OptionsSelection.EnableAppearanceFocusedCell = false;
@@ -222,8 +216,6 @@
             // 
             // gridView7
             // 
-            this.gridView7.DetailHeight = 503;
-            this.gridView7.FixedLineWidth = 3;
             this.gridView7.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
             this.gridView7.Name = "gridView7";
             this.gridView7.OptionsSelection.EnableAppearanceFocusedCell = false;
@@ -233,9 +225,10 @@
             // 
             this.groupControl2.Controls.Add(this.gridControl2);
             this.groupControl2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupControl2.Location = new System.Drawing.Point(0, 118);
+            this.groupControl2.Location = new System.Drawing.Point(0, 82);
+            this.groupControl2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.groupControl2.Name = "groupControl2";
-            this.groupControl2.Size = new System.Drawing.Size(2081, 1299);
+            this.groupControl2.Size = new System.Drawing.Size(1457, 657);
             this.groupControl2.TabIndex = 3;
             // 
             // groupControl1
@@ -247,40 +240,45 @@
             this.groupControl1.Controls.Add(this.btnApproved);
             this.groupControl1.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupControl1.Location = new System.Drawing.Point(0, 0);
+            this.groupControl1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.groupControl1.Name = "groupControl1";
-            this.groupControl1.Size = new System.Drawing.Size(2081, 118);
+            this.groupControl1.Size = new System.Drawing.Size(1457, 82);
             this.groupControl1.TabIndex = 2;
             // 
             // txtsuppid
             // 
-            this.txtsuppid.Location = new System.Drawing.Point(1088, 49);
+            this.txtsuppid.Location = new System.Drawing.Point(762, 34);
+            this.txtsuppid.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtsuppid.Name = "txtsuppid";
-            this.txtsuppid.Size = new System.Drawing.Size(202, 36);
+            this.txtsuppid.Size = new System.Drawing.Size(141, 22);
             this.txtsuppid.TabIndex = 9;
             this.txtsuppid.Visible = false;
             // 
             // txtinvoiceno
             // 
-            this.txtinvoiceno.Location = new System.Drawing.Point(853, 49);
+            this.txtinvoiceno.Location = new System.Drawing.Point(597, 34);
+            this.txtinvoiceno.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtinvoiceno.Name = "txtinvoiceno";
-            this.txtinvoiceno.Size = new System.Drawing.Size(202, 36);
+            this.txtinvoiceno.Size = new System.Drawing.Size(141, 22);
             this.txtinvoiceno.TabIndex = 8;
             this.txtinvoiceno.Visible = false;
             // 
             // txtrefno
             // 
-            this.txtrefno.Location = new System.Drawing.Point(619, 49);
+            this.txtrefno.Location = new System.Drawing.Point(433, 34);
+            this.txtrefno.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtrefno.Name = "txtrefno";
-            this.txtrefno.Size = new System.Drawing.Size(202, 36);
+            this.txtrefno.Size = new System.Drawing.Size(141, 22);
             this.txtrefno.TabIndex = 7;
             this.txtrefno.Visible = false;
             // 
             // btncancel
             // 
             this.btncancel.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btncancel.ImageOptions.Image")));
-            this.btncancel.Location = new System.Drawing.Point(172, 54);
+            this.btncancel.Location = new System.Drawing.Point(120, 38);
+            this.btncancel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btncancel.Name = "btncancel";
-            this.btncancel.Size = new System.Drawing.Size(182, 49);
+            this.btncancel.Size = new System.Drawing.Size(127, 34);
             this.btncancel.TabIndex = 6;
             this.btncancel.Text = "DisApproved";
             this.btncancel.Visible = false;
@@ -289,9 +287,10 @@
             // btnApproved
             // 
             this.btnApproved.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnApproved.ImageOptions.Image")));
-            this.btnApproved.Location = new System.Drawing.Point(12, 54);
+            this.btnApproved.Location = new System.Drawing.Point(8, 38);
+            this.btnApproved.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnApproved.Name = "btnApproved";
-            this.btnApproved.Size = new System.Drawing.Size(153, 49);
+            this.btnApproved.Size = new System.Drawing.Size(107, 34);
             this.btnApproved.TabIndex = 5;
             this.btnApproved.Text = "Approved";
             this.btnApproved.Visible = false;
@@ -299,11 +298,12 @@
             // 
             // ViewExpenseDetailsDevEx
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 23F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(2081, 1417);
+            this.ClientSize = new System.Drawing.Size(1457, 739);
             this.Controls.Add(this.groupControl2);
             this.Controls.Add(this.groupControl1);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "ViewExpenseDetailsDevEx";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ViewExpenseDetailsDevEx";

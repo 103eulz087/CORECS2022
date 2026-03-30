@@ -25,7 +25,7 @@ namespace SalesInventorySystem.POS
             percentamt = "0";
             isOnetimeDiscount = true;
 
-            if (String.IsNullOrEmpty(txtcontrolno.Text) || String.IsNullOrEmpty(txtdiscountamount.Text) || String.IsNullOrEmpty(txtpercentageamount.Text))
+            if (String.IsNullOrEmpty(txtdiscountypes.Text) || String.IsNullOrEmpty(txtcontrolno.Text) || String.IsNullOrEmpty(txtdiscountamount.Text) || String.IsNullOrEmpty(txtpercentageamount.Text))
             {
                 XtraMessageBox.Show("Fields Mandatory");
                 return;
