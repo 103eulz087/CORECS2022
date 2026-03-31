@@ -110,6 +110,7 @@
             this.gridView1.OptionsBehavior.ReadOnly = true;
             this.gridView1.OptionsView.ColumnAutoWidth = false;
             this.gridView1.OptionsView.RowAutoHeight = true;
+            this.gridView1.OptionsView.ShowFooter = true;
             this.gridView1.PreviewIndent = 0;
             // 
             // groupBox1

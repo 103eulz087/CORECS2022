@@ -241,7 +241,7 @@ exit /b
 
         private async void buttonLogin_Click(object sender, EventArgs e)
         {
-            Database.ExecuteQuery("UPDATE dbo.POSType SET DataUploading=1");
+            //Database.ExecuteQuery("UPDATE dbo.POSType SET linkedServerName='1', DataUploading=1");
             ////start loading
             //HelperFunction.ShowWaitAndDisplay("PLEASE WAIT","LOADING DATA",3000);
             //var referenceId = "001-POS1-000000000000000007"; 

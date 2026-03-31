@@ -12,6 +12,8 @@ using System.Data.SqlClient;
 using DevExpress.XtraGrid;
 using SalesInventorySystem.Classes;
 using System.IO;
+using DevExpress.XtraGrid.Views.Grid;
+using DevExpress.XtraGrid.Columns;
 
 namespace SalesInventorySystem
 {
@@ -56,18 +58,35 @@ namespace SalesInventorySystem
       
         void display()
         {
-            Database.display("SELECT SequenceNumber,Product,Description,Barcode,Quantity " +
-                "FROM InventoryIN with(nolock) WHERE ID='"+txtid.Text+"' ORDER BY SequenceNumber DESC", gridControl1, gridView1);
+            Database.display("SELECT * " +
+                $"FROM dbo.funcview_InventoryIN('{txtid.Text}') ORDER BY SequenceNumber ASC", gridControl1, gridView1);
+
+
+            //GridView view = gridControl1.FocusedView as GridView;
+            //view.SortInfo.ClearAndAddRange(new GridColumnSortInfo[] {
+            //    new GridColumnSortInfo(view.Columns["Description"],DevExpress.Data.ColumnSortOrder.Ascending)
+            //    }, 1);
+            //gridView1.ExpandAllGroups();
+
+            GridGroupSummaryItem ite = new GridGroupSummaryItem();
+            ite.FieldName = "Quantity";
+            ite.SummaryType = DevExpress.Data.SummaryItemType.Sum;
+            ite.ShowInGroupColumnFooter = gridView1.Columns["Quantity"];
+            gridView1.GroupSummary.Add(ite);
+            gridView1.Focus();
+
+            Classes.DevXGridViewSettings.ShowFooterCountTotal(gridView1, "SequenceNumber");
+            Classes.DevXGridViewSettings.ShowFooterTotal(gridView1, "Quantity");
         }
 
         private void ReInventoryIn_Load(object sender, EventArgs e)
         {
-            txtbarcodescanning.Focus();
             //Database.displayComboBoxItems("SELECT BranchName FROM Branches WHERE BranchCode='"+Login.assignedBranch+"'", "BranchName", comboBox1);
             string branchname = Database.getSingleQuery("Branches", "BranchCode='" + Login.assignedBranch + "'", "BranchName");
            
             loadInvNum();
             populateBranch();
+            txtbarcodescanning.Focus();
         }
 
         void loadInvNum()
@@ -272,6 +291,7 @@ namespace SalesInventorySystem
             //Database.ExecuteQuery("DELETE FROM TempInventoryIN WHERE SequenceNumber='" + gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "SequenceNumber").ToString() + "'");
             Database.ExecuteQuery("DELETE FROM InventoryIN WHERE SequenceNumber='" + gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "SequenceNumber").ToString() + "'");
             display();
+            txtbarcodescanning.Focus();
         }
 
         void recoverInventoryNew()
@@ -351,7 +371,7 @@ namespace SalesInventorySystem
         }
         private void simpleButton2_Click(object sender, EventArgs e)
         {
-            
+            Commit();
         }
 
         private void txtbarcodescanning_KeyDown(object sender, KeyEventArgs e)
@@ -692,59 +712,59 @@ namespace SalesInventorySystem
         }
 
 
-        void AddEntry()
-        {
-            bool validproductcode = false;
-            string desc = "", pcode = "", barcode = "", qty = "";
-            double finalqty = 0.0;
-            barcode = txtbarcodescanning.Text.Trim();
-            if (isusedbarcode == true)
-            {
-                pcode = Database.getSingleQuery("Products", "Barcode='" + txtbarcodescanning.Text + "' and BranchCode='" + Login.assignedBranch + "'", "ProductCode");
-                desc = Database.getSingleQuery("Products", "Barcode='" + txtbarcodescanning.Text + "' and BranchCode='" + Login.assignedBranch + "'", "Description");
-                //Database.getSingleQuery("Products", "ProductCode='" + pcode + "' and BranchCode='" + brcode.ToString() + "'", "Description");
-            }else
-            {
-                pcode = Database.getSingleQuery("Products", "ProductCode='" + txtbarcodescanning.Text + "' and BranchCode='" + Login.assignedBranch + "'", "ProductCode");
-                desc = Database.getSingleQuery("Products", "ProductCode='" + txtbarcodescanning.Text + "' and BranchCode='" + Login.assignedBranch + "'", "Description");
-                //Database.getSingleQuery("Products", "ProductCode='" + pcode + "' and BranchCode='" + brcode.ToString() + "'", "Description");
-            }
+        //void AddEntry()
+        //{
+        //    bool validproductcode = false;
+        //    string desc = "", pcode = "", barcode = "", qty = "";
+        //    double finalqty = 0.0;
+        //    barcode = txtbarcodescanning.Text.Trim();
+        //    if (isusedbarcode == true)
+        //    {
+        //        pcode = Database.getSingleQuery("Products", "Barcode='" + txtbarcodescanning.Text + "' and BranchCode='" + Login.assignedBranch + "'", "ProductCode");
+        //        desc = Database.getSingleQuery("Products", "Barcode='" + txtbarcodescanning.Text + "' and BranchCode='" + Login.assignedBranch + "'", "Description");
+        //        //Database.getSingleQuery("Products", "ProductCode='" + pcode + "' and BranchCode='" + brcode.ToString() + "'", "Description");
+        //    }else
+        //    {
+        //        pcode = Database.getSingleQuery("Products", "ProductCode='" + txtbarcodescanning.Text + "' and BranchCode='" + Login.assignedBranch + "'", "ProductCode");
+        //        desc = Database.getSingleQuery("Products", "ProductCode='" + txtbarcodescanning.Text + "' and BranchCode='" + Login.assignedBranch + "'", "Description");
+        //        //Database.getSingleQuery("Products", "ProductCode='" + pcode + "' and BranchCode='" + brcode.ToString() + "'", "Description");
+        //    }
 
-            qty = "1";
-            validproductcode = Database.checkifExist("SELECT TOP(1) ProductCode FROM dbo.Products WHERE ProductCode='" + pcode + "' And BranchCode='"+ brcode.ToString() + "'");
-            if (!validproductcode)
-            {
-                XtraMessageBox.Show("Invalid Product Code!!..");
-                return;
-            }
+        //    qty = "1";
+        //    validproductcode = Database.checkifExist("SELECT TOP(1) ProductCode FROM dbo.Products WHERE ProductCode='" + pcode + "' And BranchCode='"+ brcode.ToString() + "'");
+        //    if (!validproductcode)
+        //    {
+        //        XtraMessageBox.Show("Invalid Product Code!!..");
+        //        return;
+        //    }
            
-            finalqty = Convert.ToDouble(qty);
+        //    finalqty = Convert.ToDouble(qty);
 
-            string prodcatcode = Database.getSingleQuery("Products", "BranchCode='" + brcode.ToString() + "' AND ProductCode='" + pcode + "'", "ProductCategoryCode");
-            string isvat = Database.getSingleQuery("ProductCategory", "ProductCategoryID='"+prodcatcode+"'", "isVat");
+        //    string prodcatcode = Database.getSingleQuery("Products", "BranchCode='" + brcode.ToString() + "' AND ProductCode='" + pcode + "'", "ProductCategoryCode");
+        //    string isvat = Database.getSingleQuery("ProductCategory", "ProductCategoryID='"+prodcatcode+"'", "isVat");
          
-            Database.ExecuteQuery("INSERT INTO dbo.TempInventoryIN (ID,Branch,DateReceived,ExpiryDate,Product,Description,Barcode,Quantity,Cost,isWarehouse,isVat,isDone,DateEncode,EncodeBy) " +
-                "VALUES('" + txtid.Text + "'" +
-                $",'{brcode.ToString()}'" +
-                $",'{txtdatereceived.Text}'" +
-                $",'{txtxpirydate.Text}'" +
-                $",'{pcode}'" +
-                $",'{desc}'" +
-                $",'{barcode}'" +
-                $",'{finalqty}'" +
-                $",'{txtcost.Text}'" +
-                $",'0" +
-                $",'{isvat}'" +
-                $",'0'" +
-                $",'{DateTime.Now.ToShortDateString()}'" +
-                $",'{Login.isglobalUserID}')", "Succesfully Added");
+        //    Database.ExecuteQuery("INSERT INTO dbo.TempInventoryIN (ID,Branch,DateReceived,ExpiryDate,Product,Description,Barcode,Quantity,Cost,isWarehouse,isVat,isDone,DateEncode,EncodeBy) " +
+        //        "VALUES('" + txtid.Text + "'" +
+        //        $",'{brcode.ToString()}'" +
+        //        $",'{txtdatereceived.Text}'" +
+        //        $",'{txtxpirydate.Text}'" +
+        //        $",'{pcode}'" +
+        //        $",'{desc}'" +
+        //        $",'{barcode}'" +
+        //        $",'{finalqty}'" +
+        //        $",'{txtcost.Text}'" +
+        //        $",'0" +
+        //        $",'{isvat}'" +
+        //        $",'0'" +
+        //        $",'{DateTime.Now.ToShortDateString()}'" +
+        //        $",'{Login.isglobalUserID}')", "Succesfully Added");
 
-            isusedsearchform = false;
-            display();
-            gridView1.MoveLast();
-            txtbarcodescanning.Text = "";
-            txtbarcodescanning.Focus();
-        }
+        //    isusedsearchform = false;
+        //    display();
+        //    gridView1.MoveLast();
+        //    txtbarcodescanning.Text = "";
+        //    txtbarcodescanning.Focus();
+        //}
 
         private void txtbranch_EditValueChanged(object sender, EventArgs e)
         {
