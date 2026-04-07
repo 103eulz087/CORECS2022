@@ -49,33 +49,41 @@ namespace SalesInventorySystem.HOFormsDevEx
                 con.Close();
             }
         }
-        void executeTransfer()
+
+        private void executeTransfer()
         {
             try
             {
                 GridView view = gridControlRcvd.FocusedView as GridView;
-                view.SortInfo.Clear();
 
-                int[] selectedRows = gridViewRcvd.GetSelectedRows();
+                // 1. Guard clause: Ensure there is actually data to process
+                if (view == null || view.RowCount == 0)
+                {
+                    XtraMessageBox.Show("There are no items in the grid to receive.", "Empty List", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
 
-                // Create DataTable for TVP
+                // 2. Create DataTable for TVP
                 DataTable inventoryItems = new DataTable();
                 inventoryItems.Columns.Add("ProductCode", typeof(string));
                 inventoryItems.Columns.Add("Barcode", typeof(string));
                 inventoryItems.Columns.Add("Qty", typeof(float));
-          
 
-
-                for (int i = 0; i <= gridViewRcvd.RowCount - 1; i++)
+                // 3. LOOP THROUGH EVERY ROW IN THE GRID
+                for (int i = 0; i < view.RowCount; i++)
                 {
-                    string productCode = gridViewRcvd.GetRowCellValue(i, "ProductNo").ToString();
-                    string barcode = gridViewRcvd.GetRowCellValue(i, "BarcodeNo").ToString();
-                    float qty = Convert.ToSingle(gridViewRcvd.GetRowCellValue(i, "ActualQty")); 
-                 
-                    inventoryItems.Rows.Add(productCode, barcode, qty);
+                    // IsDataRow ignores Group Headers or Auto-Filter rows
+                    if (view.IsDataRow(i))
+                    {
+                        string productCode = view.GetRowCellValue(i, "ProductNo")?.ToString() ?? "";
+                        string barcode = view.GetRowCellValue(i, "BarcodeNo")?.ToString() ?? "";
+                        float qty = Convert.ToSingle(view.GetRowCellValue(i, "ActualQty"));
+
+                        inventoryItems.Rows.Add(productCode, barcode, qty);
+                    }
                 }
 
-                // Call the batch stored procedure
+                // 4. Call the batch stored procedure
                 using (SqlConnection conn = Database.getConnection())
                 {
                     using (SqlCommand cmd = new SqlCommand("sp_AddBranchTransferInventoryBatch", conn))
@@ -83,7 +91,7 @@ namespace SalesInventorySystem.HOFormsDevEx
                         cmd.CommandType = CommandType.StoredProcedure;
 
                         cmd.Parameters.AddWithValue("@TransferNo", txtshipmentno.Text);
-                        cmd.Parameters.AddWithValue("@BranchCodeRcvr", Login.assignedBranch); 
+                        cmd.Parameters.AddWithValue("@BranchCodeRcvr", Login.assignedBranch);
                         cmd.Parameters.AddWithValue("@ReceivedBy", Login.isglobalUserID);
 
                         SqlParameter tvpParam = cmd.Parameters.AddWithValue("@Items", inventoryItems);
@@ -94,15 +102,72 @@ namespace SalesInventorySystem.HOFormsDevEx
                         cmd.ExecuteNonQuery();
                     }
                 }
-
-                totalreceive = selectedRows.Length;
                 isdone = true;
+                XtraMessageBox.Show($"Successfully received {inventoryItems.Rows.Count} items!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                // Optional: Clear the grid or reload it from the database now that they are received
+                // gridControlRcvd.DataSource = null; 
             }
             catch (SqlException ex)
             {
-                XtraMessageBox.Show("Error: " + ex.Message);
+                XtraMessageBox.Show("Database Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+        //void executeTransfer()
+        //{
+        //    try
+        //    {
+        //        GridView view = gridControlRcvd.FocusedView as GridView;
+        //        view.SortInfo.Clear();
+
+        //        int[] selectedRows = gridViewRcvd.GetSelectedRows();
+
+        //        // Create DataTable for TVP
+        //        DataTable inventoryItems = new DataTable();
+        //        inventoryItems.Columns.Add("ProductCode", typeof(string));
+        //        inventoryItems.Columns.Add("Barcode", typeof(string));
+        //        inventoryItems.Columns.Add("Qty", typeof(float));
+          
+
+
+        //        for (int i = 0; i <= gridViewRcvd.RowCount - 1; i++)
+        //        {
+        //            string productCode = gridViewRcvd.GetRowCellValue(i, "ProductNo").ToString();
+        //            string barcode = gridViewRcvd.GetRowCellValue(i, "BarcodeNo").ToString();
+        //            float qty = Convert.ToSingle(gridViewRcvd.GetRowCellValue(i, "ActualQty")); 
+                 
+        //            inventoryItems.Rows.Add(productCode, barcode, qty);
+        //        }
+
+        //        // Call the batch stored procedure
+        //        using (SqlConnection conn = Database.getConnection())
+        //        {
+        //            using (SqlCommand cmd = new SqlCommand("sp_AddBranchTransferInventoryBatch", conn))
+        //            {
+        //                cmd.CommandType = CommandType.StoredProcedure;
+
+        //                cmd.Parameters.AddWithValue("@TransferNo", txtshipmentno.Text);
+        //                cmd.Parameters.AddWithValue("@BranchCodeRcvr", Login.assignedBranch); 
+        //                cmd.Parameters.AddWithValue("@ReceivedBy", Login.isglobalUserID);
+
+        //                SqlParameter tvpParam = cmd.Parameters.AddWithValue("@Items", inventoryItems);
+        //                tvpParam.SqlDbType = SqlDbType.Structured;
+        //                tvpParam.TypeName = "dbo.TransferInventoryItemType";
+
+        //                conn.Open();
+        //                cmd.ExecuteNonQuery();
+        //            }
+        //        }
+
+        //        totalreceive = selectedRows.Length;
+        //        isdone = true;
+        //    }
+        //    catch (SqlException ex)
+        //    {
+        //        XtraMessageBox.Show("Error: " + ex.Message);
+        //    }
+        //}
+
         private void simpleButton2_Click(object sender, EventArgs e)
         {
             int totalorders = Database.getCountData("SELECT COUNT(ProductNo) as Counter FROM dbo.TransferInventoryDetails  WHERE TransferNo=" + txtshipmentno.Text + "", "Counter");
@@ -167,7 +232,7 @@ namespace SalesInventorySystem.HOFormsDevEx
         {
             string qtydel = gridViewRcvd.GetRowCellValue(gridViewRcvd.FocusedRowHandle, "QtyDelivered").ToString();
             Barcode.BarcodePrinting bprint = new Barcode.BarcodePrinting();
-            bprint.xrshipno.Text = "TRANSFER#:" + gridViewRcvd.GetRowCellValue(gridViewRcvd.FocusedRowHandle, "TransferNo").ToString();
+            bprint.xrshipno.Text = "TRANSFER#:" + txtshipmentno.Text;//gridViewRcvd.GetRowCellValue(gridViewRcvd.FocusedRowHandle, "TransferNo").ToString();
             bprint.xrpalletno.Text = "n/a";
             bprint.lblmanufdate.Text = DateTime.Now.ToShortDateString();
             bprint.lblprodtype.Text = gridViewRcvd.GetRowCellValue(gridViewRcvd.FocusedRowHandle, "ProductName").ToString();
@@ -176,6 +241,11 @@ namespace SalesInventorySystem.HOFormsDevEx
             bprint.lblxpirydate.Text = DateTime.Now.AddYears(1).ToShortDateString();
             ReportPrintTool report = new ReportPrintTool(bprint);
             report.Print();
+        }
+
+        private void ReceivedTransferInventoryBatchMode_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

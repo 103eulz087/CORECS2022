@@ -253,6 +253,7 @@
             this.barButtonItemInvDailyActivity = new DevExpress.XtraBars.BarButtonItem();
             this.btnLiveTrendsSts = new DevExpress.XtraBars.BarButtonItem();
             this.btnPurchaseCosting = new DevExpress.XtraBars.BarButtonItem();
+            this.btnInventoryBranchSummary = new DevExpress.XtraBars.BarButtonItem();
             this.ribbonPage1 = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup20 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup2 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -300,7 +301,6 @@
             this.barButtonItem103 = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem5 = new DevExpress.XtraBars.BarButtonItem();
-            this.btnInventoryBranchSummary = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.popupMenuInvTransfer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.popupMenu1)).BeginInit();
@@ -1147,7 +1147,7 @@
             // 
             // barStaticItem6
             // 
-            this.barStaticItem6.Caption = "IP Address:";
+            this.barStaticItem6.Caption = "Token:";
             this.barStaticItem6.Id = 70;
             this.barStaticItem6.Name = "barStaticItem6";
             // 
@@ -1165,7 +1165,7 @@
             // 
             // barStaticItem7
             // 
-            this.barStaticItem7.Caption = "Server Date:";
+            this.barStaticItem7.Caption = "Version Checker URL:";
             this.barStaticItem7.Id = 73;
             this.barStaticItem7.Name = "barStaticItem7";
             // 
@@ -2574,6 +2574,16 @@
             this.btnPurchaseCosting.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("btnPurchaseCosting.ImageOptions.LargeImage")));
             this.btnPurchaseCosting.Name = "btnPurchaseCosting";
             // 
+            // btnInventoryBranchSummary
+            // 
+            this.btnInventoryBranchSummary.Caption = "Inventory Branch Summary";
+            this.btnInventoryBranchSummary.Id = 223;
+            this.btnInventoryBranchSummary.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnInventoryBranchSummary.ImageOptions.Image")));
+            this.btnInventoryBranchSummary.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("btnInventoryBranchSummary.ImageOptions.LargeImage")));
+            this.btnInventoryBranchSummary.Name = "btnInventoryBranchSummary";
+            this.btnInventoryBranchSummary.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+            this.btnInventoryBranchSummary.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnInventoryBranchSummary_ItemClick);
+            // 
             // ribbonPage1
             // 
             this.ribbonPage1.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
@@ -3035,16 +3045,6 @@
             this.barButtonItem5.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barButtonItem5.ImageOptions.Image")));
             this.barButtonItem5.Name = "barButtonItem5";
             this.barButtonItem5.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
-            // 
-            // btnInventoryBranchSummary
-            // 
-            this.btnInventoryBranchSummary.Caption = "Inventory Branch Summary";
-            this.btnInventoryBranchSummary.Id = 223;
-            this.btnInventoryBranchSummary.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnInventoryBranchSummary.ImageOptions.Image")));
-            this.btnInventoryBranchSummary.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("btnInventoryBranchSummary.ImageOptions.LargeImage")));
-            this.btnInventoryBranchSummary.Name = "btnInventoryBranchSummary";
-            this.btnInventoryBranchSummary.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
-            this.btnInventoryBranchSummary.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnInventoryBranchSummary_ItemClick);
             // 
             // Main
             // 

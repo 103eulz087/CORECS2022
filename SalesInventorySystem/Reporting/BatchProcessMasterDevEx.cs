@@ -28,7 +28,7 @@ namespace SalesInventorySystem.Reporting
             DateTime today = DateTime.Now;
             txtdate.Text = HelperFunction.GetPreviousMonthSameDay(today).ToShortDateString();
             txtdateto.Text = today.ToShortDateString();
-            loadSupplier();
+          
         }
 
         void loadSupplier()
@@ -50,11 +50,22 @@ namespace SalesInventorySystem.Reporting
 
         void display()
         {
-            Database.display("SELECT ShipmentNo,SupplierID,InvoiceDate,InvoiceNo " +
-                "FROM APACCOUNTS " +
-                "WHERE SupplierID='" + value + "' " +
-                "and InvoiceDate >='" + txtdate.Text + "' " +
-                "and InvoiceDate <= '" + txtdateto.Text + "'", gridControl1, gridView1);
+            if(chckpersupplier.Checked==true && !String.IsNullOrEmpty(txtsupp.Text))
+            {
+                Database.display("SELECT * " +
+               "FROM view_APACCOUNTS " +
+               "WHERE SupplierID='" + value + "' " +
+               "and InvoiceDate >='" + txtdate.Text + "' " +
+               "and InvoiceDate <= '" + txtdateto.Text + "'", gridControl1, gridView1);
+            }
+            else if (chckpersupplier.Checked == false)
+            {
+                Database.display("SELECT * " +
+              "FROM view_APACCOUNTS " +
+              "WHERE InvoiceDate >='" + txtdate.Text + "' " +
+              "and InvoiceDate <= '" + txtdateto.Text + "'", gridControl1, gridView1);
+            }
+           
         }
 
         private void gridControl1_MouseUp(object sender, MouseEventArgs e)
@@ -116,6 +127,18 @@ namespace SalesInventorySystem.Reporting
             showItems();
         }
 
+        void checkChanged()
+        {
+            if (chckpersupplier.Checked == true) { txtsupp.Enabled = true; loadSupplier(); }
+            else { txtsupp.Text = ""; txtsupp.Enabled = false; }
+               
+        }
+
+        private void chckpersupplier_CheckedChanged(object sender, EventArgs e)
+        {
+            checkChanged();
+        }
+
         void showItems()
         {
             shipmentno = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "ShipmentNo").ToString();
@@ -130,7 +153,7 @@ namespace SalesInventorySystem.Reporting
                 carrep.gridView1.GroupSummary.Clear();
                 carrep.gridView1.Columns.Clear();
                 carrep.gridControl1.DataSource = null;
-                Database.display("SELECT DateReceived,Description,SUM(Quantity) as Quantity,Cost From dbo.Inventory with(nolock) WHERE ShipmentNo='" + shipmentno + "' and Branch='"+Login.assignedBranch+"' and isSource=1 GROUP BY DateReceived,Description,Cost", carrep.gridControl1, carrep.gridView1);
+                Database.display("SELECT DateReceived,Description,SUM(Quantity) as Quantity,Cost From dbo.TempInventory with(nolock) WHERE ShipmentNo='" + shipmentno + "' and Branch='"+Login.assignedBranch+"' and isSource=1 and isProcess=0 GROUP BY DateReceived,Description,Cost", carrep.gridControl1, carrep.gridView1);
                 GridView viewz = carrep.gridControl1.FocusedView as GridView;
                 viewz.SortInfo.ClearAndAddRange(new GridColumnSortInfo[] {
                 new GridColumnSortInfo(viewz.Columns["Description"],DevExpress.Data.ColumnSortOrder.Ascending)
@@ -151,8 +174,8 @@ namespace SalesInventorySystem.Reporting
                 //    "WHERE ShipmentNo='" + shipmentno + "' " +
                 //    "and isSource=1 ORDER BY Description,PalletNo,Cost", carrep.gridControl1, carrep.gridView1);
                 Database.display("SELECT SequenceNumber,DateReceived,Barcode,Description,Quantity,Cost " +
-                    "From dbo.Inventory with(nolock) WHERE ShipmentNo='" + shipmentno + "' " +
-                    "and Branch='" + Login.assignedBranch + "' ORDER BY Description ASC", carrep.gridControl1, carrep.gridView1);
+                    "From dbo.TempInventory with(nolock) WHERE ShipmentNo='" + shipmentno + "' " +
+                    "and Branch='" + Login.assignedBranch + "' and isProcess=0 ORDER BY Description ASC", carrep.gridControl1, carrep.gridView1);
 
                 GridView view = carrep.gridControl1.FocusedView as GridView;
                 view.SortInfo.ClearAndAddRange(new GridColumnSortInfo[] {

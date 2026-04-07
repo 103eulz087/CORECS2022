@@ -57,22 +57,21 @@
             // 
             this.groupControl1.Controls.Add(this.gridControl1);
             this.groupControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupControl1.Location = new System.Drawing.Point(0, 146);
-            this.groupControl1.Margin = new System.Windows.Forms.Padding(6, 4, 6, 4);
+            this.groupControl1.Location = new System.Drawing.Point(0, 93);
             this.groupControl1.Name = "groupControl1";
-            this.groupControl1.Size = new System.Drawing.Size(1904, 668);
+            this.groupControl1.Size = new System.Drawing.Size(1111, 428);
             this.groupControl1.TabIndex = 0;
             this.groupControl1.Text = "List of Tables";
             // 
             // gridControl1
             // 
             this.gridControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridControl1.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(6);
-            this.gridControl1.Location = new System.Drawing.Point(3, 45);
+            this.gridControl1.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.gridControl1.Location = new System.Drawing.Point(2, 28);
             this.gridControl1.MainView = this.gridView1;
-            this.gridControl1.Margin = new System.Windows.Forms.Padding(6);
+            this.gridControl1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.gridControl1.Name = "gridControl1";
-            this.gridControl1.Size = new System.Drawing.Size(1898, 620);
+            this.gridControl1.Size = new System.Drawing.Size(1107, 398);
             this.gridControl1.TabIndex = 2;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
@@ -89,8 +88,7 @@
             this.gridView1.Appearance.HeaderPanel.Options.UseFont = true;
             this.gridView1.Appearance.Row.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gridView1.Appearance.Row.Options.UseFont = true;
-            this.gridView1.DetailHeight = 673;
-            this.gridView1.FixedLineWidth = 3;
+            this.gridView1.DetailHeight = 431;
             this.gridView1.GridControl = this.gridControl1;
             this.gridView1.Name = "gridView1";
             this.gridView1.OptionsBehavior.Editable = false;
@@ -111,16 +109,16 @@
             this.groupControl2.Controls.Add(this.labelControl1);
             this.groupControl2.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupControl2.Location = new System.Drawing.Point(0, 0);
-            this.groupControl2.Margin = new System.Windows.Forms.Padding(6, 4, 6, 4);
             this.groupControl2.Name = "groupControl2";
-            this.groupControl2.Size = new System.Drawing.Size(1904, 146);
+            this.groupControl2.Size = new System.Drawing.Size(1111, 93);
             this.groupControl2.TabIndex = 1;
             // 
             // progressBar1
             // 
-            this.progressBar1.Location = new System.Drawing.Point(693, 58);
+            this.progressBar1.Location = new System.Drawing.Point(404, 37);
+            this.progressBar1.Margin = new System.Windows.Forms.Padding(2);
             this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(576, 35);
+            this.progressBar1.Size = new System.Drawing.Size(336, 22);
             this.progressBar1.TabIndex = 123642;
             // 
             // lblProgress
@@ -129,26 +127,25 @@
             this.lblProgress.Appearance.ForeColor = System.Drawing.Color.Black;
             this.lblProgress.Appearance.Options.UseFont = true;
             this.lblProgress.Appearance.Options.UseForeColor = true;
-            this.lblProgress.Location = new System.Drawing.Point(693, 99);
+            this.lblProgress.Location = new System.Drawing.Point(404, 63);
+            this.lblProgress.Margin = new System.Windows.Forms.Padding(2);
             this.lblProgress.Name = "lblProgress";
-            this.lblProgress.Size = new System.Drawing.Size(39, 31);
+            this.lblProgress.Size = new System.Drawing.Size(25, 19);
             this.lblProgress.TabIndex = 123641;
             this.lblProgress.Text = "0%";
             // 
             // progressBarControl1
             // 
-            this.progressBarControl1.Location = new System.Drawing.Point(112, 102);
-            this.progressBarControl1.Margin = new System.Windows.Forms.Padding(6, 4, 6, 4);
+            this.progressBarControl1.Location = new System.Drawing.Point(65, 65);
             this.progressBarControl1.Name = "progressBarControl1";
-            this.progressBarControl1.Size = new System.Drawing.Size(370, 34);
+            this.progressBarControl1.Size = new System.Drawing.Size(216, 22);
             this.progressBarControl1.TabIndex = 3;
             // 
             // btnGenerate
             // 
-            this.btnGenerate.Location = new System.Drawing.Point(492, 56);
-            this.btnGenerate.Margin = new System.Windows.Forms.Padding(6, 4, 6, 4);
+            this.btnGenerate.Location = new System.Drawing.Point(287, 36);
             this.btnGenerate.Name = "btnGenerate";
-            this.btnGenerate.Size = new System.Drawing.Size(192, 79);
+            this.btnGenerate.Size = new System.Drawing.Size(112, 51);
             this.btnGenerate.TabIndex = 2;
             this.btnGenerate.Text = "Extract";
             this.btnGenerate.Click += new System.EventHandler(this.btnGenerate_Click);
@@ -156,8 +153,7 @@
             // dateEdit1
             // 
             this.dateEdit1.EditValue = null;
-            this.dateEdit1.Location = new System.Drawing.Point(112, 58);
-            this.dateEdit1.Margin = new System.Windows.Forms.Padding(6, 4, 6, 4);
+            this.dateEdit1.Location = new System.Drawing.Point(65, 37);
             this.dateEdit1.Name = "dateEdit1";
             this.dateEdit1.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 9.8F);
             this.dateEdit1.Properties.Appearance.Options.UseFont = true;
@@ -165,7 +161,7 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.dateEdit1.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.dateEdit1.Size = new System.Drawing.Size(370, 46);
+            this.dateEdit1.Size = new System.Drawing.Size(216, 26);
             this.dateEdit1.TabIndex = 1;
             this.dateEdit1.EditValueChanged += new System.EventHandler(this.dateEdit1_EditValueChanged);
             // 
@@ -173,10 +169,9 @@
             // 
             this.labelControl1.Appearance.Font = new System.Drawing.Font("Tahoma", 9.8F);
             this.labelControl1.Appearance.Options.UseFont = true;
-            this.labelControl1.Location = new System.Drawing.Point(20, 62);
-            this.labelControl1.Margin = new System.Windows.Forms.Padding(6, 4, 6, 4);
+            this.labelControl1.Location = new System.Drawing.Point(12, 40);
             this.labelControl1.Name = "labelControl1";
-            this.labelControl1.Size = new System.Drawing.Size(64, 31);
+            this.labelControl1.Size = new System.Drawing.Size(38, 19);
             this.labelControl1.TabIndex = 0;
             this.labelControl1.Text = "Date:";
             // 
@@ -186,23 +181,22 @@
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.reuploadThisTableToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(298, 40);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(209, 28);
             // 
             // reuploadThisTableToolStripMenuItem
             // 
             this.reuploadThisTableToolStripMenuItem.Name = "reuploadThisTableToolStripMenuItem";
-            this.reuploadThisTableToolStripMenuItem.Size = new System.Drawing.Size(297, 36);
+            this.reuploadThisTableToolStripMenuItem.Size = new System.Drawing.Size(208, 24);
             this.reuploadThisTableToolStripMenuItem.Text = "Reupload this Table";
             this.reuploadThisTableToolStripMenuItem.Click += new System.EventHandler(this.reuploadThisTableToolStripMenuItem_Click);
             // 
             // POSUploadChecker
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1904, 814);
+            this.ClientSize = new System.Drawing.Size(1111, 521);
             this.Controls.Add(this.groupControl1);
             this.Controls.Add(this.groupControl2);
-            this.Margin = new System.Windows.Forms.Padding(6, 4, 6, 4);
             this.Name = "POSUploadChecker";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "POSUploadChecker";

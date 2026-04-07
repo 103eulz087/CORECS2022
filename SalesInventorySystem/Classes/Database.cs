@@ -13,6 +13,8 @@ using Microsoft.Win32;
 using DevExpress.XtraGrid.Views.Card;
 using DevExpress.XtraEditors.Repository;
 using Npgsql;
+using System.Threading.Tasks;
+using SalesInventorySystem.Classes;
 
 namespace SalesInventorySystem
 {
@@ -89,23 +91,57 @@ namespace SalesInventorySystem
             return constring = regkey.GetValue("dbconn").ToString();
         }
 
+        //public static SqlConnection getConnection()
+        //{
+        //    //regkey = Registry.CurrentUser.CreateSubKey(@"Enzo\ConnSettings");
+        //    regkey = Registry.CurrentUser.CreateSubKey(@"AAITCRE\ConnSettingsMain");
+        //    constring = regkey.GetValue("dbconn").ToString();
+        //    SqlConnection con;
+        //    try
+        //    {
+        //        con = new SqlConnection(constring);
+        //    }
+        //    catch (SqlException sex)
+        //    {
+        //        sex.StackTrace.ToString();
+        //        return null;
+        //    }
+        //    return con;
+        //}
+        private static string _cachedConnectionString = null;
+
         public static SqlConnection getConnection()
         {
-            //regkey = Registry.CurrentUser.CreateSubKey(@"Enzo\ConnSettings");
-            regkey = Registry.CurrentUser.CreateSubKey(@"AAITCRE\ConnSettingsMain");
-            constring = regkey.GetValue("dbconn").ToString();
-            SqlConnection con;
-            try
+            // 1. Only read from the Registry if we haven't loaded it yet!
+            if (string.IsNullOrEmpty(_cachedConnectionString))
             {
-                con = new SqlConnection(constring);
+                // Open in READ-ONLY mode, wrapped in a using block to release OS resources
+                using (RegistryKey regkey = Registry.CurrentUser.OpenSubKey(@"AAITCRE\ConnSettingsMain", false))
+                {
+                    if (regkey != null)
+                    {
+                        object regValue = regkey.GetValue("dbconn");
+
+                        if (regValue != null)
+                        {
+                            _cachedConnectionString = regValue.ToString();
+                        }
+                    }
+                }
+
+                // 2. Fail Fast: If the string is still empty, the computer isn't set up right!
+                if (string.IsNullOrEmpty(_cachedConnectionString))
+                {
+                    // Throwing an explicit exception here makes debugging 100x easier
+                    throw new InvalidOperationException("CRITICAL ERROR: Database connection string is missing from the Windows Registry.");
+                }
             }
-            catch (SqlException sex)
-            {
-                sex.StackTrace.ToString();
-                return null;
-            }
-            return con;
+
+            // 3. Create and return the connection using the blazing-fast memory cache
+            return new SqlConnection(_cachedConnectionString);
         }
+
+
         public static SqlConnection getConnection(string regkeyname)
         {
             regkey = Registry.CurrentUser.CreateSubKey(regkeyname);
@@ -336,15 +372,72 @@ namespace SalesInventorySystem
                 con.Close();
             }
         }
+        //public static void ExecuteQuery(string query, string msg)
+        //{
+        //    SqlConnection con = getConnection();
+        //    con.Open();
+        //    SqlCommand com = new SqlCommand(query, con);
+        //    com.CommandTimeout = 3600;
+        //    com.ExecuteNonQuery();
+        //    XtraMessageBox.Show(msg);
+        //    con.Close();
+        //}
         public static void ExecuteQuery(string query, string msg)
         {
-            SqlConnection con = getConnection();
-            con.Open();
-            SqlCommand com = new SqlCommand(query, con);
-            com.CommandTimeout = 3600;
-            com.ExecuteNonQuery();
-            XtraMessageBox.Show(msg);
-            con.Close();
+            try
+            {
+                using (SqlConnection con = getConnection())
+                {
+                    con.Open();
+                    using (SqlCommand com = new SqlCommand(query, con))
+                    {
+                        com.CommandTimeout = 3600; // 1-Hour Timeout
+                        com.ExecuteNonQuery();
+                    }
+                }
+
+                // Only show the popup if the query was successful AND a message was provided
+                if (!string.IsNullOrEmpty(msg))
+                {
+                    BigAlert.Show("SUCESS",msg+ ": Process was executed succesfully",MessageBoxIcon.Information);
+                }
+            }
+            catch (SqlException ex)
+            {
+                BigAlert.Show("Execution Failed:", ex.Message + "Database Error", MessageBoxIcon.Error);
+            }
+        }
+        public static async Task ExecuteQueryAsync(string query, string msg)
+        {
+            try
+            {
+                using (SqlConnection con = getConnection())
+                {
+                    // Opens the connection in the background
+                    await con.OpenAsync();
+
+                    using (SqlCommand com = new SqlCommand(query, con))
+                    {
+                        // 1 Hour timeout, but it won't freeze the screen anymore!
+                        com.CommandTimeout = 3600;
+
+                        // Executes the heavy query in the background
+                        await com.ExecuteNonQueryAsync();
+                    }
+                }
+
+                // Because we await, it safely returns to the UI thread to show the box!
+                if (!string.IsNullOrEmpty(msg))
+                {
+                    //XtraMessageBox.Show(msg, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    BigAlert.Show("SUCESS", msg + ": Process was executed succesfully", MessageBoxIcon.Information);
+                }
+            }
+            catch (SqlException ex)
+            {
+                //XtraMessageBox.Show("Execution Failed: " + ex.Message, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                BigAlert.Show("Execution Failed:", ex.Message + "Database Error", MessageBoxIcon.Error);
+            }
         }
         public static void ExecuteQuery(string query, string msg,SqlConnection con)
         {
@@ -375,35 +468,58 @@ namespace SalesInventorySystem
             con.Close();
         }
 
+        //public static bool checkifExist(string query)
+        //{
+        //    bool result = false;
+        //    SqlConnection con = getConnection();
+        //    con.Open();
+        //    //try
+        //    //{
+        //        SqlCommand com = new SqlCommand(query, con);
+        //        SqlDataReader reader = com.ExecuteReader();
+        //        if (reader.HasRows)
+        //        {
+        //            result = true;
+        //        }
+        //        else
+        //        {
+        //            result = false;
+        //        }
+        //    reader.Close();
+        //    //}
+        //    //catch(SqlException ex)
+        //    //{
+        //    //    XtraMessageBox.Show(ex.Message.ToString());
+        //    //}
+        //    //finally
+        //    //{
+        //        con.Close();
+        //    //}
+
+        //    return result;
+        //}
         public static bool checkifExist(string query)
         {
-            bool result = false;
-            SqlConnection con = getConnection();
-            con.Open();
-            //try
-            //{
-                SqlCommand com = new SqlCommand(query, con);
-                SqlDataReader reader = com.ExecuteReader();
-                if (reader.HasRows)
+            try
+            {
+                using (SqlConnection con = getConnection())
                 {
-                    result = true;
+                    con.Open();
+                    using (SqlCommand com = new SqlCommand(query, con))
+                    {
+                        using (SqlDataReader reader = com.ExecuteReader())
+                        {
+                            // Instantly returns true if data exists, false if it doesn't
+                            return reader.HasRows;
+                        }
+                    }
                 }
-                else
-                {
-                    result = false;
-                }
-            reader.Close();
-            //}
-            //catch(SqlException ex)
-            //{
-            //    XtraMessageBox.Show(ex.Message.ToString());
-            //}
-            //finally
-            //{
-                con.Close();
-            //}
-           
-            return result;
+            }
+            catch (SqlException)
+            {
+                // If the query fails or network drops, safely assume it doesn't exist
+                return false;
+            }
         }
         public static bool checkifExist(string query,SqlConnection con)
         {
@@ -442,61 +558,123 @@ namespace SalesInventorySystem
             con.Close();
             return str;
         }
-        public static String getSingleQuery(string query,string returnval)
+        //public static String getSingleQuery(string query,string returnval)
+        //{
+        //    string str = "";
+        //    SqlConnection con = getConnection();
+        //    con.Open();
+        //    try
+        //    {
+        //        SqlCommand com = new SqlCommand(query, con);
+        //        SqlDataReader reader = com.ExecuteReader();
+        //        if (reader != null)
+        //        {
+        //            while (reader.Read())
+        //            {
+        //                str = reader[returnval].ToString();
+        //            }
+        //            reader.Close();
+        //        }
+        //    }
+        //    catch(SqlException ex)
+        //    {
+        //        XtraMessageBox.Show(ex.Message.ToString());
+        //    }
+        //    finally
+        //    {
+        //        con.Close();
+        //    }
+
+        //    return str;
+        //}
+        public static string getSingleQuery(string query, string returnval)
         {
             string str = "";
-            SqlConnection con = getConnection();
-            con.Open();
             try
             {
-                SqlCommand com = new SqlCommand(query, con);
-                SqlDataReader reader = com.ExecuteReader();
-                if (reader != null)
+                using (SqlConnection con = getConnection())
                 {
-                    while (reader.Read())
+                    con.Open();
+                    using (SqlCommand com = new SqlCommand(query, con))
                     {
-                        str = reader[returnval].ToString();
+                        using (SqlDataReader reader = com.ExecuteReader())
+                        {
+                            // Loops through and grabs the specified column safely
+                            while (reader.Read())
+                            {
+                                // The ?.ToString() prevents crashes if the database cell is NULL
+                                str = reader[returnval]?.ToString() ?? "";
+                            }
+                        }
                     }
-                    reader.Close();
                 }
             }
-            catch(SqlException ex)
+            catch (SqlException)
             {
-                XtraMessageBox.Show(ex.Message.ToString());
+                // Silent fail: Let the UI handle the empty string rather than throwing a popup
             }
-            finally
-            {
-                con.Close();
-            }
-           
             return str;
         }
-        public static String getSingleQuery(string tablename, string condition, string returnval)
+        //public static String getSingleQuery(string tablename, string condition, string returnval)
+        //{
+        //    string str = "";
+        //    SqlConnection con = getConnection();
+        //    con.Open();
+        //    try
+        //    {
+        //        string query = "SELECT TOP(1) " + returnval + " FROM " + tablename + " WHERE " + condition + " ";
+        //        SqlCommand com = new SqlCommand(query, con);
+        //        SqlDataReader reader = com.ExecuteReader();
+        //        if (reader != null)
+        //        {
+        //            while (reader.Read())
+        //            {
+        //                str = reader[returnval].ToString();
+        //            }
+        //            reader.Close();
+        //        }
+        //    }
+        //    catch (SqlException ex)
+        //    {
+        //        XtraMessageBox.Show(ex.Message.ToString());
+        //    }
+        //    finally
+        //    {
+        //        con.Close();
+        //    }
+
+        //    return str;
+        //}
+        public static string getSingleQuery(string tablename, string condition, string returnval)
         {
             string str = "";
-            SqlConnection con = getConnection();
-            con.Open();
+
             try
             {
-                string query = "SELECT TOP(1) " + returnval + " FROM " + tablename + " WHERE " + condition + " ";
-                SqlCommand com = new SqlCommand(query, con);
-                SqlDataReader reader = com.ExecuteReader();
-                if (reader != null)
+                // 'using' blocks automatically close connections and destroy memory safely
+                using (SqlConnection con = getConnection())
                 {
-                    while (reader.Read())
+                    con.Open();
+
+                    string query = $"SELECT TOP(1) {returnval} FROM {tablename} WHERE {condition}";
+
+                    using (SqlCommand com = new SqlCommand(query, con))
                     {
-                        str = reader[returnval].ToString();
+                        // ExecuteScalar is heavily optimized for grabbing exactly ONE value
+                        object result = com.ExecuteScalar();
+
+                        // Ensure we don't crash on NULL database values
+                        if (result != null && result != DBNull.Value)
+                        {
+                            str = result.ToString();
+                        }
                     }
-                    reader.Close();
                 }
             }
-            catch (SqlException ex)
+            catch (SqlException)
             {
-                XtraMessageBox.Show(ex.Message.ToString());
-            }
-            finally
-            {
-                con.Close();
+                // SILENT FAIL: Let it return an empty string. 
+                // The calling method (like your button click) should be the one to show an error if it gets "".
             }
 
             return str;
@@ -531,94 +709,255 @@ namespace SalesInventorySystem
            
             return str;
         }
-
-        public static Dictionary<string, object> getMultipleQuery(string tablename, string condition, string returnval) // ID, Name
+        public static async Task<string> getSingleQueryAsync(string tablename, string condition, string returnval)
         {
-           
-            SqlConnection con = getConnection();
-            con.Open();
-            string query = "SELECT TOP(1) " + returnval + " FROM " + tablename + " WHERE " + condition + " ";
-            SqlCommand com = new SqlCommand(query, con);
-            SqlDataReader reader = com.ExecuteReader();
+            string str = "";
 
-            Dictionary<string, object> dic = new Dictionary<string, object>();
-            if (reader != null)
+            try
             {
-                while (reader.Read())
+                using (SqlConnection con = getConnection())
                 {
-                    //str = reader[returnval].ToString();
-                    dic = ToDictionary(reader);
-                }
-                reader.Close();
-            }
-            con.Close();
-            return dic;
-        }
-        public static Dictionary<string, object> getMultipleQuery(string query, string returnval) // ID, Name
-        {
-           
-            SqlConnection con = getConnection();
-            con.Open();
-            //string query = "SELECT TOP 1 " + returnval + " FROM " + tablename + " WHERE " + condition + " ";
-            SqlCommand com = new SqlCommand(query, con);
-            SqlDataReader reader = com.ExecuteReader();
+                    await con.OpenAsync(); // Non-blocking connection
 
-            Dictionary<string, object> dic = new Dictionary<string, object>();
-            if (reader != null)
-            {
-                while (reader.Read())
-                {
-                    //str = reader[returnval].ToString();
-                    dic = ToDictionary(reader);
-                    // Replace null or whitespace values with empty string
-                    foreach (var key in dic.Keys.ToList())
+                    string query = $"SELECT TOP(1) {returnval} FROM {tablename} WHERE {condition}";
+
+                    using (SqlCommand com = new SqlCommand(query, con))
                     {
-                        var value = dic[key];
-                        dic[key] = string.IsNullOrWhiteSpace(value?.ToString()) ? "" : value;
+                        object result = await com.ExecuteScalarAsync(); // Non-blocking query
+
+                        if (result != null && result != DBNull.Value)
+                        {
+                            str = result.ToString();
+                        }
                     }
-
                 }
-                reader.Close();
             }
-            con.Close();
-            return dic;
-        }
-         public static Dictionary<string, object> getMultipleQueryLocal(string query, string returnval, SqlConnection con) // ID, Name
-        {
-           
-            
-            con.Open();
-            //string query = "SELECT TOP 1 " + returnval + " FROM " + tablename + " WHERE " + condition + " ";
-            SqlCommand com = new SqlCommand(query, con);
-            SqlDataReader reader = com.ExecuteReader();
-
-            Dictionary<string, object> dic = new Dictionary<string, object>();
-            if (reader != null)
+            catch (SqlException)
             {
-                while (reader.Read())
-                {
-                    //str = reader[returnval].ToString();
-                    dic = ToDictionary(reader);
-                }
-                reader.Close();
+                // Silently catch network blips
             }
-            con.Close();
+
+            return str;
+        }
+
+        //public static Dictionary<string, object> getMultipleQuery(string tablename, string condition, string returnval) // ID, Name
+        //{
+
+        //    SqlConnection con = getConnection();
+        //    con.Open();
+        //    string query = "SELECT TOP(1) " + returnval + " FROM " + tablename + " WHERE " + condition + " ";
+        //    SqlCommand com = new SqlCommand(query, con);
+        //    SqlDataReader reader = com.ExecuteReader();
+
+        //    Dictionary<string, object> dic = new Dictionary<string, object>();
+        //    if (reader != null)
+        //    {
+        //        while (reader.Read())
+        //        {
+        //            //str = reader[returnval].ToString();
+        //            dic = ToDictionary(reader);
+        //        }
+        //        reader.Close();
+        //    }
+        //    con.Close();
+        //    return dic;
+        //}
+        //public static Dictionary<string, object> getMultipleQuery(string query, string returnval) // ID, Name
+        //{
+
+        //    SqlConnection con = getConnection();
+        //    con.Open();
+        //    //string query = "SELECT TOP 1 " + returnval + " FROM " + tablename + " WHERE " + condition + " ";
+        //    SqlCommand com = new SqlCommand(query, con);
+        //    SqlDataReader reader = com.ExecuteReader();
+
+        //    Dictionary<string, object> dic = new Dictionary<string, object>();
+        //    if (reader != null)
+        //    {
+        //        while (reader.Read())
+        //        {
+        //            //str = reader[returnval].ToString();
+        //            dic = ToDictionary(reader);
+        //            // Replace null or whitespace values with empty string
+        //            foreach (var key in dic.Keys.ToList())
+        //            {
+        //                var value = dic[key];
+        //                dic[key] = string.IsNullOrWhiteSpace(value?.ToString()) ? "" : value;
+        //            }
+
+        //        }
+        //        reader.Close();
+        //    }
+        //    con.Close();
+        //    return dic;
+        //}
+        public static Dictionary<string, object> getMultipleQuery(string tablename, string condition, string returnval)
+        {
+            Dictionary<string, object> dic = new Dictionary<string, object>();
+
+            try
+            {
+                using (SqlConnection con = getConnection())
+                {
+                    con.Open();
+                    string query = $"SELECT TOP(1) {returnval} FROM {tablename} WHERE {condition}";
+
+                    using (SqlCommand com = new SqlCommand(query, con))
+                    using (SqlDataReader reader = com.ExecuteReader())
+                    {
+                        // Changed 'while' to 'if' since we are only grabbing TOP(1)
+                        if (reader.Read())
+                        {
+                            dic = ToDictionary(reader);
+                            CleanDictionary(dic); // Apply your null cleanup!
+                        }
+                    }
+                }
+            }
+            catch (SqlException)
+            {
+                // Fail safely and return an empty dictionary
+            }
+
             return dic;
         }
 
+        // Note: I kept 'returnval' in the signature so it doesn't break your existing code, 
+        // but it is not doing anything since 'query' is already fully formed.
+        public static Dictionary<string, object> getMultipleQuery(string query, string returnval = "")
+        {
+            Dictionary<string, object> dic = new Dictionary<string, object>();
+
+            try
+            {
+                using (SqlConnection con = getConnection())
+                {
+                    con.Open();
+                    using (SqlCommand com = new SqlCommand(query, con))
+                    using (SqlDataReader reader = com.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            dic = ToDictionary(reader);
+                            CleanDictionary(dic); // Apply your null cleanup!
+                        }
+                    }
+                }
+            }
+            catch (SqlException)
+            {
+                // Fail safely
+            }
+
+            return dic;
+        }
+
+        // ------------------------------------------------------------------
+        // HELPER METHOD: Keeps your code DRY (Don't Repeat Yourself)
+        // ------------------------------------------------------------------
+        private static void CleanDictionary(Dictionary<string, object> dic)
+        {
+            foreach (var key in dic.Keys.ToList())
+            {
+                var value = dic[key];
+                // Extra safe: checks for SQL DBNull as well as standard C# nulls
+                if (value == null || value == DBNull.Value || string.IsNullOrWhiteSpace(value.ToString()))
+                {
+                    dic[key] = "";
+                }
+            }
+        }
+
+        public static async Task<Dictionary<string, object>> getMultipleQueryAsync(string tablename, string condition, string returnval)
+        {
+            Dictionary<string, object> dic = new Dictionary<string, object>();
+
+            try
+            {
+                using (SqlConnection con = getConnection())
+                {
+                    await con.OpenAsync();
+                    string query = $"SELECT TOP(1) {returnval} FROM {tablename} WHERE {condition}";
+
+                    using (SqlCommand com = new SqlCommand(query, con))
+                    using (SqlDataReader reader = await com.ExecuteReaderAsync())
+                    {
+                        if (await reader.ReadAsync())
+                        {
+                            dic = ToDictionary(reader);
+                            CleanDictionary(dic);
+                        }
+                    }
+                }
+            }
+            catch (SqlException) { }
+
+            return dic;
+        }
+
+        public static async Task<Dictionary<string, object>> getMultipleQueryAsync(string query, string returnval = "")
+        {
+            Dictionary<string, object> dic = new Dictionary<string, object>();
+
+            try
+            {
+                using (SqlConnection con = getConnection())
+                {
+                    await con.OpenAsync();
+                    using (SqlCommand com = new SqlCommand(query, con))
+                    using (SqlDataReader reader = await com.ExecuteReaderAsync())
+                    {
+                        if (await reader.ReadAsync())
+                        {
+                            dic = ToDictionary(reader);
+                            CleanDictionary(dic);
+                        }
+                    }
+                }
+            }
+            catch (SqlException) { }
+
+            return dic;
+        }
+
+        //public static Dictionary<string, object> ToDictionary(System.Data.SqlClient.SqlDataReader row)
+        //{
+        //    string nameStr="";
+        //    lock (nameStr)
+        //    {
+        //        var dic = new Dictionary<string, object>();
+        //        for (int i = 0; i < row.FieldCount; i++)
+        //        {
+        //            nameStr = row.GetName(i);
+        //            dic[nameStr] = (object)row[nameStr];
+        //        }
+        //        return dic;
+        //    }
+        //}
         public static Dictionary<string, object> ToDictionary(System.Data.SqlClient.SqlDataReader row)
         {
-            string nameStr="";
-            lock (nameStr)
+            // Adding OrdinalIgnoreCase makes reading from this dictionary later 100x easier!
+            var dic = new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase);
+
+            for (int i = 0; i < row.FieldCount; i++)
             {
-                var dic = new Dictionary<string, object>();
-                for (int i = 0; i < row.FieldCount; i++)
+                string columnName = row.GetName(i);
+
+                // Grab the value directly by INDEX (i). This is significantly faster!
+                object value = row[i];
+
+                // Handle SQL NULLs directly at the source
+                if (value == DBNull.Value)
                 {
-                    nameStr = row.GetName(i);
-                    dic[nameStr] = (object)row[nameStr];
+                    dic[columnName] = "";
                 }
-                return dic;
+                else
+                {
+                    dic[columnName] = value;
+                }
             }
+
+            return dic;
         }
 
 

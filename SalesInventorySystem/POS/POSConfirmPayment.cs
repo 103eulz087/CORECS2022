@@ -292,9 +292,10 @@ namespace SalesInventorySystem.POS
         {
             using (var client = new HttpClient())
             {
-               
-                //string apiKey = "baf02cb4f4bd4e3681dc7c0ad77068e0x";
-                string apiKey = "b25ffbdd1bcd428f9d60ad679e6e9d66";
+
+                string apiKey = PointOfSale.apiKey;
+
+              //  string apiKey = "113f4ac38ab642a193d75352f815681f";
                 client.DefaultRequestHeaders.Clear();
                 client.DefaultRequestHeaders.Add("IssuedKey", apiKey);
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
@@ -306,12 +307,12 @@ namespace SalesInventorySystem.POS
                 var json = JsonConvert.SerializeObject(sale, settings);
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
                 var response = await client.PostAsync("http://itcoreapps.com:8181/api/sales", content);
-                if (response.IsSuccessStatusCode) { MessageBox.Show("Sale pushed successfully!"); }
+                if (response.IsSuccessStatusCode) { return; }//MessageBox.Show("Sale pushed successfully!"); }
                 else
                 {
-                    MessageBox.Show("Failed to push sale: " + response.ReasonPhrase);
+                    //MessageBox.Show("Failed to push sale: " + response.ReasonPhrase);
                     var errorDetails = await response.Content.ReadAsStringAsync();
-                    MessageBox.Show($"Failed to push sale: {response.ReasonPhrase}\nDetails: {errorDetails}");
+                    //MessageBox.Show($"Failed to push sale: {response.ReasonPhrase}\nDetails: {errorDetails}");
                 }
             }
            
@@ -325,7 +326,7 @@ namespace SalesInventorySystem.POS
 
             using (SqlConnection conn = Database.getConnection())
             {
-                string query = "SELECT * FROM BatchSalesSummary WHERE BranchCode=@BrCode ReferenceNo = @OrderNo AND MachineUsed = @POSID";
+                string query = "SELECT * FROM BatchSalesSummary WHERE BranchCode=@BrCode AND ReferenceNo = @OrderNo AND MachineUsed = @POSID";
 
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
@@ -384,9 +385,9 @@ namespace SalesInventorySystem.POS
                                 PwdIDNo = reader["PwdIDNo"].ToString(),
                                 PwdName = reader["PwdName"].ToString(),
                                 PwdDiscountAmount = Convert.ToDecimal(reader["PwdDiscountAmount"]),
-                                DateAdded = Convert.ToDateTime(reader["TransDate"]),
+                               // DateAdded = Convert.ToDateTime(reader["TransDate"]),
                                 //TimeAdded = (TimeSpan)reader["TimeAdded"],
-                                DateTimeAdded = Convert.ToDateTime(reader["TransDate"])
+                                //DateTimeAdded = Convert.ToDateTime(reader["TransDate"])
                                 //DateUpdated = Convert.ToDateTime(reader["DateUpdated"]),
                                 //TimeUpdated = (TimeSpan)reader["TimeUpdated"],
                                 //DateTimeUpdated = Convert.ToDateTime(reader["DateTimeUpdated"])

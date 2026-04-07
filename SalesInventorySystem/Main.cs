@@ -17,11 +17,20 @@ using DevExpress.XtraEditors;
 using SalesInventorySystem.POS;
 using SalesInventorySystem.HotelManagement;
 using DevExpress.XtraReports.UI;
+using System.Threading.Tasks;
+using System.Reflection;
+using System.Net.Http;
 
 namespace SalesInventorySystem
 {
+    
     public partial class Main : DevExpress.XtraBars.Ribbon.RibbonForm
     {
+        // 1. Declare a single, reusable HttpClient at the top of your class
+        private static readonly HttpClient _httpClient = new HttpClient()
+        {
+            Timeout = TimeSpan.FromSeconds(5) // Guarantees it won't hang forever!
+        };
         public static string getUserTransCode = "";
         string strmenuInventory,strmenuAdmin,strmenuSales,strmenuAccounting,strmenuReporting,strmenuHotel, strmenuForwarding, strmenucif;
         double cashbegin = Convert.ToDouble(Login.iscashBegin);
@@ -30,6 +39,7 @@ namespace SalesInventorySystem
         bool isadmin = false, issales = false, isinv = false, isaccounting = false, ishotel = false, ispayroll = false, isreporting = false, isforwarding = false;
         private Form lockScreen;
         private System.Windows.Forms.Timer eodTimer;
+        private bool isUpdateTriggered = false;
         public Main()
         {
             InitializeComponent();
@@ -37,6 +47,231 @@ namespace SalesInventorySystem
             //DevExpress.UserSkins.BonusSkins.Register();
             //DevExpress.Skins.SkinManager.EnableFormSkins();
             //DevExpress.XtraBars.Helpers.SkinHelper.InitSkinGallery(skinRibbonGalleryBarItem1, true, true);
+        }
+        private async void Main_Load(object sender, EventArgs e)
+        {
+            _ = StartUpdateListenerAsync();
+         
+            //string filepath= (Application.StartupPath + "\\checkVersion.txt");
+            //var result = HelperFunction.GetVersionAndToken(filepath);
+            //string version = result.Version;
+            //string token = result.Token;
+
+            this.Text = "ITCORE SOLUTIONS INC. Ver:" + GlobalConfig.Version;
+            //Login login = new Login();
+            //login.ShowDialog(this);
+
+            // enzowarehouse.Visible = false;
+            validate_userAccess();
+            //checkAccess();
+            //  ribbonPage1.Visible = false;
+            //if (Convert.ToBoolean(Login.isglobalAdmin) != true) //ADMIN TOOLS TAB
+            //{
+            //    AdminPage.Visible = false;
+            //}
+            //if(Convert.ToBoolean(Login.isglobalWarehouseOfficer) ==true)
+            //{
+            //    AdminPage.Visible = false;
+            //    SALES.Visible = false;
+            //    INVENTORY.Visible = false;
+            //    HOTELMANAGEMENT.Visible = false;
+            //    ACCOUNTING.Visible = false;
+            //}
+            ////if (Convert.ToBoolean(Login.isglobalOfficer) != true) //HEAD OFFICE TAB
+            ////{
+            ////    HOPage.Visible = false;
+            ////}
+            ////if (Convert.ToBoolean(Login.isglobalWarehouseOfficer) != true) //WAREHOUSE TAB
+            ////{
+            ////    WarehousePage.Visible = false;
+            ////}
+            ////if (Convert.ToBoolean(Login.isglobalBranchOfficer) != true) //BRANCH CASHIER
+            ////{
+            ////    BranchPage.Visible = false;
+            ////}
+            //if (Convert.ToBoolean(Login.isCashier) != true)
+            //{
+            //    SALES.Visible = false;
+            //}
+            //if (Convert.ToBoolean(Login.isglobalAccounting) != true) //ACCOUNTING TAB
+            //{
+            //    ACCOUNTING.Visible = false;
+            //}
+
+            barStaticItem3.Caption = GlobalConfig.Token;//HelperFunction.GetLocalIPAddress();
+            barStaticItem2.Caption = Login.assignedBranch + " - " + getbranchname();
+            barHeaderItem1.Caption = Login.isglobalUserID;
+            barHeaderItem3.Caption = Database.getConnectionServerName();
+            barHeaderItem4.Caption = GlobalConfig.VersionCheckerUrl;//DateTime.Now.ToShortDateString();
+
+            if (Convert.ToBoolean(Login.isCashier) == true)
+            {
+                string transdate = Database.getSingleResultSet("SELECT  dbo.func_ConvertDateTimeToChar('DATE','" + DateTime.Now.ToString() + "')");
+                string getCashierTransNo = Database.getSingleQuery("SalesTransactionSummary", "BranchCode='" + Login.assignedBranch + "' AND UserID='" + barHeaderItem1.Caption + "' and TransactionDate='" + transdate.Trim() + "'", "CashierTransNo");
+
+                bool isUserExistToday = Database.checkifExist("SELECT BranchCode FROM SalesTransactionSummary WHERE BranchCode='" + Login.assignedBranch + "' and TransactionDate='" + transdate.Trim() + "' AND isOpen='1' and CashierTransNo='" + getCashierTransNo + "'"); //UserID='" + Login.isglobalUserID + "'
+                if (isUserExistToday == true)
+                {
+                    barStaticCashierTransNo.Caption = getCashierTransNo;
+                }
+                else
+                {
+                    barStaticCashierTransNo.Caption = "NON";
+                }
+
+            }
+            else
+            {
+                barStaticItem8.Visibility = BarItemVisibility.Never;
+                barStaticCashierTransNo.Visibility = BarItemVisibility.Never;
+            }
+
+
+            //RemoteWindow remwin = new RemoteWindow();
+            //remwin.Hide();
+            //connectServer();
+
+        }
+
+        void checkAccess()
+        {
+            SqlConnection con = Database.getConnection();
+            try
+            {
+                con.Open();
+                string query = "sp_CheckAccess";
+                SqlCommand com = new SqlCommand(query, con);
+                com.Parameters.AddWithValue("@parmuserid", Login.isglobalUserID);
+                com.Parameters.Add("@isadmin", SqlDbType.Bit).Direction = ParameterDirection.Output;
+                com.Parameters.Add("@issales", SqlDbType.Bit).Direction = ParameterDirection.Output;
+                com.Parameters.Add("@isinv", SqlDbType.Bit).Direction = ParameterDirection.Output;
+                com.Parameters.Add("@isacct", SqlDbType.Bit).Direction = ParameterDirection.Output;
+                com.Parameters.Add("@ishotel", SqlDbType.Bit).Direction = ParameterDirection.Output;
+                com.Parameters.Add("@ispayroll", SqlDbType.Bit).Direction = ParameterDirection.Output;
+                com.Parameters.Add("@isreporting", SqlDbType.Bit).Direction = ParameterDirection.Output;
+                com.Parameters.Add("@isforwarding", SqlDbType.Bit).Direction = ParameterDirection.Output;
+                com.CommandType = CommandType.StoredProcedure;
+                com.CommandText = query;
+                com.CommandTimeout = 3600;
+                com.ExecuteNonQuery();
+                isadmin = Convert.ToBoolean(com.Parameters["@isadmin"].Value.ToString());
+                issales = Convert.ToBoolean(com.Parameters["@issales"].Value.ToString());
+                isinv = Convert.ToBoolean(com.Parameters["@isinv"].Value.ToString());
+                isaccounting = Convert.ToBoolean(com.Parameters["@isacct"].Value.ToString());
+                ishotel = Convert.ToBoolean(com.Parameters["@ishotel"].Value.ToString());
+                ispayroll = Convert.ToBoolean(com.Parameters["@ispayroll"].Value.ToString());
+                isreporting = Convert.ToBoolean(com.Parameters["@isreporting"].Value.ToString());
+                isforwarding = Convert.ToBoolean(com.Parameters["@isforwarding"].Value.ToString());
+
+                AdminPage.Visible = isadmin;
+                SalesPage.Visible = issales;
+                InventoryPage.Visible = isinv;
+                AccountingPage.Visible = isaccounting;
+                HOTELMANAGEMENT.Visible = ishotel;
+                REPORTING.Visible = isreporting;
+                FORWARDING.Visible = isforwarding;
+
+            }
+            catch (SqlException ex)
+            {
+                XtraMessageBox.Show(ex.Message.ToString());
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+        private async Task StartUpdateListenerAsync()
+        {
+            Random randomJitter = new Random();
+
+            while (!isUpdateTriggered)
+            {
+                // 1. Base delay of 5 minutes
+                TimeSpan baseDelay = TimeSpan.FromMinutes(5);
+                //TimeSpan baseDelay = TimeSpan.FromSeconds(5);
+
+                // 2. Add a random delay between 0 and 120 seconds
+                TimeSpan jitter = TimeSpan.FromSeconds(randomJitter.Next(0, 60));
+
+                // 3. The app will now wait somewhere between 5 and 7 minutes!
+                await Task.Delay(baseDelay + jitter);
+
+                try
+                {
+                    await CheckForUpdatesAsync();
+                }
+                catch
+                {
+                   
+                }
+            }
+        }
+        //public static async Task<string> GetApiResponseAsync(string url)
+        //{
+        //    using (HttpClient client = new HttpClient())
+        //    {
+        //        return await client.GetStringAsync(url);
+        //    }
+        //}
+        public static async Task<string> GetApiResponseAsync(string url)
+        {
+            // 2. Use the static client instead of recreating it!
+            return await _httpClient.GetStringAsync(url);
+        }
+
+        private async Task CheckForUpdatesAsync()
+        {
+            try
+            {
+                string currentAppVersion = GlobalConfig.Version;
+                string url = GlobalConfig.VersionCheckerUrl;
+                string token = GlobalConfig.Token;
+                // Note: If Database.getSingleQuery is synchronous, it will briefly pause the background thread. 
+                // This is okay, but if you have an Async version of this method, use it!
+                // Inside your CheckForUpdatesAsync() method...
+                string isForceRestartStr = await Database.getSingleQueryAsync("AppVersionControl", $"Token='{token}'", "ForceRestart"); // Ensure this method has a timeout (e.g., 5 seconds) so it doesn't hang forever
+                string currentApiAppVersion = await GetApiResponseAsync(url);
+
+                // 1. SAFEGUARD: Ensure the API actually returned a valid, clean version number
+                if (string.IsNullOrWhiteSpace(currentApiAppVersion) || currentApiAppVersion.Length > 20)
+                {
+                    return; // The API failed or returned an HTML error page. Ignore and try again in 5 minutes.
+                }
+
+                // 2. SAFEGUARD: Parse the SQL boolean without crashing
+                // This handles "1", "0", "True", or "False" seamlessly
+                bool forceRestart = (isForceRestartStr == "1" || isForceRestartStr.Equals("True", StringComparison.OrdinalIgnoreCase));
+
+                // 3. THE TRIGGER
+                if (currentAppVersion != currentApiAppVersion && forceRestart)
+                {
+                    string message = "A mandatory system update is available. Please save your work and Logout; the application will restart shortly.";
+
+                    isUpdateTriggered = true; // Stops the loop
+
+                    // Execute the shutdown sequence on the main UI thread
+                    this.Invoke(new Action(() => ExecuteForcedShutdown(message)));
+                }
+            }
+            catch (Exception)
+            {
+                // Fail silently. If the internet drops, we don't want error boxes popping up every 5 minutes.
+            }
+        }
+        private async void ExecuteForcedShutdown(string message)
+        {
+            Classes.BigAlert.Show("CRITICAL SYSTEM UPDATE",
+                $"{message}\n\nThe application will automatically close in 60 seconds to apply the update. Please save your work immediately.",
+                MessageBoxIcon.Warning, MessageBoxButtons.OK);
+
+            // 2. Wait exactly 60 seconds
+            await Task.Delay(TimeSpan.FromSeconds(60));
+            Application.Exit();
+
+            // NOTE: Application.Exit() fires the FormClosing events so it exits cleanly. 
+            // If your app refuses to close because a child form cancels the exit, 
+            // you can use Environment.Exit(0) as a last resort brute-force kill.
         }
 
         private void InitializeEODTimer()
@@ -237,132 +472,7 @@ namespace SalesInventorySystem
             }
         }
 
-        private void Main_Load(object sender, EventArgs e)
-        {
-            this.Text = HelperFunction.readFileVersion();
-            //Login login = new Login();
-            //login.ShowDialog(this);
-
-            // enzowarehouse.Visible = false;
-            validate_userAccess();
-            //checkAccess();
-            //  ribbonPage1.Visible = false;
-            //if (Convert.ToBoolean(Login.isglobalAdmin) != true) //ADMIN TOOLS TAB
-            //{
-            //    AdminPage.Visible = false;
-            //}
-            //if(Convert.ToBoolean(Login.isglobalWarehouseOfficer) ==true)
-            //{
-            //    AdminPage.Visible = false;
-            //    SALES.Visible = false;
-            //    INVENTORY.Visible = false;
-            //    HOTELMANAGEMENT.Visible = false;
-            //    ACCOUNTING.Visible = false;
-            //}
-            ////if (Convert.ToBoolean(Login.isglobalOfficer) != true) //HEAD OFFICE TAB
-            ////{
-            ////    HOPage.Visible = false;
-            ////}
-            ////if (Convert.ToBoolean(Login.isglobalWarehouseOfficer) != true) //WAREHOUSE TAB
-            ////{
-            ////    WarehousePage.Visible = false;
-            ////}
-            ////if (Convert.ToBoolean(Login.isglobalBranchOfficer) != true) //BRANCH CASHIER
-            ////{
-            ////    BranchPage.Visible = false;
-            ////}
-            //if (Convert.ToBoolean(Login.isCashier) != true)
-            //{
-            //    SALES.Visible = false;
-            //}
-            //if (Convert.ToBoolean(Login.isglobalAccounting) != true) //ACCOUNTING TAB
-            //{
-            //    ACCOUNTING.Visible = false;
-            //}
-
-            barStaticItem3.Caption = HelperFunction.GetLocalIPAddress();
-            barStaticItem2.Caption = Login.assignedBranch + " - " + getbranchname();
-            barHeaderItem1.Caption = Login.isglobalUserID;
-            barHeaderItem3.Caption = Database.getConnectionServerName();
-            barHeaderItem4.Caption = DateTime.Now.ToShortDateString();
-             
-            if (Convert.ToBoolean(Login.isCashier) == true)
-            {
-                string transdate = Database.getSingleResultSet("SELECT  dbo.func_ConvertDateTimeToChar('DATE','" + DateTime.Now.ToString() + "')");
-                string getCashierTransNo = Database.getSingleQuery("SalesTransactionSummary", "BranchCode='" + Login.assignedBranch + "' AND UserID='" + barHeaderItem1.Caption + "' and TransactionDate='" + transdate.Trim() + "'", "CashierTransNo");
-
-                bool isUserExistToday = Database.checkifExist("SELECT BranchCode FROM SalesTransactionSummary WHERE BranchCode='" + Login.assignedBranch + "' and TransactionDate='" + transdate.Trim() + "' AND isOpen='1' and CashierTransNo='" + getCashierTransNo + "'"); //UserID='" + Login.isglobalUserID + "'
-                if (isUserExistToday == true)
-                {
-                    barStaticCashierTransNo.Caption = getCashierTransNo;
-                }
-                else
-                {
-                    barStaticCashierTransNo.Caption = "NON";
-                }
-                
-            }
-            else
-            {
-                barStaticItem8.Visibility = BarItemVisibility.Never;
-                barStaticCashierTransNo.Visibility = BarItemVisibility.Never;
-            }
-            
-            
-            //RemoteWindow remwin = new RemoteWindow();
-            //remwin.Hide();
-            //connectServer();
-           
-        }
-
-        void checkAccess()
-        {
-            SqlConnection con = Database.getConnection();
-            try
-            {
-                con.Open();
-                string query = "sp_CheckAccess";
-                SqlCommand com = new SqlCommand(query, con);
-                com.Parameters.AddWithValue("@parmuserid", Login.isglobalUserID);
-                com.Parameters.Add("@isadmin", SqlDbType.Bit).Direction = ParameterDirection.Output;
-                com.Parameters.Add("@issales", SqlDbType.Bit).Direction = ParameterDirection.Output;
-                com.Parameters.Add("@isinv", SqlDbType.Bit).Direction = ParameterDirection.Output;
-                com.Parameters.Add("@isacct", SqlDbType.Bit).Direction = ParameterDirection.Output;
-                com.Parameters.Add("@ishotel", SqlDbType.Bit).Direction = ParameterDirection.Output;
-                com.Parameters.Add("@ispayroll", SqlDbType.Bit).Direction = ParameterDirection.Output;
-                com.Parameters.Add("@isreporting", SqlDbType.Bit).Direction = ParameterDirection.Output;
-                com.Parameters.Add("@isforwarding", SqlDbType.Bit).Direction = ParameterDirection.Output;
-                com.CommandType = CommandType.StoredProcedure;
-                com.CommandText = query;
-                com.CommandTimeout = 3600;
-                com.ExecuteNonQuery();
-                isadmin = Convert.ToBoolean(com.Parameters["@isadmin"].Value.ToString());
-                issales = Convert.ToBoolean(com.Parameters["@issales"].Value.ToString());
-                isinv = Convert.ToBoolean(com.Parameters["@isinv"].Value.ToString());
-                isaccounting = Convert.ToBoolean(com.Parameters["@isacct"].Value.ToString());
-                ishotel = Convert.ToBoolean(com.Parameters["@ishotel"].Value.ToString());
-                ispayroll = Convert.ToBoolean(com.Parameters["@ispayroll"].Value.ToString());
-                isreporting = Convert.ToBoolean(com.Parameters["@isreporting"].Value.ToString());
-                isforwarding = Convert.ToBoolean(com.Parameters["@isforwarding"].Value.ToString());
-
-                AdminPage.Visible = isadmin;
-                SalesPage.Visible = issales;
-                InventoryPage.Visible = isinv;
-                AccountingPage.Visible = isaccounting;
-                HOTELMANAGEMENT.Visible = ishotel;
-                REPORTING.Visible = isreporting;
-                FORWARDING.Visible = isforwarding;
-
-            }
-            catch (SqlException ex)
-            {
-                XtraMessageBox.Show(ex.Message.ToString());
-            }
-            finally
-            {
-                con.Close();
-            }
-        }
+     
 
         // Custom localizer that changes skin captions 
 

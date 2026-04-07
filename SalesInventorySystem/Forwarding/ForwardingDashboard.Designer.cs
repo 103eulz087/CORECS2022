@@ -115,7 +115,7 @@
             this.tabControl1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1235, 750);
+            this.tabControl1.Size = new System.Drawing.Size(1240, 754);
             this.tabControl1.TabIndex = 3;
             this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
             // 
@@ -127,7 +127,7 @@
             this.Pending.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Pending.Name = "Pending";
             this.Pending.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.Pending.Size = new System.Drawing.Size(1227, 718);
+            this.Pending.Size = new System.Drawing.Size(1232, 722);
             this.Pending.TabIndex = 0;
             this.Pending.Text = "Pending";
             this.Pending.UseVisualStyleBackColor = true;
@@ -140,7 +140,7 @@
             this.groupBox7.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.groupBox7.Name = "groupBox7";
             this.groupBox7.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.groupBox7.Size = new System.Drawing.Size(1221, 646);
+            this.groupBox7.Size = new System.Drawing.Size(1226, 650);
             this.groupBox7.TabIndex = 4;
             this.groupBox7.TabStop = false;
             // 
@@ -152,7 +152,7 @@
             this.gridControl1.MainView = this.gridView1;
             this.gridControl1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.gridControl1.Name = "gridControl1";
-            this.gridControl1.Size = new System.Drawing.Size(1215, 618);
+            this.gridControl1.Size = new System.Drawing.Size(1220, 622);
             this.gridControl1.TabIndex = 0;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
@@ -189,7 +189,7 @@
             this.groupBox3.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.groupBox3.Size = new System.Drawing.Size(1221, 64);
+            this.groupBox3.Size = new System.Drawing.Size(1226, 64);
             this.groupBox3.TabIndex = 3;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Filter Date";
@@ -410,14 +410,14 @@
             // 
             this.xtraTabPage1.Controls.Add(this.tabControl1);
             this.xtraTabPage1.Name = "xtraTabPage1";
-            this.xtraTabPage1.Size = new System.Drawing.Size(1235, 750);
+            this.xtraTabPage1.Size = new System.Drawing.Size(1240, 754);
             this.xtraTabPage1.Text = "PRIME OVER";
             // 
             // xtraTabPage2
             // 
             this.xtraTabPage2.Controls.Add(this.tabControl2);
             this.xtraTabPage2.Name = "xtraTabPage2";
-            this.xtraTabPage2.Size = new System.Drawing.Size(1235, 750);
+            this.xtraTabPage2.Size = new System.Drawing.Size(1240, 754);
             this.xtraTabPage2.Text = "TRIP TICKETS";
             // 
             // tabControl2
@@ -430,7 +430,7 @@
             this.tabControl2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tabControl2.Name = "tabControl2";
             this.tabControl2.SelectedIndex = 0;
-            this.tabControl2.Size = new System.Drawing.Size(1235, 750);
+            this.tabControl2.Size = new System.Drawing.Size(1240, 754);
             this.tabControl2.TabIndex = 4;
             this.tabControl2.SelectedIndexChanged += new System.EventHandler(this.tabControl2_SelectedIndexChanged);
             // 
@@ -442,7 +442,7 @@
             this.pendingtrip.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.pendingtrip.Name = "pendingtrip";
             this.pendingtrip.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.pendingtrip.Size = new System.Drawing.Size(1227, 718);
+            this.pendingtrip.Size = new System.Drawing.Size(1232, 722);
             this.pendingtrip.TabIndex = 0;
             this.pendingtrip.Text = "Pending";
             this.pendingtrip.UseVisualStyleBackColor = true;
@@ -455,7 +455,7 @@
             this.groupBox4.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.groupBox4.Size = new System.Drawing.Size(1221, 646);
+            this.groupBox4.Size = new System.Drawing.Size(1226, 650);
             this.groupBox4.TabIndex = 4;
             this.groupBox4.TabStop = false;
             // 
@@ -467,7 +467,7 @@
             this.gridControlpendingtrip.MainView = this.gridViewpendingtrip;
             this.gridControlpendingtrip.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.gridControlpendingtrip.Name = "gridControlpendingtrip";
-            this.gridControlpendingtrip.Size = new System.Drawing.Size(1215, 618);
+            this.gridControlpendingtrip.Size = new System.Drawing.Size(1220, 622);
             this.gridControlpendingtrip.TabIndex = 0;
             this.gridControlpendingtrip.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewpendingtrip});
@@ -503,7 +503,7 @@
             this.groupBox5.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.groupBox5.Size = new System.Drawing.Size(1221, 64);
+            this.groupBox5.Size = new System.Drawing.Size(1226, 64);
             this.groupBox5.TabIndex = 3;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Filter Date";
@@ -568,7 +568,7 @@
             this.deliveredtrip.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.deliveredtrip.Name = "deliveredtrip";
             this.deliveredtrip.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.deliveredtrip.Size = new System.Drawing.Size(1227, 718);
+            this.deliveredtrip.Size = new System.Drawing.Size(1232, 722);
             this.deliveredtrip.TabIndex = 5;
             this.deliveredtrip.Text = "Delivered";
             this.deliveredtrip.UseVisualStyleBackColor = true;
@@ -581,7 +581,7 @@
             this.groupBox6.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.groupBox6.Name = "groupBox6";
             this.groupBox6.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.groupBox6.Size = new System.Drawing.Size(1221, 646);
+            this.groupBox6.Size = new System.Drawing.Size(1226, 650);
             this.groupBox6.TabIndex = 6;
             this.groupBox6.TabStop = false;
             // 
@@ -593,7 +593,7 @@
             this.gridControldelivtrip.MainView = this.gridViewdelivtrip;
             this.gridControldelivtrip.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.gridControldelivtrip.Name = "gridControldelivtrip";
-            this.gridControldelivtrip.Size = new System.Drawing.Size(1215, 618);
+            this.gridControldelivtrip.Size = new System.Drawing.Size(1220, 622);
             this.gridControldelivtrip.TabIndex = 0;
             this.gridControldelivtrip.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewdelivtrip});
@@ -629,7 +629,7 @@
             this.groupBox8.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.groupBox8.Name = "groupBox8";
             this.groupBox8.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.groupBox8.Size = new System.Drawing.Size(1221, 64);
+            this.groupBox8.Size = new System.Drawing.Size(1226, 64);
             this.groupBox8.TabIndex = 5;
             this.groupBox8.TabStop = false;
             this.groupBox8.Text = "Filter Date";

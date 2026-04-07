@@ -43,6 +43,7 @@
             this.txtavailable = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.tablePanel1 = new DevExpress.Utils.Layout.TablePanel();
+            this.label4 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tablePanel1)).BeginInit();
@@ -201,7 +202,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Tahoma", 22.8F, System.Drawing.FontStyle.Bold);
-            this.label3.Location = new System.Drawing.Point(537, 132);
+            this.label3.Location = new System.Drawing.Point(559, 199);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(208, 46);
             this.label3.TabIndex = 12;
@@ -222,11 +223,25 @@
             this.tablePanel1.Size = new System.Drawing.Size(482, 247);
             this.tablePanel1.TabIndex = 13;
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.label4.Font = new System.Drawing.Font("Tahoma", 17.8F);
+            this.label4.Location = new System.Drawing.Point(716, 69);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(138, 36);
+            this.label4.TabIndex = 14;
+            this.label4.Text = "POINTER";
+            // 
             // TestSweepStakes
             // 
+            this.Appearance.BackColor = System.Drawing.Color.Black;
+            this.Appearance.Options.UseBackColor = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1114, 577);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.tablePanel1);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.txtavailable);
@@ -270,5 +285,6 @@
         private System.Windows.Forms.Label txtavailable;
         private System.Windows.Forms.Label label3;
         private DevExpress.Utils.Layout.TablePanel tablePanel1;
+        private System.Windows.Forms.Label label4;
     }
 }
