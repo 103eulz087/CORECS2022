@@ -12050,3 +12050,4 @@ C:\Users\User\Downloads\CORECS2022\SalesInventorySystem\bin\Debug\Microsoft.Web.
 C:\Users\User\Downloads\CORECS2022\SalesInventorySystem\bin\Debug\Microsoft.Web.WebView2.Core.xml
 C:\Users\User\Downloads\CORECS2022\SalesInventorySystem\bin\Debug\Microsoft.Web.WebView2.WinForms.xml
 C:\Users\User\Downloads\CORECS2022\SalesInventorySystem\bin\Debug\Microsoft.Web.WebView2.Wpf.xml
+D:\Repos\CORECS2022\SalesInventorySystem\obj\Debug\SalesInventorySystem.V5.V5Pay.resources

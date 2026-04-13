@@ -48,10 +48,10 @@ namespace SalesInventorySystem.Reporting
                 com.Parameters.AddWithValue("@parmdate",dateEdit1.Text);
                 com.CommandType = CommandType.StoredProcedure;
                 com.CommandText = query;
+
                 //if (company == "JFC")
                 //{
                 //    com = new SqlCommand("select a.BranchName,b.ProductName,b.EffectivityDate,b.Qty,c.Description FROM dbo.PurchaseOrderDetails  as b INNER JOIN dbo.Branches as a ON b.BranchCode=a.BranchCode INNER JOIN dbo.ProductCategory as c ON c.ProductCategoryID=SUBSTRING(b.ProductCode,1,2) WHERE CAST(b.EffectivityDate as date)='" + dateEdit1.Text + "' order by c.Description", con);
-
                 //}
                 //else if(company == "ENZO")
                 //{     
