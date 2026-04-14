@@ -79,56 +79,56 @@ namespace SalesInventorySystem
         }
 
 
-        // 1. Change the return type to Task<int> and add the 'async' keyword
-        public static async Task<int> getCTRVersionAsAsync(String name)
-        {
-            // 1. INSTANT CHECK: Is the computer even connected to a network?
-            // If there is no internet/network, instantly return -1 and skip the update check!
-            if (!NetworkInterface.GetIsNetworkAvailable())
-            {
-                return -1;
-            }
+        //// 1. Change the return type to Task<int> and add the 'async' keyword
+        //public static async Task<int> getCTRVersionAsAsync(String name)
+        //{
+        //    // 1. INSTANT CHECK: Is the computer even connected to a network?
+        //    // If there is no internet/network, instantly return -1 and skip the update check!
+        //    if (!NetworkInterface.GetIsNetworkAvailable())
+        //    {
+        //        return -1;
+        //    }
 
-            int num1 = -1;
+        //    int num1 = -1;
 
-            try
-            {
-                using (SqlConnection connection = Database.getConnection(@"Enzo\ConnSettingsUpdater"))
-                {
-                    // 2. THE 3-SECOND RULE (Fail Fast)
-                    // By default, SQL waits 15 to 30 seconds. We change it to 3 seconds.
-                    SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder(connection.ConnectionString);
-                    builder.ConnectTimeout = 3;
-                    connection.ConnectionString = builder.ConnectionString;
+        //    try
+        //    {
+        //        using (SqlConnection connection = Database.getConnection(@"Enzo\ConnSettingsUpdater"))
+        //        {
+        //            // 2. THE 3-SECOND RULE (Fail Fast)
+        //            // By default, SQL waits 15 to 30 seconds. We change it to 3 seconds.
+        //            SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder(connection.ConnectionString);
+        //            builder.ConnectTimeout = 3;
+        //            connection.ConnectionString = builder.ConnectionString;
 
-                    // Try to connect. If the server is unreachable, it will fail in exactly 3 seconds.
-                    await connection.OpenAsync();
+        //            // Try to connect. If the server is unreachable, it will fail in exactly 3 seconds.
+        //            await connection.OpenAsync();
 
-                    string query = "SELECT TOP 1 CAST(Versions as int) AS CC FROM UploaderLookUp WHERE Company = @CompanyName;";
+        //            string query = "SELECT TOP 1 CAST(Versions as int) AS CC FROM UploaderLookUp WHERE Company = @CompanyName;";
 
-                    using (SqlCommand command = new SqlCommand(query, connection))
-                    {
-                        command.Parameters.AddWithValue("@CompanyName", name);
+        //            using (SqlCommand command = new SqlCommand(query, connection))
+        //            {
+        //                command.Parameters.AddWithValue("@CompanyName", name);
 
-                        using (SqlDataReader sqlDataReader = await command.ExecuteReaderAsync())
-                        {
-                            if (sqlDataReader != null && await sqlDataReader.ReadAsync())
-                            {
-                                num1 = Convert.ToInt32(sqlDataReader["CC"]);
-                            }
-                        }
-                    }
-                }
-            }
-            catch (Exception)
-            {
-                // 3. SILENT FAIL
-                // If the 3 seconds run out, or the server is down, it safely lands here.
-                // It returns -1, skipping the update and letting the user log in normally!
-            }
+        //                using (SqlDataReader sqlDataReader = await command.ExecuteReaderAsync())
+        //                {
+        //                    if (sqlDataReader != null && await sqlDataReader.ReadAsync())
+        //                    {
+        //                        num1 = Convert.ToInt32(sqlDataReader["CC"]);
+        //                    }
+        //                }
+        //            }
+        //        }
+        //    }
+        //    catch (Exception)
+        //    {
+        //        // 3. SILENT FAIL
+        //        // If the 3 seconds run out, or the server is down, it safely lands here.
+        //        // It returns -1, skipping the update and letting the user log in normally!
+        //    }
 
-            return num1;
-        }
+        //    return num1;
+        //}
 
         private void btnclose_Click(object sender, EventArgs e)
         {
@@ -137,6 +137,11 @@ namespace SalesInventorySystem
 
         private async void Login_Load(object sender, EventArgs e)
         {
+            //FOR STAND ALONE POS ONLY
+            if(GlobalConfig.Token== "MTQ2NzgwNjAz" || GlobalConfig.Token == "ODM1NTI0ODYz" || GlobalConfig.Token == "NjQwOTg4MzU1")
+            {
+                Database.RunLocalDatabaseMigrations();
+            }
             tryCheckUpdate(); //#tryCheckUpdateV1();
             labelversion.Text= HelperFunction.readFileVersion();
         }
@@ -172,11 +177,11 @@ namespace SalesInventorySystem
                     MessageBox.Show("A New Updates Available\nGet the latest application update now.");
                     string batCmdLaunch = $"bat_{ DateTime.Now.ToString("yyyyMMdd.HHmmss") }.bat";
                     System.IO.File.WriteAllText(batCmdLaunch, @"
-@echo off
-taskkill /pid " + Process.GetCurrentProcess().Id + @" /f
-START exeUpdater.exe 
-del ""%~f0""
-exit /b
+                        @echo off
+                        taskkill /pid " + Process.GetCurrentProcess().Id + @" /f
+                        START exeUpdater.exe 
+                        del ""%~f0""
+                        exit /b
                     ");
                     ProcessStart(batCmdLaunch).WaitForExit();
                     Application.Exit();
@@ -188,46 +193,46 @@ exit /b
                 MessageBox.Show(ex.Message.ToString());
             }
         }
-        private async void tryCheckUpdateV1()
-        {
-            try
-            {
-                // 2. Await the new async method! The UI will stay smooth while this runs.
-                int server_version = await getCTRVersionAsAsync(file["Company"].ToString());
-                int client_version = Convert.ToInt32(file["Version"]);
+        //private async void tryCheckUpdateV1()
+        //{
+        //    try
+        //    {
+        //        // 2. Await the new async method! The UI will stay smooth while this runs.
+        //        int server_version = await getCTRVersionAsAsync(file["Company"].ToString());
+        //        int client_version = Convert.ToInt32(file["Version"]);
 
-                // If server_version is -1, it means the internet was down, so we just skip this safely
-                if (server_version != -1 && client_version < server_version)
-                {
-                    MessageBox.Show("A New Update is Available\nGet the latest application update now.");
+        //        // If server_version is -1, it means the internet was down, so we just skip this safely
+        //        if (server_version != -1 && client_version < server_version)
+        //        {
+        //            MessageBox.Show("A New Update is Available\nGet the latest application update now.");
 
-                    // Generate a bulletproof update script
-                    string batScript = $@"
-                                    @echo off
-                                    taskkill /pid {Process.GetCurrentProcess().Id} /f
-                                    timeout /t 2 /nobreak > NUL
-                                    cd /d ""{Application.StartupPath}""
-                                    start """" ""exeUpdater.exe""
-                                    del ""%~f0""
-                                    ";
-                    System.IO.File.WriteAllText("loaders.bat", batScript);
+        //            // Generate a bulletproof update script
+        //            string batScript = $@"
+        //                            @echo off
+        //                            taskkill /pid {Process.GetCurrentProcess().Id} /f
+        //                            timeout /t 2 /nobreak > NUL
+        //                            cd /d ""{Application.StartupPath}""
+        //                            start """" ""exeUpdater.exe""
+        //                            del ""%~f0""
+        //                            ";
+        //            System.IO.File.WriteAllText("loaders.bat", batScript);
 
-                    System.Diagnostics.ProcessStartInfo psi = new System.Diagnostics.ProcessStartInfo()
-                    {
-                        FileName = "loaders.bat",
-                        WorkingDirectory = Application.StartupPath,
-                        UseShellExecute = true
-                    };
-                    Process.Start(psi);
+        //            System.Diagnostics.ProcessStartInfo psi = new System.Diagnostics.ProcessStartInfo()
+        //            {
+        //                FileName = "loaders.bat",
+        //                WorkingDirectory = Application.StartupPath,
+        //                UseShellExecute = true
+        //            };
+        //            Process.Start(psi);
 
-                    return; // Stop loading the login screen since we are updating!
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message.ToString());
-            }
-        }
+        //            return; // Stop loading the login screen since we are updating!
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show(ex.Message.ToString());
+        //    }
+        //}
 
         public void SucessPayment(V5Pay form)
         {

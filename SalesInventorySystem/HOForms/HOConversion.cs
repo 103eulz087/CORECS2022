@@ -159,127 +159,127 @@ namespace SalesInventorySystem
         }
         
 
-        void addEntry()
-        {
-            //GRID VIEW 1
-            try
-            {
-                double sourceTotalAmount = 0.0, sourceTotalAmount2 = 0.0;
-                string sourceSeqNum = "0";
+        //void addEntry()
+        //{
+        //    //GRID VIEW 1
+        //    try
+        //    {
+        //        double sourceTotalAmount = 0.0, sourceTotalAmount2 = 0.0;
+        //        string sourceSeqNum = "0";
                 
-                string sourceProd = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "Product").ToString();
-                string sourceDesc = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "Description").ToString();
+        //        string sourceProd = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "Product").ToString();
+        //        string sourceDesc = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "Description").ToString();
                
-                string sourceCost = "0";
-                string sourceAvailable = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "Available").ToString();
+        //        string sourceCost = "0";
+        //        string sourceAvailable = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "Available").ToString();
                 
-                sourceTotalAmount = Convert.ToDouble(sourceCost) * Convert.ToDouble(txttotalavailableqty.Text);
-                double percentagePerPart = 0.0, sourceAmountPerPart = 0.0, percentagePerPart2 = 0.0, sourceAmountPerPart2 = 0.0;
-                string conversionType = "";
+        //        sourceTotalAmount = Convert.ToDouble(sourceCost) * Convert.ToDouble(txttotalavailableqty.Text);
+        //        double percentagePerPart = 0.0, sourceAmountPerPart = 0.0, percentagePerPart2 = 0.0, sourceAmountPerPart2 = 0.0;
+        //        string conversionType = "";
                
-                int ctr = gridView3.RowCount;
-                string sourceSeqNum1 = "";
-                string srcprodcode = "";
-                string sourceProd1 ="";
-                string sourceDesc1="";
-                string sourceAvailableGrid2="";
-                string actualqty = "";
-                double totalSourceQuantity = 0.0;
-                double totalActualQuantity = 0.0;
-                double newcostkg = 0.0;
-                for (int i = 0; i <= gridView3.RowCount-1; i++)
-                {
+        //        int ctr = gridView3.RowCount;
+        //        string sourceSeqNum1 = "";
+        //        string srcprodcode = "";
+        //        string sourceProd1 ="";
+        //        string sourceDesc1="";
+        //        string sourceAvailableGrid2="";
+        //        string actualqty = "";
+        //        double totalSourceQuantity = 0.0;
+        //        double totalActualQuantity = 0.0;
+        //        double newcostkg = 0.0;
+        //        for (int i = 0; i <= gridView3.RowCount-1; i++)
+        //        {
 
-                    srcprodcode = gridView3.GetRowCellValue(i, "SourceProductCode").ToString();
-                    sourceProd1 = gridView3.GetRowCellValue(i, "ProductCode").ToString();
-                    sourceDesc1 = gridView3.GetRowCellValue(i, "Description").ToString();
-                    //ONE TO MANY
-                    if(radioButton1.Checked==true)
-                    {
-                        actualqty = gridView3.GetRowCellValue(i, "ActualQty").ToString();
-                        percentagePerPart = Convert.ToDouble(actualqty) / Convert.ToDouble(txttotalavailableqty.Text);/// Convert.ToDouble(sourceAvailable);
-                        sourceAmountPerPart = percentagePerPart * sourceTotalAmount;
-                        totalActualQuantity += Convert.ToDouble(gridView3.GetRowCellValue(i, "ActualQty").ToString());
-                        newcostkg = sourceAmountPerPart / Convert.ToDouble(actualqty);
-                        //ONE TO MANY
-                        if (String.IsNullOrEmpty(gridView3.GetRowCellValue(i, "ProductCode").ToString()) || String.IsNullOrEmpty(gridView3.GetRowCellValue(i, "Description").ToString()))
-                        {
-                            //XtraMessageBox.Show("The System found out that one of your Converted Items is No ProductCode or No Description!...");
-                            BigAlert.Show(
-                              "NO PRODUCT CODE",
-                              "The System found out that one of your Converted Items is No ProductCode or No Description!...",
-                              MessageBoxIcon.Warning);
-                            return;
-                        }
-                        conversionType = "OneToMany";
-                        string srcdesc = Database.getSingleQuery("Products", "BranchCode='" + Login.assignedBranch + "' and ProductCode='" + srcprodcode + "'", "Description");
-                        //if total quantity converted greater than source quantity
-                        if (Convert.ToDouble(txttotalweight.Text) > Convert.ToDouble(txttotalavailableqty.Text))
-                        {
-                            //XtraMessageBox.Show("Quantity must not greater than SourceQty");
-                            BigAlert.Show(
-                              "QUANTITY NOT EQUAL",
-                              "Quantity must not greater than SourceQty",
-                              MessageBoxIcon.Warning);
-                            return;
-                        }
+        //            srcprodcode = gridView3.GetRowCellValue(i, "SourceProductCode").ToString();
+        //            sourceProd1 = gridView3.GetRowCellValue(i, "ProductCode").ToString();
+        //            sourceDesc1 = gridView3.GetRowCellValue(i, "Description").ToString();
+        //            //ONE TO MANY
+        //            if(radioButton1.Checked==true)
+        //            {
+        //                actualqty = gridView3.GetRowCellValue(i, "ActualQty").ToString();
+        //                percentagePerPart = Convert.ToDouble(actualqty) / Convert.ToDouble(txttotalavailableqty.Text);/// Convert.ToDouble(sourceAvailable);
+        //                sourceAmountPerPart = percentagePerPart * sourceTotalAmount;
+        //                totalActualQuantity += Convert.ToDouble(gridView3.GetRowCellValue(i, "ActualQty").ToString());
+        //                newcostkg = sourceAmountPerPart / Convert.ToDouble(actualqty);
+        //                //ONE TO MANY
+        //                if (String.IsNullOrEmpty(gridView3.GetRowCellValue(i, "ProductCode").ToString()) || String.IsNullOrEmpty(gridView3.GetRowCellValue(i, "Description").ToString()))
+        //                {
+        //                    //XtraMessageBox.Show("The System found out that one of your Converted Items is No ProductCode or No Description!...");
+        //                    BigAlert.Show(
+        //                      "NO PRODUCT CODE",
+        //                      "The System found out that one of your Converted Items is No ProductCode or No Description!...",
+        //                      MessageBoxIcon.Warning);
+        //                    return;
+        //                }
+        //                conversionType = "OneToMany";
+        //                string srcdesc = Database.getSingleQuery("Products", "BranchCode='" + Login.assignedBranch + "' and ProductCode='" + srcprodcode + "'", "Description");
+        //                //if total quantity converted greater than source quantity
+        //                if (Convert.ToDouble(txttotalweight.Text) > Convert.ToDouble(txttotalavailableqty.Text))
+        //                {
+        //                    //XtraMessageBox.Show("Quantity must not greater than SourceQty");
+        //                    BigAlert.Show(
+        //                      "QUANTITY NOT EQUAL",
+        //                      "Quantity must not greater than SourceQty",
+        //                      MessageBoxIcon.Warning);
+        //                    return;
+        //                }
 
 
-                        else if (Convert.ToDouble(txttotalactualweight.Text) > Convert.ToDouble(txttotalweight.Text))
-                        {
+        //                else if (Convert.ToDouble(txttotalactualweight.Text) > Convert.ToDouble(txttotalweight.Text))
+        //                {
 
-                            //ang sobra na quantity or overrage
-                            existingqty = Convert.ToDouble(txttotalavailableqty.Text) - totalActualQuantity;
-                            string mark1 = newcostkg.ToString();
-                            string mark2 = percentagePerPart.ToString();
-                            string mark3 = sourceAmountPerPart.ToString();
-                            Database.ExecuteQuery("INSERT INTO TempConversionDetails VALUES('" + Login.assignedBranch + "','" + txtrefcode.Text + "',1,'" + srcprodcode + "','" + srcdesc + "','" + txtsrcqty.Text + "',0,0,'" + gridView3.GetRowCellValue(i, "ProductCode").ToString() + "','" + gridView3.GetRowCellValue(i, "Description").ToString() + "','" + gridView3.GetRowCellValue(i, "ActualQty").ToString() + "','" + gridView3.GetRowCellValue(i, "ActualQty").ToString() + "','" + 0 + "','" + 0 + "',0,0,'0','" + gridView3.GetRowCellValue(i, "Barcode").ToString() + "')");
+        //                    //ang sobra na quantity or overrage
+        //                    existingqty = Convert.ToDouble(txttotalavailableqty.Text) - totalActualQuantity;
+        //                    string mark1 = newcostkg.ToString();
+        //                    string mark2 = percentagePerPart.ToString();
+        //                    string mark3 = sourceAmountPerPart.ToString();
+        //                    Database.ExecuteQuery("INSERT INTO TempConversionDetails VALUES('" + Login.assignedBranch + "','" + txtrefcode.Text + "',1,'" + srcprodcode + "','" + srcdesc + "','" + txtsrcqty.Text + "',0,0,'" + gridView3.GetRowCellValue(i, "ProductCode").ToString() + "','" + gridView3.GetRowCellValue(i, "Description").ToString() + "','" + gridView3.GetRowCellValue(i, "ActualQty").ToString() + "','" + gridView3.GetRowCellValue(i, "ActualQty").ToString() + "','" + 0 + "','" + 0 + "',0,0,'0','" + gridView3.GetRowCellValue(i, "Barcode").ToString() + "')");
 
-                        }
-                        else
-                        {
-                            Database.ExecuteQuery("INSERT INTO TempConversionDetails VALUES('" + Login.assignedBranch + "','" + txtrefcode.Text + "','" + sourceSeqNum + " ','" + srcprodcode + "','" + srcdesc + "','" + txtsrcqty.Text + "','" + sourceCost + "',0,'" + gridView3.GetRowCellValue(i, "ProductCode").ToString() + "','" + gridView3.GetRowCellValue(i, "Description").ToString() + "','" + gridView3.GetRowCellValue(i, "ActualQty").ToString() + "','" + gridView3.GetRowCellValue(i, "ActualQty").ToString() + "','" + newcostkg + "','" + percentagePerPart + "',0,0,'" + sourceAmountPerPart + "','" + gridView3.GetRowCellValue(i, "Barcode").ToString() + "')");
-                        }
-                    }
-                    else  //MANY TO ONE
-                    {
-                        percentagePerPart = Convert.ToDouble(txtactualqty.Text) / Convert.ToDouble(txttotalavailableqty.Text);
-                        sourceAmountPerPart = percentagePerPart * sourceTotalAmount;
-                        totalActualQuantity = Convert.ToDouble(txtactualqty.Text);
-                        newcostkg = sourceAmountPerPart / Convert.ToDouble(txtactualqty.Text);
+        //                }
+        //                else
+        //                {
+        //                    Database.ExecuteQuery("INSERT INTO TempConversionDetails VALUES('" + Login.assignedBranch + "','" + txtrefcode.Text + "','" + sourceSeqNum + " ','" + srcprodcode + "','" + srcdesc + "','" + txtsrcqty.Text + "','" + sourceCost + "',0,'" + gridView3.GetRowCellValue(i, "ProductCode").ToString() + "','" + gridView3.GetRowCellValue(i, "Description").ToString() + "','" + gridView3.GetRowCellValue(i, "ActualQty").ToString() + "','" + gridView3.GetRowCellValue(i, "ActualQty").ToString() + "','" + newcostkg + "','" + percentagePerPart + "',0,0,'" + sourceAmountPerPart + "','" + gridView3.GetRowCellValue(i, "Barcode").ToString() + "')");
+        //                }
+        //            }
+        //            else  //MANY TO ONE
+        //            {
+        //                percentagePerPart = Convert.ToDouble(txtactualqty.Text) / Convert.ToDouble(txttotalavailableqty.Text);
+        //                sourceAmountPerPart = percentagePerPart * sourceTotalAmount;
+        //                totalActualQuantity = Convert.ToDouble(txtactualqty.Text);
+        //                newcostkg = sourceAmountPerPart / Convert.ToDouble(txtactualqty.Text);
 
-                        sourceSeqNum1 = "222";
-                        sourceAvailableGrid2 = gridView3.GetRowCellValue(i, "SourceQty").ToString(); //ang original quantity sa product nga e convert
-                        sourceTotalAmount2 = 0 * Convert.ToDouble(sourceAvailableGrid2);
-                        percentagePerPart2 = Convert.ToDouble(gridView3.GetRowCellValue(i, "Quantity").ToString()) / Convert.ToDouble(sourceAvailableGrid2);
-                        sourceAmountPerPart = percentagePerPart * sourceTotalAmount;
-                        sourceAmountPerPart2 = percentagePerPart2 * sourceTotalAmount2;
-                        totalqtysource = Convert.ToDouble(sourceAvailableGrid2);
-                        totalSourceQuantity += Convert.ToDouble(sourceAvailableGrid2);
+        //                sourceSeqNum1 = "222";
+        //                sourceAvailableGrid2 = gridView3.GetRowCellValue(i, "SourceQty").ToString(); //ang original quantity sa product nga e convert
+        //                sourceTotalAmount2 = 0 * Convert.ToDouble(sourceAvailableGrid2);
+        //                percentagePerPart2 = Convert.ToDouble(gridView3.GetRowCellValue(i, "Quantity").ToString()) / Convert.ToDouble(sourceAvailableGrid2);
+        //                sourceAmountPerPart = percentagePerPart * sourceTotalAmount;
+        //                sourceAmountPerPart2 = percentagePerPart2 * sourceTotalAmount2;
+        //                totalqtysource = Convert.ToDouble(sourceAvailableGrid2);
+        //                totalSourceQuantity += Convert.ToDouble(sourceAvailableGrid2);
 
-                        conversionType = "ManyToOne";
-                        Database.ExecuteQuery("INSERT INTO TempConversionDetails VALUES('" + Login.assignedBranch + "','" + txtrefcode.Text + "','" + sourceSeqNum1 + "','" + sourceProd1 + "','" + sourceDesc1 + "','" + sourceAvailableGrid2 + "','0',0,'" + objprodforcodemanytoone.ToString() + "','" + txtsrchprdctmanytoone.Text + "','" + gridView3.GetRowCellValue(i, "Quantity").ToString() + "','" + txtactualqty.Text + "','0','" + percentagePerPart2 + "',0,0,'" + sourceAmountPerPart2 + "','" + gridView3.GetRowCellValue(i, "Barcode").ToString() + "')");
-                    }
-                    totalqtyconverted += Convert.ToDouble(gridView3.GetRowCellValue(i, "Quantity").ToString()); //Total Quantity sa gi convert
-                }
-                if (radioButton1.Checked == true)
-                {
-                    //ONE TO MANY (BranchCode,CONID,SourceSequenceNUmber,SourceQty,SourceCost,SourceTotalAmount,TotalItemsConverted,TotalQtyConverted,ActualQty,ConversionType,DateConverted,ConvertedBy)
-                    Database.ExecuteQuery("INSERT INTO TempConversionSummary VALUES('" + Login.assignedBranch + "','" + txtrefcode.Text + "','"+sourceSeqNum+"','" + txtsrcqty.Text + "','"+sourceCost+"','" + sourceTotalAmount + "','" + ctr + "','" + totalActualQuantity + "','"+ totalActualQuantity + "','" + conversionType + "','" +DateTime.Now.ToString() + "','" + Login.Fullname + "','0',0)");
-                }
-                else
-                {
-                    //MANY TO ONE 
-                    Database.ExecuteQuery("INSERT INTO TempConversionSummary VALUES('" + Login.assignedBranch + "','" + txtrefcode.Text + "','','" + totalSourceQuantity + "','','" + txtsrcqty.Text + "','" + ctr + "','" + txttotalweight.Text + "','" + txtactualqty.Text + "','" + conversionType + "','" + DateTime.Now.ToString() + "','" + Login.Fullname + "','0',0)");
-                }
-                // save();
-                conversionProcess();
-            }
-            catch (SqlException ex)
-            {
-                XtraMessageBox.Show(ex.Message.ToString());
-            }       
-        }
+        //                conversionType = "ManyToOne";
+        //                Database.ExecuteQuery("INSERT INTO TempConversionDetails VALUES('" + Login.assignedBranch + "','" + txtrefcode.Text + "','" + sourceSeqNum1 + "','" + sourceProd1 + "','" + sourceDesc1 + "','" + sourceAvailableGrid2 + "','0',0,'" + objprodforcodemanytoone.ToString() + "','" + txtsrchprdctmanytoone.Text + "','" + gridView3.GetRowCellValue(i, "Quantity").ToString() + "','" + txtactualqty.Text + "','0','" + percentagePerPart2 + "',0,0,'" + sourceAmountPerPart2 + "','" + gridView3.GetRowCellValue(i, "Barcode").ToString() + "')");
+        //            }
+        //            totalqtyconverted += Convert.ToDouble(gridView3.GetRowCellValue(i, "Quantity").ToString()); //Total Quantity sa gi convert
+        //        }
+        //        if (radioButton1.Checked == true)
+        //        {
+        //            //ONE TO MANY (BranchCode,CONID,SourceSequenceNUmber,SourceQty,SourceCost,SourceTotalAmount,TotalItemsConverted,TotalQtyConverted,ActualQty,ConversionType,DateConverted,ConvertedBy)
+        //            Database.ExecuteQuery("INSERT INTO TempConversionSummary VALUES('" + Login.assignedBranch + "','" + txtrefcode.Text + "','"+sourceSeqNum+"','" + txtsrcqty.Text + "','"+sourceCost+"','" + sourceTotalAmount + "','" + ctr + "','" + totalActualQuantity + "','"+ totalActualQuantity + "','" + conversionType + "','" +DateTime.Now.ToString() + "','" + Login.Fullname + "','0',0)");
+        //        }
+        //        else
+        //        {
+        //            //MANY TO ONE 
+        //            Database.ExecuteQuery("INSERT INTO TempConversionSummary VALUES('" + Login.assignedBranch + "','" + txtrefcode.Text + "','','" + totalSourceQuantity + "','','" + txtsrcqty.Text + "','" + ctr + "','" + txttotalweight.Text + "','" + txtactualqty.Text + "','" + conversionType + "','" + DateTime.Now.ToString() + "','" + Login.Fullname + "','0',0)");
+        //        }
+        //        // save();
+        //        conversionProcess();
+        //    }
+        //    catch (SqlException ex)
+        //    {
+        //        XtraMessageBox.Show(ex.Message.ToString());
+        //    }       
+        //}
 
         bool trappings()
         {
@@ -980,5 +980,432 @@ namespace SalesInventorySystem
         {
             repositoryItemComboBox1.Items.Add("Eulz");
         }
+
+        //////////////////////////////////////////////////////////////////////////////////////
+        ///
+        private DataTable BuildOneToManyLines()
+        {
+            var dt = new DataTable();
+            dt.Columns.Add("ProductCode", typeof(string));
+            dt.Columns.Add("Description", typeof(string));
+            dt.Columns.Add("ActualQty", typeof(decimal));
+            dt.Columns.Add("Barcode", typeof(string));
+
+            gridView3.CloseEditor();
+            gridView3.UpdateCurrentRow();
+
+            for (int i = 0; i < gridView3.DataRowCount; i++)
+            {
+                int rh = gridView3.GetVisibleRowHandle(i);
+                if (!gridView3.IsDataRow(rh)) continue;
+
+                decimal actualQty = Convert.ToDecimal(gridView3.GetRowCellValue(rh, "ActualQty") ?? 0m);
+                if (actualQty <= 0) continue;
+
+                var r = dt.NewRow();
+                r["ProductCode"] = gridView3.GetRowCellValue(rh, "ProductCode")?.ToString();
+                r["Description"] = gridView3.GetRowCellValue(rh, "Description")?.ToString();
+                r["ActualQty"] = actualQty;
+                r["Barcode"] = gridView3.GetRowCellValue(rh, "Barcode")?.ToString() ?? "";
+                dt.Rows.Add(r);
+            }
+            return dt;
+        }
+        private DataTable BuildManyToOneLines()
+        {
+            var dt = new DataTable();
+            dt.Columns.Add("SourceProductCode", typeof(string));
+            dt.Columns.Add("SourceDescription", typeof(string));
+            dt.Columns.Add("QtyUsed", typeof(decimal));
+            dt.Columns.Add("Barcode", typeof(string));
+
+            gridView3.CloseEditor();
+            gridView3.UpdateCurrentRow();
+
+            for (int i = 0; i < gridView3.DataRowCount; i++)
+            {
+                int rh = gridView3.GetVisibleRowHandle(i);
+                if (!gridView3.IsDataRow(rh)) continue;
+
+                decimal qtyUsed = Convert.ToDecimal(gridView3.GetRowCellValue(rh, "Quantity") ?? 0m);
+                if (qtyUsed <= 0) continue;
+
+                var r = dt.NewRow();
+                r["SourceProductCode"] = gridView3.GetRowCellValue(rh, "ProductCode")?.ToString();
+                r["SourceDescription"] = gridView3.GetRowCellValue(rh, "Description")?.ToString();
+                r["QtyUsed"] = qtyUsed;
+                r["Barcode"] = gridView3.GetRowCellValue(rh, "Barcode")?.ToString() ?? "";
+                dt.Rows.Add(r);
+            }
+            return dt;
+        }
+        //private void SubmitConversionRaw()
+        //{
+        //    using (SqlConnection conn = Database.getConnection())
+        //    using (SqlCommand cmd = new SqlCommand("dbo.sp_SubmitConversionRaw", conn))
+        //    {
+        //        cmd.CommandType = CommandType.StoredProcedure;
+        //        cmd.CommandTimeout = 180;
+
+        //        bool isOneToMany = radioButton1.Checked;
+
+        //        cmd.Parameters.AddWithValue("@BranchCode", Login.assignedBranch);
+        //        cmd.Parameters.AddWithValue("@ConID", Convert.ToInt32(txtrefcode.Text));
+        //        cmd.Parameters.AddWithValue("@ConversionType", isOneToMany ? "OneToMany" : "ManyToOne");
+        //        cmd.Parameters.AddWithValue("@ConvertedBy", Login.Fullname);
+        //        cmd.Parameters.AddWithValue("@DateConverted", DateTime.Now);
+        //        cmd.Parameters.AddWithValue("@IsErrorCorrect", false);
+        //        cmd.Parameters.AddWithValue("@IsConfirm", false);
+
+        //        if (isOneToMany)
+        //        {
+        //            cmd.Parameters.AddWithValue("@SourceProductCode",
+        //                gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "Product")?.ToString());
+
+        //            cmd.Parameters.AddWithValue("@SourceDescription",
+        //                gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "Description")?.ToString());
+
+        //            cmd.Parameters.AddWithValue("@SourceSequenceNumber", DBNull.Value);
+        //            cmd.Parameters.AddWithValue("@SourceQty", Convert.ToDecimal(txttotalavailableqty.Text));
+
+        //            cmd.Parameters.AddWithValue("@DestProductCode", DBNull.Value);
+        //            cmd.Parameters.AddWithValue("@DestDescription", DBNull.Value);
+        //            cmd.Parameters.AddWithValue("@ActualQtyOut", DBNull.Value);
+
+        //            var lines = BuildOneToManyLines();
+        //            var p1 = cmd.Parameters.AddWithValue("@OneToManyLines", lines);
+        //            p1.SqlDbType = SqlDbType.Structured;
+        //            p1.TypeName = "dbo.TVP_Conversion_OneToManyLines";
+
+        //            var p2 = cmd.Parameters.AddWithValue("@ManyToOneLines", new DataTable());
+        //            p2.SqlDbType = SqlDbType.Structured;
+        //            p2.TypeName = "dbo.TVP_Conversion_ManyToOneLines";
+        //        }
+        //        else
+        //        {
+        //            cmd.Parameters.AddWithValue("@SourceProductCode", DBNull.Value);
+        //            cmd.Parameters.AddWithValue("@SourceDescription", DBNull.Value);
+        //            cmd.Parameters.AddWithValue("@SourceSequenceNumber", DBNull.Value);
+        //            cmd.Parameters.AddWithValue("@SourceQty", DBNull.Value);
+
+        //            cmd.Parameters.AddWithValue("@DestProductCode", objprodforcodemanytoone.ToString());
+        //            cmd.Parameters.AddWithValue("@DestDescription", txtsrchprdctmanytoone.Text);
+        //            cmd.Parameters.AddWithValue("@ActualQtyOut", Convert.ToDecimal(txtactualqty.Text));
+
+        //            var p1 = cmd.Parameters.AddWithValue("@OneToManyLines", new DataTable());
+        //            p1.SqlDbType = SqlDbType.Structured;
+        //            p1.TypeName = "dbo.TVP_Conversion_OneToManyLines";
+
+        //            var lines = BuildManyToOneLines();
+        //            var p2 = cmd.Parameters.AddWithValue("@ManyToOneLines", lines);
+        //            p2.SqlDbType = SqlDbType.Structured;
+        //            p2.TypeName = "dbo.TVP_Conversion_ManyToOneLines";
+        //        }
+
+        //        conn.Open();
+        //        cmd.ExecuteNonQuery();
+        //    }
+        //}
+        //private DataTable BuildConversionSummaryTVP(
+        //        string branch, int conId, int? sourceSeqNo,
+        //        decimal sourceQty, decimal sourceCost, decimal sourceTotalAmount,
+        //        int totalItems, decimal totalQtyConverted, decimal actualQty,
+        //        string conversionType, DateTime dateConverted, string convertedBy,
+        //         bool isErrorCorrect, bool isConfirm)
+        //{
+        //    var dt = new DataTable();
+        //    dt.Columns.Add("BranchCode", typeof(string));
+        //    dt.Columns.Add("ConID", typeof(int));
+        //    dt.Columns.Add("SourceSequenceNumber", typeof(int));
+        //    dt.Columns.Add("SourceQty", typeof(decimal));
+        //    dt.Columns.Add("SourceCost", typeof(decimal));
+        //    dt.Columns.Add("SourceTotalAmount", typeof(decimal));
+        //    dt.Columns.Add("TotalItemsConverted", typeof(int));
+        //    dt.Columns.Add("TotalQtyConverted", typeof(decimal));
+        //    dt.Columns.Add("ActualQty", typeof(decimal));
+        //    dt.Columns.Add("ConversionType", typeof(string));
+        //    dt.Columns.Add("DateConverted", typeof(DateTime));
+        //    dt.Columns.Add("ConvertedBy", typeof(string));
+        //    dt.Columns.Add("isErrorCorrect", typeof(bool));
+        //    dt.Columns.Add("isConfirm", typeof(bool));
+
+        //    var r = dt.NewRow();
+        //    r["BranchCode"] = branch;
+        //    r["ConID"] = conId;
+        //    r["SourceSequenceNumber"] = (object)sourceSeqNo ?? DBNull.Value;
+        //    r["SourceQty"] = sourceQty;
+        //    r["SourceCost"] = sourceCost;
+        //    r["SourceTotalAmount"] = sourceTotalAmount;
+        //    r["TotalItemsConverted"] = totalItems;
+        //    r["TotalQtyConverted"] = totalQtyConverted;
+        //    r["ActualQty"] = actualQty;
+        //    r["ConversionType"] = conversionType;
+        //    r["DateConverted"] = dateConverted;
+        //    r["ConvertedBy"] = convertedBy;
+        //    r["isErrorCorrect"] = isErrorCorrect;
+        //    r["isConfirm"] = isConfirm;
+
+        //    dt.Rows.Add(r);
+        //    return dt;
+        //}
+
+        //private DataTable BuildConversionDetailsTVP()
+        //{
+        //    var dt = new DataTable();
+        //    dt.Columns.Add("BranchCode", typeof(string));
+        //    dt.Columns.Add("ConID", typeof(int));
+        //    dt.Columns.Add("SequenceRefNum", typeof(int));
+        //    dt.Columns.Add("SourceProductCode", typeof(string));
+        //    dt.Columns.Add("SourceDescription", typeof(string));
+        //    dt.Columns.Add("SourceQty", typeof(decimal));
+        //    dt.Columns.Add("SourceCost", typeof(decimal));
+        //    dt.Columns.Add("SourceTotalCost", typeof(decimal));
+        //    dt.Columns.Add("Product", typeof(string));
+        //    dt.Columns.Add("Description", typeof(string));
+        //    dt.Columns.Add("Quantity", typeof(decimal));
+        //    dt.Columns.Add("ActualQty", typeof(decimal));
+        //    dt.Columns.Add("Cost", typeof(decimal));
+        //    dt.Columns.Add("PercentagePerPart", typeof(double));
+        //    dt.Columns.Add("FinalRatio", typeof(double));
+        //    dt.Columns.Add("TotalCost", typeof(decimal));
+        //    dt.Columns.Add("SourceAmountPerPart", typeof(decimal));
+        //    dt.Columns.Add("Barcode", typeof(string));
+
+        //    return dt;
+        //}
+
+        private DataTable BuildOneToManyLinesFromGrid()
+        {
+            var dt = new DataTable();
+            dt.Columns.Add("ProductCode", typeof(string));
+            dt.Columns.Add("Description", typeof(string));
+            dt.Columns.Add("ActualQty", typeof(decimal));
+            dt.Columns.Add("Barcode", typeof(string));
+
+            for (int i = 0; i < gridView3.DataRowCount; i++)
+            {
+                int rh = gridView3.GetVisibleRowHandle(i);
+                if (!gridView3.IsDataRow(rh)) continue;
+
+                object aqObj = gridView3.GetRowCellValue(rh, "ActualQty");
+                decimal actualQty = 0m;
+                decimal.TryParse(Convert.ToString(aqObj), out actualQty);
+
+                if (actualQty <= 0m) continue;
+
+                string prod = Convert.ToString(gridView3.GetRowCellValue(rh, "ProductCode"));
+                string desc = Convert.ToString(gridView3.GetRowCellValue(rh, "Description"));
+
+                if (string.IsNullOrWhiteSpace(prod) || string.IsNullOrWhiteSpace(desc))
+                    continue;
+
+                var r = dt.NewRow();
+                r["ProductCode"] = prod.Trim();
+                r["Description"] = desc.Trim();
+                r["ActualQty"] = actualQty;
+                r["Barcode"] = Convert.ToString(gridView3.GetRowCellValue(rh, "Barcode")) ?? "";
+                dt.Rows.Add(r);
+            }
+
+            return dt;
+        }
+        private DataTable BuildManyToOneLinesFromGrid()
+        {
+            var dt = new DataTable();
+            dt.Columns.Add("SourceProductCode", typeof(string));
+            dt.Columns.Add("SourceDescription", typeof(string));
+            dt.Columns.Add("QtyUsed", typeof(decimal));
+            dt.Columns.Add("Barcode", typeof(string));
+
+            for (int i = 0; i < gridView3.DataRowCount; i++)
+            {
+                int rh = gridView3.GetVisibleRowHandle(i);
+                if (!gridView3.IsDataRow(rh)) continue;
+
+                object qObj = gridView3.GetRowCellValue(rh, "Quantity");
+                decimal qtyUsed = 0m;
+                decimal.TryParse(Convert.ToString(qObj), out qtyUsed);
+
+                if (qtyUsed <= 0m) continue;
+
+                string srcProd = Convert.ToString(gridView3.GetRowCellValue(rh, "ProductCode"));
+                string srcDesc = Convert.ToString(gridView3.GetRowCellValue(rh, "Description"));
+
+                if (string.IsNullOrWhiteSpace(srcProd) || string.IsNullOrWhiteSpace(srcDesc))
+                    continue;
+
+                var r = dt.NewRow();
+                r["SourceProductCode"] = srcProd.Trim();
+                r["SourceDescription"] = srcDesc.Trim();
+                r["QtyUsed"] = qtyUsed;
+                r["Barcode"] = Convert.ToString(gridView3.GetRowCellValue(rh, "Barcode")) ?? "";
+                dt.Rows.Add(r);
+            }
+
+            return dt;
+        }
+
+        private void addEntry()
+        {
+            try
+            {
+                // Commit any edits in grid before reading values
+                gridView1.CloseEditor();
+                gridView1.UpdateCurrentRow();
+                gridView3.CloseEditor();
+                gridView3.UpdateCurrentRow();
+
+                bool isOneToMany = radioButton1.Checked;   // your OneToMany radio
+                int conId = Convert.ToInt32(txtrefcode.Text);
+                string branch = Login.assignedBranch;
+                string convertedBy = Login.Fullname;
+
+                // Build TVPs
+                DataTable dtOneToMany = BuildOneToManyLinesFromGrid();
+                DataTable dtManyToOne = BuildManyToOneLinesFromGrid();
+
+                // Basic validation (client side)
+                if (isOneToMany)
+                {
+                    if (dtOneToMany.Rows.Count == 0)
+                    {
+                        BigAlert.Show("NO ITEMS", "Please enter ActualQty > 0 for at least one converted item.", MessageBoxIcon.Warning);
+                        return;
+                    }
+                }
+                else
+                {
+                    if (dtManyToOne.Rows.Count == 0)
+                    {
+                        BigAlert.Show("NO ITEMS", "Please enter Quantity > 0 for at least one source ingredient.", MessageBoxIcon.Warning);
+                        return;
+                    }
+
+                    if (string.IsNullOrWhiteSpace(txtactualqty.Text) || Convert.ToDecimal(txtactualqty.Text) <= 0)
+                    {
+                        BigAlert.Show("INVALID ACTUAL QTY", "Actual output quantity must be > 0 for ManyToOne.", MessageBoxIcon.Warning);
+                        return;
+                    }
+
+                    if (objprodforcodemanytoone == null || string.IsNullOrWhiteSpace(objprodforcodemanytoone.ToString()))
+                    {
+                        BigAlert.Show("NO DEST PRODUCT", "Please select destination product for ManyToOne conversion.", MessageBoxIcon.Warning);
+                        return;
+                    }
+                }
+
+                // Source fields for OneToMany
+                string srcProdCode = null;
+                string srcDesc = null;
+                decimal srcQty = 0m;
+
+                if (isOneToMany)
+                {
+                    srcProdCode = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "Product")?.ToString();
+                    srcDesc = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "Description")?.ToString();
+
+                    if (string.IsNullOrWhiteSpace(srcProdCode))
+                    {
+                        BigAlert.Show("NO SOURCE PRODUCT", "Please select a source product in the source grid.", MessageBoxIcon.Warning);
+                        return;
+                    }
+
+                    if (string.IsNullOrWhiteSpace(txtsrcqty.Text) || Convert.ToDecimal(txtsrcqty.Text) <= 0)
+                    {
+                        BigAlert.Show("INVALID SOURCE QTY", "Source quantity must be > 0.", MessageBoxIcon.Warning);
+                        return;
+                    }
+
+                    srcQty = Convert.ToDecimal(txtsrcqty.Text);
+                }
+
+                // Dest fields for ManyToOne
+                string destProdCode = null;
+                string destDesc = null;
+                decimal actualQtyOut = 0m;
+
+                if (!isOneToMany)
+                {
+                    destProdCode = objprodforcodemanytoone.ToString();
+                    destDesc = txtsrchprdctmanytoone.Text;
+                    actualQtyOut = Convert.ToDecimal(txtactualqty.Text);
+
+                    if (string.IsNullOrWhiteSpace(destDesc))
+                        destDesc = ""; // allow blank description; SQL validation can enforce if needed
+                }
+
+                // Call ONE stored procedure
+                using (SqlConnection conn = Database.getConnection())
+                using (SqlCommand cmd = new SqlCommand("dbo.sp_SubmitConversionRaw", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.CommandTimeout = 180;
+
+                    cmd.Parameters.AddWithValue("@BranchCode", branch);
+                    cmd.Parameters.AddWithValue("@ConID", conId);
+                    cmd.Parameters.AddWithValue("@ConversionType", isOneToMany ? "OneToMany" : "ManyToOne");
+                    cmd.Parameters.AddWithValue("@ConvertedBy", convertedBy);
+                    cmd.Parameters.AddWithValue("@DateConverted", DateTime.Now);
+                    cmd.Parameters.AddWithValue("@IsErrorCorrect", false);
+                    cmd.Parameters.AddWithValue("@IsConfirm", false);
+
+                    // OneToMany params
+                    cmd.Parameters.AddWithValue("@SourceProductCode", (object)srcProdCode ?? DBNull.Value);
+                    cmd.Parameters.AddWithValue("@SourceDescription", (object)srcDesc ?? DBNull.Value);
+                    cmd.Parameters.AddWithValue("@SourceSequenceNumber", DBNull.Value); // pass if you have it
+                    cmd.Parameters.AddWithValue("@SourceQty", isOneToMany ? (object)srcQty : DBNull.Value);
+
+                    // ManyToOne params
+                    cmd.Parameters.AddWithValue("@DestProductCode", (object)destProdCode ?? DBNull.Value);
+                    cmd.Parameters.AddWithValue("@DestDescription", (object)destDesc ?? DBNull.Value);
+                    cmd.Parameters.AddWithValue("@ActualQtyOut", !isOneToMany ? (object)actualQtyOut : DBNull.Value);
+
+                    // TVPs
+                    var p1 = cmd.Parameters.AddWithValue("@OneToManyLines", dtOneToMany);
+                    p1.SqlDbType = SqlDbType.Structured;
+                    p1.TypeName = "dbo.TVP_Conversion_OneToManyLines";
+
+                    var p2 = cmd.Parameters.AddWithValue("@ManyToOneLines", dtManyToOne);
+                    p2.SqlDbType = SqlDbType.Structured;
+                    p2.TypeName = "dbo.TVP_Conversion_ManyToOneLines";
+
+                    conn.Open();
+                    cmd.ExecuteNonQuery();
+                }
+
+                BigAlert.Show(
+                    "SUCCESS",
+                    "Conversion successfully submitted and processed. Please proceed to Approval for Validation.",
+                    MessageBoxIcon.Information);
+
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                XtraMessageBox.Show(ex.Message);
+            }
+        }
+
+    //private void SaveAndProcessConversion(DataTable dtSummary, DataTable dtDetails)
+    //    {
+    //        using (SqlConnection conn = Database.getConnection())
+    //        using (SqlCommand cmd = new SqlCommand("dbo.sp_SaveConversionFromTVP", conn))
+    //        {
+    //            cmd.CommandType = CommandType.StoredProcedure;
+    //            cmd.CommandTimeout = 180;
+
+    //            var pSummary = cmd.Parameters.AddWithValue("@Summary", dtSummary);
+    //            pSummary.SqlDbType = SqlDbType.Structured;
+    //            pSummary.TypeName = "dbo.TVP_ConversionSummary";
+
+    //            var pDetails = cmd.Parameters.AddWithValue("@Details", dtDetails);
+    //            pDetails.SqlDbType = SqlDbType.Structured;
+    //            pDetails.TypeName = "dbo.TVP_ConversionDetails";
+
+    //            conn.Open();
+    //            cmd.ExecuteNonQuery();
+    //        }
+    //    }
+
     }
 }

@@ -37,8 +37,10 @@ namespace SalesInventorySystem
             return Database.getSingleData("Branches", "BranchName", comboBox1.Text, "BranchCode");
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private async void button1_Click(object sender, EventArgs e)
         {
+            button1.Enabled = false;
+            Cursor = Cursors.WaitCursor;
             try
             {
                 if (comboBox1.Text == "")
@@ -54,22 +56,22 @@ namespace SalesInventorySystem
                         {
                             if (checkBox2.Checked == true) //with date filtering
                             {
-                                Database.display("select Branch,Product,Barcode,Description,Cost,Available,DateReceived,ExpiryDate,isVat,SequenceNumber FROM InventoryBigBlue WHERE Branch='888' AND Available > 0 and isStock=1 and isConversion=1 AND DateReceived >= '" + dateEdit1.Text + "' AND DateReceived <= '" + dateEdit2.Text + "'", gridControl1, gridView1);
+                                await Database.displayAsync("select Branch,Product,Barcode,Description,Cost,Available,DateReceived,ExpiryDate,isVat,SequenceNumber FROM InventoryBigBlue with(nolock) WHERE Branch='888' AND Available > 0 and isStock=1 and isConversion=1 AND DateReceived >= '" + dateEdit1.Text + "' AND DateReceived <= '" + dateEdit2.Text + "'", gridControl1, gridView1);
                             }
                             else
                             {
-                                Database.display("select Branch,Product,Barcode,Description,Cost,Available,DateReceived,ExpiryDate,isVat,SequenceNumber FROM InventoryBigBlue WHERE Branch='888' AND Available > 0 and isStock=1 and isConversion=1", gridControl1, gridView1);
+                               await Database.displayAsync("select Branch,Product,Barcode,Description,Cost,Available,DateReceived,ExpiryDate,isVat,SequenceNumber FROM InventoryBigBlue with(nolock) WHERE Branch='888' AND Available > 0 and isStock=1 and isConversion=1", gridControl1, gridView1);
                             }
                         }
                         else
                         {
                             if (checkBox2.Checked == true) //with date filtering commissary
                             {
-                                Database.display("select Branch,Product,Barcode,Description,Cost,Available,DateReceived,ExpiryDate,isVat,SequenceNumber FROM Inventory WHERE Branch='888' AND Available > 0 and isStock=1 and isConversion=1 AND DateReceived >= '" + dateEdit1.Text + "' AND DateReceived <= '" + dateEdit2.Text + "'", gridControl1, gridView1);
+                                await Database.displayAsync("select Branch,Product,Barcode,Description,Cost,Available,DateReceived,ExpiryDate,isVat,SequenceNumber FROM Inventory with(nolock) WHERE Branch='888' AND Available > 0 and isStock=1 and isConversion=1 AND DateReceived >= '" + dateEdit1.Text + "' AND DateReceived <= '" + dateEdit2.Text + "'", gridControl1, gridView1);
                             }
                             else
                             {
-                                Database.display("select  Branch,Product,Barcode,Description,Cost,Available,DateReceived,ExpiryDate,isVat,SequenceNumber FROM Inventory WHERE Branch='888' AND Available > 0 and isStock=1 and isConversion=1", gridControl1, gridView1);
+                                await Database.displayAsync("select  Branch,Product,Barcode,Description,Cost,Available,DateReceived,ExpiryDate,isVat,SequenceNumber FROM Inventory with(nolock) WHERE Branch='888' AND Available > 0 and isStock=1 and isConversion=1", gridControl1, gridView1);
                             }
                         }
                         
@@ -80,22 +82,22 @@ namespace SalesInventorySystem
                         {
                             if (checkBox2.Checked == true) //with date filtering
                             {
-                                Database.display("select Branch,Product,Barcode,Description,Cost,Available,DateReceived,ExpiryDate,isVat,SequenceNumber FROM InventoryBigBlue WHERE Branch='888' AND Available > 0 and isStock=1 AND DateReceived >= '" + dateEdit1.Text + "' AND DateReceived <= '" + dateEdit2.Text + "'", gridControl1, gridView1);
+                                await Database.displayAsync("select Branch,Product,Barcode,Description,Cost,Available,DateReceived,ExpiryDate,isVat,SequenceNumber FROM InventoryBigBlue with(nolock) WHERE Branch='888' AND Available > 0 and isStock=1 AND DateReceived >= '" + dateEdit1.Text + "' AND DateReceived <= '" + dateEdit2.Text + "'", gridControl1, gridView1);
                             }
                             else
                             {
-                                Database.display("select Branch,Product,Barcode,Description,Cost,Available,DateReceived,ExpiryDate,isVat,SequenceNumber FROM InventoryBigBlue WHERE Branch='888' AND Available > 0 and isStock=1  ", gridControl1, gridView1);
+                                await Database.displayAsync("select Branch,Product,Barcode,Description,Cost,Available,DateReceived,ExpiryDate,isVat,SequenceNumber FROM InventoryBigBlue with(nolock) WHERE Branch='888' AND Available > 0 and isStock=1  ", gridControl1, gridView1);
                             }
                         }
                         else
                         {
                             if (checkBox2.Checked == true) //with date filtering
                             {
-                                Database.display("select * FROM vw_generalInventory WHERE Branch='888' AND Available > 0 AND DateReceived >= '" + dateEdit1.Text + "' AND DateReceived <= '" + dateEdit2.Text + "'", gridControl1, gridView1);
+                                await Database.displayAsync("select * FROM vw_generalInventory WHERE Branch='888' AND Available > 0 AND DateReceived >= '" + dateEdit1.Text + "' AND DateReceived <= '" + dateEdit2.Text + "'", gridControl1, gridView1);
                             }
                             else
                             {
-                                Database.display("select * FROM vw_generalInventory WHERE Branch='888' AND Available > 0  ", gridControl1, gridView1);
+                                await Database.displayAsync("select * FROM vw_generalInventory WHERE Branch='888' AND Available > 0  ", gridControl1, gridView1);
                             }
                         }
                          
@@ -106,11 +108,11 @@ namespace SalesInventorySystem
                     {
                         if (checkBox2.Checked == true)
                         {
-                            Database.display("select * FROM vw_generalInventory WHERE Branch='" + getBranchCode() + "' AND  isConversion='1' AND DateReceived >= '" + dateEdit1.Text + "' AND DateReceived <= '" + dateEdit2.Text + "'", gridControl1, gridView1);
+                            await Database.displayAsync("select * FROM vw_generalInventory WHERE Branch='" + getBranchCode() + "' AND  isConversion='1' AND DateReceived >= '" + dateEdit1.Text + "' AND DateReceived <= '" + dateEdit2.Text + "'", gridControl1, gridView1);
                         }
                         else
                         {
-                            Database.display("select * FROM vw_generalInventory WHERE Branch='" + getBranchCode() + "' AND isConversion=1", gridControl1, gridView1);
+                            await Database.displayAsync("select * FROM vw_generalInventory WHERE Branch='" + getBranchCode() + "' AND isConversion=1", gridControl1, gridView1);
                         }
                        
                     }
@@ -118,15 +120,18 @@ namespace SalesInventorySystem
                     {
                         if (checkBox2.Checked == true)
                         {
-                            Database.display("select * FROM vw_generalInventory WHERE Branch='" + getBranchCode() + "' AND DateReceived >= '" + dateEdit1.Text + "' AND DateReceived <= '" + dateEdit2.Text + "'", gridControl1, gridView1);
+                            await Database.displayAsync("select * FROM vw_generalInventory WHERE Branch='" + getBranchCode() + "' AND DateReceived >= '" + dateEdit1.Text + "' AND DateReceived <= '" + dateEdit2.Text + "'", gridControl1, gridView1);
                         }
                         else
                         {
-                            Database.display("select * FROM vw_generalInventory WHERE Branch='" + getBranchCode() + "' ", gridControl1, gridView1);
+                            await Database.displayAsync("select * FROM vw_generalInventory WHERE Branch='" + getBranchCode() + "' ", gridControl1, gridView1);
                         }
                         
                     }
                 }
+
+                Cursor = Cursors.Default;
+                button1.Enabled = true;
                 return;
             }
             catch (Exception ex)

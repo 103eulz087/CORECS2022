@@ -161,7 +161,7 @@
             this.xrLabel1.SizeF = new System.Drawing.SizeF(354.5417F, 17.79167F);
             this.xrLabel1.StylePriority.UseFont = false;
             this.xrLabel1.StylePriority.UseTextAlignment = false;
-            this.xrLabel1.Text = "ENZO MEAT MARKET FOODS CORP.";
+            this.xrLabel1.Text = "ENZO MEAT MARKET FOODS CORP..";
             this.xrLabel1.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
             // 
             // xrLabel2

@@ -32,12 +32,11 @@
             this.BottomMargin = new DevExpress.XtraReports.UI.BottomMarginBand();
             this.Detail = new DevExpress.XtraReports.UI.DetailBand();
             this.ReportHeader = new DevExpress.XtraReports.UI.ReportHeaderBand();
-            this.xrcustname = new DevExpress.XtraReports.UI.XRLabel();
-            this.xrdate = new DevExpress.XtraReports.UI.XRLabel();
             this.xrinvoiceno = new DevExpress.XtraReports.UI.XRLabel();
+            this.xrdate = new DevExpress.XtraReports.UI.XRLabel();
+            this.xrcustname = new DevExpress.XtraReports.UI.XRLabel();
             this.PageFooter = new DevExpress.XtraReports.UI.PageFooterBand();
             this.xrpreparedby = new DevExpress.XtraReports.UI.XRLabel();
-            this.xrLabel1 = new DevExpress.XtraReports.UI.XRLabel();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             // 
             // TopMargin
@@ -63,15 +62,14 @@
             this.ReportHeader.HeightF = 155F;
             this.ReportHeader.Name = "ReportHeader";
             // 
-            // xrcustname
+            // xrinvoiceno
             // 
-            this.xrcustname.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.xrcustname.LocationFloat = new DevExpress.Utils.PointFloat(169.1666F, 0F);
-            this.xrcustname.Name = "xrcustname";
-            this.xrcustname.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
-            this.xrcustname.SizeF = new System.Drawing.SizeF(401.6667F, 18F);
-            this.xrcustname.StylePriority.UseFont = false;
-            this.xrcustname.Text = "EULZ AVANCENA";
+            this.xrinvoiceno.Font = new System.Drawing.Font("Century Gothic", 9.2F);
+            this.xrinvoiceno.LocationFloat = new DevExpress.Utils.PointFloat(169.1666F, 28.83331F);
+            this.xrinvoiceno.Name = "xrinvoiceno";
+            this.xrinvoiceno.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.xrinvoiceno.SizeF = new System.Drawing.SizeF(401.6667F, 14.66667F);
+            this.xrinvoiceno.StylePriority.UseFont = false;
             // 
             // xrdate
             // 
@@ -84,19 +82,19 @@
             this.xrdate.StylePriority.UsePadding = false;
             this.xrdate.Text = "January 21 2018";
             // 
-            // xrinvoiceno
+            // xrcustname
             // 
-            this.xrinvoiceno.Font = new System.Drawing.Font("Century Gothic", 9.2F);
-            this.xrinvoiceno.LocationFloat = new DevExpress.Utils.PointFloat(169.1666F, 28.83331F);
-            this.xrinvoiceno.Name = "xrinvoiceno";
-            this.xrinvoiceno.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
-            this.xrinvoiceno.SizeF = new System.Drawing.SizeF(401.6667F, 14.66667F);
-            this.xrinvoiceno.StylePriority.UseFont = false;
+            this.xrcustname.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.xrcustname.LocationFloat = new DevExpress.Utils.PointFloat(169.1666F, 0F);
+            this.xrcustname.Name = "xrcustname";
+            this.xrcustname.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.xrcustname.SizeF = new System.Drawing.SizeF(401.6667F, 18F);
+            this.xrcustname.StylePriority.UseFont = false;
+            this.xrcustname.Text = "EULZ AVANCENA";
             // 
             // PageFooter
             // 
             this.PageFooter.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
-            this.xrLabel1,
             this.xrpreparedby});
             this.PageFooter.Name = "PageFooter";
             // 
@@ -110,16 +108,6 @@
             this.xrpreparedby.StylePriority.UseFont = false;
             this.xrpreparedby.Text = "EULZ AVANCENA";
             // 
-            // xrLabel1
-            // 
-            this.xrLabel1.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.xrLabel1.LocationFloat = new DevExpress.Utils.PointFloat(603.6666F, 20.08382F);
-            this.xrLabel1.Name = "xrLabel1";
-            this.xrLabel1.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
-            this.xrLabel1.SizeF = new System.Drawing.SizeF(199.1667F, 18F);
-            this.xrLabel1.StylePriority.UseFont = false;
-            this.xrLabel1.Text = "EULZ AVANCENA";
-            // 
             // CreditMemoNew
             // 
             this.Bands.AddRange(new DevExpress.XtraReports.UI.Band[] {
@@ -131,7 +119,7 @@
             this.Font = new System.Drawing.Font("Arial", 9.75F);
             this.Margins = new System.Drawing.Printing.Margins(0, 0, 230, 100);
             this.PageHeight = 1169;
-            this.PageWidth = 827;
+            this.PageWidth = 826;
             this.PaperKind = System.Drawing.Printing.PaperKind.A4;
             this.ShowPreviewMarginLines = false;
             this.ShowPrintMarginsWarning = false;
@@ -150,7 +138,6 @@
         public DevExpress.XtraReports.UI.XRLabel xrdate;
         public DevExpress.XtraReports.UI.XRLabel xrinvoiceno;
         private DevExpress.XtraReports.UI.PageFooterBand PageFooter;
-        public DevExpress.XtraReports.UI.XRLabel xrLabel1;
         public DevExpress.XtraReports.UI.XRLabel xrpreparedby;
     }
 }

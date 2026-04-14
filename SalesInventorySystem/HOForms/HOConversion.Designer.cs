@@ -422,7 +422,7 @@
             // 
             // txtdriplossqty
             // 
-            this.txtdriplossqty.EditValue = "";
+            this.txtdriplossqty.EditValue = "0";
             this.txtdriplossqty.Location = new System.Drawing.Point(100, 67);
             this.txtdriplossqty.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtdriplossqty.Name = "txtdriplossqty";
@@ -465,7 +465,7 @@
             // 
             // txtactualqty
             // 
-            this.txtactualqty.EditValue = "";
+            this.txtactualqty.EditValue = "0";
             this.txtactualqty.Location = new System.Drawing.Point(100, 33);
             this.txtactualqty.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtactualqty.Name = "txtactualqty";
@@ -509,7 +509,7 @@
             // 
             // txtsrcqty
             // 
-            this.txtsrcqty.EditValue = "";
+            this.txtsrcqty.EditValue = "0";
             this.txtsrcqty.Location = new System.Drawing.Point(149, 96);
             this.txtsrcqty.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtsrcqty.Name = "txtsrcqty";

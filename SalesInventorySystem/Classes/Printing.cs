@@ -1425,7 +1425,7 @@ namespace SalesInventorySystem
             string discountamount = rows["DiscountAmount"].ToString();
             double discpercent = Convert.ToDouble(discountpercentage) * 100;
             double totalvatitems = 0.0;
-            double newdiscitems = 0.0;
+            
             for (int i = 0; i <= gridview.RowCount - 1; i++)
             {
                 string addV = "";

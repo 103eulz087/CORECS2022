@@ -818,7 +818,11 @@ namespace SalesInventorySystem
         private void gridControl4_MouseUp_1(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Right)
+            {
                 contextMenuForDelivery.Show(gridControl4, e.Location);
+                contextMenuForDelivery.Items[1].Visible = false;
+                contextMenuForDelivery.Items[2].Visible = false;
+            }
         }
 
         private void gridControl5_MouseUp_1(object sender, MouseEventArgs e)

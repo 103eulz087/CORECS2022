@@ -836,7 +836,6 @@ namespace SalesInventorySystem.POS
         public async Task<bool> VerifySupervisorAnalysisAsync(string branchCode, DateTime shiftDate)
         {
             string rawConnString = Database.getConnectionString(@"AAITCRE\ConnSettingsServer");
-
             // Use a builder to inject a short timeout so it doesn't "hang"
             SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder(rawConnString);
             builder.ConnectTimeout = 5; // Fail fast after 5 seconds if no internet
@@ -1062,8 +1061,9 @@ namespace SalesInventorySystem.POS
             try
             {
                 //check linkedserver=1 IF TRUE it means SUPERVISOR DEDUCTION MATTER
-                bool islinked = Database.checkifExist("SELECT 1 FROM dbo.POSType WHERE linkedServerName='1'");
-                if(islinked)
+                //bool islinked = Database.checkifExist("SELECT 1 FROM dbo.POSType WHERE isLinkedServer=1");
+                bool isAutoDeduct = Database.checkifExist("SELECT 1 FROM dbo.POSType WHERE isAutoSystemDeduct=1");
+                if(!isAutoDeduct)
                 {
                     // 1. Check Cloud for Supervisor Approval
                     bool canProceed = await VerifySupervisorAnalysisAsync(Login.assignedBranch, Convert.ToDateTime(txttransactiondate.Text));

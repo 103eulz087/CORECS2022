@@ -25,14 +25,15 @@ namespace SalesInventorySystem
             display();
         }
 
-        private void display()
+        private async void display()
         {
             //string query = "SELECT * FROM view_PrimalCutInventory";
             //HelperFunction.ShowWaitAndDisplay(query, gridControl1, gridView1, "Please wait", "Populating data into the database...");
             //gridView1.Focus();
-           
 
-            Database.display("SELECT * FROM view_PrimalCutInventory", gridControl1, gridView1);
+            Cursor = Cursors.WaitCursor;
+            await Database.displayAsync("SELECT * FROM view_PrimalCutInventory", gridControl1, gridView1);
+            Cursor = Cursors.Default;
             gridView1.Columns[0].Visible = false;
             if (Convert.ToBoolean(Login.isglobalAdmin) == true)
             {

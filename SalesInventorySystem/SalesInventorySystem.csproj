@@ -971,6 +971,12 @@
     <Compile Include="HOFormsDevEx\AddPurchaseOrder.Designer.cs">
       <DependentUpon>AddPurchaseOrder.cs</DependentUpon>
     </Compile>
+    <Compile Include="HOFormsDevEx\AddPurchaseOrderSubmit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HOFormsDevEx\AddPurchaseOrderSubmit.Designer.cs">
+      <DependentUpon>AddPurchaseOrderSubmit.cs</DependentUpon>
+    </Compile>
     <Compile Include="HOFormsDevEx\AddSupplierDevEx.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -2756,6 +2762,11 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="ReInventoryAnalyzer.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -3549,6 +3560,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="HOFormsDevEx\AddPurchaseOrder.resx">
       <DependentUpon>AddPurchaseOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HOFormsDevEx\AddPurchaseOrderSubmit.resx">
+      <DependentUpon>AddPurchaseOrderSubmit.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="HOFormsDevEx\AddSupplierDevEx.resx">
       <DependentUpon>AddSupplierDevEx.cs</DependentUpon>
@@ -4460,8 +4474,8 @@
     <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="ReInventoryAnalyzer.resx">
       <DependentUpon>ReInventoryAnalyzer.cs</DependentUpon>
@@ -4594,11 +4608,6 @@
     <EmbeddedResource Include="Reporting\PurchaseOrderRepDevEx.resx">
       <DependentUpon>PurchaseOrderRepDevEx.cs</DependentUpon>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <EmbeddedResource Include="Reporting\SalesInvoiceDexEx.resx">
       <DependentUpon>SalesInvoiceDexEx.cs</DependentUpon>
     </EmbeddedResource>
@@ -4824,6 +4833,7 @@
     <None Include="Resources\SalesAnalysis_32x321.png" />
     <None Include="Resources\SalesSummary2_32x32.png" />
     <None Include="Resources\sparkposlogo.jpg" />
+    <None Include="Resources\corecslogindesign.jpg" />
     <Content Include="spireicon.ico" />
     <Content Include="spireicon1.ico" />
   </ItemGroup>

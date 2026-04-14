@@ -196,7 +196,7 @@ namespace SalesInventorySystem.HOFormsDevEx
         {
             //Database.display($"SELECT * FROM view_ExpenseSummary WHERE Status='APPROVED' AND CAST(ExpenseDate as date) between '{datefromapproved.Text}' AND '{datetoapproved.Text}' ", gridControl1, gridView1);
             string query = $"SELECT * FROM view_ExpenseSummary WHERE Status='APPROVED' AND CAST(ExpenseDate as date) between '{datefromapproved.Text}' AND '{datetoapproved.Text}' ";
-            HelperFunction.ShowWaitAndDisplay(query, gridControl1, gridView1, "Please wait", "Populating data into the database...");
+            HelperFunction.ShowWaitAndDisplayNonAsync(query, gridControl1, gridView1, "Please wait", "Populating data into the database...");
             gridView1.Focus();
             Classes.DevXGridViewSettings.ShowFooterTotal(gridView1, "Amount");
         }
@@ -205,7 +205,7 @@ namespace SalesInventorySystem.HOFormsDevEx
         {
             //Database.display($"SELECT * FROM view_ExpenseSummary WHERE Status='PAID' AND CAST(ExpenseDate as date) between '{dateFromPaid.Text}' AND '{dateToPaid.Text}' ", gridControl4, gridView4);
             string query = $"SELECT * FROM view_ExpenseSummary WHERE Status='PAID' AND CAST(ExpenseDate as date) between '{dateFromPaid.Text}' AND '{dateToPaid.Text}'  ";
-            HelperFunction.ShowWaitAndDisplay(query, gridControl4, gridView4, "Please wait", "Populating data into the database...");
+            HelperFunction.ShowWaitAndDisplayNonAsync(query, gridControl4, gridView4, "Please wait", "Populating data into the database...");
             gridView4.Focus();
             Classes.DevXGridViewSettings.ShowFooterTotal(gridView4, "Amount");
         }
@@ -280,7 +280,7 @@ namespace SalesInventorySystem.HOFormsDevEx
         private void btnforapproval_Click(object sender, EventArgs e)
         {
             string query = $"SELECT * FROM view_ExpenseSummary WHERE Status='FOR APPROVAL' AND CAST(ExpenseDate as date) between '{txtdatefromforapproval.Text}' AND '{txtdatetoforapproval.Text}' ";
-            HelperFunction.ShowWaitAndDisplay(query, gridControl1, gridView1, "Please wait", "Populating data into the database...");
+            HelperFunction.ShowWaitAndDisplayNonAsync(query, gridControl2, gridView2, "Please wait", "Populating data into the database...");
             gridView1.Focus();
         }
     }

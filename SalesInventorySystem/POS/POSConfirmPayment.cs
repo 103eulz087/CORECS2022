@@ -554,7 +554,9 @@ namespace SalesInventorySystem.POS
                 discounttype = "REGULAR";
             }
             spSaveTransaction(discounttype, invno);
-            pushit();
+            bool isLinkedServer = Database.checkifExist("SELECT 1 FROM POSType WHERE isLinkedServer=1");
+            if (isLinkedServer) { pushit(); }
+            
         }
         bool haveOneTimeDiscount()
         {

@@ -191,7 +191,7 @@ namespace SalesInventorySystem.Reporting
                     string productcode = gridView1.GetRowCellValue(rowHandle, "ProductCode").ToString();//dataGridView1.Rows[0].Cells["Product"].Value.ToString();
                     string description = gridView1.GetRowCellValue(rowHandle, "ProductName").ToString();// dataGridView1.Rows[0].Cells["Description"].Value.ToString(); 
                     string cost = gridView1.GetRowCellValue(rowHandle, "Cost").ToString();//dataGridView1.Rows[0].Cells["Quantity"].Value.ToString();
-                    string quantity = gridView1.GetRowCellValue(rowHandle, "Qty").ToString();//dataGridView1.Rows[0].Cells["Quantity"].Value.ToString();
+                    string quantity = gridView1.GetRowCellValue(rowHandle, "QtyDispatch").ToString();//dataGridView1.Rows[0].Cells["Quantity"].Value.ToString();
                     string barcode = gridView1.GetRowCellValue(rowHandle, "BarcodeNo").ToString();//dataGridView1.Rows[0].Cells["Quantity"].Value.ToString();
                     totalreceive = rowHandle;
                     if (rowHandle >= 0)

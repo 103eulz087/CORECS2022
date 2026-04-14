@@ -55,7 +55,7 @@ namespace SalesInventorySystem
 
             txtcashiername.Text = cashierName;
 
-            bool isPendingTran = Database.checkifExist("SELECT TOP(1) Status FROM BatchSalesSummary WHERE (Status='Pending' OR isHold='1') " +
+            bool isPendingTran = Database.checkifExist("SELECT 1 FROM BatchSalesSummary WHERE (Status='Pending' OR isHold='1') " +
                 "AND BranchCode='" + Login.assignedBranch + "' " +
                 "AND MachineUsed='" + Environment.MachineName + "' " +
                 //"AND isHold='1' " +
@@ -69,9 +69,9 @@ namespace SalesInventorySystem
                 simpleButton3.Enabled = false;
                 simpleButton1.Enabled = false;
                 grouppendingtran.Visible = true;
-                Database.display($"SELECT ReferenceNo as ORNum,TotalAmount as Amount,OnHoldName as CustName,PreparedBy " +
-                      $"FROM dbo.BatchSalesSummary WHERE (Status='Pending' OR isHold='1') AND BranchCode='{Login.assignedBranch}' " +
-                      $"AND MachineUsed='{Environment.MachineName}' AND CashierTransNo='{txtcashiertransno.Text}' ", gridControl1, gridView1);
+                //Database.display($"SELECT ReferenceNo as ORNum,TotalAmount as Amount,OnHoldName as CustName,PreparedBy " +
+                //      $"FROM dbo.BatchSalesSummary WHERE BranchCode='{Login.assignedBranch}' AND (Status='Pending' OR isHold='1') " +
+                //      $"AND MachineUsed='{Environment.MachineName}' AND CashierTransNo='{txtcashiertransno.Text}' ", gridControl1, gridView1);
 
             }
             else

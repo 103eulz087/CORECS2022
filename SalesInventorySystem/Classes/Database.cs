@@ -15,6 +15,7 @@ using DevExpress.XtraEditors.Repository;
 using Npgsql;
 using System.Threading.Tasks;
 using SalesInventorySystem.Classes;
+using System.Collections.Concurrent;
 
 namespace SalesInventorySystem
 {
@@ -79,18 +80,110 @@ namespace SalesInventorySystem
         //    //exitProg:
         //    return num1;
         //}
-        public static String getConnectionServerName()
+        //public static String getConnectionServerName()
+        //{
+        //    regkey = Registry.CurrentUser.CreateSubKey(@"AAITCRE\ConnSettingsMain");
+        //    return constring = regkey.GetValue("servername").ToString();
+        //}
+
+        //public static String getConnectionString(string regkeypath)
+        //{
+        //    regkey = Registry.CurrentUser.CreateSubKey(regkeypath);
+        //    return constring = regkey.GetValue("dbconn").ToString();
+        //}
+        // Cache the server name in memory so we only read the Registry once!
+        private static string _cachedServerName = null;
+
+        public static string getConnectionServerName()
         {
-            regkey = Registry.CurrentUser.CreateSubKey(@"AAITCRE\ConnSettingsMain");
-            return constring = regkey.GetValue("servername").ToString();
+            // 1. Check if we already loaded it into memory
+            if (string.IsNullOrEmpty(_cachedServerName))
+            {
+                // 2. Open safely in READ-ONLY mode, wrapped in a 'using' block to prevent OS memory leaks
+                using (RegistryKey key = Registry.CurrentUser.OpenSubKey(@"AAITCRE\ConnSettingsMain", false))
+                {
+                    if (key != null)
+                    {
+                        object regValue = key.GetValue("servername");
+                        if (regValue != null)
+                        {
+                            _cachedServerName = regValue.ToString();
+                        }
+                    }
+                }
+            }
+
+            // 3. Return the cached string (or a blank string if the registry key is completely missing)
+            return _cachedServerName ?? "";
         }
 
-        public static String getConnectionString(string regkeypath)
+        public static string getConnectionString(string regkeypath)
         {
-            regkey = Registry.CurrentUser.CreateSubKey(regkeypath);
-            return constring = regkey.GetValue("dbconn").ToString();
-        }
+            string connectionString = "";
 
+            try
+            {
+                using (RegistryKey key = Registry.CurrentUser.OpenSubKey(regkeypath, false))
+                {
+                    if (key != null)
+                    {
+                        object regValue = key.GetValue("dbconn");
+
+                        // Safely check for null before converting to string!
+                        if (regValue != null)
+                        {
+                            connectionString = regValue.ToString();
+                        }
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                // Fail safely if the registry path is malformed
+            }
+
+            return connectionString;
+        }
+        //FOR CASHIER ONLY
+        public static void RunLocalDatabaseMigrations()
+        {
+            try
+            {
+                using (SqlConnection con = getConnection()) // Connects to the cashier's local DB
+                {
+                    con.Open();
+
+                    // You can safely stack as many CREATEs and ALTERs in here as you want!
+                //    --1.Create the new table if it doesn't exist
+                //IF NOT EXISTS(SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[NewCloudTable]') AND type in (N'U'))
+                //BEGIN
+                //    CREATE TABLE[dbo].[NewCloudTable](
+                //        [ID][int] IDENTITY(1, 1) NOT NULL PRIMARY KEY,
+                //        [DataValue] [varchar] (50) NULL
+                //    )
+                //END
+
+                //-- 2. Add the audit columns to DeliveryDetails if they are missing
+                    string migrationScript = @"
+            
+                        IF COL_LENGTH('dbo.POSType', 'isAutoSystemDeduct') IS NULL
+                        BEGIN
+                            ALTER TABLE dbo.POSType ADD isAutoSystemDeduct BIT NULL DEFAULT 0 WITH VALUES;
+                        END
+                    ";
+
+                    using (SqlCommand com = new SqlCommand(migrationScript, con))
+                    {
+                        com.CommandTimeout = 120; // 2 minutes
+                        com.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                XtraMessageBox.Show("Warning: Local database migration failed. " + ex.Message, "Sync Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
         //public static SqlConnection getConnection()
         //{
         //    //regkey = Registry.CurrentUser.CreateSubKey(@"Enzo\ConnSettings");
@@ -142,43 +235,84 @@ namespace SalesInventorySystem
         }
 
 
+        //public static SqlConnection getConnection(string regkeyname)
+        //{
+        //    regkey = Registry.CurrentUser.CreateSubKey(regkeyname);
+        //    constring = regkey.GetValue("dbconn").ToString();
+        //    SqlConnection con;
+        //    try
+        //    {
+        //        con = new SqlConnection(constring);
+        //        //if (con.State == ConnectionState.Closed)
+        //        //{
+        //        //    con.Close();
+        //        //    goto outer;
+        //        //}
+        //    }
+        //    catch (SqlException sex)
+        //    {
+        //        sex.StackTrace.ToString();
+        //        return null;
+        //    }
+        //    //outer:
+        //    return con;
+        //}
+        //public static SqlConnection getConnectionUpdater()
+        //{
+        //    regkey = Registry.CurrentUser.CreateSubKey(@"AAITCRE\ConnSettingsUpdater");
+        //    constring = regkey.GetValue("dbconn").ToString();
+        //    SqlConnection con;
+        //    try
+        //    {
+        //        con = new SqlConnection(constring);
+        //    }
+        //    catch (SqlException sex)
+        //    {
+        //        sex.StackTrace.ToString();
+        //        return null;
+        //    }
+        //    return con;
+        //}
+        // A thread-safe memory cache to store multiple connection strings
+        private static readonly ConcurrentDictionary<string, string> _connectionCache = new ConcurrentDictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+
         public static SqlConnection getConnection(string regkeyname)
         {
-            regkey = Registry.CurrentUser.CreateSubKey(regkeyname);
-            constring = regkey.GetValue("dbconn").ToString();
-            SqlConnection con;
-            try
+            // 1. Try to get the connection string from memory cache first (Blazing fast!)
+            if (!_connectionCache.TryGetValue(regkeyname, out string cachedString))
             {
-                con = new SqlConnection(constring);
-                //if (con.State == ConnectionState.Closed)
-                //{
-                //    con.Close();
-                //    goto outer;
-                //}
+                // 2. If it is NOT in memory, read the Registry (Safely in READ-ONLY mode)
+                using (RegistryKey regkey = Registry.CurrentUser.OpenSubKey(regkeyname, false))
+                {
+                    if (regkey != null)
+                    {
+                        object regValue = regkey.GetValue("dbconn");
+                        if (regValue != null)
+                        {
+                            cachedString = regValue.ToString();
+
+                            // 3. Save it to the cache so we never have to read the registry for this key again!
+                            _connectionCache.TryAdd(regkeyname, cachedString);
+                        }
+                    }
+                }
+
+                // 4. Fail Fast: If it's still null, the registry key is missing or blank
+                if (string.IsNullOrEmpty(cachedString))
+                {
+                    throw new InvalidOperationException($"CRITICAL ERROR: Connection string missing in Registry: {regkeyname}");
+                }
             }
-            catch (SqlException sex)
-            {
-                sex.StackTrace.ToString();
-                return null;
-            }
-            //outer:
-            return con;
+
+            // 5. Return the new connection using the safely cached string
+            return new SqlConnection(cachedString);
         }
+
         public static SqlConnection getConnectionUpdater()
         {
-            regkey = Registry.CurrentUser.CreateSubKey(@"AAITCRE\ConnSettingsUpdater");
-            constring = regkey.GetValue("dbconn").ToString();
-            SqlConnection con;
-            try
-            {
-                con = new SqlConnection(constring);
-            }
-            catch (SqlException sex)
-            {
-                sex.StackTrace.ToString();
-                return null;
-            }
-            return con;
+            // DRY Principle (Don't Repeat Yourself): 
+            // Just pass the hardcoded string into your optimized master method!
+            return getConnection(@"AAITCRE\ConnSettingsUpdater");
         }
         public static SqlConnection getCustomConnection(string constring)
         {
@@ -961,425 +1095,599 @@ namespace SalesInventorySystem
         }
 
 
-        public static Double getSingleAmountQuery(string tablename, string condition, string returnval)
+        //public static Double getSingleAmountQuery(string tablename, string condition, string returnval)
+        //{
+        //    double str = 0.0;
+        //    SqlConnection con = getConnection();
+        //    con.Open();
+        //    string query = "SELECT TOP(1) * FROM " + tablename + " WHERE " + condition + " ";
+        //    SqlCommand com = new SqlCommand(query, con);
+        //    SqlDataReader reader = com.ExecuteReader();
+        //    if (reader != null)
+        //    {
+        //        while (reader.Read())
+        //        {
+        //            str = Convert.ToDouble(reader[returnval]);
+        //        }
+        //        reader.Close();
+        //    }
+        //    con.Close();
+        //    return str;
+        //}
+
+        //public static String getSingleQueryWithNull(string tablename,string id, string condition, string returnval)
+        //{
+        //    string str = "";
+        //    SqlConnection con = getConnection();
+        //    con.Open();
+        //    string query = "SELECT TOP(1) " + id+" FROM " + tablename + " WHERE " + condition + " ";
+        //    SqlCommand com = new SqlCommand(query, con);
+        //    SqlDataReader reader = com.ExecuteReader();
+        //    try
+        //    {
+        //        if (reader != null)
+        //        {
+        //            while (reader.Read())
+        //            {
+        //                str = reader[returnval].ToString();
+        //            }
+        //            reader.Close();
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw new Exception(ex.Message.ToString());
+        //    }
+        //    finally
+        //    {
+        //        con.Close();
+        //    }
+        //    return str;
+        //}
+
+        //public static String getSingleData(string tablename,string col,string value)
+        //{
+        //    string str = "";
+        //    SqlConnection con = getConnection();
+        //    con.Open();
+        //    try
+        //    {
+        //        string query = "SELECT TOP(1) * FROM " + tablename + " WHERE " + col + " = '" + value + "' ";
+        //        SqlCommand com = new SqlCommand(query, con);
+        //        SqlDataReader reader = com.ExecuteReader();
+        //        if (reader != null)
+        //        {
+        //            while (reader.Read())
+        //            {
+        //                str = reader[col].ToString();
+        //            }
+        //            reader.Close();
+        //        }
+        //    }
+        //    catch(SqlException ex)
+        //    {
+        //        ex.Message.ToString();
+        //    }
+        //    finally
+        //    {
+        //        con.Close();
+        //    }
+        //    return str;
+        //}
+
+        //public static String getSingleData(string tablename, string col, string value,string returnval)
+        //{
+        //    string str = "";
+        //    SqlConnection con = getConnection();
+        //    con.Open();
+        //    try
+        //    {
+        //        string query = "SELECT TOP(1) * FROM " + tablename + " WHERE " + col + " = '" + value + "' ";
+        //        SqlCommand com = new SqlCommand(query, con);
+        //        SqlDataReader reader = com.ExecuteReader();
+        //        if (reader != null)
+        //        {
+        //            while (reader.Read())
+        //            {
+        //                str = reader[returnval].ToString();
+        //            }
+        //            reader.Close();
+        //        }
+        //    }
+        //    catch (SqlException ex)
+        //    {
+        //        ex.Message.ToString();
+        //    }
+        //    finally
+        //    {
+        //        con.Close();
+        //    }
+        //    return str;
+        //}
+        // 1. The Double / Amount Lookup
+        public static double getSingleAmountQuery(string tablename, string condition, string returnval)
         {
-            double str = 0.0;
-            SqlConnection con = getConnection();
-            con.Open();
-            string query = "SELECT TOP(1) * FROM " + tablename + " WHERE " + condition + " ";
-            SqlCommand com = new SqlCommand(query, con);
-            SqlDataReader reader = com.ExecuteReader();
-            if (reader != null)
+            try
             {
-                while (reader.Read())
+                using (SqlConnection con = getConnection())
                 {
-                    str = Convert.ToDouble(reader[returnval]);
+                    con.Open();
+                    // FIXED: Only selects the column we actually need!
+                    string query = $"SELECT TOP(1) {returnval} FROM {tablename} WHERE {condition}";
+
+                    using (SqlCommand com = new SqlCommand(query, con))
+                    {
+                        object result = com.ExecuteScalar();
+                        return (result != null && result != DBNull.Value) ? Convert.ToDouble(result) : 0.0;
+                    }
                 }
-                reader.Close();
             }
-            con.Close();
-            return str;
+            catch (SqlException)
+            {
+                return 0.0; // Fail safely
+            }
         }
 
-        public static String getSingleQueryWithNull(string tablename,string id, string condition, string returnval)
+        // 2. The Null-Safe String Lookup (Fixed the 'id' vs 'returnval' bug!)
+        public static string getSingleQueryWithNull(string tablename, string id, string condition, string returnval)
+        {
+            try
+            {
+                using (SqlConnection con = getConnection())
+                {
+                    con.Open();
+                    // FIXED: We select 'returnval' directly so ExecuteScalar grabs the right text.
+                    // (Note: If 'id' was supposed to be the column, just swap {returnval} with {id} here)
+                    string query = $"SELECT TOP(1) {returnval} FROM {tablename} WHERE {condition}";
+
+                    using (SqlCommand com = new SqlCommand(query, con))
+                    {
+                        object result = com.ExecuteScalar();
+                        return (result != null && result != DBNull.Value) ? result.ToString() : "";
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                // Fail silently and safely return a blank string
+                return "";
+            }
+        }
+
+        // 3. Single Data Lookup (Returns the same column you searched for)
+        public static string getSingleData(string tablename, string col, string value)
+        {
+            try
+            {
+                using (SqlConnection con = getConnection())
+                {
+                    con.Open();
+                    // FIXED: Replaced * with {col}
+                    string query = $"SELECT TOP(1) {col} FROM {tablename} WHERE {col} = '{value}'";
+
+                    using (SqlCommand com = new SqlCommand(query, con))
+                    {
+                        object result = com.ExecuteScalar();
+                        return (result != null && result != DBNull.Value) ? result.ToString() : "";
+                    }
+                }
+            }
+            catch (SqlException)
+            {
+                return "";
+            }
+        }
+
+        // 4. Single Data Lookup (Searches one column, returns another)
+        public static string getSingleData(string tablename, string col, string value, string returnval)
+        {
+            try
+            {
+                using (SqlConnection con = getConnection())
+                {
+                    con.Open();
+                    // FIXED: Replaced * with {returnval}
+                    string query = $"SELECT TOP(1) {returnval} FROM {tablename} WHERE {col} = '{value}'";
+
+                    using (SqlCommand com = new SqlCommand(query, con))
+                    {
+                        object result = com.ExecuteScalar();
+                        return (result != null && result != DBNull.Value) ? result.ToString() : "";
+                    }
+                }
+            }
+            catch (SqlException)
+            {
+                return "";
+            }
+        }
+        //public static String getSingleResultSet(string query)
+        //{
+        //    string str = "";
+        //    SqlConnection con = getConnection();
+        //    con.Open();
+        //    try
+        //    {
+        //        SqlCommand com = new SqlCommand(query, con);
+        //        com.CommandTimeout = 0;
+        //        SqlDataReader reader = com.ExecuteReader();
+        //        if(reader.Read())
+        //        {
+        //            str = reader[0].ToString();
+        //        }
+        //        reader.Close();
+        //    }
+        //    catch (SqlException ex)
+        //    {
+        //        ex.Message.ToString();
+        //    }
+        //    finally
+        //    {
+        //        con.Close();
+        //    }
+        //    return str;
+        //}
+        public static string getSingleResultSet(string query)
         {
             string str = "";
-            SqlConnection con = getConnection();
-            con.Open();
-            string query = "SELECT TOP(1) " + id+" FROM " + tablename + " WHERE " + condition + " ";
-            SqlCommand com = new SqlCommand(query, con);
-            SqlDataReader reader = com.ExecuteReader();
             try
             {
-                if (reader != null)
+                using (SqlConnection con = getConnection())
                 {
-                    while (reader.Read())
+                    con.Open();
+                    using (SqlCommand com = new SqlCommand(query, con))
                     {
-                        str = reader[returnval].ToString();
+                        // Removed the infinite 0 timeout. 
+                        // Set to 3600 (1 hour) if this is a heavy report, otherwise 30-60 is safer!
+                        com.CommandTimeout = 3600;
+
+                        // ExecuteScalar instantly grabs the exact value of reader[0] and nothing else
+                        object result = com.ExecuteScalar();
+
+                        if (result != null && result != DBNull.Value)
+                        {
+                            str = result.ToString();
+                        }
                     }
-                    reader.Close();
                 }
             }
-            catch (Exception ex)
+            catch (SqlException)
             {
-                throw new Exception(ex.Message.ToString());
+                // Fail silently. The UI should handle what to do if it receives an empty string.
             }
-            finally
-            {
-                con.Close();
-            }
+
             return str;
         }
-
-        public static String getSingleData(string tablename,string col,string value)
+        public static async Task<string> getSingleResultSetAsync(string query)
         {
             string str = "";
-            SqlConnection con = getConnection();
-            con.Open();
             try
             {
-                string query = "SELECT TOP(1) * FROM " + tablename + " WHERE " + col + " = '" + value + "' ";
-                SqlCommand com = new SqlCommand(query, con);
-                SqlDataReader reader = com.ExecuteReader();
-                if (reader != null)
+                using (SqlConnection con = getConnection())
                 {
-                    while (reader.Read())
+                    await con.OpenAsync();
+                    using (SqlCommand com = new SqlCommand(query, con))
                     {
-                        str = reader[col].ToString();
+                        com.CommandTimeout = 3600;
+
+                        object result = await com.ExecuteScalarAsync();
+
+                        if (result != null && result != DBNull.Value)
+                        {
+                            str = result.ToString();
+                        }
                     }
-                    reader.Close();
                 }
             }
-            catch(SqlException ex)
+            catch (SqlException)
             {
-                ex.Message.ToString();
+                // Fail silently
             }
-            finally
-            {
-                con.Close();
-            }
+
             return str;
         }
 
-        public static String getSingleData(string tablename, string col, string value,string returnval)
+        //public static int getCountData(string query,string value)
+        //{
+        //    int ctr = 0;
+        //    SqlConnection con = getConnection();
+        //    con.Open();
+        //   // string query = "SELECT COUNT(" + id + ") AS Counter FROM " + tablename + " WHERE " + condition + " ";
+        //    SqlCommand com = new SqlCommand(query, con);
+        //    SqlDataReader reader = com.ExecuteReader();
+        //    if (reader != null)
+        //    {
+        //        while (reader.Read())
+        //        {
+        //            ctr = Convert.ToInt32(reader[value].ToString());
+        //        }
+        //        reader.Close();
+        //    }
+        //    con.Close();
+        //    return ctr;
+        //}
+        //public static int getCountData(string tablename, string condition,string id)
+        //{
+        //    int ctr = 0;
+        //    SqlConnection con = getConnection();
+        //    con.Open();
+        //    try
+        //    {
+        //        string query = "SELECT TOP(1) COUNT(" + id + ") AS Counter FROM " + tablename + " WHERE " + condition + " ";
+        //        SqlCommand com = new SqlCommand(query, con);
+        //        SqlDataReader reader = com.ExecuteReader();
+        //        if (reader != null)
+        //        {
+        //            while (reader.Read())
+        //            {
+        //                ctr = Convert.ToInt32(reader["Counter"].ToString());
+        //            }
+        //            reader.Close();
+        //        }
+        //    }
+        //    catch (SqlException ex)
+        //    {
+        //        ex.Message.ToString();
+        //    }
+        //    finally
+        //    {
+        //        con.Close();
+        //    }
+        //    return ctr;
+        //}
+
+        //public static int getCountData(string tablename, string col, string value,string id)
+        //{
+        //    int ctr=0;
+        //    SqlConnection con = getConnection();
+        //    con.Open();
+        //    string query = "SELECT TOP(1) COUNT(" + id+") AS Counter FROM " + tablename + " WHERE " + col + " = '" + value + "' ";
+        //    SqlCommand com = new SqlCommand(query, con);
+        //    SqlDataReader reader = com.ExecuteReader();
+        //    if (reader != null)
+        //    {
+        //        while (reader.Read())
+        //        {
+        //            ctr = Convert.ToInt32(reader["Counter"].ToString());
+        //        }
+        //        reader.Close();
+        //    }
+        //    con.Close();
+        //    return ctr;
+        //}
+
+        //public static int getCountData(string tablename, string col, string value, string id,string col2,string val2)
+        //{
+        //    int ctr = 0;
+        //    SqlConnection con = getConnection();
+        //    con.Open();
+        //    string query = "SELECT TOP(1) COUNT(" + id + ") AS Counter FROM " + tablename + " WHERE " + col + " = '" + value + "' AND "+col2+" = "+val2+" ";
+        //    SqlCommand com = new SqlCommand(query, con);
+        //    SqlDataReader reader = com.ExecuteReader();
+        //    if (reader != null)
+        //    {
+        //        while (reader.Read())
+        //        {
+        //            ctr = Convert.ToInt32(reader["Counter"].ToString());
+        //        }
+        //        reader.Close();
+        //    }
+        //    con.Close();
+        //    return ctr;
+        //}
+        // OVERLOAD 1: Raw Query
+        // Note: We keep the 'value' parameter so we don't break your existing code, 
+        // but ExecuteScalar makes it obsolete since it grabs the first column automatically!
+        public static int getCountData(string query, string value)
         {
-            string str = "";
-            SqlConnection con = getConnection();
-            con.Open();
             try
             {
-                string query = "SELECT TOP(1) * FROM " + tablename + " WHERE " + col + " = '" + value + "' ";
-                SqlCommand com = new SqlCommand(query, con);
-                SqlDataReader reader = com.ExecuteReader();
-                if (reader != null)
+                using (SqlConnection con = getConnection())
                 {
-                    while (reader.Read())
+                    con.Open();
+                    using (SqlCommand com = new SqlCommand(query, con))
                     {
-                        str = reader[returnval].ToString();
+                        object result = com.ExecuteScalar();
+                        return (result != null && result != DBNull.Value) ? Convert.ToInt32(result) : 0;
                     }
-                    reader.Close();
                 }
             }
-            catch (SqlException ex)
+            catch (SqlException)
             {
-                ex.Message.ToString();
+                return 0; // Safe fail
             }
-            finally
-            {
-                con.Close();
-            }
-            return str;
-        }
-        public static String getSingleResultSet(string query)
-        {
-            string str = "";
-            SqlConnection con = getConnection();
-            con.Open();
-            try
-            {
-                SqlCommand com = new SqlCommand(query, con);
-                com.CommandTimeout = 0;
-                SqlDataReader reader = com.ExecuteReader();
-                if(reader.Read())
-                {
-                    str = reader[0].ToString();
-                }
-                reader.Close();
-            }
-            catch (SqlException ex)
-            {
-                ex.Message.ToString();
-            }
-            finally
-            {
-                con.Close();
-            }
-            return str;
-        }
-      
-        public static int getCountData(string query,string value)
-        {
-            int ctr = 0;
-            SqlConnection con = getConnection();
-            con.Open();
-           // string query = "SELECT COUNT(" + id + ") AS Counter FROM " + tablename + " WHERE " + condition + " ";
-            SqlCommand com = new SqlCommand(query, con);
-            SqlDataReader reader = com.ExecuteReader();
-            if (reader != null)
-            {
-                while (reader.Read())
-                {
-                    ctr = Convert.ToInt32(reader[value].ToString());
-                }
-                reader.Close();
-            }
-            con.Close();
-            return ctr;
-        }
-        public static int getCountData(string tablename, string condition,string id)
-        {
-            int ctr = 0;
-            SqlConnection con = getConnection();
-            con.Open();
-            try
-            {
-                string query = "SELECT TOP(1) COUNT(" + id + ") AS Counter FROM " + tablename + " WHERE " + condition + " ";
-                SqlCommand com = new SqlCommand(query, con);
-                SqlDataReader reader = com.ExecuteReader();
-                if (reader != null)
-                {
-                    while (reader.Read())
-                    {
-                        ctr = Convert.ToInt32(reader["Counter"].ToString());
-                    }
-                    reader.Close();
-                }
-            }
-            catch (SqlException ex)
-            {
-                ex.Message.ToString();
-            }
-            finally
-            {
-                con.Close();
-            }
-            return ctr;
         }
 
-        public static int getCountData(string tablename, string col, string value,string id)
+        // OVERLOAD 2: Condition String
+        public static int getCountData(string tablename, string condition, string id)
         {
-            int ctr=0;
-            SqlConnection con = getConnection();
-            con.Open();
-            string query = "SELECT TOP(1) COUNT(" + id+") AS Counter FROM " + tablename + " WHERE " + col + " = '" + value + "' ";
-            SqlCommand com = new SqlCommand(query, con);
-            SqlDataReader reader = com.ExecuteReader();
-            if (reader != null)
-            {
-                while (reader.Read())
-                {
-                    ctr = Convert.ToInt32(reader["Counter"].ToString());
-                }
-                reader.Close();
-            }
-            con.Close();
-            return ctr;
-        }
-
-        public static int getCountData(string tablename, string col, string value, string id,string col2,string val2)
-        {
-            int ctr = 0;
-            SqlConnection con = getConnection();
-            con.Open();
-            string query = "SELECT TOP(1) COUNT(" + id + ") AS Counter FROM " + tablename + " WHERE " + col + " = '" + value + "' AND "+col2+" = "+val2+" ";
-            SqlCommand com = new SqlCommand(query, con);
-            SqlDataReader reader = com.ExecuteReader();
-            if (reader != null)
-            {
-                while (reader.Read())
-                {
-                    ctr = Convert.ToInt32(reader["Counter"].ToString());
-                }
-                reader.Close();
-            }
-            con.Close();
-            return ctr;
-        }
-
-        public static double getTotalSummation(string tablename, string condition,string id)
-        {
-            double ctr = 0.0;
-            SqlConnection con = getConnection();
-            con.Open();
             try
             {
-                string query = "SELECT TOP(1) ISNULL(" + id + ",0) AS Totals FROM (SELECT SUM(" + id + ") AS Totals FROM " + tablename + " WHERE " + condition + ") ";
-                SqlCommand com = new SqlCommand(query, con);
-                SqlDataReader reader = com.ExecuteReader();
-                if (!reader.HasRows)
+                using (SqlConnection con = getConnection())
                 {
-                    while (reader.Read())
+                    con.Open();
+                    // Note: TOP(1) is technically not needed with COUNT(), but harmless to leave in.
+                    string query = $"SELECT COUNT({id}) FROM {tablename} WHERE {condition}";
+
+                    using (SqlCommand com = new SqlCommand(query, con))
                     {
-                        ctr = Convert.ToDouble(reader["Totals"].ToString());
+                        object result = com.ExecuteScalar();
+                        return (result != null && result != DBNull.Value) ? Convert.ToInt32(result) : 0;
                     }
-                    reader.Close();
                 }
             }
-            catch (SqlException ex)
+            catch (SqlException)
             {
-                ex.Message.ToString();
+                return 0;
             }
-            finally
-            {
-                con.Close();
-            }
-            return ctr;
         }
 
-        public static double getTotalSummation2(string tablename, string condition, string id)
+        
+       
+        //public static double getTotalSummation(string tablename, string condition,string id)
+        //{
+        //    double ctr = 0.0;
+        //    SqlConnection con = getConnection();
+        //    con.Open();
+        //    try
+        //    {
+        //        string query = "SELECT TOP(1) ISNULL(" + id + ",0) AS Totals FROM (SELECT SUM(" + id + ") AS Totals FROM " + tablename + " WHERE " + condition + ") ";
+        //        SqlCommand com = new SqlCommand(query, con);
+        //        SqlDataReader reader = com.ExecuteReader();
+        //        if (!reader.HasRows)
+        //        {
+        //            while (reader.Read())
+        //            {
+        //                ctr = Convert.ToDouble(reader["Totals"].ToString());
+        //            }
+        //            reader.Close();
+        //        }
+        //    }
+        //    catch (SqlException ex)
+        //    {
+        //        ex.Message.ToString();
+        //    }
+        //    finally
+        //    {
+        //        con.Close();
+        //    }
+        //    return ctr;
+        //}
+
+
+        public static double getTotalSummation2(string tablename, string condition, string columnName)
         {
-            double ctr = 0.0;
-            SqlConnection con = getConnection();
-            con.Open();
-            string query = "SELECT TOP(1) ISNULL(SUM(" + id + "),0) AS Totals FROM " + tablename + " WHERE " + condition + " ";
-            SqlCommand com = new SqlCommand(query, con);
-            SqlDataReader reader = com.ExecuteReader();
             try
             {
-                if (reader != null)
+                using (SqlConnection con = getConnection())
                 {
-                    while (reader.Read())
+                    con.Open();
+                    // Simplified query: No need for nested SELECTs!
+                    string query = $"SELECT ISNULL(SUM({columnName}), 0) FROM {tablename} WHERE {condition}";
+
+                    using (SqlCommand com = new SqlCommand(query, con))
                     {
-                        ctr = Convert.ToDouble(reader["Totals"].ToString());
+                        // ExecuteScalar grabs the exact single value instantly
+                        object result = com.ExecuteScalar();
+                        return (result != null && result != DBNull.Value) ? Convert.ToDouble(result) : 0;
                     }
-                    reader.Close();
                 }
             }
-            catch(Exception ex)
+            catch (SqlException)
             {
-                throw new Exception(ex.StackTrace.ToString());
+                return 0; // Fail safely
             }
-            finally
-            {
-                con.Close();
-            }
-           
-            return ctr;
-            // con.Close();
         }
-        public static decimal getTotalSummation2Dec(string tablename, string condition, string id)
+        // Exactly the same, just returning a Decimal for currency!
+        public static decimal getTotalSummation2Dec(string tablename, string condition, string columnName)
         {
-            decimal ctr = 0;
-            SqlConnection con = getConnection();
-            con.Open();
-            string query = "SELECT TOP(1) ISNULL(SUM(" + id + "),0) AS Totals FROM " + tablename + " WHERE " + condition + " ";
-            SqlCommand com = new SqlCommand(query, con);
-            SqlDataReader reader = com.ExecuteReader();
             try
             {
-                if (reader != null)
+                using (SqlConnection con = getConnection())
                 {
-                    while (reader.Read())
+                    con.Open();
+                    string query = $"SELECT ISNULL(SUM({columnName}), 0) FROM {tablename} WHERE {condition}";
+
+                    using (SqlCommand com = new SqlCommand(query, con))
                     {
-                        ctr = Convert.ToDecimal(reader["Totals"].ToString());
+                        object result = com.ExecuteScalar();
+                        return (result != null && result != DBNull.Value) ? Convert.ToDecimal(result) : 0;
                     }
-                    reader.Close();
                 }
             }
-            catch (Exception ex)
+            catch (SqlException)
             {
-                throw new Exception(ex.StackTrace.ToString());
+                return 0;
             }
-            finally
-            {
-                con.Close();
-            }
-            return ctr;
-            // con.Close();
-        }
-        public static double getTotalSummation2(string tablename, string condition, string id,SqlConnection con)
-        {
-            double ctr = 0.0;
-            //SqlConnection con = getConnection();
-            con.Open();
-            string query = "SELECT TOP(1) ISNULL(SUM(" + id + "),0) AS Totals FROM " + tablename + " WHERE " + condition + " ";
-            SqlCommand com = new SqlCommand(query, con);
-            SqlDataReader reader = com.ExecuteReader();
-            try
-            {
-                if (reader != null)
-                {
-                    while (reader.Read())
-                    {
-                        ctr = Convert.ToDouble(reader["Totals"].ToString());
-                    }
-                    reader.Close();
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.StackTrace.ToString());
-            }
-            finally
-            {
-                con.Close();
-            }
-            return ctr;
-            // con.Close();
         }
 
-        public static double getTotalSummation(string tablename, string col, string value,string id)
+        //public static int getLastID(string tableName,string id)
+        //{
+        //    int i = 0;
+        //    SqlConnection con = getConnection();
+        //    con.Open();
+        //    string query = "SELECT TOP(1) ISNULL(MAX(CAST(" + id + " as int)),0) AS CC FROM " + tableName;
+        //    SqlCommand com = new SqlCommand(query, con);
+        //    SqlDataReader reader = com.ExecuteReader();
+        //    if (reader != null)
+        //    {
+        //        while (reader.Read())
+        //        { 
+        //            i = Convert.ToInt32(reader["CC"].ToString());
+        //        }
+        //        reader.Close();
+        //    }
+
+        //    con.Close();
+        //    return i;
+        //}
+
+        //public static int getLastID(string tableName,string condition, string id)
+        //{
+        //    int i = 0;
+        //    SqlConnection con = getConnection();
+        //    con.Open();
+        //    string query = "SELECT TOP(1) isnull(MAX(CAST(" + id + " as int)),0) AS CC FROM " + tableName + " WHERE "+condition+"";
+        //    SqlCommand com = new SqlCommand(query, con);
+        //    SqlDataReader reader = com.ExecuteReader();
+        //    if (reader != null)
+        //    {
+        //        while (reader.Read())
+        //        {
+        //            //i = reader.GetInt32(1);
+        //            i = Convert.ToInt32(reader["CC"].ToString());
+        //            // i = int.Parse(reader["CC"].ToString());
+        //            //  i = reader.GetInt32(reader.GetOrdinal("CC"));
+        //        }
+        //        reader.Close();
+        //    }
+        //    con.Close();
+        //    return i;
+        //}
+        // Version 1: No Condition
+        public static int getLastID(string tableName, string idColumnName)
         {
-            double ctr = 0.0;
-            SqlConnection con = getConnection();
-            con.Open();
             try
             {
-                string query = "SELECT TOP(1) ISNULL(" + id + ",0) AS Summary FROM (SELECT SUM(" + id + ") AS Summary FROM " + tablename + " WHERE " + col + " = '" + value + "') ";
-                SqlCommand com = new SqlCommand(query, con);
-                SqlDataReader reader = com.ExecuteReader();
-                if (reader != null)
+                using (SqlConnection con = getConnection())
                 {
-                    while (reader.Read())
+                    con.Open();
+                    string query = $"SELECT ISNULL(MAX(CAST({idColumnName} AS INT)), 0) FROM {tableName}";
+
+                    using (SqlCommand com = new SqlCommand(query, con))
                     {
-                        ctr = Convert.ToDouble(reader["Summary"].ToString());
+                        object result = com.ExecuteScalar();
+                        return (result != null && result != DBNull.Value) ? Convert.ToInt32(result) : 0;
                     }
-                    reader.Close();
                 }
             }
-            catch (SqlException ex)
+            catch (SqlException)
             {
-                ex.Message.ToString();
+                return 0;
             }
-            finally
-            {
-                con.Close();
-            }
-            return ctr;
         }
 
-        public static int getLastID(string tableName,string id)
+        // Version 2: With Condition
+        public static int getLastID(string tableName, string condition, string idColumnName)
         {
-            int i = 0;
-            SqlConnection con = getConnection();
-            con.Open();
-            string query = "SELECT TOP(1) ISNULL(MAX(CAST(" + id + " as int)),0) AS CC FROM " + tableName;
-            SqlCommand com = new SqlCommand(query, con);
-            SqlDataReader reader = com.ExecuteReader();
-            if (reader != null)
+            try
             {
-                while (reader.Read())
-                { 
-                    i = Convert.ToInt32(reader["CC"].ToString());
-                }
-                reader.Close();
-            }
-         
-            con.Close();
-            return i;
-        }
-
-        public static int getLastID(string tableName,string condition, string id)
-        {
-            int i = 0;
-            SqlConnection con = getConnection();
-            con.Open();
-            string query = "SELECT TOP(1) isnull(MAX(CAST(" + id + " as int)),0) AS CC FROM " + tableName + " WHERE "+condition+"";
-            SqlCommand com = new SqlCommand(query, con);
-            SqlDataReader reader = com.ExecuteReader();
-            if (reader != null)
-            {
-                while (reader.Read())
+                using (SqlConnection con = getConnection())
                 {
-                    //i = reader.GetInt32(1);
-                    i = Convert.ToInt32(reader["CC"].ToString());
-                    // i = int.Parse(reader["CC"].ToString());
-                    //  i = reader.GetInt32(reader.GetOrdinal("CC"));
+                    con.Open();
+                    string query = $"SELECT ISNULL(MAX(CAST({idColumnName} AS INT)), 0) FROM {tableName} WHERE {condition}";
+
+                    using (SqlCommand com = new SqlCommand(query, con))
+                    {
+                        object result = com.ExecuteScalar();
+                        return (result != null && result != DBNull.Value) ? Convert.ToInt32(result) : 0;
+                    }
                 }
-                reader.Close();
             }
-            con.Close();
-            return i;
+            catch (SqlException)
+            {
+                return 0;
+            }
         }
         public static int getLastID(string tableName, string condition, string id,SqlConnection con)
         {
@@ -1481,35 +1789,116 @@ namespace SalesInventorySystem
             return lastdate;
         }
 
+        //public static void display(string query, GridControl cont, GridView view)
+        //{
+        //    SqlConnection con = getConnection();
+        //    con.Open();
+        //  //  cont.BeginUpdate();
+        //    SqlCommand com = new SqlCommand(query, con);
+        //    SqlDataAdapter adapter = new SqlDataAdapter(com);
+        //    DataTable table = new DataTable();
+        //    try
+        //    {
+        //        com.CommandTimeout = 0;
+        //        view.Columns.Clear();
+        //        cont.DataSource = null;
+        //        adapter.Fill(table);
+        //        //  table.Columns.Add("OvertimeType");
+        //        cont.DataSource = table;
+        //        view.BestFitColumns();
+        //    }
+        //    catch (SqlException ee)
+        //    {
+        //        XtraMessageBox.Show(ee.ToString());
+        //    }
+        //    finally
+        //    {
+        //     //   cont.EndUpdate();
+        //        con.Close();
+        //    }
+        //}
         public static void display(string query, GridControl cont, GridView view)
         {
-            SqlConnection con = getConnection();
-            con.Open();
-          //  cont.BeginUpdate();
-            SqlCommand com = new SqlCommand(query, con);
-            SqlDataAdapter adapter = new SqlDataAdapter(com);
-            DataTable table = new DataTable();
             try
             {
-                com.CommandTimeout = 0;
+                using (SqlConnection con = getConnection())
+                {
+                    con.Open();
+                    using (SqlCommand com = new SqlCommand(query, con))
+                    {
+                        // 1 Hour timeout. High enough for heavy reports, but prevents infinite freezes.
+                        com.CommandTimeout = 3600;
+
+                        using (SqlDataAdapter adapter = new SqlDataAdapter(com))
+                        {
+                            DataTable table = new DataTable();
+                            adapter.Fill(table);
+
+                            // Freeze the UI drawing engine (Prevents flickering and speeds up load times)
+                            cont.BeginUpdate();
+
+                            view.Columns.Clear();
+                            cont.DataSource = null; // Clean slate
+                            cont.DataSource = table;
+                            view.BestFitColumns();
+                        }
+                    }
+                }
+            }
+            catch (SqlException ee)
+            {
+                XtraMessageBox.Show("Failed to load grid data: " + ee.Message, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                // ALWAYS resume drawing, even if the query crashes!
+                if (cont != null)
+                {
+                    cont.EndUpdate();
+                }
+            }
+        }
+        public static async Task displayAsync(string query, GridControl cont, GridView view)
+        {
+            try
+            {
+                DataTable table = new DataTable();
+                // 1. Do all the heavy database lifting in the BACKGROUND
+                using (SqlConnection con = getConnection())
+                {
+                    await con.OpenAsync();
+                    using (SqlCommand com = new SqlCommand(query, con))
+                    {
+                        com.CommandTimeout = 3600; // 1-Hour Timeout
+
+                        using (SqlDataReader reader = await com.ExecuteReaderAsync())
+                        {
+                            // This seamlessly loads the DataTable without blocking the UI
+                            table.Load(reader);
+                        }
+                    }
+                }
+
+                // 2. Now that the data is ready, update the DevExpress UI safely
+                cont.BeginUpdate();
+
                 view.Columns.Clear();
                 cont.DataSource = null;
-                adapter.Fill(table);
-                //  table.Columns.Add("OvertimeType");
                 cont.DataSource = table;
                 view.BestFitColumns();
             }
             catch (SqlException ee)
             {
-                XtraMessageBox.Show(ee.ToString());
+                XtraMessageBox.Show("Failed to load grid data: " + ee.Message, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
             {
-             //   cont.EndUpdate();
-                con.Close();
+                if (cont != null)
+                {
+                    cont.EndUpdate();
+                }
             }
         }
-
         public static void displayPg(string query, GridControl cont, GridView view)
         {
             // 1. Use your PostgreSQL connection method
@@ -2328,42 +2717,125 @@ namespace SalesInventorySystem
             }
         }
 
+        //public static void displaySearchlookupEdit(string query, SearchLookUpEdit searchEdit)
+        //{
+        //    SqlConnection con = Database.getConnection();
+        //    con.Open();
+        //    // string query = "SELECT * FROM PrimalCuts";
+        //    SqlCommand com = new SqlCommand(query, con);
+        //    SqlDataAdapter adapter = new SqlDataAdapter(com);
+        //    DataTable table = new DataTable();
+        //    adapter.Fill(table);
+        //    searchEdit.Properties.DataSource = table;
+        //    con.Close();
+        //}
+        //public static void displaySearchlookupEdit(string query,SearchLookUpEdit searchEdit,string displaymember,string valuemember)
+        //{
+        //    SqlConnection con = Database.getConnection();
+        //    con.Open();
+        //    try
+        //    {
+        //        SqlCommand com = new SqlCommand(query, con);
+        //        SqlDataAdapter adapter = new SqlDataAdapter(com);
+        //        DataTable table = new DataTable();
+
+        //        searchEdit.Properties.View.Columns.Clear();
+        //        adapter.Fill(table);
+        //        searchEdit.Properties.DataSource = null;
+        //        searchEdit.Properties.DataSource = table;
+        //        searchEdit.Properties.DisplayMember = displaymember;
+        //        searchEdit.Properties.ValueMember = valuemember;
+        //    }
+        //    catch(SqlException ex)
+        //    {
+        //        XtraMessageBox.Show(ex.Message.ToString());
+        //    }
+        //    finally
+        //    {
+        //        con.Close();
+        //    }
+        //}
         public static void displaySearchlookupEdit(string query, SearchLookUpEdit searchEdit)
         {
-            SqlConnection con = Database.getConnection();
-            con.Open();
-            // string query = "SELECT * FROM PrimalCuts";
-            SqlCommand com = new SqlCommand(query, con);
-            SqlDataAdapter adapter = new SqlDataAdapter(com);
-            DataTable table = new DataTable();
-            adapter.Fill(table);
-            searchEdit.Properties.DataSource = table;
-            con.Close();
-        }
-        public static void displaySearchlookupEdit(string query,SearchLookUpEdit searchEdit,string displaymember,string valuemember)
-        {
-            SqlConnection con = Database.getConnection();
-            con.Open();
             try
             {
-                SqlCommand com = new SqlCommand(query, con);
-                SqlDataAdapter adapter = new SqlDataAdapter(com);
+                using (SqlConnection con = getConnection()) // Uses your new optimized connection!
+                {
+                    con.Open();
+                    using (SqlCommand com = new SqlCommand(query, con))
+                    using (SqlDataAdapter adapter = new SqlDataAdapter(com))
+                    {
+                        DataTable table = new DataTable();
+                        adapter.Fill(table);
+
+                        searchEdit.Properties.DataSource = table;
+                    }
+                }
+            }
+            catch (SqlException)
+            {
+                // Fail silently so the UI just shows an empty dropdown instead of crashing the form
+            }
+        }
+
+        public static void displaySearchlookupEdit(string query, SearchLookUpEdit searchEdit, string displaymember, string valuemember)
+        {
+            try
+            {
+                using (SqlConnection con = getConnection())
+                {
+                    con.Open();
+                    using (SqlCommand com = new SqlCommand(query, con))
+                    using (SqlDataAdapter adapter = new SqlDataAdapter(com))
+                    {
+                        DataTable table = new DataTable();
+                        adapter.Fill(table);
+
+                        // UI binding logic
+                        searchEdit.Properties.View.Columns.Clear();
+                        searchEdit.Properties.DataSource = null; // Forces a clean DevExpress refresh
+                        searchEdit.Properties.DataSource = table;
+                        searchEdit.Properties.DisplayMember = displaymember;
+                        searchEdit.Properties.ValueMember = valuemember;
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                // Formatted cleanly for DevExpress
+                XtraMessageBox.Show("Failed to load dropdown data: " + ex.Message, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        public static async Task displaySearchlookupEditAsync(string query, SearchLookUpEdit searchEdit, string displaymember, string valuemember)
+        {
+            try
+            {
                 DataTable table = new DataTable();
 
+                // 1. Fetch the data in the background (UI stays completely unfrozen)
+                using (SqlConnection con = getConnection())
+                {
+                    await con.OpenAsync();
+                    using (SqlCommand com = new SqlCommand(query, con))
+                    {
+                        // We use a DataReader for Async because SqlDataAdapter doesn't fully support true Async operations
+                        using (SqlDataReader reader = await com.ExecuteReaderAsync())
+                        {
+                            table.Load(reader);
+                        }
+                    }
+                }
+
+                // 2. Bind it to the DevExpress control safely on the UI thread
                 searchEdit.Properties.View.Columns.Clear();
-                adapter.Fill(table);
                 searchEdit.Properties.DataSource = null;
                 searchEdit.Properties.DataSource = table;
                 searchEdit.Properties.DisplayMember = displaymember;
                 searchEdit.Properties.ValueMember = valuemember;
             }
-            catch(SqlException ex)
+            catch (SqlException ex)
             {
-                XtraMessageBox.Show(ex.Message.ToString());
-            }
-            finally
-            {
-                con.Close();
+                XtraMessageBox.Show("Failed to load dropdown data: " + ex.Message, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         public static void displaySearchlookupEdit(string query, SearchLookUpEdit searchEdit, string displaymember, string valuemember,SqlConnection con)
@@ -2455,7 +2927,7 @@ namespace SalesInventorySystem
             //gridLookUpEdit1.Properties.DataSource = table;
         }
         /***************************************************************************/
-        public static void setConnectionState()
+        public static void setConnectionState()//must remove
         {
             if (con.State == ConnectionState.Open)
             {
@@ -2464,7 +2936,7 @@ namespace SalesInventorySystem
             con.ConnectionString = getConnectionStringProd();
         }
 
-        public static SqlConnection OpenConnection()
+        public static SqlConnection OpenConnection()//must remove
         {
             setConnectionState();
             try
@@ -2478,7 +2950,7 @@ namespace SalesInventorySystem
             return con;
         }
 
-        public static SqlDataReader GetRecord(string sql)
+        public static SqlDataReader GetRecord(string sql) //must remove
         {
             try
             {

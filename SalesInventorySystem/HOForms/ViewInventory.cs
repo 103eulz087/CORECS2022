@@ -28,9 +28,8 @@ namespace SalesInventorySystem
 
             GridView view = gridControl1.FocusedView as GridView;
             view.SortInfo.ClearAndAddRange(new GridColumnSortInfo[] {
-                new GridColumnSortInfo(view.Columns["SupplierName"],DevExpress.Data.ColumnSortOrder.Ascending),
                  new GridColumnSortInfo(view.Columns["ShipmentNo"],DevExpress.Data.ColumnSortOrder.Ascending)
-                }, 2);
+                }, 1);
 
             //GridGroupSummaryItem ite = new GridGroupSummaryItem();
             //ite.FieldName = "TipWeight";
@@ -46,7 +45,7 @@ namespace SalesInventorySystem
 
            
                 //gridView1.Columns["TipWeight"].Summary.Add(DevExpress.Data.SummaryItemType.Sum, "TipWeight", "{0:n2}");
-                gridView1.Columns["Quantity"].Summary.Add(DevExpress.Data.SummaryItemType.Sum, "Quantity", "{0:n2}");
+                //gridView1.Columns["Quantity"].Summary.Add(DevExpress.Data.SummaryItemType.Sum, "Quantity", "{0:n2}");
 
       
            
@@ -55,13 +54,15 @@ namespace SalesInventorySystem
 
       
 
-        private void display()
+        private async void display()
         {
             //string query = "SELECT * FROM view_BigBlueInventoryDetails";
             //HelperFunction.ShowWaitAndDisplay(query, gridControl1, gridView1, "Please wait", "Populating data into the database...");
             //gridView1.Focus();
-
-            Database.display("SELECT * FROM view_BigBlueInventoryDetails", gridControl1, gridView1);
+            Cursor = Cursors.WaitCursor;
+            //Database.display("SELECT * FROM view_BigBlueInventoryDetails", gridControl1, gridView1);
+            await Database.displayAsync("SELECT * FROM view_BigBlueInventoryDetails", gridControl1, gridView1);
+            Cursor = Cursors.Default;
             gridView1.Columns[0].Visible = false;
            
         }

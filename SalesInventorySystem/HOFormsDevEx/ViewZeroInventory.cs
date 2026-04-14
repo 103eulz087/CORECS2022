@@ -20,26 +20,33 @@ namespace SalesInventorySystem.HOFormsDevEx
 
         private void ViewZeroInventory_Load(object sender, EventArgs e)
         {
-            Database.displaySearchlookupEdit("SELECT BranchCode,BranchName From Branches", searchLookUpEdit1, "BranchCode", "BranchCode");
+            populateBranches();
+        }
+        async void populateBranches()
+        {
+            await Database.displaySearchlookupEditAsync("SELECT BranchCode,BranchName From Branches", searchLookUpEdit1, "BranchCode", "BranchCode");
         }
 
-
-        void generate()
+       async void generate()
         {
             if(radzero.Checked==true)
             {
-                Database.display($"Select * FROM vw_ZeroInv WHERE Available <= 0  and BranchCode='{brcode}' order by ProductCode,Available", gridControl1, gridView1);
+               await Database.displayAsync($"Select * FROM vw_ZeroInv WHERE Available <= 0  and BranchCode='{brcode}' order by ProductCode,Available", gridControl1, gridView1);
             }
             else
             {
-                Database.display($"Select * FROM vw_InvLessThanReorderLevel WHERE Available > 0 and Available < ReOrderLevel  and Branch='{brcode}' ", gridControl1, gridView1);
+                await Database.displayAsync($"Select * FROM vw_InvLessThanReorderLevel WHERE Available > 0 and Available < ReOrderLevel  and Branch='{brcode}' ", gridControl1, gridView1);
             }
 
         }
 
         private void btnForApprovalSalesOrder_Click(object sender, EventArgs e)
         {
+            btnForApprovalSalesOrder.Enabled = false;
+            Cursor = Cursors.WaitCursor;
             generate();
+            Cursor = Cursors.Default;
+            btnForApprovalSalesOrder.Enabled = true;
         }
 
         private void searchLookUpEdit1_EditValueChanged(object sender, EventArgs e)

@@ -514,25 +514,25 @@ namespace SalesInventorySystem
                 //        MydataGridView1.Rows[0].Selected = true;
                 //}
                 
-                bool isLinkedServer = Database.checkifExist("Select isnull(isLinkedServer,0) FROM POSType WHERE isLinkedServer=1");
+                //bool isLinkedServer = Database.checkifExist("Select isnull(isLinkedServer,0) FROM POSType WHERE isLinkedServer=1");
 
-                if (isLinkedServer) //if they used linkedserver
-                {
-                    string linkedServerName = Database.getSingleQuery("POSType", "isLinkedServer is not null", "linkedServerName"); //linkedservername
-                    string conLink = Database.getSingleResultSet("exec checkLinkedServer  " + linkedServerName + "  "); //check connection
-                    if (conLink == "1")
-                    {
-                        labelControl8.ForeColor = Color.Green;
-                    }
-                    else
-                    {
-                        labelControl8.ForeColor = Color.Red;
-                    }
-                }
-                else
-                {
-                    labelControl8.ForeColor = Color.Red;
-                }
+                //if (isLinkedServer) //if they used linkedserver
+                //{
+                //    string linkedServerName = Database.getSingleQuery("POSType", "isLinkedServer is not null", "linkedServerName"); //linkedservername
+                //    string conLink = Database.getSingleResultSet("exec checkLinkedServer  " + linkedServerName + "  "); //check connection
+                //    if (conLink == "1")
+                //    {
+                //        labelControl8.ForeColor = Color.Green;
+                //    }
+                //    else
+                //    {
+                //        labelControl8.ForeColor = Color.Red;
+                //    }
+                //}
+                //else
+                //{
+                //    labelControl8.ForeColor = Color.Red;
+                //}
             }
             catch (SqlException ex)
             {
@@ -716,40 +716,13 @@ namespace SalesInventorySystem
             {
                 productcode = prodcode;
             }
-            //else
-            //{
-            //    productcode = prodcode;
-            //}
-
-            bool islinkedServer = Database.checkifExist("SELECT isnull(isLinkedServer,0) FROM POSType WHERE isLinkedServer=1");
-            string linkedServerName = Database.getSingleQuery("POSType", "isLinkedServer is not null", "linkedServerName"); //linkedservername
-           
             SqlConnection con = Database.getConnection();
             con.Open();
             try
             {
-                //string query = POS.POSConnectionSettings.spValue;
-                // string query = "sp_AddSalesInvoiceOffline";
                 string query = "";
-                if(islinkedServer)
-                {
-                    string conLink = Database.getSingleResultSet("exec checkLinkedServer " + linkedServerName + " "); //check connection
-                    if(conLink == "1")
-                    {
-                        query = "sp_AddSalesInvoiceLinkToServer";
-                    }
-                    else
-                    {
-                        query = "sp_AddSalesInvoiceLinkToServer";
-                    }
-                }
-                else
-                {
-                    query = "sp_AddSalesInvoice";
-                }
-               
+                query = "sp_AddSalesInvoice";
                 SqlCommand com = new SqlCommand(query, con);
-                //refno = textEdit3.Text.Trim();
                 refno = txtOrderNo.Text.Trim();
                 com.Parameters.AddWithValue("@parmorderno", refno); //ORDER NO
                 com.Parameters.AddWithValue("@parmcustid", txtcustid.Text); 
@@ -1307,7 +1280,7 @@ namespace SalesInventorySystem
                 {
                     ViewOnHoldTransaction vonhldtrn = new ViewOnHoldTransaction();
                     Database.display($"SELECT BranchCode,MachineUsed,Transdate,ReferenceNo,TotalAmount,OnHoldName,PreparedBy " +
-                       $"FROM dbo.BatchSalesSummary WHERE (Status='Pending' OR isHold='1') and BranchCode='{Login.assignedBranch}' " +
+                       $"FROM dbo.BatchSalesSummary WHERE BranchCode='{Login.assignedBranch}' AND (Status='Pending' OR isHold='1') " +
                        $"AND MachineUsed='{Environment.MachineName}' AND CashierTransNo='{lblTransactionIDCashier.Text}' ", vonhldtrn.gridControl1, vonhldtrn.gridView1);
                     vonhldtrn.ShowDialog(this);
                     if (ViewOnHoldTransaction.isdone == true)
@@ -1322,7 +1295,7 @@ namespace SalesInventorySystem
                         displayHoldTransactions(ViewOnHoldTransaction.refno, ViewOnHoldTransaction.machinename);
                         txtOrderNo.Text = ViewOnHoldTransaction.refno;
                         updateTransactionNo();
-                        Database.ExecuteQuery($"INSERT INTO dbo.POSTransaction VALUES ('{Login.assignedBranch}','{lblTransactionIDInc.Text}','{Environment.MachineName}','RECOVER TRAN','{DateTime.Now.ToString()}','{Login.isglobalUserID}','0','0')");
+                        //Database.ExecuteQuery($"INSERT INTO dbo.POSTransaction VALUES ('{Login.assignedBranch}','{lblTransactionIDInc.Text}','{Environment.MachineName}','RECOVER TRAN','{DateTime.Now.ToString()}','{Login.isglobalUserID}','0','0')");
                         updateTransactionNo();
                         ViewOnHoldTransaction.isdone = false;
                         vonhldtrn.Dispose();
@@ -1533,24 +1506,24 @@ namespace SalesInventorySystem
 
         private void Onhold_Click(object sender, EventArgs e)
         {
-            
-            //bool isoverride = false;
-            //isoverride = Database.checkifExist("SELECT isnull(isOverride,0) FROM dbo.POSFunctions WHERE FunctionName='RECOVERTRAN' AND isOverride=1");
-            //if (!isoverride)
-            //{
-            //    OnHoldTransaction();
-            //}
-            //else
-            //{
-            //    AuthorizedConfirmationFrm authfrm = new AuthorizedConfirmationFrm();
-            //    authfrm.ShowDialog(this);
-            //    if (AuthorizedConfirmationFrm.isconfirmedLogin == true)
-            //    {
-            //        OnHoldTransaction();
-            //        AuthorizedConfirmationFrm.isconfirmedLogin = false;
-            //        authfrm.Dispose();
-            //    }
-            //}
+
+            bool isoverride = false;
+            isoverride = Database.checkifExist("SELECT 1 FROM dbo.POSFunctions WHERE FunctionName='RECOVERTRAN' AND isOverride=1");
+            if (!isoverride)
+            {
+                OnHoldTransaction();
+            }
+            else
+            {
+                AuthorizedConfirmationFrm authfrm = new AuthorizedConfirmationFrm();
+                authfrm.ShowDialog(this);
+                if (AuthorizedConfirmationFrm.isconfirmedLogin == true)
+                {
+                    OnHoldTransaction();
+                    AuthorizedConfirmationFrm.isconfirmedLogin = false;
+                    authfrm.Dispose();
+                }
+            }
         }
 
         void poschar_FormClosed(object sender, FormClosedEventArgs e)
@@ -1926,7 +1899,7 @@ namespace SalesInventorySystem
             try
             {
                 string filename = "";
-                string body = "WELCOME TO ENZO"+Environment.NewLine;
+                string body = "WELCOME TO KRAFTED"+Environment.NewLine;
                 body += "NEXT CUSTOMER PLEASE";
                 string filepath = "C:\\POSTransaction\\DisplayPool\\";
                 if (serialPort1.IsOpen && chckdisplaypool.Checked == true)

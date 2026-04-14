@@ -28,9 +28,10 @@ namespace SalesInventorySystem
 
         private void display()
         {
-            //gridControl1.BeginUpdate();
-            //gridView1.Columns.Clear();
-            //gridControl1.DataSource = null;
+            gridControl1.BeginUpdate();
+            gridView1.Columns.Clear();
+            gridControl1.DataSource = null;
+
             try
             {   
                 if (radioButton1.Checked == true) //DETAILED
@@ -68,22 +69,22 @@ namespace SalesInventorySystem
             {
                 XtraMessageBox.Show(sex2.Message.ToString());
             }
-            //finally
-            //{
-            //    gridControl1.EndUpdate();
-            //}
+            finally
+            {
+                gridControl1.EndUpdate();
+            }
             //HelperFunction.getTotalSum("Available");
             //gridView1.Columns["Available"].Summary.Add(DevExpress.Data.SummaryItemType.Sum, "Available", "{0:n2}");
         }
 
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
         {
-            display();
+            //display();
         }
 
         private void radioButton2_CheckedChanged(object sender, EventArgs e)
         {
-            display();
+            //display();
         }
 
         private void gridView1_RowCellStyle(object sender, DevExpress.XtraGrid.Views.Grid.RowCellStyleEventArgs e)
@@ -134,7 +135,11 @@ namespace SalesInventorySystem
 
         private void simpleButton1_Click(object sender, EventArgs e)
         {
+            simpleButton1.Enabled = false;
+            Cursor = Cursors.WaitCursor;
             display();
+            Cursor = Cursors.Default;
+            simpleButton1.Enabled = true;
         }
     }
 }

@@ -164,85 +164,68 @@ namespace SalesInventorySystem.HOFormsDevEx
             }
         }
 
-        private void btnDeduct_Click(object sender, EventArgs e)
+        private async void btnDeduct_Click(object sender, EventArgs e)
         {
-            bool pendingConversion = Database.checkifExist("SELECT 1 FROM dbo.ConversionSummary " +
-                "WHERE BranchCode='" + txtbranch.Text + "'  and CAST(DateConverted as date) = '" + txtdate.Text + "' and isErrorCorrect=0 and isConfirm=0 ");
-           // var rowszz = Database.getMultipleQuery("ReInventoryMonitoring", "BranchCode='" + txtbranch.Text + "' and CAST(DateExecute as date)='" + txtdate.Text + "' ", "isAnalyze,isDeducted");
-            bool check = Database.checkifExist("SELECT 1 FROM dbo.ReInventoryMonitoring " +
-                "WHERE BranchCode='" + txtbranch.Text + "'  and CAST(DateExecute as date)='" + txtdate.Text + "' and isAnalyze=1 ");
-            var rows = Database.getMultipleQuery("ReInventoryMonitoring", "BranchCode='" + txtbranch.Text + "' and CAST(DateExecute as date)='" + txtdate.Text + "' ", "isAnalyze,isDeducted");
-            string isAnalyze = rows["isAnalyze"].ToString();
-            string isDeducted = rows["isDeducted"].ToString();
-            if (pendingConversion)
-            {
-                //XtraMessageBox.Show("You still have pending Conversion to be Approved.");
-                BigAlert.Show(
-                        "THERE IS A PENDING CONVERSION",
-                        "You still have pending Conversion to be Approved.",
-                        MessageBoxIcon.Warning);
-                return;
-            }
-            if (!check)
-            {
-                //XtraMessageBox.Show("You Cant Proceed this Inventory is Not Yet Analyze.. No Records in Monitorings");
-                BigAlert.Show(
-                      "ANALYZE FIRST",
-                      "You Cant Proceed this Inventory is Not Yet Analyze.. No Records in Monitorings",
-                      MessageBoxIcon.Warning);
-                return;
-            }
-            if (gridView1.RowCount==0)
-            {
-                //XtraMessageBox.Show("No Data Displayed");
-                BigAlert.Show(
-                      "Empty Records",
-                      "No Data Displayed",
-                      MessageBoxIcon.Warning);
-                return;
-            }
-            if (Convert.ToBoolean(isAnalyze) == true && Convert.ToBoolean(isDeducted) == true)
-            {
-                //XtraMessageBox.Show("You Already Execute this Transaction");
-                BigAlert.Show(
-                     "Already Executed",
-                     "You Already Execute this Transaction",
-                     MessageBoxIcon.Warning);
-                return;
-               
-            }
-            else if (Convert.ToBoolean(isAnalyze) == true && Convert.ToBoolean(isDeducted) == false)
-            {
-                //deductInventory();
-                //for (int i = 0; i <= gridView1.RowCount - 1; i++)
-                //{
-                //    if (gridView1.GetRowCellValue(i, "Status").ToString() == "FAILED" || gridView1.GetRowCellValue(i, "Status").ToString() == "NO INVENTORY")
-                //    {
-                //        XtraMessageBox.Show("You Cant Proceed there is a Failed Inventory Status");
-                //        return;
-                //    }
-                //}
-                doFIFO();
-                
+            // 1. LOCK DOWN THE UI IMMEDIATELY
+         // Prevents impatient users from clicking "Deduct" multiple times
+            btnDeduct.Enabled = false;
+            Cursor = Cursors.WaitCursor;
 
-                //displayInventoryUnitActivity();
+            try
+            {
+                // --- 2. FAST SYNCHRONOUS VALIDATIONS ---
+                bool pendingConversion = Database.checkifExist("SELECT 1 FROM dbo.ConversionSummary WHERE BranchCode='" + txtbranch.Text + "' and CAST(DateConverted as date) = '" + txtdate.Text + "' and isErrorCorrect=0 and isConfirm=0 ");
+                bool check = Database.checkifExist("SELECT 1 FROM dbo.ReInventoryMonitoring WHERE BranchCode='" + txtbranch.Text + "' and CAST(DateExecute as date)='" + txtdate.Text + "' and isAnalyze=1 ");
+                var rows = Database.getMultipleQuery("ReInventoryMonitoring", "BranchCode='" + txtbranch.Text + "' and CAST(DateExecute as date)='" + txtdate.Text + "' ", "isAnalyze,isDeducted");
 
-                /*
-                DateTime dt = new DateTime();
-                dt = Convert.ToDateTime(txtdate.Text);
-                string filepath = "C:\\ENDOFDAY_INVENTORY_REPORTS\\" + dt.ToString("yyyyMMdd") + "\\";
-                Utilities.createDirectoryFolder(filepath);
-                */
+                string isAnalyze = rows["isAnalyze"].ToString();
+                string isDeducted = rows["isDeducted"].ToString();
 
-                //string filename = Branch.getBranchName(txtbranch.Text) + "_" + dt.ToString("yyyyMMdd") + ".xls";
-                //string file = filepath + filename;
-                //gridControl1.ExportToXls(file);
+                if (pendingConversion)
+                {
+                    BigAlert.Show("THERE IS A PENDING CONVERSION", "You still have pending Conversion to be Approved.", MessageBoxIcon.Warning);
+                    return; // Jumps to 'finally' to turn button back on
+                }
 
-               // sendMailNotification(file, txtbranch.Text);
-                
-              
+                if (!check)
+                {
+                    BigAlert.Show("ANALYZE FIRST", "You Cant Proceed this Inventory is Not Yet Analyze.. No Records in Monitorings", MessageBoxIcon.Warning);
+                    return;
+                }
+
+                if (gridView1.RowCount == 0)
+                {
+                    BigAlert.Show("Empty Records", "No Data Displayed", MessageBoxIcon.Warning);
+                    return;
+                }
+
+                if (Convert.ToBoolean(isAnalyze) == true && Convert.ToBoolean(isDeducted) == true)
+                {
+                    BigAlert.Show("Already Executed", "You Already Execute this Transaction", MessageBoxIcon.Warning);
+                    return;
+                }
+
+                // --- 3. THE HEAVY ASYNC EXECUTION ---
+                else if (Convert.ToBoolean(isAnalyze) == true && Convert.ToBoolean(isDeducted) == false)
+                {
+                    progressBarControl1.Position = 10; // Give the user some visual feedback that it started
+
+                    // The UI will stay buttery smooth while this runs!
+                    await doFIFOAsync();
+                }
             }
-            
+            finally
+            {
+                // 4. CLEANUP (Guaranteed to run even if the code above crashes)
+                Cursor = Cursors.Default;
+
+                // Only re-enable the button if the progress didn't reach 100% (meaning it failed or was stopped by a validation)
+                if (progressBarControl1.Position != 100)
+                {
+                    btnDeduct.Enabled = true;
+                }
+            }
+
         }
 
         void displayInventoryUnitActivity()
@@ -302,7 +285,56 @@ namespace SalesInventorySystem.HOFormsDevEx
                 con.Close();
             }
         }
+        // We changed 'void' to 'async Task', and renamed it to show it is asynchronous
+        private async Task doFIFOAsync()
+        {
+            try
+            {
+                // 1. We wrap everything in 'using' blocks to guarantee safe memory cleanup
+                using (SqlConnection con = Database.getConnection())
+                {
+                    await con.OpenAsync(); // Open connection in the background
 
+                    using (SqlCommand com = new SqlCommand("sp_FiFoMappingSalesInvDeduct", con))
+                    {
+                        com.CommandType = CommandType.StoredProcedure;
+                        com.CommandTimeout = 3600; // 1 Hour limit
+
+                        // Add parameters cleanly
+                        com.Parameters.AddWithValue("@parmtransdate", txtdate.Text);
+                        com.Parameters.AddWithValue("@parmbranchcode", txtbranch.Text);
+                        com.Parameters.AddWithValue("@parmprodcode", "");
+                        com.Parameters.AddWithValue("@parmqty", "");
+                        com.Parameters.AddWithValue("@parmoption", "2");
+
+                        // 2. THIS IS THE MAGIC. 
+                        // The UI is released to the user while SQL does the heavy lifting!
+                        await com.ExecuteNonQueryAsync();
+                    }
+                }
+
+                // 3. Because we use 'await', C# knows to safely come back to the UI thread here
+                progressBarControl1.Position = 90;
+
+                BigAlert.Show(
+                    "SUCCESS",
+                    "Successfully Executed",
+                    MessageBoxIcon.Information);
+
+                btnDeduct.Enabled = false; // Keep it disabled so they can't deduct twice!
+                progressBarControl1.Position = 100;
+
+                gridControl1.DataSource = null;
+                gridView1.Columns.Clear();
+            }
+            catch (SqlException ex)
+            {
+                BigAlert.Show(
+                    "Database Error",
+                    ex.Message,
+                    MessageBoxIcon.Warning);
+            }
+        }
         void doFIFO()
         {
             SqlConnection con = Database.getConnection();
