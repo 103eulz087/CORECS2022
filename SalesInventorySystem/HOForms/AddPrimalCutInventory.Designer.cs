@@ -70,6 +70,7 @@
             this.groupControl2 = new DevExpress.XtraEditors.GroupControl();
             this.gridControl1 = new DevExpress.XtraGrid.GridControl();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.btnprintReport = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
             this.groupControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtdispatchno.Properties)).BeginInit();
@@ -85,6 +86,7 @@
             // 
             // groupControl1
             // 
+            this.groupControl1.Controls.Add(this.btnprintReport);
             this.groupControl1.Controls.Add(this.txtdispatchno);
             this.groupControl1.Controls.Add(this.label11);
             this.groupControl1.Controls.Add(this.txtpalletno);
@@ -131,7 +133,7 @@
             // txtdispatchno
             // 
             this.txtdispatchno.Location = new System.Drawing.Point(1244, 212);
-            this.txtdispatchno.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtdispatchno.Margin = new System.Windows.Forms.Padding(2);
             this.txtdispatchno.Name = "txtdispatchno";
             this.txtdispatchno.Size = new System.Drawing.Size(103, 22);
             this.txtdispatchno.TabIndex = 61;
@@ -150,7 +152,7 @@
             // txtpalletno
             // 
             this.txtpalletno.Location = new System.Drawing.Point(1244, 84);
-            this.txtpalletno.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtpalletno.Margin = new System.Windows.Forms.Padding(2);
             this.txtpalletno.Name = "txtpalletno";
             this.txtpalletno.Size = new System.Drawing.Size(103, 22);
             this.txtpalletno.TabIndex = 59;
@@ -228,9 +230,9 @@
             this.buttonSaveAndTransfer.Appearance.Font = new System.Drawing.Font("Tahoma", 9.25F);
             this.buttonSaveAndTransfer.Appearance.Options.UseFont = true;
             this.buttonSaveAndTransfer.ImageOptions.Image = global::SalesInventorySystem.Properties.Resources.Save_16x16__5_;
-            this.buttonSaveAndTransfer.Location = new System.Drawing.Point(814, 252);
+            this.buttonSaveAndTransfer.Location = new System.Drawing.Point(790, 253);
             this.buttonSaveAndTransfer.Name = "buttonSaveAndTransfer";
-            this.buttonSaveAndTransfer.Size = new System.Drawing.Size(148, 37);
+            this.buttonSaveAndTransfer.Size = new System.Drawing.Size(140, 37);
             this.buttonSaveAndTransfer.TabIndex = 53;
             this.buttonSaveAndTransfer.Text = "Save && Transfer";
             this.buttonSaveAndTransfer.Click += new System.EventHandler(this.buttonSaveAndTransfer_Click);
@@ -241,9 +243,9 @@
             this.buttonClear.Appearance.Options.UseFont = true;
             this.buttonClear.ImageOptions.Image = global::SalesInventorySystem.Properties.Resources.Clear_16x16__2_;
             this.buttonClear.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.buttonClear.Location = new System.Drawing.Point(688, 252);
+            this.buttonClear.Location = new System.Drawing.Point(672, 252);
             this.buttonClear.Name = "buttonClear";
-            this.buttonClear.Size = new System.Drawing.Size(120, 37);
+            this.buttonClear.Size = new System.Drawing.Size(112, 37);
             this.buttonClear.TabIndex = 52;
             this.buttonClear.Text = "Clear";
             this.buttonClear.Click += new System.EventHandler(this.buttonClear_Click);
@@ -254,9 +256,9 @@
             this.buttonCancel.Appearance.Options.UseFont = true;
             this.buttonCancel.ImageOptions.Image = global::SalesInventorySystem.Properties.Resources.Cancel_16x16__2_;
             this.buttonCancel.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.buttonCancel.Location = new System.Drawing.Point(555, 252);
+            this.buttonCancel.Location = new System.Drawing.Point(547, 252);
             this.buttonCancel.Name = "buttonCancel";
-            this.buttonCancel.Size = new System.Drawing.Size(127, 37);
+            this.buttonCancel.Size = new System.Drawing.Size(119, 37);
             this.buttonCancel.TabIndex = 51;
             this.buttonCancel.Text = "Cancel Line";
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
@@ -269,7 +271,7 @@
             this.buttonAdd.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
             this.buttonAdd.Location = new System.Drawing.Point(432, 252);
             this.buttonAdd.Name = "buttonAdd";
-            this.buttonAdd.Size = new System.Drawing.Size(117, 37);
+            this.buttonAdd.Size = new System.Drawing.Size(109, 37);
             this.buttonAdd.TabIndex = 50;
             this.buttonAdd.Text = "Add";
             this.buttonAdd.Click += new System.EventHandler(this.buttonAdd_Click);
@@ -278,7 +280,7 @@
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
             this.pictureBox1.Location = new System.Drawing.Point(5, 30);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(252, 224);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -292,7 +294,7 @@
             this.button2.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button2.ForeColor = System.Drawing.Color.White;
             this.button2.Location = new System.Drawing.Point(237, 243);
-            this.button2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button2.Margin = new System.Windows.Forms.Padding(4);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(188, 46);
             this.button2.TabIndex = 27;
@@ -333,7 +335,7 @@
             this.autoprintbarcode.Font = new System.Drawing.Font("Tahoma", 10F);
             this.autoprintbarcode.ForeColor = System.Drawing.Color.Black;
             this.autoprintbarcode.Location = new System.Drawing.Point(1075, 275);
-            this.autoprintbarcode.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.autoprintbarcode.Margin = new System.Windows.Forms.Padding(4);
             this.autoprintbarcode.Name = "autoprintbarcode";
             this.autoprintbarcode.Size = new System.Drawing.Size(171, 25);
             this.autoprintbarcode.TabIndex = 48;
@@ -405,7 +407,7 @@
             this.checkBox1.Font = new System.Drawing.Font("Tahoma", 10F);
             this.checkBox1.ForeColor = System.Drawing.Color.Black;
             this.checkBox1.Location = new System.Drawing.Point(1075, 243);
-            this.checkBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.checkBox1.Margin = new System.Windows.Forms.Padding(4);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(150, 25);
             this.checkBox1.TabIndex = 47;
@@ -536,7 +538,7 @@
             this.isprimalcuts.Font = new System.Drawing.Font("Tahoma", 10F);
             this.isprimalcuts.ForeColor = System.Drawing.Color.Black;
             this.isprimalcuts.Location = new System.Drawing.Point(864, 129);
-            this.isprimalcuts.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.isprimalcuts.Margin = new System.Windows.Forms.Padding(4);
             this.isprimalcuts.Name = "isprimalcuts";
             this.isprimalcuts.Size = new System.Drawing.Size(123, 25);
             this.isprimalcuts.TabIndex = 43;
@@ -582,6 +584,19 @@
             this.gridView1.OptionsView.ShowFooter = true;
             this.gridView1.OptionsView.ShowIndicator = false;
             // 
+            // btnprintReport
+            // 
+            this.btnprintReport.Appearance.Font = new System.Drawing.Font("Tahoma", 9.25F);
+            this.btnprintReport.Appearance.Options.UseFont = true;
+            this.btnprintReport.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnprintReport.ImageOptions.Image")));
+            this.btnprintReport.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
+            this.btnprintReport.Location = new System.Drawing.Point(936, 253);
+            this.btnprintReport.Name = "btnprintReport";
+            this.btnprintReport.Size = new System.Drawing.Size(122, 37);
+            this.btnprintReport.TabIndex = 62;
+            this.btnprintReport.Text = "Print Report";
+            this.btnprintReport.Click += new System.EventHandler(this.btnprintReport_Click);
+            // 
             // AddPrimalCutInventory
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -590,7 +605,7 @@
             this.ClientSize = new System.Drawing.Size(1577, 675);
             this.Controls.Add(this.groupControl2);
             this.Controls.Add(this.groupControl1);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "AddPrimalCutInventory";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "AddPrimalCutInventory";
@@ -655,5 +670,6 @@
         private DevExpress.XtraEditors.TextEdit txtpalletno;
         public System.Windows.Forms.Label label11;
         private DevExpress.XtraEditors.TextEdit txtdispatchno;
+        private DevExpress.XtraEditors.SimpleButton btnprintReport;
     }
 }

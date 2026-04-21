@@ -12882,3 +12882,4 @@ D:\MYGDRIVE\CORECS2026\SalesInventorySystem\obj\Debug\SalesInventorySystem.cspro
 D:\MYGDRIVE\CORECS2026\SalesInventorySystem\obj\Debug\SalesInventorySystem.csproj.CopyComplete
 D:\MYGDRIVE\CORECS2026\SalesInventorySystem\obj\Debug\SalesInventorySystem.exe
 D:\MYGDRIVE\CORECS2026\SalesInventorySystem\obj\Debug\SalesInventorySystem.pdb
+D:\MYGDRIVE\CORECS2026\SalesInventorySystem\obj\Debug\SalesInventorySystem.Orders.AddItemsBranchOrderSTS.resources

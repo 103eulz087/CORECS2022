@@ -129,14 +129,7 @@ namespace SalesInventorySystem
         private void txtsku_KeyDown(object sender, KeyEventArgs e)
         {
             //bool isExist = Database.checkifExist("SELECT TOP 1 BarcodeNo FROM DeliveryDetails WHERE BarcodeNo='" + txtsku.Text + "'");
-            if (e.KeyCode == Keys.Enter)
-            {
-                btnadd.PerformClick();
-            }
-            else if (e.KeyCode == Keys.F10)
-            {
-                simpleButton11.PerformClick();
-            }
+            btnadd.PerformClick();
         }
 
         private void displayForDelivery()

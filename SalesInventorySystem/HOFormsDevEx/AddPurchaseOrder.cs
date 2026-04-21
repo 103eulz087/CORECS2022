@@ -130,6 +130,7 @@ namespace SalesInventorySystem.HOFormsDevEx
 
             return dt;
         }
+
         private DataTable BuildPODetailsTable_ByQty()
         {
             // Ensure any in-place editor value is committed to the datasource

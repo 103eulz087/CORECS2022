@@ -193,13 +193,14 @@ namespace SalesInventorySystem.Orders
             }
             else
             {
-                Orders.SearchProductBatchMode orderko = new SearchProductBatchMode();
+                //Orders.SearchProductBatchMode orderko = new SearchProductBatchMode();
+                Orders.AddItemsBranchOrderSTS orderko = new AddItemsBranchOrderSTS();
                 orderko.txtpono.Text = textEdit1.Text;
                 
                 orderko.ShowDialog(this);
-                if (Orders.SearchProductBatchMode.isdone == true)
+                if (Orders.AddItemsBranchOrderSTS.isdone == true)
                 {
-                    Orders.SearchProductBatchMode.isdone = false;
+                    Orders.AddItemsBranchOrderSTS.isdone = false;
                     orderko.Dispose();
                     display();
 

@@ -187,12 +187,11 @@
             // 
             // xrBarCode2
             // 
-            this.xrBarCode2.AutoModule = true;
             this.xrBarCode2.Font = new System.Drawing.Font("Arial", 8.75F);
             this.xrBarCode2.LocationFloat = new DevExpress.Utils.PointFloat(17.70833F, 50.66667F);
             this.xrBarCode2.Name = "xrBarCode2";
             this.xrBarCode2.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100F);
-            this.xrBarCode2.SizeF = new System.Drawing.SizeF(222.2916F, 98.4585F);
+            this.xrBarCode2.SizeF = new System.Drawing.SizeF(354.5416F, 102.2839F);
             this.xrBarCode2.StylePriority.UseFont = false;
             this.xrBarCode2.StylePriority.UsePadding = false;
             this.xrBarCode2.StylePriority.UseTextAlignment = false;
@@ -280,6 +279,7 @@
             this.PageHeight = 190;
             this.PageWidth = 400;
             this.PaperKind = System.Drawing.Printing.PaperKind.Custom;
+            this.ShowPrintMarginsWarning = false;
             this.Version = "19.2";
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
 

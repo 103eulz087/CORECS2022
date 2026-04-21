@@ -745,7 +745,7 @@
             // 
             // txtcontactno
             // 
-            this.txtcontactno.Location = new System.Drawing.Point(548, 60);
+            this.txtcontactno.Location = new System.Drawing.Point(561, 60);
             this.txtcontactno.Margin = new System.Windows.Forms.Padding(2);
             this.txtcontactno.Name = "txtcontactno";
             this.txtcontactno.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 9F);
@@ -756,7 +756,7 @@
             // 
             // txtaddress
             // 
-            this.txtaddress.Location = new System.Drawing.Point(548, 95);
+            this.txtaddress.Location = new System.Drawing.Point(561, 95);
             this.txtaddress.Margin = new System.Windows.Forms.Padding(2);
             this.txtaddress.Name = "txtaddress";
             this.txtaddress.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 9F);

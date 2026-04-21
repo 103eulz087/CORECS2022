@@ -92,6 +92,7 @@
             this.txtbrcode.Properties.PopupView = this.searchLookUpEdit1View;
             this.txtbrcode.Size = new System.Drawing.Size(282, 24);
             this.txtbrcode.TabIndex = 7;
+            this.txtbrcode.EditValueChanged += new System.EventHandler(this.txtbrcode_EditValueChanged);
             // 
             // searchLookUpEdit1View
             // 

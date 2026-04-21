@@ -18,6 +18,7 @@ namespace SalesInventorySystem.Reporting
 {
     public partial class ConversionReports : Form
     {
+        object objbrcode = null;
         public static string conid,contype="";
         public ConversionReports()
         {
@@ -77,25 +78,34 @@ namespace SalesInventorySystem.Reporting
                 //Database.display("SELECT * FROM view_ConversionSummary WHERE DateConverted >= '" + datefrom.Text + "' and DateConverted <= '" + dateto.Text + "' and isErrorCorrect ='0' and BranchCode='" + txtbrcode.Text + "'", gridControl1,gridView1);
                 if (tabControl1.SelectedTab.Equals(FORAPPROVAL))
                 {
-                    Database.display("SELECT * FROM view_ConversionSummary WHERE BranchCode='" + Login.assignedBranch + "' AND CAST(DateConverted as date) BETWEEN '" + datefrom.Text + "' and  '" + dateto.Text + "' and isErrorCorrect ='0' and isConfirm='0' ", gridControl1, gridView1);
+                    Database.display("SELECT * FROM view_ConversionSummary WHERE BranchCode='" + objbrcode.ToString() + "' AND CAST(DateConverted as date) BETWEEN '" + datefrom.Text + "' and  '" + dateto.Text + "' and isErrorCorrect ='0' and isConfirm='0' ", gridControl1, gridView1);
                     gridView1.Focus();
                 }
                 else if (tabControl1.SelectedTab.Equals(APPROVED))
                 {
-                    Database.display("SELECT * FROM view_ConversionSummary WHERE BranchCode='" + Login.assignedBranch + "' AND CAST(DateConverted as date) BETWEEN '" + datefrom.Text + "' and  '" + dateto.Text + "' and isErrorCorrect ='0' and isConfirm='1' ", gridControl2, gridView2);
+                    Database.display("SELECT * FROM view_ConversionSummary WHERE BranchCode='" + objbrcode.ToString() + "' AND CAST(DateConverted as date) BETWEEN '" + datefrom.Text + "' and  '" + dateto.Text + "' and isErrorCorrect ='0' and isConfirm='1' ", gridControl2, gridView2);
                     gridView1.Focus();
                 }
                 else if (tabControl1.SelectedTab.Equals(SUMMARY))
                 {
-                    Database.display("SELECT * FROM view_ConversionReport WHERE BranchCode='" + Login.assignedBranch + "' AND CAST(DateConverted as date) BETWEEN '" + datefrom.Text + "' and  '" + dateto.Text + "' and isErrorCorrect ='0' and isConfirm='1' ", gridControl3, gridView3);
+                    Database.display("SELECT * FROM view_ConversionReport WHERE BranchCode='" + objbrcode.ToString() + "' AND CAST(DateConverted as date) BETWEEN '" + datefrom.Text + "' and  '" + dateto.Text + "' and isErrorCorrect ='0' and isConfirm='1' ", gridControl3, gridView3);
                     //gridView3.Focus();
                     gridView3.BeginSort();
                     gridView3.ClearSorting();
-
                     gridView3.Columns["ConID"].SortIndex = 0;
-                    gridView3.Columns["ConID"].SortOrder = DevExpress.Data.ColumnSortOrder.Ascending;
+                    gridView3.Columns["ConID"].SortOrder = ColumnSortOrder.Ascending;
+                    //gridView3.Columns["Product"].SortIndex = 1;   // optional: keep products ordered
 
                     gridView3.EndSort();
+
+                    // Enable cell merge
+
+                    gridView3.OptionsView.AllowCellMerge = true;
+
+                    foreach (DevExpress.XtraGrid.Columns.GridColumn col in gridView3.Columns)
+                        col.OptionsColumn.AllowMerge = DevExpress.Utils.DefaultBoolean.False;
+
+                    gridView3.Columns["ConID"].OptionsColumn.AllowMerge = DevExpress.Utils.DefaultBoolean.True;
                 }
             }
             else
@@ -418,6 +428,11 @@ namespace SalesInventorySystem.Reporting
             // Important: do NOT set e.Handled=true here
 
 
+        }
+
+        private void txtbrcode_EditValueChanged(object sender, EventArgs e)
+        {
+            objbrcode = SearchLookUpClass.getSingleValue(txtbrcode, "BranchCode");
         }
 
         private void gridView1_DoubleClick(object sender, EventArgs e)

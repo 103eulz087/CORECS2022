@@ -1,5 +1,9 @@
 ﻿using DevExpress.XtraEditors;
+using DevExpress.XtraGrid;
+using DevExpress.XtraGrid.Columns;
+using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraReports.UI;
+using SalesInventorySystem.Classes;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -65,8 +69,8 @@ namespace SalesInventorySystem.HOForms
                 txtprodcat.Focus();
 
                 //Classes.DevXGridViewSettings.ShowFooterCountTotal(gridView1, "Description");
-                Classes.DevXGridViewSettings.ShowFooterTotal(gridView1, "Quantity");
-                Classes.DevXGridViewSettings.ShowFooterTotal(gridView1, "Available");
+                //Classes.DevXGridViewSettings.ShowFooterTotal(gridView1, "Quantity");
+                //Classes.DevXGridViewSettings.ShowFooterTotal(gridView1, "Available");
             }
             catch (Exception ex)
             {
@@ -97,6 +101,30 @@ namespace SalesInventorySystem.HOForms
             Database.display("SELECT * FROM view_ProcessToPrimal " +
                 "WHERE BatchCode='" + txtbatchcode.Text + "' " +
                 "and Available > 0 ORDER BY SequenceNumber DESC", gridControl1, gridView1);
+
+            GridView view = gridControl1.FocusedView as GridView;
+            view.SortInfo.ClearAndAddRange(new GridColumnSortInfo[] {
+                new GridColumnSortInfo(view.Columns["PalletNo"],DevExpress.Data.ColumnSortOrder.Ascending),
+                new GridColumnSortInfo(view.Columns["Description"],DevExpress.Data.ColumnSortOrder.Ascending)
+                },2);
+            gridView1.ExpandAllGroups();
+
+            GridGroupSummaryItem itemCount = new GridGroupSummaryItem();
+            itemCount.FieldName = "PalletNo";
+            itemCount.SummaryType = DevExpress.Data.SummaryItemType.Count;
+            itemCount.ShowInGroupColumnFooter = gridView1.Columns["PalletNo"];
+            gridView1.GroupSummary.Add(itemCount);
+            gridView1.Focus();
+
+            GridGroupSummaryItem ite = new GridGroupSummaryItem();
+            ite.FieldName = "Quantity";
+            ite.SummaryType = DevExpress.Data.SummaryItemType.Sum;
+            ite.ShowInGroupColumnFooter = gridView1.Columns["Quantity"];
+            gridView1.GroupSummary.Add(ite);
+            gridView1.Focus();
+
+            Classes.DevXGridViewSettings.ShowFooterCountTotal(gridView1, "PalletNo");
+            Classes.DevXGridViewSettings.ShowFooterTotal(gridView1, "Quantity");
         }
 
         private void getAvailablePort()
@@ -199,69 +227,70 @@ namespace SalesInventorySystem.HOForms
 
         }
 
-        void add()
-        {
-            try
-            {
+        //void add()
+        //{
+        //    try
+        //    {
                  
-                //bool ifexist = Database.checkifExist("SELECT 1 FROM TempCosting with(nolock) WHERE ShipmentNo='" + txtshipmentno.Text + "'");
-                string cost="0";
-                if (String.IsNullOrEmpty(txtshipmentno.Text))
-                {
-                    XtraMessageBox.Show("Please Indicate what Shipment Number you process!");
-                    return;
-                }
-                //if (ifexist)
-                //{
-                //    cost = Database.getSingleQuery("TempCosting", "ItemCode='" + productcode + "' and ShipmentNo='" + txtshipmentno.Text + "'", "CostPerKg"); //get from excel anna uploading
-                //}
-                //else
-                //{
-                //    //cost = Database.getSingleQuery("Products", "ProductCode='" + productcode + "' and BranchCode='888'", "LandingCost"); //get to product table landing cost
-                //    XtraMessageBox.Show("Primal Cut Costing Not Yet Uploaded..");
-                //    return;
-                //}
+        //        //bool ifexist = Database.checkifExist("SELECT 1 FROM TempCosting with(nolock) WHERE ShipmentNo='" + txtshipmentno.Text + "'");
+        //        string cost="0";
+        //        if (String.IsNullOrEmpty(txtshipmentno.Text))
+        //        {
+        //            XtraMessageBox.Show("Please Indicate what Shipment Number you process!");
+        //            return;
+        //        }
+        //        //if (ifexist)
+        //        //{
+        //        //    cost = Database.getSingleQuery("TempCosting", "ItemCode='" + productcode + "' and ShipmentNo='" + txtshipmentno.Text + "'", "CostPerKg"); //get from excel anna uploading
+        //        //}
+        //        //else
+        //        //{
+        //        //    //cost = Database.getSingleQuery("Products", "ProductCode='" + productcode + "' and BranchCode='888'", "LandingCost"); //get to product table landing cost
+        //        //    XtraMessageBox.Show("Primal Cut Costing Not Yet Uploaded..");
+        //        //    return;
+        //        //}
 
-                string finalqty = txtweight.Text;
-                int seqno = Database.getLastID("TempInventoryPrimal", "SequenceNumber")+1;
-                Database.ExecuteQuery("INSERT INTO TempInventoryPrimal " +
-                    "VALUES ('" + seqno + "'" +
-                    ",'" + Login.assignedBranch + "'" +
-                    ",'" + txtshipmentno.Text + "'" +
-                    ",'" + txtbatchcode.Text + "'" +
-                    ",'" + productcode + "'" +
-                    ",'" + txtsrchprod.Text + "'" +
-                    ",'" + txtskuno.Text + "'" +
-                    ",'" + finalqty + "'" +
-                    ",'" + cost + "'" +
-                    ",'" + finalqty + "'" +
-                    ",0" + //iswarehouse
-                    ",0" +
-                    ",'" + Login.isglobalUserID + "','" + DateTime.Now.ToString() + "','"+txtpalletno.Text+"')");
-                display();
-                txtweight.Text = "";
-                txtskuno.Text = "";
-                txtweight.Focus();
-            }
-            catch (Exception ex)
-            {
-                XtraMessageBox.Show(ex.Message.ToString());
-            }
-        }
+        //        string finalqty = txtweight.Text;
+        //        int seqno = Database.getLastID("TempInventoryPrimal", "SequenceNumber")+1;
+        //        Database.ExecuteQuery("INSERT INTO TempInventoryPrimal " +
+        //            "VALUES ('" + seqno + "'" +
+        //            ",'" + Login.assignedBranch + "'" +
+        //            ",'" + txtshipmentno.Text + "'" +
+        //            ",'" + txtbatchcode.Text + "'" +
+        //            ",'" + productcode + "'" +
+        //            ",'" + txtsrchprod.Text + "'" +
+        //            ",'" + txtskuno.Text + "'" +
+        //            ",'" + finalqty + "'" +
+        //            ",'" + cost + "'" +
+        //            ",'" + finalqty + "'" +
+        //            ",0" + //iswarehouse
+        //            ",0" +
+        //            ",'" + Login.isglobalUserID + "','" + DateTime.Now.ToString() + "','"+txtpalletno.Text+"')");
+        //        display();
+        //        txtweight.Text = "";
+        //        txtskuno.Text = "";
+        //        txtweight.Focus();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        XtraMessageBox.Show(ex.Message.ToString());
+        //    }
+        //}
 
         private void txtskuno_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
-                if (autoprintbarcode.Checked == true)
-                {
-                    buttonPrintBarcode.PerformClick();
-                    buttonAdd.PerformClick();
-                }
-                else
-                {
-                    buttonPrintBarcode.PerformClick();
-                }
+                buttonAdd.PerformClick();
+                //if (autoprintbarcode.Checked == true)
+                //{
+                //    buttonPrintBarcode.PerformClick();
+                //    buttonAdd.PerformClick();
+                //}
+                //else
+                //{
+                //    buttonPrintBarcode.PerformClick();
+                //}
             }
 
         }
@@ -533,6 +562,8 @@ namespace SalesInventorySystem.HOForms
             xct.PaperKind = System.Drawing.Printing.PaperKind.Letter;
             xct.Margins = new System.Drawing.Printing.Margins(100, 100, 100, 100);
 
+            //this.gridView1.Columns["Cost"].Visible = false;
+            //this.gridView1.Columns["Available"].Visible = false;
 
             xct.xrdate.Text = DateTime.Now.ToShortDateString();
             xct.xrpreparedby.Text = Login.Fullname;
@@ -548,36 +579,113 @@ namespace SalesInventorySystem.HOForms
             Database.displayComboBoxItems("SELECT * FROM ShipmentOrder", "ShipmentNo", txtshipmentno);
         }
 
-      
         void addItem()
         {
+            // 1. Initial UI Validation (Fail fast before doing any heavy lifting)
+            if (string.IsNullOrWhiteSpace(txtshipmentno.Text))
+            {
+                BigAlert.Show("NO SHIPMENT NUMBER","Please Indicate what Shipment Number you process!",MessageBoxIcon.Warning);
+                txtshipmentno.Focus();
+                return;
+            }
+            if (string.IsNullOrWhiteSpace(txtskuno.Text))
+            {
+                BigAlert.Show("BARCODE EMPTY","SKU Field must not be empty.", MessageBoxIcon.Warning);
+                txtskuno.Focus();
+                return;
+            }
+            if (string.IsNullOrWhiteSpace(txtpalletno.Text))
+            {
+                BigAlert.Show("PALLET NUMBER IS EMPTY","Pallet Number must not be empty.", MessageBoxIcon.Warning);
+                txtpalletno.Focus();
+                return;
+            }
+
+            // 2. Lock the UI cursor while processing
             this.Cursor = Cursors.WaitCursor;
+
             try
             {
-                if (txtskuno.Text == "")
+                // 3. Database Insertion (Using the Stored Procedure)
+                //string connString = Database.GetConnectionString(); // Adjust to your actual DB helper
+                using (SqlConnection conn = Database.getConnection())
                 {
-                    XtraMessageBox.Show("Field must not Empty");
-                    txtskuno.Text = "";
-                    txtskuno.Focus();
-                }
-                else if(String.IsNullOrEmpty(txtpalletno.Text))
-                {
-                    XtraMessageBox.Show("Pallet Number must not Empty");
-                    txtpalletno.Focus();
+                    using (SqlCommand cmd = new SqlCommand("sp_InsertTempInventoryPrimal", conn))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+
+                        // Add parameters safely
+                        cmd.Parameters.AddWithValue("@Branch", Login.assignedBranch.Trim());
+                        cmd.Parameters.AddWithValue("@ShipmentNo", txtshipmentno.Text.Trim());
+                        cmd.Parameters.AddWithValue("@BatchCode", txtbatchcode.Text.Trim());
+                        cmd.Parameters.AddWithValue("@ProductCode", productcode.ToString().Trim());
+                        cmd.Parameters.AddWithValue("@ProductName", txtsrchprod.Text.Trim());
+                        cmd.Parameters.AddWithValue("@SkuNo", txtskuno.Text.Trim());
+                        cmd.Parameters.AddWithValue("@Quantity", txtweight.Text.Trim());
+                        cmd.Parameters.AddWithValue("@Cost", "0");
+                        cmd.Parameters.AddWithValue("@UserID", Login.isglobalUserID);
+                        cmd.Parameters.AddWithValue("@PalletNo", txtpalletno.Text.Trim());
+
+                        conn.Open();
+                        cmd.ExecuteNonQuery();
+                    }
                 }
 
-                else
-                {
-                    add();
-                    txtskuno.Text = "";
-                }
+                // 4. Refresh your data grid
+                display();
+
+                // 5. ✨ Print ONLY if the database insert succeeds ✨
+                printBarcode(txtskuno.Text);
+
+                // 6. Clean up UI state for the next item
+                txtskuno.Text = string.Empty;
+                txtweight.Text = string.Empty;
+                txtweight.Focus();
             }
             catch (SqlException ex)
             {
-                XtraMessageBox.Show(ex.Message.ToString());
+                BigAlert.Show("Database Error: ",ex.Message, MessageBoxIcon.Error);
             }
-            this.Cursor = Cursors.Default;
+            catch (Exception ex)
+            {
+                BigAlert.Show("Application Error: ", ex.Message, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                // 7. Guaranteed execution: Always return control to the user's mouse
+                this.Cursor = Cursors.Default;
+            }
         }
+
+        //void addItem()
+        //{
+        //    this.Cursor = Cursors.WaitCursor;
+        //    try
+        //    {
+        //        if (txtskuno.Text == "")
+        //        {
+        //            XtraMessageBox.Show("Field must not Empty");
+        //            txtskuno.Text = "";
+        //            txtskuno.Focus();
+        //        }
+        //        else if(String.IsNullOrEmpty(txtpalletno.Text))
+        //        {
+        //            XtraMessageBox.Show("Pallet Number must not Empty");
+        //            txtpalletno.Focus();
+        //        }
+
+        //        else
+        //        {
+        //            add();
+        //            txtskuno.Text = "";
+        //        }
+        //    }
+        //    catch (SqlException ex)
+        //    {
+        //        XtraMessageBox.Show(ex.Message.ToString());
+        //    }
+        //    this.Cursor = Cursors.Default;
+        //}
 
         private void buttonAdd_Click(object sender, EventArgs e)
         {
@@ -673,89 +781,191 @@ namespace SalesInventorySystem.HOForms
             //button2.PerformClick();
         }
 
+        //void getWeight()
+        //{
+        //    try
+        //    {
+        //        decimal quantity;
+        //        string strquantity;
+
+        //        if (checkBox1.Checked == true)
+        //        {
+        //            if (txtports.Text == "" || txtports.Text == null)
+        //            {
+        //                XtraMessageBox.Show("Please Select COM-PORT!");
+        //                txtports.Focus();
+        //            }
+        //            else if(String.IsNullOrEmpty(txtsrchprod.Text))
+        //            {
+        //                XtraMessageBox.Show("Please Select Product Items");
+        //                txtsrchprod.Focus();
+        //            }
+        //            else
+        //            {
+
+        //                txtweight.Invoke(this.myDelegate, new Object[] { wieght2 });
+        //                quantity = Decimal.Parse(txtweight.Text);
+        //                strquantity = String.Format("{0:00.000}", quantity);
+
+
+        //                string barcode = Database.getSingleResultSet($"SELECT dbo.func_GeneratePrimalCutBarcode" +
+        //        $"('{Login.assignedBranch}','{txtbatchcode.Text}','{productcode}','{strquantity}') "); 
+
+        //                txtskuno.Text = barcode;
+        //                txtskuno.Focus();
+        //            }
+        //        }
+        //        else
+        //        {
+
+        //            quantity = Decimal.Parse(txtweight.Text);
+        //            strquantity = String.Format("{0:00.000}", quantity);
+        //            string barcode = Database.getSingleResultSet($"SELECT dbo.func_GeneratePrimalCutBarcode" +
+        //        $"('{Login.assignedBranch}','{txtbatchcode.Text}','{productcode}','{strquantity}') ");
+        //            txtskuno.Text = barcode;
+        //            txtskuno.Focus();
+        //        }
+
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        XtraMessageBox.Show(ex.Message.ToString());
+        //    }
+        //}
         void getWeight()
         {
             try
             {
-                decimal quantity;
-                string strquantity;
-               
-                if (checkBox1.Checked == true)
+                // 1. Validate Checkbox 1 conditions early and exit if they fail
+                if (checkBox1.Checked)
                 {
-                    if (txtports.Text == "" || txtports.Text == null)
+                    if (string.IsNullOrWhiteSpace(txtports.Text))
                     {
                         XtraMessageBox.Show("Please Select COM-PORT!");
                         txtports.Focus();
+                        return;
                     }
-                    else if(String.IsNullOrEmpty(txtsrchprod.Text))
+                    if (string.IsNullOrWhiteSpace(txtsrchprod.Text))
                     {
                         XtraMessageBox.Show("Please Select Product Items");
                         txtsrchprod.Focus();
+                        return;
                     }
-                    else
-                    {
 
-                        txtweight.Invoke(this.myDelegate, new Object[] { wieght2 });
-                        quantity = Decimal.Parse(txtweight.Text);
-                        strquantity = String.Format("{0:00.000}", quantity);
-                        
-
-                        string barcode = Database.getSingleResultSet($"SELECT dbo.func_GeneratePrimalCutBarcode" +
-                $"('{Login.assignedBranch}','{txtbatchcode.Text}','{productcode}','{strquantity}') "); 
-
-                        txtskuno.Text = barcode;
-                        txtskuno.Focus();
-                    }
+                    // Fetch weight from scale
+                    txtweight.Invoke(this.myDelegate, new Object[] { wieght2 });
                 }
-                else
+
+                // 2. Safe Parsing to avoid application crashes
+                if (!decimal.TryParse(txtweight.Text, out decimal quantity))
                 {
-
-                    quantity = Decimal.Parse(txtweight.Text);
-                    strquantity = String.Format("{0:00.000}", quantity);
-                    string barcode = Database.getSingleResultSet($"SELECT dbo.func_GeneratePrimalCutBarcode" +
-                $"('{Login.assignedBranch}','{txtbatchcode.Text}','{productcode}','{strquantity}') ");
-                    txtskuno.Text = barcode;
-                    txtskuno.Focus();
+                    XtraMessageBox.Show("Invalid weight reading. Please check the scale.");
+                    return;
                 }
 
+                string strquantity = quantity.ToString("00.000");
+
+                // 3. Sanitize inputs to prevent SQL errors from apostrophes
+                string safeBranch = Login.assignedBranch.Trim().Replace("'", "''");
+                string safeBatch = txtbatchcode.Text.Trim().Replace("'", "''");
+                string safeProduct = productcode.ToString().Trim().Replace("'", "''");
+
+                // 4. Single execution path for DB call
+                string query = $"SELECT dbo.func_GeneratePrimalCutBarcode('{safeBranch}','{safeBatch}','{safeProduct}','{strquantity}')";
+                string barcode = Database.getSingleResultSet(query);
+
+                txtskuno.Text = barcode;
+                txtskuno.Focus();
             }
             catch (Exception ex)
             {
-                XtraMessageBox.Show(ex.Message.ToString());
+                XtraMessageBox.Show(ex.Message);
             }
         }
 
-        void printBarcode()
+        void printBarcode(string barcode)
         {
             try
             {
-                if (txtskuno.Text == "")
+                if (string.IsNullOrWhiteSpace(txtskuno.Text))
                 {
-                    XtraMessageBox.Show("No SKU No to print");
+                    BigAlert.Show("NO BARCODE","No SKU No to print",MessageBoxIcon.Warning);
+                    return;
                 }
-                else
-                {
-                    prodprint = txtsrchprod.Text;
-                    weightprint = txtweight.Text;
-                    barcodeprint = txtskuno.Text.Trim();
-                    Barcode.BarcodePrinting bprint = new Barcode.BarcodePrinting();
-                    bprint.xrshipno.Text = txtshipmentno.Text;
-                    bprint.xrpalletno.Text = txtpalletno.Text;
-                    bprint.lblmanufdate.Text = DateTime.Now.ToShortDateString();
-                    bprint.lblprodtype.Text = prodprint;
-                    bprint.xrsku.Text = productcode.ToString();
-                    bprint.lbltotalkilos.Text = weightprint;
-                    bprint.lblxpirydate.Text = DateTime.Now.AddYears(1).ToShortDateString();
-                    bprint.xrBarCode2.Text = barcodeprint;//productcategorycode + primalcode + txtweight.Text.Remove(2, 1);
-                    ReportPrintTool report = new ReportPrintTool(bprint);
-                    report.Print();
-                }
+
+                //Barcode.BarcodePrinting bprint = new Barcode.BarcodePrinting();
+                //bprint.xrshipno.Text = txtshipmentno.Text.Trim();
+                //bprint.xrpalletno.Text = txtpalletno.Text.Trim();
+                //bprint.lblmanufdate.Text = DateTime.Now.ToShortDateString();
+                //bprint.lblprodtype.Text = txtsrchprod.Text.Trim();
+                //bprint.xrsku.Text = productcode.ToString().Trim();
+                //bprint.lbltotalkilos.Text = txtweight.Text.Trim();
+                //bprint.lblxpirydate.Text = DateTime.Now.AddYears(1).ToShortDateString();
+                //bprint.xrBarCode2.Text = txtskuno.Text.Trim();
+
+                //ReportPrintTool report = new ReportPrintTool(bprint);
+                //report.Print();
+
+                var rpt = new Barcode.BarcodePrinting();
+
+                rpt.DataSource = null;
+                rpt.DataMember = "";
+
+                rpt.xrshipno.Text = txtshipmentno.Text.Trim();
+                rpt.xrpalletno.Text = txtpalletno.Text.Trim();
+                rpt.lblmanufdate.Text = DateTime.Now.ToShortDateString();
+                rpt.lblprodtype.Text = txtsrchprod.Text.Trim();
+                rpt.xrsku.Text = productcode.ToString();
+                rpt.lbltotalkilos.Text = txtweight.Text.Trim();
+                rpt.lblxpirydate.Text = DateTime.Now.AddYears(1).ToShortDateString();
+
+                // KEY: force QR payload
+                rpt.xrBarCode2.AutoModule = false;                 // override designer
+                rpt.xrBarCode2.Text = barcode.Trim();
+                //rpt.xrBarCode2.CodeText = barcode.Trim();
+
+                rpt.CreateDocument();
+
+                new ReportPrintTool(rpt).Print();
+
             }
             catch (Exception ex)
             {
-                XtraMessageBox.Show(ex.Message.ToString());
+                BigAlert.Show("ERROR",ex.Message,MessageBoxIcon.Error);
             }
         }
+
+        //void printBarcode()
+        //{
+        //    try
+        //    {
+        //        if (txtskuno.Text == "")
+        //        {
+        //            XtraMessageBox.Show("No SKU No to print");
+        //        }
+        //        else
+        //        {
+        //            prodprint = txtsrchprod.Text;
+        //            weightprint = txtweight.Text;
+        //            barcodeprint = txtskuno.Text.Trim();
+        //            Barcode.BarcodePrinting bprint = new Barcode.BarcodePrinting();
+        //            bprint.xrshipno.Text = txtshipmentno.Text;
+        //            bprint.xrpalletno.Text = txtpalletno.Text;
+        //            bprint.lblmanufdate.Text = DateTime.Now.ToShortDateString();
+        //            bprint.lblprodtype.Text = prodprint;
+        //            bprint.xrsku.Text = productcode.ToString();
+        //            bprint.lbltotalkilos.Text = weightprint;
+        //            bprint.lblxpirydate.Text = DateTime.Now.AddYears(1).ToShortDateString();
+        //            bprint.xrBarCode2.Text = barcodeprint;//productcategorycode + primalcode + txtweight.Text.Remove(2, 1);
+        //            ReportPrintTool report = new ReportPrintTool(bprint);
+        //            report.Print();
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        XtraMessageBox.Show(ex.Message.ToString());
+        //    }
+        //}
 
         void searchitems()
         {
@@ -772,7 +982,7 @@ namespace SalesInventorySystem.HOForms
 
         private void buttonPrintBarcode_Click_1(object sender, EventArgs e)
         {
-            printBarcode();
+            printBarcode(txtskuno.Text);
         }
 
         private void buttonGetWeight_Click(object sender, EventArgs e)
@@ -788,6 +998,11 @@ namespace SalesInventorySystem.HOForms
         private void autoprintbarcode_CheckedChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnprintReport_Click(object sender, EventArgs e)
+        {
+            BigBlueTemplate();
         }
 
         private void txtsrchprod_EditValueChanged(object sender, EventArgs e)

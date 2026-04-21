@@ -73,63 +73,114 @@ namespace SalesInventorySystem.HOFormsDevEx
 
         private void simpleButton1_Click(object sender, EventArgs e)
         {
-            bool isproductexist = true;
-            if (checkBox3.Checked == true && String.IsNullOrEmpty(txtcost.Text))
+            bool isproductexist = true; // Assuming this is evaluated properly elsewhere in your real code
+
+            // 1. Guard clauses for validation
+            if (checkBox3.Checked && string.IsNullOrWhiteSpace(txtcost.Text))
             {
                 XtraMessageBox.Show("Please Input Cost Field!");
                 return;
             }
-            if (String.IsNullOrEmpty(txtpalletno.Text))
+
+            if (string.IsNullOrWhiteSpace(txtpalletno.Text))
             {
-                //XtraMessageBox.Show("Please Input Pallet Number!");
-                BigAlert.Show(
-                      "NO PALLET NUMBER",
-                      "Please Input Pallet Number!",
-                      MessageBoxIcon.Warning);
+                BigAlert.Show("NO PALLET NUMBER", "Please Input Pallet Number!", MessageBoxIcon.Warning);
                 return;
             }
-            if (txtbarcode.Text == "")
+
+            if (string.IsNullOrWhiteSpace(txtbarcode.Text))
             {
-                //XtraMessageBox.Show("Textfield must not empty");
-                BigAlert.Show(
-                    "TEXTFIELD EMPTY",
-                    "Textfield must not empty",
-                    MessageBoxIcon.Warning);
-                txtbarcode.Text = "";
+                BigAlert.Show("TEXTFIELD EMPTY", "Textfield must not empty", MessageBoxIcon.Warning);
                 txtbarcode.Focus();
+                return;
             }
-            else if (!isproductexist)
+
+            if (!isproductexist)
             {
-                //XtraMessageBox.Show("Product Not Exist in OrderDetails");
-                BigAlert.Show(
-                   "PRODUCT NOT EXISTS",
-                   "Product Not Exist in your PO",
-                   MessageBoxIcon.Warning);
-                txtbarcode.Text = "";
+                BigAlert.Show("PRODUCT NOT EXISTS", "Product Not Exist in your PO", MessageBoxIcon.Warning);
+                txtbarcode.Text = string.Empty;
                 txtbarcode.Focus();
+                return;
             }
-            else
+
+            try
             {
-                if (chckboxbarcode.Checked == true)
+                // 2. CRITICAL FIX: Always Insert Data FIRST. 
+                // If this fails, it throws an exception and stops the print.
+                InsertData();
+                display();
+
+                // 3. Print ONLY after successful database insertion
+                if (chckboxbarcode.Checked)
                 {
                     btnprintbarcode.PerformClick();
-                    InsertData();
-                    display();
-                    txtbarcode.Text = "";
-                    txtweight.Text = "";
-                    txtweight.Focus();
                 }
-                else
-                {
-                    InsertData();
-                    display();
-                    txtbarcode.Text = "";
-                    txtweight.Text = "";
-                    txtweight.Focus();
-                }
-                //Classes.DevXGridViewSettings.ShowFooterCountTotal(gridView1, "PalletNo");
-                //Classes.DevXGridViewSettings.ShowFooterTotal(gridView1, "TotalCost");
+
+                // 4. Reset UI
+                txtbarcode.Text = string.Empty;
+                txtweight.Text = string.Empty;
+                txtweight.Focus();
             }
+            catch (Exception ex)
+            {
+                XtraMessageBox.Show("Failed to save receiving data: " + ex.Message);
+            }
+            //bool isproductexist = true;
+            //if (checkBox3.Checked == true && String.IsNullOrEmpty(txtcost.Text))
+            //{
+            //    XtraMessageBox.Show("Please Input Cost Field!");
+            //    return;
+            //}
+            //if (String.IsNullOrEmpty(txtpalletno.Text))
+            //{
+            //    //XtraMessageBox.Show("Please Input Pallet Number!");
+            //    BigAlert.Show(
+            //          "NO PALLET NUMBER",
+            //          "Please Input Pallet Number!",
+            //          MessageBoxIcon.Warning);
+            //    return;
+            //}
+            //if (txtbarcode.Text == "")
+            //{
+            //    //XtraMessageBox.Show("Textfield must not empty");
+            //    BigAlert.Show(
+            //        "TEXTFIELD EMPTY",
+            //        "Textfield must not empty",
+            //        MessageBoxIcon.Warning);
+            //    txtbarcode.Text = "";
+            //    txtbarcode.Focus();
+            //}
+            //else if (!isproductexist)
+            //{
+            //    //XtraMessageBox.Show("Product Not Exist in OrderDetails");
+            //    BigAlert.Show(
+            //       "PRODUCT NOT EXISTS",
+            //       "Product Not Exist in your PO",
+            //       MessageBoxIcon.Warning);
+            //    txtbarcode.Text = "";
+            //    txtbarcode.Focus();
+            //}
+            //else
+            //{
+            //    if (chckboxbarcode.Checked == true)
+            //    {
+            //        btnprintbarcode.PerformClick();
+            //        InsertData();
+            //        display();
+            //        txtbarcode.Text = "";
+            //        txtweight.Text = "";
+            //        txtweight.Focus();
+            //    }
+            //    else
+            //    {
+            //        InsertData();
+            //        display();
+            //        txtbarcode.Text = "";
+            //        txtweight.Text = "";
+            //        txtweight.Focus();
+            //    }
+
+            //}
 
         }
 
@@ -479,50 +530,101 @@ namespace SalesInventorySystem.HOFormsDevEx
         {
             try
             {
-                decimal quantity;
-                string strquantity;
-
-                if (checkBox2.Checked == true)
+                // 1. Pre-validation for COM port
+                if (checkBox2.Checked && string.IsNullOrWhiteSpace(txtcomport.Text))
                 {
-                    if (txtcomport.Text == "" || txtcomport.Text == null)
-                    {
-                        XtraMessageBox.Show("Please Select COM-PORT!");
-                        txtcomport.Focus();
-                    }
-                    else
-                    {
-                    
-                        txtweight.Invoke(this.myDelegate, new Object[] { wieght2 });
-                        quantity = Decimal.Parse(txtweight.Text);
-                        strquantity = String.Format("{0:00.000}", quantity);
-
-                        string barcode = Database.getSingleResultSet($"SELECT dbo.func_GenerateBarcode" +
-                $"('{Login.assignedBranch}',0,'{txtshipmentno.Text}','{productcode.ToString()}','{strquantity}','1') ");
-
-                        txtbarcode.Text = barcode;
-
-                       
-                        simpleButton1.Focus();
-                    }
+                    XtraMessageBox.Show("Please Select COM-PORT!");
+                    txtcomport.Focus();
+                    return; // Stop execution early
                 }
-                else
+
+                // 2. Invoke weight from COM port if needed
+                if (checkBox2.Checked)
                 {
-                   
-                    quantity = Decimal.Parse(txtweight.Text);
-                    strquantity = String.Format("{0:00.000}", quantity); 
-                
-
-                    string barcode = Database.getSingleResultSet($"SELECT dbo.func_GenerateBarcode" +
-            $"('{Login.assignedBranch}',0,'{txtshipmentno.Text}','{productcode.ToString()}','{strquantity}','1') ");
-                    txtbarcode.Text = barcode;
-
-                    simpleButton1.Focus();
+                    txtweight.Invoke(this.myDelegate, new Object[] { wieght2 });
                 }
+
+                // 3. Safely parse the decimal to avoid unhandled FormatExceptions
+                if (!decimal.TryParse(txtweight.Text, out decimal quantity))
+                {
+                    XtraMessageBox.Show("Invalid weight reading. Please ensure the scale is stable.");
+                    return;
+                }
+
+                // 4. Standardize the format to exactly 2 digits left, 3 right (e.g., "05.250")
+                // Note: If weight can exceed 99, this will naturally expand (e.g., "150.250"), 
+                // which changes your barcode length. Be mindful of this!
+                string strquantity = quantity.ToString("00.000");
+
+                // 5. Parameterized query to prevent SQL Injection
+                // *IMPORTANT*: You need to update your Database.getSingleResultSet to accept parameters, 
+                // or use standard ADO.NET (SqlCommand) here. Example format:
+                string query = "SELECT dbo.func_GenerateBarcode(@branch, @batch, @shipment, @product, @qty, @code)";
+
+                // Pseudo-code for parameterized call (Adapt to your specific 'Database' helper class)
+                string barcode = Database.getSingleResultSet(query, new Dictionary<string, object>
+                {
+                    {"@branch", Login.assignedBranch},
+                    {"@batch", 0},
+                    {"@shipment", txtshipmentno.Text.Trim()},
+                    {"@product", productcode.ToString().Trim()},
+                    {"@qty", strquantity},
+                    {"@code", "1"}
+                });
+
+                txtbarcode.Text = barcode;
+                simpleButton1.Focus();
             }
             catch (Exception ex)
             {
-                XtraMessageBox.Show(ex.Message.ToString());
+                XtraMessageBox.Show("Error generating barcode: " + ex.Message);
             }
+            //try
+            //{
+            //    decimal quantity;
+            //    string strquantity;
+
+            //    if (checkBox2.Checked == true)
+            //    {
+            //        if (txtcomport.Text == "" || txtcomport.Text == null)
+            //        {
+            //            XtraMessageBox.Show("Please Select COM-PORT!");
+            //            txtcomport.Focus();
+            //        }
+            //        else
+            //        {
+
+            //            txtweight.Invoke(this.myDelegate, new Object[] { wieght2 });
+            //            quantity = Decimal.Parse(txtweight.Text);
+            //            strquantity = String.Format("{0:00.000}", quantity);
+
+            //            string barcode = Database.getSingleResultSet($"SELECT dbo.func_GenerateBarcode" +
+            //    $"('{Login.assignedBranch}',0,'{txtshipmentno.Text}','{productcode.ToString()}','{strquantity}','1') ");
+
+            //            txtbarcode.Text = barcode;
+
+
+            //            simpleButton1.Focus();
+            //        }
+            //    }
+            //    else
+            //    {
+
+            //        quantity = Decimal.Parse(txtweight.Text);
+            //        strquantity = String.Format("{0:00.000}", quantity); 
+
+
+            //        string barcode = Database.getSingleResultSet($"SELECT dbo.func_GenerateBarcode" +
+            //$"('{Login.assignedBranch}',0,'{txtshipmentno.Text}','{productcode.ToString()}','{strquantity}','1') ");
+            //        txtbarcode.Text = barcode;
+
+            //        simpleButton1.Focus();
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+            //    XtraMessageBox.Show(ex.Message.ToString());
+            //}
         }
 
         private void txtweight_KeyDown(object sender, KeyEventArgs e)
@@ -541,22 +643,71 @@ namespace SalesInventorySystem.HOFormsDevEx
             txtweight.Focus();
         }
 
+        private void PrintQr(string barcodeValue)
+        {
+            var rpt = new Barcode.BarcodePrinting();
+
+            rpt.DataSource = null;
+            rpt.DataMember = "";
+
+            rpt.xrshipno.Text = txtshipmentno.Text.Trim();
+            rpt.xrpalletno.Text = txtpalletno.Text.Trim();
+            rpt.lblmanufdate.Text = DateTime.Now.ToShortDateString();
+            rpt.lblprodtype.Text = productname.ToString().Trim();
+            rpt.xrsku.Text = productcode.ToString();
+            rpt.lbltotalkilos.Text = txtweight.Text.Trim();
+            rpt.lblxpirydate.Text = DateTime.Now.AddYears(1).ToShortDateString();
+
+            // KEY: force QR payload
+            rpt.xrBarCode2.AutoModule = false;                 // override designer
+            rpt.xrBarCode2.Text = barcodeValue.Trim(); 
+
+            rpt.CreateDocument();
+
+            new ReportPrintTool(rpt).Print();
+        }
+
         private void simpleButton5_Click(object sender, EventArgs e)
         {
-            Barcode.BarcodePrinting bprint = new Barcode.BarcodePrinting();
-            bprint.xrshipno.Text = txtshipmentno.Text;
-            bprint.lblmanufdate.Text = DateTime.Now.ToShortDateString();
-            bprint.lblprodtype.Text = productname.ToString();
-            bprint.lbltotalkilos.Text = txtweight.Text;
-            bprint.xrpalletno.Text = txtpalletno.Text;
-            bprint.xrsku.Text = productcode.ToString();
-            bprint.lblxpirydate.Text = Convert.ToDateTime(txtduedate.Text).ToShortDateString();//DateTime.Now.AddYears(1).ToShortDateString();
-            bprint.xrBarCode2.Text = txtbarcode.Text.Trim(); //productcategorycode + primalcode + txtweight.Text.Remove(2, 1);
-            
-            ReportPrintTool report = new ReportPrintTool(bprint);
-            //report.ShowRibbonPreviewDialog();
-            //report.PrintDialog();
-            report.Print();
+            // Minimal changes here. Passing strings to XR labels is fine, 
+            // just ensure txtbarcode.Text is fully generated and trimmed.
+
+            PrintQr(txtbarcode.Text);
+
+            //Barcode.BarcodePrinting bprint = new Barcode.BarcodePrinting();
+            //bprint.xrshipno.Text = txtshipmentno.Text.Trim();
+            //bprint.lblmanufdate.Text = DateTime.Now.ToShortDateString();
+            //bprint.lblprodtype.Text = productname.ToString().Trim();
+            //bprint.lbltotalkilos.Text = txtweight.Text.Trim();
+            //bprint.xrpalletno.Text = txtpalletno.Text.Trim();
+            //bprint.xrsku.Text = productcode.ToString().Trim();
+
+            //if (DateTime.TryParse(txtduedate.Text, out DateTime dueDate))
+            //{
+            //    bprint.lblxpirydate.Text = dueDate.ToShortDateString();
+            //}
+
+            //bprint.xrBarCode2.Text = txtbarcode.Text.Trim();
+
+            //ReportPrintTool report = new ReportPrintTool(bprint);
+            //report.Print();
+
+
+
+            //Barcode.BarcodePrinting bprint = new Barcode.BarcodePrinting();
+            //bprint.xrshipno.Text = txtshipmentno.Text;
+            //bprint.lblmanufdate.Text = DateTime.Now.ToShortDateString();
+            //bprint.lblprodtype.Text = productname.ToString();
+            //bprint.lbltotalkilos.Text = txtweight.Text;
+            //bprint.xrpalletno.Text = txtpalletno.Text;
+            //bprint.xrsku.Text = productcode.ToString();
+            //bprint.lblxpirydate.Text = Convert.ToDateTime(txtduedate.Text).ToShortDateString();//DateTime.Now.AddYears(1).ToShortDateString();
+            //bprint.xrBarCode2.Text = txtbarcode.Text.Trim(); //productcategorycode + primalcode + txtweight.Text.Remove(2, 1);
+
+            //ReportPrintTool report = new ReportPrintTool(bprint);
+            ////report.ShowRibbonPreviewDialog();
+            ////report.PrintDialog();
+            //report.Print();
         }
 
         private void checkBox3_CheckedChanged(object sender, EventArgs e)

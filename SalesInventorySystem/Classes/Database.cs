@@ -1358,6 +1358,42 @@ namespace SalesInventorySystem
 
             return str;
         }
+        public static string getSingleResultSet(string query, Dictionary<string, object> parameters)
+        {
+            string result = string.Empty;
+
+            // Replace "GetConnectionString()" with however you currently get your DB connection string
+            using (SqlConnection conn = getConnection())
+            {
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    // Attach all parameters dynamically
+                    if (parameters != null)
+                    {
+                        foreach (var param in parameters)
+                        {
+                            cmd.Parameters.AddWithValue(param.Key, param.Value ?? DBNull.Value);
+                        }
+                    }
+
+                    try
+                    {
+                        conn.Open();
+                        object obj = cmd.ExecuteScalar();
+                        if (obj != null)
+                        {
+                            result = obj.ToString();
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        // Handle or log your database errors here
+                        throw new Exception("Database Error: " + ex.Message);
+                    }
+                }
+            }
+            return result;
+        }
         public static async Task<string> getSingleResultSetAsync(string query)
         {
             string str = "";
