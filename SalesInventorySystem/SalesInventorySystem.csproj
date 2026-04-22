@@ -552,6 +552,12 @@
     <Compile Include="Branches\BranchGenInventory.Designer.cs">
       <DependentUpon>BranchGenInventory.cs</DependentUpon>
     </Compile>
+    <Compile Include="Branches\BranchGenInventoryUpdateCost.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Branches\BranchGenInventoryUpdateCost.Designer.cs">
+      <DependentUpon>BranchGenInventoryUpdateCost.cs</DependentUpon>
+    </Compile>
     <Compile Include="Branches\BranchInventory.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -3379,6 +3385,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Branches\BranchGenInventory.resx">
       <DependentUpon>BranchGenInventory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Branches\BranchGenInventoryUpdateCost.resx">
+      <DependentUpon>BranchGenInventoryUpdateCost.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Branches\BranchInventory.resx">
       <DependentUpon>BranchInventory.cs</DependentUpon>

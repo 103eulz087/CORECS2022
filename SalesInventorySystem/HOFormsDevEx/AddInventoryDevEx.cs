@@ -125,62 +125,7 @@ namespace SalesInventorySystem.HOFormsDevEx
             {
                 XtraMessageBox.Show("Failed to save receiving data: " + ex.Message);
             }
-            //bool isproductexist = true;
-            //if (checkBox3.Checked == true && String.IsNullOrEmpty(txtcost.Text))
-            //{
-            //    XtraMessageBox.Show("Please Input Cost Field!");
-            //    return;
-            //}
-            //if (String.IsNullOrEmpty(txtpalletno.Text))
-            //{
-            //    //XtraMessageBox.Show("Please Input Pallet Number!");
-            //    BigAlert.Show(
-            //          "NO PALLET NUMBER",
-            //          "Please Input Pallet Number!",
-            //          MessageBoxIcon.Warning);
-            //    return;
-            //}
-            //if (txtbarcode.Text == "")
-            //{
-            //    //XtraMessageBox.Show("Textfield must not empty");
-            //    BigAlert.Show(
-            //        "TEXTFIELD EMPTY",
-            //        "Textfield must not empty",
-            //        MessageBoxIcon.Warning);
-            //    txtbarcode.Text = "";
-            //    txtbarcode.Focus();
-            //}
-            //else if (!isproductexist)
-            //{
-            //    //XtraMessageBox.Show("Product Not Exist in OrderDetails");
-            //    BigAlert.Show(
-            //       "PRODUCT NOT EXISTS",
-            //       "Product Not Exist in your PO",
-            //       MessageBoxIcon.Warning);
-            //    txtbarcode.Text = "";
-            //    txtbarcode.Focus();
-            //}
-            //else
-            //{
-            //    if (chckboxbarcode.Checked == true)
-            //    {
-            //        btnprintbarcode.PerformClick();
-            //        InsertData();
-            //        display();
-            //        txtbarcode.Text = "";
-            //        txtweight.Text = "";
-            //        txtweight.Focus();
-            //    }
-            //    else
-            //    {
-            //        InsertData();
-            //        display();
-            //        txtbarcode.Text = "";
-            //        txtweight.Text = "";
-            //        txtweight.Focus();
-            //    }
-
-            //}
+           
 
         }
 

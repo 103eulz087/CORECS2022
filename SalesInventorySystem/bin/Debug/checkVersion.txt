@@ -1,6 +1,6 @@
-Version=35
+Version=38
 Filename=updated.zip
 Launcher=SalesInventorySystem.exe
 VersionCheckerUrl=https://check-uploader.uat-ph.com/ODU2NDE4OTA3
 DownloadUrlFormat=https://file-uploader.uat-ph.com/ODU2NDE4OTA3/file.zip
-DownloadUrl=https://file-uploader.uat-ph.com/ODU2NDE4OTA3/file-v35.zip
+DownloadUrl=https://file-uploader.uat-ph.com/ODU2NDE4OTA3/file-v38.zip

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.gridControl1 = new DevExpress.XtraGrid.GridControl();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -41,6 +42,8 @@
             this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.btnforapprovalsalesorderexcel = new DevExpress.XtraEditors.SimpleButton();
             this.label1 = new System.Windows.Forms.Label();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.updateCostToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
@@ -48,6 +51,7 @@
             this.groupControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).BeginInit();
+            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox2
@@ -56,25 +60,26 @@
             this.groupBox2.Controls.Add(this.gridControl1);
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox2.Location = new System.Drawing.Point(0, 109);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.groupBox2.Size = new System.Drawing.Size(933, 445);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(2, 4, 2, 4);
+            this.groupBox2.Size = new System.Drawing.Size(932, 445);
             this.groupBox2.TabIndex = 13;
             this.groupBox2.TabStop = false;
             // 
             // gridControl1
             // 
             this.gridControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridControl1.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.gridControl1.Location = new System.Drawing.Point(3, 19);
+            this.gridControl1.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
+            this.gridControl1.Location = new System.Drawing.Point(2, 19);
             this.gridControl1.MainView = this.gridView1;
-            this.gridControl1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.gridControl1.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
             this.gridControl1.Name = "gridControl1";
-            this.gridControl1.Size = new System.Drawing.Size(927, 422);
+            this.gridControl1.Size = new System.Drawing.Size(928, 422);
             this.gridControl1.TabIndex = 1;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
+            this.gridControl1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.gridControl1_MouseUp);
             // 
             // gridView1
             // 
@@ -112,17 +117,17 @@
             this.groupControl1.Controls.Add(this.label1);
             this.groupControl1.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupControl1.Location = new System.Drawing.Point(0, 0);
-            this.groupControl1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.groupControl1.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
             this.groupControl1.Name = "groupControl1";
-            this.groupControl1.Size = new System.Drawing.Size(933, 109);
+            this.groupControl1.Size = new System.Drawing.Size(932, 109);
             this.groupControl1.TabIndex = 14;
             // 
             // simpleButton2
             // 
             this.simpleButton2.ImageOptions.Image = global::SalesInventorySystem.Properties.Resources.ExportToExcel_16x16;
             this.simpleButton2.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.simpleButton2.Location = new System.Drawing.Point(583, 40);
-            this.simpleButton2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.simpleButton2.Location = new System.Drawing.Point(582, 40);
+            this.simpleButton2.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
             this.simpleButton2.Name = "simpleButton2";
             this.simpleButton2.Size = new System.Drawing.Size(165, 52);
             this.simpleButton2.TabIndex = 15;
@@ -133,7 +138,7 @@
             // searchLookUpEdit1
             // 
             this.searchLookUpEdit1.Location = new System.Drawing.Point(126, 40);
-            this.searchLookUpEdit1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.searchLookUpEdit1.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
             this.searchLookUpEdit1.Name = "searchLookUpEdit1";
             this.searchLookUpEdit1.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 9.25F);
             this.searchLookUpEdit1.Properties.Appearance.Options.UseFont = true;
@@ -141,7 +146,7 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.searchLookUpEdit1.Properties.NullText = "";
             this.searchLookUpEdit1.Properties.PopupView = this.searchLookUpEdit1View;
-            this.searchLookUpEdit1.Size = new System.Drawing.Size(185, 24);
+            this.searchLookUpEdit1.Size = new System.Drawing.Size(184, 24);
             this.searchLookUpEdit1.TabIndex = 14;
             this.searchLookUpEdit1.EditValueChanged += new System.EventHandler(this.searchLookUpEdit1_EditValueChanged);
             // 
@@ -159,9 +164,9 @@
             this.simpleButton1.ImageOptions.Image = global::SalesInventorySystem.Properties.Resources.Refresh_16x16;
             this.simpleButton1.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
             this.simpleButton1.Location = new System.Drawing.Point(328, 40);
-            this.simpleButton1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.simpleButton1.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
             this.simpleButton1.Name = "simpleButton1";
-            this.simpleButton1.Size = new System.Drawing.Size(108, 52);
+            this.simpleButton1.Size = new System.Drawing.Size(107, 52);
             this.simpleButton1.TabIndex = 13;
             this.simpleButton1.Text = "Generate";
             this.simpleButton1.Click += new System.EventHandler(this.simpleButton1_Click);
@@ -172,6 +177,7 @@
             this.label2.BackColor = System.Drawing.Color.Transparent;
             this.label2.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(14, 77);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(47, 18);
             this.label2.TabIndex = 12;
@@ -183,7 +189,7 @@
             this.radioButton2.Checked = true;
             this.radioButton2.Font = new System.Drawing.Font("Tahoma", 9.25F);
             this.radioButton2.Location = new System.Drawing.Point(217, 74);
-            this.radioButton2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.radioButton2.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
             this.radioButton2.Name = "radioButton2";
             this.radioButton2.Size = new System.Drawing.Size(98, 23);
             this.radioButton2.TabIndex = 11;
@@ -197,7 +203,7 @@
             this.radioButton1.AutoSize = true;
             this.radioButton1.Font = new System.Drawing.Font("Tahoma", 9.25F);
             this.radioButton1.Location = new System.Drawing.Point(126, 74);
-            this.radioButton1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.radioButton1.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
             this.radioButton1.Name = "radioButton1";
             this.radioButton1.Size = new System.Drawing.Size(87, 23);
             this.radioButton1.TabIndex = 10;
@@ -209,8 +215,8 @@
             // 
             this.btnforapprovalsalesorderexcel.ImageOptions.Image = global::SalesInventorySystem.Properties.Resources.ExportToExcel_16x16;
             this.btnforapprovalsalesorderexcel.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnforapprovalsalesorderexcel.Location = new System.Drawing.Point(443, 40);
-            this.btnforapprovalsalesorderexcel.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnforapprovalsalesorderexcel.Location = new System.Drawing.Point(442, 40);
+            this.btnforapprovalsalesorderexcel.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
             this.btnforapprovalsalesorderexcel.Name = "btnforapprovalsalesorderexcel";
             this.btnforapprovalsalesorderexcel.Size = new System.Drawing.Size(133, 52);
             this.btnforapprovalsalesorderexcel.TabIndex = 9;
@@ -223,19 +229,35 @@
             this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(14, 43);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(101, 18);
             this.label1.TabIndex = 0;
             this.label1.Text = "Select Branch:";
             // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.updateCostToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(211, 56);
+            // 
+            // updateCostToolStripMenuItem
+            // 
+            this.updateCostToolStripMenuItem.Name = "updateCostToolStripMenuItem";
+            this.updateCostToolStripMenuItem.Size = new System.Drawing.Size(210, 24);
+            this.updateCostToolStripMenuItem.Text = "Update Cost";
+            this.updateCostToolStripMenuItem.Click += new System.EventHandler(this.updateCostToolStripMenuItem_Click);
+            // 
             // BranchGenInventory
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(933, 554);
+            this.ClientSize = new System.Drawing.Size(932, 554);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupControl1);
-            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
             this.Name = "BranchGenInventory";
             this.Text = "BranchGenInventory";
             this.Load += new System.EventHandler(this.BranchGenInventory_Load);
@@ -247,6 +269,7 @@
             this.groupControl1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).EndInit();
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -266,5 +289,7 @@
         private DevExpress.XtraEditors.SearchLookUpEdit searchLookUpEdit1;
         private DevExpress.XtraGrid.Views.Grid.GridView searchLookUpEdit1View;
         private DevExpress.XtraEditors.SimpleButton simpleButton2;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem updateCostToolStripMenuItem;
     }
 }

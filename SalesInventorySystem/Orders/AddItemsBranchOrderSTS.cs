@@ -11,6 +11,8 @@ using DevExpress.XtraEditors;
 using DevExpress.XtraGrid.Views.Grid;
 using SalesInventorySystem.Classes;
 using DevExpress.XtraEditors.Repository;
+using System.Globalization;
+using System.Data.SqlClient;
 
 namespace SalesInventorySystem.Orders
 {
@@ -45,6 +47,170 @@ namespace SalesInventorySystem.Orders
             repoQuantity.IsFloatValue = false;
             gridControl1.RepositoryItems.Add(repoQuantity);
         }
+
+
+        private DataTable BuildTransferDetailsTable()
+        {
+            var dt = new DataTable();
+            dt.Columns.Add("PONumber", typeof(string));
+            dt.Columns.Add("ProductCode", typeof(string));
+            dt.Columns.Add("ProductName", typeof(string));
+            dt.Columns.Add("Qty", typeof(decimal));
+            dt.Columns.Add("Units", typeof(string));
+            dt.Columns.Add("isValid", typeof(bool));
+            dt.Columns.Add("Remarks", typeof(string));
+
+            gridView1.BeginDataUpdate();
+            try
+            {
+                for (int r = 0; r < gridView1.RowCount; r++)
+                {
+                    int rowHandle = gridView1.GetVisibleRowHandle(r);
+                    if (rowHandle < 0) continue; // group rows / invalid
+
+                    var qtyObj = gridView1.GetRowCellValue(rowHandle, "Quantity");
+                    if (qtyObj == null) continue;
+
+                    if (!decimal.TryParse(qtyObj.ToString(), NumberStyles.Any, CultureInfo.InvariantCulture, out var qty))
+                        continue;
+
+                    if (qty <= 0) continue;
+
+                    string productCode = Convert.ToString(gridView1.GetRowCellValue(rowHandle, "ProductCode"))?.Trim();
+                    string desc = Convert.ToString(gridView1.GetRowCellValue(rowHandle, "Description"))?.Trim();
+                    string remarks = Convert.ToString(gridView1.GetRowCellValue(rowHandle, "Remarks"))?.Trim();
+
+                    if (string.IsNullOrWhiteSpace(productCode)) continue;
+
+                    dt.Rows.Add(
+                        txtpono.Text.Trim(),
+                        productCode,
+                        desc,
+                        qty,
+                        "kgs",
+                        true,
+                        remarks ?? ""
+                    );
+                }
+            }
+            finally
+            {
+                gridView1.EndDataUpdate();
+            }
+
+            return dt;
+        }
+
+        void save_optimized()
+        {
+            try
+            {
+                if (string.IsNullOrWhiteSpace(txtpono.Text))
+                {
+                    XtraMessageBox.Show("PO Number is required.");
+                    return;
+                }
+
+                var dt = BuildTransferDetailsTable();
+                if (dt.Rows.Count == 0)
+                {
+                    XtraMessageBox.Show("No items with Quantity > 0 to save.");
+                    return;
+                }
+
+                SqlConnection con = Database.getConnection();
+                con.Open();
+
+                var tran = con.BeginTransaction();
+
+                // 1) create temp table
+                using (var cmd = new SqlCommand(@"
+                    CREATE TABLE #tmpTransferDetails(
+                        PONumber    varchar(10) COLLATE DATABASE_DEFAULT,
+                        ProductCode varchar(10) COLLATE DATABASE_DEFAULT,
+                        ProductName varchar(200) COLLATE DATABASE_DEFAULT,
+                        Qty         decimal(18,3),
+                        Units       varchar(10) COLLATE DATABASE_DEFAULT,
+                        isValid     bit,
+                        Remarks     varchar(500) COLLATE DATABASE_DEFAULT
+                    );", con, tran))
+                {
+                    cmd.ExecuteNonQuery();
+                }
+
+                // 2) bulk copy
+                using (var bulk = new SqlBulkCopy(con, SqlBulkCopyOptions.Default, tran))
+                {
+                    bulk.DestinationTableName = "#tmpTransferDetails";
+                    bulk.BatchSize = 2000;
+
+                    bulk.ColumnMappings.Add("PONumber", "PONumber");
+                    bulk.ColumnMappings.Add("ProductCode", "ProductCode");
+                    bulk.ColumnMappings.Add("ProductName", "ProductName");
+                    bulk.ColumnMappings.Add("Qty", "Qty");
+                    bulk.ColumnMappings.Add("Units", "Units");
+                    bulk.ColumnMappings.Add("isValid", "isValid");
+                    bulk.ColumnMappings.Add("Remarks", "Remarks");
+
+                    bulk.WriteToServer(dt);
+                }
+
+                // 3) detect duplicates in ONE query
+                using (var cmd = new SqlCommand(@"
+                    IF EXISTS(
+                        SELECT 1
+                        FROM #tmpTransferDetails t
+                        INNER JOIN TransferOrderDetails d
+                            ON d.PONumber = t.PONumber COLLATE DATABASE_DEFAULT
+                           AND d.ProductCode = t.ProductCode COLLATE DATABASE_DEFAULT
+                    )
+                    BEGIN
+                        RAISERROR('One or more products already exist in TransferOrderDetails for this PO.', 16, 1);
+                    END
+                ", con, tran))
+                {
+                    cmd.ExecuteNonQuery();
+                }
+
+                // 4) insert all rows set-based with proper SeqNo generation
+                // IMPORTANT: generate SeqNo without row-by-row getLastID.
+                // We'll compute starting SeqNo once and use ROW_NUMBER().
+                using (var cmd = new SqlCommand(@"
+                    DECLARE @StartSeq int =
+                        ISNULL((SELECT MAX(SeqNo) FROM TransferOrderDetails WHERE PONumber = @PONumber), 0);
+
+                    INSERT INTO TransferOrderDetails
+                        (PONumber, SeqNo, ProductCode, ProductName, Qty, Units, isValid, Remarks)
+                    SELECT
+                        t.PONumber,
+                        @StartSeq + ROW_NUMBER() OVER (ORDER BY t.ProductCode) AS SeqNo,
+                        t.ProductCode,
+                        t.ProductName,
+                        t.Qty,
+                        t.Units,
+                        t.isValid,
+                        t.Remarks
+                    FROM #tmpTransferDetails t;
+                ", con, tran))
+                {
+                    cmd.Parameters.AddWithValue("@PONumber", txtpono.Text.Trim());
+                    cmd.ExecuteNonQuery();
+                }
+
+                tran.Commit();
+
+                XtraMessageBox.Show($"Saved {dt.Rows.Count} item(s) successfully.");
+            }
+            catch (SqlException ex)
+            {
+                XtraMessageBox.Show(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                XtraMessageBox.Show(ex.Message);
+            }
+        }
+
         void save()
         {
             try
@@ -78,13 +244,15 @@ namespace SalesInventorySystem.Orders
                     }
                     else
                     {
-                        Database.ExecuteQuery("INSERT INTO TransferOrderDetails (PONumber" +
+                        if(Convert.ToDouble(gridView1.GetRowCellValue(i,"Quantity")) > 0)
+                        {
+                            Database.ExecuteQuery("INSERT INTO TransferOrderDetails (PONumber" +
                             ",SeqNo" +
                             ",ProductCode" +
                             ",ProductName" +
                             ",Qty" +
                             ",Units" +
-                            ",isValid" +  
+                            ",isValid" +
                             ",Remarks) " +
                             "VALUES ('" + txtpono.Text + "'" +
                             ",'" + ctr + "'" +
@@ -94,6 +262,8 @@ namespace SalesInventorySystem.Orders
                             ",'kgs'" +
                             ",'1'" +
                             ",'" + remarks + "') ");
+                        }
+                       
                     }
                 }
             }
@@ -110,7 +280,8 @@ namespace SalesInventorySystem.Orders
             {
 
                 //UnfilterAndSave();
-                save();
+                //save();
+                save_optimized();
                 isdone = true;
                 this.Close();
             }

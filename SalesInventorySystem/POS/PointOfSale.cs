@@ -106,19 +106,7 @@ namespace SalesInventorySystem
             refreshView();
            
             txtsku.Focus();
-            //Database.displayComboBoxItems("SELECT distinct CustomerName FROM Customers", "CustomerName", txtcustname);
-
-            //if(POS.POSConnectionSettings.spValue == "sp_AddSalesInvoiceOnline")
-            //{
-            //    constring = "Online";
-            //}else
-            //{
-            //    constring = "Offline";
-            //}
-            //lblstatus.Text = constring;
-            //loadDefaultClient();
-            //lblTransactionIDInc.Text = Database.getSingleQuery("POSTransaction", "TransactionNo <> ''", "TransactionNo");
-            lblTransactionIDCashier.Text = Database.getSingleQuery("SalesTransactionSummary", "UserID='" + Login.isglobalUserID + "' AND BranchCode='" + Login.assignedBranch + "' AND isOpen='1' and DateOpen='"+DateTime.Now.ToShortDateString()+"' ", "CashierTransNo");
+          lblTransactionIDCashier.Text = Database.getSingleQuery("SalesTransactionSummary", "UserID='" + Login.isglobalUserID + "' AND BranchCode='" + Login.assignedBranch + "' AND isOpen='1' and DateOpen='"+DateTime.Now.ToShortDateString()+"' ", "CashierTransNo");
             lblMachineName.Text = Classes.Utilities.getComputerName();
             labelControl7.Text = Login.Fullname;
 

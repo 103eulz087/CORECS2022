@@ -2890,7 +2890,7 @@ namespace SalesInventorySystem
             bool isPOSDetailsExists = Database.checkifExist("SELECT TOP(1) BranchCode FROM dbo.POSInfoDetails WHERE MachineUsed='" + Environment.MachineName + "'");
 
             //check if END OF DAY Transaction is already Executed, IF True, cashiers cannot login anymore.
-            bool isExists = Database.checkifExist("SELECT TOP(1) MachineUsed " +
+            bool isExists = Database.checkifExist("SELECT 1 " +
                                                     "FROM POSZReadingTransactions " +
                                                     "WHERE MachineUsed='" + Environment.MachineName + "' " +
                                                     "AND BranchCode='"+Login.assignedBranch+"' " +
@@ -2899,13 +2899,13 @@ namespace SalesInventorySystem
             
             //check if END OF DAY Monitoring is not yet EXECUTED on this date.
             //used this condition always, because what if the CASHIER are forgot to EXECUTE END OF DAY
-            bool notyetEOF = Database.checkifExist("Select TOP(1) isEndOfDay " +
+            bool notyetEOF = Database.checkifExist("Select 1 " +
                                                     "FROM POSEODMonitoring " +
                                                     "WHERE isEndOfDay=0 AND BranchCode='"+Login.assignedBranch+"' " +
                                                     "AND TransactionDate<>'"+ charDate + "'"); 
 
             //check if there are still OPEN CASHIER TRANSACTION on previous date.
-            bool stillOpenTransaction = Database.checkifExist("Select isOpen " +
+            bool stillOpenTransaction = Database.checkifExist("Select 1 " +
                                                           "FROM SalesTransactionSummary " +
                                                           "WHERE BranchCode='" + Login.assignedBranch + "' " +
                                                           "and isOpen=1 " +
@@ -2913,7 +2913,7 @@ namespace SalesInventorySystem
                                                           "and CAST(TransactionDate as date) < '" + DateTime.Now.ToShortDateString() + "'" +
                                                           "AND MachineUsed='" + Environment.MachineName.ToString() + "' ");
 
-           bool cashierAlreadyLogin = Database.checkifExist("Select isOpen " +
+           bool cashierAlreadyLogin = Database.checkifExist("Select 1 " +
                                                           "FROM SalesTransactionSummary " +
                                                           "WHERE BranchCode='" + Login.assignedBranch + "' " +
                                                           "and UserID='" + Login.isglobalUserID + "' " +

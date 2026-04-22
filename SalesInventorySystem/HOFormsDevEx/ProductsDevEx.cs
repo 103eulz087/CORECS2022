@@ -165,7 +165,7 @@ namespace SalesInventorySystem.HOFormsDevEx
 
 
 
-                if (HelperFunction.isTextBoxEmpty(txtdesc, txtprodcode, txtsellingprice, txtlandingcost, txtreorderlevel))
+                if (HelperFunction.isTextBoxEmpty(txtdesc, txtprodcode, txtsellingprice, txtlandingcost, txtreorderlevel) || String.IsNullOrEmpty(txtprodtype.Text))
                 {
                     XtraMessageBox.Show("Please Input All Fields");
                 }

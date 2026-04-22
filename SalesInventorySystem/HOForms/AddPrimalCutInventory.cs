@@ -96,17 +96,13 @@ namespace SalesInventorySystem.HOForms
         //    }
         //}
 
-        void display()
+        void displayToPrint()
         {
-            Database.display("SELECT * FROM view_ProcessToPrimal " +
-                "WHERE BatchCode='" + txtbatchcode.Text + "' " +
-                "and Available > 0 ORDER BY SequenceNumber DESC", gridControl1, gridView1);
-
             GridView view = gridControl1.FocusedView as GridView;
             view.SortInfo.ClearAndAddRange(new GridColumnSortInfo[] {
                 new GridColumnSortInfo(view.Columns["PalletNo"],DevExpress.Data.ColumnSortOrder.Ascending),
                 new GridColumnSortInfo(view.Columns["Description"],DevExpress.Data.ColumnSortOrder.Ascending)
-                },2);
+                }, 2);
             gridView1.ExpandAllGroups();
 
             GridGroupSummaryItem itemCount = new GridGroupSummaryItem();
@@ -125,6 +121,13 @@ namespace SalesInventorySystem.HOForms
 
             Classes.DevXGridViewSettings.ShowFooterCountTotal(gridView1, "PalletNo");
             Classes.DevXGridViewSettings.ShowFooterTotal(gridView1, "Quantity");
+        }
+
+        void display()
+        {
+            Database.display("SELECT * FROM view_ProcessToPrimal " +
+                "WHERE BatchCode='" + txtbatchcode.Text + "' " +
+                "and Available > 0 ORDER BY SequenceNumber DESC", gridControl1, gridView1);
         }
 
         private void getAvailablePort()
@@ -562,8 +565,7 @@ namespace SalesInventorySystem.HOForms
             xct.PaperKind = System.Drawing.Printing.PaperKind.Letter;
             xct.Margins = new System.Drawing.Printing.Margins(100, 100, 100, 100);
 
-            //this.gridView1.Columns["Cost"].Visible = false;
-            //this.gridView1.Columns["Available"].Visible = false;
+            displayToPrint();
 
             xct.xrdate.Text = DateTime.Now.ToShortDateString();
             xct.xrpreparedby.Text = Login.Fullname;

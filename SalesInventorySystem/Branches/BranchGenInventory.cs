@@ -146,5 +146,31 @@ namespace SalesInventorySystem.Branches
             Reporting.BranchInventoryProductSummary branchsum = new Reporting.BranchInventoryProductSummary();
             branchsum.Show();
         }
+
+        private void gridControl1_MouseUp(object sender, MouseEventArgs e)
+        {
+
+            if (e.Button == MouseButtons.Right)
+            {
+                if (Convert.ToBoolean(Login.isglobalAdmin) == true && radioButton1.Checked == true)
+                {
+                    contextMenuStrip1.Show(gridControl1, e.Location);
+                }
+            }
+        }
+
+        private void updateCostToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            BranchGenInventoryUpdateCost brnchupdcost = new BranchGenInventoryUpdateCost();
+            brnchupdcost.txtseqno.Text = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "SequenceNumber").ToString();
+            brnchupdcost.txtcost.Text = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "Cost").ToString();
+            brnchupdcost.ShowDialog(this);
+            if(BranchGenInventoryUpdateCost.isdone==true)
+            {
+                BranchGenInventoryUpdateCost.isdone = false;
+                brnchupdcost.Dispose();
+                display();
+            }
+        }
     }
 }

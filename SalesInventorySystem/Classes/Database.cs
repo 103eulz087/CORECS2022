@@ -50,48 +50,7 @@ namespace SalesInventorySystem
             }
             return con;
         }
-        //public static int getCTRVersionAs(String name)
-        //{
-        //    int num1 = 0;
-
-        //    SqlDataReader sqlDataReader=null;
-        //    try
-        //    {
-        //        SqlConnection connection = Database.getConnection(@"AAITCRE\ConnSettingsUpdater");
-        //        connection.Open();
-        //        sqlDataReader = new SqlCommand($"SELECT TOP 1 CAST(Versions as int) AS CC FROM UploaderLoopUps WHERE Company='{ name }';", connection).ExecuteReader();
-
-        //        if (sqlDataReader != null)
-        //        {
-        //            while (sqlDataReader.Read())
-        //                num1 = Convert.ToInt32(sqlDataReader["CC"].ToString());
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        num1 = 0;// (int)MessageBox.Show(ex.StackTrace.ToString());
-        //    }
-        //    finally
-        //    {
-        //        sqlDataReader.Close();
-        //        connection.Close();
-        //    }
-
-        //    //exitProg:
-        //    return num1;
-        //}
-        //public static String getConnectionServerName()
-        //{
-        //    regkey = Registry.CurrentUser.CreateSubKey(@"AAITCRE\ConnSettingsMain");
-        //    return constring = regkey.GetValue("servername").ToString();
-        //}
-
-        //public static String getConnectionString(string regkeypath)
-        //{
-        //    regkey = Registry.CurrentUser.CreateSubKey(regkeypath);
-        //    return constring = regkey.GetValue("dbconn").ToString();
-        //}
-        // Cache the server name in memory so we only read the Registry once!
+     
         private static string _cachedServerName = null;
 
         public static string getConnectionServerName()
@@ -184,23 +143,7 @@ namespace SalesInventorySystem
                 XtraMessageBox.Show("Warning: Local database migration failed. " + ex.Message, "Sync Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
-        //public static SqlConnection getConnection()
-        //{
-        //    //regkey = Registry.CurrentUser.CreateSubKey(@"Enzo\ConnSettings");
-        //    regkey = Registry.CurrentUser.CreateSubKey(@"AAITCRE\ConnSettingsMain");
-        //    constring = regkey.GetValue("dbconn").ToString();
-        //    SqlConnection con;
-        //    try
-        //    {
-        //        con = new SqlConnection(constring);
-        //    }
-        //    catch (SqlException sex)
-        //    {
-        //        sex.StackTrace.ToString();
-        //        return null;
-        //    }
-        //    return con;
-        //}
+         
         private static string _cachedConnectionString = null;
 
         public static SqlConnection getConnection()
@@ -692,35 +635,7 @@ namespace SalesInventorySystem
             con.Close();
             return str;
         }
-        //public static String getSingleQuery(string query,string returnval)
-        //{
-        //    string str = "";
-        //    SqlConnection con = getConnection();
-        //    con.Open();
-        //    try
-        //    {
-        //        SqlCommand com = new SqlCommand(query, con);
-        //        SqlDataReader reader = com.ExecuteReader();
-        //        if (reader != null)
-        //        {
-        //            while (reader.Read())
-        //            {
-        //                str = reader[returnval].ToString();
-        //            }
-        //            reader.Close();
-        //        }
-        //    }
-        //    catch(SqlException ex)
-        //    {
-        //        XtraMessageBox.Show(ex.Message.ToString());
-        //    }
-        //    finally
-        //    {
-        //        con.Close();
-        //    }
-
-        //    return str;
-        //}
+      
         public static string getSingleQuery(string query, string returnval)
         {
             string str = "";
@@ -749,36 +664,7 @@ namespace SalesInventorySystem
             }
             return str;
         }
-        //public static String getSingleQuery(string tablename, string condition, string returnval)
-        //{
-        //    string str = "";
-        //    SqlConnection con = getConnection();
-        //    con.Open();
-        //    try
-        //    {
-        //        string query = "SELECT TOP(1) " + returnval + " FROM " + tablename + " WHERE " + condition + " ";
-        //        SqlCommand com = new SqlCommand(query, con);
-        //        SqlDataReader reader = com.ExecuteReader();
-        //        if (reader != null)
-        //        {
-        //            while (reader.Read())
-        //            {
-        //                str = reader[returnval].ToString();
-        //            }
-        //            reader.Close();
-        //        }
-        //    }
-        //    catch (SqlException ex)
-        //    {
-        //        XtraMessageBox.Show(ex.Message.ToString());
-        //    }
-        //    finally
-        //    {
-        //        con.Close();
-        //    }
-
-        //    return str;
-        //}
+   
         public static string getSingleQuery(string tablename, string condition, string returnval)
         {
             string str = "";
@@ -873,58 +759,7 @@ namespace SalesInventorySystem
 
             return str;
         }
-
-        //public static Dictionary<string, object> getMultipleQuery(string tablename, string condition, string returnval) // ID, Name
-        //{
-
-        //    SqlConnection con = getConnection();
-        //    con.Open();
-        //    string query = "SELECT TOP(1) " + returnval + " FROM " + tablename + " WHERE " + condition + " ";
-        //    SqlCommand com = new SqlCommand(query, con);
-        //    SqlDataReader reader = com.ExecuteReader();
-
-        //    Dictionary<string, object> dic = new Dictionary<string, object>();
-        //    if (reader != null)
-        //    {
-        //        while (reader.Read())
-        //        {
-        //            //str = reader[returnval].ToString();
-        //            dic = ToDictionary(reader);
-        //        }
-        //        reader.Close();
-        //    }
-        //    con.Close();
-        //    return dic;
-        //}
-        //public static Dictionary<string, object> getMultipleQuery(string query, string returnval) // ID, Name
-        //{
-
-        //    SqlConnection con = getConnection();
-        //    con.Open();
-        //    //string query = "SELECT TOP 1 " + returnval + " FROM " + tablename + " WHERE " + condition + " ";
-        //    SqlCommand com = new SqlCommand(query, con);
-        //    SqlDataReader reader = com.ExecuteReader();
-
-        //    Dictionary<string, object> dic = new Dictionary<string, object>();
-        //    if (reader != null)
-        //    {
-        //        while (reader.Read())
-        //        {
-        //            //str = reader[returnval].ToString();
-        //            dic = ToDictionary(reader);
-        //            // Replace null or whitespace values with empty string
-        //            foreach (var key in dic.Keys.ToList())
-        //            {
-        //                var value = dic[key];
-        //                dic[key] = string.IsNullOrWhiteSpace(value?.ToString()) ? "" : value;
-        //            }
-
-        //        }
-        //        reader.Close();
-        //    }
-        //    con.Close();
-        //    return dic;
-        //}
+        
         public static Dictionary<string, object> getMultipleQuery(string tablename, string condition, string returnval)
         {
             Dictionary<string, object> dic = new Dictionary<string, object>();
@@ -1053,21 +888,6 @@ namespace SalesInventorySystem
 
             return dic;
         }
-
-        //public static Dictionary<string, object> ToDictionary(System.Data.SqlClient.SqlDataReader row)
-        //{
-        //    string nameStr="";
-        //    lock (nameStr)
-        //    {
-        //        var dic = new Dictionary<string, object>();
-        //        for (int i = 0; i < row.FieldCount; i++)
-        //        {
-        //            nameStr = row.GetName(i);
-        //            dic[nameStr] = (object)row[nameStr];
-        //        }
-        //        return dic;
-        //    }
-        //}
         public static Dictionary<string, object> ToDictionary(System.Data.SqlClient.SqlDataReader row)
         {
             // Adding OrdinalIgnoreCase makes reading from this dictionary later 100x easier!
@@ -1094,117 +914,7 @@ namespace SalesInventorySystem
             return dic;
         }
 
-
-        //public static Double getSingleAmountQuery(string tablename, string condition, string returnval)
-        //{
-        //    double str = 0.0;
-        //    SqlConnection con = getConnection();
-        //    con.Open();
-        //    string query = "SELECT TOP(1) * FROM " + tablename + " WHERE " + condition + " ";
-        //    SqlCommand com = new SqlCommand(query, con);
-        //    SqlDataReader reader = com.ExecuteReader();
-        //    if (reader != null)
-        //    {
-        //        while (reader.Read())
-        //        {
-        //            str = Convert.ToDouble(reader[returnval]);
-        //        }
-        //        reader.Close();
-        //    }
-        //    con.Close();
-        //    return str;
-        //}
-
-        //public static String getSingleQueryWithNull(string tablename,string id, string condition, string returnval)
-        //{
-        //    string str = "";
-        //    SqlConnection con = getConnection();
-        //    con.Open();
-        //    string query = "SELECT TOP(1) " + id+" FROM " + tablename + " WHERE " + condition + " ";
-        //    SqlCommand com = new SqlCommand(query, con);
-        //    SqlDataReader reader = com.ExecuteReader();
-        //    try
-        //    {
-        //        if (reader != null)
-        //        {
-        //            while (reader.Read())
-        //            {
-        //                str = reader[returnval].ToString();
-        //            }
-        //            reader.Close();
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw new Exception(ex.Message.ToString());
-        //    }
-        //    finally
-        //    {
-        //        con.Close();
-        //    }
-        //    return str;
-        //}
-
-        //public static String getSingleData(string tablename,string col,string value)
-        //{
-        //    string str = "";
-        //    SqlConnection con = getConnection();
-        //    con.Open();
-        //    try
-        //    {
-        //        string query = "SELECT TOP(1) * FROM " + tablename + " WHERE " + col + " = '" + value + "' ";
-        //        SqlCommand com = new SqlCommand(query, con);
-        //        SqlDataReader reader = com.ExecuteReader();
-        //        if (reader != null)
-        //        {
-        //            while (reader.Read())
-        //            {
-        //                str = reader[col].ToString();
-        //            }
-        //            reader.Close();
-        //        }
-        //    }
-        //    catch(SqlException ex)
-        //    {
-        //        ex.Message.ToString();
-        //    }
-        //    finally
-        //    {
-        //        con.Close();
-        //    }
-        //    return str;
-        //}
-
-        //public static String getSingleData(string tablename, string col, string value,string returnval)
-        //{
-        //    string str = "";
-        //    SqlConnection con = getConnection();
-        //    con.Open();
-        //    try
-        //    {
-        //        string query = "SELECT TOP(1) * FROM " + tablename + " WHERE " + col + " = '" + value + "' ";
-        //        SqlCommand com = new SqlCommand(query, con);
-        //        SqlDataReader reader = com.ExecuteReader();
-        //        if (reader != null)
-        //        {
-        //            while (reader.Read())
-        //            {
-        //                str = reader[returnval].ToString();
-        //            }
-        //            reader.Close();
-        //        }
-        //    }
-        //    catch (SqlException ex)
-        //    {
-        //        ex.Message.ToString();
-        //    }
-        //    finally
-        //    {
-        //        con.Close();
-        //    }
-        //    return str;
-        //}
-        // 1. The Double / Amount Lookup
+        
         public static double getSingleAmountQuery(string tablename, string condition, string returnval)
         {
             try
@@ -1301,32 +1011,6 @@ namespace SalesInventorySystem
                 return "";
             }
         }
-        //public static String getSingleResultSet(string query)
-        //{
-        //    string str = "";
-        //    SqlConnection con = getConnection();
-        //    con.Open();
-        //    try
-        //    {
-        //        SqlCommand com = new SqlCommand(query, con);
-        //        com.CommandTimeout = 0;
-        //        SqlDataReader reader = com.ExecuteReader();
-        //        if(reader.Read())
-        //        {
-        //            str = reader[0].ToString();
-        //        }
-        //        reader.Close();
-        //    }
-        //    catch (SqlException ex)
-        //    {
-        //        ex.Message.ToString();
-        //    }
-        //    finally
-        //    {
-        //        con.Close();
-        //    }
-        //    return str;
-        //}
         public static string getSingleResultSet(string query)
         {
             string str = "";
@@ -1423,97 +1107,7 @@ namespace SalesInventorySystem
             return str;
         }
 
-        //public static int getCountData(string query,string value)
-        //{
-        //    int ctr = 0;
-        //    SqlConnection con = getConnection();
-        //    con.Open();
-        //   // string query = "SELECT COUNT(" + id + ") AS Counter FROM " + tablename + " WHERE " + condition + " ";
-        //    SqlCommand com = new SqlCommand(query, con);
-        //    SqlDataReader reader = com.ExecuteReader();
-        //    if (reader != null)
-        //    {
-        //        while (reader.Read())
-        //        {
-        //            ctr = Convert.ToInt32(reader[value].ToString());
-        //        }
-        //        reader.Close();
-        //    }
-        //    con.Close();
-        //    return ctr;
-        //}
-        //public static int getCountData(string tablename, string condition,string id)
-        //{
-        //    int ctr = 0;
-        //    SqlConnection con = getConnection();
-        //    con.Open();
-        //    try
-        //    {
-        //        string query = "SELECT TOP(1) COUNT(" + id + ") AS Counter FROM " + tablename + " WHERE " + condition + " ";
-        //        SqlCommand com = new SqlCommand(query, con);
-        //        SqlDataReader reader = com.ExecuteReader();
-        //        if (reader != null)
-        //        {
-        //            while (reader.Read())
-        //            {
-        //                ctr = Convert.ToInt32(reader["Counter"].ToString());
-        //            }
-        //            reader.Close();
-        //        }
-        //    }
-        //    catch (SqlException ex)
-        //    {
-        //        ex.Message.ToString();
-        //    }
-        //    finally
-        //    {
-        //        con.Close();
-        //    }
-        //    return ctr;
-        //}
-
-        //public static int getCountData(string tablename, string col, string value,string id)
-        //{
-        //    int ctr=0;
-        //    SqlConnection con = getConnection();
-        //    con.Open();
-        //    string query = "SELECT TOP(1) COUNT(" + id+") AS Counter FROM " + tablename + " WHERE " + col + " = '" + value + "' ";
-        //    SqlCommand com = new SqlCommand(query, con);
-        //    SqlDataReader reader = com.ExecuteReader();
-        //    if (reader != null)
-        //    {
-        //        while (reader.Read())
-        //        {
-        //            ctr = Convert.ToInt32(reader["Counter"].ToString());
-        //        }
-        //        reader.Close();
-        //    }
-        //    con.Close();
-        //    return ctr;
-        //}
-
-        //public static int getCountData(string tablename, string col, string value, string id,string col2,string val2)
-        //{
-        //    int ctr = 0;
-        //    SqlConnection con = getConnection();
-        //    con.Open();
-        //    string query = "SELECT TOP(1) COUNT(" + id + ") AS Counter FROM " + tablename + " WHERE " + col + " = '" + value + "' AND "+col2+" = "+val2+" ";
-        //    SqlCommand com = new SqlCommand(query, con);
-        //    SqlDataReader reader = com.ExecuteReader();
-        //    if (reader != null)
-        //    {
-        //        while (reader.Read())
-        //        {
-        //            ctr = Convert.ToInt32(reader["Counter"].ToString());
-        //        }
-        //        reader.Close();
-        //    }
-        //    con.Close();
-        //    return ctr;
-        //}
-        // OVERLOAD 1: Raw Query
-        // Note: We keep the 'value' parameter so we don't break your existing code, 
-        // but ExecuteScalar makes it obsolete since it grabs the first column automatically!
+       
         public static int getCountData(string query, string value)
         {
             try
@@ -1557,39 +1151,7 @@ namespace SalesInventorySystem
                 return 0;
             }
         }
-
         
-       
-        //public static double getTotalSummation(string tablename, string condition,string id)
-        //{
-        //    double ctr = 0.0;
-        //    SqlConnection con = getConnection();
-        //    con.Open();
-        //    try
-        //    {
-        //        string query = "SELECT TOP(1) ISNULL(" + id + ",0) AS Totals FROM (SELECT SUM(" + id + ") AS Totals FROM " + tablename + " WHERE " + condition + ") ";
-        //        SqlCommand com = new SqlCommand(query, con);
-        //        SqlDataReader reader = com.ExecuteReader();
-        //        if (!reader.HasRows)
-        //        {
-        //            while (reader.Read())
-        //            {
-        //                ctr = Convert.ToDouble(reader["Totals"].ToString());
-        //            }
-        //            reader.Close();
-        //        }
-        //    }
-        //    catch (SqlException ex)
-        //    {
-        //        ex.Message.ToString();
-        //    }
-        //    finally
-        //    {
-        //        con.Close();
-        //    }
-        //    return ctr;
-        //}
-
 
         public static double getTotalSummation2(string tablename, string condition, string columnName)
         {
@@ -1636,51 +1198,7 @@ namespace SalesInventorySystem
                 return 0;
             }
         }
-
-        //public static int getLastID(string tableName,string id)
-        //{
-        //    int i = 0;
-        //    SqlConnection con = getConnection();
-        //    con.Open();
-        //    string query = "SELECT TOP(1) ISNULL(MAX(CAST(" + id + " as int)),0) AS CC FROM " + tableName;
-        //    SqlCommand com = new SqlCommand(query, con);
-        //    SqlDataReader reader = com.ExecuteReader();
-        //    if (reader != null)
-        //    {
-        //        while (reader.Read())
-        //        { 
-        //            i = Convert.ToInt32(reader["CC"].ToString());
-        //        }
-        //        reader.Close();
-        //    }
-
-        //    con.Close();
-        //    return i;
-        //}
-
-        //public static int getLastID(string tableName,string condition, string id)
-        //{
-        //    int i = 0;
-        //    SqlConnection con = getConnection();
-        //    con.Open();
-        //    string query = "SELECT TOP(1) isnull(MAX(CAST(" + id + " as int)),0) AS CC FROM " + tableName + " WHERE "+condition+"";
-        //    SqlCommand com = new SqlCommand(query, con);
-        //    SqlDataReader reader = com.ExecuteReader();
-        //    if (reader != null)
-        //    {
-        //        while (reader.Read())
-        //        {
-        //            //i = reader.GetInt32(1);
-        //            i = Convert.ToInt32(reader["CC"].ToString());
-        //            // i = int.Parse(reader["CC"].ToString());
-        //            //  i = reader.GetInt32(reader.GetOrdinal("CC"));
-        //        }
-        //        reader.Close();
-        //    }
-        //    con.Close();
-        //    return i;
-        //}
-        // Version 1: No Condition
+        
         public static int getLastID(string tableName, string idColumnName)
         {
             try
@@ -1825,34 +1343,6 @@ namespace SalesInventorySystem
             return lastdate;
         }
 
-        //public static void display(string query, GridControl cont, GridView view)
-        //{
-        //    SqlConnection con = getConnection();
-        //    con.Open();
-        //  //  cont.BeginUpdate();
-        //    SqlCommand com = new SqlCommand(query, con);
-        //    SqlDataAdapter adapter = new SqlDataAdapter(com);
-        //    DataTable table = new DataTable();
-        //    try
-        //    {
-        //        com.CommandTimeout = 0;
-        //        view.Columns.Clear();
-        //        cont.DataSource = null;
-        //        adapter.Fill(table);
-        //        //  table.Columns.Add("OvertimeType");
-        //        cont.DataSource = table;
-        //        view.BestFitColumns();
-        //    }
-        //    catch (SqlException ee)
-        //    {
-        //        XtraMessageBox.Show(ee.ToString());
-        //    }
-        //    finally
-        //    {
-        //     //   cont.EndUpdate();
-        //        con.Close();
-        //    }
-        //}
         public static void display(string query, GridControl cont, GridView view)
         {
             try
@@ -2752,45 +2242,7 @@ namespace SalesInventorySystem
                 con.Close();
             }
         }
-
-        //public static void displaySearchlookupEdit(string query, SearchLookUpEdit searchEdit)
-        //{
-        //    SqlConnection con = Database.getConnection();
-        //    con.Open();
-        //    // string query = "SELECT * FROM PrimalCuts";
-        //    SqlCommand com = new SqlCommand(query, con);
-        //    SqlDataAdapter adapter = new SqlDataAdapter(com);
-        //    DataTable table = new DataTable();
-        //    adapter.Fill(table);
-        //    searchEdit.Properties.DataSource = table;
-        //    con.Close();
-        //}
-        //public static void displaySearchlookupEdit(string query,SearchLookUpEdit searchEdit,string displaymember,string valuemember)
-        //{
-        //    SqlConnection con = Database.getConnection();
-        //    con.Open();
-        //    try
-        //    {
-        //        SqlCommand com = new SqlCommand(query, con);
-        //        SqlDataAdapter adapter = new SqlDataAdapter(com);
-        //        DataTable table = new DataTable();
-
-        //        searchEdit.Properties.View.Columns.Clear();
-        //        adapter.Fill(table);
-        //        searchEdit.Properties.DataSource = null;
-        //        searchEdit.Properties.DataSource = table;
-        //        searchEdit.Properties.DisplayMember = displaymember;
-        //        searchEdit.Properties.ValueMember = valuemember;
-        //    }
-        //    catch(SqlException ex)
-        //    {
-        //        XtraMessageBox.Show(ex.Message.ToString());
-        //    }
-        //    finally
-        //    {
-        //        con.Close();
-        //    }
-        //}
+        
         public static void displaySearchlookupEdit(string query, SearchLookUpEdit searchEdit)
         {
             try
