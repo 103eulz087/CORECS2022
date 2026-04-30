@@ -54,12 +54,12 @@
             // gridControl1
             // 
             this.gridControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridControl1.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
-            this.gridControl1.Location = new System.Drawing.Point(6, 36);
+            this.gridControl1.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.gridControl1.Location = new System.Drawing.Point(3, 20);
             this.gridControl1.MainView = this.gridView1;
-            this.gridControl1.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.gridControl1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.gridControl1.Name = "gridControl1";
-            this.gridControl1.Size = new System.Drawing.Size(2954, 1507);
+            this.gridControl1.Size = new System.Drawing.Size(1039, 500);
             this.gridControl1.TabIndex = 0;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
@@ -86,8 +86,7 @@
             this.gridView1.AppearancePrint.GroupRow.Options.UseFont = true;
             this.gridView1.AppearancePrint.Row.Options.UseTextOptions = true;
             this.gridView1.AppearancePrint.Row.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridView1.DetailHeight = 781;
-            this.gridView1.FixedLineWidth = 4;
+            this.gridView1.DetailHeight = 431;
             this.gridView1.GridControl = this.gridControl1;
             this.gridView1.Name = "gridView1";
             this.gridView1.OptionsBehavior.Editable = false;
@@ -107,25 +106,25 @@
             this.cancelThisItemToolStripMenuItem,
             this.printSTSToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(337, 130);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(213, 76);
             // 
             // printPurchaseOrderToolStripMenuItem
             // 
             this.printPurchaseOrderToolStripMenuItem.Name = "printPurchaseOrderToolStripMenuItem";
-            this.printPurchaseOrderToolStripMenuItem.Size = new System.Drawing.Size(336, 42);
+            this.printPurchaseOrderToolStripMenuItem.Size = new System.Drawing.Size(212, 24);
             this.printPurchaseOrderToolStripMenuItem.Text = "Print Purchase Order";
             // 
             // cancelThisItemToolStripMenuItem
             // 
             this.cancelThisItemToolStripMenuItem.Name = "cancelThisItemToolStripMenuItem";
-            this.cancelThisItemToolStripMenuItem.Size = new System.Drawing.Size(336, 42);
+            this.cancelThisItemToolStripMenuItem.Size = new System.Drawing.Size(212, 24);
             this.cancelThisItemToolStripMenuItem.Text = "Cancel this Item";
             this.cancelThisItemToolStripMenuItem.Click += new System.EventHandler(this.cancelThisItemToolStripMenuItem_Click);
             // 
             // printSTSToolStripMenuItem
             // 
             this.printSTSToolStripMenuItem.Name = "printSTSToolStripMenuItem";
-            this.printSTSToolStripMenuItem.Size = new System.Drawing.Size(336, 42);
+            this.printSTSToolStripMenuItem.Size = new System.Drawing.Size(212, 24);
             this.printSTSToolStripMenuItem.Text = "Print STS";
             this.printSTSToolStripMenuItem.Click += new System.EventHandler(this.printSTSToolStripMenuItem_Click);
             // 
@@ -138,11 +137,11 @@
             this.groupBox1.Controls.Add(this.txtpono);
             this.groupBox1.Controls.Add(this.richTextBox1);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.groupBox1.Location = new System.Drawing.Point(0, 1550);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.groupBox1.Location = new System.Drawing.Point(0, 524);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(6, 7, 6, 7);
-            this.groupBox1.Size = new System.Drawing.Size(2966, 112);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.groupBox1.Size = new System.Drawing.Size(1045, 62);
             this.groupBox1.TabIndex = 5;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Remarks";
@@ -150,10 +149,10 @@
             // simpleButton1
             // 
             this.simpleButton1.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("simpleButton1.ImageOptions.Image")));
-            this.simpleButton1.Location = new System.Drawing.Point(1868, 40);
-            this.simpleButton1.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.simpleButton1.Location = new System.Drawing.Point(1006, 22);
+            this.simpleButton1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.simpleButton1.Name = "simpleButton1";
-            this.simpleButton1.Size = new System.Drawing.Size(214, 58);
+            this.simpleButton1.Size = new System.Drawing.Size(115, 32);
             this.simpleButton1.TabIndex = 83;
             this.simpleButton1.Text = "Print PO";
             this.simpleButton1.Click += new System.EventHandler(this.simpleButton1_Click_1);
@@ -161,10 +160,10 @@
             // simpleButton10
             // 
             this.simpleButton10.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("simpleButton10.ImageOptions.Image")));
-            this.simpleButton10.Location = new System.Drawing.Point(1640, 38);
-            this.simpleButton10.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.simpleButton10.Location = new System.Drawing.Point(883, 21);
+            this.simpleButton10.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.simpleButton10.Name = "simpleButton10";
-            this.simpleButton10.Size = new System.Drawing.Size(214, 58);
+            this.simpleButton10.Size = new System.Drawing.Size(115, 32);
             this.simpleButton10.TabIndex = 82;
             this.simpleButton10.Text = "Print STS";
             this.simpleButton10.Click += new System.EventHandler(this.simpleButton10_Click);
@@ -172,10 +171,10 @@
             // simpleButton9
             // 
             this.simpleButton9.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("simpleButton9.ImageOptions.Image")));
-            this.simpleButton9.Location = new System.Drawing.Point(1465, 38);
-            this.simpleButton9.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.simpleButton9.Location = new System.Drawing.Point(789, 21);
+            this.simpleButton9.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.simpleButton9.Name = "simpleButton9";
-            this.simpleButton9.Size = new System.Drawing.Size(162, 58);
+            this.simpleButton9.Size = new System.Drawing.Size(87, 32);
             this.simpleButton9.TabIndex = 81;
             this.simpleButton9.Text = "Reject";
             this.simpleButton9.Click += new System.EventHandler(this.simpleButton9_Click);
@@ -183,29 +182,29 @@
             // btnadd
             // 
             this.btnadd.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnadd.ImageOptions.Image")));
-            this.btnadd.Location = new System.Drawing.Point(1259, 38);
-            this.btnadd.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.btnadd.Location = new System.Drawing.Point(678, 21);
+            this.btnadd.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnadd.Name = "btnadd";
-            this.btnadd.Size = new System.Drawing.Size(193, 58);
+            this.btnadd.Size = new System.Drawing.Size(104, 32);
             this.btnadd.TabIndex = 80;
             this.btnadd.Text = "Approve";
             this.btnadd.Click += new System.EventHandler(this.btnadd_Click);
             // 
             // txtpono
             // 
-            this.txtpono.Location = new System.Drawing.Point(2093, 49);
-            this.txtpono.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.txtpono.Location = new System.Drawing.Point(1127, 27);
+            this.txtpono.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtpono.Name = "txtpono";
-            this.txtpono.Size = new System.Drawing.Size(158, 36);
+            this.txtpono.Size = new System.Drawing.Size(87, 23);
             this.txtpono.TabIndex = 5;
             this.txtpono.Visible = false;
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(26, 38);
-            this.richTextBox1.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.richTextBox1.Location = new System.Drawing.Point(14, 21);
+            this.richTextBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(1215, 55);
+            this.richTextBox1.Size = new System.Drawing.Size(656, 32);
             this.richTextBox1.TabIndex = 0;
             this.richTextBox1.Text = "";
             // 
@@ -214,22 +213,22 @@
             this.groupBox2.Controls.Add(this.gridControl1);
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox2.Location = new System.Drawing.Point(0, 0);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(6, 7, 6, 7);
-            this.groupBox2.Size = new System.Drawing.Size(2966, 1550);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.groupBox2.Size = new System.Drawing.Size(1045, 524);
             this.groupBox2.TabIndex = 6;
             this.groupBox2.TabStop = false;
             // 
             // POForApprovalDetails
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 29F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(2966, 1662);
+            this.ClientSize = new System.Drawing.Size(1045, 586);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.IconOptions.Icon = ((System.Drawing.Icon)(resources.GetObject("POForApprovalDetails.IconOptions.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "POForApprovalDetails";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "POForApprovalDetails";

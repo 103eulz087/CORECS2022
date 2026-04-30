@@ -34,7 +34,7 @@ namespace SalesInventorySystem
                 {
                     if (form.GetType() == typeof(Login))
 
-                        //if (form.GetType() == typeof(RibbonForm2))
+                    //if (form.GetType() == typeof(RFID.RFIDDashboard))
                     {
 
                         form.Activate();
@@ -52,8 +52,8 @@ namespace SalesInventorySystem
                     return;
                 }
 
-                //Application.Run(new Practice());
                 Application.Run(new Login());
+                //Application.Run(new RFID.RFIDDashboard());
                 //Application.Run(new RibbonForm2());
                 //Application.Run(new Main());
             }

@@ -290,7 +290,6 @@
         private DevExpress.XtraReports.UI.DetailBand Detail;
         private DevExpress.XtraReports.UI.TopMarginBand TopMargin;
         private DevExpress.XtraReports.UI.BottomMarginBand BottomMargin;
-        private DevExpress.XtraReports.UI.XRLabel xrLabel1;
         public DevExpress.XtraReports.UI.XRLabel lblmanufdate;
         private DevExpress.XtraReports.UI.XRLabel xrLabel2;
         private DevExpress.XtraReports.UI.XRLabel xrLabel5;
@@ -305,5 +304,6 @@
         public DevExpress.XtraReports.UI.XRLabel xrLabel6;
         public DevExpress.XtraReports.UI.XRLabel xrsku;
         public DevExpress.XtraReports.UI.XRLabel xrLabel7;
+        public DevExpress.XtraReports.UI.XRLabel xrLabel1;
     }
 }

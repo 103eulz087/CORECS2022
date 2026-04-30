@@ -136,6 +136,16 @@ namespace SalesInventorySystem.HOFormsDevEx
                 {
                     sprice4 = "1";
                 }
+
+                if(radVatableItem.Checked == true)
+                {
+                    isvat = "1";    
+                }
+                else if(radNonVatItem.Checked == true)
+                {
+                    isvat = "0";
+                }
+
                 if (isdiscountitem.Checked == true)
                 {
                     sdiscountitem = "1";
@@ -151,23 +161,19 @@ namespace SalesInventorySystem.HOFormsDevEx
                     ishavbarcode = "0";
                     barcode = "";
                 }
-
-                if (chckisvat.Checked == true)
-                {
-                    isvat = "1";
-                   
-                }
-                else
-                {
-                    isvat = "0";
-                   
-                }
+ 
 
 
 
                 if (HelperFunction.isTextBoxEmpty(txtdesc, txtprodcode, txtsellingprice, txtlandingcost, txtreorderlevel) || String.IsNullOrEmpty(txtprodtype.Text))
                 {
                     XtraMessageBox.Show("Please Input All Fields");
+                    return;
+                }
+                else if(radNonVatItem.Checked==false && radVatableItem.Checked==false)
+                {
+                    XtraMessageBox.Show("You must choose the Vatable Item Type..");
+                    return;
                 }
                 else
                 {
@@ -448,21 +454,24 @@ namespace SalesInventorySystem.HOFormsDevEx
                     barcode = "";
                 }
 
-                if (chckisvat.Checked == true)
+                if (radVatableItem.Checked == true)
                 {
                     isvat = "1";
-                    
                 }
-                else
+                else if (radNonVatItem.Checked == true)
                 {
                     isvat = "0";
-                 
                 }
 
 
-                if (HelperFunction.isTextBoxEmpty(txtreorderlevel, txtdesc, txtprodcode, txtsellingprice, txtlandingcost, txtprice1, txtprice2, txtprice3, txtprice4) || txtbranch.Text == "" || txtprodcatlookup.Text == "")
+                if (HelperFunction.isTextBoxEmpty(txtreorderlevel, txtdesc, txtprodcode, txtsellingprice, txtlandingcost, txtprice1, txtprice2, txtprice3, txtprice4) || txtbranch.Text == "" || txtprodcatlookup.Text == "" || String.IsNullOrEmpty(txtprodtype.Text))
                 {
                     XtraMessageBox.Show("Please Supply All Fields");
+                }
+                else if (radNonVatItem.Checked == false && radVatableItem.Checked == false)
+                {
+                    XtraMessageBox.Show("You must choose the Vatable Item Type..");
+                    return;
                 }
                 else
                 {

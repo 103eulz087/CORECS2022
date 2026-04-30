@@ -164,5 +164,11 @@ namespace SalesInventorySystem.Reporting
             Database.display($"SELECT * FROM InventoryLedger with(nolock) WHERE OriginBranch='{Login.assignedBranch}' AND SequenceRefNum='{seqrefno}' ORDER BY DateProcessed ASC", invledge.gridControl1,invledge.gridView1);
             invledge.ShowDialog(this);
         }
+
+        private void simpleButton1_Click(object sender, EventArgs e)
+        {
+            string filename = "ShipmentReportSummary_" + DateTime.Now.ToString("yyyyMMdd_HHmmss");
+            HelperFunction.exporttoexcel(gridView1, filename);
+        }
     }
 }

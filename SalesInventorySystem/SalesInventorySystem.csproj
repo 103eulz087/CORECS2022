@@ -564,6 +564,12 @@
     <Compile Include="Branches\BranchInventory.Designer.cs">
       <DependentUpon>BranchInventory.cs</DependentUpon>
     </Compile>
+    <Compile Include="Branches\BranchInventoryIN.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Branches\BranchInventoryIN.Designer.cs">
+      <DependentUpon>BranchInventoryIN.cs</DependentUpon>
+    </Compile>
     <Compile Include="Branches\BranchPOS.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -641,6 +647,7 @@
     <Compile Include="Classes\RoundedLabelControl.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Classes\ScannedAsset.cs" />
     <Compile Include="Classes\SearchLookUpClass.cs" />
     <Compile Include="Classes\SoundPlayer.cs" />
     <Compile Include="Classes\Suppliers.cs" />
@@ -3074,6 +3081,12 @@
     <Compile Include="ReuploadSales.Designer.cs">
       <DependentUpon>ReuploadSales.cs</DependentUpon>
     </Compile>
+    <Compile Include="RFID\RFIDDashboard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RFID\RFIDDashboard.Designer.cs">
+      <DependentUpon>RFIDDashboard.cs</DependentUpon>
+    </Compile>
     <Compile Include="RibbonForm1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -3392,6 +3405,9 @@
     <EmbeddedResource Include="Branches\BranchInventory.resx">
       <DependentUpon>BranchInventory.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Branches\BranchInventoryIN.resx">
+      <DependentUpon>BranchInventoryIN.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Branches\BranchPOS.resx">
       <DependentUpon>BranchPOS.cs</DependentUpon>
@@ -4649,6 +4665,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ReuploadSales.resx">
       <DependentUpon>ReuploadSales.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RFID\RFIDDashboard.resx">
+      <DependentUpon>RFIDDashboard.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="RibbonForm1.resx">
       <DependentUpon>RibbonForm1.cs</DependentUpon>

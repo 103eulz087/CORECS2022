@@ -632,7 +632,7 @@
             this.tabPage2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.tabPage2.Size = new System.Drawing.Size(1515, 884);
+            this.tabPage2.Size = new System.Drawing.Size(1350, 707);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Services";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -646,7 +646,7 @@
             this.groupBox4.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.groupBox4.Size = new System.Drawing.Size(1509, 704);
+            this.groupBox4.Size = new System.Drawing.Size(1344, 527);
             this.groupBox4.TabIndex = 12;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "List of Orders";
@@ -659,7 +659,7 @@
             this.gridControlitem.MainView = this.gridViewitem;
             this.gridControlitem.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.gridControlitem.Name = "gridControlitem";
-            this.gridControlitem.Size = new System.Drawing.Size(1503, 680);
+            this.gridControlitem.Size = new System.Drawing.Size(1338, 503);
             this.gridControlitem.TabIndex = 2;
             this.gridControlitem.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewitem});
@@ -703,7 +703,7 @@
             this.groupBox3.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.groupBox3.Size = new System.Drawing.Size(1509, 172);
+            this.groupBox3.Size = new System.Drawing.Size(1344, 172);
             this.groupBox3.TabIndex = 11;
             this.groupBox3.TabStop = false;
             // 

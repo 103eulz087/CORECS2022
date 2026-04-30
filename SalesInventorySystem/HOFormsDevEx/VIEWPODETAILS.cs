@@ -70,7 +70,7 @@ namespace SalesInventorySystem.HOFormsDevEx
 
         private void simpleButton1_Click(object sender, EventArgs e)
         {
-            bool checkifApproved = Database.checkifExist($"SELECT TOP(1) Status " +
+            bool checkifApproved = Database.checkifExist($"SELECT TOP(1) 1 " +
                 $"FROM POSUMMARY " +
                 $"WHERE ShipmentNo='{txtshipmentno.Text}' " +
                 $"AND Status='FOR APPROVAL'");
@@ -87,7 +87,7 @@ namespace SalesInventorySystem.HOFormsDevEx
 
         private void simpleButton2_Click(object sender, EventArgs e)
         {
-            bool checkifexists = Database.checkifExist("SELECT TOP(1) Status FROM dbo.POSUMMARY WHERE ShipmentNo='" + txtshipmentno.Text + "' and Status='FOR DELIVERY' ");
+            bool checkifexists = Database.checkifExist("SELECT TOP(1) 1 FROM dbo.POSUMMARY WHERE ShipmentNo='" + txtshipmentno.Text + "' and Status='FOR DELIVERY' ");
             if (!checkifexists)
             {
                 Database.ExecuteQuery("UPDATE dbo.POSUMMARY " +
@@ -106,7 +106,7 @@ namespace SalesInventorySystem.HOFormsDevEx
 
         private void simpleButton3_Click(object sender, EventArgs e)
         {
-            bool checkifexists = Database.checkifExist("SELECT TOP(1) Status FROM dbo.POSUMMARY WHERE ShipmentNo='" + txtshipmentno.Text + "' and Status='CANCELLED' ");
+            bool checkifexists = Database.checkifExist("SELECT TOP(1) 1 FROM dbo.POSUMMARY WHERE ShipmentNo='" + txtshipmentno.Text + "' and Status='CANCELLED' ");
             if (!checkifexists)
             {
                 Database.ExecuteQuery("UPDATE dbo.POSUMMARY Set Status='CANCELLED' " +

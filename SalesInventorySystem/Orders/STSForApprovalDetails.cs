@@ -109,10 +109,17 @@ namespace SalesInventorySystem.Orders
             xct.xrpono.Text = txtpono.Text;
             xct.xrpreparedby.Text = Login.Fullname;
 
+            gridView1.Columns["ProductName"].AppearanceCell.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            //gridView1.Columns["ProductName"].ColumnEdit = new DevExpress.XtraEditors.Repository.RepositoryItemMemoEdit();
+
+
             //this.gridView1.Columns["BranchCode"].Visible = false;
             this.gridView1.Columns["PONumber"].Visible = false;
             this.gridView1.Columns["Category"].Visible = false;
             this.gridView1.Columns["ProductCode"].Visible = false;
+            this.gridView1.Columns["ProductCategoryCode"].Visible = false;
+            this.gridView1.Columns["Barcode"].Visible = false;
+            this.gridView1.Columns["Status"].Visible = false;
             //this.gridView1.Columns["Units"].Visible = false;
             //this.gridView1.Columns["DateRequested"].Visible = false;
             //this.gridView1.Columns["EffectivityDate"].Visible = false; 
@@ -120,6 +127,15 @@ namespace SalesInventorySystem.Orders
 
             xct.Bands[BandKind.Detail].Controls.Add(HelperFunction.CopyGridControl(this.gridControl1));
             xct.Bands[BandKind.Detail].Font = new System.Drawing.Font("Tahoma", 9);
+            // Ensure detail band doesn’t force page breaks
+
+            xct.Bands[BandKind.Detail].PageBreak = DevExpress.XtraReports.UI.PageBreak.None;
+            xct.Margins = new System.Drawing.Printing.Margins(50, 50, 50, 50);
+            xct.PaperKind = System.Drawing.Printing.PaperKind.A4;
+            var gridCopy = HelperFunction.CopyGridControl(this.gridControl1);
+            gridCopy.SizeF = new SizeF(xct.PageWidth - xct.Margins.Left - xct.Margins.Right, gridCopy.SizeF.Height);
+            xct.Bands[BandKind.Detail].Controls.Add(gridCopy);
+
             ReportPrintTool report = new ReportPrintTool(xct);
             report.ShowRibbonPreviewDialog();
         }

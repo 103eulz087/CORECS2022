@@ -14,6 +14,7 @@ using System.IO.Ports;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraGrid.Columns;
 using DevExpress.XtraGrid;
+using SalesInventorySystem.Classes;
 
 namespace SalesInventorySystem
 {
@@ -202,7 +203,7 @@ namespace SalesInventorySystem
         {
             SqlConnection con = Database.getConnection();
             con.Open();
-            string query = "sp_AddBranchOrderByBarcode";
+            string query = "sp_AddHRIOrderByBarcode";
             try
             {
                 SqlCommand com = new SqlCommand(query, con);
@@ -733,108 +734,134 @@ namespace SalesInventorySystem
         private void txtbarcodescanning_KeyDown(object sender, KeyEventArgs e)
         {
             ///OLD
+            //if (e.KeyCode == Keys.Enter)
+            //{
+            //    bool isBarcodeLong = false;
+            //    isBarcodeLong = Database.checkifExist("SELECT isLong FROM BarcodeSettings WHERE isLong=1");
+            //    string pcode = "", desc = "", qty = "", barcode = "", qty1 = "", qty2 = "";
+            //    //bool isExist = Database.checkifExist("SELECT * FROM Inventory WHERE Barcode='" + txtbarcodescanning.Text + "' AND isWarehouse=1 AND isStock=1 AND Available > 0 AND Branch='888' ");
+            //    //globaltxtbarcodescanning = "";
+            //    //globaltxtbarcodescanning = txtbarcodescanning.Text;
+            //    //if (isExist)
+            //    //{
+            //    //    string valueAvailable = Database.getSingleQuery("Inventory", "Barcode='" + txtbarcodescanning.Text + "' and isWarehouse=1 and Available > 0 and Branch='888' and IsStock=1", "Available");
+            //    //    txtweight.Text = valueAvailable;
+            //    //    txtweight.Focus();
+            //    //    displayweight();
+            //    //    simpleButton1.PerformClick();
+            //    //    txtbarcodescanning.Text = "";
+            //    //    txtbarcodescanning.Focus();
+            //    //}
+            //    //else
+            //    //{
+            //    //    XtraMessageBox.Show("Barcode Not Exist in Inventory!");
+            //    //    return;
+            //    //}
+            //    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //    globaltxtbarcodescanning = "";
+            //    globaltxtbarcodescanning = txtbarcodescanning.Text;
+            //    if (isBarcodeLong == false)
+            //    {
+            //        if (txtbarcodescanning.Text.Length == 14) //tens 10015 10123 0001
+            //        {
+            //            pcode = txtbarcodescanning.Text.Substring(0, 5);
+            //            desc = Database.getSingleQuery("Products", "ProductCode='" + pcode + "' and BranchCode='888'", "Description");
+            //            qty1 = txtbarcodescanning.Text.Substring(5, 2); //1001512345
+            //            qty2 = txtbarcodescanning.Text.Substring(7, 3);
+            //            qty = qty1 + "." + qty2;
+            //            barcode = txtbarcodescanning.Text;
+            //        }
+            //        else if (txtbarcodescanning.Text.Length == 15) //hundred
+            //        {
+            //            pcode = txtbarcodescanning.Text.Substring(0, 5);
+            //            desc = Database.getSingleQuery("Products", "ProductCode='" + pcode + "' and BranchCode='888'", "Description");
+            //            qty1 = txtbarcodescanning.Text.Substring(5, 3); //10015100345
+            //            qty2 = txtbarcodescanning.Text.Substring(8, 3);
+            //            qty = qty1 + "." + qty2;
+            //            barcode = txtbarcodescanning.Text;
+            //        }
+            //        else if (txtbarcodescanning.Text.Length == 16) //thousand
+            //        {
+            //            pcode = txtbarcodescanning.Text.Substring(0, 5);
+            //            desc = Database.getSingleQuery("Products", "ProductCode='" + pcode + "' and BranchCode='888'", "Description");
+            //            qty1 = txtbarcodescanning.Text.Substring(5, 4); //10015100345
+            //            qty2 = txtbarcodescanning.Text.Substring(9, 3);
+            //            qty = qty1 + "." + qty2;
+            //            barcode = txtbarcodescanning.Text;
+            //        }
+            //        else
+            //        {
+            //            XtraMessageBox.Show("Invalid Barcode Type!.. Please use manual input!..");
+            //            return;
+            //        }
+            //    }else //if barcode is longtype
+            //    {
+            //        if (txtbarcodescanning.Text.Length == 19) //tens 11111 10015 10123 0001 --10.123 kilos
+            //        {
+            //            pcode = txtbarcodescanning.Text.Substring(5, 5);
+            //            desc = Database.getSingleQuery("Products", "ProductCode='" + pcode + "' and BranchCode='888'", "Description");
+            //            qty1 = txtbarcodescanning.Text.Substring(10, 2); //1001512345
+            //            qty2 = txtbarcodescanning.Text.Substring(12, 3);
+            //            qty = qty1 + "." + qty2;
+            //            barcode = txtbarcodescanning.Text;
+            //        }
+            //        else if (txtbarcodescanning.Text.Length == 20) //hundred 11111 10015 100123 0001 --100.123 kilos
+            //        {
+            //            pcode = txtbarcodescanning.Text.Substring(5, 5);
+            //            desc = Database.getSingleQuery("Products", "ProductCode='" + pcode + "' and BranchCode='888'", "Description");
+            //            qty1 = txtbarcodescanning.Text.Substring(10, 3); //10015100345
+            //            qty2 = txtbarcodescanning.Text.Substring(13, 3);
+            //            qty = qty1 + "." + qty2;
+            //            barcode = txtbarcodescanning.Text;
+            //        }
+            //        else if (txtbarcodescanning.Text.Length == 21) //thousand  11111 10015 1000123 0001 --1000.123 kilos
+            //        {
+            //            pcode = txtbarcodescanning.Text.Substring(5, 5);
+            //            desc = Database.getSingleQuery("Products", "ProductCode='" + pcode + "' and BranchCode='888'", "Description");
+            //            qty1 = txtbarcodescanning.Text.Substring(10, 4); //10015100345
+            //            qty2 = txtbarcodescanning.Text.Substring(14, 3);
+            //            qty = qty1 + "." + qty2;
+            //            barcode = txtbarcodescanning.Text;
+            //        }
+            //        else
+            //        {
+            //            XtraMessageBox.Show("Invalid Barcode Type!.. Please use manual input!..");
+            //            return;
+            //        }
+            //    }
+            //    globalproductcode = pcode;
+            //    txtweight.Text = qty;
+            //    txtweight.Focus();
+            //    displayweight();
+            //    btnadd.PerformClick();
+            //    txtbarcodescanning.Text = "";
+            //    txtbarcodescanning.Focus();
+            //    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //}
+            ///OLD
             if (e.KeyCode == Keys.Enter)
             {
-                bool isBarcodeLong = false;
-                isBarcodeLong = Database.checkifExist("SELECT isLong FROM BarcodeSettings WHERE isLong=1");
-                string pcode = "", desc = "", qty = "", barcode = "", qty1 = "", qty2 = "";
-                //bool isExist = Database.checkifExist("SELECT * FROM Inventory WHERE Barcode='" + txtbarcodescanning.Text + "' AND isWarehouse=1 AND isStock=1 AND Available > 0 AND Branch='888' ");
-                //globaltxtbarcodescanning = "";
-                //globaltxtbarcodescanning = txtbarcodescanning.Text;
-                //if (isExist)
-                //{
-                //    string valueAvailable = Database.getSingleQuery("Inventory", "Barcode='" + txtbarcodescanning.Text + "' and isWarehouse=1 and Available > 0 and Branch='888' and IsStock=1", "Available");
-                //    txtweight.Text = valueAvailable;
-                //    txtweight.Focus();
-                //    displayweight();
-                //    simpleButton1.PerformClick();
-                //    txtbarcodescanning.Text = "";
-                //    txtbarcodescanning.Focus();
-                //}
-                //else
-                //{
-                //    XtraMessageBox.Show("Barcode Not Exist in Inventory!");
-                //    return;
-                //}
-                //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                globaltxtbarcodescanning = "";
-                globaltxtbarcodescanning = txtbarcodescanning.Text;
-                if (isBarcodeLong == false)
+                try
                 {
-                    if (txtbarcodescanning.Text.Length == 14) //tens 10015 10123 0001
-                    {
-                        pcode = txtbarcodescanning.Text.Substring(0, 5);
-                        desc = Database.getSingleQuery("Products", "ProductCode='" + pcode + "' and BranchCode='888'", "Description");
-                        qty1 = txtbarcodescanning.Text.Substring(5, 2); //1001512345
-                        qty2 = txtbarcodescanning.Text.Substring(7, 3);
-                        qty = qty1 + "." + qty2;
-                        barcode = txtbarcodescanning.Text;
-                    }
-                    else if (txtbarcodescanning.Text.Length == 15) //hundred
-                    {
-                        pcode = txtbarcodescanning.Text.Substring(0, 5);
-                        desc = Database.getSingleQuery("Products", "ProductCode='" + pcode + "' and BranchCode='888'", "Description");
-                        qty1 = txtbarcodescanning.Text.Substring(5, 3); //10015100345
-                        qty2 = txtbarcodescanning.Text.Substring(8, 3);
-                        qty = qty1 + "." + qty2;
-                        barcode = txtbarcodescanning.Text;
-                    }
-                    else if (txtbarcodescanning.Text.Length == 16) //thousand
-                    {
-                        pcode = txtbarcodescanning.Text.Substring(0, 5);
-                        desc = Database.getSingleQuery("Products", "ProductCode='" + pcode + "' and BranchCode='888'", "Description");
-                        qty1 = txtbarcodescanning.Text.Substring(5, 4); //10015100345
-                        qty2 = txtbarcodescanning.Text.Substring(9, 3);
-                        qty = qty1 + "." + qty2;
-                        barcode = txtbarcodescanning.Text;
-                    }
-                    else
-                    {
-                        XtraMessageBox.Show("Invalid Barcode Type!.. Please use manual input!..");
-                        return;
-                    }
-                }else //if barcode is longtype
-                {
-                    if (txtbarcodescanning.Text.Length == 19) //tens 11111 10015 10123 0001 --10.123 kilos
-                    {
-                        pcode = txtbarcodescanning.Text.Substring(5, 5);
-                        desc = Database.getSingleQuery("Products", "ProductCode='" + pcode + "' and BranchCode='888'", "Description");
-                        qty1 = txtbarcodescanning.Text.Substring(10, 2); //1001512345
-                        qty2 = txtbarcodescanning.Text.Substring(12, 3);
-                        qty = qty1 + "." + qty2;
-                        barcode = txtbarcodescanning.Text;
-                    }
-                    else if (txtbarcodescanning.Text.Length == 20) //hundred 11111 10015 100123 0001 --100.123 kilos
-                    {
-                        pcode = txtbarcodescanning.Text.Substring(5, 5);
-                        desc = Database.getSingleQuery("Products", "ProductCode='" + pcode + "' and BranchCode='888'", "Description");
-                        qty1 = txtbarcodescanning.Text.Substring(10, 3); //10015100345
-                        qty2 = txtbarcodescanning.Text.Substring(13, 3);
-                        qty = qty1 + "." + qty2;
-                        barcode = txtbarcodescanning.Text;
-                    }
-                    else if (txtbarcodescanning.Text.Length == 21) //thousand  11111 10015 1000123 0001 --1000.123 kilos
-                    {
-                        pcode = txtbarcodescanning.Text.Substring(5, 5);
-                        desc = Database.getSingleQuery("Products", "ProductCode='" + pcode + "' and BranchCode='888'", "Description");
-                        qty1 = txtbarcodescanning.Text.Substring(10, 4); //10015100345
-                        qty2 = txtbarcodescanning.Text.Substring(14, 3);
-                        qty = qty1 + "." + qty2;
-                        barcode = txtbarcodescanning.Text;
-                    }
-                    else
-                    {
-                        XtraMessageBox.Show("Invalid Barcode Type!.. Please use manual input!..");
-                        return;
-                    }
+                    string pcode = "", qty = "", barcode = "";// qty1 = "", qty2 = "";desc = "",
+                    var rows = Database.getMultipleQuery($"SELECT TOP(1) Product,Available FROM dbo.Inventory WHERE Branch='{Login.assignedBranch}' AND Barcode='{txtbarcodescanning.Text}' AND Available > 0 AND isWarehouse=1 ", "Product,Available");
+
+                    pcode = rows["Product"].ToString();
+                    qty = rows["Available"].ToString();
+                    barcode = txtbarcodescanning.Text;
+
+                    globalproductcode = pcode;
+                    txtweight.Text = qty;
+                    txtweight.Focus();
+                    displayweight();
+                    btnadd.PerformClick();
+                    txtbarcodescanning.Text = "";
+                    txtbarcodescanning.Focus();
                 }
-                globalproductcode = pcode;
-                txtweight.Text = qty;
-                txtweight.Focus();
-                displayweight();
-                btnadd.PerformClick();
-                txtbarcodescanning.Text = "";
-                txtbarcodescanning.Focus();
+                catch (Exception ex)
+                {
+                    BigAlert.Show("BARCODE SCANINNG ERROR", ex.Message.ToString(), MessageBoxIcon.Error);
+                }
                 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             }
 

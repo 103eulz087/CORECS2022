@@ -11,6 +11,8 @@ using DevExpress.XtraEditors;
 using System.Threading;
 using System.Data.SqlClient;
 using DevExpress.XtraGrid.Views.Grid;
+using System.Globalization;
+using SalesInventorySystem.Classes;
 
 namespace SalesInventorySystem.POSDevEx
 {
@@ -54,16 +56,146 @@ namespace SalesInventorySystem.POSDevEx
             {
                 XtraMessageBox.Show(ex.Message.ToString() + " Please Input Valid Fields (numeric).");
             }
+
+            //try
+            //{
+            //    if (e.Column.FieldName != "NewTotalAmount" && e.Column.FieldName != "NewQty") return;
+
+            //    decimal price = Convert.ToDecimal(gridView3.GetRowCellValue(e.RowHandle, "SellingPrice"), CultureInfo.InvariantCulture);
+            //    if (price <= 0) return;
+
+            //    decimal newQty, newTotal;
+
+            //    if (e.Column.FieldName == "NewTotalAmount")
+            //    {
+            //        newTotal = Convert.ToDecimal(gridView3.GetRowCellValue(e.RowHandle, "NewTotalAmount"), CultureInfo.InvariantCulture);
+            //        newQty = newTotal / price;
+            //        gridView3.SetRowCellValue(e.RowHandle, "NewQty", newQty);
+            //    }
+            //    else
+            //    {
+            //        newQty = Convert.ToDecimal(gridView3.GetRowCellValue(e.RowHandle, "NewQty"), CultureInfo.InvariantCulture);
+            //        newTotal = newQty * price;
+            //        gridView3.SetRowCellValue(e.RowHandle, "NewTotalAmount", newTotal);
+            //    }
+
+            //    decimal oldTotal = Convert.ToDecimal(gridView3.GetRowCellValue(e.RowHandle, "TotalAmount"), CultureInfo.InvariantCulture);
+            //    gridView3.SetRowCellValue(e.RowHandle, "Difference", oldTotal - newTotal);
+
+            //    // Use grid summary instead of manual looping for total
+            //    gridView3.UpdateSummary();
+            //}
+            //catch (Exception ex)
+            //{
+            //    XtraMessageBox.Show(ex.Message + " Please input valid numeric fields.");
+            //}
+
+
         }
 
-        private void btnanalyze_Click(object sender, EventArgs e)
+        //private void btnanalyze_Click(object sender, EventArgs e)
+        //{
+        //    progressBar1.Maximum = 9;
+        //    progressBar1.Step = 1;
+        //    backgroundWorker1.RunWorkerAsync();
+        //    backgroundWorker1.ReportProgress(1);
+        //    Thread.Sleep(100);
+        //}
+
+        private CancellationTokenSource _cts;
+
+        private async void btnanalyze_Click(object sender, EventArgs e)
         {
-            progressBar1.Maximum = 9;
-            progressBar1.Step = 1;
-            backgroundWorker1.RunWorkerAsync();
-            backgroundWorker1.ReportProgress(1);
-            Thread.Sleep(100);
+
+            btnanalyze.Enabled = false;
+            progressBar1.Style = ProgressBarStyle.Marquee;
+
+            try
+            {
+                var tvp = BuildManipItemsTvpFromGrid();
+
+                if (tvp.Rows.Count == 0)
+                {
+                    XtraMessageBox.Show("No changes detected.");
+                    return;
+                }
+
+                await ApplyManipulationAndRecalcAsync(tvp);
+
+                XtraMessageBox.Show("Successfully Updated & Recalculated.");
+                this.Dispose();
+            }
+            catch (Exception ex)
+            {
+                XtraMessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                progressBar1.Style = ProgressBarStyle.Blocks;
+                btnanalyze.Enabled = true;
+            }
+
         }
+
+        private DataTable BuildManipItemsTvpFromGrid()
+        {
+            var dt = new DataTable();
+            dt.Columns.Add("BranchCode", typeof(string));
+            dt.Columns.Add("MachineUsed", typeof(string));
+            dt.Columns.Add("Petsa", typeof(DateTime));
+            dt.Columns.Add("ReferenceNo", typeof(string));
+            dt.Columns.Add("CashierTransNo", typeof(string));
+            dt.Columns.Add("SequenceNumber", typeof(int));
+            dt.Columns.Add("NewQty", typeof(decimal));
+            dt.Columns.Add("NewTotalAmount", typeof(decimal));
+
+            var petsaDate = Convert.ToDateTime(petsa); // ensure this is a valid date
+
+            for (int i = 0; i < gridView3.RowCount; i++)
+            {
+                string referenceNo = Convert.ToString(gridView3.GetRowCellValue(i, "ReferenceNo"));
+                string cashierTransNo = Convert.ToString(gridView3.GetRowCellValue(i, "CashierTransNo"));
+                string machineUsed = Convert.ToString(gridView3.GetRowCellValue(i, "MachineUsed"));
+                int seq = Convert.ToInt32(gridView3.GetRowCellValue(i, "SequenceNumber"));
+
+                // Prefer decimals for money/qty to avoid float rounding
+                decimal newQty = Convert.ToDecimal(gridView3.GetRowCellValue(i, "NewQty"), CultureInfo.InvariantCulture);
+                decimal newTotal = Convert.ToDecimal(gridView3.GetRowCellValue(i, "NewTotalAmount"), CultureInfo.InvariantCulture);
+
+                decimal oldQty = Convert.ToDecimal(gridView3.GetRowCellValue(i, "QtySold"), CultureInfo.InvariantCulture);
+                decimal oldTotal = Convert.ToDecimal(gridView3.GetRowCellValue(i, "TotalAmount"), CultureInfo.InvariantCulture);
+
+                // Only send changed rows (best practice; reduces SQL work)
+                if (newQty == oldQty && newTotal == oldTotal) continue;
+
+                dt.Rows.Add(brcode, machineUsed, petsaDate, referenceNo, cashierTransNo, seq, newQty, newTotal);
+            }
+
+            return dt;
+        }
+
+        private async Task ApplyManipulationAndRecalcAsync(DataTable tvp)
+        {
+            using (SqlConnection con = Database.getConnection())
+            using (SqlCommand cmd = new SqlCommand("dbo.spman_apply_and_calculate", con))
+            {
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandTimeout = 3600;
+
+                cmd.Parameters.Add("@brcode", SqlDbType.Char, 3).Value = brcode;
+                cmd.Parameters.Add("@petsa", SqlDbType.Date).Value = Convert.ToDateTime(petsa);
+                cmd.Parameters.Add("@machinename", SqlDbType.VarChar, 20).Value = machinename;
+
+                var p = cmd.Parameters.AddWithValue("@Items", tvp);
+                p.SqlDbType = SqlDbType.Structured;
+                p.TypeName = "dbo.ManipItemType";
+
+                await con.OpenAsync();
+                await cmd.ExecuteNonQueryAsync();
+            }
+        }
+
+
 
         void execSP()
         {

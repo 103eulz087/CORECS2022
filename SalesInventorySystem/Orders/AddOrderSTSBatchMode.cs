@@ -15,6 +15,7 @@ namespace SalesInventorySystem.Orders
     public partial class AddOrderSTSBatchMode : DevExpress.XtraEditors.XtraForm
     {
         public static bool isdone = false;
+        object brcode = null;
         public AddOrderSTSBatchMode()
         {
             InitializeComponent();
@@ -51,7 +52,7 @@ namespace SalesInventorySystem.Orders
                 }
                 else
                 {
-                    destinationBranch = txtbranch.Text;
+                    destinationBranch = brcode.ToString();
                 }
                 double totalqty = 0.0;
                 string approvalstatus = "", dateapproved = "", approvedby = "";
@@ -93,7 +94,7 @@ namespace SalesInventorySystem.Orders
                 XtraMessageBox.Show("Order Number must not Empty...");
                 return;
             }
-            txtgroup.Text = "INVENTORYTRANSFER";
+            //txtgroup.Text = "INVENTORYTRANSFER";
             if (String.IsNullOrEmpty(txtgroup.Text))
             {
                 XtraMessageBox.Show("Group Category Must Not Empty!...");
@@ -211,6 +212,11 @@ namespace SalesInventorySystem.Orders
                     btnclose.Enabled = true;
                 }
             }
+        }
+
+        private void txtbranch_EditValueChanged(object sender, EventArgs e)
+        {
+            brcode = SearchLookUpClass.getSingleValue(txtbranch, "BranchCode");
         }
     }
 }

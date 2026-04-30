@@ -16,6 +16,7 @@ using Npgsql;
 using System.Threading.Tasks;
 using SalesInventorySystem.Classes;
 using System.Collections.Concurrent;
+using DevExpress.Data;
 
 namespace SalesInventorySystem
 {
@@ -128,6 +129,16 @@ namespace SalesInventorySystem
                         IF COL_LENGTH('dbo.POSType', 'isAutoSystemDeduct') IS NULL
                         BEGIN
                             ALTER TABLE dbo.POSType ADD isAutoSystemDeduct BIT NULL DEFAULT 0 WITH VALUES;
+                        END
+
+                        IF COL_LENGTH('dbo.POSZReadingTransactions', 'isUpload') IS NULL
+                        BEGIN
+                            ALTER TABLE dbo.POSZReadingTransactions ADD isUpload BIT NULL DEFAULT 0 WITH VALUES;
+                        END
+
+                        IF COL_LENGTH('dbo.EmailServer', 'SubjectTitle') IS NULL
+                        BEGIN
+                            ALTER TABLE dbo.EmailServer ADD SubjectTitle VARCHAR(100) NULL DEFAULT 'CORECSREPORT' WITH VALUES;
                         END
                     ";
 
@@ -1542,50 +1553,304 @@ namespace SalesInventorySystem
             }
         }
 
-        public static void GridMasterDetail(string query1, string query2,string table1,string table2, string col1, string col2, string fkeyname, GridControl grid,string eulz)
+        private static void AddFooterSums(GridView view, params string[] sumColumns)
+        {
+            view.OptionsView.ShowFooter = true;
+
+            foreach (string colName in sumColumns)
+            {
+                var col = view.Columns[colName];
+                if (col == null) continue; // column might not exist, skip safely
+
+                col.Summary.Clear();
+                col.Summary.Add(SummaryItemType.Sum, colName, "{0:n2}");
+            }
+        }
+
+        private static void ConfigureView(GridView view)
+        {
+            view.OptionsBehavior.Editable = false;
+            view.OptionsBehavior.ReadOnly = true;
+            view.OptionsView.ShowGroupPanel = false;
+            view.OptionsView.ColumnAutoWidth = true;
+            view.OptionsView.RowAutoHeight = true;
+            view.OptionsView.ShowFooter = true;
+            view.BestFitColumns();
+
+            view.Appearance.HeaderPanel.Font =
+                new System.Drawing.Font("Tahoma", 8, System.Drawing.FontStyle.Bold);
+        }
+
+        private static void AddFooterTotalLabel(GridView view, params string[] candidateColumns)
+        {
+            foreach (var colName in candidateColumns)
+            {
+                var col = view.Columns[colName];
+                if (col == null) continue;
+
+                col.Summary.Clear();
+                col.Summary.Add(SummaryItemType.Custom, colName, "TOTAL:");
+                break;
+            }
+        }
+
+        public static void GridMasterDetail(
+                 string masterQuery,
+                 string detailQuery,
+                 string masterTable,
+                 string detailTable,
+                 string masterKey,
+                 string detailKey,
+                 string relationName,
+                 GridControl grid,
+                 SqlParameter[] masterParams,
+                 SqlParameter[] detailParams)
+                    {
+                        try
+                        {
+                            using (SqlConnection con = Database.getConnection())
+                            using (SqlDataAdapter masterAdapter = new SqlDataAdapter(masterQuery, con))
+                            using (SqlDataAdapter detailAdapter = new SqlDataAdapter(detailQuery, con))
+                            {
+                                if (masterParams != null) masterAdapter.SelectCommand.Parameters.AddRange(masterParams);
+                                if (detailParams != null) detailAdapter.SelectCommand.Parameters.AddRange(detailParams);
+
+                                var ds = new DataSet();
+                                masterAdapter.Fill(ds, masterTable);
+                                detailAdapter.Fill(ds, detailTable);
+
+                                grid.DataSource = null;
+                                grid.LevelTree.Nodes.Clear();
+                                ds.Relations.Clear();
+
+                                // Create relation (constraints are OK now because detail is filtered)
+                                ds.Relations.Add(relationName,
+                                    ds.Tables[masterTable].Columns[masterKey],
+                                    ds.Tables[detailTable].Columns[detailKey]);
+
+                                grid.DataSource = ds;
+                                grid.DataMember = masterTable;
+                                grid.ForceInitialize();
+
+                                GridView masterView = grid.MainView as GridView;
+                                ConfigureView(masterView);
+
+                                GridView detailView = new GridView(grid);
+                                ConfigureView(detailView);
+
+                                AddFooterSums(detailView,
+                                    "QtyDelivered",
+                                    "ActualQty",
+                                    "Variance"
+                                );
+
+                    grid.LevelTree.Nodes.Add(relationName, detailView);
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            XtraMessageBox.Show(ex.Message, "Master-Detail Error");
+                        }
+                    }
+
+        public static SqlParameter[] CloneParams(params SqlParameter[] parms)
+        {
+            if (parms == null) return null;
+
+            return parms.Select(p =>
+            {
+                var cp = new SqlParameter
+                {
+                    ParameterName = p.ParameterName,
+                    SqlDbType = p.SqlDbType,
+                    Direction = p.Direction,
+                    Value = p.Value ?? DBNull.Value,
+                    IsNullable = p.IsNullable,
+                    Precision = p.Precision,
+                    Scale = p.Scale,
+                    Size = p.Size
+                };
+
+                // copy TypeName if table-valued parameter
+                if (p.SqlDbType == SqlDbType.Structured && !string.IsNullOrEmpty(p.TypeName))
+                    cp.TypeName = p.TypeName;
+
+                return cp;
+            }).ToArray();
+        }
+        private static void AddFooterSums_FromTableSchema(GridView view, DataTable dt)
+        {
+            view.OptionsView.ShowFooter = true;
+
+            foreach (DataColumn dc in dt.Columns)
+            {
+                Type t = dc.DataType;
+                bool isNumeric =
+                    t == typeof(byte) || t == typeof(short) || t == typeof(int) || t == typeof(long) ||
+                    t == typeof(float) || t == typeof(double) || t == typeof(decimal);
+
+                if (!isNumeric) continue;
+
+                var col = view.Columns[dc.ColumnName];
+                if (col == null) continue;
+
+                col.Summary.Clear();
+                col.Summary.Add(SummaryItemType.Sum, dc.ColumnName, "{0:n2}");
+            }
+        }
+        private static void AddFooterSums_Whitelist(GridView view, params string[] sumColumns)
+        {
+            view.OptionsView.ShowFooter = true;
+
+            foreach (var name in sumColumns)
+            {
+                var col = view.Columns[name];
+                if (col == null) continue;
+
+                col.Summary.Clear();
+                col.Summary.Add(SummaryItemType.Sum, name, "{0:n2}");
+            }
+        }
+        public static void GridMasterDetail3(
+                                            string masterQuery,
+                                            string detailQuery,
+                                            string subDetailQuery,
+                                            string masterTable,
+                                            string detailTable,
+                                            string subDetailTable,
+                                            string relMasterDetail,      // relation name 1
+                                            string relDetailSubDetail,   // relation name 2
+                                            string masterKey,
+                                            string detailFKToMaster,
+                                            string detailKey,            // unique key in Detail
+                                            string subDetailFKToDetail,
+                                            GridControl grid,
+                                            SqlParameter[] masterParams = null,
+                                            SqlParameter[] detailParams = null,
+                                            SqlParameter[] subDetailParams = null,
+                                            string[] detailSumColumns = null,
+                                            string[] subDetailSumColumns = null
+                                        )
         {
             try
             {
-                SqlConnection con = Database.getConnection();
-                con.Open();
+                using (SqlConnection con = Database.getConnection())
+                using (SqlDataAdapter daMaster = new SqlDataAdapter(masterQuery, con))
+                using (SqlDataAdapter daDetail = new SqlDataAdapter(detailQuery, con))
+                using (SqlDataAdapter daSub = new SqlDataAdapter(subDetailQuery, con))
+                {
+                    if (masterParams != null) daMaster.SelectCommand.Parameters.AddRange(CloneParams(masterParams));
+                    if (detailParams != null) daDetail.SelectCommand.Parameters.AddRange(CloneParams(detailParams));
+                    if (subDetailParams != null) daSub.SelectCommand.Parameters.AddRange(CloneParams(subDetailParams));
 
-                SqlDataAdapter adapter = new SqlDataAdapter(query1, con);
-                SqlDataAdapter adapter2 = new SqlDataAdapter(query2, con);
+                    DataSet ds = new DataSet();
+                    daMaster.Fill(ds, masterTable);
+                    daDetail.Fill(ds, detailTable);
+                    daSub.Fill(ds, subDetailTable);
 
-                DataSet ds = new DataSet();
-                adapter.Fill(ds, table1);
-                adapter2.Fill(ds, table2);
+                    grid.DataSource = null;
+                    grid.LevelTree.Nodes.Clear();
+                    ds.Relations.Clear();
 
-                //Set up a master-detail relationship between the DataTables
-                DataColumn keycolumn = ds.Tables[table1].Columns[col1];
-                DataColumn foreigncolumn = ds.Tables[table2].Columns[col2];
-                ds.Relations.Add(fkeyname, keycolumn, foreigncolumn);
-                
-                //Bind the grid control to the data source
-                grid.DataSource = ds.Tables[table1];
-                grid.ForceInitialize();
+                    // Relation 1: Master -> Detail
+                    ds.Relations.Add(new DataRelation(
+                        relMasterDetail,
+                        ds.Tables[masterTable].Columns[masterKey],
+                        ds.Tables[detailTable].Columns[detailFKToMaster],
+                        false // avoid constraint issues when detail has rows outside filtered master set
+                    ));
 
-                GridView view = new GridView(grid);
-                view.BestFitColumns();
-                view.ExpandAllGroups();
-                view.OptionsView.ShowGroupPanel = false;
-                view.OptionsView.ColumnAutoWidth = true;
-                view.OptionsView.RowAutoHeight = true;
-                view.OptionsBehavior.ReadOnly = true;
-                view.OptionsBehavior.Editable = false;
-                view.Appearance.HeaderPanel.Font = new System.Drawing.Font("Tahoma", 8, System.Drawing.FontStyle.Bold);
-                view.OptionsView.ShowFooter = true;
-                grid.LevelTree.Nodes.Add(fkeyname, view);
+                    // Relation 2: Detail -> SubDetail
+                    ds.Relations.Add(new DataRelation(
+                        relDetailSubDetail,
+                        ds.Tables[detailTable].Columns[detailKey],
+                        ds.Tables[subDetailTable].Columns[subDetailFKToDetail],
+                        false
+                    ));
+
+                    // Bind master
+                    grid.DataSource = ds;
+                    grid.DataMember = masterTable;
+                    grid.ForceInitialize();
+
+                    // Master view
+                    GridView masterView = grid.MainView as GridView ?? new GridView(grid);
+                    ConfigureView(masterView);
+
+                    // Detail view
+                    GridView detailView = new GridView(grid);
+                    ConfigureView(detailView);
+
+                    // SubDetail view
+                    GridView subDetailView = new GridView(grid);
+                    ConfigureView(subDetailView);
+
+                    // Optional dynamic totals
+                    if (detailSumColumns != null && detailSumColumns.Length > 0)
+                        AddFooterSums_Whitelist(detailView, detailSumColumns);
+                    else
+                        AddFooterSums_FromTableSchema(detailView, ds.Tables[detailTable]);
+
+                    if (subDetailSumColumns != null && subDetailSumColumns.Length > 0)
+                        AddFooterSums_Whitelist(subDetailView, subDetailSumColumns);
+                    else
+                        AddFooterSums_FromTableSchema(subDetailView, ds.Tables[subDetailTable]);
+
+                    // Add nested levels: Master -> Detail -> SubDetail
+                    var nodeDetail = grid.LevelTree.Nodes.Add(relMasterDetail, detailView);
+                    nodeDetail.Nodes.Add(relDetailSubDetail, subDetailView);
+                }
             }
-            catch(SqlException e)
+            catch (Exception ex)
             {
-                XtraMessageBox.Show(e.Message.ToString());
-            }
-            finally
-            {
-                con.Close();
+                XtraMessageBox.Show(ex.Message, "Master-Detail-SubDetail Error");
             }
         }
+
+        //public static void GridMasterDetail(string query1, string query2,string table1,string table2, string col1, string col2, string fkeyname, GridControl grid,string eulz)
+        //{
+        //    try
+        //    {
+        //        SqlConnection con = Database.getConnection();
+        //        con.Open();
+
+        //        SqlDataAdapter adapter = new SqlDataAdapter(query1, con);
+        //        SqlDataAdapter adapter2 = new SqlDataAdapter(query2, con);
+
+        //        DataSet ds = new DataSet();
+        //        adapter.Fill(ds, table1);
+        //        adapter2.Fill(ds, table2);
+
+        //        //Set up a master-detail relationship between the DataTables
+        //        DataColumn keycolumn = ds.Tables[table1].Columns[col1];
+        //        DataColumn foreigncolumn = ds.Tables[table2].Columns[col2];
+        //        ds.Relations.Add(fkeyname, keycolumn, foreigncolumn);
+
+        //        //Bind the grid control to the data source
+        //        grid.DataSource = ds.Tables[table1];
+        //        grid.ForceInitialize();
+
+        //        GridView view = new GridView(grid);
+        //        view.BestFitColumns();
+        //        view.ExpandAllGroups();
+        //        view.OptionsView.ShowGroupPanel = false;
+        //        view.OptionsView.ColumnAutoWidth = true;
+        //        view.OptionsView.RowAutoHeight = true;
+        //        view.OptionsBehavior.ReadOnly = true;
+        //        view.OptionsBehavior.Editable = false;
+        //        view.Appearance.HeaderPanel.Font = new System.Drawing.Font("Tahoma", 8, System.Drawing.FontStyle.Bold);
+        //        view.OptionsView.ShowFooter = true;
+        //        grid.LevelTree.Nodes.Add(fkeyname, view);
+        //    }
+        //    catch(SqlException e)
+        //    {
+        //        XtraMessageBox.Show(e.Message.ToString());
+        //    }
+        //    finally
+        //    {
+        //        con.Close();
+        //    }
+        //}
 
         public static void GridMasterDetailMysql(string query1, string query2,string table1,string table2, string col1, string col2, string fkeyname, GridControl grid,string eulz)
         {

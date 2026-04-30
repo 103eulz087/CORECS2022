@@ -10,6 +10,7 @@ using DevExpress.XtraEditors;
 using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Columns;
 using DevExpress.XtraGrid.Views.Grid;
+using DevExpress.XtraReports.UI;
 
 namespace SalesInventorySystem
 {
@@ -125,6 +126,13 @@ namespace SalesInventorySystem
         {
             //if (e.Button == MouseButtons.Right)
             //    contextMenuStrip1.Show(gridControl1, e.Location);
+            if(radioButton1.Checked==true)
+            {
+                if(e.Button == MouseButtons.Right)
+                {
+                    contextMenuStrip2.Show(gridControl1, e.Location);
+                }
+            }
         }
 
         private void btnforapprovalsalesorderexcel_Click(object sender, EventArgs e)
@@ -140,6 +148,37 @@ namespace SalesInventorySystem
             display();
             Cursor = Cursors.Default;
             simpleButton1.Enabled = true;
+        }
+
+        private void reprintBarcodeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string compname = Database.getSingleQuery("CompanyProfile", "BranchCode='888'", "CompanyName");
+                 
+                DateTime petsa = Convert.ToDateTime(gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "DateReceived").ToString());
+                DateTime petsaExpired = Convert.ToDateTime(gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "ExpiryDate").ToString());
+                string newdate = petsa.ToShortDateString();
+                Barcode.BarcodePrinting bprint = new Barcode.BarcodePrinting();
+                bprint.xrshipno.Text = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "ShipmentNo").ToString();
+                bprint.lblmanufdate.Text = newdate;
+                bprint.xrLabel1.Text = compname;
+                bprint.lblprodtype.Text = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "Description").ToString();
+                bprint.lbltotalkilos.Text = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "Quantity").ToString();
+                bprint.xrpalletno.Text = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "PalletNo").ToString();
+                bprint.xrsku.Text = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "Product").ToString();
+                bprint.lblxpirydate.Text = petsaExpired.ToShortDateString();
+                bprint.xrBarCode2.Text = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "Barcode").ToString();
+
+                ReportPrintTool report = new ReportPrintTool(bprint);
+                //report.ShowRibbonPreviewDialog();
+                //report.PrintDialog();
+                report.Print();
+            }
+            catch (Exception ex)
+            {
+                XtraMessageBox.Show(ex.Message.ToString());
+            }
         }
     }
 }

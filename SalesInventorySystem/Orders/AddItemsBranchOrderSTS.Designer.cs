@@ -34,13 +34,13 @@
             this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
             this.btnsave = new DevExpress.XtraEditors.SimpleButton();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
+            this.label3 = new System.Windows.Forms.Label();
+            this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
             this.txtpono = new DevExpress.XtraEditors.TextEdit();
             this.panelControl2 = new DevExpress.XtraEditors.PanelControl();
             this.gridControl1 = new DevExpress.XtraGrid.GridControl();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.repoMetrics = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.txtsrchprodcat.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
@@ -108,6 +108,29 @@
             this.panelControl1.Size = new System.Drawing.Size(1013, 55);
             this.panelControl1.TabIndex = 9;
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.Color.DarkRed;
+            this.label3.Location = new System.Drawing.Point(687, 19);
+            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(315, 18);
+            this.label3.TabIndex = 111;
+            this.label3.Text = "\"PREVIEW MODE – Only Quantity > 0 shown\";";
+            // 
+            // simpleButton1
+            // 
+            this.simpleButton1.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("simpleButton1.ImageOptions.Image")));
+            this.simpleButton1.Location = new System.Drawing.Point(602, 12);
+            this.simpleButton1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.simpleButton1.Name = "simpleButton1";
+            this.simpleButton1.Size = new System.Drawing.Size(80, 33);
+            this.simpleButton1.TabIndex = 110;
+            this.simpleButton1.Text = "Preview";
+            this.simpleButton1.Click += new System.EventHandler(this.simpleButton1_Click);
+            // 
             // txtpono
             // 
             this.txtpono.Location = new System.Drawing.Point(227, 92);
@@ -164,29 +187,6 @@
             this.repoMetrics.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.repoMetrics.Name = "repoMetrics";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.Color.DarkRed;
-            this.label3.Location = new System.Drawing.Point(687, 19);
-            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(315, 18);
-            this.label3.TabIndex = 111;
-            this.label3.Text = "\"PREVIEW MODE – Only Quantity > 0 shown\";";
-            // 
-            // simpleButton1
-            // 
-            this.simpleButton1.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("simpleButton1.ImageOptions.Image")));
-            this.simpleButton1.Location = new System.Drawing.Point(602, 12);
-            this.simpleButton1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.simpleButton1.Name = "simpleButton1";
-            this.simpleButton1.Size = new System.Drawing.Size(80, 33);
-            this.simpleButton1.TabIndex = 110;
-            this.simpleButton1.Text = "Preview";
-            this.simpleButton1.Click += new System.EventHandler(this.simpleButton1_Click);
             // 
             // AddItemsBranchOrderSTS
             // 

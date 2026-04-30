@@ -12393,7 +12393,6 @@ D:\MYGDRIVE\CORECS2026\SalesInventorySystem\bin\Debug\de\DevExpress.Diagram.v19.
 D:\MYGDRIVE\CORECS2026\SalesInventorySystem\bin\Debug\es\DevExpress.Diagram.v19.2.Core.resources.dll
 D:\MYGDRIVE\CORECS2026\SalesInventorySystem\bin\Debug\ja\DevExpress.Diagram.v19.2.Core.resources.dll
 D:\MYGDRIVE\CORECS2026\SalesInventorySystem\bin\Debug\ru\DevExpress.Diagram.v19.2.Core.resources.dll
-D:\MYGDRIVE\CORECS2026\SalesInventorySystem\obj\Debug\SalesInventorySystem.csprojAssemblyReference.cache
 D:\MYGDRIVE\CORECS2026\SalesInventorySystem\obj\Debug\SalesInventorySystem.AccountingDevEx.BalanceSheetAccountDetails.resources
 D:\MYGDRIVE\CORECS2026\SalesInventorySystem\obj\Debug\SalesInventorySystem.AccountingDevEx.BalanceSheetDevEx.resources
 D:\MYGDRIVE\CORECS2026\SalesInventorySystem\obj\Debug\SalesInventorySystem.AccountingDevEx.ViewCheckVoucherDetailsDevEx.resources
@@ -12884,3 +12883,6 @@ D:\MYGDRIVE\CORECS2026\SalesInventorySystem\obj\Debug\SalesInventorySystem.exe
 D:\MYGDRIVE\CORECS2026\SalesInventorySystem\obj\Debug\SalesInventorySystem.pdb
 D:\MYGDRIVE\CORECS2026\SalesInventorySystem\obj\Debug\SalesInventorySystem.Orders.AddItemsBranchOrderSTS.resources
 D:\MYGDRIVE\CORECS2026\SalesInventorySystem\obj\Debug\SalesInventorySystem.Branches.BranchGenInventoryUpdateCost.resources
+D:\MYGDRIVE\CORECS2026\SalesInventorySystem\obj\Debug\SalesInventorySystem.csprojAssemblyReference.cache
+D:\MYGDRIVE\CORECS2026\SalesInventorySystem\obj\Debug\SalesInventorySystem.RFID.RFIDDashboard.resources
+D:\MYGDRIVE\CORECS2026\SalesInventorySystem\obj\Debug\SalesInventorySystem.Branches.BranchInventoryIN.resources

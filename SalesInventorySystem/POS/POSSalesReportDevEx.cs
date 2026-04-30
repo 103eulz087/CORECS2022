@@ -154,9 +154,21 @@ namespace SalesInventorySystem.POS
             brcodedetails = SearchLookUpClass.getSingleValue(txtbranchdetails, "BranchCode");
         }
 
+        private void btnforapprovalstsexcel_Click(object sender, EventArgs e)
+        {
+            string filename = "HRI_SalesTransactionSummary" + DateTime.Now.ToString("yyyyMMdd_HHmmss");
+            HelperFunction.exporttoexcel(gridView2, filename);
+        }
+
+        private void simpleButton1_Click(object sender, EventArgs e)
+        {
+            string filename = "HRI_SalesTransactionDetails" + DateTime.Now.ToString("yyyyMMdd_HHmmss");
+            HelperFunction.exporttoexcel(gridView2, filename);
+        }
+
         private void label15_Click(object sender, EventArgs e)
         {
-
+            
         }
     }
 }

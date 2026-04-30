@@ -51,7 +51,7 @@
             this.labelControl2.Appearance.Options.UseBackColor = true;
             this.labelControl2.Appearance.Options.UseFont = true;
             this.labelControl2.Appearance.Options.UseForeColor = true;
-            this.labelControl2.Location = new System.Drawing.Point(98, 351);
+            this.labelControl2.Location = new System.Drawing.Point(114, 351);
             this.labelControl2.Margin = new System.Windows.Forms.Padding(1, 5, 1, 5);
             this.labelControl2.Name = "labelControl2";
             this.labelControl2.Size = new System.Drawing.Size(77, 21);
@@ -61,7 +61,7 @@
             // 
             // txtuserid
             // 
-            this.txtuserid.Location = new System.Drawing.Point(922, 297);
+            this.txtuserid.Location = new System.Drawing.Point(1076, 297);
             this.txtuserid.Margin = new System.Windows.Forms.Padding(1, 5, 1, 5);
             this.txtuserid.Name = "txtuserid";
             this.txtuserid.Properties.Appearance.BackColor = System.Drawing.SystemColors.ControlDarkDark;
@@ -70,14 +70,14 @@
             this.txtuserid.Properties.Appearance.Options.UseBackColor = true;
             this.txtuserid.Properties.Appearance.Options.UseFont = true;
             this.txtuserid.Properties.Appearance.Options.UseForeColor = true;
-            this.txtuserid.Size = new System.Drawing.Size(193, 22);
+            this.txtuserid.Size = new System.Drawing.Size(225, 22);
             this.txtuserid.TabIndex = 2;
             this.txtuserid.EditValueChanged += new System.EventHandler(this.txtuserid_EditValueChanged);
             this.txtuserid.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtuserid_KeyDown);
             // 
             // txtpassword
             // 
-            this.txtpassword.Location = new System.Drawing.Point(922, 364);
+            this.txtpassword.Location = new System.Drawing.Point(1076, 364);
             this.txtpassword.Margin = new System.Windows.Forms.Padding(1, 5, 1, 5);
             this.txtpassword.Name = "txtpassword";
             this.txtpassword.Properties.Appearance.BackColor = System.Drawing.SystemColors.ControlDarkDark;
@@ -87,7 +87,7 @@
             this.txtpassword.Properties.Appearance.Options.UseFont = true;
             this.txtpassword.Properties.Appearance.Options.UseForeColor = true;
             this.txtpassword.Properties.PasswordChar = '*';
-            this.txtpassword.Size = new System.Drawing.Size(193, 22);
+            this.txtpassword.Size = new System.Drawing.Size(225, 22);
             this.txtpassword.TabIndex = 3;
             this.txtpassword.EditValueChanged += new System.EventHandler(this.txtpassword_EditValueChanged);
             this.txtpassword.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtpassword_KeyDown);
@@ -97,7 +97,7 @@
             this.btnLogin.Location = new System.Drawing.Point(0, 0);
             this.btnLogin.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.btnLogin.Name = "btnLogin";
-            this.btnLogin.Size = new System.Drawing.Size(74, 29);
+            this.btnLogin.Size = new System.Drawing.Size(86, 29);
             this.btnLogin.TabIndex = 8;
             // 
             // labelControl1
@@ -108,7 +108,7 @@
             this.labelControl1.Appearance.Options.UseBackColor = true;
             this.labelControl1.Appearance.Options.UseFont = true;
             this.labelControl1.Appearance.Options.UseForeColor = true;
-            this.labelControl1.Location = new System.Drawing.Point(25, 351);
+            this.labelControl1.Location = new System.Drawing.Point(29, 351);
             this.labelControl1.Margin = new System.Windows.Forms.Padding(1, 5, 1, 5);
             this.labelControl1.Name = "labelControl1";
             this.labelControl1.Size = new System.Drawing.Size(81, 21);
@@ -120,10 +120,10 @@
             // 
             this.buttonLogin.Appearance.BackColor = System.Drawing.Color.RoyalBlue;
             this.buttonLogin.Appearance.Options.UseBackColor = true;
-            this.buttonLogin.Location = new System.Drawing.Point(916, 444);
+            this.buttonLogin.Location = new System.Drawing.Point(1069, 444);
             this.buttonLogin.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.buttonLogin.Name = "buttonLogin";
-            this.buttonLogin.Size = new System.Drawing.Size(186, 26);
+            this.buttonLogin.Size = new System.Drawing.Size(217, 26);
             this.buttonLogin.TabIndex = 18;
             this.buttonLogin.Text = "LOGIN";
             this.buttonLogin.Click += new System.EventHandler(this.buttonLogin_Click);
@@ -136,7 +136,7 @@
             this.labelversion.Appearance.Options.UseBackColor = true;
             this.labelversion.Appearance.Options.UseFont = true;
             this.labelversion.Appearance.Options.UseForeColor = true;
-            this.labelversion.Location = new System.Drawing.Point(948, 546);
+            this.labelversion.Location = new System.Drawing.Point(1106, 546);
             this.labelversion.Margin = new System.Windows.Forms.Padding(1, 5, 1, 5);
             this.labelversion.Name = "labelversion";
             this.labelversion.Size = new System.Drawing.Size(106, 18);
@@ -148,10 +148,10 @@
             this.btnclose.Appearance.BackColor = DevExpress.LookAndFeel.DXSkinColors.FillColors.Question;
             this.btnclose.Appearance.Options.UseBackColor = true;
             this.btnclose.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnclose.ImageOptions.SvgImage")));
-            this.btnclose.Location = new System.Drawing.Point(1152, 0);
+            this.btnclose.Location = new System.Drawing.Point(1344, 0);
             this.btnclose.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.btnclose.Name = "btnclose";
-            this.btnclose.Size = new System.Drawing.Size(48, 33);
+            this.btnclose.Size = new System.Drawing.Size(56, 33);
             this.btnclose.TabIndex = 20;
             this.btnclose.Click += new System.EventHandler(this.btnclose_Click);
             // 
@@ -160,9 +160,9 @@
             this.PictureBox1.BackColor = System.Drawing.Color.Transparent;
             this.PictureBox1.Image = global::SalesInventorySystem.Properties.Resources.corecslogindesign;
             this.PictureBox1.Location = new System.Drawing.Point(0, 0);
-            this.PictureBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.PictureBox1.Margin = new System.Windows.Forms.Padding(5);
             this.PictureBox1.Name = "PictureBox1";
-            this.PictureBox1.Size = new System.Drawing.Size(1200, 700);
+            this.PictureBox1.Size = new System.Drawing.Size(1400, 700);
             this.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.PictureBox1.TabIndex = 17;
             this.PictureBox1.TabStop = false;
@@ -172,9 +172,9 @@
             // 
             this.Appearance.BackColor = System.Drawing.Color.Transparent;
             this.Appearance.Options.UseBackColor = true;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1200, 700);
+            this.ClientSize = new System.Drawing.Size(1400, 700);
             this.Controls.Add(this.btnclose);
             this.Controls.Add(this.labelversion);
             this.Controls.Add(this.buttonLogin);

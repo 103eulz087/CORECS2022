@@ -86,6 +86,8 @@
             this.label8 = new System.Windows.Forms.Label();
             this.dataGridView3 = new System.Windows.Forms.DataGridView();
             this.groupControl2 = new DevExpress.XtraEditors.GroupControl();
+            this.btnforapprovalstsexcel = new DevExpress.XtraEditors.SimpleButton();
+            this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
             this.tabControl1.SuspendLayout();
             this.tabsalestransummary.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -188,6 +190,7 @@
             this.gridView2.OptionsPrint.AutoWidth = false;
             this.gridView2.OptionsView.ColumnAutoWidth = false;
             this.gridView2.OptionsView.RowAutoHeight = true;
+            this.gridView2.OptionsView.ShowFooter = true;
             // 
             // gridView4
             // 
@@ -198,6 +201,7 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.btnforapprovalstsexcel);
             this.groupBox3.Controls.Add(this.txtbranchsummary);
             this.groupBox3.Controls.Add(this.label6);
             this.groupBox3.Controls.Add(this.btnsalestransummary);
@@ -351,9 +355,11 @@
             this.gridView1.OptionsPrint.AutoWidth = false;
             this.gridView1.OptionsView.ColumnAutoWidth = false;
             this.gridView1.OptionsView.RowAutoHeight = true;
+            this.gridView1.OptionsView.ShowFooter = true;
             // 
             // groupBox6
             // 
+            this.groupBox6.Controls.Add(this.simpleButton1);
             this.groupBox6.Controls.Add(this.txtbranchdetails);
             this.groupBox6.Controls.Add(this.label5);
             this.groupBox6.Controls.Add(this.btnTransactionDet);
@@ -901,6 +907,30 @@
             this.groupControl2.TabIndex = 434;
             this.groupControl2.Text = "Transaction Information";
             // 
+            // btnforapprovalstsexcel
+            // 
+            this.btnforapprovalstsexcel.ImageOptions.Image = global::SalesInventorySystem.Properties.Resources.ExportToExcel_16x16;
+            this.btnforapprovalstsexcel.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
+            this.btnforapprovalstsexcel.Location = new System.Drawing.Point(547, 27);
+            this.btnforapprovalstsexcel.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
+            this.btnforapprovalstsexcel.Name = "btnforapprovalstsexcel";
+            this.btnforapprovalstsexcel.Size = new System.Drawing.Size(118, 56);
+            this.btnforapprovalstsexcel.TabIndex = 448;
+            this.btnforapprovalstsexcel.Text = "Export to Excel";
+            this.btnforapprovalstsexcel.Click += new System.EventHandler(this.btnforapprovalstsexcel_Click);
+            // 
+            // simpleButton1
+            // 
+            this.simpleButton1.ImageOptions.Image = global::SalesInventorySystem.Properties.Resources.ExportToExcel_16x16;
+            this.simpleButton1.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
+            this.simpleButton1.Location = new System.Drawing.Point(547, 23);
+            this.simpleButton1.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
+            this.simpleButton1.Name = "simpleButton1";
+            this.simpleButton1.Size = new System.Drawing.Size(118, 61);
+            this.simpleButton1.TabIndex = 449;
+            this.simpleButton1.Text = "Export to Excel";
+            this.simpleButton1.Click += new System.EventHandler(this.simpleButton1_Click);
+            // 
             // POSSalesReportDevEx
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
@@ -1013,5 +1043,7 @@
         private DevExpress.XtraEditors.SearchLookUpEdit txtbranchsummary;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView5;
         internal System.Windows.Forms.Label label6;
+        private DevExpress.XtraEditors.SimpleButton btnforapprovalstsexcel;
+        private DevExpress.XtraEditors.SimpleButton simpleButton1;
     }
 }

@@ -48,13 +48,16 @@
             this.APPROVED = new System.Windows.Forms.TabPage();
             this.gridControl2 = new DevExpress.XtraGrid.GridControl();
             this.gridView2 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.SUMMARY = new System.Windows.Forms.TabPage();
+            this.gridControl3 = new DevExpress.XtraGrid.GridControl();
+            this.gridView3 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
             this.panelControl2 = new DevExpress.XtraEditors.PanelControl();
-            this.SUMMARY = new System.Windows.Forms.TabPage();
-            this.gridControl3 = new DevExpress.XtraGrid.GridControl();
-            this.gridView3 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.SUMMARYDETAIL = new System.Windows.Forms.TabPage();
+            this.gridControl4 = new DevExpress.XtraGrid.GridControl();
+            this.gridView4 = new DevExpress.XtraGrid.Views.Grid.GridView();
             ((System.ComponentModel.ISupportInitialize)(this.txtbrcode.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateto.Properties.CalendarTimeProperties)).BeginInit();
@@ -69,14 +72,17 @@
             this.APPROVED.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView2)).BeginInit();
+            this.SUMMARY.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gridControl3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView3)).BeginInit();
             this.contextMenuStrip2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).BeginInit();
             this.panelControl2.SuspendLayout();
-            this.SUMMARY.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gridControl3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView3)).BeginInit();
+            this.SUMMARYDETAIL.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gridControl4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView4)).BeginInit();
             this.SuspendLayout();
             // 
             // txtbrcode
@@ -240,6 +246,7 @@
             this.tabControl1.Controls.Add(this.FORAPPROVAL);
             this.tabControl1.Controls.Add(this.APPROVED);
             this.tabControl1.Controls.Add(this.SUMMARY);
+            this.tabControl1.Controls.Add(this.SUMMARYDETAIL);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F, System.Drawing.FontStyle.Bold);
             this.tabControl1.Location = new System.Drawing.Point(2, 2);
@@ -303,6 +310,44 @@
             this.gridView2.OptionsView.RowAutoHeight = true;
             this.gridView2.DoubleClick += new System.EventHandler(this.gridView2_DoubleClick);
             // 
+            // SUMMARY
+            // 
+            this.SUMMARY.Controls.Add(this.gridControl3);
+            this.SUMMARY.Location = new System.Drawing.Point(4, 27);
+            this.SUMMARY.Name = "SUMMARY";
+            this.SUMMARY.Size = new System.Drawing.Size(1161, 515);
+            this.SUMMARY.TabIndex = 2;
+            this.SUMMARY.Text = "SUMMARY";
+            this.SUMMARY.UseVisualStyleBackColor = true;
+            // 
+            // gridControl3
+            // 
+            this.gridControl3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gridControl3.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(4);
+            this.gridControl3.Location = new System.Drawing.Point(0, 0);
+            this.gridControl3.MainView = this.gridView3;
+            this.gridControl3.Margin = new System.Windows.Forms.Padding(4);
+            this.gridControl3.Name = "gridControl3";
+            this.gridControl3.Size = new System.Drawing.Size(1161, 515);
+            this.gridControl3.TabIndex = 3;
+            this.gridControl3.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gridView3});
+            // 
+            // gridView3
+            // 
+            this.gridView3.Appearance.HeaderPanel.Font = new System.Drawing.Font("Tahoma", 9.25F, System.Drawing.FontStyle.Bold);
+            this.gridView3.Appearance.HeaderPanel.Options.UseFont = true;
+            this.gridView3.Appearance.Row.Font = new System.Drawing.Font("Tahoma", 9.25F);
+            this.gridView3.Appearance.Row.Options.UseFont = true;
+            this.gridView3.GridControl = this.gridControl3;
+            this.gridView3.Name = "gridView3";
+            this.gridView3.OptionsView.ColumnAutoWidth = false;
+            this.gridView3.OptionsView.RowAutoHeight = true;
+            this.gridView3.OptionsView.ShowFooter = true;
+            this.gridView3.CellMerge += new DevExpress.XtraGrid.Views.Grid.CellMergeEventHandler(this.gridView3_CellMerge);
+            this.gridView3.CustomDrawCell += new DevExpress.XtraGrid.Views.Base.RowCellCustomDrawEventHandler(this.gridView3_CustomDrawCell);
+            this.gridView3.RowCellStyle += new DevExpress.XtraGrid.Views.Grid.RowCellStyleEventHandler(this.gridView3_RowCellStyle);
+            // 
             // contextMenuStrip2
             // 
             this.contextMenuStrip2.ImageScalingSize = new System.Drawing.Size(20, 20);
@@ -342,43 +387,54 @@
             this.panelControl2.Size = new System.Drawing.Size(1173, 550);
             this.panelControl2.TabIndex = 9;
             // 
-            // SUMMARY
+            // SUMMARYDETAIL
             // 
-            this.SUMMARY.Controls.Add(this.gridControl3);
-            this.SUMMARY.Location = new System.Drawing.Point(4, 27);
-            this.SUMMARY.Name = "SUMMARY";
-            this.SUMMARY.Size = new System.Drawing.Size(1161, 515);
-            this.SUMMARY.TabIndex = 2;
-            this.SUMMARY.Text = "SUMMARY";
-            this.SUMMARY.UseVisualStyleBackColor = true;
+            this.SUMMARYDETAIL.Controls.Add(this.gridControl4);
+            this.SUMMARYDETAIL.Location = new System.Drawing.Point(4, 27);
+            this.SUMMARYDETAIL.Name = "SUMMARYDETAIL";
+            this.SUMMARYDETAIL.Padding = new System.Windows.Forms.Padding(3);
+            this.SUMMARYDETAIL.Size = new System.Drawing.Size(1161, 515);
+            this.SUMMARYDETAIL.TabIndex = 3;
+            this.SUMMARYDETAIL.Text = "SUMMARYDETAIL";
+            this.SUMMARYDETAIL.UseVisualStyleBackColor = true;
             // 
-            // gridControl3
+            // gridControl4
             // 
-            this.gridControl3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridControl3.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(4);
-            this.gridControl3.Location = new System.Drawing.Point(0, 0);
-            this.gridControl3.MainView = this.gridView3;
-            this.gridControl3.Margin = new System.Windows.Forms.Padding(4);
-            this.gridControl3.Name = "gridControl3";
-            this.gridControl3.Size = new System.Drawing.Size(1161, 515);
-            this.gridControl3.TabIndex = 3;
-            this.gridControl3.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gridView3});
+            this.gridControl4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gridControl4.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.gridControl4.Location = new System.Drawing.Point(3, 3);
+            this.gridControl4.MainView = this.gridView4;
+            this.gridControl4.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.gridControl4.Name = "gridControl4";
+            this.gridControl4.Size = new System.Drawing.Size(1155, 509);
+            this.gridControl4.TabIndex = 2;
+            this.gridControl4.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gridView4});
             // 
-            // gridView3
+            // gridView4
             // 
-            this.gridView3.Appearance.HeaderPanel.Font = new System.Drawing.Font("Tahoma", 9.25F, System.Drawing.FontStyle.Bold);
-            this.gridView3.Appearance.HeaderPanel.Options.UseFont = true;
-            this.gridView3.Appearance.Row.Font = new System.Drawing.Font("Tahoma", 9.25F);
-            this.gridView3.Appearance.Row.Options.UseFont = true;
-            this.gridView3.GridControl = this.gridControl3;
-            this.gridView3.Name = "gridView3";
-            this.gridView3.OptionsView.ColumnAutoWidth = false;
-            this.gridView3.OptionsView.RowAutoHeight = true;
-            this.gridView3.OptionsView.ShowFooter = true;
-            this.gridView3.CellMerge += new DevExpress.XtraGrid.Views.Grid.CellMergeEventHandler(this.gridView3_CellMerge);
-            this.gridView3.CustomDrawCell += new DevExpress.XtraGrid.Views.Base.RowCellCustomDrawEventHandler(this.gridView3_CustomDrawCell);
-            this.gridView3.RowCellStyle += new DevExpress.XtraGrid.Views.Grid.RowCellStyleEventHandler(this.gridView3_RowCellStyle);
+            this.gridView4.Appearance.HeaderPanel.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gridView4.Appearance.HeaderPanel.Options.UseFont = true;
+            this.gridView4.Appearance.Row.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gridView4.Appearance.Row.Options.UseFont = true;
+            this.gridView4.AppearancePrint.FooterPanel.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gridView4.AppearancePrint.FooterPanel.Options.UseFont = true;
+            this.gridView4.AppearancePrint.GroupFooter.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gridView4.AppearancePrint.GroupFooter.Options.UseFont = true;
+            this.gridView4.AppearancePrint.GroupRow.Font = new System.Drawing.Font("Tahoma", 8.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gridView4.AppearancePrint.GroupRow.ForeColor = System.Drawing.Color.Maroon;
+            this.gridView4.AppearancePrint.GroupRow.Options.UseFont = true;
+            this.gridView4.AppearancePrint.GroupRow.Options.UseForeColor = true;
+            this.gridView4.AppearancePrint.HeaderPanel.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gridView4.AppearancePrint.HeaderPanel.Options.UseFont = true;
+            this.gridView4.DetailHeight = 431;
+            this.gridView4.GridControl = this.gridControl4;
+            this.gridView4.Name = "gridView4";
+            this.gridView4.OptionsBehavior.Editable = false;
+            this.gridView4.OptionsBehavior.ReadOnly = true;
+            this.gridView4.OptionsView.ColumnAutoWidth = false;
+            this.gridView4.OptionsView.RowAutoHeight = true;
+            this.gridView4.OptionsView.ShowFooter = true;
             // 
             // ConversionReports
             // 
@@ -406,15 +462,18 @@
             this.APPROVED.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridControl2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView2)).EndInit();
+            this.SUMMARY.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.gridControl3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView3)).EndInit();
             this.contextMenuStrip2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
             this.panelControl1.ResumeLayout(false);
             this.panelControl1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).EndInit();
             this.panelControl2.ResumeLayout(false);
-            this.SUMMARY.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.gridControl3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView3)).EndInit();
+            this.SUMMARYDETAIL.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.gridControl4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView4)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -446,5 +505,8 @@
         private DevExpress.XtraEditors.PanelControl panelControl2;
         public DevExpress.XtraGrid.GridControl gridControl3;
         public DevExpress.XtraGrid.Views.Grid.GridView gridView3;
+        private System.Windows.Forms.TabPage SUMMARYDETAIL;
+        private DevExpress.XtraGrid.GridControl gridControl4;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridView4;
     }
 }

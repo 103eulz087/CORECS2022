@@ -206,6 +206,7 @@ namespace SalesInventorySystem.HOFormsDevEx
                 con.Close();
             }
         }
+
         void checkBatchUpload()
         {
             SqlConnection con = Database.getConnection();

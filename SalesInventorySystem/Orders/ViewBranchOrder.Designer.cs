@@ -122,20 +122,20 @@
             this.processThisOrderToolStripMenuItem,
             this.cancelThisOrderToolStripMenuItem});
             this.contextMenuPending.Name = "contextMenuStrip2";
-            this.contextMenuPending.Size = new System.Drawing.Size(201, 56);
+            this.contextMenuPending.Size = new System.Drawing.Size(215, 84);
             // 
             // processThisOrderToolStripMenuItem
             // 
             this.processThisOrderToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("processThisOrderToolStripMenuItem.Image")));
             this.processThisOrderToolStripMenuItem.Name = "processThisOrderToolStripMenuItem";
-            this.processThisOrderToolStripMenuItem.Size = new System.Drawing.Size(200, 26);
+            this.processThisOrderToolStripMenuItem.Size = new System.Drawing.Size(214, 26);
             this.processThisOrderToolStripMenuItem.Text = "Process this Order";
             this.processThisOrderToolStripMenuItem.Click += new System.EventHandler(this.processThisOrderToolStripMenuItem_Click);
             // 
             // cancelThisOrderToolStripMenuItem
             // 
             this.cancelThisOrderToolStripMenuItem.Name = "cancelThisOrderToolStripMenuItem";
-            this.cancelThisOrderToolStripMenuItem.Size = new System.Drawing.Size(200, 26);
+            this.cancelThisOrderToolStripMenuItem.Size = new System.Drawing.Size(214, 26);
             this.cancelThisOrderToolStripMenuItem.Text = "Cancel this Order";
             this.cancelThisOrderToolStripMenuItem.Click += new System.EventHandler(this.cancelThisOrderToolStripMenuItem_Click);
             // 

@@ -40,6 +40,7 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.showLedgerInventoryMovementToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -50,10 +51,10 @@
             // gridControl1
             // 
             this.gridControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridControl1.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gridControl1.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(4);
             this.gridControl1.Location = new System.Drawing.Point(4, 19);
             this.gridControl1.MainView = this.gridView1;
-            this.gridControl1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gridControl1.Margin = new System.Windows.Forms.Padding(4);
             this.gridControl1.Name = "gridControl1";
             this.gridControl1.Size = new System.Drawing.Size(1275, 586);
             this.gridControl1.TabIndex = 0;
@@ -86,6 +87,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.simpleButton1);
             this.groupBox1.Controls.Add(this.raddetailed);
             this.groupBox1.Controls.Add(this.radgroup);
             this.groupBox1.Controls.Add(this.button1);
@@ -93,9 +95,9 @@
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox1.Location = new System.Drawing.Point(0, 0);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
             this.groupBox1.Size = new System.Drawing.Size(1283, 66);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
@@ -105,7 +107,7 @@
             this.raddetailed.AutoSize = true;
             this.raddetailed.Checked = true;
             this.raddetailed.Location = new System.Drawing.Point(241, 26);
-            this.raddetailed.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.raddetailed.Margin = new System.Windows.Forms.Padding(4);
             this.raddetailed.Name = "raddetailed";
             this.raddetailed.Size = new System.Drawing.Size(224, 21);
             this.raddetailed.TabIndex = 4;
@@ -118,7 +120,7 @@
             // 
             this.radgroup.AutoSize = true;
             this.radgroup.Location = new System.Drawing.Point(16, 26);
-            this.radgroup.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.radgroup.Margin = new System.Windows.Forms.Padding(4);
             this.radgroup.Name = "radgroup";
             this.radgroup.Size = new System.Drawing.Size(212, 21);
             this.radgroup.TabIndex = 3;
@@ -130,7 +132,7 @@
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(480, 21);
-            this.button1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(121, 30);
             this.button1.TabIndex = 2;
@@ -143,7 +145,7 @@
             this.comboBox1.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Location = new System.Drawing.Point(1216, 21);
-            this.comboBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.comboBox1.Margin = new System.Windows.Forms.Padding(4);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(160, 27);
             this.comboBox1.TabIndex = 1;
@@ -167,9 +169,9 @@
             this.groupBox2.Controls.Add(this.gridControl1);
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox2.Location = new System.Drawing.Point(0, 66);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(4);
             this.groupBox2.Size = new System.Drawing.Size(1283, 609);
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
@@ -189,6 +191,18 @@
             this.showLedgerInventoryMovementToolStripMenuItem.Text = "Show Ledger Inventory Movement";
             this.showLedgerInventoryMovementToolStripMenuItem.Click += new System.EventHandler(this.showLedgerInventoryMovementToolStripMenuItem_Click);
             // 
+            // simpleButton1
+            // 
+            this.simpleButton1.ImageOptions.Image = global::SalesInventorySystem.Properties.Resources.ExportToExcel_16x16;
+            this.simpleButton1.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
+            this.simpleButton1.Location = new System.Drawing.Point(608, 21);
+            this.simpleButton1.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
+            this.simpleButton1.Name = "simpleButton1";
+            this.simpleButton1.Size = new System.Drawing.Size(118, 29);
+            this.simpleButton1.TabIndex = 450;
+            this.simpleButton1.Text = "Export to Excel";
+            this.simpleButton1.Click += new System.EventHandler(this.simpleButton1_Click);
+            // 
             // CarcassReports
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -197,7 +211,7 @@
             this.ClientSize = new System.Drawing.Size(1283, 675);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "CarcassReports";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "CarcassReports";
@@ -225,5 +239,6 @@
         public DevExpress.XtraGrid.Views.Grid.GridView gridView1;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem showLedgerInventoryMovementToolStripMenuItem;
+        private DevExpress.XtraEditors.SimpleButton simpleButton1;
     }
 }

@@ -138,7 +138,8 @@ namespace SalesInventorySystem
         private async void Login_Load(object sender, EventArgs e)
         {
             //FOR STAND ALONE POS ONLY
-            if(GlobalConfig.Token== "MTQ2NzgwNjAz" || GlobalConfig.Token == "ODM1NTI0ODYz" || GlobalConfig.Token == "NjQwOTg4MzU1")
+            if(GlobalConfig.Token== "MTQ2NzgwNjAz" || GlobalConfig.Token == "ODM1NTI0ODYz" 
+                || GlobalConfig.Token == "NjQwOTg4MzU1" || GlobalConfig.Token== "ODU2NDE4OTA3")
             {
                 Database.RunLocalDatabaseMigrations();
             }

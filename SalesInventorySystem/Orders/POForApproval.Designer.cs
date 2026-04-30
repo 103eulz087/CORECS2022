@@ -518,7 +518,7 @@
             this.printDebitMemoChargesToolStripMenuItem,
             this.showItemsToolStripMenuItem});
             this.contextMenuForDelivery.Name = "contextMenuForDelivery";
-            this.contextMenuForDelivery.Size = new System.Drawing.Size(256, 240);
+            this.contextMenuForDelivery.Size = new System.Drawing.Size(256, 212);
             // 
             // confirmOrderToolStripMenuItem1
             // 

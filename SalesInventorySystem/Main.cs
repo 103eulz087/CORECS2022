@@ -1388,26 +1388,27 @@ namespace SalesInventorySystem
 
         private void barButtonItem57_ItemClick(object sender, ItemClickEventArgs e)
         {
-            //foreach (Form form in Application.OpenForms)
-            //{
-            //    if (form.GetType() == typeof(InventoryIN))
-            //    {
-            //        form.Activate();
-            //        return;
-            //    }
-            //}
-            //InventoryIN pcusatfsmr = new InventoryIN();
-            //pcusatfsmr.Show();
+
             foreach (Form form in Application.OpenForms)
             {
-                if (form.GetType() == typeof(ReInventoryIn))
+                if (form.GetType() == typeof(InventoryIN))
                 {
                     form.Activate();
                     return;
                 }
             }
-            ReInventoryIn pcusatfsmr = new ReInventoryIn();
+            InventoryIN pcusatfsmr = new InventoryIN();
             pcusatfsmr.Show();
+            //foreach (Form form in Application.OpenForms)
+            //{
+            //    if (form.GetType() == typeof(ReInventoryIn))
+            //    {
+            //        form.Activate();
+            //        return;
+            //    }
+            //}
+            //ReInventoryIn pcusatfsmr = new ReInventoryIn();
+            //pcusatfsmr.Show();
             //FOR FOR BUILTIN INVENTORY IN
             //foreach (Form form in Application.OpenForms)  //LAST USED
             //{
@@ -2846,20 +2847,22 @@ namespace SalesInventorySystem
 
         private void POSMachine_ItemClick(object sender, ItemClickEventArgs e)
         {
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form.GetType() == typeof(POSDevEx.POSSettingsDevEx))
-                {
-                    form.Activate();
-                    return;
-                }
-            }
-            POSDevEx.POSSettingsDevEx pcusatfsmr = new POSDevEx.POSSettingsDevEx();
-            pcusatfsmr.MdiParent = this;
-            pcusatfsmr.Show();
+            //foreach (Form form in Application.OpenForms)
+            //{
+            //    if (form.GetType() == typeof(POSDevEx.POSSettingsDevEx))
+            //    {
+            //        form.Activate();
+            //        return;
+            //    }
+            //}
+            //POSDevEx.POSSettingsDevEx pcusatfsmr = new POSDevEx.POSSettingsDevEx();
+            //pcusatfsmr.MdiParent = this;
+            //pcusatfsmr.Show();
 
 
-            Sabong.SBDashboard sbdash = new Sabong.SBDashboard();
+            //Sabong.SBDashboard sbdash = new Sabong.SBDashboard();
+            //sbdash.Show();
+            RFID.RFIDDashboard sbdash = new RFID.RFIDDashboard();
             sbdash.Show();
 
             //ShowSeniorCitizenReport();
@@ -3153,17 +3156,16 @@ namespace SalesInventorySystem
         {
             //POS.POSXreadReport xread = new POS.POSXreadReport();
             //xread.Show();
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form.GetType() == typeof(POSDevEx.POSManagementReport))
-                {
-                    form.Activate();
-                    return;
-                }
-            }
+            //foreach (Form form in Application.OpenForms)
+            //{
+            //    if (form.GetType() == typeof(POSDevEx.POSManagementReport))
+            //    {
+            //        form.Activate();
+            //        return;
+            //    }
+            //}
             POSDevEx.POSManagementReport viewinv = new POSDevEx.POSManagementReport();
-            viewinv.MdiParent = this;
-            viewinv.Show();
+            viewinv.ShowDialog(this);
         }
 
         private void barButtonItem26_ItemClick_1(object sender, ItemClickEventArgs e)
@@ -3394,6 +3396,20 @@ namespace SalesInventorySystem
         {
             Reporting.BranchInventoryProductSummary branchsum = new Reporting.BranchInventoryProductSummary();
             branchsum.Show();
+        }
+
+        private void btnBranchInventoryIN_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            foreach (Form form in Application.OpenForms)
+            {
+                if (form.GetType() == typeof(Branches.BranchInventoryIN))
+                {
+                    form.Activate();
+                    return;
+                }
+            }
+            Branches.BranchInventoryIN pcusatfsmr = new Branches.BranchInventoryIN();
+            pcusatfsmr.Show();
         }
 
         private void Main_FormClosing(object sender, FormClosingEventArgs e)
