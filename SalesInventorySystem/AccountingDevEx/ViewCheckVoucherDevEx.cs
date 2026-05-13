@@ -24,26 +24,35 @@ namespace SalesInventorySystem.AccountingDevEx
 
         private void btnsearch_Click(object sender, EventArgs e)
         {
-
-            using (var con = Database.getConnection())
-            using (var cmd = new SqlCommand(@"
+            try
+            {
+                Cursor.Current = Cursors.WaitCursor;
+                this.UseWaitCursor = true;
+                using (var con = Database.getConnection())
+                using (var cmd = new SqlCommand(@"
                     SELECT *
                     FROM dbo.view_Voucher
                     WHERE DateAdded >= @fromDate
                       AND DateAdded <  DATEADD(day,1,@toDate)
                       AND (@showAll = 1 OR isErrorCorrect = 0)
                     ORDER BY DateAdded DESC", con))
+                {
+                    cmd.Parameters.Add("@fromDate", SqlDbType.Date)
+                        .Value = Convert.ToDateTime(datefrom.Text);
+
+                    cmd.Parameters.Add("@toDate", SqlDbType.Date)
+                        .Value = Convert.ToDateTime(dateto.Text);
+
+                    cmd.Parameters.Add("@showAll", SqlDbType.Bit)
+                        .Value = checkBox1.Checked;
+
+                    Database.display(cmd, gridControl1, gridView1);
+                }
+            }
+            finally
             {
-                cmd.Parameters.Add("@fromDate", SqlDbType.Date)
-                    .Value = Convert.ToDateTime(datefrom.Text);
-
-                cmd.Parameters.Add("@toDate", SqlDbType.Date)
-                    .Value = Convert.ToDateTime(dateto.Text);
-
-                cmd.Parameters.Add("@showAll", SqlDbType.Bit)
-                    .Value = checkBox1.Checked;
-
-                Database.display(cmd, gridControl1, gridView1);
+                this.UseWaitCursor = false;
+                Cursor.Current = Cursors.Default;
             }
 
         }

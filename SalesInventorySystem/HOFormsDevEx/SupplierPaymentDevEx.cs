@@ -408,6 +408,7 @@ namespace SalesInventorySystem.HOFormsDevEx
             DateTime.TryParse(dateFrom.Text, out fromDate);
             DateTime.TryParse(dateTo.Text, out toDate);
 
+           
             // Using blocks ensure Sql objects are properly closed and disposed of.
             using (SqlConnection con = Database.getConnection())
             using (SqlCommand com = new SqlCommand("splist_Accounts", con))
@@ -426,6 +427,9 @@ namespace SalesInventorySystem.HOFormsDevEx
 
                 try
                 {
+                    Cursor.Current = Cursors.WaitCursor;
+                    this.UseWaitCursor = true;
+
                     con.Open();
                     using (SqlDataAdapter adapter = new SqlDataAdapter(com))
                     {
@@ -450,6 +454,8 @@ namespace SalesInventorySystem.HOFormsDevEx
                 finally
                 {
                     gridControlMaster.EndUpdate();
+                    this.UseWaitCursor = false;
+                    Cursor.Current = Cursors.Default;
                 }
             }
         }

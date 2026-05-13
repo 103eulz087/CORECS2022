@@ -1358,6 +1358,8 @@ namespace SalesInventorySystem
             con.Close();
             return lastdate;
         }
+
+       
         public static void display(SqlCommand cmd, GridControl grid, GridView view)
         {
             using (var da = new SqlDataAdapter(cmd))

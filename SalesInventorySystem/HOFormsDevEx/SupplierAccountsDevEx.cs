@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using DevExpress.XtraEditors;
 using DevExpress.XtraGrid.Views.Grid;
+using System.Data.SqlClient;
 
 namespace SalesInventorySystem.HOFormsDevEx
 {
@@ -19,7 +20,34 @@ namespace SalesInventorySystem.HOFormsDevEx
         {
             InitializeComponent();
         }
+        private void LoadGrid(
+               string sql,
+               Action<SqlCommand> parameterBinder,
+               DevExpress.XtraGrid.GridControl grid,
+               DevExpress.XtraGrid.Views.Grid.GridView view)
+        {
+            try
+            {
+                Cursor.Current = Cursors.WaitCursor;
+                this.UseWaitCursor = true;
 
+                using (SqlConnection con = Database.getConnection())
+                using (SqlCommand cmd = new SqlCommand(sql, con))
+                {
+                    cmd.CommandType = CommandType.Text;
+                    parameterBinder(cmd);
+
+                    Database.display(cmd, grid, view);
+                }
+
+                view.Focus();
+            }
+            finally
+            {
+                this.UseWaitCursor = false;
+                Cursor.Current = Cursors.Default;
+            }
+        }
         double getBalance()
         {
             double total = 0.0, purchasetotal=0.0;
@@ -44,19 +72,29 @@ namespace SalesInventorySystem.HOFormsDevEx
         }
         void loadLedger()
         {
-            //Database.display("SELECT * FROM view_APLedger WHERE SupplierID='" + txtacctid.Text + "' AND CAST(TransactionDate as Date) >= '" + dateTimePicker1.Text + "' and CAST(TransactionDate as date)<= '" + dateTimePicker2.Text + "' ORDER BY TRN_SEQ_NO", gridControl2, gridView2);
-            string query = "SELECT * FROM view_APLedger WHERE SupplierID='" + txtacctid.Text + "' AND CAST(TransactionDate as Date) >= '" + dateTimePicker1.Text + "' and CAST(TransactionDate as date)<= '" + dateTimePicker2.Text + "' ORDER BY TRN_SEQ_NO ";
-            HelperFunction.ShowWaitAndDisplay(query, gridControl2, gridView2, "Please wait", "Populating data into the database...");
-            //gridView2.Focus();
-            //gridView2.Columns["SupplierID"].Visible = false;
-            //gridView2.Columns["SupplierID"].OptionsColumn.ShowInCustomizationForm = true;
-            //gridView2.Columns["PostingDate"].Visible = false;
-            //gridView2.Columns["PostingDate"].OptionsColumn.ShowInCustomizationForm = true;
-            //gridView2.Columns["PostingDate"].Visible = false;
-            //gridView2.Columns["PostingDate"].OptionsColumn.ShowInCustomizationForm = true;
-            //gridView2.Columns["TransCode"].Visible = false;
-            //gridView2.Columns["TransCode"].OptionsColumn.ShowInCustomizationForm = true;
+            DateTime fromDate = dateTimePicker1.Value.Date;
+            DateTime toDateExclusive = dateTimePicker2.Value.Date.AddDays(1);
+
+            const string sql = @"
+                SELECT *
+                FROM view_APLedger
+                WHERE SupplierID = @supplierId
+                  AND TransactionDate >= @fromDate
+                  AND TransactionDate <  @toDateExclusive
+                ORDER BY TRN_SEQ_NO";
+
+            LoadGrid(sql, cmd =>
+            {
+                cmd.Parameters.Add("@supplierId", SqlDbType.VarChar, 10).Value = supplierid;
+                cmd.Parameters.Add("@fromDate", SqlDbType.DateTime).Value = fromDate;
+                cmd.Parameters.Add("@toDateExclusive", SqlDbType.DateTime).Value = toDateExclusive;
+            }, gridControl2, gridView2);
         }
+        //void loadLedger()
+        //{
+        //     string query = "SELECT * FROM view_APLedger WHERE SupplierID='" + txtacctid.Text + "' AND CAST(TransactionDate as Date) >= '" + dateTimePicker1.Text + "' and CAST(TransactionDate as date)<= '" + dateTimePicker2.Text + "' ORDER BY TRN_SEQ_NO ";
+        //    HelperFunction.ShowWaitAndDisplay(query, gridControl2, gridView2, "Please wait", "Populating data into the database...");
+        //}
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -64,51 +102,169 @@ namespace SalesInventorySystem.HOFormsDevEx
         }
         void loadPurchases()
         {
-            if (checkBox2.Checked == true)
+            if (checkBox2.Checked)
             {
-                string query = "SELECT * FROM vw_SupplierPurchases WHERE SupplierID='" + txtacctid.Text + "' ORDER BY SequenceNo DESC ";
-                HelperFunction.ShowWaitAndDisplay(query, gridControl1, gridView1, "Please wait", "Populating data into the database...");
-                gridView1.Focus();
+                const string sql = @"
+            SELECT *
+            FROM vw_SupplierPurchases
+            WHERE SupplierID = @supplierId
+            ORDER BY SequenceNo DESC";
+
+                LoadGrid(sql, cmd =>
+                {
+                    cmd.Parameters.Add("@supplierId", SqlDbType.VarChar, 50).Value = supplierid;
+                }, gridControl1, gridView1);
             }
             else
             {
-                string query = "SELECT * FROM vw_SupplierPurchases WHERE SupplierID='" + txtacctid.Text + "' AND CAST(InvoiceDate as Date) between '" + datefrompurch.Text + "' and '" + datetopurch.Text + "' ORDER BY SequenceNo ASC ";
-                HelperFunction.ShowWaitAndDisplay(query, gridControl1, gridView1, "Please wait", "Populating data into the database...");
-                gridView1.Focus();
+                DateTime fromDate = datefrompurch.Value.Date;
+                DateTime toDateExclusive = datetopurch.Value.Date.AddDays(1);
+
+                const string sql = @"
+            SELECT *
+            FROM vw_SupplierPurchases
+            WHERE SupplierID = @supplierId
+              AND InvoiceDate >= @fromDate
+              AND InvoiceDate <  @toDateExclusive
+            ORDER BY SequenceNo ASC";
+
+                LoadGrid(sql, cmd =>
+                {
+                    cmd.Parameters.Add("@supplierId", SqlDbType.VarChar, 10).Value = supplierid;
+                    cmd.Parameters.Add("@fromDate", SqlDbType.DateTime).Value = fromDate;
+                    cmd.Parameters.Add("@toDateExclusive", SqlDbType.DateTime).Value = toDateExclusive;
+                }, gridControl1, gridView1);
+            }
+        }
+        //void loadPurchases()
+        //{
+        //    if (checkBox2.Checked == true)
+        //    {
+        //        string query = "SELECT * FROM vw_SupplierPurchases WHERE SupplierID='" + txtacctid.Text + "' ORDER BY SequenceNo DESC ";
+        //        HelperFunction.ShowWaitAndDisplay(query, gridControl1, gridView1, "Please wait", "Populating data into the database...");
+        //        gridView1.Focus();
+        //    }
+        //    else
+        //    {
+        //        string query = "SELECT * FROM vw_SupplierPurchases WHERE SupplierID='" + txtacctid.Text + "' AND CAST(InvoiceDate as Date) between '" + datefrompurch.Text + "' and '" + datetopurch.Text + "' ORDER BY SequenceNo ASC ";
+        //        HelperFunction.ShowWaitAndDisplay(query, gridControl1, gridView1, "Please wait", "Populating data into the database...");
+        //        gridView1.Focus();
+        //    }
+        //}
+        void loadPayments()
+        {
+            if (checkBox3.Checked)
+            {
+                const string sql = @"
+            SELECT SEQ_NO, DatePaid, ReferenceNumber, Amount,
+                   VoucherType, ExecuteBy, DateUpdate,
+                   UpdateBy, ErrorCorrect
+            FROM TransactionPaymentAP
+            WHERE SupplierKey = @supplierKey
+            ORDER BY SEQ_NO ASC";
+
+                LoadGrid(sql, cmd =>
+                {
+                    cmd.Parameters.Add("@supplierKey", SqlDbType.VarChar, 10).Value = supplierid;
+                }, gridControl3, gridView3);
+            }
+            else
+            {
+                DateTime fromDate = datefrompay.Value.Date;
+                DateTime toDateExclusive = datetopay.Value.Date.AddDays(1);
+
+                const string sql = @"
+            SELECT SEQ_NO, DatePaid, ReferenceNumber, Amount,
+                   VoucherType, ExecuteBy, DateUpdate,
+                   UpdateBy, ErrorCorrect
+            FROM TransactionPaymentAP
+            WHERE SupplierKey = @supplierKey
+              AND DatePaid >= @fromDate
+              AND DatePaid <  @toDateExclusive
+            ORDER BY SEQ_NO ASC";
+
+                LoadGrid(sql, cmd =>
+                {
+                    cmd.Parameters.Add("@supplierKey", SqlDbType.VarChar, 10).Value = supplierid;
+                    cmd.Parameters.Add("@fromDate", SqlDbType.DateTime).Value = fromDate;
+                    cmd.Parameters.Add("@toDateExclusive", SqlDbType.DateTime).Value = toDateExclusive;
+                }, gridControl3, gridView3);
             }
         }
 
-        void loadPayments()
-        {
-            if (checkBox3.Checked == true)
-            {
-                string query = "SELECT SEQ_NO,DatePaid,ReferenceNumber,Amount,VoucherType,ExecuteBy,DateUpdate,UpdateBy,ErrorCorrect FROM TransactionPaymentAP WHERE SupplierKey='" + txtacctid.Text + "' ORDER BY SEQ_NO ASC";
-                HelperFunction.ShowWaitAndDisplay(query, gridControl3, gridView3, "Please wait", "Populating data into the database...");
-                gridView3.Focus();
-            }
-            else
-            {
-                string query = "SELECT SEQ_NO,DatePaid,ReferenceNumber,Amount,VoucherType,ExecuteBy,DateUpdate,UpdateBy,ErrorCorrect FROM TransactionPaymentAP WHERE SupplierKey='" + txtacctid.Text + "' AND CAST(DatePaid as Date) >= '" + datefrompay.Text + "' and CAST(DatePaid as date)<= '" + datetopay.Text + "' ORDER BY SEQ_NO ASC";
-                HelperFunction.ShowWaitAndDisplay(query, gridControl3, gridView3, "Please wait", "Populating data into the database...");
-                gridView3.Focus();
-            }
-        }
+        //void loadPayments()
+        //{
+        //    if (checkBox3.Checked == true)
+        //    {
+        //        string query = "SELECT SEQ_NO,DatePaid,ReferenceNumber,Amount,VoucherType,ExecuteBy,DateUpdate,UpdateBy,ErrorCorrect FROM TransactionPaymentAP WHERE SupplierKey='" + txtacctid.Text + "' ORDER BY SEQ_NO ASC";
+        //        HelperFunction.ShowWaitAndDisplay(query, gridControl3, gridView3, "Please wait", "Populating data into the database...");
+        //        gridView3.Focus();
+        //    }
+        //    else
+        //    {
+        //        string query = "SELECT SEQ_NO,DatePaid,ReferenceNumber,Amount,VoucherType,ExecuteBy,DateUpdate,UpdateBy,ErrorCorrect FROM TransactionPaymentAP WHERE SupplierKey='" + txtacctid.Text + "' AND CAST(DatePaid as Date) >= '" + datefrompay.Text + "' and CAST(DatePaid as date)<= '" + datetopay.Text + "' ORDER BY SEQ_NO ASC";
+        //        HelperFunction.ShowWaitAndDisplay(query, gridControl3, gridView3, "Please wait", "Populating data into the database...");
+        //        gridView3.Focus();
+        //    }
+        //}
         void loadExpenses()
         {
-            if (checkBox4.Checked == true)
+            if (checkBox4.Checked)
             {
-                string query = "SELECT TRN_SEQ_NO,BranchCode,ExpenseDate,ReferenceNumber,InvoiceNo,ExpenseName,Amount,Remarks,Status,Balance,AmountPaid,EWTAmount,DiscountAmount,OffsetAmount,isErrorCorrect FROM ExpenseMaster WHERE SupplierID='" + txtacctid.Text + "' ";
-                HelperFunction.ShowWaitAndDisplay(query, gridControl4, gridView4, "Please wait", "Populating data into the database...");
-                gridView4.Focus();
+                const string sql = @"
+            SELECT TRN_SEQ_NO, BranchCode, ExpenseDate, ReferenceNumber,
+                   InvoiceNo, ExpenseName, Amount, Remarks,
+                   Status, Balance, AmountPaid,
+                   EWTAmount, DiscountAmount, OffsetAmount,
+                   isErrorCorrect
+            FROM ExpenseMaster
+            WHERE SupplierID = @supplierId";
+
+                LoadGrid(sql, cmd =>
+                {
+                    cmd.Parameters.Add("@supplierId", SqlDbType.VarChar, 10).Value = supplierid;
+                }, gridControl4, gridView4);
             }
             else
             {
-                string query = "SELECT TRN_SEQ_NO,BranchCode,ExpenseDate,ReferenceNumber,InvoiceNo,ExpenseName,Amount,Remarks,Status,Balance,AmountPaid,EWTAmount,DiscountAmount,OffsetAmount,isErrorCorrect FROM ExpenseMaster WHERE SupplierID='" + txtacctid.Text + "' AND CAST(ExpenseDate as Date) >= '" + expdatefrom.Text + "' and CAST(ExpenseDate as date)<= '" + expdateto.Text + "' ";
-                HelperFunction.ShowWaitAndDisplay(query, gridControl4, gridView4, "Please wait", "Populating data into the database...");
-                gridView4.Focus();
+                DateTime fromDate = expdatefrom.Value.Date;
+                DateTime toDateExclusive = expdateto.Value.Date.AddDays(1);
+
+                const string sql = @"
+                SELECT TRN_SEQ_NO, BranchCode, ExpenseDate, ReferenceNumber,
+                       InvoiceNo, ExpenseName, Amount, Remarks,
+                       Status, Balance, AmountPaid,
+                       EWTAmount, DiscountAmount, OffsetAmount,
+                       isErrorCorrect
+                FROM ExpenseMaster
+                WHERE SupplierID = @supplierId
+                  AND ExpenseDate >= @fromDate
+                  AND ExpenseDate <  @toDateExclusive";
+
+                LoadGrid(sql, cmd =>
+                {
+                    cmd.Parameters.Add("@supplierId", SqlDbType.VarChar, 10).Value = supplierid;
+                    cmd.Parameters.Add("@fromDate", SqlDbType.DateTime).Value = fromDate;
+                    cmd.Parameters.Add("@toDateExclusive", SqlDbType.DateTime).Value = toDateExclusive;
+                }, gridControl4, gridView4);
             }
-            
         }
+        //void loadExpenses()
+        //{
+        //    if (checkBox4.Checked == true)
+        //    {
+        //        string query = "SELECT TRN_SEQ_NO,BranchCode,ExpenseDate,ReferenceNumber,InvoiceNo,ExpenseName,Amount,Remarks,Status,Balance,AmountPaid,EWTAmount,DiscountAmount,OffsetAmount,isErrorCorrect FROM ExpenseMaster WHERE SupplierID='" + txtacctid.Text + "' ";
+        //        HelperFunction.ShowWaitAndDisplay(query, gridControl4, gridView4, "Please wait", "Populating data into the database...");
+        //        gridView4.Focus();
+        //    }
+        //    else
+        //    {
+        //        string query = "SELECT TRN_SEQ_NO,BranchCode,ExpenseDate,ReferenceNumber,InvoiceNo,ExpenseName,Amount,Remarks,Status,Balance,AmountPaid,EWTAmount,DiscountAmount,OffsetAmount,isErrorCorrect FROM ExpenseMaster WHERE SupplierID='" + txtacctid.Text + "' AND CAST(ExpenseDate as Date) >= '" + expdatefrom.Text + "' and CAST(ExpenseDate as date)<= '" + expdateto.Text + "' ";
+        //        HelperFunction.ShowWaitAndDisplay(query, gridControl4, gridView4, "Please wait", "Populating data into the database...");
+        //        gridView4.Focus();
+        //    }
+
+        //}
 
         private void button2_Click(object sender, EventArgs e)
         {
@@ -190,6 +346,9 @@ namespace SalesInventorySystem.HOFormsDevEx
 
             expdatefrom.Text = date.ToShortDateString();
             expdateto.Text = lastDay.ToShortDateString();
+
+            supplierid = txtacctid.Text;
+
             Database.displaySearchlookupEdit("select SupplierID,SupplierName FROM Supplier", searchLookUpEdit1, "SupplierName", "SupplierName");
         }
 

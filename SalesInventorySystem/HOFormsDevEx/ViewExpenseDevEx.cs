@@ -42,38 +42,38 @@ namespace SalesInventorySystem.HOFormsDevEx
             //filtertab();
         }
 
-        private void filtertab()
-        {
-            //FOR APPROVAL
-            if (xtraTabControl1.SelectedTabPage.Equals(xtraTabPageForApproval)) //FOR APPROVAL
-            {
-                //Database.display($"SELECT * FROM view_ExpenseSummary WHERE Status='FOR APPROVAL' AND CAST(ExpenseDate as date) between '{txtdatefromforapproval.Text}' AND '{txtdatetoforapproval.Text}' ", gridControl2, gridView2);
-                string query = $"SELECT * FROM view_ExpenseSummary with(nolock) WHERE Status='FOR APPROVAL' AND CAST(ExpenseDate as date) between '{txtdatefromforapproval.Text}' AND '{txtdatetoforapproval.Text}' ";
-                HelperFunction.ShowWaitAndDisplay(query, gridControl2, gridView2, "Please wait", "Populating data into the database...");
-                gridView2.Focus();
-            }
-            else if (xtraTabControl1.SelectedTabPage.Equals(xtraTabPageApproved))  //APPROVED
-            {
-                //Database.display($"SELECT * FROM view_ExpenseSummary WHERE Status='APPROVED' AND CAST(ExpenseDate as date) between '{datefromapproved.Text}' AND '{datetoapproved.Text}' ", gridControl1, gridView1);
-                string query = $"SELECT * FROM view_ExpenseSummary with(nolock) WHERE Status='APPROVED' AND CAST(ExpenseDate as date) between '{datefromapproved.Text}' AND '{datetoapproved.Text}' ";
-                HelperFunction.ShowWaitAndDisplay(query, gridControl1, gridView1, "Please wait", "Populating data into the database...");
-                gridView1.Focus();
-            }
-            else if (xtraTabControl1.SelectedTabPage.Equals(xtraTabPageCancelled))  //APPROVED
-            {
-                //Database.display($"SELECT * FROM view_ExpenseSummary WHERE Status='CANCELLED'", gridControl3, gridView3);
-                string query = $"SELECT * FROM view_ExpenseSummary with(nolock) WHERE Status='CANCELLED' ";
-                HelperFunction.ShowWaitAndDisplay(query, gridControl3, gridView3, "Please wait", "Populating data into the database...");
-                gridView3.Focus();
-            }
-            else if (xtraTabControl1.SelectedTabPage.Equals(xtraTabPagePaid))  //APPROVED
-            {
-                //Database.display($"SELECT * FROM view_ExpenseSummary WHERE Status='PAID' AND CAST(ExpenseDate as date) between '{dateFromPaid.Text}' AND '{dateToPaid.Text}' ", gridControl4, gridView4);
-                string query = $"SELECT * FROM view_ExpenseSummary with(nolock) WHERE Status='PAID' AND CAST(ExpenseDate as date) between '{dateFromPaid.Text}' AND '{dateToPaid.Text}' ";
-                HelperFunction.ShowWaitAndDisplay(query, gridControl4, gridView4, "Please wait", "Populating data into the database...");
-                gridView4.Focus();
-            }
-        }
+        //private void filtertab()
+        //{
+        //    //FOR APPROVAL
+        //    if (xtraTabControl1.SelectedTabPage.Equals(xtraTabPageForApproval)) //FOR APPROVAL
+        //    {
+        //        //Database.display($"SELECT * FROM view_ExpenseSummary WHERE Status='FOR APPROVAL' AND CAST(ExpenseDate as date) between '{txtdatefromforapproval.Text}' AND '{txtdatetoforapproval.Text}' ", gridControl2, gridView2);
+        //        string query = $"SELECT * FROM view_ExpenseSummary with(nolock) WHERE Status='FOR APPROVAL' AND CAST(ExpenseDate as date) between '{txtdatefromforapproval.Text}' AND '{txtdatetoforapproval.Text}' ";
+        //        HelperFunction.ShowWaitAndDisplay(query, gridControl2, gridView2, "Please wait", "Populating data into the database...");
+        //        gridView2.Focus();
+        //    }
+        //    else if (xtraTabControl1.SelectedTabPage.Equals(xtraTabPageApproved))  //APPROVED
+        //    {
+        //        //Database.display($"SELECT * FROM view_ExpenseSummary WHERE Status='APPROVED' AND CAST(ExpenseDate as date) between '{datefromapproved.Text}' AND '{datetoapproved.Text}' ", gridControl1, gridView1);
+        //        string query = $"SELECT * FROM view_ExpenseSummary with(nolock) WHERE Status='APPROVED' AND CAST(ExpenseDate as date) between '{datefromapproved.Text}' AND '{datetoapproved.Text}' ";
+        //        HelperFunction.ShowWaitAndDisplay(query, gridControl1, gridView1, "Please wait", "Populating data into the database...");
+        //        gridView1.Focus();
+        //    }
+        //    else if (xtraTabControl1.SelectedTabPage.Equals(xtraTabPageCancelled))  //APPROVED
+        //    {
+        //        //Database.display($"SELECT * FROM view_ExpenseSummary WHERE Status='CANCELLED'", gridControl3, gridView3);
+        //        string query = $"SELECT * FROM view_ExpenseSummary with(nolock) WHERE Status='CANCELLED' ";
+        //        HelperFunction.ShowWaitAndDisplay(query, gridControl3, gridView3, "Please wait", "Populating data into the database...");
+        //        gridView3.Focus();
+        //    }
+        //    else if (xtraTabControl1.SelectedTabPage.Equals(xtraTabPagePaid))  //APPROVED
+        //    {
+        //        //Database.display($"SELECT * FROM view_ExpenseSummary WHERE Status='PAID' AND CAST(ExpenseDate as date) between '{dateFromPaid.Text}' AND '{dateToPaid.Text}' ", gridControl4, gridView4);
+        //        string query = $"SELECT * FROM view_ExpenseSummary with(nolock) WHERE Status='PAID' AND CAST(ExpenseDate as date) between '{dateFromPaid.Text}' AND '{dateToPaid.Text}' ";
+        //        HelperFunction.ShowWaitAndDisplay(query, gridControl4, gridView4, "Please wait", "Populating data into the database...");
+        //        gridView4.Focus();
+        //    }
+        //}
 
         private void showDetailsToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -192,22 +192,79 @@ namespace SalesInventorySystem.HOFormsDevEx
             displayDetails();
         }
 
+        private void LoadExpenseSummaryByStatus(
+            string status,
+            string fromDateText,
+            string toDateText,
+            DevExpress.XtraGrid.GridControl grid,
+            DevExpress.XtraGrid.Views.Grid.GridView view)
+        {
+            DateTime fromDate = Convert.ToDateTime(fromDateText).Date;
+            DateTime toDateExclusive = Convert.ToDateTime(toDateText).Date.AddDays(1);
+
+            try
+            {
+                Cursor.Current = Cursors.WaitCursor;
+                this.UseWaitCursor = true;
+
+                using (SqlConnection con = Database.getConnection())
+                using (SqlCommand cmd = new SqlCommand(@"
+            SELECT *
+            FROM dbo.view_ExpenseSummary
+            WHERE Status = @status
+              AND ExpenseDate >= @fromDate
+              AND ExpenseDate <  @toDateExclusive
+            ORDER BY ExpenseDate DESC", con))
+                {
+                    cmd.Parameters.Add("@status", SqlDbType.VarChar, 50).Value = status;
+                    cmd.Parameters.Add("@fromDate", SqlDbType.DateTime).Value = fromDate;
+                    cmd.Parameters.Add("@toDateExclusive", SqlDbType.DateTime).Value = toDateExclusive;
+
+                    Database.display(cmd, grid, view);
+                }
+
+                view.Focus();
+                Classes.DevXGridViewSettings.ShowFooterTotal(view, "Amount");
+            }
+            finally
+            {
+                this.UseWaitCursor = false;
+                Cursor.Current = Cursors.Default;
+            }
+        }
+
         private void btnPendingGenerate_Click(object sender, EventArgs e)
         {
+
+            LoadExpenseSummaryByStatus(
+                    "APPROVED",
+                    datefromapproved.Text,
+                    datetoapproved.Text,
+                    gridControl1,
+                    gridView1);
+
             //Database.display($"SELECT * FROM view_ExpenseSummary WHERE Status='APPROVED' AND CAST(ExpenseDate as date) between '{datefromapproved.Text}' AND '{datetoapproved.Text}' ", gridControl1, gridView1);
-            string query = $"SELECT * FROM view_ExpenseSummary WHERE Status='APPROVED' AND CAST(ExpenseDate as date) between '{datefromapproved.Text}' AND '{datetoapproved.Text}' ";
-            HelperFunction.ShowWaitAndDisplayNonAsync(query, gridControl1, gridView1, "Please wait", "Populating data into the database...");
-            gridView1.Focus();
-            Classes.DevXGridViewSettings.ShowFooterTotal(gridView1, "Amount");
+            //string query = $"SELECT * FROM view_ExpenseSummary WHERE Status='APPROVED' AND CAST(ExpenseDate as date) between '{datefromapproved.Text}' AND '{datetoapproved.Text}' ";
+            //HelperFunction.ShowWaitAndDisplayNonAsync(query, gridControl1, gridView1, "Please wait", "Populating data into the database...");
+            //gridView1.Focus();
+            //Classes.DevXGridViewSettings.ShowFooterTotal(gridView1, "Amount");
         }
 
         private void simpleButton1_Click(object sender, EventArgs e)
         {
+
+            LoadExpenseSummaryByStatus(
+                    "PAID",
+                    dateFromPaid.Text,
+                    dateToPaid.Text,
+                    gridControl4,
+                    gridView4);
+
             //Database.display($"SELECT * FROM view_ExpenseSummary WHERE Status='PAID' AND CAST(ExpenseDate as date) between '{dateFromPaid.Text}' AND '{dateToPaid.Text}' ", gridControl4, gridView4);
-            string query = $"SELECT * FROM view_ExpenseSummary WHERE Status='PAID' AND CAST(ExpenseDate as date) between '{dateFromPaid.Text}' AND '{dateToPaid.Text}'  ";
-            HelperFunction.ShowWaitAndDisplayNonAsync(query, gridControl4, gridView4, "Please wait", "Populating data into the database...");
-            gridView4.Focus();
-            Classes.DevXGridViewSettings.ShowFooterTotal(gridView4, "Amount");
+            //string query = $"SELECT * FROM view_ExpenseSummary WHERE Status='PAID' AND CAST(ExpenseDate as date) between '{dateFromPaid.Text}' AND '{dateToPaid.Text}'  ";
+            //HelperFunction.ShowWaitAndDisplayNonAsync(query, gridControl4, gridView4, "Please wait", "Populating data into the database...");
+            //gridView4.Focus();
+            //Classes.DevXGridViewSettings.ShowFooterTotal(gridView4, "Amount");
         }
 
         private void toolStripMenuItem3_Click(object sender, EventArgs e)
@@ -279,9 +336,14 @@ namespace SalesInventorySystem.HOFormsDevEx
 
         private void btnforapproval_Click(object sender, EventArgs e)
         {
-            string query = $"SELECT * FROM view_ExpenseSummary WHERE Status='FOR APPROVAL' AND CAST(ExpenseDate as date) between '{txtdatefromforapproval.Text}' AND '{txtdatetoforapproval.Text}' ";
-            HelperFunction.ShowWaitAndDisplayNonAsync(query, gridControl2, gridView2, "Please wait", "Populating data into the database...");
-            gridView1.Focus();
+            LoadExpenseSummaryByStatus(
+                    "FOR APPROVAL",
+                    txtdatefromforapproval.Text,
+                    txtdatetoforapproval.Text,
+                    gridControl2,
+                    gridView2);
+
+
         }
     }
 }
