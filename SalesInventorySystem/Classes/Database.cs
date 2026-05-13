@@ -131,6 +131,11 @@ namespace SalesInventorySystem
                             ALTER TABLE dbo.POSType ADD isAutoSystemDeduct BIT NULL DEFAULT 0 WITH VALUES;
                         END
 
+                        IF COL_LENGTH('dbo.POSCreditCardTransactions', 'isUpload') IS NULL
+                        BEGIN
+                            ALTER TABLE dbo.POSCreditCardTransactions ADD isUpload BIT NULL DEFAULT 0 WITH VALUES;
+                        END
+
                         IF COL_LENGTH('dbo.POSZReadingTransactions', 'isUpload') IS NULL
                         BEGIN
                             ALTER TABLE dbo.POSZReadingTransactions ADD isUpload BIT NULL DEFAULT 0 WITH VALUES;
@@ -1353,7 +1358,43 @@ namespace SalesInventorySystem
             con.Close();
             return lastdate;
         }
+        public static void display(SqlCommand cmd, GridControl grid, GridView view)
+        {
+            using (var da = new SqlDataAdapter(cmd))
+            {
+                try
+                {
 
+                    var dt = new DataTable();
+
+                    if (cmd.Connection.State != ConnectionState.Open)
+                        cmd.Connection.Open();
+
+                    da.Fill(dt);
+
+                    grid.BeginUpdate();          // match other overload
+                    view.Columns.Clear();
+                    grid.DataSource = null;
+                    grid.DataSource = dt;
+                    view.BestFitColumns();
+
+                }
+                catch (SqlException ex)
+                {
+                    XtraMessageBox.Show(
+                        "Failed to load grid data: " + ex.Message,
+                        "Database Error",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error
+                    );
+                }
+                finally
+                {
+                    if (grid != null)
+                        grid.EndUpdate();
+                }
+            }
+        }
         public static void display(string query, GridControl cont, GridView view)
         {
             try

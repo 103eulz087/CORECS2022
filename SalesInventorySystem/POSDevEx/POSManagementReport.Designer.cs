@@ -658,7 +658,7 @@
             this.xtraTabPage2.Controls.Add(this.groupControl3);
             this.xtraTabPage2.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
             this.xtraTabPage2.Name = "xtraTabPage2";
-            this.xtraTabPage2.Size = new System.Drawing.Size(1130, 649);
+            this.xtraTabPage2.Size = new System.Drawing.Size(1688, 649);
             this.xtraTabPage2.Text = "Manage Data";
             // 
             // groupControl4
@@ -668,7 +668,7 @@
             this.groupControl4.Location = new System.Drawing.Point(0, 203);
             this.groupControl4.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
             this.groupControl4.Name = "groupControl4";
-            this.groupControl4.Size = new System.Drawing.Size(1130, 446);
+            this.groupControl4.Size = new System.Drawing.Size(1688, 446);
             this.groupControl4.TabIndex = 2;
             // 
             // gridControl2
@@ -679,7 +679,7 @@
             this.gridControl2.MainView = this.gridView3;
             this.gridControl2.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
             this.gridControl2.Name = "gridControl2";
-            this.gridControl2.Size = new System.Drawing.Size(1126, 416);
+            this.gridControl2.Size = new System.Drawing.Size(1684, 416);
             this.gridControl2.TabIndex = 1;
             this.gridControl2.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView3});
@@ -737,7 +737,7 @@
             this.groupControl3.Location = new System.Drawing.Point(0, 0);
             this.groupControl3.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
             this.groupControl3.Name = "groupControl3";
-            this.groupControl3.Size = new System.Drawing.Size(1130, 203);
+            this.groupControl3.Size = new System.Drawing.Size(1688, 203);
             this.groupControl3.TabIndex = 1;
             // 
             // groupBox1
@@ -1109,7 +1109,7 @@
             this.xtraTabPage3.Controls.Add(this.groupControl6);
             this.xtraTabPage3.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.xtraTabPage3.Name = "xtraTabPage3";
-            this.xtraTabPage3.Size = new System.Drawing.Size(1130, 649);
+            this.xtraTabPage3.Size = new System.Drawing.Size(1688, 649);
             this.xtraTabPage3.Text = "Manage Data VAT";
             // 
             // groupControl5
@@ -1119,7 +1119,7 @@
             this.groupControl5.Location = new System.Drawing.Point(0, 161);
             this.groupControl5.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
             this.groupControl5.Name = "groupControl5";
-            this.groupControl5.Size = new System.Drawing.Size(1130, 488);
+            this.groupControl5.Size = new System.Drawing.Size(1688, 488);
             this.groupControl5.TabIndex = 4;
             // 
             // gridControl3
@@ -1130,7 +1130,7 @@
             this.gridControl3.MainView = this.gridView4;
             this.gridControl3.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
             this.gridControl3.Name = "gridControl3";
-            this.gridControl3.Size = new System.Drawing.Size(1126, 458);
+            this.gridControl3.Size = new System.Drawing.Size(1684, 458);
             this.gridControl3.TabIndex = 1;
             this.gridControl3.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView4});
@@ -1187,7 +1187,7 @@
             this.groupControl6.Location = new System.Drawing.Point(0, 0);
             this.groupControl6.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
             this.groupControl6.Name = "groupControl6";
-            this.groupControl6.Size = new System.Drawing.Size(1130, 161);
+            this.groupControl6.Size = new System.Drawing.Size(1688, 161);
             this.groupControl6.TabIndex = 3;
             // 
             // txtmachineVAT

@@ -380,7 +380,7 @@ namespace SalesInventorySystem
             viewdet.Show();
             
             analyze("spview_SalesInvoice", refno1, viewdet.gridControl4, viewdet.gridView4);
-
+            Classes.DevXGridViewSettings.ShowFooterCountTotal(viewdet.gridView4, "Cnt"); //NEW
             viewdet.txtpono.Text = refno1;
             viewdet.txtcusttin.Text = tinno;
             double vatablesales = 0.0, vatexemptsale = 0.0, vatamount = 0.0, totalsales = 0.0, lessvat = 0.0, netofvat = 0.0, amountdue = 0.0, addvat = 0.0, vatsales = 0.0, totalamountdue = 0.0;

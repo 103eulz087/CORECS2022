@@ -55,7 +55,7 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>CORECSICON.ico</ApplicationIcon>
+    <ApplicationIcon>Gemini_Generated_Image_knbj2tknbj2tknbjNew.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject>
@@ -335,6 +335,12 @@
     </Compile>
     <Compile Include="AccountingDevEx\ViewCheckVoucherDetailsDevEx.Designer.cs">
       <DependentUpon>ViewCheckVoucherDetailsDevEx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AccountingDevEx\CancelledCheckVoucher.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AccountingDevEx\CancelledCheckVoucher.Designer.cs">
+      <DependentUpon>CancelledCheckVoucher.cs</DependentUpon>
     </Compile>
     <Compile Include="AccountingDevEx\ViewCheckVoucherDevEx.cs">
       <SubType>Form</SubType>
@@ -3291,6 +3297,9 @@
     <EmbeddedResource Include="AccountingDevEx\ViewCheckVoucherDetailsDevEx.resx">
       <DependentUpon>ViewCheckVoucherDetailsDevEx.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="AccountingDevEx\CancelledCheckVoucher.resx">
+      <DependentUpon>CancelledCheckVoucher.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="AccountingDevEx\ViewCheckVoucherDevEx.resx">
       <DependentUpon>ViewCheckVoucherDevEx.cs</DependentUpon>
     </EmbeddedResource>
@@ -4809,6 +4818,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="CORECSICON.ico" />
+    <Content Include="Gemini_Generated_Image_knbj2tknbj2tknbjNew.ico" />
     <Content Include="icon175x175.ico" />
     <Content Include="Images\noimagefound.jpg" />
     <None Include="Resources\table-512.png" />

@@ -43,7 +43,11 @@ namespace SalesInventorySystem.Reporting
 
             DevExReportTemplate.SalesInvoice xct = new DevExReportTemplate.SalesInvoice();
             //this.gridView4.Columns["TotalBox"].Width = 5;
-            this.gridView4.Columns["Quantity"].Width = 125;
+            if(Login.compname=="JFC")
+            { this.gridView4.Columns["Cnt"].Width = 25; }
+           
+            this.gridView4.Columns["Quantity"].Width = 100;
+            //this.gridView4.Columns["Quantity"].Width = 125; //ORIG
             this.gridView4.Columns["Unit"].Width = 78;
             this.gridView4.Columns["ProductName"].Width = 300;
             this.gridView4.Columns["Price"].Width = 110;
@@ -53,11 +57,18 @@ namespace SalesInventorySystem.Reporting
 
             this.gridView4.Columns["Cost"].Visible=false;
 
+            double count = 0.0;
+            for(int i=0;i<gridView4.RowCount;i++)
+            {
+                count += Convert.ToDouble(gridView4.GetRowCellValue(i, "Cnt"));
+            }
+
             xct.xrcustname.Text = txtcustname.Text;
             xct.xrcontrolno.Text = controlno;
             xct.xraddress.Text = txtcustaddress.Text;
             xct.xrbusinessstyle.Text = remarks;
             xct.xrtin.Text = txtcusttin.Text;
+            xct.xrlabeltotalcount.Text = count.ToString();
 
             string term = "", trm = "";
             term = txtterm.Text;
@@ -103,6 +114,11 @@ namespace SalesInventorySystem.Reporting
         private void simpleButton1_Click(object sender, EventArgs e)
         {
             print();
+        }
+
+        private void gridControl4_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

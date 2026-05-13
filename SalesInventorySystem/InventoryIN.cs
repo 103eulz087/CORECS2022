@@ -158,7 +158,8 @@ namespace SalesInventorySystem
 
         void display()
         {
-            Database.display("SELECT SequenceNumber,Branch,DateReceived,Product,Description,Quantity,Cost,IsVat FROM InventoryIN WHERE EncodeBy='" + Login.isglobalUserID + "'", gridControl1, gridView1);
+            //Database.display("SELECT SequenceNumber,Branch,DateReceived,Product,Description,Quantity,Cost,IsVat FROM InventoryIN WHERE EncodeBy='" + Login.isglobalUserID + "'", gridControl1, gridView1);
+            Database.display("SELECT SequenceNumber,Branch,DateReceived,Product,Description,Quantity,Cost,IsVat FROM InventoryIN WHERE ID='" + txtid.Text + "'", gridControl1, gridView1);
         }
 
         private void txtprodcat_SelectedIndexChanged(object sender, EventArgs e)
@@ -224,10 +225,10 @@ namespace SalesInventorySystem
             int ctr = gridView1.RowCount - 1;
             try
             {
-                string query = "sp_UploadInventoryIN";
+                string query = "sp_UploadInventoryINAdj";
                 SqlCommand com = new SqlCommand(query, con);
                 com.Parameters.AddWithValue("@parmid", txtid.Text);
-                com.Parameters.AddWithValue("@parmuser", Login.isglobalUserID);
+                com.Parameters.AddWithValue("@parmbranchcode", Login.assignedBranch);
                 com.CommandType = CommandType.StoredProcedure;
                 com.CommandText = query;
                 com.ExecuteNonQuery();

@@ -180,12 +180,12 @@
             this.contextMenuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.reprintBarcodeToolStripMenuItem});
             this.contextMenuStrip2.Name = "contextMenuStrip2";
-            this.contextMenuStrip2.Size = new System.Drawing.Size(211, 56);
+            this.contextMenuStrip2.Size = new System.Drawing.Size(186, 28);
             // 
             // reprintBarcodeToolStripMenuItem
             // 
             this.reprintBarcodeToolStripMenuItem.Name = "reprintBarcodeToolStripMenuItem";
-            this.reprintBarcodeToolStripMenuItem.Size = new System.Drawing.Size(210, 24);
+            this.reprintBarcodeToolStripMenuItem.Size = new System.Drawing.Size(185, 24);
             this.reprintBarcodeToolStripMenuItem.Text = "Reprint Barcode";
             this.reprintBarcodeToolStripMenuItem.Click += new System.EventHandler(this.reprintBarcodeToolStripMenuItem_Click);
             // 

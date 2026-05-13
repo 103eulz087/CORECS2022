@@ -169,6 +169,29 @@ namespace SalesInventorySystem.Reporting
         {
 
         }
+        void exporttoexcel(GridView view, string title)
+        {
+            if (view.RowCount == 0)
+            {
+                XtraMessageBox.Show("No Data to Import!..");
+                return;
+            }
+            else
+            {
+
+                string filepath = "C:\\MyFiles\\";
+                Classes.Utilities.createDirectoryFolder(filepath);
+                string filename = title + ".xls";
+                string file = filepath + filename;
+                view.ExportToXls(file);
+                XtraMessageBox.Show("Successfully Exported.. Please Check your Drive C://MyFiles/folder");
+            }
+        }
+        private void btnforapprovalsalesorderexcel_Click(object sender, EventArgs e)
+        {
+            string filename = "DeliveryReportSummary" + DateTime.Now.ToString("yyyyMMdd_HHmmss");
+            HelperFunction.exporttoexcel(gridView1, filename);
+        }
 
         void showSTSDetails()
         {

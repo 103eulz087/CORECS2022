@@ -27,7 +27,7 @@ namespace SalesInventorySystem
 {
     public partial class Login : DevExpress.XtraEditors.XtraForm
     {
-        public static string assignedBranch, Fullname, isMaker, isChecker, isglobalPOS, isglobalAccounting, iscashBegin, isglobalUserID, isglobalAdmin, isglobalOfficer, isglobalBranchOfficer, isglobalWarehouseOfficer, isCashier, isglobalApprover, glacctcode, cashinlimit, cashendlimit;
+        public static string compname, assignedBranch, Fullname, isMaker, isChecker, isglobalPOS, isglobalAccounting, iscashBegin, isglobalUserID, isglobalAdmin, isglobalOfficer, isglobalBranchOfficer, isglobalWarehouseOfficer, isCashier, isglobalApprover, glacctcode, cashinlimit, cashendlimit;
         RegistryKey regkey;
         string password;
         string encryptedpassword;
@@ -142,6 +142,10 @@ namespace SalesInventorySystem
                 || GlobalConfig.Token == "NjQwOTg4MzU1" || GlobalConfig.Token== "ODU2NDE4OTA3")
             {
                 Database.RunLocalDatabaseMigrations();
+            }
+            if(GlobalConfig.Token== "ODM1NTI0ODYz")//VROSS STORE
+            {
+                Database.ExecuteQuery("UPDATE POSType set isAutoSystemDeduct=1");
             }
             tryCheckUpdate(); //#tryCheckUpdateV1();
             labelversion.Text= HelperFunction.readFileVersion();
@@ -374,7 +378,7 @@ namespace SalesInventorySystem
                         }
                     }
                 }
-
+                compname = Database.getSingleQuery("CompanyProfile", "CompanyName='JFC'", "CompanyName");
                 // --- PHASE 2: Decrypt the Password ---
                 // --- PHASE 2: Decrypt the Password ---
                 string decryptedPassword = null;

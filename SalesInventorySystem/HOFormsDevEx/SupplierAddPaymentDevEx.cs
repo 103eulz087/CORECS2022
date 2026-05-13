@@ -16,6 +16,11 @@ namespace SalesInventorySystem.HOFormsDevEx
         public static string amountpaid, discount, ewt, offset;
         public static bool isdone = false;
 
+        public decimal AmountPaid { get; private set; }
+        public decimal Discount { get; private set; }
+        public decimal EWT { get; private set; }
+        public decimal Offset { get; private set; }
+
         private void btnupdate_Click(object sender, EventArgs e)
         {
             Database.ExecuteQuery($"UPDATE APACCOUNTS SET " +
@@ -41,21 +46,42 @@ namespace SalesInventorySystem.HOFormsDevEx
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            double total = 0.0;
-            total = Math.Round(Convert.ToDouble(txtamountpaid.Text) + Convert.ToDouble(txtdiscountamount.Text) + Convert.ToDouble(txtewtamount.Text),2);
-            if (total > Convert.ToDouble(txtbalance.Text))
+            if (!decimal.TryParse(txtamountpaid.Text, out var paid)) paid = 0;
+            if (!decimal.TryParse(txtdiscountamount.Text, out var disc)) disc = 0;
+            if (!decimal.TryParse(txtewtamount.Text, out var ewt)) ewt = 0;
+            if (!decimal.TryParse(txtoffsetamount.Text, out var off)) off = 0;
+            if (!decimal.TryParse(txtbalance.Text, out var bal)) bal = 0;
+
+            var total = Math.Round(paid + disc + ewt + off, 2);
+            if (total > bal)
             {
-                XtraMessageBox.Show("Must not Greater than Balance");
+                XtraMessageBox.Show("Must not be greater than Balance.");
+                return;
             }
-            else
-            {
-                amountpaid = txtamountpaid.Text;
-                discount = txtdiscountamount.Text;
-                ewt = txtewtamount.Text;
-                offset = txtoffsetamount.Text;
-                isdone = true;
-                this.Close();
-            }
+
+            AmountPaid = paid;
+            Discount = disc;
+            EWT = ewt;
+            Offset = off;
+
+            this.DialogResult = DialogResult.OK;
+            Close();
+
+            //double total = 0.0;
+            //total = Math.Round(Convert.ToDouble(txtamountpaid.Text) + Convert.ToDouble(txtdiscountamount.Text) + Convert.ToDouble(txtewtamount.Text),2);
+            //if (total > Convert.ToDouble(txtbalance.Text))
+            //{
+            //    XtraMessageBox.Show("Must not Greater than Balance");
+            //}
+            //else
+            //{
+            //    amountpaid = txtamountpaid.Text;
+            //    discount = txtdiscountamount.Text;
+            //    ewt = txtewtamount.Text;
+            //    offset = txtoffsetamount.Text;
+            //    isdone = true;
+            //    this.Close();
+            //}
         }
 
         private void SupplierAddPaymentDevEx_Load(object sender, EventArgs e)

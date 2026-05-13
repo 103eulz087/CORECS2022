@@ -583,7 +583,28 @@ namespace SalesInventorySystem.POS
                     invno = txtinvoiceno.Text;
                     customercode = custcode.ToString();
                     //update as of 04142020
-                    Database.ExecuteQuery("INSERT INTO dbo.POSCreditCardTransactions VALUES('" + lbltranscode.Text + "','" + lblorderno.Text + "','" + Login.assignedBranch + "','" + DateTime.Now.ToString() + "','" + POSPaymentDetails.creditcardname + "','" + POSPaymentDetails.creditcardnum + "','" + POSPaymentDetails.creditcardtype + "','" + POSPaymentDetails.creditcardexpirydate + "','" + POSPaymentDetails.creditcardbankname + "','" + POSPaymentDetails.creditcardmerchant + "','" + POSPaymentDetails.creditcardrefno + "','" + txtamountpayable.Text + "','0','" + DateTime.Now.ToString() + "',' ','" + Login.Fullname + "','" + GlobalVariables.computerName + "','"+lblcashiertransno.Text+"')");
+                    Database.ExecuteQuery("INSERT INTO dbo.POSCreditCardTransactions(TransactionCode, ReferenceNo, BranchCode, TransactionDate," +
+                        " CCName, CCNumber, CCType, CCExpirydate, CCBank, CCBankMerchant, CCPaymentReferenceNo, Amount, isCleared, DateAdded," +
+                        " DateCleared, ProcessedBy, MachineUsed, CashierTransNo, isUpload) " +
+                        "VALUES('" + lbltranscode.Text + "'," +
+                        "'" + lblorderno.Text + "'," +
+                        "'" + Login.assignedBranch + "'," +
+                        "'" + DateTime.Now.ToString() + "'," +
+                        "'" + POSPaymentDetails.creditcardname + "'," +
+                        "'" + POSPaymentDetails.creditcardnum + "'," +
+                        "'" + POSPaymentDetails.creditcardtype + "'," +
+                        "'" + POSPaymentDetails.creditcardexpirydate + "'," +
+                        "'" + POSPaymentDetails.creditcardbankname + "'," +
+                        "'" + POSPaymentDetails.creditcardmerchant + "'," +
+                        "'" + POSPaymentDetails.creditcardrefno + "'," +
+                        "'" + txtamountpayable.Text + "'," +
+                        "'0'," +
+                        "'" + DateTime.Now.ToString() + "'," +
+                        "' '," +
+                        "'" + Login.Fullname + "'," +
+                        "'" + GlobalVariables.computerName + "'," +
+                         "'0'," +
+                        "'" +lblcashiertransno.Text+"')");
                     //update as of 04142020
                 }
                 else if (radmerchant.Checked.Equals(true))

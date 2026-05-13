@@ -92,98 +92,181 @@ namespace SalesInventorySystem.HOFormsDevEx
             if (e.Column.FieldName == "Amount")
                 e.RepositoryItem = repamount;
         }
+        private DataTable BuildExpenseTVP()
+        {
+            var dt = new DataTable();
+            dt.Columns.Add("BranchCode", typeof(string));
+            dt.Columns.Add("ExpenseName", typeof(string));
+            dt.Columns.Add("Particulars", typeof(string));
+            dt.Columns.Add("Amount", typeof(decimal));
+
+            for (int i = 0; i < gridView1.RowCount; i++)
+            {
+                dt.Rows.Add(
+                    gridView1.GetRowCellValue(i, "BranchCode")?.ToString(),
+                    gridView1.GetRowCellValue(i, "TypeOfExpense")?.ToString(),
+                    gridView1.GetRowCellValue(i, "Particulars")?.ToString(),
+                    Convert.ToDecimal(gridView1.GetRowCellValue(i, "Amount"))
+                );
+            }
+            return dt;
+        }
 
         private void simpleButton4_Click(object sender, EventArgs e)
         {
-            try
+            if (gridView1.RowCount == 0)
             {
-                string supplierkey = Database.getSingleQuery("Supplier", "SupplierID='" + suppid.ToString() + "'", "SupplierKey");
-                string branchcode, expname, particulars, amount;
-                bool isEmpty = false;
-                int ctr = 1;
-                for (int i = 0; i <= gridView1.RowCount - 1; i++)
-                {
-                    if (String.IsNullOrEmpty(gridView1.GetRowCellValue(i, "BranchCode").ToString()) || String.IsNullOrEmpty(gridView1.GetRowCellValue(i, "TypeOfExpense").ToString()))
-                    {
-                        isEmpty = true;
-                        break;
-                    }
-                }
-                if(gridView1.RowCount==0)
-                {
-                    XtraMessageBox.Show("No Expense Details Entry");
-                    return;
-                }
-                if (isEmpty)
+                XtraMessageBox.Show("No Expense Details Entry");
+                return;
+            }
+
+            for (int i = 0; i < gridView1.RowCount; i++)
+            {
+                if (string.IsNullOrWhiteSpace(Convert.ToString(gridView1.GetRowCellValue(i, "BranchCode"))) ||
+                    string.IsNullOrWhiteSpace(Convert.ToString(gridView1.GetRowCellValue(i, "TypeOfExpense"))))
                 {
                     XtraMessageBox.Show("Some Fields are Empty..");
                     return;
                 }
-                if (txtinvoiceno.Text == "")
-                {
-                    XtraMessageBox.Show("Please Input All Valid Fields");
-                }
-                else
-                {
-                    for (int i = 0; i <= gridView1.RowCount - 1; i++)
-                    {
-                        
-                        branchcode = gridView1.GetRowCellValue(i, "BranchCode").ToString();
-                        expname = gridView1.GetRowCellValue(i, "TypeOfExpense").ToString();
-                        particulars = gridView1.GetRowCellValue(i, "Particulars").ToString();
-                        amount = gridView1.GetRowCellValue(i, "Amount").ToString();
-
-                        //int ledgeseqno = Database.getLastID("SupplierLedger", "SupplierID='" + txtvendor.Text + "'", "TRN_SEQ_NO")+1;
-                        //int lastexpseqno = Database.getLastID("SupplierLedger", "SupplierID='" + txtvendor.Text + "'", "TRN_SEQ_NO") + 1;
-                        Database.ExecuteQuery("INSERT INTO ExpenseMaster VALUES ('" + ctr + "','" + branchcode + "','" + supplierkey + "','" + txtrefno.Text + "','" + txtinvoiceno.Text + "','" + expname + "','" + txtexpdate.Text + "','" + amount + "','" + particulars + "','UNPAID','" + amount + "',0,0,0,0,0,'"+txtbatchid.Text+"','"+ shipmentno .ToString()+ "')");
-                        //Database.ExecuteQuery($"INSERT INTO ExpenseDetails VALUES('{ctr}','{branchcode}','{txtrefno.Text}','{txtinvoiceno.Text}','{expname}','{particulars}','{amount}')");
-                        //Database.ExecuteQuery("INSERT INTO SupplierLedger VALUES ('" + supplierkey + "','" + txtvendor.Text + "','" + txtexpdate.Text + "','" + particulars + "','EXP','" + DateTime.Now.ToString() + "','" + txtinvoiceno.Text + "',0,0,'" + amount + "',0,'" + Login.Fullname + "','*',0,'UNPAID',0,' ','" + ledgeseqno + "')");
-                        ctr += 1;
-                    }
-                    postExpense();
-                    XtraMessageBox.Show("Successfully Added!");
-                    this.Close();
-                }
             }
-            catch(SqlException ex)
+
+            if (string.IsNullOrWhiteSpace(txtinvoiceno.Text))
             {
-                XtraMessageBox.Show(ex.Message.ToString());
+                XtraMessageBox.Show("Please Input All Valid Fields");
+                return;
             }
-        }
 
-        void postExpense()
-        {
             try
             {
+                using (var con = Database.getConnection())
+                using (var cmd = new SqlCommand("dbo.sp_PostExpense", con))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
 
-                SqlConnection con = Database.getConnection();
-                con.Open();
-                string query = "sp_UpdateExpense";
-                SqlCommand com = new SqlCommand(query, con);
-                //com.Parameters.AddWithValue("@parmrefno", txtrefno.Text);
-                //com.Parameters.AddWithValue("@parmsupplierid", suppid.ToString());
-                //com.Parameters.AddWithValue("@parminvoiceno", txtinvoiceno.Text);
-                //com.Parameters.AddWithValue("@parmexpensedate", txtexpdate.Text);
-                //com.Parameters.AddWithValue("@parmremarks", txtremarks.Text);
-                //com.Parameters.AddWithValue("@parmuser", Login.Fullname);
-               
-                com.Parameters.AddWithValue("@parmrefno", txtrefno.Text);
-                com.Parameters.AddWithValue("@parmbatchrefno", txtbatchid.Text);
-                com.Parameters.AddWithValue("@parmsupplierid", suppid.ToString());
-                com.Parameters.AddWithValue("@parminvoiceno", txtinvoiceno.Text);
-                com.Parameters.AddWithValue("@parmexpensedate", txtexpdate.Text);
-                com.Parameters.AddWithValue("@parmremarks", txtremarks.Text); //DESCRIPTION
-                com.Parameters.AddWithValue("@parmuser", Login.Fullname);
-                com.CommandType = CommandType.StoredProcedure;
-                com.CommandText = query;
-                com.ExecuteNonQuery();
-                con.Close();
+                    cmd.Parameters.Add("@parmrefno", SqlDbType.VarChar, 10).Value = txtrefno.Text.Trim();
+                    cmd.Parameters.Add("@parmbatchrefno", SqlDbType.BigInt).Value = Convert.ToInt64(txtbatchid.Text);
+                    cmd.Parameters.Add("@parmsupplierid", SqlDbType.VarChar, 100).Value = suppid.ToString();
+                    cmd.Parameters.Add("@parminvoiceno", SqlDbType.VarChar, 150).Value = txtinvoiceno.Text.Trim();
+                    cmd.Parameters.Add("@parmexpensedate", SqlDbType.Date).Value = Convert.ToDateTime(txtexpdate.Text);
+                    cmd.Parameters.Add("@parmremarks", SqlDbType.VarChar, 2000).Value = txtremarks.Text.Trim();
+                    cmd.Parameters.Add("@parmuser", SqlDbType.VarChar, 40).Value = Login.Fullname;
+
+                    var tvp = BuildExpenseTVP();
+                    var p = cmd.Parameters.AddWithValue("@Lines", tvp);
+                    p.SqlDbType = SqlDbType.Structured;
+                    p.TypeName = "dbo.ExpenseEntryTVP";
+
+                    con.Open();
+                    cmd.ExecuteNonQuery();
+                }
+
+                XtraMessageBox.Show("Successfully Added!");
+                this.Close();
             }
             catch (SqlException ex)
             {
-                XtraMessageBox.Show(ex.Message.ToString());
+                XtraMessageBox.Show(ex.Message);
             }
+
+            //try
+            //{
+            //    string supplierkey = Database.getSingleQuery("Supplier", "SupplierID='" + suppid.ToString() + "'", "SupplierKey");
+            //    string branchcode, expname, particulars, amount;
+            //    bool isEmpty = false;
+            //    int ctr = 1;
+            //    for (int i = 0; i <= gridView1.RowCount - 1; i++)
+            //    {
+            //        if (String.IsNullOrEmpty(gridView1.GetRowCellValue(i, "BranchCode").ToString()) || String.IsNullOrEmpty(gridView1.GetRowCellValue(i, "TypeOfExpense").ToString()))
+            //        {
+            //            isEmpty = true;
+            //            break;
+            //        }
+            //    }
+            //    if(gridView1.RowCount==0)
+            //    {
+            //        XtraMessageBox.Show("No Expense Details Entry");
+            //        return;
+            //    }
+            //    if (isEmpty)
+            //    {
+            //        XtraMessageBox.Show("Some Fields are Empty..");
+            //        return;
+            //    }
+            //    if (txtinvoiceno.Text == "")
+            //    {
+            //        XtraMessageBox.Show("Please Input All Valid Fields");
+            //    }
+            //    else
+            //    {
+            //        for (int i = 0; i <= gridView1.RowCount - 1; i++)
+            //        {
+
+            //            branchcode = gridView1.GetRowCellValue(i, "BranchCode").ToString();
+            //            expname = gridView1.GetRowCellValue(i, "TypeOfExpense").ToString();
+            //            particulars = gridView1.GetRowCellValue(i, "Particulars").ToString();
+            //            amount = gridView1.GetRowCellValue(i, "Amount").ToString();
+
+            //           Database.ExecuteQuery("INSERT INTO ExpenseMaster VALUES ('" + ctr + "','" + branchcode + "','" + supplierkey + "','" + txtrefno.Text + "','" + txtinvoiceno.Text + "','" + expname + "','" + txtexpdate.Text + "','" + amount + "','" + particulars + "','UNPAID','" + amount + "',0,0,0,0,0,'"+txtbatchid.Text+"','"+ shipmentno .ToString()+ "')");
+            //              ctr += 1;
+            //        }
+            //        postExpense();
+            //        XtraMessageBox.Show("Successfully Added!");
+            //        this.Close();
+            //    }
+            //}
+            //catch(SqlException ex)
+            //{
+            //    XtraMessageBox.Show(ex.Message.ToString());
+            //}
         }
+
+        //void postExpense()
+        //{
+        //    using (var con = Database.getConnection())
+        //    using (var cmd = new SqlCommand("dbo.sp_PostExpenseUnified", con))
+        //    {
+        //        cmd.CommandType = CommandType.StoredProcedure;
+
+        //        cmd.Parameters.Add("@parmrefno", SqlDbType.VarChar, 10).Value = txtrefno.Text;
+        //        cmd.Parameters.Add("@parmbatchrefno", SqlDbType.BigInt).Value = Convert.ToInt64(txtbatchid.Text);
+        //        cmd.Parameters.Add("@parmsupplierid", SqlDbType.VarChar, 100).Value = suppid;
+        //        cmd.Parameters.Add("@parminvoiceno", SqlDbType.VarChar, 150).Value = txtinvoiceno.Text;
+        //        cmd.Parameters.Add("@parmexpensedate", SqlDbType.Date).Value = Convert.ToDateTime(txtexpdate.Text);
+        //        cmd.Parameters.Add("@parmremarks", SqlDbType.VarChar, 2000).Value = txtremarks.Text;
+        //        cmd.Parameters.Add("@parmuser", SqlDbType.VarChar, 40).Value = Login.Fullname;
+
+        //        var tvp = BuildExpenseTVP();
+        //        var p = cmd.Parameters.AddWithValue("@Lines", tvp);
+        //        p.SqlDbType = SqlDbType.Structured;
+        //        p.TypeName = "dbo.ExpenseEntryTVP";
+
+        //        con.Open();
+        //        cmd.ExecuteNonQuery();
+        //    }
+        //    //try
+        //    //{
+
+        //    //    SqlConnection con = Database.getConnection();
+        //    //    con.Open();
+        //    //    string query = "sp_UpdateExpense";
+        //    //    SqlCommand com = new SqlCommand(query, con);
+        //    //    com.Parameters.AddWithValue("@parmrefno", txtrefno.Text);
+        //    //    com.Parameters.AddWithValue("@parmbatchrefno", txtbatchid.Text);
+        //    //    com.Parameters.AddWithValue("@parmsupplierid", suppid.ToString());
+        //    //    com.Parameters.AddWithValue("@parminvoiceno", txtinvoiceno.Text);
+        //    //    com.Parameters.AddWithValue("@parmexpensedate", txtexpdate.Text);
+        //    //    com.Parameters.AddWithValue("@parmremarks", txtremarks.Text); //DESCRIPTION
+        //    //    com.Parameters.AddWithValue("@parmuser", Login.Fullname);
+        //    //    com.CommandType = CommandType.StoredProcedure;
+        //    //    com.CommandText = query;
+        //    //    com.ExecuteNonQuery();
+        //    //    con.Close();
+        //    //}
+        //    //catch (SqlException ex)
+        //    //{
+        //    //    XtraMessageBox.Show(ex.Message.ToString());
+        //    //}
+        //}
 
         private void gridControl1_MouseUp(object sender, MouseEventArgs e)
         {

@@ -12886,3 +12886,4 @@ D:\MYGDRIVE\CORECS2026\SalesInventorySystem\obj\Debug\SalesInventorySystem.Branc
 D:\MYGDRIVE\CORECS2026\SalesInventorySystem\obj\Debug\SalesInventorySystem.csprojAssemblyReference.cache
 D:\MYGDRIVE\CORECS2026\SalesInventorySystem\obj\Debug\SalesInventorySystem.RFID.RFIDDashboard.resources
 D:\MYGDRIVE\CORECS2026\SalesInventorySystem\obj\Debug\SalesInventorySystem.Branches.BranchInventoryIN.resources
+D:\MYGDRIVE\CORECS2026\SalesInventorySystem\obj\Debug\SalesInventorySystem.AccountingDevEx.CancelledCheckVoucher.resources

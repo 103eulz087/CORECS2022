@@ -16,7 +16,7 @@ namespace SalesInventorySystem.AccountingDevEx
     public partial class ViewCheckVoucherDevEx : DevExpress.XtraEditors.XtraForm
     { 
         public static string supplierid,refno,vouchid, paidto, checkno, checkdate, pariculars, amount, vouchertype,dateadded, preparedby;
-
+        string reason = "";
         public ViewCheckVoucherDevEx()
         {
             InitializeComponent();
@@ -24,20 +24,28 @@ namespace SalesInventorySystem.AccountingDevEx
 
         private void btnsearch_Click(object sender, EventArgs e)
         {
-            if (checkBox1.Checked == true)
+
+            using (var con = Database.getConnection())
+            using (var cmd = new SqlCommand(@"
+                    SELECT *
+                    FROM dbo.view_Voucher
+                    WHERE DateAdded >= @fromDate
+                      AND DateAdded <  DATEADD(day,1,@toDate)
+                      AND (@showAll = 1 OR isErrorCorrect = 0)
+                    ORDER BY DateAdded DESC", con))
             {
-                Database.display("SELECT * " +
-                    "FROM view_Voucher " +
-                    "WHERE DateAdded BETWEEN '" + datefrom.Text + "' and '" + dateto.Text + "' " +
-                    "", gridControl1, gridView1);
+                cmd.Parameters.Add("@fromDate", SqlDbType.Date)
+                    .Value = Convert.ToDateTime(datefrom.Text);
+
+                cmd.Parameters.Add("@toDate", SqlDbType.Date)
+                    .Value = Convert.ToDateTime(dateto.Text);
+
+                cmd.Parameters.Add("@showAll", SqlDbType.Bit)
+                    .Value = checkBox1.Checked;
+
+                Database.display(cmd, gridControl1, gridView1);
             }
-            else
-            {
-                Database.display("SELECT * " +
-                    "FROM view_Voucher " +
-                    "WHERE DateAdded BETWEEN '" + datefrom.Text + "' and '" + dateto.Text + "' " +
-                    "AND isErrorCorrect='0' ", gridControl1, gridView1);
-            }
+
         }
 
         private void gridControl1_MouseUp(object sender, MouseEventArgs e)
@@ -63,7 +71,8 @@ namespace SalesInventorySystem.AccountingDevEx
             Database.display("SELECT * " +
                 "FROM view_VoucherDetails " +
                 "WHERE VoucherID='" + vouchid + "' " +
-                "and SupplierID='" + supplierid + "' ", vouch.gridControl1, vouch.gridView1);
+                "and SupplierID='" + supplierid + "' AND ReferenceNumber='"+ refno + "'",
+                vouch.gridControl1, vouch.gridView1);
             vouch.gridView1.Columns["VoucherID"].Visible = false;
             //Database.display($"SELECT * FROM view_VoucherDetails WHERE ReferenceNumber='{refno}'", vouch.gridControl1, vouch.gridView1);
             //Classes.DevXGridViewSettings.ShowFooterCountTotal(vouch.gridView1, "VoucherID");
@@ -75,39 +84,98 @@ namespace SalesInventorySystem.AccountingDevEx
         {
             viewVoucherDetails();
         }
-        void CancelledCheque()
+        private void CancelledCheque()
         {
-            SqlConnection con = Database.getConnection();
-            con.Open();
-            try
+            if (gridView1.FocusedRowHandle < 0)
             {
-                string id = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "VoucherID").ToString();
-
-                string query = "sp_CancelledCheques";
-                SqlCommand com = new SqlCommand(query, con);
-                com.Parameters.AddWithValue("@parmsupplierid", gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "SupplierID").ToString());
-                com.Parameters.AddWithValue("@parmcheckno", gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "CheckNo").ToString());
-                com.Parameters.AddWithValue("@parmreferenceno", gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "ReferenceNumber").ToString());
-                com.Parameters.AddWithValue("@parmvoucherid", gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "VoucherID").ToString());
-                com.Parameters.AddWithValue("@parmvouchertype", gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "VoucherType").ToString());
-                com.Parameters.AddWithValue("@parmuser", Login.Fullname);
-                com.CommandType = CommandType.StoredProcedure;
-                com.CommandText = query;
-                com.ExecuteNonQuery();
-
+                XtraMessageBox.Show("Please select a voucher to cancel.");
+                return;
             }
-            catch (SqlException ex)
+
+            if (XtraMessageBox.Show(
+                "This will reverse all posted payments and GL entries.\n\nContinue?",
+                "Confirm Reversal",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning) != DialogResult.Yes)
             {
-                XtraMessageBox.Show(ex.Message.ToString());
+                return;
             }
-            finally
+
+            using (var con = Database.getConnection())
+            using (var cmd = new SqlCommand("dbo.sp_CancelledChequesCS", con))
             {
-                con.Close();
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.Add("@parmsupplierid", SqlDbType.VarChar, 30)
+                    .Value = gridView1.GetFocusedRowCellValue("SupplierID");
+
+                cmd.Parameters.Add("@parmcheckno", SqlDbType.VarChar, 50)
+                    .Value = gridView1.GetFocusedRowCellValue("CheckNo");
+
+                cmd.Parameters.Add("@parmreferenceno", SqlDbType.VarChar, 20)
+                    .Value = gridView1.GetFocusedRowCellValue("ReferenceNumber");
+
+                cmd.Parameters.Add("@parmvoucherid", SqlDbType.VarChar, 10)
+                    .Value = gridView1.GetFocusedRowCellValue("VoucherID");
+
+                cmd.Parameters.Add("@parmvouchertype", SqlDbType.VarChar, 20)
+                    .Value = gridView1.GetFocusedRowCellValue("VoucherType");
+
+                cmd.Parameters.Add("@parmreason", SqlDbType.VarChar, 300)
+                    .Value = reason.Trim();
+
+
+                cmd.Parameters.Add("@parmuser", SqlDbType.VarChar, 50)
+                    .Value = Login.Fullname;
+
+                try
+                {
+                    con.Open();
+                    cmd.ExecuteNonQuery();
+                    XtraMessageBox.Show("Voucher successfully reversed.");
+                    btnsearch_Click(null, null); // refresh grid
+                }
+                catch (SqlException ex)
+                {
+                    XtraMessageBox.Show(ex.Message);
+                }
             }
         }
+        //void CancelledCheque()
+        //{
+        //    SqlConnection con = Database.getConnection();
+        //    con.Open();
+        //    try
+        //    {
+        //        string id = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "VoucherID").ToString();
+
+        //        string query = "sp_CancelledCheques";
+        //        SqlCommand com = new SqlCommand(query, con);
+        //        com.Parameters.AddWithValue("@parmsupplierid", gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "SupplierID").ToString());
+        //        com.Parameters.AddWithValue("@parmcheckno", gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "CheckNo").ToString());
+        //        com.Parameters.AddWithValue("@parmreferenceno", gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "ReferenceNumber").ToString());
+        //        com.Parameters.AddWithValue("@parmvoucherid", gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "VoucherID").ToString());
+        //        com.Parameters.AddWithValue("@parmvouchertype", gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "VoucherType").ToString());
+        //        com.Parameters.AddWithValue("@parmuser", Login.Fullname);
+        //        com.CommandType = CommandType.StoredProcedure;
+        //        com.CommandText = query;
+        //        com.ExecuteNonQuery();
+
+        //    }
+        //    catch (SqlException ex)
+        //    {
+        //        XtraMessageBox.Show(ex.Message.ToString());
+        //    }
+        //    finally
+        //    {
+        //        con.Close();
+        //    }
+        //}
         private void errorCorrecToolStripMenuItem_Click(object sender, EventArgs e)
         {
             string id = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "VoucherID").ToString();
+            string suppid = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "SupplierID").ToString();
+            string refno = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "ReferenceNumber").ToString();
             if (Convert.ToBoolean(gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "isErrorCorrect").ToString()) == true)
             {
                 XtraMessageBox.Show("Entry Already Corrected!");
@@ -116,8 +184,15 @@ namespace SalesInventorySystem.AccountingDevEx
             bool confirm = HelperFunction.ConfirmDialog("Are you sure you want to Cancel this Cheque? if yes All Ticket Entries in this Transaction Voucher will automatically create reversal entries..", "Cancelled Cheque");
             if (confirm)
             {
-                CancelledCheque();
-                XtraMessageBox.Show("Payment Successfully Posted");
+                CancelledCheckVoucher canfrm = new CancelledCheckVoucher();
+                canfrm.ShowDialog(this);
+                if(CancelledCheckVoucher.isdone==true)
+                {
+                    reason = CancelledCheckVoucher.reason;
+                    CancelledCheque();
+                    canfrm.Dispose();
+                }
+               
             }
             else
             {

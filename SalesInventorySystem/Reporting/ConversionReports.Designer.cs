@@ -51,13 +51,13 @@
             this.SUMMARY = new System.Windows.Forms.TabPage();
             this.gridControl3 = new DevExpress.XtraGrid.GridControl();
             this.gridView3 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.SUMMARYDETAIL = new System.Windows.Forms.TabPage();
+            this.gridControl4 = new DevExpress.XtraGrid.GridControl();
+            this.gridView4 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
             this.panelControl2 = new DevExpress.XtraEditors.PanelControl();
-            this.SUMMARYDETAIL = new System.Windows.Forms.TabPage();
-            this.gridControl4 = new DevExpress.XtraGrid.GridControl();
-            this.gridView4 = new DevExpress.XtraGrid.Views.Grid.GridView();
             ((System.ComponentModel.ISupportInitialize)(this.txtbrcode.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateto.Properties.CalendarTimeProperties)).BeginInit();
@@ -75,14 +75,14 @@
             this.SUMMARY.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView3)).BeginInit();
+            this.SUMMARYDETAIL.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gridControl4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView4)).BeginInit();
             this.contextMenuStrip2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).BeginInit();
             this.panelControl2.SuspendLayout();
-            this.SUMMARYDETAIL.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gridControl4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView4)).BeginInit();
             this.SuspendLayout();
             // 
             // txtbrcode
@@ -348,45 +348,6 @@
             this.gridView3.CustomDrawCell += new DevExpress.XtraGrid.Views.Base.RowCellCustomDrawEventHandler(this.gridView3_CustomDrawCell);
             this.gridView3.RowCellStyle += new DevExpress.XtraGrid.Views.Grid.RowCellStyleEventHandler(this.gridView3_RowCellStyle);
             // 
-            // contextMenuStrip2
-            // 
-            this.contextMenuStrip2.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.contextMenuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem1});
-            this.contextMenuStrip2.Name = "contextMenuStrip1";
-            this.contextMenuStrip2.Size = new System.Drawing.Size(163, 28);
-            // 
-            // toolStripMenuItem1
-            // 
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(162, 24);
-            this.toolStripMenuItem1.Text = "Error Correct";
-            this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
-            // 
-            // panelControl1
-            // 
-            this.panelControl1.Controls.Add(this.labelControl1);
-            this.panelControl1.Controls.Add(this.txtbrcode);
-            this.panelControl1.Controls.Add(this.labelControl2);
-            this.panelControl1.Controls.Add(this.labelControl3);
-            this.panelControl1.Controls.Add(this.simpleButton1);
-            this.panelControl1.Controls.Add(this.datefrom);
-            this.panelControl1.Controls.Add(this.dateto);
-            this.panelControl1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelControl1.Location = new System.Drawing.Point(0, 0);
-            this.panelControl1.Name = "panelControl1";
-            this.panelControl1.Size = new System.Drawing.Size(1173, 72);
-            this.panelControl1.TabIndex = 8;
-            // 
-            // panelControl2
-            // 
-            this.panelControl2.Controls.Add(this.tabControl1);
-            this.panelControl2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelControl2.Location = new System.Drawing.Point(0, 72);
-            this.panelControl2.Name = "panelControl2";
-            this.panelControl2.Size = new System.Drawing.Size(1173, 550);
-            this.panelControl2.TabIndex = 9;
-            // 
             // SUMMARYDETAIL
             // 
             this.SUMMARYDETAIL.Controls.Add(this.gridControl4);
@@ -436,6 +397,45 @@
             this.gridView4.OptionsView.RowAutoHeight = true;
             this.gridView4.OptionsView.ShowFooter = true;
             // 
+            // contextMenuStrip2
+            // 
+            this.contextMenuStrip2.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.contextMenuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem1});
+            this.contextMenuStrip2.Name = "contextMenuStrip1";
+            this.contextMenuStrip2.Size = new System.Drawing.Size(163, 28);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(162, 24);
+            this.toolStripMenuItem1.Text = "Error Correct";
+            this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
+            // 
+            // panelControl1
+            // 
+            this.panelControl1.Controls.Add(this.labelControl1);
+            this.panelControl1.Controls.Add(this.txtbrcode);
+            this.panelControl1.Controls.Add(this.labelControl2);
+            this.panelControl1.Controls.Add(this.labelControl3);
+            this.panelControl1.Controls.Add(this.simpleButton1);
+            this.panelControl1.Controls.Add(this.datefrom);
+            this.panelControl1.Controls.Add(this.dateto);
+            this.panelControl1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelControl1.Location = new System.Drawing.Point(0, 0);
+            this.panelControl1.Name = "panelControl1";
+            this.panelControl1.Size = new System.Drawing.Size(1173, 72);
+            this.panelControl1.TabIndex = 8;
+            // 
+            // panelControl2
+            // 
+            this.panelControl2.Controls.Add(this.tabControl1);
+            this.panelControl2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelControl2.Location = new System.Drawing.Point(0, 72);
+            this.panelControl2.Name = "panelControl2";
+            this.panelControl2.Size = new System.Drawing.Size(1173, 550);
+            this.panelControl2.TabIndex = 9;
+            // 
             // ConversionReports
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -465,15 +465,15 @@
             this.SUMMARY.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridControl3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView3)).EndInit();
+            this.SUMMARYDETAIL.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.gridControl4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView4)).EndInit();
             this.contextMenuStrip2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
             this.panelControl1.ResumeLayout(false);
             this.panelControl1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).EndInit();
             this.panelControl2.ResumeLayout(false);
-            this.SUMMARYDETAIL.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.gridControl4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView4)).EndInit();
             this.ResumeLayout(false);
 
         }

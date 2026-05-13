@@ -35,6 +35,7 @@ namespace SalesInventorySystem.HOForms
                 invsourcestat = "LOCAL";
                 //UploadBatchItems();
                 UploadInventory();
+                displayUploadedItems();
             }
             else if (HOFormsDevEx.ReceivedInventoryDevEx.inventorysource == "LIVE")
             {
@@ -47,7 +48,7 @@ namespace SalesInventorySystem.HOForms
                 UploadBatchItemsWithoutPO();
             }
             //sa cloud nani cya nga display
-            Database.display("SELECT * FROM Inventory WHERE ShipmentNo='" + txtshipmentno.Text + "' ORDER BY Product,SequenceNumber", gridControl1, gridView1);
+            //Database.display("SELECT * FROM Inventory WHERE ShipmentNo='" + txtshipmentno.Text + "' ORDER BY Product,SequenceNumber", gridControl1, gridView1);
         }
 
         private void UPLOADINVENTORY_Load(object sender, EventArgs e)
@@ -113,7 +114,7 @@ namespace SalesInventorySystem.HOForms
                 com.CommandText = query;
                 com.CommandTimeout = 3600;
                 com.ExecuteNonQuery();
-                displayUploadedItems();
+                //displayUploadedItems();
             }
             catch (SqlException ex)
             {
@@ -127,7 +128,7 @@ namespace SalesInventorySystem.HOForms
 
         void displayUploadedItems()
         {
-            Database.display("SELECT * FROM Inventory WHERE ShipmentNo='" + txtshipmentno.Text + "'", gridControl1, gridView1);
+            Database.display("SELECT * FROM TempInventoryBatchUpload WHERE ShipmentNo='" + txtshipmentno.Text + "'", gridControl1, gridView1);
         }
 
         void finalupdate()
@@ -213,12 +214,12 @@ namespace SalesInventorySystem.HOForms
                    
                 });
 
-                MessageBox.Show("All end-of-day data uploaded seamlessly!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                BigAlert.Show("SUCCES:","All Shipment Received items uploaded seamlessly!",MessageBoxIcon.Information);
             }
             catch (Exception ex)
             {
                 lblProgress.Text = "Error during upload.";
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                BigAlert.Show("Error", ex.Message, MessageBoxIcon.Error);
             }
             finally
             {
@@ -236,6 +237,8 @@ namespace SalesInventorySystem.HOForms
             if (invsourcestat != "LOCALWITHOUTPO")
             {
                 upload();
+                isdone = true;
+                this.Dispose();
             }
             else
             {

@@ -30,20 +30,20 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BranchInventoryIN));
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
+            this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
+            this.btnforapprovalstsexcel = new DevExpress.XtraEditors.SimpleButton();
+            this.txtid = new DevExpress.XtraEditors.TextEdit();
+            this.simpleButton2 = new DevExpress.XtraEditors.SimpleButton();
             this.panelControl2 = new DevExpress.XtraEditors.PanelControl();
             this.gridControlRcvd = new DevExpress.XtraGrid.GridControl();
             this.gridViewRcvd = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.simpleButton2 = new DevExpress.XtraEditors.SimpleButton();
-            this.txtid = new DevExpress.XtraEditors.TextEdit();
-            this.btnforapprovalstsexcel = new DevExpress.XtraEditors.SimpleButton();
-            this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtid.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).BeginInit();
             this.panelControl2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControlRcvd)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridViewRcvd)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtid.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // panelControl1
@@ -57,6 +57,52 @@
             this.panelControl1.Name = "panelControl1";
             this.panelControl1.Size = new System.Drawing.Size(1080, 65);
             this.panelControl1.TabIndex = 0;
+            // 
+            // simpleButton1
+            // 
+            this.simpleButton1.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("simpleButton1.ImageOptions.Image")));
+            this.simpleButton1.Location = new System.Drawing.Point(5, 13);
+            this.simpleButton1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.simpleButton1.Name = "simpleButton1";
+            this.simpleButton1.Size = new System.Drawing.Size(110, 44);
+            this.simpleButton1.TabIndex = 95;
+            this.simpleButton1.Text = "Preview";
+            this.simpleButton1.Click += new System.EventHandler(this.simpleButton1_Click);
+            // 
+            // btnforapprovalstsexcel
+            // 
+            this.btnforapprovalstsexcel.ImageOptions.Image = global::SalesInventorySystem.Properties.Resources.ExportToExcel_16x16;
+            this.btnforapprovalstsexcel.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
+            this.btnforapprovalstsexcel.Location = new System.Drawing.Point(121, 13);
+            this.btnforapprovalstsexcel.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
+            this.btnforapprovalstsexcel.Name = "btnforapprovalstsexcel";
+            this.btnforapprovalstsexcel.Size = new System.Drawing.Size(138, 44);
+            this.btnforapprovalstsexcel.TabIndex = 94;
+            this.btnforapprovalstsexcel.Text = "Export to Excel";
+            this.btnforapprovalstsexcel.Click += new System.EventHandler(this.btnforapprovalstsexcel_Click);
+            // 
+            // txtid
+            // 
+            this.txtid.Location = new System.Drawing.Point(414, 27);
+            this.txtid.Margin = new System.Windows.Forms.Padding(4);
+            this.txtid.Name = "txtid";
+            this.txtid.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtid.Properties.Appearance.Options.UseFont = true;
+            this.txtid.Properties.MaxLength = 13;
+            this.txtid.Properties.ReadOnly = true;
+            this.txtid.Size = new System.Drawing.Size(99, 30);
+            this.txtid.TabIndex = 93;
+            // 
+            // simpleButton2
+            // 
+            this.simpleButton2.ImageOptions.Image = global::SalesInventorySystem.Properties.Resources.Save_16x16__5_;
+            this.simpleButton2.Location = new System.Drawing.Point(265, 14);
+            this.simpleButton2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.simpleButton2.Name = "simpleButton2";
+            this.simpleButton2.Size = new System.Drawing.Size(142, 43);
+            this.simpleButton2.TabIndex = 92;
+            this.simpleButton2.Text = "Save";
+            this.simpleButton2.Click += new System.EventHandler(this.simpleButton2_Click);
             // 
             // panelControl2
             // 
@@ -97,52 +143,6 @@
             this.gridViewRcvd.ShowingEditor += new System.ComponentModel.CancelEventHandler(this.gridViewRcvd_ShowingEditor);
             this.gridViewRcvd.CellValueChanged += new DevExpress.XtraGrid.Views.Base.CellValueChangedEventHandler(this.gridViewRcvd_CellValueChanged);
             // 
-            // simpleButton2
-            // 
-            this.simpleButton2.ImageOptions.Image = global::SalesInventorySystem.Properties.Resources.Save_16x16__5_;
-            this.simpleButton2.Location = new System.Drawing.Point(265, 14);
-            this.simpleButton2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.simpleButton2.Name = "simpleButton2";
-            this.simpleButton2.Size = new System.Drawing.Size(142, 43);
-            this.simpleButton2.TabIndex = 92;
-            this.simpleButton2.Text = "Save";
-            this.simpleButton2.Click += new System.EventHandler(this.simpleButton2_Click);
-            // 
-            // txtid
-            // 
-            this.txtid.Location = new System.Drawing.Point(414, 27);
-            this.txtid.Margin = new System.Windows.Forms.Padding(4);
-            this.txtid.Name = "txtid";
-            this.txtid.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtid.Properties.Appearance.Options.UseFont = true;
-            this.txtid.Properties.MaxLength = 13;
-            this.txtid.Properties.ReadOnly = true;
-            this.txtid.Size = new System.Drawing.Size(99, 30);
-            this.txtid.TabIndex = 93;
-            // 
-            // btnforapprovalstsexcel
-            // 
-            this.btnforapprovalstsexcel.ImageOptions.Image = global::SalesInventorySystem.Properties.Resources.ExportToExcel_16x16;
-            this.btnforapprovalstsexcel.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
-            this.btnforapprovalstsexcel.Location = new System.Drawing.Point(121, 13);
-            this.btnforapprovalstsexcel.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
-            this.btnforapprovalstsexcel.Name = "btnforapprovalstsexcel";
-            this.btnforapprovalstsexcel.Size = new System.Drawing.Size(138, 44);
-            this.btnforapprovalstsexcel.TabIndex = 94;
-            this.btnforapprovalstsexcel.Text = "Export to Excel";
-            this.btnforapprovalstsexcel.Click += new System.EventHandler(this.btnforapprovalstsexcel_Click);
-            // 
-            // simpleButton1
-            // 
-            this.simpleButton1.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("simpleButton1.ImageOptions.Image")));
-            this.simpleButton1.Location = new System.Drawing.Point(5, 13);
-            this.simpleButton1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.simpleButton1.Name = "simpleButton1";
-            this.simpleButton1.Size = new System.Drawing.Size(110, 44);
-            this.simpleButton1.TabIndex = 95;
-            this.simpleButton1.Text = "Preview";
-            this.simpleButton1.Click += new System.EventHandler(this.simpleButton1_Click);
-            // 
             // BranchInventoryIN
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -156,11 +156,11 @@
             this.Load += new System.EventHandler(this.BranchInventoryIN_Load);
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
             this.panelControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.txtid.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).EndInit();
             this.panelControl2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridControlRcvd)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridViewRcvd)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtid.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }

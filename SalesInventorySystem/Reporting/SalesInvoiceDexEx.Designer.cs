@@ -81,6 +81,7 @@
             this.gridControl4.TabIndex = 4;
             this.gridControl4.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView4});
+            this.gridControl4.Click += new System.EventHandler(this.gridControl4_Click);
             // 
             // gridView4
             // 

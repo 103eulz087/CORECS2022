@@ -3412,6 +3412,12 @@ namespace SalesInventorySystem
             pcusatfsmr.Show();
         }
 
+        private void btnInventoryINAdjustment_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            InventoryIN pcusatfsmr = new InventoryIN();
+            pcusatfsmr.ShowDialog(this);
+        }
+
         private void Main_FormClosing(object sender, FormClosingEventArgs e)
         {
             //bool confirm = HelperFunction.ConfirmDialog("Are you want to close the Main Window?", "Close Main Window");

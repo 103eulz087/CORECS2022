@@ -47,15 +47,15 @@ namespace SalesInventorySystem.HOFormsDevEx
             //Database.display("SELECT * FROM view_APLedger WHERE SupplierID='" + txtacctid.Text + "' AND CAST(TransactionDate as Date) >= '" + dateTimePicker1.Text + "' and CAST(TransactionDate as date)<= '" + dateTimePicker2.Text + "' ORDER BY TRN_SEQ_NO", gridControl2, gridView2);
             string query = "SELECT * FROM view_APLedger WHERE SupplierID='" + txtacctid.Text + "' AND CAST(TransactionDate as Date) >= '" + dateTimePicker1.Text + "' and CAST(TransactionDate as date)<= '" + dateTimePicker2.Text + "' ORDER BY TRN_SEQ_NO ";
             HelperFunction.ShowWaitAndDisplay(query, gridControl2, gridView2, "Please wait", "Populating data into the database...");
-            gridView2.Focus();
-            gridView2.Columns["SupplierID"].Visible = false;
-            gridView2.Columns["SupplierID"].OptionsColumn.ShowInCustomizationForm = true;
-            gridView2.Columns["PostingDate"].Visible = false;
-            gridView2.Columns["PostingDate"].OptionsColumn.ShowInCustomizationForm = true;
-            gridView2.Columns["PostingDate"].Visible = false;
-            gridView2.Columns["PostingDate"].OptionsColumn.ShowInCustomizationForm = true;
-            gridView2.Columns["TransCode"].Visible = false;
-            gridView2.Columns["TransCode"].OptionsColumn.ShowInCustomizationForm = true;
+            //gridView2.Focus();
+            //gridView2.Columns["SupplierID"].Visible = false;
+            //gridView2.Columns["SupplierID"].OptionsColumn.ShowInCustomizationForm = true;
+            //gridView2.Columns["PostingDate"].Visible = false;
+            //gridView2.Columns["PostingDate"].OptionsColumn.ShowInCustomizationForm = true;
+            //gridView2.Columns["PostingDate"].Visible = false;
+            //gridView2.Columns["PostingDate"].OptionsColumn.ShowInCustomizationForm = true;
+            //gridView2.Columns["TransCode"].Visible = false;
+            //gridView2.Columns["TransCode"].OptionsColumn.ShowInCustomizationForm = true;
         }
 
         private void button1_Click(object sender, EventArgs e)

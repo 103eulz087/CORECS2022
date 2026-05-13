@@ -165,6 +165,7 @@ namespace SalesInventorySystem.HOFormsDevEx
                 com.Parameters.AddWithValue("@parmcost", txtcost.Text);
                 com.Parameters.AddWithValue("@parmisoverride", isoverride);
                 com.Parameters.AddWithValue("@parmisusebarcode", isusedbarcode);
+                com.Parameters.AddWithValue("@parmexpirydate", txtduedate.Text);
 
                 com.CommandType = CommandType.StoredProcedure;
                 com.CommandText = query;
@@ -602,7 +603,7 @@ namespace SalesInventorySystem.HOFormsDevEx
             rpt.lblprodtype.Text = productname.ToString().Trim();
             rpt.xrsku.Text = productcode.ToString();
             rpt.lbltotalkilos.Text = txtweight.Text.Trim();
-            rpt.lblxpirydate.Text = DateTime.Now.AddYears(1).ToShortDateString();
+            rpt.lblxpirydate.Text = txtduedate.Text;//DateTime.Now.AddYears(1).ToShortDateString();
 
             // KEY: force QR payload
             rpt.xrBarCode2.AutoModule = false;                 // override designer
