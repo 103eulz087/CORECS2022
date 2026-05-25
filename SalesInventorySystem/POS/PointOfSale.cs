@@ -47,6 +47,7 @@ namespace SalesInventorySystem
         public static string cashierTransactionCode = "";
         public static bool iszeroratedsale = false;
         public static string userid = "";
+        public static string apiKey = ""; 
         private System.Windows.Forms.Timer statusTimer;
         SqlCommand com;
         public PointOfSale()
@@ -123,6 +124,8 @@ namespace SalesInventorySystem
 
             string displaypoolport = Database.getSingleQuery("POSType", "DisplayPoolPort <> 'eulz'", "DisplayPoolPort");
             string isuseddisplaypool = Database.getSingleQuery("POSType", "DisplayPoolPort <> 'eulz'", "isUsedDisplayPool");
+            apiKey = Database.getSingleQuery("Branches", "BranchCode='" + Login.assignedBranch + "'", "SignatoryCashier");
+
             if (!String.IsNullOrEmpty(displaypoolport))
             {
                 txtcomport.Text = "";

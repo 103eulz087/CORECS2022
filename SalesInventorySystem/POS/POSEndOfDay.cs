@@ -742,7 +742,7 @@ namespace SalesInventorySystem.POS
                 //DateTime transDate = DateTime.Today;
                 string branchCode = Login.assignedBranch;
                 string machineName = Environment.MachineName;
-                string dateTempforCC = "03/01/2026";
+                
                 PosDataUploader uploader = new PosDataUploader();
                
                 statusHandler.Report("Starting upload process...");
@@ -771,7 +771,7 @@ namespace SalesInventorySystem.POS
                     await uploader.UploadTableToCloudAsync("POSSalesSummary", "DateOrder", transDate, branchCode, machineName, progressHandler, statusHandler);
 
                     statusHandler.Report("Starting CreditCard Transaction upload...");
-                    await uploader.UploadTableToCloudAsync("POSCreditCardTransactions","DateAdded",Convert.ToDateTime(dateTempforCC), branchCode, machineName, progressHandler, statusHandler);
+                    await uploader.UploadTableToCloudAsync("POSCreditCardTransactions","DateAdded", transDate, branchCode, machineName, progressHandler, statusHandler);
 
                     ///////////////////////////////////////
 
@@ -1062,7 +1062,7 @@ namespace SalesInventorySystem.POS
             try
             {
                 //check linkedserver=1 IF TRUE it means SUPERVISOR DEDUCTION MATTER
-                bool islinked = Database.checkifExist("SELECT 1 FROM dbo.POSType WHERE isLinkedServer=1");
+                bool islinked = Database.checkifExist("SELECT 1 FROM dbo.POSType WHERE linkedServerName='1'");
                 if(islinked)
                 {
                     // 1. Check Cloud for Supervisor Approval

@@ -94,7 +94,7 @@
             this.labelControl6.Appearance.Options.UseFont = true;
             this.labelControl6.Appearance.Options.UseForeColor = true;
             this.labelControl6.Location = new System.Drawing.Point(13, 216);
-            this.labelControl6.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.labelControl6.Margin = new System.Windows.Forms.Padding(4);
             this.labelControl6.Name = "labelControl6";
             this.labelControl6.Size = new System.Drawing.Size(88, 18);
             this.labelControl6.TabIndex = 12;
@@ -107,7 +107,7 @@
             this.labelControl1.Appearance.Options.UseFont = true;
             this.labelControl1.Appearance.Options.UseForeColor = true;
             this.labelControl1.Location = new System.Drawing.Point(7, 35);
-            this.labelControl1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.labelControl1.Margin = new System.Windows.Forms.Padding(4);
             this.labelControl1.Name = "labelControl1";
             this.labelControl1.Size = new System.Drawing.Size(137, 21);
             this.labelControl1.TabIndex = 13;
@@ -117,7 +117,7 @@
             // 
             this.txttransno.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txttransno.Location = new System.Drawing.Point(409, 180);
-            this.txttransno.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txttransno.Margin = new System.Windows.Forms.Padding(4);
             this.txttransno.Name = "txttransno";
             this.txttransno.ReadOnly = true;
             this.txttransno.Size = new System.Drawing.Size(129, 26);
@@ -130,7 +130,7 @@
             this.labelControl5.Appearance.Options.UseFont = true;
             this.labelControl5.Appearance.Options.UseForeColor = true;
             this.labelControl5.Location = new System.Drawing.Point(291, 184);
-            this.labelControl5.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.labelControl5.Margin = new System.Windows.Forms.Padding(4);
             this.labelControl5.Name = "labelControl5";
             this.labelControl5.Size = new System.Drawing.Size(97, 18);
             this.labelControl5.TabIndex = 29;
@@ -140,7 +140,7 @@
             // 
             this.txtreturntransno.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtreturntransno.Location = new System.Drawing.Point(179, 180);
-            this.txtreturntransno.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtreturntransno.Margin = new System.Windows.Forms.Padding(4);
             this.txtreturntransno.Name = "txtreturntransno";
             this.txtreturntransno.ReadOnly = true;
             this.txtreturntransno.Size = new System.Drawing.Size(95, 26);
@@ -153,7 +153,7 @@
             this.labelControl4.Appearance.Options.UseFont = true;
             this.labelControl4.Appearance.Options.UseForeColor = true;
             this.labelControl4.Location = new System.Drawing.Point(13, 184);
-            this.labelControl4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.labelControl4.Margin = new System.Windows.Forms.Padding(4);
             this.labelControl4.Name = "labelControl4";
             this.labelControl4.Size = new System.Drawing.Size(145, 18);
             this.labelControl4.TabIndex = 27;
@@ -162,7 +162,7 @@
             // txtremarks
             // 
             this.txtremarks.Location = new System.Drawing.Point(140, 248);
-            this.txtremarks.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtremarks.Margin = new System.Windows.Forms.Padding(4);
             this.txtremarks.Name = "txtremarks";
             this.txtremarks.Size = new System.Drawing.Size(545, 76);
             this.txtremarks.TabIndex = 17;
@@ -176,7 +176,7 @@
             this.labelControl2.Appearance.Options.UseFont = true;
             this.labelControl2.Appearance.Options.UseForeColor = true;
             this.labelControl2.Location = new System.Drawing.Point(28, 271);
-            this.labelControl2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.labelControl2.Margin = new System.Windows.Forms.Padding(4);
             this.labelControl2.Name = "labelControl2";
             this.labelControl2.Size = new System.Drawing.Size(96, 24);
             this.labelControl2.TabIndex = 16;
@@ -187,7 +187,7 @@
             // 
             this.txtorderno.Font = new System.Drawing.Font("Tahoma", 12F);
             this.txtorderno.Location = new System.Drawing.Point(159, 29);
-            this.txtorderno.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtorderno.Margin = new System.Windows.Forms.Padding(4);
             this.txtorderno.Name = "txtorderno";
             this.txtorderno.Size = new System.Drawing.Size(229, 32);
             this.txtorderno.TabIndex = 15;
@@ -197,7 +197,7 @@
             // 
             this.txtbranch.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtbranch.Location = new System.Drawing.Point(179, 212);
-            this.txtbranch.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtbranch.Margin = new System.Windows.Forms.Padding(4);
             this.txtbranch.Name = "txtbranch";
             this.txtbranch.ReadOnly = true;
             this.txtbranch.Size = new System.Drawing.Size(95, 26);
@@ -211,7 +211,7 @@
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.Location = new System.Drawing.Point(3, 19);
-            this.dataGridView1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dataGridView1.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(745, 215);
             this.dataGridView1.TabIndex = 15;
@@ -249,7 +249,7 @@
             this.labelControl7.Appearance.Options.UseFont = true;
             this.labelControl7.Appearance.Options.UseForeColor = true;
             this.labelControl7.Location = new System.Drawing.Point(159, 69);
-            this.labelControl7.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.labelControl7.Margin = new System.Windows.Forms.Padding(4);
             this.labelControl7.Name = "labelControl7";
             this.labelControl7.Size = new System.Drawing.Size(197, 16);
             this.labelControl7.TabIndex = 32;
@@ -331,9 +331,9 @@
             this.groupBox1.Controls.Add(this.gridControlMaster);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.Location = new System.Drawing.Point(0, 104);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox1.Size = new System.Drawing.Size(1217, 600);
             this.groupBox1.TabIndex = 34;
             this.groupBox1.TabStop = false;
@@ -494,7 +494,7 @@
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupControl1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "POSErrrorCorrect";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "POSErrrorCorrect";

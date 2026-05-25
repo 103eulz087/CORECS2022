@@ -13,6 +13,7 @@ using DevExpress.XtraGrid.Columns;
 using DevExpress.XtraGrid;
 using System.Data.SqlClient;
 using SalesInventorySystem.Reporting;
+using System.IO;
 
 namespace SalesInventorySystem.Orders
 {
@@ -108,8 +109,8 @@ namespace SalesInventorySystem.Orders
 
         private void btndeliveredstsexcel_Click(object sender, EventArgs e)
         {
-            string filename = "DELIVERED_STS" + DateTime.Now.ToShortDateString().Replace(@"\", "-");
-            exporttoexcel(gridViewDelivSts, filename);
+            string filename = "DELIVERED_STS" + DateTime.Now.ToString("yyyyMMdd_HHmmss");
+            HelperFunction.exporttoexcel(gridViewDelivSts, filename);
         }
 
         private void gridViewapprvdsts_DoubleClick(object sender, EventArgs e)
@@ -302,45 +303,28 @@ namespace SalesInventorySystem.Orders
 
         private void btnfordelivstsexcel_Click(object sender, EventArgs e)
         {
-            string filename = "FORDELIVERY_STS" + DateTime.Now.ToShortDateString().Replace(@"\", "-");
-            exporttoexcel(gridViewForDelivSts, filename);
+            string filename = "FORDELIVERY_STS" + DateTime.Now.ToString("yyyyMMdd_HHmmss");
+            HelperFunction.exporttoexcel(gridViewForDelivSts, filename);
         }
 
         private void btnrejectedstsexcel_Click(object sender, EventArgs e)
         {
-            string filename = "REJECTED_STS" + DateTime.Now.ToShortDateString().Replace(@"\", "-");
-            exporttoexcel(gridViewrjctdsts, filename);
+            string filename = "REJECTED_STS" + DateTime.Now.ToString("yyyyMMdd_HHmmss");
+            HelperFunction.exporttoexcel(gridViewrjctdsts, filename);
         }
 
         private void btnapprovedreqstsexcel_Click(object sender, EventArgs e)
         {
-            string filename = "APPROVED_STS" + DateTime.Now.ToShortDateString().Replace(@"\", "-");
-            exporttoexcel(gridViewapprvdsts, filename);
+            string filename = "APPROVED_STS" + DateTime.Now.ToString("yyyyMMdd_HHmmss");
+            HelperFunction.exporttoexcel(gridViewapprvdsts, filename);
         }
 
         private void btnforapprovalstsexcel_Click(object sender, EventArgs e)
         {
-            string filename = "FORAPPROVAL_STS" + DateTime.Now.ToShortDateString().Replace(@"\", "-");
-            exporttoexcel(gridViewSTS, filename);
+            string filename = "FORAPPROVAL_STS" + DateTime.Now.ToString("yyyyMMdd_HHmmss");
+            HelperFunction.exporttoexcel(gridViewSTS, filename);
         }
-        void exporttoexcel(GridView view, string title)
-        {
-            if (view.RowCount == 0)
-            {
-                XtraMessageBox.Show("No Data to Import!..");
-                return;
-            }
-            else
-            {
-
-                string filepath = "C:\\MyFiles\\";
-                Classes.Utilities.createDirectoryFolder(filepath);
-                string filename = title + ".xls";
-                string file = filepath + filename;
-                view.ExportToXls(file);
-                XtraMessageBox.Show("Successfully Exported.. Please Check your Drive C://MyFiles/folder");
-            }
-        }
+     
         void showSTSForApproval()
         {
             menu = "";

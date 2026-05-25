@@ -17,6 +17,7 @@ using System.Net;
 using System.Net.NetworkInformation;
 using System.Net.Sockets;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -30,6 +31,38 @@ namespace SalesInventorySystem
         static int papersize = 38;
         //static int papersize = 27;
         static int cornerlength = 0;
+
+        /// <summary>
+        /// Reads the config file and returns Version and Token.
+        /// </summary>
+        /// <param name="filePath">Path to the config file</param>
+        /// <returns>Tuple containing version and token</returns>
+        public static (string Version, string Token) GetVersionAndToken(string filePath)
+        {
+            string[] lines = File.ReadAllLines(filePath);
+
+            string version = null;
+            string token = null;
+
+            foreach (string line in lines)
+            {
+                // Get version number
+                if (line.StartsWith("Version="))
+                {
+                    version = line.Split('=')[1];
+                }
+
+                // Extract token from any URL line
+                Match match = Regex.Match(line, @"https:\/\/.*?\/([A-Za-z0-9]+)\/");
+                if (match.Success)
+                {
+                    token = match.Groups[1].Value;
+                }
+            }
+
+            return (version, token);
+        }
+
 
         public static void ShowWaitAndDisplay(string query, GridControl grid, GridView view, string caption = "Please wait", string description = "Loading data...", int delayMs = 1000)
         {
@@ -986,12 +1019,19 @@ namespace SalesInventorySystem
             else
             {
 
-                string filepath = "C:\\MyFiles\\";
+                string filepath = @"C:\MyFiles\";
                 Classes.Utilities.createDirectoryFolder(filepath);
                 string filename = title + ".xls";
-                string file = filepath + filename;
-                view.ExportToXls(file);
-                XtraMessageBox.Show("Successfully Exported.. Please Check your Drive C://MyFiles folder");
+                string file = Path.Combine(filepath, filename);
+                try
+                {
+                    view.ExportToXls(file);
+                    XtraMessageBox.Show($"Successfully Exported to {file}");
+                }
+                catch (Exception ex)
+                {
+                    XtraMessageBox.Show("Export failed: " + ex.Message);
+                }
             }
         }
         public static void exporttoexcel(GridView view, string title,string filepath)
@@ -1046,4 +1086,5 @@ namespace SalesInventorySystem
         //}
 
     }
+
 }

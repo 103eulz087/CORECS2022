@@ -208,6 +208,7 @@
             this.Name = "ReceivedTransferInventoryBatchMode";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Received Transfer Inventory";
+            this.Load += new System.EventHandler(this.ReceivedTransferInventoryBatchMode_Load);
             ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).EndInit();
             this.groupControl2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridControlRcvd)).EndInit();

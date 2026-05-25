@@ -73,8 +73,15 @@ namespace SalesInventorySystem
         void displayProdCat()
         {
             //Classes.Product.displayProductCategoryComboBoxItems(txtprodcat);
-            Database.displaySearchlookupEdit("Select ProductCategoryID,Description FROM ProductCategory with(nolock)", txtsrchprodcat, "Description", "Description");
-           
+            if(Login.assignedBranch=="888")
+            {
+                Database.displaySearchlookupEdit("Select ProductCategoryID,Description FROM ProductCategory with(nolock) WHERE ProductCategoryID NOT IN (10,11,12)", txtsrchprodcat, "Description", "Description");
+            }
+            else
+            {
+                Database.displaySearchlookupEdit("Select ProductCategoryID,Description FROM ProductCategory with(nolock)", txtsrchprodcat, "Description", "Description");
+            }
+
         }
 
 

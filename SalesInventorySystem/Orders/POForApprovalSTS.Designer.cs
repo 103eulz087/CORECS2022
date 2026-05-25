@@ -810,7 +810,7 @@
             this.tabDelivered.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("tabDelivered.ImageOptions.Image")));
             this.tabDelivered.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.tabDelivered.Name = "tabDelivered";
-            this.tabDelivered.Size = new System.Drawing.Size(1506, 651);
+            this.tabDelivered.Size = new System.Drawing.Size(1130, 648);
             this.tabDelivered.Text = "Delivered";
             // 
             // tabDelivSub
@@ -824,7 +824,7 @@
             this.tabDelivSub.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.tabDelivSub.Name = "tabDelivSub";
             this.tabDelivSub.SelectedTabPage = this.delivSTS;
-            this.tabDelivSub.Size = new System.Drawing.Size(1506, 651);
+            this.tabDelivSub.Size = new System.Drawing.Size(1130, 648);
             this.tabDelivSub.TabIndex = 8;
             this.tabDelivSub.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
             this.delivSTS});
@@ -836,7 +836,7 @@
             this.delivSTS.ImageOptions.Image = global::SalesInventorySystem.Properties.Resources.Transit_16x16;
             this.delivSTS.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.delivSTS.Name = "delivSTS";
-            this.delivSTS.Size = new System.Drawing.Size(1504, 619);
+            this.delivSTS.Size = new System.Drawing.Size(1128, 616);
             this.delivSTS.Text = "STS";
             // 
             // groupBox30
@@ -847,7 +847,7 @@
             this.groupBox30.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.groupBox30.Name = "groupBox30";
             this.groupBox30.Padding = new System.Windows.Forms.Padding(3, 5, 3, 5);
-            this.groupBox30.Size = new System.Drawing.Size(1504, 576);
+            this.groupBox30.Size = new System.Drawing.Size(1128, 573);
             this.groupBox30.TabIndex = 2;
             this.groupBox30.TabStop = false;
             // 
@@ -859,7 +859,7 @@
             this.gridControlDelivSts.MainView = this.gridViewDelivSts;
             this.gridControlDelivSts.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.gridControlDelivSts.Name = "gridControlDelivSts";
-            this.gridControlDelivSts.Size = new System.Drawing.Size(1498, 550);
+            this.gridControlDelivSts.Size = new System.Drawing.Size(1122, 547);
             this.gridControlDelivSts.TabIndex = 4;
             this.gridControlDelivSts.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewDelivSts});
@@ -894,7 +894,7 @@
             this.panelControl10.Location = new System.Drawing.Point(0, 0);
             this.panelControl10.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.panelControl10.Name = "panelControl10";
-            this.panelControl10.Size = new System.Drawing.Size(1504, 43);
+            this.panelControl10.Size = new System.Drawing.Size(1128, 43);
             this.panelControl10.TabIndex = 1;
             // 
             // btndeliveredstsexcel
@@ -967,13 +967,13 @@
             this.contextMenuStripForDelivery.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.printDeliveryReceiptToolStripMenuItem});
             this.contextMenuStripForDelivery.Name = "contextMenuStrip2";
-            this.contextMenuStripForDelivery.Size = new System.Drawing.Size(141, 30);
+            this.contextMenuStripForDelivery.Size = new System.Drawing.Size(215, 58);
             // 
             // printDeliveryReceiptToolStripMenuItem
             // 
             this.printDeliveryReceiptToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("printDeliveryReceiptToolStripMenuItem.Image")));
             this.printDeliveryReceiptToolStripMenuItem.Name = "printDeliveryReceiptToolStripMenuItem";
-            this.printDeliveryReceiptToolStripMenuItem.Size = new System.Drawing.Size(140, 26);
+            this.printDeliveryReceiptToolStripMenuItem.Size = new System.Drawing.Size(214, 26);
             this.printDeliveryReceiptToolStripMenuItem.Text = "Print STS";
             this.printDeliveryReceiptToolStripMenuItem.Click += new System.EventHandler(this.printDeliveryReceiptToolStripMenuItem_Click);
             // 

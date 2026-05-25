@@ -22,6 +22,10 @@ namespace SalesInventorySystem
         {
             try
             {
+                string filepath = (Application.StartupPath + "\\checkVersion.txt");
+                GlobalConfig.Load(filepath);
+
+
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
                 DevExpress.UserSkins.BonusSkins.Register();

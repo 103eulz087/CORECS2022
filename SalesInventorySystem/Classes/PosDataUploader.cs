@@ -703,7 +703,7 @@ namespace SalesInventorySystem.Classes
         public async Task UploadPOSCreditCardTransactionAsync(DateTime transactionDate, string branchCode, string machineName, IProgress<int> progress, IProgress<string> statusText)
         {
             DateTime startDate = transactionDate.Date;
-            DateTime endDate = startDate.AddDays(29);
+            DateTime endDate = startDate.AddDays(1);
 
             using (SqlConnection localConn = Database.getConnection())
             using (SqlConnection cloudConn = Database.getConnection(@"AAITCRE\ConnSettingsServer"))

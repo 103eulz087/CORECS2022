@@ -350,7 +350,7 @@
             this.contextMenuStripForReceiving.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.showForReceivingItemsToolStripMenuItem});
             this.contextMenuStripForReceiving.Name = "contextMenuStripForReceiving";
-            this.contextMenuStripForReceiving.Size = new System.Drawing.Size(246, 28);
+            this.contextMenuStripForReceiving.Size = new System.Drawing.Size(246, 56);
             // 
             // showForReceivingItemsToolStripMenuItem
             // 

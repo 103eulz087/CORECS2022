@@ -4,8 +4,10 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.OleDb;
 using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -53,4 +55,34 @@ namespace SalesInventorySystem
 
         public static int intNoOfCheques;
     }
+    public static class GlobalConfig
+    {
+        public static string Version { get; private set; }
+        public static string Token { get; private set; }
+        public static string VersionCheckerUrl { get; private set; }
+
+        // Call this once at startup (e.g., in Program.cs or MainForm)
+        public static void Load(string filePath)
+        {
+            string[] lines = File.ReadAllLines(filePath);
+
+            foreach (string line in lines)
+            {
+                if (line.StartsWith("Version="))
+                {
+                    Version = line.Split('=')[1];
+                }
+                if (line.StartsWith("VersionCheckerUrl="))
+                {
+                    VersionCheckerUrl = line.Split('=')[1];
+                }
+                Match match = Regex.Match(line, @"https:\/\/.*?\/([A-Za-z0-9]+)\/");
+                if (match.Success)
+                {
+                    Token = match.Groups[1].Value;
+                }
+            }
+        }
+    }
+
 }
