@@ -29,14 +29,60 @@ namespace SalesInventorySystem.Reporting
 
         void display()
         {
-            if (radfordeliv.Checked == true)
-            {
-                    Database.display("SELECT * FROM view_DeliveryReportSummary WHERE DateAdded >= '" + dateFrom.Text + "' and DateAdded <= '" + dateTo.Text + "' and BranchCode='" + searchLookUpEdit1.Text + "' and Status='FOR DELIVERY'", gridControl1, gridView1);
-            }
-            else
-            {
-                Database.display("SELECT * FROM view_DeliveryReportSummary WHERE DateAdded >= '" + dateFrom.Text + "' and DateAdded <= '" + dateTo.Text + "' and BranchCode='" + searchLookUpEdit1.Text + "'  and Status='DELIVERED'", gridControl1, gridView1);
-            }
+            
+                string status = radfordeliv.Checked ? "FOR DELIVERY" : "DELIVERED";
+
+                            string masterQuery = @"
+                    SELECT *
+                    FROM view_DeliveryReportSummary
+                    WHERE DateAdded >= @DateFrom
+                      AND DateAdded <  DATEADD(day,1,@DateTo)
+                      AND BranchCode = @Branch
+                      AND Status = @Status";
+
+                            string detailQuery = @"
+                    SELECT d.*
+                    FROM view_DeliveryReportDetails d
+                    WHERE EXISTS
+                    (
+                        SELECT 1
+                        FROM view_DeliveryReportSummary s
+                        WHERE s.PONumber = d.PONumber
+                          AND s.DateAdded >= @DateFrom
+                          AND s.DateAdded <  DATEADD(day,1,@DateTo)
+                          AND s.BranchCode = @Branch
+                          AND s.Status = @Status
+                    )";
+
+                            var masterParams = new[]
+                            {
+                    new SqlParameter("@DateFrom", dateFrom.DateTime),
+                    new SqlParameter("@DateTo", dateTo.DateTime),
+                    new SqlParameter("@Branch", searchLookUpEdit1.Text),
+                    new SqlParameter("@Status", status)
+                };
+
+                            var detailParams = new[]
+                            {
+                    new SqlParameter("@DateFrom", dateFrom.DateTime),
+                    new SqlParameter("@DateTo", dateTo.DateTime),
+                    new SqlParameter("@Branch", searchLookUpEdit1.Text),
+                    new SqlParameter("@Status", status)
+                };
+
+                            Database.GridMasterDetail(
+                                masterQuery,
+                                detailQuery,
+                                "Master",
+                                "Detail",
+                                "PONumber",
+                                "PONumber",
+                                "DeliveryDetails",
+                                gridControl1,
+                                masterParams,
+                                detailParams
+                            );
+
         }
 
         private void DeliveryReportsFrm_Load(object sender, EventArgs e)
@@ -122,6 +168,29 @@ namespace SalesInventorySystem.Reporting
         private void searchLookUpEdit1_EditValueChanged(object sender, EventArgs e)
         {
 
+        }
+        void exporttoexcel(GridView view, string title)
+        {
+            if (view.RowCount == 0)
+            {
+                XtraMessageBox.Show("No Data to Import!..");
+                return;
+            }
+            else
+            {
+
+                string filepath = "C:\\MyFiles\\";
+                Classes.Utilities.createDirectoryFolder(filepath);
+                string filename = title + ".xls";
+                string file = filepath + filename;
+                view.ExportToXls(file);
+                XtraMessageBox.Show("Successfully Exported.. Please Check your Drive C://MyFiles/folder");
+            }
+        }
+        private void btnforapprovalsalesorderexcel_Click(object sender, EventArgs e)
+        {
+            string filename = "DeliveryReportSummary" + DateTime.Now.ToString("yyyyMMdd_HHmmss");
+            HelperFunction.exporttoexcel(gridView1, filename);
         }
 
         void showSTSDetails()

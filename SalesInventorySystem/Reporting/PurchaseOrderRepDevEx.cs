@@ -53,6 +53,7 @@ namespace SalesInventorySystem.Reporting
 
             Reporting.PurchaseOrderRepDetailsDevEx purchdet = new PurchaseOrderRepDetailsDevEx();
             Database.display("SELECT * FROM view_PODETAILS WHERE ShipmentNo='" + pono + "' and SupplierID='" + supplierid + "'", purchdet.gridControl1, purchdet.gridView1);
+            Classes.DevXGridViewSettings.ShowFooterTotal(purchdet.gridView1, "ActualTotalCost");
             purchdet.ShowDialog(this);
        }
 

@@ -223,6 +223,16 @@ namespace SalesInventorySystem.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap corecslogindesign {
+            get {
+                object obj = ResourceManager.GetObject("corecslogindesign", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Database_32x32__2_ {
             get {
                 object obj = ResourceManager.GetObject("Database_32x32 (2)", resourceCulture);

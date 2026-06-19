@@ -373,6 +373,7 @@ namespace SalesInventorySystem.POS
             catch (Exception ex)
             {
                 // If the cloud is offline, we fill it with -1 so the user knows it failed
+                ex.Message.ToString();
                 foreach (var key in localCounts.Keys)
                 {
                     cloudCounts[key] = -1;

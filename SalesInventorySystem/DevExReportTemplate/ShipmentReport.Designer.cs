@@ -47,6 +47,8 @@
             this.preparedby = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel6 = new DevExpress.XtraReports.UI.XRLabel();
             this.ReportHeader = new DevExpress.XtraReports.UI.ReportHeaderBand();
+            this.xrLabel3 = new DevExpress.XtraReports.UI.XRLabel();
+            this.xrdatereceived = new DevExpress.XtraReports.UI.XRLabel();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             // 
             // Detail
@@ -70,7 +72,7 @@
             // 
             // xrPictureBox1
             // 
-            this.xrPictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("xrPictureBox1.Image")));
+            this.xrPictureBox1.ImageSource = new DevExpress.XtraPrinting.Drawing.ImageSource("img", resources.GetString("xrPictureBox1.ImageSource"));
             this.xrPictureBox1.LocationFloat = new DevExpress.Utils.PointFloat(140.5208F, 10.00001F);
             this.xrPictureBox1.Name = "xrPictureBox1";
             this.xrPictureBox1.SizeF = new System.Drawing.SizeF(80.20839F, 60.66668F);
@@ -215,6 +217,8 @@
             // ReportHeader
             // 
             this.ReportHeader.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
+            this.xrdatereceived,
+            this.xrLabel3,
             this.xrLabel1,
             this.xrinvoiceno,
             this.xrsuppliername,
@@ -222,9 +226,30 @@
             this.xrreporttype,
             this.xrLabel2,
             this.xrLabel5});
-            this.ReportHeader.HeightF = 79.16663F;
+            this.ReportHeader.HeightF = 97.49998F;
             this.ReportHeader.Name = "ReportHeader";
             this.ReportHeader.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.ReportHeader_BeforePrint);
+            // 
+            // xrLabel3
+            // 
+            this.xrLabel3.Font = new System.Drawing.Font("Tahoma", 11F, System.Drawing.FontStyle.Bold);
+            this.xrLabel3.LocationFloat = new DevExpress.Utils.PointFloat(5.833282F, 74.79162F);
+            this.xrLabel3.Multiline = true;
+            this.xrLabel3.Name = "xrLabel3";
+            this.xrLabel3.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.xrLabel3.SizeF = new System.Drawing.SizeF(125.0001F, 17.08334F);
+            this.xrLabel3.StylePriority.UseFont = false;
+            this.xrLabel3.Text = "Date Received:";
+            // 
+            // xrdatereceived
+            // 
+            this.xrdatereceived.Font = new System.Drawing.Font("Tahoma", 11F, System.Drawing.FontStyle.Bold);
+            this.xrdatereceived.LocationFloat = new DevExpress.Utils.PointFloat(128.75F, 74.79162F);
+            this.xrdatereceived.Name = "xrdatereceived";
+            this.xrdatereceived.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.xrdatereceived.SizeF = new System.Drawing.SizeF(310.8333F, 17.08332F);
+            this.xrdatereceived.StylePriority.UseFont = false;
+            this.xrdatereceived.Text = "999999";
             // 
             // ShipmentReport
             // 
@@ -235,7 +260,7 @@
             this.ReportFooter,
             this.ReportHeader});
             this.Margins = new System.Drawing.Printing.Margins(100, 80, 81, 100);
-            this.Version = "18.1";
+            this.Version = "19.2";
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
 
         }
@@ -260,5 +285,7 @@
         public DevExpress.XtraReports.UI.XRLabel xrcompanyname;
         public DevExpress.XtraReports.UI.XRLabel xrcaption1;
         public DevExpress.XtraReports.UI.XRLabel xrcaption2;
+        public DevExpress.XtraReports.UI.XRLabel xrdatereceived;
+        public DevExpress.XtraReports.UI.XRLabel xrLabel3;
     }
 }

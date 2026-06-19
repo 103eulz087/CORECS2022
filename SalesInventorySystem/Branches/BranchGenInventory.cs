@@ -25,7 +25,11 @@ namespace SalesInventorySystem.Branches
 
         private void BranchGenInventory_Load(object sender, EventArgs e)
         {
-            Database.displaySearchlookupEdit("Select BranchCode,BranchName FROM Branches ORDER BY BranchCode", searchLookUpEdit1, "BranchCode", "BranchCode");
+            populateBranches();
+        }
+        async void populateBranches()
+        {
+            await Database.displaySearchlookupEditAsync("Select BranchCode,BranchName FROM Branches ORDER BY BranchCode", searchLookUpEdit1, "BranchCode", "BranchCode");
         }
 
         private void display()
@@ -86,17 +90,21 @@ namespace SalesInventorySystem.Branches
       
         private void simpleButton1_Click(object sender, EventArgs e)
         {
+            simpleButton1.Enabled = false;
+            Cursor = Cursors.WaitCursor;
             display();
+            Cursor = Cursors.Default;
+            simpleButton1.Enabled = true;
         }
 
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
         {
-            display();
+            //display();
         }
 
         private void radioButton2_CheckedChanged(object sender, EventArgs e)
         {
-            display();
+            //display();
         }
 
         private void gridView1_RowCellStyle(object sender, DevExpress.XtraGrid.Views.Grid.RowCellStyleEventArgs e)
@@ -137,6 +145,32 @@ namespace SalesInventorySystem.Branches
         {
             Reporting.BranchInventoryProductSummary branchsum = new Reporting.BranchInventoryProductSummary();
             branchsum.Show();
+        }
+
+        private void gridControl1_MouseUp(object sender, MouseEventArgs e)
+        {
+
+            if (e.Button == MouseButtons.Right)
+            {
+                if (Convert.ToBoolean(Login.isglobalAdmin) == true && radioButton1.Checked == true)
+                {
+                    contextMenuStrip1.Show(gridControl1, e.Location);
+                }
+            }
+        }
+
+        private void updateCostToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            BranchGenInventoryUpdateCost brnchupdcost = new BranchGenInventoryUpdateCost();
+            brnchupdcost.txtseqno.Text = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "SequenceNumber").ToString();
+            brnchupdcost.txtcost.Text = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "Cost").ToString();
+            brnchupdcost.ShowDialog(this);
+            if(BranchGenInventoryUpdateCost.isdone==true)
+            {
+                BranchGenInventoryUpdateCost.isdone = false;
+                brnchupdcost.Dispose();
+                display();
+            }
         }
     }
 }

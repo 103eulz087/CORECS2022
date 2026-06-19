@@ -128,7 +128,18 @@ namespace SalesInventorySystem.HOFormsDevEx
             }
             else
             {
-                Database.ExecuteQuery("INSERT INTO Users VALUES('" + txtuserid.Text + "','" + txtfullname.Text + "','" + txtdesignation.Text + "','" + txtemailadd.Text + "','" + txtpass.Text + "','" + txtbranch.Text + "','" + sadmin + "','" + sglobalofficer + "','" + sbranchofficer + "','" + swarehouseofficer + "','" + scashier + "','" + smaker + "','" + schecker + "','" + sapprover + "','" + saccounting + "','" + DateTime.Now.ToString() + "','" + DateTime.Now.ToString() + "','" + txtcashendlimit.Text + "','" + txtcashinlimit.Text + "','" + txtreceivablelimit.Text + "','" + txtglaccount.Text + "')", "Succesfully Added!");
+                Database.ExecuteQuery("INSERT INTO Users(UserID, FullName, Designation, EmailAddress,  " +
+                    "AssignedBranch, isAdmin, isGlobalOfficer, isBranchOfficer, isWarehouseOfficer, isCashier, " +
+                    "isMaker, isChecker, isApprover, isAccounting, DateRegister, LastUpdated, CashEndLimit, " +
+                    "CashInLimit, ReceivableLimit, GLAccount,MustChangePassword) " +
+                    "VALUES('" + txtuserid.Text + "','" + txtfullname.Text + "','" + txtdesignation.Text + "'," +
+                    "'" + txtemailadd.Text + "','" + txtbranch.Text + "','" + sadmin + "'," +
+                    "'" + sglobalofficer + "','" + sbranchofficer + "','" + swarehouseofficer + "','" + scashier + "'," +
+                    "'" + smaker + "','" + schecker + "','" + sapprover + "','" + saccounting + "'," +
+                    "'" + DateTime.Now.ToString() + "','" + DateTime.Now.ToString() + "','" + txtcashendlimit.Text + "'," +
+                    "'" + txtcashinlimit.Text + "','" + txtreceivablelimit.Text + "','" + txtglaccount.Text + "',1)", 
+                    "Succesfully Added!");
+
                 HelperFunction.ClearAllText(this);
                 HelperFunction.DisableTextFields(this);
                 HelperFunction.DisableCheckbox(this);
@@ -233,7 +244,7 @@ namespace SalesInventorySystem.HOFormsDevEx
                 }
                 else
                 {
-                    Database.ExecuteQuery("UPDATE Users SET Fullname='" + txtfullname.Text + "',Designation='" + txtdesignation.Text + "',EmailAddress='" + txtemailadd.Text + "',Password='" + txtpass.Text + "',AssignedBranch='" + txtbranch.Text + "',isAdmin='" + sadmin + "',isGlobalOfficer='" + sglobalofficer + "',isBranchOfficer='" + sbranchofficer + "',isWarehouseOfficer='" + swarehouseofficer + "',isCashier='" + scashier + "',isMaker='" + smaker + "',isChecker='" + schecker + "',isApprover='" + sapprover + "',isAccounting='" + saccounting + "',LastUpdated='" + DateTime.Now.ToString() + "',CashEndLimit='" + txtcashendlimit.Text + "',CashInLimit='" + txtcashinlimit.Text + "',ReceivableLimit='" + txtreceivablelimit.Text + "',GLAccount='" + txtglaccount.Text + "' WHERE UserID='" + txtuserid.Text + "' ", "Successfully Updated!");
+                    Database.ExecuteQuery("UPDATE Users SET Fullname='" + txtfullname.Text + "',Designation='" + txtdesignation.Text + "',EmailAddress='" + txtemailadd.Text + "',AssignedBranch='" + txtbranch.Text + "',isAdmin='" + sadmin + "',isGlobalOfficer='" + sglobalofficer + "',isBranchOfficer='" + sbranchofficer + "',isWarehouseOfficer='" + swarehouseofficer + "',isCashier='" + scashier + "',isMaker='" + smaker + "',isChecker='" + schecker + "',isApprover='" + sapprover + "',isAccounting='" + saccounting + "',LastUpdated='" + DateTime.Now.ToString() + "',CashEndLimit='" + txtcashendlimit.Text + "',CashInLimit='" + txtcashinlimit.Text + "',ReceivableLimit='" + txtreceivablelimit.Text + "',GLAccount='" + txtglaccount.Text + "',MustChangePassword=1 WHERE UserID='" + txtuserid.Text + "' ", "Successfully Updated!");
                     HelperFunction.ClearAllText(this);
                     HelperFunction.DisableTextFields(this);
                     HelperFunction.DisableCheckbox(this);
@@ -384,7 +395,7 @@ namespace SalesInventorySystem.HOFormsDevEx
 
         private void resetPasswordToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Database.ExecuteQuery($"UPDATE Users SET Password='123456' WHERE UserID='{txtuserid.Text}'","Successfully Updated!..");
+            Database.ExecuteQuery($"UPDATE Users SET MustChangePassword=1 WHERE UserID='{txtuserid.Text}'","Successfully Updated!..");
         }
     }
 }

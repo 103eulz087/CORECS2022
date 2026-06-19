@@ -33,6 +33,7 @@
             this.gridControl1 = new DevExpress.XtraGrid.GridControl();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.lblProgress = new DevExpress.XtraEditors.LabelControl();
             this.txtinvoiceno = new System.Windows.Forms.TextBox();
             this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
             this.simpleButton3 = new DevExpress.XtraEditors.SimpleButton();
@@ -96,6 +97,7 @@
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.Color.White;
+            this.groupBox1.Controls.Add(this.lblProgress);
             this.groupBox1.Controls.Add(this.txtinvoiceno);
             this.groupBox1.Controls.Add(this.labelControl2);
             this.groupBox1.Controls.Add(this.simpleButton3);
@@ -113,6 +115,19 @@
             this.groupBox1.Size = new System.Drawing.Size(1557, 100);
             this.groupBox1.TabIndex = 22;
             this.groupBox1.TabStop = false;
+            // 
+            // lblProgress
+            // 
+            this.lblProgress.Appearance.Font = new System.Drawing.Font("Tahoma", 9.875F);
+            this.lblProgress.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.lblProgress.Appearance.Options.UseFont = true;
+            this.lblProgress.Appearance.Options.UseForeColor = true;
+            this.lblProgress.Location = new System.Drawing.Point(475, 23);
+            this.lblProgress.Margin = new System.Windows.Forms.Padding(2);
+            this.lblProgress.Name = "lblProgress";
+            this.lblProgress.Size = new System.Drawing.Size(25, 19);
+            this.lblProgress.TabIndex = 123640;
+            this.lblProgress.Text = "0%";
             // 
             // txtinvoiceno
             // 
@@ -215,7 +230,6 @@
             this.ClientSize = new System.Drawing.Size(1557, 822);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "UPLOADINVENTORY";
             this.Text = "UPLOADINVENTORY";
@@ -246,5 +260,6 @@
         private DevExpress.XtraEditors.SimpleButton btndone;
         private System.Windows.Forms.TextBox txtinvoiceno;
         private DevExpress.XtraEditors.LabelControl labelControl2;
+        private DevExpress.XtraEditors.LabelControl lblProgress;
     }
 }

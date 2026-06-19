@@ -17,6 +17,7 @@ namespace SalesInventorySystem.Reporting
         public ConversionReportDetails()
         {
             InitializeComponent();
+
         }
 
         Double getTotal(string value)

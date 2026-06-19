@@ -8,6 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DevExpress.XtraEditors;
+using System.Data.SqlClient;
 
 namespace SalesInventorySystem.HOFormsDevEx
 {
@@ -23,28 +24,85 @@ namespace SalesInventorySystem.HOFormsDevEx
             display();
         }
 
-        void display()
+        private void display()
         {
-            if (chckzerobal.Checked == false && String.IsNullOrEmpty(txtapaccnt.Text))
-            {
+            string supplierId = (txtapaccnt.Text ?? string.Empty).Trim();
+            bool includeZero = chckzerobal.Checked;
 
-                string query = "SELECT SupplierID,SupplierName,FORMAT(AccountBalance,'N', 'en-us') as AccountBalance,AccountStatus,LastMovementDate FROM SupplierAccounts with(nolock) WHERE AccountBalance > 0 ";
-                HelperFunction.ShowWaitAndDisplay(query, gridControl1, gridView1, "Please wait", "Populating data into the database...");
+            // Build WHERE dynamically (no duplication)
+            string sql = @"
+                        SELECT SupplierID,
+                               SupplierName,
+                               AccountBalance,        -- keep numeric
+                               AccountStatus,
+                               LastMovementDate
+                        FROM SupplierAccounts
+                        WHERE 1=1
+                    ";
+
+            if (!includeZero)
+                sql += " AND AccountBalance > 0 ";
+
+            if (!string.IsNullOrEmpty(supplierId))
+                sql += " AND SupplierID = @supplierId ";
+
+            sql += " ORDER BY SupplierName ";
+
+            try
+            {
+                Cursor.Current = Cursors.WaitCursor;
+                this.UseWaitCursor = true;
+
+                using (var con = Database.getConnection())
+                using (var cmd = new SqlCommand(sql, con))
+                {
+                    cmd.CommandType = CommandType.Text;
+
+                    if (!string.IsNullOrEmpty(supplierId))
+                        cmd.Parameters.Add("@supplierId", SqlDbType.VarChar, 10).Value = supplierId;
+
+                    // Uses your existing overload: Database.display(SqlCommand,...)
+                    Database.display(cmd, gridControl1, gridView1);
+                }
+
+                // DevExpress formatting (UI responsibility)
+                var col = gridView1.Columns["AccountBalance"];
+                if (col != null)
+                {
+                    col.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+                    col.DisplayFormat.FormatString = "n2";
+                }
+
                 gridView1.Focus();
             }
-            else if (chckzerobal.Checked == false && !String.IsNullOrEmpty(txtapaccnt.Text))
+            finally
             {
-                string query = "SELECT SupplierID,SupplierName,FORMAT(AccountBalance,'N', 'en-us') as AccountBalance,AccountStatus,LastMovementDate FROM SupplierAccounts with(nolock) WHERE SupplierID='" + txtapaccnt.Text + "' ";
-                HelperFunction.ShowWaitAndDisplay(query, gridControl1, gridView1, "Please wait", "Populating data into the database...");
-                gridView1.Focus();
-            }
-            else
-            {
-                string query = "SELECT SupplierID,SupplierName,FORMAT(AccountBalance,'N', 'en-us') as AccountBalance,AccountStatus,LastMovementDate FROM SupplierAccounts with(nolock) ";
-                HelperFunction.ShowWaitAndDisplay(query, gridControl1, gridView1, "Please wait", "Populating data into the database...");
-                gridView1.Focus();
+                this.UseWaitCursor = false;
+                Cursor.Current = Cursors.Default;
             }
         }
+        //void display()
+        //{
+        //    if (chckzerobal.Checked == false && String.IsNullOrEmpty(txtapaccnt.Text))
+        //    {
+
+        //        string query = "SELECT SupplierID,SupplierName,FORMAT(AccountBalance,'N', 'en-us') as AccountBalance,AccountStatus,LastMovementDate FROM SupplierAccounts with(nolock) WHERE AccountBalance > 0 ";
+        //        HelperFunction.ShowWaitAndDisplay(query, gridControl1, gridView1, "Please wait", "Populating data into the database...");
+        //        gridView1.Focus();
+        //    }
+        //    else if (chckzerobal.Checked == false && !String.IsNullOrEmpty(txtapaccnt.Text))
+        //    {
+        //        string query = "SELECT SupplierID,SupplierName,FORMAT(AccountBalance,'N', 'en-us') as AccountBalance,AccountStatus,LastMovementDate FROM SupplierAccounts with(nolock) WHERE SupplierID='" + txtapaccnt.Text + "' ";
+        //        HelperFunction.ShowWaitAndDisplay(query, gridControl1, gridView1, "Please wait", "Populating data into the database...");
+        //        gridView1.Focus();
+        //    }
+        //    else
+        //    {
+        //        string query = "SELECT SupplierID,SupplierName,FORMAT(AccountBalance,'N', 'en-us') as AccountBalance,AccountStatus,LastMovementDate FROM SupplierAccounts with(nolock) ";
+        //        HelperFunction.ShowWaitAndDisplay(query, gridControl1, gridView1, "Please wait", "Populating data into the database...");
+        //        gridView1.Focus();
+        //    }
+        //}
 
         private void gridView1_DoubleClick(object sender, EventArgs e)
         {

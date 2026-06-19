@@ -226,7 +226,7 @@
             this.groupControl2.Controls.Add(this.gridControl2);
             this.groupControl2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupControl2.Location = new System.Drawing.Point(0, 82);
-            this.groupControl2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupControl2.Margin = new System.Windows.Forms.Padding(2);
             this.groupControl2.Name = "groupControl2";
             this.groupControl2.Size = new System.Drawing.Size(1457, 657);
             this.groupControl2.TabIndex = 3;
@@ -240,7 +240,7 @@
             this.groupControl1.Controls.Add(this.btnApproved);
             this.groupControl1.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupControl1.Location = new System.Drawing.Point(0, 0);
-            this.groupControl1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupControl1.Margin = new System.Windows.Forms.Padding(2);
             this.groupControl1.Name = "groupControl1";
             this.groupControl1.Size = new System.Drawing.Size(1457, 82);
             this.groupControl1.TabIndex = 2;
@@ -248,7 +248,7 @@
             // txtsuppid
             // 
             this.txtsuppid.Location = new System.Drawing.Point(762, 34);
-            this.txtsuppid.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtsuppid.Margin = new System.Windows.Forms.Padding(2);
             this.txtsuppid.Name = "txtsuppid";
             this.txtsuppid.Size = new System.Drawing.Size(141, 22);
             this.txtsuppid.TabIndex = 9;
@@ -257,7 +257,7 @@
             // txtinvoiceno
             // 
             this.txtinvoiceno.Location = new System.Drawing.Point(597, 34);
-            this.txtinvoiceno.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtinvoiceno.Margin = new System.Windows.Forms.Padding(2);
             this.txtinvoiceno.Name = "txtinvoiceno";
             this.txtinvoiceno.Size = new System.Drawing.Size(141, 22);
             this.txtinvoiceno.TabIndex = 8;
@@ -266,7 +266,7 @@
             // txtrefno
             // 
             this.txtrefno.Location = new System.Drawing.Point(433, 34);
-            this.txtrefno.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtrefno.Margin = new System.Windows.Forms.Padding(2);
             this.txtrefno.Name = "txtrefno";
             this.txtrefno.Size = new System.Drawing.Size(141, 22);
             this.txtrefno.TabIndex = 7;
@@ -276,7 +276,7 @@
             // 
             this.btncancel.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btncancel.ImageOptions.Image")));
             this.btncancel.Location = new System.Drawing.Point(120, 38);
-            this.btncancel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btncancel.Margin = new System.Windows.Forms.Padding(2);
             this.btncancel.Name = "btncancel";
             this.btncancel.Size = new System.Drawing.Size(127, 34);
             this.btncancel.TabIndex = 6;
@@ -288,7 +288,7 @@
             // 
             this.btnApproved.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnApproved.ImageOptions.Image")));
             this.btnApproved.Location = new System.Drawing.Point(8, 38);
-            this.btnApproved.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnApproved.Margin = new System.Windows.Forms.Padding(2);
             this.btnApproved.Name = "btnApproved";
             this.btnApproved.Size = new System.Drawing.Size(107, 34);
             this.btnApproved.TabIndex = 5;
@@ -303,7 +303,7 @@
             this.ClientSize = new System.Drawing.Size(1457, 739);
             this.Controls.Add(this.groupControl2);
             this.Controls.Add(this.groupControl1);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "ViewExpenseDetailsDevEx";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ViewExpenseDetailsDevEx";

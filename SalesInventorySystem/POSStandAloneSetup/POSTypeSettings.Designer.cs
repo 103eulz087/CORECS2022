@@ -54,7 +54,7 @@
             this.chckisretail.AutoSize = true;
             this.chckisretail.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chckisretail.Location = new System.Drawing.Point(150, 98);
-            this.chckisretail.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.chckisretail.Margin = new System.Windows.Forms.Padding(4);
             this.chckisretail.Name = "chckisretail";
             this.chckisretail.Size = new System.Drawing.Size(87, 25);
             this.chckisretail.TabIndex = 453;
@@ -66,7 +66,7 @@
             this.chckisenableprinting.AutoSize = true;
             this.chckisenableprinting.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chckisenableprinting.Location = new System.Drawing.Point(150, 135);
-            this.chckisenableprinting.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.chckisenableprinting.Margin = new System.Windows.Forms.Padding(4);
             this.chckisenableprinting.Name = "chckisenableprinting";
             this.chckisenableprinting.Size = new System.Drawing.Size(150, 25);
             this.chckisenableprinting.TabIndex = 454;
@@ -78,7 +78,7 @@
             this.btnupdate.Appearance.Font = new System.Drawing.Font("Tahoma", 9.75F);
             this.btnupdate.Appearance.Options.UseFont = true;
             this.btnupdate.Location = new System.Drawing.Point(188, 367);
-            this.btnupdate.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnupdate.Margin = new System.Windows.Forms.Padding(4);
             this.btnupdate.Name = "btnupdate";
             this.btnupdate.Size = new System.Drawing.Size(330, 58);
             this.btnupdate.TabIndex = 455;
@@ -90,7 +90,7 @@
             this.chckuploadpershifting.AutoSize = true;
             this.chckuploadpershifting.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chckuploadpershifting.Location = new System.Drawing.Point(315, 135);
-            this.chckuploadpershifting.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.chckuploadpershifting.Margin = new System.Windows.Forms.Padding(4);
             this.chckuploadpershifting.Name = "chckuploadpershifting";
             this.chckuploadpershifting.Size = new System.Drawing.Size(172, 25);
             this.chckuploadpershifting.TabIndex = 457;
@@ -102,7 +102,7 @@
             this.chcksendemail.AutoSize = true;
             this.chcksendemail.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chcksendemail.Location = new System.Drawing.Point(315, 98);
-            this.chcksendemail.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.chcksendemail.Margin = new System.Windows.Forms.Padding(4);
             this.chcksendemail.Name = "chcksendemail";
             this.chcksendemail.Size = new System.Drawing.Size(203, 25);
             this.chcksendemail.TabIndex = 456;
@@ -114,7 +114,7 @@
             this.chckinvoicelapsing.AutoSize = true;
             this.chckinvoicelapsing.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chckinvoicelapsing.Location = new System.Drawing.Point(315, 168);
-            this.chckinvoicelapsing.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.chckinvoicelapsing.Margin = new System.Windows.Forms.Padding(4);
             this.chckinvoicelapsing.Name = "chckinvoicelapsing";
             this.chckinvoicelapsing.Size = new System.Drawing.Size(190, 25);
             this.chckinvoicelapsing.TabIndex = 459;
@@ -126,7 +126,7 @@
             this.chckisdatauploading.AutoSize = true;
             this.chckisdatauploading.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chckisdatauploading.Location = new System.Drawing.Point(150, 168);
-            this.chckisdatauploading.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.chckisdatauploading.Margin = new System.Windows.Forms.Padding(4);
             this.chckisdatauploading.Name = "chckisdatauploading";
             this.chckisdatauploading.Size = new System.Drawing.Size(146, 25);
             this.chckisdatauploading.TabIndex = 458;
@@ -138,7 +138,7 @@
             this.chckislinkedserver.AutoSize = true;
             this.chckislinkedserver.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chckislinkedserver.Location = new System.Drawing.Point(150, 201);
-            this.chckislinkedserver.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.chckislinkedserver.Margin = new System.Windows.Forms.Padding(4);
             this.chckislinkedserver.Name = "chckislinkedserver";
             this.chckislinkedserver.Size = new System.Drawing.Size(143, 25);
             this.chckislinkedserver.TabIndex = 461;
@@ -150,7 +150,7 @@
             this.chckcreditlimit.AutoSize = true;
             this.chckcreditlimit.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chckcreditlimit.Location = new System.Drawing.Point(315, 201);
-            this.chckcreditlimit.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.chckcreditlimit.Margin = new System.Windows.Forms.Padding(4);
             this.chckcreditlimit.Name = "chckcreditlimit";
             this.chckcreditlimit.Size = new System.Drawing.Size(172, 25);
             this.chckcreditlimit.TabIndex = 460;
@@ -221,7 +221,7 @@
             this.chckeodnotification.AutoSize = true;
             this.chckeodnotification.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chckeodnotification.Location = new System.Drawing.Point(150, 234);
-            this.chckeodnotification.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.chckeodnotification.Margin = new System.Windows.Forms.Padding(4);
             this.chckeodnotification.Name = "chckeodnotification";
             this.chckeodnotification.Size = new System.Drawing.Size(201, 25);
             this.chckeodnotification.TabIndex = 468;
@@ -252,7 +252,7 @@
             this.chckdenableinvoiceprinting.AutoSize = true;
             this.chckdenableinvoiceprinting.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chckdenableinvoiceprinting.Location = new System.Drawing.Point(150, 263);
-            this.chckdenableinvoiceprinting.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.chckdenableinvoiceprinting.Margin = new System.Windows.Forms.Padding(4);
             this.chckdenableinvoiceprinting.Name = "chckdenableinvoiceprinting";
             this.chckdenableinvoiceprinting.Size = new System.Drawing.Size(201, 25);
             this.chckdenableinvoiceprinting.TabIndex = 471;
@@ -283,7 +283,7 @@
             this.Controls.Add(this.btnupdate);
             this.Controls.Add(this.chckisenableprinting);
             this.Controls.Add(this.chckisretail);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "POSTypeSettings";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "POSTypeSettings";

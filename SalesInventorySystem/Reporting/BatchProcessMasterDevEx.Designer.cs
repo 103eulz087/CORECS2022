@@ -30,6 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.chckpersupplier = new DevExpress.XtraEditors.CheckEdit();
             this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
             this.txtsupp = new DevExpress.XtraEditors.SearchLookUpEdit();
             this.searchLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -45,8 +46,8 @@
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.showDetailsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.chckpersupplier = new DevExpress.XtraEditors.CheckEdit();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chckpersupplier.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtsupp.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtdateto.Properties.CalendarTimeProperties)).BeginInit();
@@ -56,7 +57,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.chckpersupplier.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -80,6 +80,15 @@
             this.groupBox1.Size = new System.Drawing.Size(1132, 110);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
+            // 
+            // chckpersupplier
+            // 
+            this.chckpersupplier.Location = new System.Drawing.Point(474, 28);
+            this.chckpersupplier.Name = "chckpersupplier";
+            this.chckpersupplier.Properties.Caption = "Per Supplier?";
+            this.chckpersupplier.Size = new System.Drawing.Size(114, 24);
+            this.chckpersupplier.TabIndex = 18;
+            this.chckpersupplier.CheckedChanged += new System.EventHandler(this.chckpersupplier_CheckedChanged);
             // 
             // simpleButton1
             // 
@@ -260,15 +269,6 @@
             this.showDetailsToolStripMenuItem.Text = "Show Details";
             this.showDetailsToolStripMenuItem.Click += new System.EventHandler(this.showDetailsToolStripMenuItem_Click);
             // 
-            // chckpersupplier
-            // 
-            this.chckpersupplier.Location = new System.Drawing.Point(474, 28);
-            this.chckpersupplier.Name = "chckpersupplier";
-            this.chckpersupplier.Properties.Caption = "Per Supplier?";
-            this.chckpersupplier.Size = new System.Drawing.Size(114, 24);
-            this.chckpersupplier.TabIndex = 18;
-            this.chckpersupplier.CheckedChanged += new System.EventHandler(this.chckpersupplier_CheckedChanged);
-            // 
             // BatchProcessMasterDevEx
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
@@ -284,6 +284,7 @@
             this.Load += new System.EventHandler(this.BatchProcessMasterDevEx_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chckpersupplier.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtsupp.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtdateto.Properties.CalendarTimeProperties)).EndInit();
@@ -293,7 +294,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.chckpersupplier.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }

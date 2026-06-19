@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            DevExpress.XtraGrid.GridLevelNode gridLevelNode3 = new DevExpress.XtraGrid.GridLevelNode();
             DevExpress.XtraGrid.GridLevelNode gridLevelNode1 = new DevExpress.XtraGrid.GridLevelNode();
-            DevExpress.XtraGrid.GridLevelNode gridLevelNode2 = new DevExpress.XtraGrid.GridLevelNode();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ConfirmOrderDevEx));
             this.gridView5 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridControl2 = new DevExpress.XtraGrid.GridControl();
@@ -91,6 +91,7 @@
             this.updateSellingPriceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStripCharges = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.chckboxzerorated = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.gridView5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView2)).BeginInit();
@@ -153,11 +154,11 @@
             // 
             this.gridControl2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gridControl2.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            gridLevelNode1.LevelTemplate = this.gridView5;
-            gridLevelNode1.RelationName = "Level1";
+            gridLevelNode3.LevelTemplate = this.gridView5;
+            gridLevelNode3.RelationName = "Level1";
             this.gridControl2.LevelTree.Nodes.AddRange(new DevExpress.XtraGrid.GridLevelNode[] {
-            gridLevelNode1});
-            this.gridControl2.Location = new System.Drawing.Point(2, 25);
+            gridLevelNode3});
+            this.gridControl2.Location = new System.Drawing.Point(2, 28);
             this.gridControl2.MainView = this.gridView2;
             this.gridControl2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.gridControl2.Name = "gridControl2";
@@ -169,7 +170,7 @@
             this.repositoryItemSearchLookUpEditOffsetCreditGLCode,
             this.repositoryItemSearchLookUpEditEWTDebitGLCode,
             this.repositoryItemSearchLookUpEditEWTCreditGLCode});
-            this.gridControl2.Size = new System.Drawing.Size(1593, 281);
+            this.gridControl2.Size = new System.Drawing.Size(1593, 278);
             this.gridControl2.TabIndex = 7;
             this.gridControl2.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView2,
@@ -299,11 +300,11 @@
             // 
             this.gridControlChargesSum.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gridControlChargesSum.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            gridLevelNode2.LevelTemplate = this.gridView3;
-            gridLevelNode2.RelationName = "Level1";
+            gridLevelNode1.LevelTemplate = this.gridView3;
+            gridLevelNode1.RelationName = "Level1";
             this.gridControlChargesSum.LevelTree.Nodes.AddRange(new DevExpress.XtraGrid.GridLevelNode[] {
-            gridLevelNode2});
-            this.gridControlChargesSum.Location = new System.Drawing.Point(2, 25);
+            gridLevelNode1});
+            this.gridControlChargesSum.Location = new System.Drawing.Point(2, 28);
             this.gridControlChargesSum.MainView = this.gridViewChargesSum;
             this.gridControlChargesSum.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.gridControlChargesSum.Name = "gridControlChargesSum";
@@ -315,7 +316,7 @@
             this.repositoryItemSearchLookUpEdit3,
             this.repositoryItemSearchLookUpEdit4,
             this.repositoryItemSearchLookUpEdit5});
-            this.gridControlChargesSum.Size = new System.Drawing.Size(1593, 307);
+            this.gridControlChargesSum.Size = new System.Drawing.Size(1593, 304);
             this.gridControlChargesSum.TabIndex = 7;
             this.gridControlChargesSum.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewChargesSum,
@@ -432,6 +433,7 @@
             // 
             // groupControl1
             // 
+            this.groupControl1.Controls.Add(this.chckboxzerorated);
             this.groupControl1.Controls.Add(this.radsummary);
             this.groupControl1.Controls.Add(this.raddetailed);
             this.groupControl1.Controls.Add(this.txtcustname);
@@ -765,6 +767,16 @@
             this.deleteToolStripMenuItem.Text = "Delete";
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
             // 
+            // chckboxzerorated
+            // 
+            this.chckboxzerorated.AutoSize = true;
+            this.chckboxzerorated.Location = new System.Drawing.Point(734, 137);
+            this.chckboxzerorated.Name = "chckboxzerorated";
+            this.chckboxzerorated.Size = new System.Drawing.Size(117, 21);
+            this.chckboxzerorated.TabIndex = 39;
+            this.chckboxzerorated.Text = "is Zero Rated?";
+            this.chckboxzerorated.UseVisualStyleBackColor = true;
+            // 
             // ConfirmOrderDevEx
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
@@ -892,5 +904,6 @@
         public DevExpress.XtraEditors.TextEdit txtcustname;
         private System.Windows.Forms.RadioButton radsummary;
         private System.Windows.Forms.RadioButton raddetailed;
+        private System.Windows.Forms.CheckBox chckboxzerorated;
     }
 }

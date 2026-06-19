@@ -84,6 +84,8 @@
             this.bandedGridView1 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridView();
             this.advBandedGridView1 = new DevExpress.XtraGrid.Views.BandedGrid.AdvBandedGridView();
             this.gridBand1 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
+            this.panelControl2 = new DevExpress.XtraEditors.PanelControl();
+            this.tablePanel1 = new DevExpress.Utils.Layout.TablePanel();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).BeginInit();
             this.groupControl2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
@@ -114,16 +116,22 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bandedGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.advBandedGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).BeginInit();
+            this.panelControl2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tablePanel1)).BeginInit();
+            this.tablePanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupControl2
             // 
+            this.tablePanel1.SetColumn(this.groupControl2, 0);
             this.groupControl2.Controls.Add(this.gridControl1);
             this.groupControl2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupControl2.Location = new System.Drawing.Point(2, 194);
+            this.groupControl2.Location = new System.Drawing.Point(3, 2);
             this.groupControl2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupControl2.Name = "groupControl2";
-            this.groupControl2.Size = new System.Drawing.Size(1128, 156);
+            this.tablePanel1.SetRow(this.groupControl2, 0);
+            this.groupControl2.Size = new System.Drawing.Size(556, 476);
             this.groupControl2.TabIndex = 24;
             // 
             // gridControl1
@@ -134,7 +142,7 @@
             this.gridControl1.MainView = this.gridView1;
             this.gridControl1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.gridControl1.Name = "gridControl1";
-            this.gridControl1.Size = new System.Drawing.Size(1124, 126);
+            this.gridControl1.Size = new System.Drawing.Size(552, 446);
             this.gridControl1.TabIndex = 18;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
@@ -199,7 +207,7 @@
             this.groupControl1.Name = "groupControl1";
             this.groupControl1.Size = new System.Drawing.Size(1128, 192);
             this.groupControl1.TabIndex = 23;
-            this.groupControl1.Text = "Receive PO/Inventory";
+            this.groupControl1.Text = "Receive PO/Inventory ";
             // 
             // chckboxUseBarcode
             // 
@@ -709,13 +717,13 @@
             // 
             // panelControl1
             // 
-            this.panelControl1.Controls.Add(this.groupControl2);
+            this.panelControl1.Controls.Add(this.panelControl2);
             this.panelControl1.Controls.Add(this.groupControl1);
             this.panelControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelControl1.Location = new System.Drawing.Point(0, 328);
+            this.panelControl1.Location = new System.Drawing.Point(0, 0);
             this.panelControl1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.panelControl1.Name = "panelControl1";
-            this.panelControl1.Size = new System.Drawing.Size(1132, 352);
+            this.panelControl1.Size = new System.Drawing.Size(1132, 680);
             this.panelControl1.TabIndex = 25;
             // 
             // dockManager1
@@ -733,14 +741,16 @@
             // 
             // groupControl3
             // 
+            this.tablePanel1.SetColumn(this.groupControl3, 1);
             this.groupControl3.Controls.Add(this.gridControl2);
-            this.groupControl3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupControl3.Location = new System.Drawing.Point(0, 0);
+            this.groupControl3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupControl3.Location = new System.Drawing.Point(565, 4);
             this.groupControl3.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.groupControl3.Name = "groupControl3";
-            this.groupControl3.Size = new System.Drawing.Size(1132, 328);
+            this.tablePanel1.SetRow(this.groupControl3, 0);
+            this.groupControl3.Size = new System.Drawing.Size(556, 472);
             this.groupControl3.TabIndex = 26;
-            this.groupControl3.Text = "Purchase Order Details";
+            this.groupControl3.Text = "Purchase Order Details ";
             // 
             // gridControl2
             // 
@@ -750,7 +760,7 @@
             this.gridControl2.MainView = this.gridView2;
             this.gridControl2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.gridControl2.Name = "gridControl2";
-            this.gridControl2.Size = new System.Drawing.Size(1128, 298);
+            this.gridControl2.Size = new System.Drawing.Size(552, 442);
             this.gridControl2.TabIndex = 2;
             this.gridControl2.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView2,
@@ -799,13 +809,36 @@
             this.gridBand1.VisibleIndex = 0;
             this.gridBand1.Width = 82;
             // 
+            // panelControl2
+            // 
+            this.panelControl2.Controls.Add(this.tablePanel1);
+            this.panelControl2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelControl2.Location = new System.Drawing.Point(2, 194);
+            this.panelControl2.Name = "panelControl2";
+            this.panelControl2.Size = new System.Drawing.Size(1128, 484);
+            this.panelControl2.TabIndex = 27;
+            // 
+            // tablePanel1
+            // 
+            this.tablePanel1.Columns.AddRange(new DevExpress.Utils.Layout.TablePanelColumn[] {
+            new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 50F),
+            new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 50F)});
+            this.tablePanel1.Controls.Add(this.groupControl3);
+            this.tablePanel1.Controls.Add(this.groupControl2);
+            this.tablePanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tablePanel1.Location = new System.Drawing.Point(2, 2);
+            this.tablePanel1.Name = "tablePanel1";
+            this.tablePanel1.Rows.AddRange(new DevExpress.Utils.Layout.TablePanelRow[] {
+            new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 26F)});
+            this.tablePanel1.Size = new System.Drawing.Size(1124, 480);
+            this.tablePanel1.TabIndex = 27;
+            // 
             // AddInventoryDevEx
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1132, 680);
             this.Controls.Add(this.panelControl1);
-            this.Controls.Add(this.groupControl3);
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "AddInventoryDevEx";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -843,6 +876,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridView2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bandedGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.advBandedGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).EndInit();
+            this.panelControl2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.tablePanel1)).EndInit();
+            this.tablePanel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -903,5 +940,7 @@
         private DevExpress.XtraGrid.Views.Grid.GridView searchLookUpEdit1View;
         private DevExpress.XtraEditors.LabelControl labelControl7;
         private System.Windows.Forms.CheckBox chckboxUseBarcode;
+        private DevExpress.Utils.Layout.TablePanel tablePanel1;
+        private DevExpress.XtraEditors.PanelControl panelControl2;
     }
 }

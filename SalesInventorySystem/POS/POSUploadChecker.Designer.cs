@@ -181,12 +181,12 @@
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.reuploadThisTableToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(209, 28);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(211, 56);
             // 
             // reuploadThisTableToolStripMenuItem
             // 
             this.reuploadThisTableToolStripMenuItem.Name = "reuploadThisTableToolStripMenuItem";
-            this.reuploadThisTableToolStripMenuItem.Size = new System.Drawing.Size(208, 24);
+            this.reuploadThisTableToolStripMenuItem.Size = new System.Drawing.Size(210, 24);
             this.reuploadThisTableToolStripMenuItem.Text = "Reupload this Table";
             this.reuploadThisTableToolStripMenuItem.Click += new System.EventHandler(this.reuploadThisTableToolStripMenuItem_Click);
             // 

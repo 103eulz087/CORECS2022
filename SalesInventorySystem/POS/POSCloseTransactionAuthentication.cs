@@ -23,9 +23,9 @@ namespace SalesInventorySystem.POS
         }
 
         public static string UserID,CashierTransNo, MachineUsed;
-        string password;
-        string encryptedpassword;
-        string decryptedpassword;
+        //string password;
+        //string encryptedpassword;
+        //string decryptedpassword;
         public POSCloseTransactionAuthentication()
         {
             InitializeComponent();
@@ -57,7 +57,8 @@ namespace SalesInventorySystem.POS
                 XtraMessageBox.Show("Password is required.", "ITCORE Solutions Inc.");
                 return;
             }
-            bool checkifexist = Database.checkifExist("SELECT TOP 1 UserID FROM SalesTransactionSummary WHERE BranchCode='" + Login.assignedBranch + "' " +
+            bool checkifexist = Database.checkifExist("SELECT TOP 1 UserID FROM SalesTransactionSummary " +
+                "WHERE BranchCode='" + Login.assignedBranch + "' " +
                 "AND DateOpen='" + DateTime.Today.ToShortDateString() + "' AND MachineUsed='"+Environment.MachineName.ToString()+"' AND isOpen=1 AND UserID='"+ txtuserid.Text.Trim() + "'");
             if (checkifexist)
             {
@@ -71,7 +72,8 @@ namespace SalesInventorySystem.POS
                 CashierTransNo = rows["CashierTransNo"].ToString();
                 MachineUsed = rows["MachineUsed"].ToString();
                 UserID = rows["UserID"].ToString();
-                get_password();
+                AuthenticateCashierTransactionUser();
+                //get_password();
             }
             else
             {
@@ -86,156 +88,324 @@ namespace SalesInventorySystem.POS
             //}
            
         }
-
-        private void get_password()
+        private void AuthenticateCashierTransactionUser()
         {
-            SqlConnection con = Database.getConnection();
-            con.Open();
-            SqlCommand com = new SqlCommand("Select Password from Users where UserID = '" + txtuserid.Text + "'", con);
-            SqlDataReader reader = com.ExecuteReader();
             try
             {
-                if (reader != null)
+                using (SqlConnection con = Database.getConnection())
                 {
-                    while (reader.Read())
+                    if (con == null)
                     {
-                        password = reader["Password"].ToString();
-                        decrypt_password();
+                        XtraMessageBox.Show("Database connection is not available.", "ITCORE Solutions Inc.");
                         return;
                     }
-                }
-                XtraMessageBox.Show("Invalid user id or password given.", "SPIRE Solutions Inc.", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
-                txtpassword.Focus();
-                txtpassword.SelectionStart = 0;
-                txtpassword.SelectionLength = txtpassword.Text.Length;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-            finally
-            {
-                con.Close();
-            }
-        }
-        private void decrypt_password()
-        {
-            SqlConnection con = Database.getConnection();
-            con.Open();
-            SqlCommand com = new SqlCommand("declare @pwd varchar(50) exec master..xp_aes_decrypt '" + password + "','0123456789ABCDEF0123456789ABCDEF',@pwd output select @pwd result", con);
-            SqlDataReader reader = com.ExecuteReader();
-            try
-            {
-                if (reader != null)
-                {
-                    while (reader.Read())
+
+                    con.Open();
+
+                    // ==========================================================
+                    // STEP 1: Check if this cashier has an open transaction today
+                    // on this branch + current machine
+                    // ==========================================================
+                    string transactionSql = @"
+                            SELECT TOP 1 UserID, CashierTransNo, MachineUsed
+                            FROM dbo.SalesTransactionSummary
+                            WHERE BranchCode = @BranchCode
+                              AND DateOpen = @DateOpen
+                              AND MachineUsed = @MachineUsed
+                              AND isOpen = 1
+                              AND UserID = @UserID;";
+
+                    using (SqlCommand transCmd = new SqlCommand(transactionSql, con))
                     {
-                        decryptedpassword = reader["result"].ToString();
-                        validate_user();
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-            finally
-            {
-                con.Close();
-            }
-        }
-        private void encrypt()
-        {
-            SqlConnection con = Database.getConnection();
-            con.Open();
-            SqlCommand com = new SqlCommand("exec master..xp_aes_encrypt '" + txtpassword.Text + "','0123456789ABCDEF0123456789ABCDEF'", con);
-            SqlDataReader reader = com.ExecuteReader();
-            try
-            {
-                if (reader != null)
-                {
-                    while (reader.Read())
-                    {
-                        encryptedpassword = reader["result"].ToString();
-                        validate_user();
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-            finally
-            {
-                con.Close();
-            }
-        }
-        private void validate_user()
-        {
-            SqlConnection con = Database.getConnection();
-            con.Open();
-            SqlCommand com = new SqlCommand("Select * from Users where UserID= '" + txtuserid.Text + "' and Password = '" + password + "'", con);
-            SqlDataReader reader = com.ExecuteReader();
-            try
-            {
-                if (reader != null)
-                {
-                    while (reader.Read())
-                    {
-                        isglobalAdmin = reader["isAdmin"].ToString();
-                        isglobalOfficer = reader["isGlobalOfficer"].ToString();
-                        isglobalBranchOfficer = reader["isBranchOfficer"].ToString();
-                        isglobalWarehouseOfficer = reader["isWarehouseOfficer"].ToString();
-                        isMaker = reader["isMaker"].ToString();
-                        isChecker = reader["isChecker"].ToString();
-                        isCashier = reader["isCashier"].ToString();
-                        isglobalApprover = reader["isApprover"].ToString();
-                        isglobalUserID = reader["UserID"].ToString();
-                        assignedBranch = reader["AssignedBranch"].ToString();
-                        cashinlimit = reader["CashInLimit"].ToString();
-                        cashendlimit = reader["CashEndLimit"].ToString();
-                        glacctcode = reader["GLAccount"].ToString();
-                        if (txtpassword.Text != decryptedpassword)
+                        transCmd.Parameters.AddWithValue("@BranchCode", Login.assignedBranch);
+                        transCmd.Parameters.AddWithValue("@DateOpen", DateTime.Today.ToShortDateString());
+                        transCmd.Parameters.AddWithValue("@MachineUsed", Environment.MachineName);
+                        transCmd.Parameters.AddWithValue("@UserID", txtuserid.Text.Trim());
+
+                        using (SqlDataReader transReader = transCmd.ExecuteReader())
                         {
-                            XtraMessageBox.Show("Invalid user id or password given.", "SPIRE IT SOLUTIONS", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
-                            txtuserid.Focus();
-                            return;
+                            if (!transReader.Read())
+                            {
+                                XtraMessageBox.Show("The credentials you entered have no transaction for this day!.", "ITCORE Solutions Inc.");
+                                txtuserid.Focus();
+                                return;
+                            }
+
+                            CashierTransNo = transReader["CashierTransNo"].ToString();
+                            MachineUsed = transReader["MachineUsed"].ToString();
+                            UserID = transReader["UserID"].ToString();
                         }
-                        else
+                    }
+
+                    // ==========================================================
+                    // STEP 2: Load user account + password hash
+                    // ==========================================================
+                    string userSql = @"
+                            SELECT TOP 1
+                                UserID,
+                                isAdmin,
+                                isGlobalOfficer,
+                                isBranchOfficer,
+                                isWarehouseOfficer,
+                                isMaker,
+                                isChecker,
+                                isCashier,
+                                isApprover,
+                                AssignedBranch,
+                                CashInLimit,
+                                CashEndLimit,
+                                GLAccount,
+                                PasswordHash,
+                                PasswordSalt,
+                                PasswordIterations,
+                                MustChangePassword
+                            FROM dbo.Users
+                            WHERE UserID = @UserID;";
+
+                    using (SqlCommand userCmd = new SqlCommand(userSql, con))
+                    {
+                        userCmd.Parameters.AddWithValue("@UserID", txtuserid.Text.Trim());
+
+                        using (SqlDataReader reader = userCmd.ExecuteReader())
                         {
+                            if (!reader.Read())
+                            {
+                                XtraMessageBox.Show("Invalid user id or password given.", "ITCORE Solutions Inc.",
+                                    MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
+                                txtpassword.Focus();
+                                txtpassword.SelectAll();
+                                return;
+                            }
+
+                            byte[] passwordHash = reader["PasswordHash"] == DBNull.Value ? null : (byte[])reader["PasswordHash"];
+                            byte[] passwordSalt = reader["PasswordSalt"] == DBNull.Value ? null : (byte[])reader["PasswordSalt"];
+                            int passwordIterations = reader["PasswordIterations"] == DBNull.Value ? 0 : Convert.ToInt32(reader["PasswordIterations"]);
+                            bool mustChangePassword = reader["MustChangePassword"] != DBNull.Value && Convert.ToBoolean(reader["MustChangePassword"]);
+
+                            if (passwordHash == null || passwordSalt == null || passwordIterations <= 0)
+                            {
+                                XtraMessageBox.Show("This account needs a password reset before it can be used.",
+                                    "ITCORE Solutions Inc.",
+                                    MessageBoxButtons.OK,
+                                    MessageBoxIcon.Warning,
+                                    MessageBoxDefaultButton.Button1);
+                                txtuserid.Focus();
+                                return;
+                            }
+
+                            if (mustChangePassword)
+                            {
+                                XtraMessageBox.Show("This account is required to change password before it can be used.",
+                                    "ITCORE Solutions Inc.",
+                                    MessageBoxButtons.OK,
+                                    MessageBoxIcon.Warning,
+                                    MessageBoxDefaultButton.Button1);
+                                txtuserid.Focus();
+                                return;
+                            }
+
+                            bool passwordOk = PasswordHasher.VerifyPassword(
+                                txtpassword.Text,
+                                passwordSalt,
+                                passwordIterations,
+                                passwordHash);
+
+                            if (!passwordOk)
+                            {
+                                XtraMessageBox.Show("Invalid user id or password given.",
+                                    "ITCORE Solutions Inc.",
+                                    MessageBoxButtons.OK,
+                                    MessageBoxIcon.Information,
+                                    MessageBoxDefaultButton.Button1);
+                                txtpassword.Focus();
+                                txtpassword.SelectAll();
+                                return;
+                            }
+
+                            // ==================================================
+                            // STEP 3: Populate existing global variables
+                            // ==================================================
+                            isglobalAdmin = reader["isAdmin"].ToString();
+                            isglobalOfficer = reader["isGlobalOfficer"].ToString();
+                            isglobalBranchOfficer = reader["isBranchOfficer"].ToString();
+                            isglobalWarehouseOfficer = reader["isWarehouseOfficer"].ToString();
+                            isMaker = reader["isMaker"].ToString();
+                            isChecker = reader["isChecker"].ToString();
+                            isCashier = reader["isCashier"].ToString();
+                            isglobalApprover = reader["isApprover"].ToString();
+                            isglobalUserID = reader["UserID"].ToString();
+                            assignedBranch = reader["AssignedBranch"].ToString();
+                            cashinlimit = reader["CashInLimit"].ToString();
+                            cashendlimit = reader["CashEndLimit"].ToString();
+                            glacctcode = reader["GLAccount"].ToString();
+
+                            // ==================================================
+                            // STEP 4: Success
+                            // ==================================================
                             isconfirmedLogin = true;
                             this.Hide();
                         }
-                        //if ((Convert.ToBoolean(isglobalBranchOfficer) == true || Convert.ToBoolean(isglobalAdmin)) && assignedBranch == Login.assignedBranch)
-                        //{
-                        //    isconfirmedLogin = true;
-                        //    this.Hide();
-                        //}
-                        //if (Convert.ToBoolean(isglobalOfficer))
-                        //{
-                        //    isconfirmedLogin = true;
-                        //    this.Hide();
-                        //}
-                        // this.Close();
-
-
                     }
                 }
-                // XtraMessageBox.Show("Invalid user id or password given.", "Spire Solution", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
-                txtpassword.Focus();
-                txtpassword.SelectionStart = 0;
-                txtpassword.SelectionLength = txtpassword.Text.Length;
-                return;
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message.ToString());
-            }
-            finally
-            {
-                con.Close();
+                XtraMessageBox.Show("Authentication error: " + ex.Message,
+                    "ITCORE Solutions Inc.",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error,
+                    MessageBoxDefaultButton.Button1);
             }
         }
+        //private void get_password()
+        //{
+        //    SqlConnection con = Database.getConnection();
+        //    con.Open();
+        //    SqlCommand com = new SqlCommand("Select Password from Users where UserID = '" + txtuserid.Text + "'", con);
+        //    SqlDataReader reader = com.ExecuteReader();
+        //    try
+        //    {
+        //        if (reader != null)
+        //        {
+        //            while (reader.Read())
+        //            {
+        //                password = reader["Password"].ToString();
+        //                decrypt_password();
+        //                return;
+        //            }
+        //        }
+        //        XtraMessageBox.Show("Invalid user id or password given.", "SPIRE Solutions Inc.", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
+        //        txtpassword.Focus();
+        //        txtpassword.SelectionStart = 0;
+        //        txtpassword.SelectionLength = txtpassword.Text.Length;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw new Exception(ex.Message);
+        //    }
+        //    finally
+        //    {
+        //        con.Close();
+        //    }
+        //}
+        //private void decrypt_password()
+        //{
+        //    SqlConnection con = Database.getConnection();
+        //    con.Open();
+        //    SqlCommand com = new SqlCommand("declare @pwd varchar(50) exec master..xp_aes_decrypt '" + password + "','0123456789ABCDEF0123456789ABCDEF',@pwd output select @pwd result", con);
+        //    SqlDataReader reader = com.ExecuteReader();
+        //    try
+        //    {
+        //        if (reader != null)
+        //        {
+        //            while (reader.Read())
+        //            {
+        //                decryptedpassword = reader["result"].ToString();
+        //                validate_user();
+        //            }
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw new Exception(ex.Message);
+        //    }
+        //    finally
+        //    {
+        //        con.Close();
+        //    }
+        //}
+        //private void encrypt()
+        //{
+        //    SqlConnection con = Database.getConnection();
+        //    con.Open();
+        //    SqlCommand com = new SqlCommand("exec master..xp_aes_encrypt '" + txtpassword.Text + "','0123456789ABCDEF0123456789ABCDEF'", con);
+        //    SqlDataReader reader = com.ExecuteReader();
+        //    try
+        //    {
+        //        if (reader != null)
+        //        {
+        //            while (reader.Read())
+        //            {
+        //                encryptedpassword = reader["result"].ToString();
+        //                validate_user();
+        //            }
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw new Exception(ex.Message);
+        //    }
+        //    finally
+        //    {
+        //        con.Close();
+        //    }
+        //}
+        //private void validate_user()
+        //{
+        //    SqlConnection con = Database.getConnection();
+        //    con.Open();
+        //    SqlCommand com = new SqlCommand("Select * from Users where UserID= '" + txtuserid.Text + "' and Password = '" + password + "'", con);
+        //    SqlDataReader reader = com.ExecuteReader();
+        //    try
+        //    {
+        //        if (reader != null)
+        //        {
+        //            while (reader.Read())
+        //            {
+        //                isglobalAdmin = reader["isAdmin"].ToString();
+        //                isglobalOfficer = reader["isGlobalOfficer"].ToString();
+        //                isglobalBranchOfficer = reader["isBranchOfficer"].ToString();
+        //                isglobalWarehouseOfficer = reader["isWarehouseOfficer"].ToString();
+        //                isMaker = reader["isMaker"].ToString();
+        //                isChecker = reader["isChecker"].ToString();
+        //                isCashier = reader["isCashier"].ToString();
+        //                isglobalApprover = reader["isApprover"].ToString();
+        //                isglobalUserID = reader["UserID"].ToString();
+        //                assignedBranch = reader["AssignedBranch"].ToString();
+        //                cashinlimit = reader["CashInLimit"].ToString();
+        //                cashendlimit = reader["CashEndLimit"].ToString();
+        //                glacctcode = reader["GLAccount"].ToString();
+        //                if (txtpassword.Text != decryptedpassword)
+        //                {
+        //                    XtraMessageBox.Show("Invalid user id or password given.", "SPIRE IT SOLUTIONS", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
+        //                    txtuserid.Focus();
+        //                    return;
+        //                }
+        //                else
+        //                {
+        //                    isconfirmedLogin = true;
+        //                    this.Hide();
+        //                }
+        //                //if ((Convert.ToBoolean(isglobalBranchOfficer) == true || Convert.ToBoolean(isglobalAdmin)) && assignedBranch == Login.assignedBranch)
+        //                //{
+        //                //    isconfirmedLogin = true;
+        //                //    this.Hide();
+        //                //}
+        //                //if (Convert.ToBoolean(isglobalOfficer))
+        //                //{
+        //                //    isconfirmedLogin = true;
+        //                //    this.Hide();
+        //                //}
+        //                // this.Close();
+
+
+        //            }
+        //        }
+        //        // XtraMessageBox.Show("Invalid user id or password given.", "Spire Solution", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
+        //        txtpassword.Focus();
+        //        txtpassword.SelectionStart = 0;
+        //        txtpassword.SelectionLength = txtpassword.Text.Length;
+        //        return;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw new Exception(ex.Message.ToString());
+        //    }
+        //    finally
+        //    {
+        //        con.Close();
+        //    }
+        //}
 
         private void txtuserid_KeyDown(object sender, KeyEventArgs e)
         {

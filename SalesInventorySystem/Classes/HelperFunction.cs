@@ -31,7 +31,60 @@ namespace SalesInventorySystem
         static int papersize = 38;
         //static int papersize = 27;
         static int cornerlength = 0;
+        public static int papersize56 = 32;
+        public static int cornerlength56 = 0;
 
+
+        public static String PrintLeftRigthText56(String value_left, String value_right)
+        {
+            // Determine how much space the left text is actually allowed to take up
+            int availableLeftSpace = papersize56 - (cornerlength * 2) - value_right.Length;
+
+            // Truncate the left text if it's too long, leaving room for the ".." 
+            if (value_left.Length > availableLeftSpace)
+            {
+                // I kept your Split1 logic, assuming you have that method defined elsewhere.
+                // Alternatively, you could use: value_left = value_left.Substring(0, availableLeftSpace - 2) + "..";
+                value_left = Split1(value_left) + "..";
+            }
+
+            // Calculate the exact number of spaces needed between left and right
+            int spacesNeeded = papersize56 - (cornerlength56 * 2) - value_left.Length - value_right.Length;
+
+            // Safety check to prevent negative space errors
+            if (spacesNeeded < 0) spacesNeeded = 0;
+
+            return PrintGetSpace56(cornerlength56) + value_left + PrintGetSpace56(spacesNeeded) + value_right;
+        }
+        public static string PrinttoRight56(string righttext)
+        {
+            string str = "";
+            for (int i = 0; i <= (32 - righttext.Length); i++)
+            {
+                str += " ";
+            }
+            return str + righttext;
+        }
+        public static String PrintLeftText56(String value)
+        {
+            return PrintGetSpace56(cornerlength56) + value;
+        }
+
+        public static String PrintGetSpace56(int val)
+        {
+            // 2. Fixed the off-by-one bug. Returns exactly the number of spaces requested.
+            if (val <= 0) return "";
+            return new string(' ', val);
+        }
+
+        public static String createDottedLine56()
+        {
+            // 3. Fixed the off-by-one bug here as well, and eliminated the loop.
+            int lineLength = papersize56 - (cornerlength56 * 2);
+            if (lineLength <= 0) return "";
+
+            return PrintGetSpace56(cornerlength56) + new string('-', lineLength);
+        }
         /// <summary>
         /// Reads the config file and returns Version and Token.
         /// </summary>
@@ -64,7 +117,29 @@ namespace SalesInventorySystem
         }
 
 
-        public static void ShowWaitAndDisplay(string query, GridControl grid, GridView view, string caption = "Please wait", string description = "Loading data...", int delayMs = 1000)
+        public static async void ShowWaitAndDisplay(string query, GridControl grid, GridView view, string caption = "Please wait", string description = "Loading data...", int delayMs = 1000)
+        {
+            try
+            {
+                SplashScreenManager.ShowDefaultWaitForm();
+                SplashScreenManager.Default.SetWaitFormCaption(caption);
+                SplashScreenManager.Default.SetWaitFormDescription(description);
+
+                await Database.displayAsync(query, grid, view);
+
+                // Optional delay to keep the wait form visible
+                Thread.Sleep(delayMs);
+            }
+            catch (SqlException ex)
+            {
+                XtraMessageBox.Show("Error: " + ex.Message);
+            }
+            finally
+            {
+                SplashScreenManager.CloseDefaultWaitForm();
+            }
+        }
+        public static void ShowWaitAndDisplayNonAsync(string query, GridControl grid, GridView view, string caption = "Please wait", string description = "Loading data...", int delayMs = 1000)
         {
             try
             {
@@ -86,7 +161,6 @@ namespace SalesInventorySystem
                 SplashScreenManager.CloseDefaultWaitForm();
             }
         }
-
         public static void ShowWaitAndDisplay(string caption = "Please wait", string description = "Loading data...", int delayMs = 1000)
         {
             try
@@ -199,7 +273,10 @@ namespace SalesInventorySystem
             str = String.Format("{0:0,0.00}", value); 
             return str;
         }
-
+        public static string convertToNumericFormat(decimal value)
+        {
+            return string.Format("{0:0,0.00}", value);
+        }
         public static string numericFormat(double value)
         {
             string str = "";

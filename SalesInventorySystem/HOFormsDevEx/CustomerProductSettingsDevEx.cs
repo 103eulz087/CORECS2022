@@ -128,7 +128,7 @@ namespace SalesInventorySystem.HOFormsDevEx
 
         private void btnupdate_Click(object sender, EventArgs e)
         {
-            Database.ExecuteQuery("UPDATE CustomerProductSetting Set SpecialPriceAmount='" + gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "SpecialPriceAmount").ToString() + "',Remarks='"+ gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "Remarks").ToString() + "' WHERE SequenceNumber='" + gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "SequenceNumber").ToString() + "'", "Successfully Update");
+            Database.ExecuteQuery("UPDATE CustomerProductSetting Set SpecialPriceAmount='" + gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "SpecialPriceAmount").ToString() + "',Remarks='"+ gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "Remarks").ToString() + "' WHERE CustID='" + gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "CustID").ToString() + "' AND ProductCode='"+ gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "ProductCode").ToString() + "'", "Successfully Update");
             gridView1.OptionsBehavior.Editable = false;
             gridView1.OptionsBehavior.ReadOnly = true;
             btnupdate.Enabled = false;

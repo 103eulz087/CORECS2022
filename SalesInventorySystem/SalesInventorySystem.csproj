@@ -55,7 +55,7 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>CORECSICON.ico</ApplicationIcon>
+    <ApplicationIcon>Gemini_Generated_Image_knbj2tknbj2tknbjNew.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject>
@@ -228,6 +228,7 @@
     <Reference Include="DocumentFormat.OpenXml">
       <HintPath>..\..\..\..\..\Downloads\DocumentFormat.OpenXml.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="Microsoft.Web.WebView2.Core">
       <HintPath>obj\Plugins\Microsoft.Web.WebView2.1.0.2478.35\lib\net45\Microsoft.Web.WebView2.Core.dll</HintPath>
     </Reference>
@@ -330,11 +331,47 @@
     <Compile Include="AccountingDevEx\BalanceSheetDevEx.Designer.cs">
       <DependentUpon>BalanceSheetDevEx.cs</DependentUpon>
     </Compile>
+    <Compile Include="AccountingDevEx\BankReconFormV1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AccountingDevEx\BankReconFormV1.Designer.cs">
+      <DependentUpon>BankReconFormV1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AccountingDevEx\BankReconForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AccountingDevEx\BankReconForm.Designer.cs">
+      <DependentUpon>BankReconForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AccountingDevEx\BankReconItemForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AccountingDevEx\BankReconItemForm.Designer.cs">
+      <DependentUpon>BankReconItemForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AccountingDevEx\ManualTicketFormV1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AccountingDevEx\ManualTicketFormV1.Designer.cs">
+      <DependentUpon>ManualTicketFormV1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AccountingDevEx\ManualTicketForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AccountingDevEx\ManualTicketForm.Designer.cs">
+      <DependentUpon>ManualTicketForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="AccountingDevEx\ViewCheckVoucherDetailsDevEx.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="AccountingDevEx\ViewCheckVoucherDetailsDevEx.Designer.cs">
       <DependentUpon>ViewCheckVoucherDetailsDevEx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AccountingDevEx\CancelledCheckVoucher.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AccountingDevEx\CancelledCheckVoucher.Designer.cs">
+      <DependentUpon>CancelledCheckVoucher.cs</DependentUpon>
     </Compile>
     <Compile Include="AccountingDevEx\ViewCheckVoucherDevEx.cs">
       <SubType>Form</SubType>
@@ -552,11 +589,23 @@
     <Compile Include="Branches\BranchGenInventory.Designer.cs">
       <DependentUpon>BranchGenInventory.cs</DependentUpon>
     </Compile>
+    <Compile Include="Branches\BranchGenInventoryUpdateCost.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Branches\BranchGenInventoryUpdateCost.Designer.cs">
+      <DependentUpon>BranchGenInventoryUpdateCost.cs</DependentUpon>
+    </Compile>
     <Compile Include="Branches\BranchInventory.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Branches\BranchInventory.Designer.cs">
       <DependentUpon>BranchInventory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Branches\BranchInventoryIN.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Branches\BranchInventoryIN.Designer.cs">
+      <DependentUpon>BranchInventoryIN.cs</DependentUpon>
     </Compile>
     <Compile Include="Branches\BranchPOS.cs">
       <SubType>Form</SubType>
@@ -606,6 +655,7 @@
     <Compile Include="Classes\Branch.cs" />
     <Compile Include="Classes\ClientAccount.cs" />
     <Compile Include="Classes\CompanyProfile.cs" />
+    <Compile Include="Classes\ConnRegistry.cs" />
     <Compile Include="Classes\CurrencyConversion.cs" />
     <Compile Include="Classes\Customers.cs" />
     <Compile Include="Classes\Database.cs" />
@@ -615,14 +665,18 @@
     <Compile Include="Classes\Departments.cs" />
     <Compile Include="Classes\DevExUtilities.cs" />
     <Compile Include="Classes\DevXGridViewSettings.cs" />
+    <Compile Include="Classes\EJournalGenerator.cs" />
     <Compile Include="Classes\EmailSetup.cs" />
     <Compile Include="Classes\FileObject.cs" />
+    <Compile Include="Classes\GlobalCache.cs" />
     <Compile Include="Classes\GlobalVariables.cs" />
     <Compile Include="Classes\HelperFunction.cs" />
     <Compile Include="Classes\IDGenerator.cs" />
     <Compile Include="Classes\Inventory.cs" />
     <Compile Include="Classes\ListItems.cs" />
     <Compile Include="Classes\Locations.cs" />
+    <Compile Include="Classes\PasswordHasher.cs" />
+    <Compile Include="Classes\PasswordPolicy.cs" />
     <Compile Include="Classes\PosDataDownloader.cs" />
     <Compile Include="Classes\PosDataUploader.cs" />
     <Compile Include="Classes\POSDownloadUpdates.cs" />
@@ -635,6 +689,7 @@
     <Compile Include="Classes\RoundedLabelControl.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Classes\ScannedAsset.cs" />
     <Compile Include="Classes\SearchLookUpClass.cs" />
     <Compile Include="Classes\SoundPlayer.cs" />
     <Compile Include="Classes\Suppliers.cs" />
@@ -970,6 +1025,12 @@
     </Compile>
     <Compile Include="HOFormsDevEx\AddPurchaseOrder.Designer.cs">
       <DependentUpon>AddPurchaseOrder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HOFormsDevEx\AddPurchaseOrderSubmit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HOFormsDevEx\AddPurchaseOrderSubmit.Designer.cs">
+      <DependentUpon>AddPurchaseOrderSubmit.cs</DependentUpon>
     </Compile>
     <Compile Include="HOFormsDevEx\AddSupplierDevEx.cs">
       <SubType>Form</SubType>
@@ -2154,6 +2215,12 @@
     <Compile Include="Orders\AddBranchOrderSTSBatchMode.Designer.cs">
       <DependentUpon>AddBranchOrderSTSBatchMode.cs</DependentUpon>
     </Compile>
+    <Compile Include="Orders\AddItemsBranchOrderSTS.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Orders\AddItemsBranchOrderSTS.Designer.cs">
+      <DependentUpon>AddItemsBranchOrderSTS.cs</DependentUpon>
+    </Compile>
     <Compile Include="Orders\AddOrder.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -2291,6 +2358,12 @@
     </Compile>
     <Compile Include="POSDevEx\POSCreditCardMonitoring.Designer.cs">
       <DependentUpon>POSCreditCardMonitoring.cs</DependentUpon>
+    </Compile>
+    <Compile Include="POSDevEx\POSDataManagementAutomation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="POSDevEx\POSDataManagementAutomation.Designer.cs">
+      <DependentUpon>POSDataManagementAutomation.cs</DependentUpon>
     </Compile>
     <Compile Include="POSDevEx\POSManagementReport.cs">
       <SubType>Form</SubType>
@@ -2556,12 +2629,6 @@
     <Compile Include="POS\POSMainRestoDashboard.Designer.cs">
       <DependentUpon>POSMainRestoDashboard.cs</DependentUpon>
     </Compile>
-    <Compile Include="POS\POSMainWithDashboard.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="POS\POSMainWithDashboard.Designer.cs">
-      <DependentUpon>POSMainWithDashboard.cs</DependentUpon>
-    </Compile>
     <Compile Include="POS\POSOnHoldTransaction.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -2756,6 +2823,11 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="ReInventoryAnalyzer.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -2791,6 +2863,12 @@
     </Compile>
     <Compile Include="Reporting\AccountingReportingDetails.Designer.cs">
       <DependentUpon>AccountingReportingDetails.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reporting\AccountingReportsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reporting\AccountingReportsForm.Designer.cs">
+      <DependentUpon>AccountingReportsForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Reporting\AccountReconDevEx.cs">
       <SubType>Form</SubType>
@@ -2899,6 +2977,12 @@
     </Compile>
     <Compile Include="Reporting\BIR\VATInput.Designer.cs">
       <DependentUpon>VATInput.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reporting\BranchInventoryTransfer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reporting\BranchInventoryTransfer.Designer.cs">
+      <DependentUpon>BranchInventoryTransfer.cs</DependentUpon>
     </Compile>
     <Compile Include="Reporting\CarcassReports.cs">
       <SubType>Form</SubType>
@@ -3051,6 +3135,12 @@
     <Compile Include="ReuploadSales.Designer.cs">
       <DependentUpon>ReuploadSales.cs</DependentUpon>
     </Compile>
+    <Compile Include="RFID\RFIDDashboard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RFID\RFIDDashboard.Designer.cs">
+      <DependentUpon>RFIDDashboard.cs</DependentUpon>
+    </Compile>
     <Compile Include="RibbonForm1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -3138,6 +3228,7 @@
     <Compile Include="SearchProductItems.Designer.cs">
       <DependentUpon>SearchProductItems.cs</DependentUpon>
     </Compile>
+    <Compile Include="SingleInstanceApp.cs" />
     <Compile Include="SplashScreen1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -3167,6 +3258,12 @@
     </Compile>
     <Compile Include="SplashScreen5.Designer.cs">
       <DependentUpon>SplashScreen5.cs</DependentUpon>
+    </Compile>
+    <Compile Include="StartupForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StartupForm.Designer.cs">
+      <DependentUpon>StartupForm.cs</DependentUpon>
     </Compile>
     <Compile Include="StickerLabeling.cs">
       <SubType>Form</SubType>
@@ -3252,8 +3349,20 @@
     <EmbeddedResource Include="AccountingDevEx\BalanceSheetDevEx.resx">
       <DependentUpon>BalanceSheetDevEx.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="AccountingDevEx\BankReconFormV1.resx">
+      <DependentUpon>BankReconFormV1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AccountingDevEx\BankReconForm.resx">
+      <DependentUpon>BankReconForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AccountingDevEx\ManualTicketFormV1.resx">
+      <DependentUpon>ManualTicketFormV1.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="AccountingDevEx\ViewCheckVoucherDetailsDevEx.resx">
       <DependentUpon>ViewCheckVoucherDetailsDevEx.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AccountingDevEx\CancelledCheckVoucher.resx">
+      <DependentUpon>CancelledCheckVoucher.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AccountingDevEx\ViewCheckVoucherDevEx.resx">
       <DependentUpon>ViewCheckVoucherDevEx.cs</DependentUpon>
@@ -3363,9 +3472,15 @@
     <EmbeddedResource Include="Branches\BranchGenInventory.resx">
       <DependentUpon>BranchGenInventory.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Branches\BranchGenInventoryUpdateCost.resx">
+      <DependentUpon>BranchGenInventoryUpdateCost.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Branches\BranchInventory.resx">
       <DependentUpon>BranchInventory.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Branches\BranchInventoryIN.resx">
+      <DependentUpon>BranchInventoryIN.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Branches\BranchPOS.resx">
       <DependentUpon>BranchPOS.cs</DependentUpon>
@@ -3549,6 +3664,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="HOFormsDevEx\AddPurchaseOrder.resx">
       <DependentUpon>AddPurchaseOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HOFormsDevEx\AddPurchaseOrderSubmit.resx">
+      <DependentUpon>AddPurchaseOrderSubmit.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="HOFormsDevEx\AddSupplierDevEx.resx">
       <DependentUpon>AddSupplierDevEx.cs</DependentUpon>
@@ -4150,6 +4268,9 @@
     <EmbeddedResource Include="Orders\AddBranchOrderSTSBatchMode.resx">
       <DependentUpon>AddBranchOrderSTSBatchMode.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Orders\AddItemsBranchOrderSTS.resx">
+      <DependentUpon>AddItemsBranchOrderSTS.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Orders\AddOrder.resx">
       <DependentUpon>AddOrder.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -4223,6 +4344,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="POSDevEx\POSCreditCardMonitoring.resx">
       <DependentUpon>POSCreditCardMonitoring.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="POSDevEx\POSDataManagementAutomation.resx">
+      <DependentUpon>POSDataManagementAutomation.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="POSDevEx\POSManagementReport.resx">
       <DependentUpon>POSManagementReport.cs</DependentUpon>
@@ -4357,9 +4481,6 @@
     <EmbeddedResource Include="POS\POSMainRestoDashboard.resx">
       <DependentUpon>POSMainRestoDashboard.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="POS\POSMainWithDashboard.resx">
-      <DependentUpon>POSMainWithDashboard.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="POS\POSOnHoldTransaction.resx">
       <DependentUpon>POSOnHoldTransaction.cs</DependentUpon>
     </EmbeddedResource>
@@ -4460,8 +4581,8 @@
     <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="ReInventoryAnalyzer.resx">
       <DependentUpon>ReInventoryAnalyzer.cs</DependentUpon>
@@ -4480,6 +4601,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reporting\AccountingReportingDetails.resx">
       <DependentUpon>AccountingReportingDetails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reporting\AccountingReportsForm.resx">
+      <DependentUpon>AccountingReportsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reporting\AccountReconDevEx.resx">
       <DependentUpon>AccountReconDevEx.cs</DependentUpon>
@@ -4534,6 +4658,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reporting\BIR\VATInput.resx">
       <DependentUpon>VATInput.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reporting\BranchInventoryTransfer.resx">
+      <DependentUpon>BranchInventoryTransfer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reporting\CarcassReports.resx">
       <DependentUpon>CarcassReports.cs</DependentUpon>
@@ -4594,11 +4721,6 @@
     <EmbeddedResource Include="Reporting\PurchaseOrderRepDevEx.resx">
       <DependentUpon>PurchaseOrderRepDevEx.cs</DependentUpon>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <EmbeddedResource Include="Reporting\SalesInvoiceDexEx.resx">
       <DependentUpon>SalesInvoiceDexEx.cs</DependentUpon>
     </EmbeddedResource>
@@ -4622,6 +4744,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ReuploadSales.resx">
       <DependentUpon>ReuploadSales.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RFID\RFIDDashboard.resx">
+      <DependentUpon>RFIDDashboard.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="RibbonForm1.resx">
       <DependentUpon>RibbonForm1.cs</DependentUpon>
@@ -4763,6 +4888,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="CORECSICON.ico" />
+    <Content Include="Gemini_Generated_Image_knbj2tknbj2tknbjNew.ico" />
     <Content Include="icon175x175.ico" />
     <Content Include="Images\noimagefound.jpg" />
     <None Include="Resources\table-512.png" />
@@ -4824,6 +4950,7 @@
     <None Include="Resources\SalesAnalysis_32x321.png" />
     <None Include="Resources\SalesSummary2_32x32.png" />
     <None Include="Resources\sparkposlogo.jpg" />
+    <None Include="Resources\corecslogindesign.jpg" />
     <Content Include="spireicon.ico" />
     <Content Include="spireicon1.ico" />
   </ItemGroup>

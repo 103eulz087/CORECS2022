@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using DevExpress.XtraEditors;
 using DevExpress.XtraGrid.Views.Grid;
 using System.Data.SqlClient;
+using SalesInventorySystem.Classes;
 
 namespace SalesInventorySystem.Orders
 {
@@ -58,169 +59,215 @@ namespace SalesInventorySystem.Orders
                 XtraMessageBox.Show(ex.Message.ToString());
             }
         }
-        void ConfirmBranchOrder()
-        {
-            SqlConnection con = Database.getConnection();
-            con.Open();
-            string query = "sp_ConfirmBranchOrderSTS";
-            try
-            {
-                SqlCommand com = new SqlCommand(query, con);
-                com.Parameters.AddWithValue("@parmdevno", txtdevno.Text);
-                com.Parameters.AddWithValue("@parmrefno", txtrefno.Text);
-                com.Parameters.AddWithValue("@parmeffectivitydate", "");
-                com.Parameters.AddWithValue("@parmpono", txtponum.Text);
-                com.Parameters.AddWithValue("@parmbarcode", "");
-                com.Parameters.AddWithValue("@parmbranchcode", txtbrcode.Text);
-                com.Parameters.AddWithValue("@parmorigin", Login.assignedBranch);
-                com.Parameters.AddWithValue("@preparedby", Login.Fullname);
-                com.CommandType = CommandType.StoredProcedure;
-                com.CommandText = query;
-                com.ExecuteNonQuery();
-            }
-            catch (SqlException ex)
-            {
-                XtraMessageBox.Show(ex.Message);
-            }
-            con.Close();
-        }
-
-        void executeTransfer()
+        
+        private bool executeTransfer()
         {
             try
             {
                 DataTable dtTransfer = new DataTable();
                 dtTransfer.Columns.Add("ProductCategoryCode", typeof(string));
                 dtTransfer.Columns.Add("ProductCode", typeof(string));
-                dtTransfer.Columns.Add("ProductName", typeof(string));
-                //dtTransfer.Columns.Add("Cost", typeof(decimal));
-                dtTransfer.Columns.Add("QtyRequested", typeof(decimal));
                 dtTransfer.Columns.Add("Qty", typeof(decimal));
-                //dtTransfer.Columns.Add("Barcode", typeof(string));
+                dtTransfer.Columns.Add("Barcode", typeof(string));
 
                 int[] selectedRows = gridView1.GetSelectedRows();
+                if (selectedRows == null || selectedRows.Length == 0)
+                {
+                    XtraMessageBox.Show("No items selected.");
+                    return false;
+                }
+
                 foreach (int rowHandle in selectedRows)
                 {
+                    if (rowHandle < 0) continue;
+
                     DataRow dr = dtTransfer.NewRow();
-                    dr["ProductCategoryCode"] = Classes.Product.getProductCategoryCode(gridView1.GetRowCellValue(rowHandle, "Category").ToString());
-                    dr["ProductCode"] = gridView1.GetRowCellValue(rowHandle, "ProductCode").ToString();
-                    dr["ProductName"] = gridView1.GetRowCellValue(rowHandle, "ProductName").ToString();
-                    //dr["Cost"] = Convert.ToDecimal(gridView1.GetRowCellValue(rowHandle, "Cost"));
-                    dr["QtyRequested"] = Convert.ToDecimal(gridView1.GetRowCellValue(rowHandle, "QtyRequested"));
+                    dr["ProductCategoryCode"] =
+                        Classes.Product.getProductCategoryCode(
+                            Convert.ToString(gridView1.GetRowCellValue(rowHandle, "Category")));
+
+                    dr["ProductCode"] = Convert.ToString(gridView1.GetRowCellValue(rowHandle, "ProductCode"));
                     dr["Qty"] = Convert.ToDecimal(gridView1.GetRowCellValue(rowHandle, "Qty"));
-                    //dr["Barcode"] = gridView1.GetRowCellValue(rowHandle, "Barcode").ToString();
+
+                    object barcodeObj = gridView1.GetRowCellValue(rowHandle, "Barcode");
+                    dr["Barcode"] = (barcodeObj == null || barcodeObj == DBNull.Value)
+                        ? (object)DBNull.Value
+                        : barcodeObj.ToString();
+
                     dtTransfer.Rows.Add(dr);
+                }
+
+                if (dtTransfer.Rows.Count == 0)
+                {
+                    XtraMessageBox.Show("No valid rows selected.");
+                    return false;
                 }
 
                 using (SqlConnection conn = Database.getConnection())
                 using (SqlCommand cmd = new SqlCommand("sp_AddBranchOrderBatch", conn))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@TransferItems", dtTransfer);
-                    cmd.Parameters.AddWithValue("@PONumber", txtponum.Text);
-                    cmd.Parameters.AddWithValue("@DeliveryNo", txtdevno.Text);
-                    cmd.Parameters.AddWithValue("@ReferenceNo", txtrefno.Text);
-                    cmd.Parameters.AddWithValue("@BranchCode", txtbrcode.Text);
+
+                    // IMPORTANT: Structured TVP should be typed, not AddWithValue guessing.
+                    var p = cmd.Parameters.Add("@TransferItems", SqlDbType.Structured);
+                    p.TypeName = "dbo.TransferItemType";
+                    p.Value = dtTransfer;
+
+                    cmd.Parameters.Add("@PONumber", SqlDbType.VarChar, 10).Value = txtponum.Text.Trim();
+                    cmd.Parameters.Add("@DeliveryNo", SqlDbType.VarChar, 10).Value = txtdevno.Text.Trim();
+                    cmd.Parameters.Add("@ReferenceNo", SqlDbType.VarChar, 10).Value = txtrefno.Text.Trim();
+                    cmd.Parameters.Add("@BranchCode", SqlDbType.VarChar, 10).Value = txtbrcode.Text.Trim();
+                    cmd.Parameters.Add("@PreparedBy", SqlDbType.VarChar, 60).Value = Login.Fullname;
+
                     conn.Open();
                     cmd.ExecuteNonQuery();
                 }
 
-                isdone = true;
+                return true; // ✅ success
             }
             catch (SqlException ex)
             {
-                XtraMessageBox.Show(ex.Message.ToString());
+                XtraMessageBox.Show(ex.Message, "Transfer Failed",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false; // ✅ failure
             }
         }
+        private bool ConfirmBranchOrder()
+        {
+            try
+            {
+                using (SqlConnection con = Database.getConnection())
+                using (SqlCommand cmd = new SqlCommand("dbo.sp_ConfirmBranchOrderSTS", con))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.CommandTimeout = 120;
 
-        //void executeTransfer()
-        //{
-        //    try
-        //    {
-        //        GridView view = gridControl1.FocusedView as GridView;
-        //        view.SortInfo.Clear();
+                    cmd.Parameters.Add("@parmdevno", SqlDbType.VarChar, 20).Value = txtdevno.Text.Trim();
+                    cmd.Parameters.Add("@parmrefno", SqlDbType.VarChar, 10).Value = txtrefno.Text.Trim();
+                    cmd.Parameters.Add("@parmeffectivitydate", SqlDbType.Date).Value = DBNull.Value;
+                    cmd.Parameters.Add("@parmpono", SqlDbType.VarChar, 10).Value = txtponum.Text.Trim();
+                    cmd.Parameters.Add("@parmbarcode", SqlDbType.VarChar, 50).Value = DBNull.Value;
+                    cmd.Parameters.Add("@parmbranchcode", SqlDbType.VarChar, 10).Value = txtbrcode.Text.Trim();
+                    cmd.Parameters.Add("@parmorigin", SqlDbType.VarChar, 10).Value = Login.assignedBranch;
+                    cmd.Parameters.Add("@preparedby", SqlDbType.VarChar, 30).Value = Login.Fullname;
 
-        //        int[] selectedRows = gridView1.GetSelectedRows();
+                    con.Open();
+                    cmd.ExecuteNonQuery();
+                }
 
-        //        foreach (int rowHandle in selectedRows)
-        //        {
-
-        //            //string prodcatcode = gridView1.GetRowCellValue(rowHandle, "CategoryCode").ToString();//dataGridView1.Rows[0].Cells["Product"].Value.ToString();
-        //            string prodcatcode = Classes.Product.getProductCategoryCode(gridView1.GetRowCellValue(rowHandle, "Category").ToString());
-        //            string productcode = gridView1.GetRowCellValue(rowHandle, "ProductCode").ToString();//dataGridView1.Rows[0].Cells["Product"].Value.ToString();
-        //            string description = gridView1.GetRowCellValue(rowHandle, "ProductName").ToString();// dataGridView1.Rows[0].Cells["Description"].Value.ToString(); 
-        //            string cost = gridView1.GetRowCellValue(rowHandle, "Cost").ToString();//dataGridView1.Rows[0].Cells["Quantity"].Value.ToString();
-        //            string quantityReq = gridView1.GetRowCellValue(rowHandle, "QtyRequested").ToString();//dataGridView1.Rows[0].Cells["Quantity"].Value.ToString();
-        //            string quantity = gridView1.GetRowCellValue(rowHandle, "Qty").ToString();//dataGridView1.Rows[0].Cells["Quantity"].Value.ToString();
-        //            string barcode = gridView1.GetRowCellValue(rowHandle, "Barcode").ToString();//dataGridView1.Rows[0].Cells["Quantity"].Value.ToString();
-        //            totalreceive = rowHandle;
-
-        //            if (rowHandle >= 0)
-        //            {
-        //                processSTS(txtponum.Text, txtdevno.Text, txtrefno.Text, txtbrcode.Text, prodcatcode, productcode, quantity, barcode);
-        //            }
-        //        }
-        //        totalreceive = gridView1.SelectedRowsCount;
-        //        isdone = true;
-        //    }
-        //    catch (SqlException ex)
-        //    {
-        //        XtraMessageBox.Show(ex.Message.ToString());
-        //    }
-        //}
-
+                return true;
+            }
+            catch (SqlException ex)
+            {
+                XtraMessageBox.Show(ex.Message, "Confirm Branch Order Failed",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+        }
         private void simpleButton2_Click(object sender, EventArgs e)
         {
-            int totalorders = Database.getCountData("SELECT TOP(1) COUNT(ProductNo) as Counter FROM DeliveryDetails with(nolock) WHERE PONumber=" + txtponum.Text + "", "Counter");
 
-            bool confirmRcv = HelperFunction.ConfirmDialog("Are you sure you want to save this Inventory?", "Confirm Inventory Entry");
-            if (confirmRcv)
-            {
-                executeTransfer();
-                if (totalorders != totalreceive)
-                {
-                    bool confirm = HelperFunction.ConfirmDialog("The System found out that there are remaining items in OrderDetails that you do not receive.. Are you sure you want to Continue", "Dscrepancy");
-                    if (confirm)
-                    {
-                        ConfirmBranchOrder();
-                        XtraMessageBox.Show("Successfully Added!");
-                        this.Close();
-                    }
-                    else
-                    {
-                        return;
-                    }
-                }
-                else
-                {
-                    ConfirmBranchOrder();
-                    isdone = true;
-                    XtraMessageBox.Show("Successfully Added!");
-                    this.Close();
-                }
-            }
-            else
-            {
+            int totalorders = Database.getCountData(
+                    "SELECT COUNT(ProductNo) as Counter FROM DeliveryDetails WHERE PONumber=" + txtponum.Text,
+                    "Counter");
+
+            if (!HelperFunction.ConfirmDialog("Are you sure you want to save this Inventory?", "Confirm Inventory Entry"))
                 return;
+
+            // ✅ NEW: check for negative inventory BEFORE transfer
+            if (HasNegativeInventorySelected())
+            {
+                bool confirmNegative = HelperFunction.ConfirmDialog(
+                    "Some items exceed available inventory (NEGATIVE INVENTORY).\n\nDo you want to continue processing?",
+                    "Negative Inventory Warning");
+
+                if (!confirmNegative)
+                    return; // ❌ stop process
             }
+
+            // ✅ Stop if executeTransfer fails
+            if (!executeTransfer())
+                return;
+
+            // discrepancy prompt
+            if (totalorders != totalreceive)
+            {
+                if (!HelperFunction.ConfirmDialog(
+                    "The System found out that there are remaining items in OrderDetails that you do not receive.. Are you sure you want to Continue",
+                    "Discrepancy"))
+                    return;
+            }
+
+            // ✅ Stop if confirm fails
+            if (!ConfirmBranchOrder())
+                return;
+
             isdone = true;
+            BigAlert.Show("SUCCESS", "Successfully Added!", MessageBoxIcon.Information);
+            this.Close();
+
+            //int totalorders = Database.getCountData(
+            //        "SELECT COUNT(ProductNo) as Counter FROM DeliveryDetails WHERE PONumber=" + txtponum.Text,
+            //        "Counter");
+
+            //if (!HelperFunction.ConfirmDialog("Are you sure you want to save this Inventory?", "Confirm Inventory Entry"))
+            //    return;
+
+            //// ✅ Stop if executeTransfer fails
+            //if (!executeTransfer())
+            //    return;
+
+            //// discrepancy prompt
+            //if (totalorders != totalreceive)
+            //{
+            //    if (!HelperFunction.ConfirmDialog(
+            //        "The System found out that there are remaining items in OrderDetails that you do not receive.. Are you sure you want to Continue",
+            //        "Discrepancy"))
+            //        return;
+            //}
+
+            //// ✅ Stop if confirm fails
+            //if (!ConfirmBranchOrder())
+            //    return;
+
+            //isdone = true;
+            //BigAlert.Show("SUCCESS","Successfully Added!",MessageBoxIcon.Information);
+            //this.Close();
+
         }
 
         private void gridView1_RowCellStyle(object sender, RowCellStyleEventArgs e)
         {
-            GridView view = sender as GridView;
-            if (e.Column.FieldName == "Qty")
-            {
-                e.Appearance.BackColor = Color.Salmon;
-                e.Appearance.BackColor2 = Color.LightSalmon;
-            }
+            //GridView view = sender as GridView;
+            //if (e.Column.FieldName == "Qty")
+            //{
+            //    e.Appearance.BackColor = Color.Salmon;
+            //    e.Appearance.BackColor2 = Color.LightSalmon;
+            //}
+            //if (e.RowHandle >= 0)
+            //{
+            //    string status = gridView1.GetRowCellValue(e.RowHandle, "Status")?.ToString();
+            //    if (status == "NEGATIVE INVENTORY" || status == "NO INVENTORY")
+            //    {
+            //        e.Appearance.BackColor = Color.LightGray; // Grays out the row
+            //        e.Appearance.ForeColor = Color.DarkGray;
+            //    }
+            //}
             if (e.RowHandle >= 0)
             {
-                string status = gridView1.GetRowCellValue(e.RowHandle, "Status")?.ToString();
-                if (status == "NEGATIVE INVENTORY" || status == "NO INVENTORY")
+                double available = Convert.ToDouble(gridView1.GetRowCellValue(e.RowHandle, "AvailableInv"));
+
+                if (available <= 0)
                 {
-                    e.Appearance.BackColor = Color.LightGray; // Grays out the row
+                    // ❌ Disable only when NO inventory
+                    e.Appearance.BackColor = Color.LightGray;
                     e.Appearance.ForeColor = Color.DarkGray;
+                }
+                else if (Convert.ToDouble(gridView1.GetRowCellValue(e.RowHandle, "QtyRequested")) > available)
+                {
+                    // ⚠ NEGATIVE INVENTORY (visual only, not disabled)
+                    e.Appearance.BackColor = Color.Khaki;
+                    e.Appearance.ForeColor = Color.Black;
                 }
             }
         }
@@ -242,23 +289,59 @@ namespace SalesInventorySystem.Orders
             int rowHandle = e.ControllerRow;
             if (rowHandle >= 0)
             {
-                string status = gridView1.GetRowCellValue(rowHandle, "Status")?.ToString();
-                if (status == "NEGATIVE INVENTORY" || status == "NO INVENTORY")
+                //string status = gridView1.GetRowCellValue(rowHandle, "Status")?.ToString();
+                //if (status == "NEGATIVE INVENTORY" || status == "NO INVENTORY")
+                //{
+                //    gridView1.UnselectRow(rowHandle); // Manually unselect the row
+                //}
+
+                double available = Convert.ToDouble(gridView1.GetRowCellValue(rowHandle, "AvailableInv"));
+                if (available <= 0)
                 {
-                    gridView1.UnselectRow(rowHandle); // Manually unselect the row
+                    // only block if NO inventory
+                    gridView1.UnselectRow(rowHandle);
                 }
+
             }
             if (gridView1.SelectedRowsCount == gridView1.DataRowCount) // Check if "Select All" was clicked
             {
                 for (int i = 0; i < gridView1.DataRowCount; i++)
                 {
-                    string status = gridView1.GetRowCellValue(i, "Status")?.ToString();
-                    if (status == "NEGATIVE INVENTORY" || status == "NO INVENTORY")
+                    //string status = gridView1.GetRowCellValue(i, "Status")?.ToString();
+                    //if (status == "NEGATIVE INVENTORY" || status == "NO INVENTORY")
+                    //{
+                    //    gridView1.UnselectRow(i); // Exclude rows with NEGATIVE INVENTORY
+                    //}
+
+                    double available = Convert.ToDouble(gridView1.GetRowCellValue(i, "AvailableInv"));
+
+                    if (available <= 0)
                     {
-                        gridView1.UnselectRow(i); // Exclude rows with NEGATIVE INVENTORY
+                        gridView1.UnselectRow(i);
                     }
+
                 }
             }
+        }
+        private bool HasNegativeInventorySelected()
+        {
+            int[] selectedRows = gridView1.GetSelectedRows();
+
+            foreach (int rowHandle in selectedRows)
+            {
+                if (rowHandle < 0) continue;
+
+                double available = Convert.ToDouble(gridView1.GetRowCellValue(rowHandle, "AvailableInv"));
+                double requested = Convert.ToDouble(gridView1.GetRowCellValue(rowHandle, "QtyRequested"));
+
+                // ✅ Negative inventory condition
+                if (available > 0 && requested > available)
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         private void gridView1_CellValueChanged(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)

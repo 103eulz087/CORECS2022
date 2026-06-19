@@ -50,7 +50,7 @@ namespace SalesInventorySystem
         }
         private async void Main_Load(object sender, EventArgs e)
         {
-            _ = StartUpdateListenerAsync();
+             _ = StartUpdateListenerAsync();
          
             //string filepath= (Application.StartupPath + "\\checkVersion.txt");
             //var result = HelperFunction.GetVersionAndToken(filepath);
@@ -493,75 +493,62 @@ namespace SalesInventorySystem
             //viewshipdash.Show();
         }
 
-     
-        private void showInventory1()
+        private void OpenMdiForm<T>() where T : Form, new()
         {
-            foreach (Form form in Application.OpenForms)
+            Form existingForm = null;
+
+            foreach (Form form in this.MdiChildren)
             {
-                if (form.GetType() == typeof(ViewInventory))
+                if (form is T)
                 {
-                    form.Activate();
-                    return;
+                    existingForm = form;
+                    break;
                 }
             }
-            ViewInventory viewinv = new ViewInventory();
-            viewinv.MdiParent = this;
-            viewinv.Show();
+
+            if (existingForm != null)
+            {
+                existingForm.Show();
+                existingForm.BringToFront();
+                existingForm.Activate();
+                return;
+            }
+
+            var newForm = new T();
+            newForm.MdiParent = this;
+            newForm.Show();
+        }
+
+        private void showInventory1()
+        {
+            OpenMdiForm<ViewInventory>();
         }
 
         private void barButtonItem3_ItemClick(object sender, ItemClickEventArgs e)
         {
-            showInventory2();
-        }
-
-        private void showInventory2()
-        {
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form.GetType() == typeof(ViewPrimalCutsInventory))
-                {
-                    form.Activate();
-                    return;
-                }
-            }
-            ViewPrimalCutsInventory viewprinv = new ViewPrimalCutsInventory();
-            viewprinv.MdiParent = this;
-            viewprinv.Show();
+            
+            OpenMdiForm<ViewPrimalCutsInventory>();
         }
 
         private void barButtonItem4_ItemClick(object sender, ItemClickEventArgs e)
         {
-            //CarcassSettings carset = new CarcassSettings();
-            //carset.Show();
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form.GetType() == typeof(HOFormsDevEx.InventoryCost))
-                {
-                    form.Activate();
-                    return;
-                }
-            }
-            //HOForms.InventoryCostDevEx invcost = new HOForms.InventoryCostDevEx();
-            //invcost.MdiParent = this;
-            //invcost.Show();
-            HOFormsDevEx.InventoryCost invcost = new HOFormsDevEx.InventoryCost();
-            invcost.MdiParent = this;
-            invcost.Show();
+            OpenMdiForm<HOFormsDevEx.InventoryCost>();
         }
 
         private void barButtonItem5_ItemClick(object sender, ItemClickEventArgs e)
         {
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form.GetType() == typeof(HOFormsDevEx.ProductsDevEx))
-                {
-                    form.Activate();
-                    return;
-                }
-            }
-            HOFormsDevEx.ProductsDevEx prodsets = new HOFormsDevEx.ProductsDevEx();
-            prodsets.MdiParent = this;
-            prodsets.Show();
+            OpenMdiForm<HOFormsDevEx.ProductsDevEx>();
+            //foreach (Form form in Application.OpenForms)
+            //{
+            //    if (form.GetType() == typeof(HOFormsDevEx.ProductsDevEx))
+            //    {
+            //        form.Activate();
+            //        return;
+            //    }
+            //}
+            //HOFormsDevEx.ProductsDevEx prodsets = new HOFormsDevEx.ProductsDevEx();
+            //prodsets.MdiParent = this;
+            //prodsets.Show();
         }
 
         private void barButtonItem7_ItemClick(object sender, ItemClickEventArgs e)
@@ -606,17 +593,18 @@ namespace SalesInventorySystem
 
         private void barButtonItem8_ItemClick(object sender, ItemClickEventArgs e)
         {
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form.GetType() == typeof(POForApproval))
-                {
-                    form.Activate();
-                    return;
-                }
-            }
-            POForApproval pfoap = new POForApproval();
-            pfoap.MdiParent = this;
-            pfoap.Show();
+            OpenMdiForm<POForApproval>();
+            //foreach (Form form in Application.OpenForms)
+            //{
+            //    if (form.GetType() == typeof(POForApproval))
+            //    {
+            //        form.Activate();
+            //        return;
+            //    }
+            //}
+            //POForApproval pfoap = new POForApproval();
+            //pfoap.MdiParent = this;
+            //pfoap.Show();
 
         }
 
@@ -648,32 +636,34 @@ namespace SalesInventorySystem
 
         private void barButtonItem12_ItemClick(object sender, ItemClickEventArgs e)
         {
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form.GetType() == typeof(HeadOfficeInventory))
-                {
-                    form.Activate();
-                    return;
-                }
-            }
-            HeadOfficeInventory headinv = new HeadOfficeInventory();
-            headinv.MdiParent = this;
-            headinv.Show();
+            OpenMdiForm<HeadOfficeInventory>();
+            //foreach (Form form in Application.OpenForms)
+            //{
+            //    if (form.GetType() == typeof(HeadOfficeInventory))
+            //    {
+            //        form.Activate();
+            //        return;
+            //    }
+            //}
+            //HeadOfficeInventory headinv = new HeadOfficeInventory();
+            //headinv.MdiParent = this;
+            //headinv.Show();
         }
 
         private void barButtonItem13_ItemClick(object sender, ItemClickEventArgs e)
         {
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form.GetType() == typeof(BranchInventory))
-                {
-                    form.Activate();
-                    return;
-                }
-            }
-            BranchInventory brancinv = new BranchInventory();
-            brancinv.MdiParent = this;
-            brancinv.Show();
+            OpenMdiForm<BranchInventory>();
+            //foreach (Form form in Application.OpenForms)
+            //{
+            //    if (form.GetType() == typeof(BranchInventory))
+            //    {
+            //        form.Activate();
+            //        return;
+            //    }
+            //}
+            //BranchInventory brancinv = new BranchInventory();
+            //brancinv.MdiParent = this;
+            //brancinv.Show();
         }
 
         void openPOS()
@@ -817,17 +807,18 @@ namespace SalesInventorySystem
 
         private void barButtonItem15_ItemClick(object sender, ItemClickEventArgs e)
         {
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form.GetType() == typeof(CashSalesReport))
-                {
-                    form.Activate();
-                    return;
-                }
-            }
-            CashSalesReport cashreps = new CashSalesReport();
-            cashreps.MdiParent = this;
-            cashreps.Show();
+            OpenMdiForm<CashSalesReport>();
+            //foreach (Form form in Application.OpenForms)
+            //{
+            //    if (form.GetType() == typeof(CashSalesReport))
+            //    {
+            //        form.Activate();
+            //        return;
+            //    }
+            //}
+            //CashSalesReport cashreps = new CashSalesReport();
+            //cashreps.MdiParent = this;
+            //cashreps.Show();
 
         }
 
@@ -867,17 +858,18 @@ namespace SalesInventorySystem
 
         private void barButtonItem20_ItemClick(object sender, ItemClickEventArgs e)
         {
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form.GetType() == typeof(ViewBranchOrder))
-                {
-                    form.Activate();
-                    return;
-                }
-            }
-            ViewBranchOrder viewbrordcr = new ViewBranchOrder();
-            viewbrordcr.MdiParent = this;
-            viewbrordcr.Show();
+            OpenMdiForm<ViewBranchOrder>();
+            //foreach (Form form in Application.OpenForms)
+            //{
+            //    if (form.GetType() == typeof(ViewBranchOrder))
+            //    {
+            //        form.Activate();
+            //        return;
+            //    }
+            //}
+            //ViewBranchOrder viewbrordcr = new ViewBranchOrder();
+            //viewbrordcr.MdiParent = this;
+            //viewbrordcr.Show();
         }
 
         private void barButtonItem22_ItemClick(object sender, ItemClickEventArgs e)
@@ -899,17 +891,18 @@ namespace SalesInventorySystem
 
         private void barButtonItem23_ItemClick(object sender, ItemClickEventArgs e)
         {
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form.GetType() == typeof(ViewGeneralInventory))
-                {
-                    form.Activate();
-                    return;
-                }
-            }
-            ViewGeneralInventory viewgeninv = new ViewGeneralInventory();
-            viewgeninv.MdiParent = this;
-            viewgeninv.Show();
+            OpenMdiForm<ViewGeneralInventory>();
+            //foreach (Form form in Application.OpenForms)
+            //{
+            //    if (form.GetType() == typeof(ViewGeneralInventory))
+            //    {
+            //        form.Activate();
+            //        return;
+            //    }
+            //}
+            //ViewGeneralInventory viewgeninv = new ViewGeneralInventory();
+            //viewgeninv.MdiParent = this;
+            //viewgeninv.Show();
         }
 
         private void barButtonItem24_ItemClick(object sender, ItemClickEventArgs e)
@@ -928,50 +921,39 @@ namespace SalesInventorySystem
 
         private void barButtonItem25_ItemClick(object sender, ItemClickEventArgs e)
         {
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form.GetType() == typeof(HOFormsDevEx.AddSupplierDevEx))
-                {
-                    form.Activate();
-                    return;
-                }
-            }
-            HOFormsDevEx.AddSupplierDevEx addsupp = new HOFormsDevEx.AddSupplierDevEx();
-            addsupp.MdiParent = this;
-            addsupp.Show();
+            OpenMdiForm<HOFormsDevEx.AddSupplierDevEx>();
+            //foreach (Form form in Application.OpenForms)
+            //{
+            //    if (form.GetType() == typeof(HOFormsDevEx.AddSupplierDevEx))
+            //    {
+            //        form.Activate();
+            //        return;
+            //    }
+            //}
+            //HOFormsDevEx.AddSupplierDevEx addsupp = new HOFormsDevEx.AddSupplierDevEx();
+            //addsupp.MdiParent = this;
+            //addsupp.Show();
         }
 
         private void barButtonItem26_ItemClick(object sender, ItemClickEventArgs e)
         {
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form.GetType() == typeof(HOFormsDevEx.VIEWPO))
-                {
-                    form.Activate();
-                    return;
-                }
-            }
-            //ViewOrder viewrod = new ViewOrder();
-            //viewrod.MdiParent = this;
-            //viewrod.Show();
-            HOFormsDevEx.VIEWPO sad = new HOFormsDevEx.VIEWPO();
-            sad.MdiParent = this;
-            sad.Show();
+            OpenMdiForm<HOFormsDevEx.VIEWPO>();
         }
 
         private void barButtonItem27_ItemClick(object sender, ItemClickEventArgs e)
         {
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form.GetType() == typeof(ProductCategory))
-                {
-                    form.Activate();
-                    return;
-                }
-            }
-            ProductCategory prodcat = new ProductCategory();
-            prodcat.MdiParent = this;
-            prodcat.Show();
+            OpenMdiForm<ProductCategory>();
+            //foreach (Form form in Application.OpenForms)
+            //{
+            //    if (form.GetType() == typeof(ProductCategory))
+            //    {
+            //        form.Activate();
+            //        return;
+            //    }
+            //}
+            //ProductCategory prodcat = new ProductCategory();
+            //prodcat.MdiParent = this;
+            //prodcat.Show();
         }
 
         private void barButtonItem28_ItemClick(object sender, ItemClickEventArgs e)
@@ -1004,6 +986,7 @@ namespace SalesInventorySystem
 
         private void barButtonItem30_ItemClick(object sender, ItemClickEventArgs e)
         {
+            OpenMdiForm<HOFormsDevEx.UsersDevEx>();
             //foreach (Form form in Application.OpenForms)
             //{
             //    if (form.GetType() == typeof(HOForms.Users))
@@ -1016,21 +999,22 @@ namespace SalesInventorySystem
             //housers.MdiParent = this;
             //housers.Show();
 
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form.GetType() == typeof(HOFormsDevEx.UsersDevEx))
-                {
-                    form.Activate();
-                    return;
-                }
-            }
-            HOFormsDevEx.UsersDevEx housers = new HOFormsDevEx.UsersDevEx();
-            housers.MdiParent = this;
-            housers.Show();
+            //foreach (Form form in Application.OpenForms)
+            //{
+            //    if (form.GetType() == typeof(HOFormsDevEx.UsersDevEx))
+            //    {
+            //        form.Activate();
+            //        return;
+            //    }
+            //}
+            //HOFormsDevEx.UsersDevEx housers = new HOFormsDevEx.UsersDevEx();
+            //housers.MdiParent = this;
+            //housers.Show();
         }
 
         private void barButtonItem34_ItemClick(object sender, ItemClickEventArgs e)
         {
+            OpenMdiForm<HOFormsDevEx.BranchDevEx>();
             //foreach (Form form in Application.OpenForms)
             //{
             //    if (form.GetType() == typeof(Branches.Branches))
@@ -1044,49 +1028,51 @@ namespace SalesInventorySystem
             ////brnchs.Show();
             //brnchs.Show();
 
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form.GetType() == typeof(HOFormsDevEx.BranchDevEx))
-                {
-                    form.Activate();
-                    return;
-                }
-            }
-            HOFormsDevEx.BranchDevEx brnchs = new HOFormsDevEx.BranchDevEx();
-            brnchs.MdiParent = this;
+            //foreach (Form form in Application.OpenForms)
+            //{
+            //    if (form.GetType() == typeof(HOFormsDevEx.BranchDevEx))
+            //    {
+            //        form.Activate();
+            //        return;
+            //    }
+            //}
+            //HOFormsDevEx.BranchDevEx brnchs = new HOFormsDevEx.BranchDevEx();
+            //brnchs.MdiParent = this;
+            ////brnchs.Show();
             //brnchs.Show();
-            brnchs.Show();
         }
 
         private void barButtonItem31_ItemClick(object sender, ItemClickEventArgs e)
         {
-            foreach (Form form in Application.OpenForms)
-            {
-                //   if (form.GetType() == typeof(HOForms.CustomersFrm))
-                if (form.GetType() == typeof(HOFormsDevEx.CustomersInfoDevEx))
-                {
-                    form.Activate();
-                    return;
-                }
-            }
-            HOFormsDevEx.CustomersInfoDevEx cstfmrs = new HOFormsDevEx.CustomersInfoDevEx();
-            cstfmrs.MdiParent = this;
-            cstfmrs.Show();
+            OpenMdiForm<HOFormsDevEx.CustomersInfoDevEx>();
+            //foreach (Form form in Application.OpenForms)
+            //{
+            //    //   if (form.GetType() == typeof(HOForms.CustomersFrm))
+            //    if (form.GetType() == typeof(HOFormsDevEx.CustomersInfoDevEx))
+            //    {
+            //        form.Activate();
+            //        return;
+            //    }
+            //}
+            //HOFormsDevEx.CustomersInfoDevEx cstfmrs = new HOFormsDevEx.CustomersInfoDevEx();
+            //cstfmrs.MdiParent = this;
+            //cstfmrs.Show();
         }
 
         private void barButtonItem32_ItemClick(object sender, ItemClickEventArgs e)
         {
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form.GetType() == typeof(HOForms.TransactionDefinitionForm))
-                {
-                    form.Activate();
-                    return;
-                }
-            }
-            HOForms.TransactionDefinitionForm transdefnit = new HOForms.TransactionDefinitionForm();
-            transdefnit.MdiParent = this;
-            transdefnit.Show();
+            OpenMdiForm<HOForms.TransactionDefinitionForm>();
+            //foreach (Form form in Application.OpenForms)
+            //{
+            //    if (form.GetType() == typeof(HOForms.TransactionDefinitionForm))
+            //    {
+            //        form.Activate();
+            //        return;
+            //    }
+            //}
+            //HOForms.TransactionDefinitionForm transdefnit = new HOForms.TransactionDefinitionForm();
+            //transdefnit.MdiParent = this;
+            //transdefnit.Show();
         }
 
         private void barButtonItem33_ItemClick(object sender, ItemClickEventArgs e)
@@ -1105,15 +1091,17 @@ namespace SalesInventorySystem
 
         private void barButtonItem35_ItemClick(object sender, ItemClickEventArgs e)
         {
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form.GetType() == typeof(Accounting.AddNewTicket))
-                {
-                    form.Activate();
-                    return;
-                }
-            }
-            Accounting.AddNewTicket addnewtcet = new Accounting.AddNewTicket();
+            //foreach (Form form in Application.OpenForms)
+            //{
+            //    if (form.GetType() == typeof(Accounting.AddNewTicket))
+            //    {
+            //        form.Activate();
+            //        return;
+            //    }
+            //}
+            //Accounting.AddNewTicket addnewtcet = new Accounting.AddNewTicket();
+            //addnewtcet.Show();
+            AccountingDevEx.ManualTicketForm addnewtcet = new AccountingDevEx.ManualTicketForm();
             addnewtcet.Show();
         }
 
@@ -1212,17 +1200,18 @@ namespace SalesInventorySystem
 
         private void barButtonItem47_ItemClick(object sender, ItemClickEventArgs e)
         {
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form.GetType() == typeof(Reporting.BatchProcessMasterDevEx))
-                {
-                    form.Activate();
-                    return;
-                }
-            }
-            Reporting.BatchProcessMasterDevEx pcutfmr = new Reporting.BatchProcessMasterDevEx();
-            pcutfmr.MdiParent = this;
-            pcutfmr.Show();
+            OpenMdiForm<Reporting.BatchProcessMasterDevEx>();
+            //foreach (Form form in Application.OpenForms)
+            //{
+            //    if (form.GetType() == typeof(Reporting.BatchProcessMasterDevEx))
+            //    {
+            //        form.Activate();
+            //        return;
+            //    }
+            //}
+            //Reporting.BatchProcessMasterDevEx pcutfmr = new Reporting.BatchProcessMasterDevEx();
+            //pcutfmr.MdiParent = this;
+            //pcutfmr.Show();
         }
 
         
@@ -1272,19 +1261,20 @@ namespace SalesInventorySystem
 
         private void barButtonItem52_ItemClick(object sender, ItemClickEventArgs e)
         {
+            OpenMdiForm<POSDevEx.POSXReadReportDevEx>();
             //POS.POSXreadReport xread = new POS.POSXreadReport();
             //xread.Show();
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form.GetType() == typeof(POSDevEx.POSXReadReportDevEx))
-                {
-                    form.Activate();
-                    return;
-                }
-            }
-            POSDevEx.POSXReadReportDevEx viewinv = new POSDevEx.POSXReadReportDevEx();
-            viewinv.MdiParent = this;
-            viewinv.Show();
+            //foreach (Form form in Application.OpenForms)
+            //{
+            //    if (form.GetType() == typeof(POSDevEx.POSXReadReportDevEx))
+            //    {
+            //        form.Activate();
+            //        return;
+            //    }
+            //}
+            //POSDevEx.POSXReadReportDevEx viewinv = new POSDevEx.POSXReadReportDevEx();
+            //viewinv.MdiParent = this;
+            //viewinv.Show();
         }
 
         private void barButtonItem53_ItemClick(object sender, ItemClickEventArgs e)
@@ -1303,6 +1293,7 @@ namespace SalesInventorySystem
 
         private void barButtonItem54_ItemClick(object sender, ItemClickEventArgs e)
         {
+            OpenMdiForm<HOFormsDevEx.TransferUpdateDevEx>();
             //foreach (Form form in Application.OpenForms)
             //{
             //    if (form.GetType() == typeof(HOForms.TransferInventory))
@@ -1314,32 +1305,33 @@ namespace SalesInventorySystem
             //HOForms.TransferInventory pcusatfsmr = new HOForms.TransferInventory();
             //pcusatfsmr.MdiParent = this;
             //pcusatfsmr.Show();
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form.GetType() == typeof(HOFormsDevEx.TransferUpdateDevEx))
-                {
-                    form.Activate();
-                    return;
-                }
-            }
-            HOFormsDevEx.TransferUpdateDevEx pcusatfsmr = new HOFormsDevEx.TransferUpdateDevEx();
-            pcusatfsmr.MdiParent = this;
-            pcusatfsmr.Show();
+            //foreach (Form form in Application.OpenForms)
+            //{
+            //    if (form.GetType() == typeof(HOFormsDevEx.TransferUpdateDevEx))
+            //    {
+            //        form.Activate();
+            //        return;
+            //    }
+            //}
+            //HOFormsDevEx.TransferUpdateDevEx pcusatfsmr = new HOFormsDevEx.TransferUpdateDevEx();
+            //pcusatfsmr.MdiParent = this;
+            //pcusatfsmr.Show();
         }
 
         private void barButtonItem18_ItemClick(object sender, ItemClickEventArgs e)
         {
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form.GetType() == typeof(Reporting.DeliveryReportsFrm))
-                {
-                    form.Activate();
-                    return;
-                }
-            }
-            Reporting.DeliveryReportsFrm pcusatfsmr = new Reporting.DeliveryReportsFrm();
-            pcusatfsmr.MdiParent = this;
-            pcusatfsmr.Show();
+            OpenMdiForm<Reporting.DeliveryReportsFrm>();
+            //foreach (Form form in Application.OpenForms)
+            //{
+            //    if (form.GetType() == typeof(Reporting.DeliveryReportsFrm))
+            //    {
+            //        form.Activate();
+            //        return;
+            //    }
+            //}
+            //Reporting.DeliveryReportsFrm pcusatfsmr = new Reporting.DeliveryReportsFrm();
+            //pcusatfsmr.MdiParent = this;
+            //pcusatfsmr.Show();
         }
 
         private void barButtonItem56_ItemClick(object sender, ItemClickEventArgs e)
@@ -1388,6 +1380,7 @@ namespace SalesInventorySystem
 
         private void barButtonItem57_ItemClick(object sender, ItemClickEventArgs e)
         {
+
             //foreach (Form form in Application.OpenForms)
             //{
             //    if (form.GetType() == typeof(InventoryIN))
@@ -1398,16 +1391,35 @@ namespace SalesInventorySystem
             //}
             //InventoryIN pcusatfsmr = new InventoryIN();
             //pcusatfsmr.Show();
-            foreach (Form form in Application.OpenForms)
+            if(GlobalCache.CompanyName=="ENZO")
             {
-                if (form.GetType() == typeof(ReInventoryIn))
+                foreach (Form form in Application.OpenForms)
                 {
-                    form.Activate();
-                    return;
+                    if (form.GetType() == typeof(ReInventoryIn))
+                    {
+                        form.Activate();
+                        return;
+                    }
                 }
+                ReInventoryIn pcusatfsmr = new ReInventoryIn();
+                pcusatfsmr.Show();
+            }else if(GlobalCache.CompanyName == "VROSS")
+            {
+                OpenMdiForm<POS.POSInventoryIN>();
+                //foreach (Form form in Application.OpenForms)  //LAST USED
+                //{
+                //    if (form.GetType() == typeof(POS.POSInventoryIN))
+                //    {
+                //        form.Activate();
+                //        return;
+                //    }
+                //}
+
+                //POS.POSInventoryIN pcusatfsmr = new POS.POSInventoryIN();
+                //pcusatfsmr.MdiParent = this;
+                //pcusatfsmr.Show();
             }
-            ReInventoryIn pcusatfsmr = new ReInventoryIn();
-            pcusatfsmr.Show();
+
             //FOR FOR BUILTIN INVENTORY IN
             //foreach (Form form in Application.OpenForms)  //LAST USED
             //{
@@ -1425,37 +1437,41 @@ namespace SalesInventorySystem
 
         private void barButtonItem55_ItemClick(object sender, ItemClickEventArgs e)
         {
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form.GetType() == typeof(HOForms.Metrics))
-                {
-                    form.Activate();
-                    return;
-                }
-            }
-            HOForms.Metrics pcusatfsmr = new HOForms.Metrics();
-            pcusatfsmr.MdiParent = this;
-            pcusatfsmr.Show();
+            //foreach (Form form in Application.OpenForms)
+            //{
+            //    if (form.GetType() == typeof(HOForms.Metrics))
+            //    {
+            //        form.Activate();
+            //        return;
+            //    }
+            //}
+            //HOForms.Metrics pcusatfsmr = new HOForms.Metrics();
+            //pcusatfsmr.MdiParent = this;
+            //pcusatfsmr.Show();
+            POSDevEx.POSDataManagementAutomation repos = new POSDevEx.POSDataManagementAutomation();
+            repos.Show();
 
         }
 
         private void barButtonItem58_ItemClick(object sender, ItemClickEventArgs e)
         {
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form.GetType() == typeof(Reporting.ConversionReports))
-                {
-                    form.Activate();
-                    return;
-                }
-            }
-            Reporting.ConversionReports pcusatfsmr = new Reporting.ConversionReports();
-            pcusatfsmr.MdiParent = this;
-            pcusatfsmr.Show();
+            OpenMdiForm<Reporting.ConversionReports>();
+            //foreach (Form form in Application.OpenForms)
+            //{
+            //    if (form.GetType() == typeof(Reporting.ConversionReports))
+            //    {
+            //        form.Activate();
+            //        return;
+            //    }
+            //}
+            //Reporting.ConversionReports pcusatfsmr = new Reporting.ConversionReports();
+            //pcusatfsmr.MdiParent = this;
+            //pcusatfsmr.Show();
         }
 
         private void barButtonItem59_ItemClick(object sender, ItemClickEventArgs e)
         {
+            OpenMdiForm<HOFormsDevEx.PrimalCutCosting>();
             //foreach (Form form in Application.OpenForms)
             //{
             //    if (form.GetType() == typeof(HOFormsDevEx.CarcassCostingDevEx))
@@ -1467,17 +1483,17 @@ namespace SalesInventorySystem
             //HOFormsDevEx.CarcassCostingDevEx pcusatfsmr = new HOFormsDevEx.CarcassCostingDevEx();
             //pcusatfsmr.MdiParent = this;
             //pcusatfsmr.Show();
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form.GetType() == typeof(HOFormsDevEx.PrimalCutCosting))
-                {
-                    form.Activate();
-                    return;
-                }
-            }
-            HOFormsDevEx.PrimalCutCosting pcusatfsmr = new HOFormsDevEx.PrimalCutCosting();
-            pcusatfsmr.MdiParent = this;
-            pcusatfsmr.Show();
+            //foreach (Form form in Application.OpenForms)
+            //{
+            //    if (form.GetType() == typeof(HOFormsDevEx.PrimalCutCosting))
+            //    {
+            //        form.Activate();
+            //        return;
+            //    }
+            //}
+            //HOFormsDevEx.PrimalCutCosting pcusatfsmr = new HOFormsDevEx.PrimalCutCosting();
+            //pcusatfsmr.MdiParent = this;
+            //pcusatfsmr.Show();
         }
 
         private void ribbon_Click(object sender, EventArgs e)
@@ -1487,18 +1503,19 @@ namespace SalesInventorySystem
 
         private void barButtonItem60_ItemClick(object sender, ItemClickEventArgs e)
         {
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form.GetType() == typeof(HOFormsDevEx.ClientAccountsDevEx))
-                {
-                    form.Activate();
-                    return;
-                }
-            }
-            //HOForms.ClientAccounts pcusatfsmr = new HOForms.ClientAccounts();
-            HOFormsDevEx.ClientAccountsDevEx pcusatfsmr = new HOFormsDevEx.ClientAccountsDevEx();
-            pcusatfsmr.MdiParent = this;
-            pcusatfsmr.Show();
+            OpenMdiForm<HOFormsDevEx.ClientAccountsDevEx>();
+            //foreach (Form form in Application.OpenForms)
+            //{
+            //    if (form.GetType() == typeof(HOFormsDevEx.ClientAccountsDevEx))
+            //    {
+            //        form.Activate();
+            //        return;
+            //    }
+            //}
+            ////HOForms.ClientAccounts pcusatfsmr = new HOForms.ClientAccounts();
+            //HOFormsDevEx.ClientAccountsDevEx pcusatfsmr = new HOFormsDevEx.ClientAccountsDevEx();
+            //pcusatfsmr.MdiParent = this;
+            //pcusatfsmr.Show();
         }
 
         private void barButtonItem61_ItemClick(object sender, ItemClickEventArgs e)
@@ -1607,18 +1624,18 @@ namespace SalesInventorySystem
 
         private void barButtonItem50_ItemClick(object sender, ItemClickEventArgs e)
         {
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form.GetType() == typeof(AccountingDevEx.BalanceSheetDevEx))
-                {
-                    form.Activate();
-                    return;
-                }
-            }
-            //Accounting.BalanceSheet pcusatfsmr = new Accounting.BalanceSheet();
+            //foreach (Form form in Application.OpenForms)
+            //{
+            //    if (form.GetType() == typeof(AccountingDevEx.BalanceSheetDevEx))
+            //    {
+            //        form.Activate();
+            //        return;
+            //    }
+            //}
+            //AccountingDevEx.BalanceSheetDevEx pcusatfsmr = new AccountingDevEx.BalanceSheetDevEx();
+            //pcusatfsmr.MdiParent = this;
             //pcusatfsmr.Show();
-            AccountingDevEx.BalanceSheetDevEx pcusatfsmr = new AccountingDevEx.BalanceSheetDevEx();
-            pcusatfsmr.MdiParent = this;
+            Reporting.AccountingReportsForm pcusatfsmr = new Reporting.AccountingReportsForm();
             pcusatfsmr.Show();
         }
 
@@ -1677,18 +1694,19 @@ namespace SalesInventorySystem
 
         private void barButtonItem67_ItemClick(object sender, ItemClickEventArgs e)
         {
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form.GetType() == typeof(AccountingDevEx.ViewCheckVoucherDevEx))
-                {
-                    form.Activate();
-                    return;
-                }
-            }
-            //Accounting.ViewCheckVoucher pcusatfsmr = new Accounting.ViewCheckVoucher();
-            AccountingDevEx.ViewCheckVoucherDevEx pcusatfsmr = new AccountingDevEx.ViewCheckVoucherDevEx();
-            pcusatfsmr.MdiParent = this;
-            pcusatfsmr.Show();
+            OpenMdiForm<AccountingDevEx.ViewCheckVoucherDevEx>();
+            //foreach (Form form in Application.OpenForms)
+            //{
+            //    if (form.GetType() == typeof(AccountingDevEx.ViewCheckVoucherDevEx))
+            //    {
+            //        form.Activate();
+            //        return;
+            //    }
+            //}
+            ////Accounting.ViewCheckVoucher pcusatfsmr = new Accounting.ViewCheckVoucher();
+            //AccountingDevEx.ViewCheckVoucherDevEx pcusatfsmr = new AccountingDevEx.ViewCheckVoucherDevEx();
+            //pcusatfsmr.MdiParent = this;
+            //pcusatfsmr.Show();
         }
 
         private void barButtonItem68_ItemClick(object sender, ItemClickEventArgs e)
@@ -1707,74 +1725,69 @@ namespace SalesInventorySystem
 
         private void barButtonItem70_ItemClick(object sender, ItemClickEventArgs e)
         {
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form.GetType() == typeof(HOFormsDevEx.InventoryTransferDevEx))
-                {
-                    form.Activate();
-                    return;
-                }
-            }
-            HOFormsDevEx.InventoryTransferDevEx pcusatfsmr = new HOFormsDevEx.InventoryTransferDevEx();
-            pcusatfsmr.MdiParent = this;
-            pcusatfsmr.Show();
-        }
-
-        private void barButtonItem71_ItemClick(object sender, ItemClickEventArgs e)
-        {
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form.GetType() == typeof(HOFormsDevEx.SupplierAccountsDevEx))
-                {
-                    form.Activate();
-                    return;
-                }
-            }
-            //HOForms.SupplierAccounts pcusatfsmr = new HOForms.SupplierAccounts();
-            HOFormsDevEx.SupplierAccountsDevEx pcusatfsmr = new HOFormsDevEx.SupplierAccountsDevEx();
-            pcusatfsmr.MdiParent = this;
-            pcusatfsmr.Show();
-        }
-
-        private void barButtonItem72_ItemClick(object sender, ItemClickEventArgs e)
-        {
+            OpenMdiForm<HOFormsDevEx.InventoryTransferDevEx>();
             //foreach (Form form in Application.OpenForms)
             //{
-            //    if (form.GetType() == typeof(HOFormsDevEx.AccountReconDevEx))
+            //    if (form.GetType() == typeof(HOFormsDevEx.InventoryTransferDevEx))
             //    {
             //        form.Activate();
             //        return;
             //    }
             //}
-            //HOFormsDevEx.AccountReconDevEx pcusatfsmr = new HOFormsDevEx.AccountReconDevEx();
+            //HOFormsDevEx.InventoryTransferDevEx pcusatfsmr = new HOFormsDevEx.InventoryTransferDevEx();
             //pcusatfsmr.MdiParent = this;
             //pcusatfsmr.Show();
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form.GetType() == typeof(Reporting.AccountReconDevEx))
-                {
-                    form.Activate();
-                    return;
-                }
-            }
-            Reporting.AccountReconDevEx pcusatfsmr = new Reporting.AccountReconDevEx();
-            pcusatfsmr.MdiParent = this;
-            pcusatfsmr.Show();
+        }
+
+        private void barButtonItem71_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            OpenMdiForm<HOFormsDevEx.SupplierAccountsDevEx>();
+            //foreach (Form form in Application.OpenForms)
+            //{
+            //    if (form.GetType() == typeof(HOFormsDevEx.SupplierAccountsDevEx))
+            //    {
+            //        form.Activate();
+            //        return;
+            //    }
+            //}
+            ////HOForms.SupplierAccounts pcusatfsmr = new HOForms.SupplierAccounts();
+            //HOFormsDevEx.SupplierAccountsDevEx pcusatfsmr = new HOFormsDevEx.SupplierAccountsDevEx();
+            //pcusatfsmr.MdiParent = this;
+            //pcusatfsmr.Show();
+        }
+
+        private void barButtonItem72_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            AccountingDevEx.BankReconForm bnkform = new AccountingDevEx.BankReconForm();
+            bnkform.Show();
+            //foreach (Form form in Application.OpenForms)
+            //{
+            //    if (form.GetType() == typeof(Reporting.AccountReconDevEx))
+            //    {
+            //        form.Activate();
+            //        return;
+            //    }
+            //}
+            //Reporting.AccountReconDevEx pcusatfsmr = new Reporting.AccountReconDevEx();
+            //pcusatfsmr.MdiParent = this;
+            //pcusatfsmr.Show();
+
         }
 
         private void barButtonItem73_ItemClick(object sender, ItemClickEventArgs e)
         {
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form.GetType() == typeof(POSDevEx.AccountPayablesDevEx))
-                {
-                    form.Activate();
-                    return;
-                }
-            }
-            POSDevEx.AccountPayablesDevEx pcusatfsmr = new POSDevEx.AccountPayablesDevEx();
-            pcusatfsmr.MdiParent = this;
-            pcusatfsmr.Show();
+            OpenMdiForm<POSDevEx.AccountPayablesDevEx>();
+            //foreach (Form form in Application.OpenForms)
+            //{
+            //    if (form.GetType() == typeof(POSDevEx.AccountPayablesDevEx))
+            //    {
+            //        form.Activate();
+            //        return;
+            //    }
+            //}
+            //POSDevEx.AccountPayablesDevEx pcusatfsmr = new POSDevEx.AccountPayablesDevEx();
+            //pcusatfsmr.MdiParent = this;
+            //pcusatfsmr.Show();
         }
 
         private void barButtonItem69_ItemClick(object sender, ItemClickEventArgs e)
@@ -1784,47 +1797,50 @@ namespace SalesInventorySystem
 
         private void barButtonItem75_ItemClick(object sender, ItemClickEventArgs e)
         {
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form.GetType() == typeof(HOFormsDevEx.AccountMasterListDevEx))
-                {
-                    form.Activate();
-                    return;
-                }
-            }
-            HOFormsDevEx.AccountMasterListDevEx pcusatfsmr = new HOFormsDevEx.AccountMasterListDevEx();
-            pcusatfsmr.MdiParent = this;
-            pcusatfsmr.Show();
+            OpenMdiForm<HOFormsDevEx.AccountMasterListDevEx>();
+            //foreach (Form form in Application.OpenForms)
+            //{
+            //    if (form.GetType() == typeof(HOFormsDevEx.AccountMasterListDevEx))
+            //    {
+            //        form.Activate();
+            //        return;
+            //    }
+            //}
+            //HOFormsDevEx.AccountMasterListDevEx pcusatfsmr = new HOFormsDevEx.AccountMasterListDevEx();
+            //pcusatfsmr.MdiParent = this;
+            //pcusatfsmr.Show();
         }
 
         private void barButtonItem76_ItemClick(object sender, ItemClickEventArgs e)
         {
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form.GetType() == typeof(HOFormsDevEx.CustomerProductSettingsDevEx))
-                {
-                    form.Activate();
-                    return;
-                }
-            }
-            HOFormsDevEx.CustomerProductSettingsDevEx invcost = new HOFormsDevEx.CustomerProductSettingsDevEx();
-            invcost.MdiParent = this;
-            invcost.Show();
+            OpenMdiForm<HOFormsDevEx.CustomerProductSettingsDevEx>();
+            //foreach (Form form in Application.OpenForms)
+            //{
+            //    if (form.GetType() == typeof(HOFormsDevEx.CustomerProductSettingsDevEx))
+            //    {
+            //        form.Activate();
+            //        return;
+            //    }
+            //}
+            //HOFormsDevEx.CustomerProductSettingsDevEx invcost = new HOFormsDevEx.CustomerProductSettingsDevEx();
+            //invcost.MdiParent = this;
+            //invcost.Show();
         }
 
         private void barButtonItem77_ItemClick(object sender, ItemClickEventArgs e)
         {
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form.GetType() == typeof(HOFormsDevEx.InventorySettlementDevEx))
-                {
-                    form.Activate();
-                    return;
-                }
-            }
-            HOFormsDevEx.InventorySettlementDevEx pcusatfsmr = new HOFormsDevEx.InventorySettlementDevEx();
-            pcusatfsmr.MdiParent = this;
-            pcusatfsmr.Show();
+            OpenMdiForm<HOFormsDevEx.InventorySettlementDevEx>();
+            //foreach (Form form in Application.OpenForms)
+            //{
+            //    if (form.GetType() == typeof(HOFormsDevEx.InventorySettlementDevEx))
+            //    {
+            //        form.Activate();
+            //        return;
+            //    }
+            //}
+            //HOFormsDevEx.InventorySettlementDevEx pcusatfsmr = new HOFormsDevEx.InventorySettlementDevEx();
+            //pcusatfsmr.MdiParent = this;
+            //pcusatfsmr.Show();
         }
 
         private void barButtonItem78_ItemClick(object sender, ItemClickEventArgs e)
@@ -1891,17 +1907,18 @@ namespace SalesInventorySystem
 
         private void barButtonItem83_ItemClick(object sender, ItemClickEventArgs e)
         {
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form.GetType() == typeof(HOFormsDevEx.ViewNonTradeOrdersDevEx))
-                {
-                    form.Activate();
-                    return;
-                }
-            }
-            HOFormsDevEx.ViewNonTradeOrdersDevEx pcusatfsmr = new HOFormsDevEx.ViewNonTradeOrdersDevEx();
-            pcusatfsmr.MdiParent = this;
-            pcusatfsmr.Show();
+            OpenMdiForm<HOFormsDevEx.ViewNonTradeOrdersDevEx>();
+            //foreach (Form form in Application.OpenForms)
+            //{
+            //    if (form.GetType() == typeof(HOFormsDevEx.ViewNonTradeOrdersDevEx))
+            //    {
+            //        form.Activate();
+            //        return;
+            //    }
+            //}
+            //HOFormsDevEx.ViewNonTradeOrdersDevEx pcusatfsmr = new HOFormsDevEx.ViewNonTradeOrdersDevEx();
+            //pcusatfsmr.MdiParent = this;
+            //pcusatfsmr.Show();
         }
 
         private void barButtonItem82_ItemClick(object sender, ItemClickEventArgs e)
@@ -1974,70 +1991,74 @@ namespace SalesInventorySystem
 
         private void barButtonItem86_ItemClick(object sender, ItemClickEventArgs e)
         {
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form.GetType() == typeof(HOFormsDevEx.DepartmentsDevEx))
-                {
-                    form.Activate();
-                    return;
-                }
-            }
-            HOFormsDevEx.DepartmentsDevEx pcusatfsmr = new HOFormsDevEx.DepartmentsDevEx();
-            pcusatfsmr.MdiParent = this;
-            pcusatfsmr.Show();
+            OpenMdiForm<HOFormsDevEx.DepartmentsDevEx>();
+            //foreach (Form form in Application.OpenForms)
+            //{
+            //    if (form.GetType() == typeof(HOFormsDevEx.DepartmentsDevEx))
+            //    {
+            //        form.Activate();
+            //        return;
+            //    }
+            //}
+            //HOFormsDevEx.DepartmentsDevEx pcusatfsmr = new HOFormsDevEx.DepartmentsDevEx();
+            //pcusatfsmr.MdiParent = this;
+            //pcusatfsmr.Show();
         }
 
         private void barButtonItem87_ItemClick(object sender, ItemClickEventArgs e)
         {
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form.GetType() == typeof(HOFormsDevEx.LocationDevEx))
-                {
-                    form.Activate();
-                    return;
-                }
-            }
-            HOFormsDevEx.LocationDevEx pcusatfsmr = new HOFormsDevEx.LocationDevEx();
-            pcusatfsmr.MdiParent = this;
-            pcusatfsmr.Show();
+            OpenMdiForm<HOFormsDevEx.LocationDevEx>();
+            //foreach (Form form in Application.OpenForms)
+            //{
+            //    if (form.GetType() == typeof(HOFormsDevEx.LocationDevEx))
+            //    {
+            //        form.Activate();
+            //        return;
+            //    }
+            //}
+            //HOFormsDevEx.LocationDevEx pcusatfsmr = new HOFormsDevEx.LocationDevEx();
+            //pcusatfsmr.MdiParent = this;
+            //pcusatfsmr.Show();
         }
 
         private void barButtonItem88_ItemClick(object sender, ItemClickEventArgs e)
         {
-            program = "SALESANDINVENTORY";
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form.GetType() == typeof(HOFormsDevEx.GenInventoryCategoryDevEx))
-                {
-                    form.Activate();
-                    return;
-                }
-            }
-            HOFormsDevEx.GenInventoryCategoryDevEx pcusatfsmr = new HOFormsDevEx.GenInventoryCategoryDevEx();
-            pcusatfsmr.MdiParent = this;
-            pcusatfsmr.Show();
-            Database.display("SELECT * FROM GenInventoryCategory", pcusatfsmr.gridControl1, pcusatfsmr.gridView1);
+            OpenMdiForm<HOFormsDevEx.GenInventoryCategoryDevEx>();
+            //program = "SALESANDINVENTORY";
+            //foreach (Form form in Application.OpenForms)
+            //{
+            //    if (form.GetType() == typeof(HOFormsDevEx.GenInventoryCategoryDevEx))
+            //    {
+            //        form.Activate();
+            //        return;
+            //    }
+            //}
+            //HOFormsDevEx.GenInventoryCategoryDevEx pcusatfsmr = new HOFormsDevEx.GenInventoryCategoryDevEx();
+            //pcusatfsmr.MdiParent = this;
+            //pcusatfsmr.Show();
+            //Database.display("SELECT * FROM GenInventoryCategory", pcusatfsmr.gridControl1, pcusatfsmr.gridView1);
         }
 
         private void barButtonItem89_ItemClick(object sender, ItemClickEventArgs e)
         {
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form.GetType() == typeof(HOFormsDevEx.ViewGeneralnventory))
-                {
-                    form.Activate();
-                    return;
-                }
-            }
-            HOFormsDevEx.ViewGeneralnventory pcusatfsmr = new HOFormsDevEx.ViewGeneralnventory();
-            pcusatfsmr.MdiParent = this;
-            pcusatfsmr.Show();
-            Database.displaySearchlookupEdit("SELECT * FROM GenInventoryCategory", pcusatfsmr.txtcategory, "Category", "Category");
-            Database.displaySearchlookupEdit("SELECT * FROM Custodian", pcusatfsmr.txtcustodian, "Custodian", "Custodian");
-            Database.displaySearchlookupEdit("SELECT SupplierID,SupplierName FROM Supplier", pcusatfsmr.txtvendor, "SupplierID", "SupplierID");
-            Database.displaySearchlookupEdit("SELECT LocationID,LocationName FROM Location", pcusatfsmr.txtlocation, "LocationID", "LocationID");
-            Database.displaySearchlookupEdit("SELECT DeptID,DeptName FROM Departments", pcusatfsmr.txtdept, "DeptID", "DeptID");
-            Database.display("Select TOP 100 * FROM view_GenInventory ", pcusatfsmr.gridControl1, pcusatfsmr.gridView1);
+            OpenMdiForm<HOFormsDevEx.ViewGeneralnventory>();
+            //foreach (Form form in Application.OpenForms)
+            //{
+            //    if (form.GetType() == typeof(HOFormsDevEx.ViewGeneralnventory))
+            //    {
+            //        form.Activate();
+            //        return;
+            //    }
+            //}
+            //HOFormsDevEx.ViewGeneralnventory pcusatfsmr = new HOFormsDevEx.ViewGeneralnventory();
+            //pcusatfsmr.MdiParent = this;
+            //pcusatfsmr.Show();
+            //Database.displaySearchlookupEdit("SELECT * FROM GenInventoryCategory", pcusatfsmr.txtcategory, "Category", "Category");
+            //Database.displaySearchlookupEdit("SELECT * FROM Custodian", pcusatfsmr.txtcustodian, "Custodian", "Custodian");
+            //Database.displaySearchlookupEdit("SELECT SupplierID,SupplierName FROM Supplier", pcusatfsmr.txtvendor, "SupplierID", "SupplierID");
+            //Database.displaySearchlookupEdit("SELECT LocationID,LocationName FROM Location", pcusatfsmr.txtlocation, "LocationID", "LocationID");
+            //Database.displaySearchlookupEdit("SELECT DeptID,DeptName FROM Departments", pcusatfsmr.txtdept, "DeptID", "DeptID");
+            //Database.display("Select TOP 100 * FROM view_GenInventory ", pcusatfsmr.gridControl1, pcusatfsmr.gridView1);
             //pcusatfsmr.gridView1.Columns["PhotoImage"].Width = 150;
             //pcusatfsmr.gridView1.RowHeight = 50;
             //pcusatfsmr.gridView1.BestFitColumns();
@@ -2045,137 +2066,146 @@ namespace SalesInventorySystem
 
         private void barButtonItem90_ItemClick(object sender, ItemClickEventArgs e)
         {
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form.GetType() == typeof(HOFormsDevEx.GenInventoryItems))
-                {
-                    form.Activate();
-                    return;
-                }
-            }
-            HOFormsDevEx.GenInventoryItems pcusatfsmr = new HOFormsDevEx.GenInventoryItems();
-            pcusatfsmr.MdiParent = this;
-            pcusatfsmr.Show();
+            OpenMdiForm<HOFormsDevEx.GenInventoryItems>();
+            //foreach (Form form in Application.OpenForms)
+            //{
+            //    if (form.GetType() == typeof(HOFormsDevEx.GenInventoryItems))
+            //    {
+            //        form.Activate();
+            //        return;
+            //    }
+            //}
+            //HOFormsDevEx.GenInventoryItems pcusatfsmr = new HOFormsDevEx.GenInventoryItems();
+            //pcusatfsmr.MdiParent = this;
+            //pcusatfsmr.Show();
         }
 
         private void barButtonItem91_ItemClick(object sender, ItemClickEventArgs e)
         {
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form.GetType() == typeof(Reporting.DepreciationReports))
-                {
-                    form.Activate();
-                    return;
-                }
-            }
-            Reporting.DepreciationReports pcusatfsmr = new Reporting.DepreciationReports();
-            pcusatfsmr.MdiParent = this;
-            pcusatfsmr.Show();
+            OpenMdiForm<Reporting.DepreciationReports>();
+            //foreach (Form form in Application.OpenForms)
+            //{
+            //    if (form.GetType() == typeof(Reporting.DepreciationReports))
+            //    {
+            //        form.Activate();
+            //        return;
+            //    }
+            //}
+            //Reporting.DepreciationReports pcusatfsmr = new Reporting.DepreciationReports();
+            //pcusatfsmr.MdiParent = this;
+            //pcusatfsmr.Show();
         }
 
         private void barButtonItem17_ItemClick(object sender, ItemClickEventArgs e)
         {
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form.GetType() == typeof(Reporting.PurchaseOrderRepDevEx))
-                {
-                    form.Activate();
-                    return;
-                }
-            }
-            Reporting.PurchaseOrderRepDevEx pcusatfsmr = new Reporting.PurchaseOrderRepDevEx();
-            pcusatfsmr.MdiParent = this;
-            pcusatfsmr.Show();
+            OpenMdiForm<Reporting.PurchaseOrderRepDevEx>();
+            //foreach (Form form in Application.OpenForms)
+            //{
+            //    if (form.GetType() == typeof(Reporting.PurchaseOrderRepDevEx))
+            //    {
+            //        form.Activate();
+            //        return;
+            //    }
+            //}
+            //Reporting.PurchaseOrderRepDevEx pcusatfsmr = new Reporting.PurchaseOrderRepDevEx();
+            //pcusatfsmr.MdiParent = this;
+            //pcusatfsmr.Show();
         }
 
         private void barButtonItem92_ItemClick(object sender, ItemClickEventArgs e)
         {
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form.GetType() == typeof(HotelManagement.HotelFrmMainDashBoard))
-                {
-                    form.Activate();
-                    return;
-                }
-            }
-            HotelManagement.HotelFrmMainDashBoard pcusatfsmr = new HotelManagement.HotelFrmMainDashBoard();
-            pcusatfsmr.MdiParent = this;
-            pcusatfsmr.Show();
+            OpenMdiForm<HotelManagement.HotelFrmMainDashBoard>();
+            //foreach (Form form in Application.OpenForms)
+            //{
+            //    if (form.GetType() == typeof(HotelManagement.HotelFrmMainDashBoard))
+            //    {
+            //        form.Activate();
+            //        return;
+            //    }
+            //}
+            //HotelManagement.HotelFrmMainDashBoard pcusatfsmr = new HotelManagement.HotelFrmMainDashBoard();
+            //pcusatfsmr.MdiParent = this;
+            //pcusatfsmr.Show();
         }
 
         private void barButtonItem93_ItemClick(object sender, ItemClickEventArgs e)
         {
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form.GetType() == typeof(HotelManagement.HotelFrmRoomCategory))
-                {
-                    form.Activate();
-                    return;
-                }
-            }
-            HotelManagement.HotelFrmRoomCategory pcusatfsmr = new HotelManagement.HotelFrmRoomCategory();
-            pcusatfsmr.MdiParent = this;
-            pcusatfsmr.Show();
+            OpenMdiForm<HotelManagement.HotelFrmRoomCategory>();
+            //foreach (Form form in Application.OpenForms)
+            //{
+            //    if (form.GetType() == typeof(HotelManagement.HotelFrmRoomCategory))
+            //    {
+            //        form.Activate();
+            //        return;
+            //    }
+            //}
+            //HotelManagement.HotelFrmRoomCategory pcusatfsmr = new HotelManagement.HotelFrmRoomCategory();
+            //pcusatfsmr.MdiParent = this;
+            //pcusatfsmr.Show();
         }
 
         private void btnCustodian_ItemClick(object sender, ItemClickEventArgs e)
         {
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form.GetType() == typeof(HOFormsDevEx.Custodian))
-                {
-                    form.Activate();
-                    return;
-                }
-            }
-            HOFormsDevEx.Custodian pcusatfsmr = new HOFormsDevEx.Custodian();
-            pcusatfsmr.MdiParent = this;
-            pcusatfsmr.Show();
+            OpenMdiForm<HOFormsDevEx.Custodian>();
+            //foreach (Form form in Application.OpenForms)
+            //{
+            //    if (form.GetType() == typeof(HOFormsDevEx.Custodian))
+            //    {
+            //        form.Activate();
+            //        return;
+            //    }
+            //}
+            //HOFormsDevEx.Custodian pcusatfsmr = new HOFormsDevEx.Custodian();
+            //pcusatfsmr.MdiParent = this;
+            //pcusatfsmr.Show();
         }
 
         private void btnReportHeaderSettings_ItemClick(object sender, ItemClickEventArgs e)
         {
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form.GetType() == typeof(HOFormsDevEx.ReportHeaderSettings))
-                {
-                    form.Activate();
-                    return;
-                }
-            }
-            HOFormsDevEx.ReportHeaderSettings pcusatfsmr = new HOFormsDevEx.ReportHeaderSettings();
-            pcusatfsmr.MdiParent = this;
-            pcusatfsmr.Show();
+            OpenMdiForm<HOFormsDevEx.ReportHeaderSettings>();
+            //foreach (Form form in Application.OpenForms)
+            //{
+            //    if (form.GetType() == typeof(HOFormsDevEx.ReportHeaderSettings))
+            //    {
+            //        form.Activate();
+            //        return;
+            //    }
+            //}
+            //HOFormsDevEx.ReportHeaderSettings pcusatfsmr = new HOFormsDevEx.ReportHeaderSettings();
+            //pcusatfsmr.MdiParent = this;
+            //pcusatfsmr.Show();
         }
 
         private void btnCollectionList_ItemClick(object sender, ItemClickEventArgs e)
         {
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form.GetType() == typeof(Reporting.CollectionList))
-                {
-                    form.Activate();
-                    return;
-                }
-            }
-            Reporting.CollectionList pcusatfsmr = new Reporting.CollectionList();
-            pcusatfsmr.MdiParent = this;
-            pcusatfsmr.Show();
+            OpenMdiForm<Reporting.CollectionList>();
+            //foreach (Form form in Application.OpenForms)
+            //{
+            //    if (form.GetType() == typeof(Reporting.CollectionList))
+            //    {
+            //        form.Activate();
+            //        return;
+            //    }
+            //}
+            //Reporting.CollectionList pcusatfsmr = new Reporting.CollectionList();
+            //pcusatfsmr.MdiParent = this;
+            //pcusatfsmr.Show();
         }
 
         private void btnHotelFoodMenu_ItemClick(object sender, ItemClickEventArgs e)
         {
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form.GetType() == typeof(HotelManagement.HotelFrmFoodMenu))
-                {
-                    form.Activate();
-                    return;
-                }
-            }
-            HotelManagement.HotelFrmFoodMenu pcusatfsmr = new HotelManagement.HotelFrmFoodMenu();
-            pcusatfsmr.MdiParent = this;
-            pcusatfsmr.Show();
+            OpenMdiForm<HotelManagement.HotelFrmFoodMenu>();
+            //foreach (Form form in Application.OpenForms)
+            //{
+            //    if (form.GetType() == typeof(HotelManagement.HotelFrmFoodMenu))
+            //    {
+            //        form.Activate();
+            //        return;
+            //    }
+            //}
+            //HotelManagement.HotelFrmFoodMenu pcusatfsmr = new HotelManagement.HotelFrmFoodMenu();
+            //pcusatfsmr.MdiParent = this;
+            //pcusatfsmr.Show();
         }
 
         private void barButtonItem2_ItemClick_1(object sender, ItemClickEventArgs e)
@@ -2194,91 +2224,97 @@ namespace SalesInventorySystem
 
         private void btnExpenseList_ItemClick(object sender, ItemClickEventArgs e)
         {
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form.GetType() == typeof(HOFormsDevEx.ExpenseList))
-                {
-                    form.Activate();
-                    return;
-                }
-            }
-            HOFormsDevEx.ExpenseList invcost = new HOFormsDevEx.ExpenseList();
-            invcost.MdiParent = this;
-            invcost.Show();
+            OpenMdiForm<HOFormsDevEx.ExpenseList>();
+            //foreach (Form form in Application.OpenForms)
+            //{
+            //    if (form.GetType() == typeof(HOFormsDevEx.ExpenseList))
+            //    {
+            //        form.Activate();
+            //        return;
+            //    }
+            //}
+            //HOFormsDevEx.ExpenseList invcost = new HOFormsDevEx.ExpenseList();
+            //invcost.MdiParent = this;
+            //invcost.Show();
         }
 
         private void btnExpenseMapping_ItemClick(object sender, ItemClickEventArgs e)
         {
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form.GetType() == typeof(HOFormsDevEx.ExpenseMapping))
-                {
-                    form.Activate();
-                    return;
-                }
-            }
-            HOFormsDevEx.ExpenseMapping invcost = new HOFormsDevEx.ExpenseMapping();
-            invcost.MdiParent = this;
-            invcost.Show();
+            OpenMdiForm<HOFormsDevEx.ExpenseMapping>();
+            //foreach (Form form in Application.OpenForms)
+            //{
+            //    if (form.GetType() == typeof(HOFormsDevEx.ExpenseMapping))
+            //    {
+            //        form.Activate();
+            //        return;
+            //    }
+            //}
+            //HOFormsDevEx.ExpenseMapping invcost = new HOFormsDevEx.ExpenseMapping();
+            //invcost.MdiParent = this;
+            //invcost.Show();
         }
 
         private void barButtonItem5_ItemClick_1(object sender, ItemClickEventArgs e)
         {
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form.GetType() == typeof(HOFormsDevEx.PostExpenseDevExFrm))
-                {
-                    form.Activate();
-                    return;
-                }
-            }
-            HOFormsDevEx.PostExpenseDevExFrm pcusatfsmr = new HOFormsDevEx.PostExpenseDevExFrm();
-            pcusatfsmr.MdiParent = this;
-            pcusatfsmr.Show();
+            OpenMdiForm<HOFormsDevEx.PostExpenseDevExFrm>();
+            //foreach (Form form in Application.OpenForms)
+            //{
+            //    if (form.GetType() == typeof(HOFormsDevEx.PostExpenseDevExFrm))
+            //    {
+            //        form.Activate();
+            //        return;
+            //    }
+            //}
+            //HOFormsDevEx.PostExpenseDevExFrm pcusatfsmr = new HOFormsDevEx.PostExpenseDevExFrm();
+            //pcusatfsmr.MdiParent = this;
+            //pcusatfsmr.Show();
         }
 
         private void barButtonItem7_ItemClick_1(object sender, ItemClickEventArgs e)
         {
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form.GetType() == typeof(HOFormsDevEx.AddExpenseDevExFrm))
-                {
-                    form.Activate();
-                    return;
-                }
-            }
-            HOFormsDevEx.AddExpenseDevExFrm pcusatfsmr = new HOFormsDevEx.AddExpenseDevExFrm();
-            pcusatfsmr.Show();
+            OpenMdiForm<HOFormsDevEx.AddExpenseDevExFrm>();
+            //foreach (Form form in Application.OpenForms)
+            //{
+            //    if (form.GetType() == typeof(HOFormsDevEx.AddExpenseDevExFrm))
+            //    {
+            //        form.Activate();
+            //        return;
+            //    }
+            //}
+            //HOFormsDevEx.AddExpenseDevExFrm pcusatfsmr = new HOFormsDevEx.AddExpenseDevExFrm();
+            //pcusatfsmr.Show();
         }
 
         private void btnLiquidationList_ItemClick(object sender, ItemClickEventArgs e)
         {
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form.GetType() == typeof(HOFormsDevEx.LiquidationList))
-                {
-                    form.Activate();
-                    return;
-                }
-            }
-            HOFormsDevEx.LiquidationList invcost = new HOFormsDevEx.LiquidationList();
-            invcost.MdiParent = this;
-            invcost.Show();
+            OpenMdiForm<HOFormsDevEx.LiquidationList>();
+            //foreach (Form form in Application.OpenForms)
+            //{
+            //    if (form.GetType() == typeof(HOFormsDevEx.LiquidationList))
+            //    {
+            //        form.Activate();
+            //        return;
+            //    }
+            //}
+            //HOFormsDevEx.LiquidationList invcost = new HOFormsDevEx.LiquidationList();
+            //invcost.MdiParent = this;
+            //invcost.Show();
         }
 
         private void btnLiquidationMapping_ItemClick(object sender, ItemClickEventArgs e)
         {
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form.GetType() == typeof(HOFormsDevEx.LiquidationMapping))
-                {
-                    form.Activate();
-                    return;
-                }
-            }
-            HOFormsDevEx.LiquidationMapping invcost = new HOFormsDevEx.LiquidationMapping();
-            invcost.MdiParent = this;
-            invcost.Show();
+            OpenMdiForm<HOFormsDevEx.LiquidationMapping>();
+            //foreach (Form form in Application.OpenForms)
+            //{
+            //    if (form.GetType() == typeof(HOFormsDevEx.LiquidationMapping))
+            //    {
+            //        form.Activate();
+            //        return;
+            //    }
+            //}
+            //HOFormsDevEx.LiquidationMapping invcost = new HOFormsDevEx.LiquidationMapping();
+            //invcost.MdiParent = this;
+            //invcost.Show();
         }
 
         private void btnInventoryQtyAdjustment_ItemClick(object sender, ItemClickEventArgs e)
@@ -2297,62 +2333,66 @@ namespace SalesInventorySystem
 
         private void barButtonItem96_ItemClick(object sender, ItemClickEventArgs e)
         {
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form.GetType() == typeof(HotelManagement.HotelFrmTypeOfRates))
-                {
-                    form.Activate();
-                    return;
-                }
-            }
-            HotelManagement.HotelFrmTypeOfRates pcusatfsmr = new HotelManagement.HotelFrmTypeOfRates();
-            pcusatfsmr.MdiParent = this;
-            pcusatfsmr.Show();
+            OpenMdiForm<HotelManagement.HotelFrmTypeOfRates>();
+            //foreach (Form form in Application.OpenForms)
+            //{
+            //    if (form.GetType() == typeof(HotelManagement.HotelFrmTypeOfRates))
+            //    {
+            //        form.Activate();
+            //        return;
+            //    }
+            //}
+            //HotelManagement.HotelFrmTypeOfRates pcusatfsmr = new HotelManagement.HotelFrmTypeOfRates();
+            //pcusatfsmr.MdiParent = this;
+            //pcusatfsmr.Show();
         }
 
         private void btnHotelFoodCategory_ItemClick(object sender, ItemClickEventArgs e)
         {
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form.GetType() == typeof(HotelManagement.HotelFrmFoodCategory))
-                {
-                    form.Activate();
-                    return;
-                }
-            }
-            HotelManagement.HotelFrmFoodCategory pcusatfsmr = new HotelManagement.HotelFrmFoodCategory();
-            pcusatfsmr.MdiParent = this;
-            pcusatfsmr.Show();
+            OpenMdiForm<HotelManagement.HotelFrmFoodCategory>();
+            //foreach (Form form in Application.OpenForms)
+            //{
+            //    if (form.GetType() == typeof(HotelManagement.HotelFrmFoodCategory))
+            //    {
+            //        form.Activate();
+            //        return;
+            //    }
+            //}
+            //HotelManagement.HotelFrmFoodCategory pcusatfsmr = new HotelManagement.HotelFrmFoodCategory();
+            //pcusatfsmr.MdiParent = this;
+            //pcusatfsmr.Show();
         }
 
         private void btnHotelFoodMenuMaker_ItemClick(object sender, ItemClickEventArgs e)
         {
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form.GetType() == typeof(HotelManagement.HotelFrmMenuMaker))
-                {
-                    form.Activate();
-                    return;
-                }
-            }
-            HotelManagement.HotelFrmMenuMaker pcusatfsmr = new HotelManagement.HotelFrmMenuMaker();
-            pcusatfsmr.MdiParent = this;
-            pcusatfsmr.Show();
+            OpenMdiForm<HotelManagement.HotelFrmMenuMaker>();
+            //foreach (Form form in Application.OpenForms)
+            //{
+            //    if (form.GetType() == typeof(HotelManagement.HotelFrmMenuMaker))
+            //    {
+            //        form.Activate();
+            //        return;
+            //    }
+            //}
+            //HotelManagement.HotelFrmMenuMaker pcusatfsmr = new HotelManagement.HotelFrmMenuMaker();
+            //pcusatfsmr.MdiParent = this;
+            //pcusatfsmr.Show();
         }
 
         private void btnHotelCharges_ItemClick(object sender, ItemClickEventArgs e)
         {
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form.GetType() == typeof(HotelManagement.HotelFrmCharges))
-                {
-                    form.Activate();
-                    return;
-                }
-            }
-            HotelManagement.HotelFrmCharges pcusatfsmr = new HotelManagement.HotelFrmCharges();
-            pcusatfsmr.MdiParent = this;
-            pcusatfsmr.Show();
+            OpenMdiForm<HotelManagement.HotelFrmCharges>();
+            //foreach (Form form in Application.OpenForms)
+            //{
+            //    if (form.GetType() == typeof(HotelManagement.HotelFrmCharges))
+            //    {
+            //        form.Activate();
+            //        return;
+            //    }
+            //}
+            //HotelManagement.HotelFrmCharges pcusatfsmr = new HotelManagement.HotelFrmCharges();
+            //pcusatfsmr.MdiParent = this;
+            //pcusatfsmr.Show();
         }
 
         private void btnHotelReports_ItemClick(object sender, ItemClickEventArgs e)
@@ -2390,122 +2430,130 @@ namespace SalesInventorySystem
 
         private void btnForwardingDashboard_ItemClick(object sender, ItemClickEventArgs e)
         {
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form.GetType() == typeof(Forwarding.ForwardingDashboard))
-                {
-                    form.Activate();
-                    return;
-                }
-            }
-            Forwarding.ForwardingDashboard pcusatfsmr = new Forwarding.ForwardingDashboard();
-            pcusatfsmr.MdiParent = this;
-            pcusatfsmr.Show();
+            OpenMdiForm<Forwarding.ForwardingDashboard>();
+            //foreach (Form form in Application.OpenForms)
+            //{
+            //    if (form.GetType() == typeof(Forwarding.ForwardingDashboard))
+            //    {
+            //        form.Activate();
+            //        return;
+            //    }
+            //}
+            //Forwarding.ForwardingDashboard pcusatfsmr = new Forwarding.ForwardingDashboard();
+            //pcusatfsmr.MdiParent = this;
+            //pcusatfsmr.Show();
         }
 
         private void btnfwrdingbilling_ItemClick(object sender, ItemClickEventArgs e)
         {
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form.GetType() == typeof(Forwarding.Reporting.ForwardingDeliveryFrm))
-                {
-                    form.Activate();
-                    return;
-                }
-            }
-            Forwarding.Reporting.ForwardingDeliveryFrm pcusatfsmr = new Forwarding.Reporting.ForwardingDeliveryFrm();
-            pcusatfsmr.MdiParent = this;
-            pcusatfsmr.Show();
+            OpenMdiForm<Forwarding.Reporting.ForwardingDeliveryFrm>();
+            //foreach (Form form in Application.OpenForms)
+            //{
+            //    if (form.GetType() == typeof(Forwarding.Reporting.ForwardingDeliveryFrm))
+            //    {
+            //        form.Activate();
+            //        return;
+            //    }
+            //}
+            //Forwarding.Reporting.ForwardingDeliveryFrm pcusatfsmr = new Forwarding.Reporting.ForwardingDeliveryFrm();
+            //pcusatfsmr.MdiParent = this;
+            //pcusatfsmr.Show();
         }
 
         private void btnCompany_ItemClick(object sender, ItemClickEventArgs e)
         {
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form.GetType() == typeof(HOFormsDevEx.AddCompanyDevFrm))
-                {
-                    form.Activate();
-                    return;
-                }
-            }
-            HOFormsDevEx.AddCompanyDevFrm pcusatfsmr = new HOFormsDevEx.AddCompanyDevFrm();
-            pcusatfsmr.MdiParent = this;
-            pcusatfsmr.Show();
+            OpenMdiForm<HOFormsDevEx.AddCompanyDevFrm>();
+            //foreach (Form form in Application.OpenForms)
+            //{
+            //    if (form.GetType() == typeof(HOFormsDevEx.AddCompanyDevFrm))
+            //    {
+            //        form.Activate();
+            //        return;
+            //    }
+            //}
+            //HOFormsDevEx.AddCompanyDevFrm pcusatfsmr = new HOFormsDevEx.AddCompanyDevFrm();
+            //pcusatfsmr.MdiParent = this;
+            //pcusatfsmr.Show();
         }
 
         private void barButtonItem7_ItemClick_2(object sender, ItemClickEventArgs e)
         {
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form.GetType() == typeof(Forwarding.ForwardingAddPrimeOver))
-                {
-                    form.Activate();
-                    return;
-                }
-            }
-            Forwarding.ForwardingAddPrimeOver pcusatfsmr = new Forwarding.ForwardingAddPrimeOver();
-            pcusatfsmr.MdiParent = this;
-            pcusatfsmr.Show();
+            OpenMdiForm<Forwarding.ForwardingAddPrimeOver>();
+            //foreach (Form form in Application.OpenForms)
+            //{
+            //    if (form.GetType() == typeof(Forwarding.ForwardingAddPrimeOver))
+            //    {
+            //        form.Activate();
+            //        return;
+            //    }
+            //}
+            //Forwarding.ForwardingAddPrimeOver pcusatfsmr = new Forwarding.ForwardingAddPrimeOver();
+            //pcusatfsmr.MdiParent = this;
+            //pcusatfsmr.Show();
         }
 
         private void btnforwardngvhcleregistration_ItemClick(object sender, ItemClickEventArgs e)
         {
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form.GetType() == typeof(Forwarding.ForwardingTruckDetails))
-                {
-                    form.Activate();
-                    return;
-                }
-            }
-            Forwarding.ForwardingTruckDetails pcusatfsmr = new Forwarding.ForwardingTruckDetails();
-            pcusatfsmr.MdiParent = this;
-            pcusatfsmr.Show();
+            OpenMdiForm<Forwarding.ForwardingTruckDetails>();
+            //foreach (Form form in Application.OpenForms)
+            //{
+            //    if (form.GetType() == typeof(Forwarding.ForwardingTruckDetails))
+            //    {
+            //        form.Activate();
+            //        return;
+            //    }
+            //}
+            //Forwarding.ForwardingTruckDetails pcusatfsmr = new Forwarding.ForwardingTruckDetails();
+            //pcusatfsmr.MdiParent = this;
+            //pcusatfsmr.Show();
         }
 
         private void btnAccountingAging_ItemClick(object sender, ItemClickEventArgs e)
         {
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form.GetType() == typeof(Accounting.AgingReports))
-                {
-                    form.Activate();
-                    return;
-                }
-            }
-            Accounting.AgingReports pcusatfsmr = new Accounting.AgingReports();
-            pcusatfsmr.MdiParent = this;
-            pcusatfsmr.Show();
+            OpenMdiForm<Accounting.AgingReports>();
+            //foreach (Form form in Application.OpenForms)
+            //{
+            //    if (form.GetType() == typeof(Accounting.AgingReports))
+            //    {
+            //        form.Activate();
+            //        return;
+            //    }
+            //}
+            //Accounting.AgingReports pcusatfsmr = new Accounting.AgingReports();
+            //pcusatfsmr.MdiParent = this;
+            //pcusatfsmr.Show();
         }
 
         private void btnPassbookBalances_ItemClick(object sender, ItemClickEventArgs e)
         {
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form.GetType() == typeof(HOFormsDevEx.PassbookBalancesDevEx))
-                {
-                    form.Activate();
-                    return;
-                }
-            }
-            HOFormsDevEx.PassbookBalancesDevEx pcusatfsmr = new HOFormsDevEx.PassbookBalancesDevEx();
-            pcusatfsmr.MdiParent = this;
-            pcusatfsmr.Show();
+            OpenMdiForm<HOFormsDevEx.PassbookBalancesDevEx>();
+            //foreach (Form form in Application.OpenForms)
+            //{
+            //    if (form.GetType() == typeof(HOFormsDevEx.PassbookBalancesDevEx))
+            //    {
+            //        form.Activate();
+            //        return;
+            //    }
+            //}
+            //HOFormsDevEx.PassbookBalancesDevEx pcusatfsmr = new HOFormsDevEx.PassbookBalancesDevEx();
+            //pcusatfsmr.MdiParent = this;
+            //pcusatfsmr.Show();
         }
 
         private void btnBanks_ItemClick(object sender, ItemClickEventArgs e)
         {
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form.GetType() == typeof(HOFormsDevEx.BanksDevEx))
-                {
-                    form.Activate();
-                    return;
-                }
-            }
-            HOFormsDevEx.BanksDevEx pcusatfsmr = new HOFormsDevEx.BanksDevEx();
-            pcusatfsmr.MdiParent = this;
-            pcusatfsmr.Show();
+            OpenMdiForm<HOFormsDevEx.BanksDevEx>();
+            //foreach (Form form in Application.OpenForms)
+            //{
+            //    if (form.GetType() == typeof(HOFormsDevEx.BanksDevEx))
+            //    {
+            //        form.Activate();
+            //        return;
+            //    }
+            //}
+            //HOFormsDevEx.BanksDevEx pcusatfsmr = new HOFormsDevEx.BanksDevEx();
+            //pcusatfsmr.MdiParent = this;
+            //pcusatfsmr.Show();
         }
 
         private void btCounterReceipt_ItemClick(object sender, ItemClickEventArgs e)
@@ -2524,17 +2572,18 @@ namespace SalesInventorySystem
 
         private void btnCreditMemo_ItemClick(object sender, ItemClickEventArgs e)
         {
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form.GetType() == typeof(Reporting.CreditMemoRepDevEx))
-                {
-                    form.Activate();
-                    return;
-                }
-            }
-            Reporting.CreditMemoRepDevEx pcusatfsmr = new Reporting.CreditMemoRepDevEx();
-            pcusatfsmr.MdiParent = this;
-            pcusatfsmr.Show();
+            OpenMdiForm<Reporting.CreditMemoRepDevEx>();
+            //foreach (Form form in Application.OpenForms)
+            //{
+            //    if (form.GetType() == typeof(Reporting.CreditMemoRepDevEx))
+            //    {
+            //        form.Activate();
+            //        return;
+            //    }
+            //}
+            //Reporting.CreditMemoRepDevEx pcusatfsmr = new Reporting.CreditMemoRepDevEx();
+            //pcusatfsmr.MdiParent = this;
+            //pcusatfsmr.Show();
         }
 
         private void btnSTSSummaryRep_ItemClick(object sender, ItemClickEventArgs e)
@@ -2567,47 +2616,50 @@ namespace SalesInventorySystem
 
         private void btnServicesCost_ItemClick(object sender, ItemClickEventArgs e)
         {
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form.GetType() == typeof(HOFormsDevEx.ServicesCostDevEx))
-                {
-                    form.Activate();
-                    return;
-                }
-            }
-            HOFormsDevEx.ServicesCostDevEx invcost = new HOFormsDevEx.ServicesCostDevEx();
-            invcost.MdiParent = this;
-            invcost.Show();
+            OpenMdiForm<HOFormsDevEx.ServicesCostDevEx>();
+            //foreach (Form form in Application.OpenForms)
+            //{
+            //    if (form.GetType() == typeof(HOFormsDevEx.ServicesCostDevEx))
+            //    {
+            //        form.Activate();
+            //        return;
+            //    }
+            //}
+            //HOFormsDevEx.ServicesCostDevEx invcost = new HOFormsDevEx.ServicesCostDevEx();
+            //invcost.MdiParent = this;
+            //invcost.Show();
         }
 
         private void btnServices_ItemClick(object sender, ItemClickEventArgs e)
         {
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form.GetType() == typeof(HOFormsDevEx.ServicesDevEx))
-                {
-                    form.Activate();
-                    return;
-                }
-            }
-            HOFormsDevEx.ServicesDevEx invcost = new HOFormsDevEx.ServicesDevEx();
-            invcost.MdiParent = this;
-            invcost.Show();
+            OpenMdiForm<HOFormsDevEx.ServicesDevEx>();
+            //foreach (Form form in Application.OpenForms)
+            //{
+            //    if (form.GetType() == typeof(HOFormsDevEx.ServicesDevEx))
+            //    {
+            //        form.Activate();
+            //        return;
+            //    }
+            //}
+            //HOFormsDevEx.ServicesDevEx invcost = new HOFormsDevEx.ServicesDevEx();
+            //invcost.MdiParent = this;
+            //invcost.Show();
         }
 
         private void btnInventoryUnitActivity_ItemClick(object sender, ItemClickEventArgs e)
         {
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form.GetType() == typeof(Reporting.InventoryUnitActivity))
-                {
-                    form.Activate();
-                    return;
-                }
-            }
-            Reporting.InventoryUnitActivity invcost = new Reporting.InventoryUnitActivity();
-            invcost.MdiParent = this;
-            invcost.Show();
+            OpenMdiForm<Reporting.InventoryUnitActivity>();
+            //foreach (Form form in Application.OpenForms)
+            //{
+            //    if (form.GetType() == typeof(Reporting.InventoryUnitActivity))
+            //    {
+            //        form.Activate();
+            //        return;
+            //    }
+            //}
+            //Reporting.InventoryUnitActivity invcost = new Reporting.InventoryUnitActivity();
+            //invcost.MdiParent = this;
+            //invcost.Show();
         }
 
         private void btnRequestStockTransfer_ItemClick(object sender, ItemClickEventArgs e)
@@ -2620,77 +2672,82 @@ namespace SalesInventorySystem
 
         private void btnProcessSTS_ItemClick(object sender, ItemClickEventArgs e)
         {
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form.GetType() == typeof(Orders.ViewBranchOrderSTS))
-                {
-                    form.Activate();
-                    return;
-                }
-            }
-            Orders.ViewBranchOrderSTS invcost = new Orders.ViewBranchOrderSTS();
-            invcost.MdiParent = this;
-            invcost.Show();
+            OpenMdiForm<Orders.ViewBranchOrderSTS>();
+            //foreach (Form form in Application.OpenForms)
+            //{
+            //    if (form.GetType() == typeof(Orders.ViewBranchOrderSTS))
+            //    {
+            //        form.Activate();
+            //        return;
+            //    }
+            //}
+            //Orders.ViewBranchOrderSTS invcost = new Orders.ViewBranchOrderSTS();
+            //invcost.MdiParent = this;
+            //invcost.Show();
         }
 
         private void btnAddSTSCharges_ItemClick(object sender, ItemClickEventArgs e)
         {
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form.GetType() == typeof(HOFormsDevEx.AddFreightChargeSTS))
-                {
-                    form.Activate();
-                    return;
-                }
-            }
-            HOFormsDevEx.AddFreightChargeSTS invcost = new HOFormsDevEx.AddFreightChargeSTS();
-            invcost.MdiParent = this;
-            invcost.Show();
+            OpenMdiForm<HOFormsDevEx.AddFreightChargeSTS>();
+            //foreach (Form form in Application.OpenForms)
+            //{
+            //    if (form.GetType() == typeof(HOFormsDevEx.AddFreightChargeSTS))
+            //    {
+            //        form.Activate();
+            //        return;
+            //    }
+            //}
+            //HOFormsDevEx.AddFreightChargeSTS invcost = new HOFormsDevEx.AddFreightChargeSTS();
+            //invcost.MdiParent = this;
+            //invcost.Show();
         }
 
         private void btnViewJFCInventory_ItemClick(object sender, ItemClickEventArgs e)
         {
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form.GetType() == typeof(HOFormsDevEx.JFCInventory))
-                {
-                    form.Activate();
-                    return;
-                }
-            }
-            HOFormsDevEx.JFCInventory invcost = new HOFormsDevEx.JFCInventory();
-            invcost.MdiParent = this;
-            invcost.Show();
+            OpenMdiForm<HOFormsDevEx.JFCInventory>();
+            //foreach (Form form in Application.OpenForms)
+            //{
+            //    if (form.GetType() == typeof(HOFormsDevEx.JFCInventory))
+            //    {
+            //        form.Activate();
+            //        return;
+            //    }
+            //}
+            //HOFormsDevEx.JFCInventory invcost = new HOFormsDevEx.JFCInventory();
+            //invcost.MdiParent = this;
+            //invcost.Show();
         }
 
         private void barButtonItem8_ItemClick_1(object sender, ItemClickEventArgs e)
         {
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form.GetType() == typeof(Forwarding.ForwardingAddSmallTrucks))
-                {
-                    form.Activate();
-                    return;
-                }
-            }
-            Forwarding.ForwardingAddSmallTrucks pcusatfsmr = new Forwarding.ForwardingAddSmallTrucks();
-            pcusatfsmr.MdiParent = this;
-            pcusatfsmr.Show();
+            OpenMdiForm<Forwarding.ForwardingAddSmallTrucks>();
+            //foreach (Form form in Application.OpenForms)
+            //{
+            //    if (form.GetType() == typeof(Forwarding.ForwardingAddSmallTrucks))
+            //    {
+            //        form.Activate();
+            //        return;
+            //    }
+            //}
+            //Forwarding.ForwardingAddSmallTrucks pcusatfsmr = new Forwarding.ForwardingAddSmallTrucks();
+            //pcusatfsmr.MdiParent = this;
+            //pcusatfsmr.Show();
         }
 
         private void btnHotelHousekeeper_ItemClick(object sender, ItemClickEventArgs e)
         {
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form.GetType() == typeof(HotelManagement.HotelFrmAddHouseKeeper))
-                {
-                    form.Activate();
-                    return;
-                }
-            }
-            HotelManagement.HotelFrmAddHouseKeeper pcusatfsmr = new HotelManagement.HotelFrmAddHouseKeeper();
-            pcusatfsmr.MdiParent = this;
-            pcusatfsmr.Show();
+            OpenMdiForm<HotelManagement.HotelFrmAddHouseKeeper>();
+            //foreach (Form form in Application.OpenForms)
+            //{
+            //    if (form.GetType() == typeof(HotelManagement.HotelFrmAddHouseKeeper))
+            //    {
+            //        form.Activate();
+            //        return;
+            //    }
+            //}
+            //HotelManagement.HotelFrmAddHouseKeeper pcusatfsmr = new HotelManagement.HotelFrmAddHouseKeeper();
+            //pcusatfsmr.MdiParent = this;
+            //pcusatfsmr.Show();
         }
 
         private void btnfwrdAddShipment_ItemClick(object sender, ItemClickEventArgs e)
@@ -2700,62 +2757,66 @@ namespace SalesInventorySystem
 
         private void barButtonItem95_ItemClick(object sender, ItemClickEventArgs e)
         {
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form.GetType() == typeof(HotelManagement.HotelFrmRoomRates))
-                {
-                    form.Activate();
-                    return;
-                }
-            }
-            HotelManagement.HotelFrmRoomRates pcusatfsmr = new HotelManagement.HotelFrmRoomRates();
-            pcusatfsmr.MdiParent = this;
-            pcusatfsmr.Show();
+            OpenMdiForm<HotelManagement.HotelFrmRoomRates>();
+            //foreach (Form form in Application.OpenForms)
+            //{
+            //    if (form.GetType() == typeof(HotelManagement.HotelFrmRoomRates))
+            //    {
+            //        form.Activate();
+            //        return;
+            //    }
+            //}
+            //HotelManagement.HotelFrmRoomRates pcusatfsmr = new HotelManagement.HotelFrmRoomRates();
+            //pcusatfsmr.MdiParent = this;
+            //pcusatfsmr.Show();
         }
 
         private void barButtonItem97_ItemClick(object sender, ItemClickEventArgs e)
         {
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form.GetType() == typeof(HotelManagement.HotelFrmRestaurantTables))
-                {
-                    form.Activate();
-                    return;
-                }
-            }
-            HotelManagement.HotelFrmRestaurantTables pcusatfsmr = new HotelManagement.HotelFrmRestaurantTables();
-            pcusatfsmr.MdiParent = this;
-            pcusatfsmr.Show();
+            OpenMdiForm<HotelManagement.HotelFrmRestaurantTables>();
+            //foreach (Form form in Application.OpenForms)
+            //{
+            //    if (form.GetType() == typeof(HotelManagement.HotelFrmRestaurantTables))
+            //    {
+            //        form.Activate();
+            //        return;
+            //    }
+            //}
+            //HotelManagement.HotelFrmRestaurantTables pcusatfsmr = new HotelManagement.HotelFrmRestaurantTables();
+            //pcusatfsmr.MdiParent = this;
+            //pcusatfsmr.Show();
         }
 
         private void barButtonItem94_ItemClick(object sender, ItemClickEventArgs e)
         {
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form.GetType() == typeof(HotelManagement.HotelFrmRooms))
-                {
-                    form.Activate();
-                    return;
-                }
-            }
-            HotelManagement.HotelFrmRooms pcusatfsmr = new HotelManagement.HotelFrmRooms();
-            pcusatfsmr.MdiParent = this;
-            pcusatfsmr.Show();
+            OpenMdiForm<HotelManagement.HotelFrmRooms>();
+            //foreach (Form form in Application.OpenForms)
+            //{
+            //    if (form.GetType() == typeof(HotelManagement.HotelFrmRooms))
+            //    {
+            //        form.Activate();
+            //        return;
+            //    }
+            //}
+            //HotelManagement.HotelFrmRooms pcusatfsmr = new HotelManagement.HotelFrmRooms();
+            //pcusatfsmr.MdiParent = this;
+            //pcusatfsmr.Show();
         }
 
         private void barButtonItem109_ItemClick(object sender, ItemClickEventArgs e)
         {
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form.GetType() == typeof(HOFormsDevEx.UserAccessDevEx))
-                {
-                    form.Activate();
-                    return;
-                }
-            }
-            HOFormsDevEx.UserAccessDevEx pcusatfsmr = new HOFormsDevEx.UserAccessDevEx();
-            pcusatfsmr.MdiParent = this;
-            pcusatfsmr.Show();
+            OpenMdiForm<HOFormsDevEx.UserAccessDevEx>();
+            //foreach (Form form in Application.OpenForms)
+            //{
+            //    if (form.GetType() == typeof(HOFormsDevEx.UserAccessDevEx))
+            //    {
+            //        form.Activate();
+            //        return;
+            //    }
+            //}
+            //HOFormsDevEx.UserAccessDevEx pcusatfsmr = new HOFormsDevEx.UserAccessDevEx();
+            //pcusatfsmr.MdiParent = this;
+            //pcusatfsmr.Show();
         }
 
         private void barButtonItem104_ItemClick(object sender, ItemClickEventArgs e)
@@ -2810,17 +2871,18 @@ namespace SalesInventorySystem
 
         private void barButtonItem106_ItemClick(object sender, ItemClickEventArgs e)
         {
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form.GetType() == typeof(HotelManagement.HotelFrmViewGuest))
-                {
-                    form.Activate();
-                    return;
-                }
-            }
-            HotelManagement.HotelFrmViewGuest pcusatfsmr = new HotelManagement.HotelFrmViewGuest();
-            pcusatfsmr.MdiParent = this;
-            pcusatfsmr.Show();
+            OpenMdiForm<HotelManagement.HotelFrmViewGuest>();
+            //foreach (Form form in Application.OpenForms)
+            //{
+            //    if (form.GetType() == typeof(HotelManagement.HotelFrmViewGuest))
+            //    {
+            //        form.Activate();
+            //        return;
+            //    }
+            //}
+            //HotelManagement.HotelFrmViewGuest pcusatfsmr = new HotelManagement.HotelFrmViewGuest();
+            //pcusatfsmr.MdiParent = this;
+            //pcusatfsmr.Show();
         }
 
         private void barButtonItem107_ItemClick(object sender, ItemClickEventArgs e)
@@ -2831,35 +2893,38 @@ namespace SalesInventorySystem
 
         private void barButtonItem108_ItemClick(object sender, ItemClickEventArgs e)
         {
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form.GetType() == typeof(HotelManagement.HotelFrmKitchenSection))
-                {
-                    form.Activate();
-                    return;
-                }
-            }
-            HotelManagement.HotelFrmKitchenSection pcusatfsmr = new HotelManagement.HotelFrmKitchenSection();
-            pcusatfsmr.MdiParent = this;
-            pcusatfsmr.Show();
+            OpenMdiForm<HotelManagement.HotelFrmKitchenSection>();
+            //foreach (Form form in Application.OpenForms)
+            //{
+            //    if (form.GetType() == typeof(HotelManagement.HotelFrmKitchenSection))
+            //    {
+            //        form.Activate();
+            //        return;
+            //    }
+            //}
+            //HotelManagement.HotelFrmKitchenSection pcusatfsmr = new HotelManagement.HotelFrmKitchenSection();
+            //pcusatfsmr.MdiParent = this;
+            //pcusatfsmr.Show();
         }
 
         private void POSMachine_ItemClick(object sender, ItemClickEventArgs e)
         {
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form.GetType() == typeof(POSDevEx.POSSettingsDevEx))
-                {
-                    form.Activate();
-                    return;
-                }
-            }
-            POSDevEx.POSSettingsDevEx pcusatfsmr = new POSDevEx.POSSettingsDevEx();
-            pcusatfsmr.MdiParent = this;
-            pcusatfsmr.Show();
+            //foreach (Form form in Application.OpenForms)
+            //{
+            //    if (form.GetType() == typeof(POSDevEx.POSSettingsDevEx))
+            //    {
+            //        form.Activate();
+            //        return;
+            //    }
+            //}
+            //POSDevEx.POSSettingsDevEx pcusatfsmr = new POSDevEx.POSSettingsDevEx();
+            //pcusatfsmr.MdiParent = this;
+            //pcusatfsmr.Show();
 
 
-            Sabong.SBDashboard sbdash = new Sabong.SBDashboard();
+            //Sabong.SBDashboard sbdash = new Sabong.SBDashboard();
+            //sbdash.Show();
+            RFID.RFIDDashboard sbdash = new RFID.RFIDDashboard();
             sbdash.Show();
 
             //ShowSeniorCitizenReport();
@@ -2890,7 +2955,7 @@ namespace SalesInventorySystem
             bool isPOSDetailsExists = Database.checkifExist("SELECT TOP(1) BranchCode FROM dbo.POSInfoDetails WHERE MachineUsed='" + Environment.MachineName + "'");
 
             //check if END OF DAY Transaction is already Executed, IF True, cashiers cannot login anymore.
-            bool isExists = Database.checkifExist("SELECT TOP(1) MachineUsed " +
+            bool isExists = Database.checkifExist("SELECT 1 " +
                                                     "FROM POSZReadingTransactions " +
                                                     "WHERE MachineUsed='" + Environment.MachineName + "' " +
                                                     "AND BranchCode='"+Login.assignedBranch+"' " +
@@ -2899,13 +2964,13 @@ namespace SalesInventorySystem
             
             //check if END OF DAY Monitoring is not yet EXECUTED on this date.
             //used this condition always, because what if the CASHIER are forgot to EXECUTE END OF DAY
-            bool notyetEOF = Database.checkifExist("Select TOP(1) isEndOfDay " +
+            bool notyetEOF = Database.checkifExist("Select 1 " +
                                                     "FROM POSEODMonitoring " +
                                                     "WHERE isEndOfDay=0 AND BranchCode='"+Login.assignedBranch+"' " +
                                                     "AND TransactionDate<>'"+ charDate + "'"); 
 
             //check if there are still OPEN CASHIER TRANSACTION on previous date.
-            bool stillOpenTransaction = Database.checkifExist("Select isOpen " +
+            bool stillOpenTransaction = Database.checkifExist("Select 1 " +
                                                           "FROM SalesTransactionSummary " +
                                                           "WHERE BranchCode='" + Login.assignedBranch + "' " +
                                                           "and isOpen=1 " +
@@ -2913,7 +2978,7 @@ namespace SalesInventorySystem
                                                           "and CAST(TransactionDate as date) < '" + DateTime.Now.ToShortDateString() + "'" +
                                                           "AND MachineUsed='" + Environment.MachineName.ToString() + "' ");
 
-           bool cashierAlreadyLogin = Database.checkifExist("Select isOpen " +
+           bool cashierAlreadyLogin = Database.checkifExist("Select 1 " +
                                                           "FROM SalesTransactionSummary " +
                                                           "WHERE BranchCode='" + Login.assignedBranch + "' " +
                                                           "and UserID='" + Login.isglobalUserID + "' " +
@@ -3076,109 +3141,114 @@ namespace SalesInventorySystem
 
         private void btnInventoryMapping_ItemClick(object sender, ItemClickEventArgs e)
         {
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form.GetType() == typeof(POS.POSInventoryMapping))
-                {
-                    form.Activate();
-                    return;
-                }
-            }
-            POS.POSInventoryMapping pcusatfsmr = new POS.POSInventoryMapping();
-            pcusatfsmr.MdiParent = this;
-            pcusatfsmr.Show();
+            OpenMdiForm<POS.POSInventoryMapping>();
+            //foreach (Form form in Application.OpenForms)
+            //{
+            //    if (form.GetType() == typeof(POS.POSInventoryMapping))
+            //    {
+            //        form.Activate();
+            //        return;
+            //    }
+            //}
+            //POS.POSInventoryMapping pcusatfsmr = new POS.POSInventoryMapping();
+            //pcusatfsmr.MdiParent = this;
+            //pcusatfsmr.Show();
         }
 
         private void btnInventoryCostRep_ItemClick(object sender, ItemClickEventArgs e)
         {
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form.GetType() == typeof(Reporting.InventoryCostingRep))
-                {
-                    form.Activate();
-                    return;
-                }
-            }
-            Reporting.InventoryCostingRep pcusatfsmr = new Reporting.InventoryCostingRep();
-            pcusatfsmr.MdiParent = this;
-            pcusatfsmr.Show();
+            OpenMdiForm<Reporting.InventoryCostingRep>();
+            //foreach (Form form in Application.OpenForms)
+            //{
+            //    if (form.GetType() == typeof(Reporting.InventoryCostingRep))
+            //    {
+            //        form.Activate();
+            //        return;
+            //    }
+            //}
+            //Reporting.InventoryCostingRep pcusatfsmr = new Reporting.InventoryCostingRep();
+            //pcusatfsmr.MdiParent = this;
+            //pcusatfsmr.Show();
         }
 
         private void btnMerchants_ItemClick(object sender, ItemClickEventArgs e)
         {
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form.GetType() == typeof(HOFormsDevEx.MerchantsDevEx))
-                {
-                    form.Activate();
-                    return;
-                }
-            }
-            HOFormsDevEx.MerchantsDevEx pcusatfsmr = new HOFormsDevEx.MerchantsDevEx();
-            pcusatfsmr.MdiParent = this;
-            pcusatfsmr.Show();
+            OpenMdiForm<HOFormsDevEx.MerchantsDevEx>();
+            //foreach (Form form in Application.OpenForms)
+            //{
+            //    if (form.GetType() == typeof(HOFormsDevEx.MerchantsDevEx))
+            //    {
+            //        form.Activate();
+            //        return;
+            //    }
+            //}
+            //HOFormsDevEx.MerchantsDevEx pcusatfsmr = new HOFormsDevEx.MerchantsDevEx();
+            //pcusatfsmr.MdiParent = this;
+            //pcusatfsmr.Show();
         }
 
         private void btnActivityLogs_ItemClick(object sender, ItemClickEventArgs e)
         {
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form.GetType() == typeof(HOFormsDevEx.ActivityLogsDevEx))
-                {
-                    form.Activate();
-                    return;
-                }
-            }
-            HOFormsDevEx.ActivityLogsDevEx pcusatfsmr = new HOFormsDevEx.ActivityLogsDevEx();
-            pcusatfsmr.MdiParent = this;
-            pcusatfsmr.Show();
+            OpenMdiForm<HOFormsDevEx.ActivityLogsDevEx>();
+            //foreach (Form form in Application.OpenForms)
+            //{
+            //    if (form.GetType() == typeof(HOFormsDevEx.ActivityLogsDevEx))
+            //    {
+            //        form.Activate();
+            //        return;
+            //    }
+            //}
+            //HOFormsDevEx.ActivityLogsDevEx pcusatfsmr = new HOFormsDevEx.ActivityLogsDevEx();
+            //pcusatfsmr.MdiParent = this;
+            //pcusatfsmr.Show();
         }
 
         private void barButtonItem25_ItemClick_1(object sender, ItemClickEventArgs e)
         {
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form.GetType() == typeof(Reporting.BIR.ComparativeReport))
-                {
-                    form.Activate();
-                    return;
-                }
-            }
-            Reporting.BIR.ComparativeReport pfoap = new Reporting.BIR.ComparativeReport();
-            pfoap.MdiParent = this;
-            pfoap.Show();
+            OpenMdiForm<Reporting.BIR.ComparativeReport>();
+            //foreach (Form form in Application.OpenForms)
+            //{
+            //    if (form.GetType() == typeof(Reporting.BIR.ComparativeReport))
+            //    {
+            //        form.Activate();
+            //        return;
+            //    }
+            //}
+            //Reporting.BIR.ComparativeReport pfoap = new Reporting.BIR.ComparativeReport();
+            //pfoap.MdiParent = this;
+            //pfoap.Show();
         }
 
         private void btnPOSManagement2_ItemClick(object sender, ItemClickEventArgs e)
         {
             //POS.POSXreadReport xread = new POS.POSXreadReport();
             //xread.Show();
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form.GetType() == typeof(POSDevEx.POSManagementReport))
-                {
-                    form.Activate();
-                    return;
-                }
-            }
+            //foreach (Form form in Application.OpenForms)
+            //{
+            //    if (form.GetType() == typeof(POSDevEx.POSManagementReport))
+            //    {
+            //        form.Activate();
+            //        return;
+            //    }
+            //}
             POSDevEx.POSManagementReport viewinv = new POSDevEx.POSManagementReport();
-            viewinv.MdiParent = this;
-            viewinv.Show();
+            viewinv.ShowDialog(this);
         }
 
         private void barButtonItem26_ItemClick_1(object sender, ItemClickEventArgs e)
         {
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form.GetType() == typeof(Reporting.BIR.BIR2550M2))
-                {
-                    form.Activate();
-                    return;
-                }
-            }
-            Reporting.BIR.BIR2550M2 pfoap = new Reporting.BIR.BIR2550M2();
-            pfoap.MdiParent = this;
-            pfoap.Show();
+            OpenMdiForm<Reporting.BIR.BIR2550M2>();
+            //foreach (Form form in Application.OpenForms)
+            //{
+            //    if (form.GetType() == typeof(Reporting.BIR.BIR2550M2))
+            //    {
+            //        form.Activate();
+            //        return;
+            //    }
+            //}
+            //Reporting.BIR.BIR2550M2 pfoap = new Reporting.BIR.BIR2550M2();
+            //pfoap.MdiParent = this;
+            //pfoap.Show();
         }
 
         private void barButtonItem27_ItemClick_1(object sender, ItemClickEventArgs e)
@@ -3188,17 +3258,18 @@ namespace SalesInventorySystem
 
         private void barButtonItem30_ItemClick_1(object sender, ItemClickEventArgs e)
         {
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form.GetType() == typeof(Reporting.BIR.ComparativeReport2))
-                {
-                    form.Activate();
-                    return;
-                }
-            }
-            Reporting.BIR.ComparativeReport2 pfoap = new Reporting.BIR.ComparativeReport2();
-            pfoap.MdiParent = this;
-            pfoap.Show();
+            OpenMdiForm<Reporting.BIR.ComparativeReport2>();
+            //foreach (Form form in Application.OpenForms)
+            //{
+            //    if (form.GetType() == typeof(Reporting.BIR.ComparativeReport2))
+            //    {
+            //        form.Activate();
+            //        return;
+            //    }
+            //}
+            //Reporting.BIR.ComparativeReport2 pfoap = new Reporting.BIR.ComparativeReport2();
+            //pfoap.MdiParent = this;
+            //pfoap.Show();
         }
 
         private void barBtnStockOutItems_ItemClick(object sender, ItemClickEventArgs e)
@@ -3229,153 +3300,152 @@ namespace SalesInventorySystem
 
         private void btnInventoryPerBranch_ItemClick(object sender, ItemClickEventArgs e)
         {
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form.GetType() == typeof(Branches.BranchGenInventory))
-                {
-                    form.Activate();
-                    return;
-                }
-            }
-            Branches.BranchGenInventory brancinv = new Branches.BranchGenInventory();
-            brancinv.MdiParent = this;
-            brancinv.Show();
+            OpenMdiForm<Branches.BranchGenInventory>();
         }
 
         private void btnCashierSalesCollectionSummary_ItemClick(object sender, ItemClickEventArgs e)
         {
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form.GetType() == typeof(POSDevEx.POSSalesCollectionSummary))
-                {
-                    form.Activate();
-                    return;
-                }
-            }
-            POSDevEx.POSSalesCollectionSummary viewinv = new POSDevEx.POSSalesCollectionSummary();
-            viewinv.MdiParent = this;
-            viewinv.Show();
+            OpenMdiForm<POSDevEx.POSSalesCollectionSummary>();
+            //foreach (Form form in Application.OpenForms)
+            //{
+            //    if (form.GetType() == typeof(POSDevEx.POSSalesCollectionSummary))
+            //    {
+            //        form.Activate();
+            //        return;
+            //    }
+            //}
+            //POSDevEx.POSSalesCollectionSummary viewinv = new POSDevEx.POSSalesCollectionSummary();
+            //viewinv.MdiParent = this;
+            //viewinv.Show();
         }
 
         private void barbtnInventoryMonitoring_ItemClick(object sender, ItemClickEventArgs e)
         {
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form.GetType() == typeof(HOFormsDevEx.ViewZeroInventory))
-                {
-                    form.Activate();
-                    return;
-                }
-            }
-            HOFormsDevEx.ViewZeroInventory viewgeninv = new HOFormsDevEx.ViewZeroInventory();
-            viewgeninv.MdiParent = this;
-            viewgeninv.Show();
+            OpenMdiForm<HOFormsDevEx.ViewZeroInventory>();
+            //foreach (Form form in Application.OpenForms)
+            //{
+            //    if (form.GetType() == typeof(HOFormsDevEx.ViewZeroInventory))
+            //    {
+            //        form.Activate();
+            //        return;
+            //    }
+            //}
+            //HOFormsDevEx.ViewZeroInventory viewgeninv = new HOFormsDevEx.ViewZeroInventory();
+            //viewgeninv.MdiParent = this;
+            //viewgeninv.Show();
         }
 
         private void btnReturnOrders_ItemClick(object sender, ItemClickEventArgs e)
         {
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form.GetType() == typeof(Reporting.BadOrderReport))
-                {
-                    form.Activate();
-                    return;
-                }
-            }
-            Reporting.BadOrderReport viewgeninv = new Reporting.BadOrderReport();
-            viewgeninv.MdiParent = this;
-            viewgeninv.Show();
+            OpenMdiForm<Reporting.BadOrderReport>();
+            //foreach (Form form in Application.OpenForms)
+            //{
+            //    if (form.GetType() == typeof(Reporting.BadOrderReport))
+            //    {
+            //        form.Activate();
+            //        return;
+            //    }
+            //}
+            //Reporting.BadOrderReport viewgeninv = new Reporting.BadOrderReport();
+            //viewgeninv.MdiParent = this;
+            //viewgeninv.Show();
         }
 
         private void btnViewExpense_ItemClick(object sender, ItemClickEventArgs e)
         {
 
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form.GetType() == typeof(HOFormsDevEx.ViewExpenseDevEx))
-                {
-                    form.Activate();
-                    return;
-                }
-            }
-            HOFormsDevEx.ViewExpenseDevEx viewexpense = new HOFormsDevEx.ViewExpenseDevEx();
-            viewexpense.MdiParent = this;
-            viewexpense.Show();
+            OpenMdiForm<HOFormsDevEx.ViewExpenseDevEx>();
+            //foreach (Form form in Application.OpenForms)
+            //{
+            //    if (form.GetType() == typeof(HOFormsDevEx.ViewExpenseDevEx))
+            //    {
+            //        form.Activate();
+            //        return;
+            //    }
+            //}
+            //HOFormsDevEx.ViewExpenseDevEx viewexpense = new HOFormsDevEx.ViewExpenseDevEx();
+            //viewexpense.MdiParent = this;
+            //viewexpense.Show();
         }
 
         private void barButtonItem32_ItemClick_1(object sender, ItemClickEventArgs e)
         {
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form.GetType() == typeof(Reporting.BIR.POSSalesReportSummary))
-                {
-                    form.Activate();
-                    return;
-                }
-            }
-            Reporting.BIR.POSSalesReportSummary pfoap = new Reporting.BIR.POSSalesReportSummary("B");
-            pfoap.MdiParent = this;
-            pfoap.Show();
+            OpenMdiForm<Reporting.BIR.POSSalesReportSummary>();
+            //foreach (Form form in Application.OpenForms)
+            //{
+            //    if (form.GetType() == typeof(Reporting.BIR.POSSalesReportSummary))
+            //    {
+            //        form.Activate();
+            //        return;
+            //    }
+            //}
+            //Reporting.BIR.POSSalesReportSummary pfoap = new Reporting.BIR.POSSalesReportSummary("B");
+            //pfoap.MdiParent = this;
+            //pfoap.Show();
         }
 
         private void barButtonItem33_ItemClick_1(object sender, ItemClickEventArgs e)
         {
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form.GetType() == typeof(Reporting.BIR.POSSalesReportSummary))
-                {
-                    form.Activate();
-                    return;
-                }
-            }
-            Reporting.BIR.SalesDetailsComparative pfoap = new Reporting.BIR.SalesDetailsComparative();
-            pfoap.MdiParent = this;
-            pfoap.Show();
+            OpenMdiForm<Reporting.BIR.SalesDetailsComparative>();
+            //foreach (Form form in Application.OpenForms)
+            //{
+            //    if (form.GetType() == typeof(Reporting.BIR.POSSalesReportSummary))
+            //    {
+            //        form.Activate();
+            //        return;
+            //    }
+            //}
+            //Reporting.BIR.SalesDetailsComparative pfoap = new Reporting.BIR.SalesDetailsComparative();
+            //pfoap.MdiParent = this;
+            //pfoap.Show();
         }
 
         private void btnTransferInventoryHO_ItemClick(object sender, ItemClickEventArgs e)
         {
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form.GetType() == typeof(Reporting.TransferInventoryHO))
-                {
-                    form.Activate();
-                    return;
-                }
-            }
-            Reporting.TransferInventoryHO pfoap = new Reporting.TransferInventoryHO();
-            pfoap.MdiParent = this;
-            pfoap.Show();
+            OpenMdiForm<Reporting.TransferInventoryHO>();
+            //foreach (Form form in Application.OpenForms)
+            //{
+            //    if (form.GetType() == typeof(Reporting.TransferInventoryHO))
+            //    {
+            //        form.Activate();
+            //        return;
+            //    }
+            //}
+            //Reporting.TransferInventoryHO pfoap = new Reporting.TransferInventoryHO();
+            //pfoap.MdiParent = this;
+            //pfoap.Show();
         }
 
         private void barButtonItem27_ItemClick_2(object sender, ItemClickEventArgs e)
         {
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form.GetType() == typeof(HOFormsDevEx.TransferBranchToBranchInvDevEx))
-                {
-                    form.Activate();
-                    return;
-                }
-            }
-            HOFormsDevEx.TransferBranchToBranchInvDevEx pfoap = new HOFormsDevEx.TransferBranchToBranchInvDevEx();
-            pfoap.MdiParent = this;
-            pfoap.Show();
+            OpenMdiForm<HOFormsDevEx.TransferBranchToBranchInvDevEx>();
+            //foreach (Form form in Application.OpenForms)
+            //{
+            //    if (form.GetType() == typeof(HOFormsDevEx.TransferBranchToBranchInvDevEx))
+            //    {
+            //        form.Activate();
+            //        return;
+            //    }
+            //}
+            //HOFormsDevEx.TransferBranchToBranchInvDevEx pfoap = new HOFormsDevEx.TransferBranchToBranchInvDevEx();
+            //pfoap.MdiParent = this;
+            //pfoap.Show();
         }
 
         private void barButtonItemRcvdReturnInv_ItemClick(object sender, ItemClickEventArgs e)
         {
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form.GetType() == typeof(HOFormsDevEx.ReceivedTransferBranchInventory))
-                {
-                    form.Activate();
-                    return;
-                }
-            }
-            HOFormsDevEx.ReceivedTransferBranchInventory pfoap = new HOFormsDevEx.ReceivedTransferBranchInventory();
-            pfoap.MdiParent = this;
-            pfoap.Show();
+            OpenMdiForm<HOFormsDevEx.ReceivedTransferBranchInventory>();
+            //foreach (Form form in Application.OpenForms)
+            //{
+            //    if (form.GetType() == typeof(HOFormsDevEx.ReceivedTransferBranchInventory))
+            //    {
+            //        form.Activate();
+            //        return;
+            //    }
+            //}
+            //HOFormsDevEx.ReceivedTransferBranchInventory pfoap = new HOFormsDevEx.ReceivedTransferBranchInventory();
+            //pfoap.MdiParent = this;
+            //pfoap.Show();
         }
 
         private void barButtonItemInvDailyActivity_ItemClick(object sender, ItemClickEventArgs e)
@@ -3396,6 +3466,26 @@ namespace SalesInventorySystem
             branchsum.Show();
         }
 
+        private void btnBranchInventoryIN_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            foreach (Form form in Application.OpenForms)
+            {
+                if (form.GetType() == typeof(Branches.BranchInventoryIN))
+                {
+                    form.Activate();
+                    return;
+                }
+            }
+            Branches.BranchInventoryIN pcusatfsmr = new Branches.BranchInventoryIN();
+            pcusatfsmr.Show();
+        }
+
+        private void btnInventoryINAdjustment_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            InventoryIN pcusatfsmr = new InventoryIN();
+            pcusatfsmr.ShowDialog(this);
+        }
+
         private void Main_FormClosing(object sender, FormClosingEventArgs e)
         {
             //bool confirm = HelperFunction.ConfirmDialog("Are you want to close the Main Window?", "Close Main Window");
@@ -3407,32 +3497,34 @@ namespace SalesInventorySystem
 
         private void btnARCharges_ItemClick(object sender, ItemClickEventArgs e)
         {
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form.GetType() == typeof(Reporting.ARFreight))
-                {
-                    form.Activate();
-                    return;
-                }
-            }
-            Reporting.ARFreight pcusatfsmr = new Reporting.ARFreight();
-            pcusatfsmr.MdiParent = this;
-            pcusatfsmr.Show();
+            OpenMdiForm<Reporting.ARFreight>();
+            //foreach (Form form in Application.OpenForms)
+            //{
+            //    if (form.GetType() == typeof(Reporting.ARFreight))
+            //    {
+            //        form.Activate();
+            //        return;
+            //    }
+            //}
+            //Reporting.ARFreight pcusatfsmr = new Reporting.ARFreight();
+            //pcusatfsmr.MdiParent = this;
+            //pcusatfsmr.Show();
         }
 
         private void btnARPayments_ItemClick(object sender, ItemClickEventArgs e)
         {
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form.GetType() == typeof(Reporting.ARPayments))
-                {
-                    form.Activate();
-                    return;
-                }
-            }
-            Reporting.ARPayments pcusatfsmr = new Reporting.ARPayments();
-            pcusatfsmr.MdiParent = this;
-            pcusatfsmr.Show();
+            OpenMdiForm<Reporting.ARPayments>();
+            //foreach (Form form in Application.OpenForms)
+            //{
+            //    if (form.GetType() == typeof(Reporting.ARPayments))
+            //    {
+            //        form.Activate();
+            //        return;
+            //    }
+            //}
+            //Reporting.ARPayments pcusatfsmr = new Reporting.ARPayments();
+            //pcusatfsmr.MdiParent = this;
+            //pcusatfsmr.Show();
         }
 
         void displayItems()
@@ -3650,108 +3742,116 @@ namespace SalesInventorySystem
 
         private void btnReceivedSTS_ItemClick(object sender, ItemClickEventArgs e)
         {
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form.GetType() == typeof(Orders.ReceivedSTS))
-                {
-                    form.Activate();
-                    return;
-                }
-            }
-            Orders.ReceivedSTS pcusatfsmr = new Orders.ReceivedSTS();
-            pcusatfsmr.MdiParent = this;
-            pcusatfsmr.Show();
+            OpenMdiForm<Orders.ReceivedSTS>();
+            //foreach (Form form in Application.OpenForms)
+            //{
+            //    if (form.GetType() == typeof(Orders.ReceivedSTS))
+            //    {
+            //        form.Activate();
+            //        return;
+            //    }
+            //}
+            //Orders.ReceivedSTS pcusatfsmr = new Orders.ReceivedSTS();
+            //pcusatfsmr.MdiParent = this;
+            //pcusatfsmr.Show();
         }
 
         private void btnViewSTSOrder_ItemClick(object sender, ItemClickEventArgs e)
         {
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form.GetType() == typeof(Orders.POForApprovalSTS))
-                {
-                    form.Activate();
-                    return;
-                }
-            }
-            Orders.POForApprovalSTS pfoap = new Orders.POForApprovalSTS();
-            pfoap.MdiParent = this;
-            pfoap.Show();
+            OpenMdiForm<Orders.POForApprovalSTS>();
+            //foreach (Form form in Application.OpenForms)
+            //{
+            //    if (form.GetType() == typeof(Orders.POForApprovalSTS))
+            //    {
+            //        form.Activate();
+            //        return;
+            //    }
+            //}
+            //Orders.POForApprovalSTS pfoap = new Orders.POForApprovalSTS();
+            //pfoap.MdiParent = this;
+            //pfoap.Show();
 
         }
 
         private void btnSalesSummary_ItemClick(object sender, ItemClickEventArgs e)
         {
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form.GetType() == typeof(Reporting.BIR.BIR2550M))
-                {
-                    form.Activate();
-                    return;
-                }
-            }
-            Reporting.BIR.BIR2550M pfoap = new Reporting.BIR.BIR2550M();
-            pfoap.MdiParent = this;
-            pfoap.Show();
+            OpenMdiForm<Reporting.BIR.BIR2550M>();
+           
+            //foreach (Form form in Application.OpenForms)
+            //{
+            //    if (form.GetType() == typeof(Reporting.BIR.BIR2550M))
+            //    {
+            //        form.Activate();
+            //        return;
+            //    }
+            //}
+            //Reporting.BIR.BIR2550M pfoap = new Reporting.BIR.BIR2550M();
+            //pfoap.MdiParent = this;
+            //pfoap.Show();
         }
 
         private void barButtonItem19_ItemClick_1(object sender, ItemClickEventArgs e)
         {
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form.GetType() == typeof(Reporting.BIR.BIR2550M))
-                {
-                    form.Activate();
-                    return;
-                }
-            }
-            Reporting.BIR.BIR2550M pfoap = new Reporting.BIR.BIR2550M();
-            pfoap.MdiParent = this;
-            pfoap.Show();
+            OpenMdiForm<Reporting.BIR.BIR2550M>();
+            //foreach (Form form in Application.OpenForms)
+            //{
+            //    if (form.GetType() == typeof(Reporting.BIR.BIR2550M))
+            //    {
+            //        form.Activate();
+            //        return;
+            //    }
+            //}
+            //Reporting.BIR.BIR2550M pfoap = new Reporting.BIR.BIR2550M();
+            //pfoap.MdiParent = this;
+            //pfoap.Show();
         }
 
         private void barButtonItem20_ItemClick_2(object sender, ItemClickEventArgs e)
         {
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form.GetType() == typeof(Reporting.BIR.POSSalesReportSummary))
-                {
-                    form.Activate();
-                    return;
-                }
-            }
-            Reporting.BIR.POSSalesReportSummary pfoap = new Reporting.BIR.POSSalesReportSummary("A");
-            pfoap.MdiParent = this;
-            pfoap.Show();
+            OpenMdiForm<Reporting.BIR.POSSalesReportSummary>();
+            //foreach (Form form in Application.OpenForms)
+            //{
+            //    if (form.GetType() == typeof(Reporting.BIR.POSSalesReportSummary))
+            //    {
+            //        form.Activate();
+            //        return;
+            //    }
+            //}
+            //Reporting.BIR.POSSalesReportSummary pfoap = new Reporting.BIR.POSSalesReportSummary("A");
+            //pfoap.MdiParent = this;
+            //pfoap.Show();
         }
 
         private void barButtonItem18_ItemClick_1(object sender, ItemClickEventArgs e)
         {
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form.GetType() == typeof(Reporting.BIR.EWTReports))
-                {
-                    form.Activate();
-                    return;
-                }
-            }
-            Reporting.BIR.EWTReports pfoap = new Reporting.BIR.EWTReports();
-            pfoap.MdiParent = this;
-            pfoap.Show();
+            OpenMdiForm<Reporting.BIR.EWTReports>();
+            //foreach (Form form in Application.OpenForms)
+            //{
+            //    if (form.GetType() == typeof(Reporting.BIR.EWTReports))
+            //    {
+            //        form.Activate();
+            //        return;
+            //    }
+            //}
+            //Reporting.BIR.EWTReports pfoap = new Reporting.BIR.EWTReports();
+            //pfoap.MdiParent = this;
+            //pfoap.Show();
         }
 
         private void barButtonItem23_ItemClick_1(object sender, ItemClickEventArgs e)
         {
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form.GetType() == typeof(Reporting.BIR.VATInput))
-                {
-                    form.Activate();
-                    return;
-                }
-            }
-            Reporting.BIR.VATInput pfoap = new Reporting.BIR.VATInput();
-            pfoap.MdiParent = this;
-            pfoap.Show();
+            OpenMdiForm<Reporting.BIR.VATInput>();
+            //foreach (Form form in Application.OpenForms)
+            //{
+            //    if (form.GetType() == typeof(Reporting.BIR.VATInput))
+            //    {
+            //        form.Activate();
+            //        return;
+            //    }
+            //}
+            //Reporting.BIR.VATInput pfoap = new Reporting.BIR.VATInput();
+            //pfoap.MdiParent = this;
+            //pfoap.Show();
         }
     }
 }

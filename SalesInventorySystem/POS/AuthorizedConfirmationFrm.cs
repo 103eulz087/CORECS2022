@@ -58,40 +58,192 @@ namespace SalesInventorySystem
             //    XtraMessageBox.Show("Mac Address not Assigned To Branch", "SPIRE");
             //    return;
             //}
-            get_password();
+            AuthenticateSupervisor();// get_password();
         }
-
-        private void get_password()
+        private void AuthenticateSupervisor()
         {
-            SqlConnection con = Database.getConnection();
-            con.Open();
-            SqlCommand com = new SqlCommand("Select Password from Users where UserID = '" + txtuserid.Text + "'", con);
-            SqlDataReader reader = com.ExecuteReader();
             try
             {
-                if (reader != null)
+                using (SqlConnection con = Database.getConnection())
                 {
-                    while (reader.Read())
+                    if (con == null)
                     {
-                        password = reader["Password"].ToString();
-                        decrypt_password();
+                        XtraMessageBox.Show("Database connection is not available.", "ITCORE Solutions Inc.");
                         return;
                     }
+
+                    con.Open();
+
+                    string sql = @"
+                                SELECT TOP 1
+                                    UserID,
+                                    FullName,
+                                    isAdmin,
+                                    isGlobalOfficer,
+                                    isBranchOfficer,
+                                    isWarehouseOfficer,
+                                    isMaker,
+                                    isChecker,
+                                    isCashier,
+                                    isApprover,
+                                    AssignedBranch,
+                                    CashInLimit,
+                                    CashEndLimit,
+                                    GLAccount,
+                                    PasswordHash,
+                                    PasswordSalt,
+                                    PasswordIterations,
+                                    MustChangePassword
+                                FROM dbo.Users
+                                WHERE UserID = @UserID;";
+
+                    using (SqlCommand com = new SqlCommand(sql, con))
+                    {
+                        com.Parameters.AddWithValue("@UserID", txtuserid.Text.Trim());
+
+                        using (SqlDataReader reader = com.ExecuteReader())
+                        {
+                            if (!reader.Read())
+                            {
+                                XtraMessageBox.Show("Invalid user id or password given.",
+                                    "SPIRE IT BUSINESS SOLUTIONS",
+                                    MessageBoxButtons.OK,
+                                    MessageBoxIcon.Information,
+                                    MessageBoxDefaultButton.Button1);
+
+                                txtpassword.Focus();
+                                txtpassword.SelectAll();
+                                return;
+                            }
+
+                            byte[] passwordHash = reader["PasswordHash"] == DBNull.Value ? null : (byte[])reader["PasswordHash"];
+                            byte[] passwordSalt = reader["PasswordSalt"] == DBNull.Value ? null : (byte[])reader["PasswordSalt"];
+                            int passwordIterations = reader["PasswordIterations"] == DBNull.Value ? 0 : Convert.ToInt32(reader["PasswordIterations"]);
+                            bool mustChangePassword = reader["MustChangePassword"] != DBNull.Value && Convert.ToBoolean(reader["MustChangePassword"]);
+
+                            // If account hasn't migrated yet, block override and ask for password reset
+                            if (passwordHash == null || passwordSalt == null || passwordIterations <= 0)
+                            {
+                                XtraMessageBox.Show("This account needs a password reset before it can be used for approval.",
+                                    "SPIRE IT BUSINESS SOLUTIONS",
+                                    MessageBoxButtons.OK,
+                                    MessageBoxIcon.Warning,
+                                    MessageBoxDefaultButton.Button1);
+                                txtuserid.Focus();
+                                return;
+                            }
+
+                            if (mustChangePassword)
+                            {
+                                XtraMessageBox.Show("This account is required to change password before it can approve transactions.",
+                                    "SPIRE IT BUSINESS SOLUTIONS",
+                                    MessageBoxButtons.OK,
+                                    MessageBoxIcon.Warning,
+                                    MessageBoxDefaultButton.Button1);
+                                txtuserid.Focus();
+                                return;
+                            }
+
+                            bool passwordOk = PasswordHasher.VerifyPassword(
+                                txtpassword.Text,
+                                passwordSalt,
+                                passwordIterations,
+                                passwordHash);
+
+                            if (!passwordOk)
+                            {
+                                XtraMessageBox.Show("Invalid user id or password given.",
+                                    "SPIRE IT BUSINESS SOLUTIONS",
+                                    MessageBoxButtons.OK,
+                                    MessageBoxIcon.Information,
+                                    MessageBoxDefaultButton.Button1);
+
+                                txtpassword.Focus();
+                                txtpassword.SelectAll();
+                                return;
+                            }
+
+                            // Load authorization fields only after successful password verification
+                            isglobalAdmin = reader["isAdmin"].ToString();
+                            isglobalOfficer = reader["isGlobalOfficer"].ToString();
+                            isglobalBranchOfficer = reader["isBranchOfficer"].ToString();
+                            isglobalWarehouseOfficer = reader["isWarehouseOfficer"].ToString();
+                            isMaker = reader["isMaker"].ToString();
+                            isChecker = reader["isChecker"].ToString();
+                            isCashier = reader["isCashier"].ToString();
+                            isglobalApprover = reader["isApprover"].ToString();
+                            isglobalUserID = reader["UserID"].ToString();
+                            assignedBranch = reader["AssignedBranch"].ToString();
+                            cashinlimit = reader["CashInLimit"].ToString();
+                            cashendlimit = reader["CashEndLimit"].ToString();
+                            glacctcode = reader["GLAccount"].ToString();
+
+                            bool isAuthorized =
+                                Convert.ToBoolean(isglobalAdmin) ||
+                                (Convert.ToBoolean(isglobalBranchOfficer) && assignedBranch == Login.assignedBranch) ||
+                                Convert.ToBoolean(isglobalOfficer);
+
+                            if (isAuthorized)
+                            {
+                                isconfirmedLogin = true;
+                                this.Hide();
+                            }
+                            else
+                            {
+                                XtraMessageBox.Show("You are not Authorized!...",
+                                    "SPIRE IT BUSINESS SOLUTIONS",
+                                    MessageBoxButtons.OK,
+                                    MessageBoxIcon.Information,
+                                    MessageBoxDefaultButton.Button1);
+
+                                txtuserid.Focus();
+                                return;
+                            }
+                        }
+                    }
                 }
-                XtraMessageBox.Show("Invalid user id or password given.", "SPIRE Solutions Inc.", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
-                txtpassword.Focus();
-                txtpassword.SelectionStart = 0;
-                txtpassword.SelectionLength = txtpassword.Text.Length;
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
-            }
-            finally
-            {
-                con.Close();
+                XtraMessageBox.Show("Authentication error: " + ex.Message,
+                    "SPIRE IT BUSINESS SOLUTIONS",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error,
+                    MessageBoxDefaultButton.Button1);
             }
         }
+
+        //private void get_password()
+        //{
+        //    SqlConnection con = Database.getConnection();
+        //    con.Open();
+        //    SqlCommand com = new SqlCommand("Select Password from Users where UserID = '" + txtuserid.Text + "'", con);
+        //    SqlDataReader reader = com.ExecuteReader();
+        //    try
+        //    {
+        //        if (reader != null)
+        //        {
+        //            while (reader.Read())
+        //            {
+        //                password = reader["Password"].ToString();
+        //                decrypt_password();
+        //                return;
+        //            }
+        //        }
+        //        XtraMessageBox.Show("Invalid user id or password given.", "SPIRE Solutions Inc.", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
+        //        txtpassword.Focus();
+        //        txtpassword.SelectionStart = 0;
+        //        txtpassword.SelectionLength = txtpassword.Text.Length;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw new Exception(ex.Message);
+        //    }
+        //    finally
+        //    {
+        //        con.Close();
+        //    }
+        //}
         private void decrypt_password()
         {
             SqlConnection con = Database.getConnection();

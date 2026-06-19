@@ -59,11 +59,11 @@
             this.groupBox2.BackColor = System.Drawing.Color.White;
             this.groupBox2.Controls.Add(this.button1);
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.groupBox2.Location = new System.Drawing.Point(0, 1151);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(7);
+            this.groupBox2.Location = new System.Drawing.Point(0, 519);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(7);
-            this.groupBox2.Size = new System.Drawing.Size(2462, 114);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox2.Size = new System.Drawing.Size(1099, 63);
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
             // 
@@ -71,10 +71,10 @@
             // 
             this.button1.BackColor = System.Drawing.Color.SeaGreen;
             this.button1.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.button1.Location = new System.Drawing.Point(2011, 31);
-            this.button1.Margin = new System.Windows.Forms.Padding(7);
+            this.button1.Location = new System.Drawing.Point(1149, 17);
+            this.button1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(422, 69);
+            this.button1.Size = new System.Drawing.Size(241, 38);
             this.button1.TabIndex = 0;
             this.button1.Text = "Return All Inventory Items";
             this.button1.UseVisualStyleBackColor = false;
@@ -83,12 +83,12 @@
             // gridControl4
             // 
             this.gridControl4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridControl4.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(7);
-            this.gridControl4.Location = new System.Drawing.Point(7, 35);
+            this.gridControl4.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gridControl4.Location = new System.Drawing.Point(4, 19);
             this.gridControl4.MainView = this.gridView4;
-            this.gridControl4.Margin = new System.Windows.Forms.Padding(7);
+            this.gridControl4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.gridControl4.Name = "gridControl4";
-            this.gridControl4.Size = new System.Drawing.Size(2448, 995);
+            this.gridControl4.Size = new System.Drawing.Size(1091, 433);
             this.gridControl4.TabIndex = 4;
             this.gridControl4.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView4});
@@ -100,8 +100,6 @@
             this.gridView4.Appearance.HeaderPanel.Options.UseFont = true;
             this.gridView4.Appearance.Row.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gridView4.Appearance.Row.Options.UseFont = true;
-            this.gridView4.DetailHeight = 634;
-            this.gridView4.FixedLineWidth = 4;
             this.gridView4.GridControl = this.gridControl4;
             this.gridView4.Name = "gridView4";
             this.gridView4.OptionsBehavior.Editable = false;
@@ -116,12 +114,12 @@
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.returnToInventoryToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(339, 46);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(217, 28);
             // 
             // returnToInventoryToolStripMenuItem
             // 
             this.returnToInventoryToolStripMenuItem.Name = "returnToInventoryToolStripMenuItem";
-            this.returnToInventoryToolStripMenuItem.Size = new System.Drawing.Size(338, 42);
+            this.returnToInventoryToolStripMenuItem.Size = new System.Drawing.Size(216, 24);
             this.returnToInventoryToolStripMenuItem.Text = "Return Selected Item";
             this.returnToInventoryToolStripMenuItem.Click += new System.EventHandler(this.returnToInventoryToolStripMenuItem_Click);
             // 
@@ -130,11 +128,11 @@
             this.groupBox1.BackColor = System.Drawing.Color.White;
             this.groupBox1.Controls.Add(this.gridControl4);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox1.Location = new System.Drawing.Point(0, 114);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(7);
+            this.groupBox1.Location = new System.Drawing.Point(0, 63);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(7);
-            this.groupBox1.Size = new System.Drawing.Size(2462, 1037);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Size = new System.Drawing.Size(1099, 456);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             // 
@@ -149,10 +147,10 @@
             this.groupBox3.Controls.Add(this.labelControl1);
             this.groupBox3.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox3.Location = new System.Drawing.Point(0, 0);
-            this.groupBox3.Margin = new System.Windows.Forms.Padding(7);
+            this.groupBox3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Padding = new System.Windows.Forms.Padding(7);
-            this.groupBox3.Size = new System.Drawing.Size(2462, 114);
+            this.groupBox3.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox3.Size = new System.Drawing.Size(1099, 63);
             this.groupBox3.TabIndex = 4;
             this.groupBox3.TabStop = false;
             // 
@@ -160,51 +158,51 @@
             // 
             this.labelControl3.Appearance.Font = new System.Drawing.Font("Tahoma", 10.25F);
             this.labelControl3.Appearance.Options.UseFont = true;
-            this.labelControl3.Location = new System.Drawing.Point(954, 42);
-            this.labelControl3.Margin = new System.Windows.Forms.Padding(7);
+            this.labelControl3.Location = new System.Drawing.Point(545, 23);
+            this.labelControl3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.labelControl3.Name = "labelControl3";
-            this.labelControl3.Size = new System.Drawing.Size(173, 37);
+            this.labelControl3.Size = new System.Drawing.Size(94, 21);
             this.labelControl3.TabIndex = 11;
             this.labelControl3.Text = "BranchCode:";
             // 
             // txtbrcode
             // 
-            this.txtbrcode.Location = new System.Drawing.Point(1155, 36);
-            this.txtbrcode.Margin = new System.Windows.Forms.Padding(7);
+            this.txtbrcode.Location = new System.Drawing.Point(660, 20);
+            this.txtbrcode.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtbrcode.Name = "txtbrcode";
             this.txtbrcode.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 10.25F);
             this.txtbrcode.Properties.Appearance.Options.UseFont = true;
-            this.txtbrcode.Size = new System.Drawing.Size(264, 52);
+            this.txtbrcode.Size = new System.Drawing.Size(151, 28);
             this.txtbrcode.TabIndex = 10;
             // 
             // txtdevno
             // 
-            this.txtdevno.Location = new System.Drawing.Point(677, 36);
-            this.txtdevno.Margin = new System.Windows.Forms.Padding(7);
+            this.txtdevno.Location = new System.Drawing.Point(387, 20);
+            this.txtdevno.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtdevno.Name = "txtdevno";
             this.txtdevno.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 10.25F);
             this.txtdevno.Properties.Appearance.Options.UseFont = true;
-            this.txtdevno.Size = new System.Drawing.Size(264, 52);
+            this.txtdevno.Size = new System.Drawing.Size(151, 28);
             this.txtdevno.TabIndex = 9;
             // 
             // txtpono
             // 
-            this.txtpono.Location = new System.Drawing.Point(210, 36);
-            this.txtpono.Margin = new System.Windows.Forms.Padding(7);
+            this.txtpono.Location = new System.Drawing.Point(120, 20);
+            this.txtpono.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtpono.Name = "txtpono";
             this.txtpono.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 10.25F);
             this.txtpono.Properties.Appearance.Options.UseFont = true;
-            this.txtpono.Size = new System.Drawing.Size(264, 52);
+            this.txtpono.Size = new System.Drawing.Size(151, 28);
             this.txtpono.TabIndex = 8;
             // 
             // labelControl2
             // 
             this.labelControl2.Appearance.Font = new System.Drawing.Font("Tahoma", 10.25F);
             this.labelControl2.Appearance.Options.UseFont = true;
-            this.labelControl2.Location = new System.Drawing.Point(488, 42);
-            this.labelControl2.Margin = new System.Windows.Forms.Padding(7);
+            this.labelControl2.Location = new System.Drawing.Point(279, 23);
+            this.labelControl2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.labelControl2.Name = "labelControl2";
-            this.labelControl2.Size = new System.Drawing.Size(166, 37);
+            this.labelControl2.Size = new System.Drawing.Size(91, 21);
             this.labelControl2.TabIndex = 2;
             this.labelControl2.Text = "DeliveryNo.:";
             // 
@@ -212,22 +210,22 @@
             // 
             this.labelControl1.Appearance.Font = new System.Drawing.Font("Tahoma", 10.25F);
             this.labelControl1.Appearance.Options.UseFont = true;
-            this.labelControl1.Location = new System.Drawing.Point(28, 42);
-            this.labelControl1.Margin = new System.Windows.Forms.Padding(7);
+            this.labelControl1.Location = new System.Drawing.Point(16, 23);
+            this.labelControl1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.labelControl1.Name = "labelControl1";
-            this.labelControl1.Size = new System.Drawing.Size(158, 37);
+            this.labelControl1.Size = new System.Drawing.Size(85, 21);
             this.labelControl1.TabIndex = 1;
             this.labelControl1.Text = "PONumber:";
             // 
             // viewBranchOrderDetails
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(14F, 29F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(2462, 1265);
+            this.ClientSize = new System.Drawing.Size(1099, 582);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox3);
-            this.Margin = new System.Windows.Forms.Padding(7);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "viewBranchOrderDetails";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "viewBranchOrderDetails";

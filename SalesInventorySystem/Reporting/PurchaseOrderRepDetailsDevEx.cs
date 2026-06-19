@@ -56,9 +56,9 @@ namespace SalesInventorySystem.Reporting
             gridView1.Columns["Barcode"].OptionsColumn.Printable = DevExpress.Utils.DefaultBoolean.False;
             gridView1.Columns["ProductCategory"].OptionsColumn.Printable = DevExpress.Utils.DefaultBoolean.False;
             gridView1.Columns["Unit"].OptionsColumn.Printable = DevExpress.Utils.DefaultBoolean.False;
-            gridView1.Columns["ActualQuantity"].OptionsColumn.Printable = DevExpress.Utils.DefaultBoolean.False;
-            gridView1.Columns["ActualCost"].OptionsColumn.Printable = DevExpress.Utils.DefaultBoolean.False;
-            gridView1.Columns["ActualTotalCost"].OptionsColumn.Printable = DevExpress.Utils.DefaultBoolean.False;
+            //gridView1.Columns["Quantity"].OptionsColumn.Printable = DevExpress.Utils.DefaultBoolean.False;
+            gridView1.Columns["Cost"].OptionsColumn.Printable = DevExpress.Utils.DefaultBoolean.False;
+            gridView1.Columns["TotalCost"].OptionsColumn.Printable = DevExpress.Utils.DefaultBoolean.False;
             
             xct.Bands[BandKind.Detail].Controls.Add(HelperFunction.CopyGridControl(this.gridControl1));
             xct.Bands[BandKind.Detail].Font = new System.Drawing.Font("Tahoma", 10);

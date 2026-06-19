@@ -78,23 +78,24 @@
             this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button3.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button3.ForeColor = System.Drawing.Color.White;
-            this.button3.Location = new System.Drawing.Point(1081, 78);
-            this.button3.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
+            this.button3.Location = new System.Drawing.Point(618, 43);
+            this.button3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(215, 96);
+            this.button3.Size = new System.Drawing.Size(123, 53);
             this.button3.TabIndex = 6;
             this.button3.Text = "Save Edit Changes";
             this.button3.UseVisualStyleBackColor = false;
+            this.button3.Visible = false;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
             this.checkBox1.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox1.Location = new System.Drawing.Point(469, 181);
-            this.checkBox1.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
+            this.checkBox1.Location = new System.Drawing.Point(268, 100);
+            this.checkBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(391, 37);
+            this.checkBox1.Size = new System.Drawing.Size(218, 22);
             this.checkBox1.TabIndex = 4;
             this.checkBox1.Text = "Show Conversion Items Only";
             this.checkBox1.UseVisualStyleBackColor = true;
@@ -105,10 +106,10 @@
             this.panel1.Controls.Add(this.Commissary);
             this.panel1.Controls.Add(this.bigblue);
             this.panel1.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.panel1.Location = new System.Drawing.Point(522, 64);
-            this.panel1.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
+            this.panel1.Location = new System.Drawing.Point(298, 35);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(359, 58);
+            this.panel1.Size = new System.Drawing.Size(205, 32);
             this.panel1.TabIndex = 3;
             this.panel1.Visible = false;
             // 
@@ -116,10 +117,10 @@
             // 
             this.Commissary.AutoSize = true;
             this.Commissary.Checked = true;
-            this.Commissary.Location = new System.Drawing.Point(163, 7);
-            this.Commissary.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
+            this.Commissary.Location = new System.Drawing.Point(93, 4);
+            this.Commissary.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Commissary.Name = "Commissary";
-            this.Commissary.Size = new System.Drawing.Size(193, 37);
+            this.Commissary.Size = new System.Drawing.Size(109, 22);
             this.Commissary.TabIndex = 1;
             this.Commissary.TabStop = true;
             this.Commissary.Text = "Commissary";
@@ -128,10 +129,10 @@
             // bigblue
             // 
             this.bigblue.AutoSize = true;
-            this.bigblue.Location = new System.Drawing.Point(7, 7);
-            this.bigblue.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
+            this.bigblue.Location = new System.Drawing.Point(4, 4);
+            this.bigblue.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.bigblue.Name = "bigblue";
-            this.bigblue.Size = new System.Drawing.Size(137, 37);
+            this.bigblue.Size = new System.Drawing.Size(75, 22);
             this.bigblue.TabIndex = 0;
             this.bigblue.Text = "BigBlue";
             this.bigblue.UseVisualStyleBackColor = true;
@@ -142,10 +143,10 @@
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(892, 78);
-            this.button1.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
+            this.button1.Location = new System.Drawing.Point(510, 43);
+            this.button1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(175, 94);
+            this.button1.Size = new System.Drawing.Size(100, 52);
             this.button1.TabIndex = 2;
             this.button1.Text = "Get Query";
             this.button1.UseVisualStyleBackColor = false;
@@ -155,10 +156,10 @@
             // 
             this.comboBox1.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(254, 71);
-            this.comboBox1.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
+            this.comboBox1.Location = new System.Drawing.Point(145, 39);
+            this.comboBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(248, 41);
+            this.comboBox1.Size = new System.Drawing.Size(143, 26);
             this.comboBox1.TabIndex = 1;
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
@@ -167,10 +168,10 @@
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(28, 78);
-            this.label1.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
+            this.label1.Location = new System.Drawing.Point(16, 43);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(185, 33);
+            this.label1.Size = new System.Drawing.Size(101, 18);
             this.label1.TabIndex = 0;
             this.label1.Text = "Select Branch:";
             // 
@@ -179,23 +180,23 @@
             this.groupBox2.BackColor = System.Drawing.Color.White;
             this.groupBox2.Controls.Add(this.gridControl1);
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox2.Location = new System.Drawing.Point(0, 247);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
+            this.groupBox2.Location = new System.Drawing.Point(0, 136);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(7, 7, 7, 7);
-            this.groupBox2.Size = new System.Drawing.Size(2977, 1299);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox2.Size = new System.Drawing.Size(1099, 446);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             // 
             // gridControl1
             // 
             this.gridControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridControl1.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
-            this.gridControl1.Location = new System.Drawing.Point(7, 35);
+            this.gridControl1.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gridControl1.Location = new System.Drawing.Point(4, 19);
             this.gridControl1.MainView = this.gridView1;
-            this.gridControl1.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
+            this.gridControl1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.gridControl1.Name = "gridControl1";
-            this.gridControl1.Size = new System.Drawing.Size(2963, 1257);
+            this.gridControl1.Size = new System.Drawing.Size(1091, 423);
             this.gridControl1.TabIndex = 1;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
@@ -207,6 +208,8 @@
             this.gridView1.Appearance.HeaderPanel.Options.UseFont = true;
             this.gridView1.Appearance.Row.Font = new System.Drawing.Font("Tahoma", 9.25F);
             this.gridView1.Appearance.Row.Options.UseFont = true;
+            this.gridView1.DetailHeight = 193;
+            this.gridView1.FixedLineWidth = 1;
             this.gridView1.GridControl = this.gridControl1;
             this.gridView1.Name = "gridView1";
             this.gridView1.OptionsSelection.MultiSelect = true;
@@ -223,7 +226,7 @@
             this.inventoryAdjustmentToolStripMenuItem,
             this.inventoryCostAdjustmentToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(409, 88);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(253, 52);
             // 
             // inventoryAdjustmentToolStripMenuItem
             // 
@@ -231,7 +234,7 @@
             this.addToolStripMenuItem,
             this.deductToolStripMenuItem});
             this.inventoryAdjustmentToolStripMenuItem.Name = "inventoryAdjustmentToolStripMenuItem";
-            this.inventoryAdjustmentToolStripMenuItem.Size = new System.Drawing.Size(408, 42);
+            this.inventoryAdjustmentToolStripMenuItem.Size = new System.Drawing.Size(252, 24);
             this.inventoryAdjustmentToolStripMenuItem.Text = "Inventory Qty Adjustment";
             // 
             // addToolStripMenuItem
@@ -241,28 +244,28 @@
             this.otherIncomeToolStripMenuItem,
             this.addToSupplierToolStripMenuItem});
             this.addToolStripMenuItem.Name = "addToolStripMenuItem";
-            this.addToolStripMenuItem.Size = new System.Drawing.Size(209, 42);
+            this.addToolStripMenuItem.Size = new System.Drawing.Size(132, 26);
             this.addToolStripMenuItem.Text = "Add";
             this.addToolStripMenuItem.Click += new System.EventHandler(this.addToolStripMenuItem_Click);
             // 
             // inTransitToolStripMenuItem
             // 
             this.inTransitToolStripMenuItem.Name = "inTransitToolStripMenuItem";
-            this.inTransitToolStripMenuItem.Size = new System.Drawing.Size(310, 42);
+            this.inTransitToolStripMenuItem.Size = new System.Drawing.Size(189, 26);
             this.inTransitToolStripMenuItem.Text = "In Transit";
             this.inTransitToolStripMenuItem.Click += new System.EventHandler(this.inTransitToolStripMenuItem_Click);
             // 
             // otherIncomeToolStripMenuItem
             // 
             this.otherIncomeToolStripMenuItem.Name = "otherIncomeToolStripMenuItem";
-            this.otherIncomeToolStripMenuItem.Size = new System.Drawing.Size(310, 42);
+            this.otherIncomeToolStripMenuItem.Size = new System.Drawing.Size(189, 26);
             this.otherIncomeToolStripMenuItem.Text = "Other Income";
             this.otherIncomeToolStripMenuItem.Click += new System.EventHandler(this.otherIncomeToolStripMenuItem_Click);
             // 
             // addToSupplierToolStripMenuItem
             // 
             this.addToSupplierToolStripMenuItem.Name = "addToSupplierToolStripMenuItem";
-            this.addToSupplierToolStripMenuItem.Size = new System.Drawing.Size(310, 42);
+            this.addToSupplierToolStripMenuItem.Size = new System.Drawing.Size(189, 26);
             this.addToSupplierToolStripMenuItem.Text = "Add to Supplier";
             this.addToSupplierToolStripMenuItem.Click += new System.EventHandler(this.addToSupplierToolStripMenuItem_Click);
             // 
@@ -273,28 +276,28 @@
             this.otherExpenseToolStripMenuItem,
             this.deductToSupplierToolStripMenuItem});
             this.deductToolStripMenuItem.Name = "deductToolStripMenuItem";
-            this.deductToolStripMenuItem.Size = new System.Drawing.Size(209, 42);
+            this.deductToolStripMenuItem.Size = new System.Drawing.Size(132, 26);
             this.deductToolStripMenuItem.Text = "Deduct";
             this.deductToolStripMenuItem.Click += new System.EventHandler(this.deductToolStripMenuItem_Click);
             // 
             // inTransitToolStripMenuItem1
             // 
             this.inTransitToolStripMenuItem1.Name = "inTransitToolStripMenuItem1";
-            this.inTransitToolStripMenuItem1.Size = new System.Drawing.Size(346, 42);
+            this.inTransitToolStripMenuItem1.Size = new System.Drawing.Size(209, 26);
             this.inTransitToolStripMenuItem1.Text = "In Transit";
             this.inTransitToolStripMenuItem1.Click += new System.EventHandler(this.inTransitToolStripMenuItem1_Click);
             // 
             // otherExpenseToolStripMenuItem
             // 
             this.otherExpenseToolStripMenuItem.Name = "otherExpenseToolStripMenuItem";
-            this.otherExpenseToolStripMenuItem.Size = new System.Drawing.Size(346, 42);
+            this.otherExpenseToolStripMenuItem.Size = new System.Drawing.Size(209, 26);
             this.otherExpenseToolStripMenuItem.Text = "Other Expense";
             this.otherExpenseToolStripMenuItem.Click += new System.EventHandler(this.otherExpenseToolStripMenuItem_Click);
             // 
             // deductToSupplierToolStripMenuItem
             // 
             this.deductToSupplierToolStripMenuItem.Name = "deductToSupplierToolStripMenuItem";
-            this.deductToSupplierToolStripMenuItem.Size = new System.Drawing.Size(346, 42);
+            this.deductToSupplierToolStripMenuItem.Size = new System.Drawing.Size(209, 26);
             this.deductToSupplierToolStripMenuItem.Text = "Deduct to Supplier";
             this.deductToSupplierToolStripMenuItem.Click += new System.EventHandler(this.deductToSupplierToolStripMenuItem_Click);
             // 
@@ -304,20 +307,20 @@
             this.addToolStripMenuItem1,
             this.deductToolStripMenuItem1});
             this.inventoryCostAdjustmentToolStripMenuItem.Name = "inventoryCostAdjustmentToolStripMenuItem";
-            this.inventoryCostAdjustmentToolStripMenuItem.Size = new System.Drawing.Size(408, 42);
+            this.inventoryCostAdjustmentToolStripMenuItem.Size = new System.Drawing.Size(252, 24);
             this.inventoryCostAdjustmentToolStripMenuItem.Text = "Inventory Cost Adjustment";
             // 
             // addToolStripMenuItem1
             // 
             this.addToolStripMenuItem1.Name = "addToolStripMenuItem1";
-            this.addToolStripMenuItem1.Size = new System.Drawing.Size(209, 42);
+            this.addToolStripMenuItem1.Size = new System.Drawing.Size(132, 26);
             this.addToolStripMenuItem1.Text = "Add";
             this.addToolStripMenuItem1.Click += new System.EventHandler(this.addToolStripMenuItem1_Click);
             // 
             // deductToolStripMenuItem1
             // 
             this.deductToolStripMenuItem1.Name = "deductToolStripMenuItem1";
-            this.deductToolStripMenuItem1.Size = new System.Drawing.Size(209, 42);
+            this.deductToolStripMenuItem1.Size = new System.Drawing.Size(132, 26);
             this.deductToolStripMenuItem1.Text = "Deduct";
             this.deductToolStripMenuItem1.Click += new System.EventHandler(this.deductToolStripMenuItem1_Click);
             // 
@@ -326,10 +329,10 @@
             this.label2.AutoSize = true;
             this.label2.BackColor = System.Drawing.Color.Transparent;
             this.label2.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(126, 130);
-            this.label2.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
+            this.label2.Location = new System.Drawing.Point(72, 72);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(87, 33);
+            this.label2.Size = new System.Drawing.Size(47, 18);
             this.label2.TabIndex = 7;
             this.label2.Text = "From:";
             // 
@@ -338,10 +341,10 @@
             this.label3.AutoSize = true;
             this.label3.BackColor = System.Drawing.Color.Transparent;
             this.label3.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(516, 129);
-            this.label3.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
+            this.label3.Location = new System.Drawing.Point(295, 71);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(56, 33);
+            this.label3.Size = new System.Drawing.Size(31, 18);
             this.label3.TabIndex = 8;
             this.label3.Text = "To:";
             // 
@@ -349,8 +352,8 @@
             // 
             this.dateEdit1.EditValue = null;
             this.dateEdit1.Enabled = false;
-            this.dateEdit1.Location = new System.Drawing.Point(255, 126);
-            this.dateEdit1.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
+            this.dateEdit1.Location = new System.Drawing.Point(146, 70);
+            this.dateEdit1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dateEdit1.Name = "dateEdit1";
             this.dateEdit1.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dateEdit1.Properties.Appearance.Options.UseFont = true;
@@ -358,15 +361,15 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.dateEdit1.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.dateEdit1.Size = new System.Drawing.Size(247, 40);
+            this.dateEdit1.Size = new System.Drawing.Size(141, 24);
             this.dateEdit1.TabIndex = 9;
             // 
             // dateEdit2
             // 
             this.dateEdit2.EditValue = null;
             this.dateEdit2.Enabled = false;
-            this.dateEdit2.Location = new System.Drawing.Point(586, 126);
-            this.dateEdit2.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
+            this.dateEdit2.Location = new System.Drawing.Point(335, 70);
+            this.dateEdit2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dateEdit2.Name = "dateEdit2";
             this.dateEdit2.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dateEdit2.Properties.Appearance.Options.UseFont = true;
@@ -374,17 +377,17 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.dateEdit2.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.dateEdit2.Size = new System.Drawing.Size(247, 40);
+            this.dateEdit2.Size = new System.Drawing.Size(141, 24);
             this.dateEdit2.TabIndex = 10;
             // 
             // checkBox2
             // 
             this.checkBox2.AutoSize = true;
             this.checkBox2.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox2.Location = new System.Drawing.Point(255, 180);
-            this.checkBox2.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
+            this.checkBox2.Location = new System.Drawing.Point(146, 99);
+            this.checkBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(156, 37);
+            this.checkBox2.Size = new System.Drawing.Size(89, 22);
             this.checkBox2.TabIndex = 11;
             this.checkBox2.Text = "w/ Date?";
             this.checkBox2.UseVisualStyleBackColor = true;
@@ -405,19 +408,19 @@
             this.groupControl1.Controls.Add(this.label2);
             this.groupControl1.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupControl1.Location = new System.Drawing.Point(0, 0);
-            this.groupControl1.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
+            this.groupControl1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.groupControl1.Name = "groupControl1";
-            this.groupControl1.Size = new System.Drawing.Size(2977, 247);
+            this.groupControl1.Size = new System.Drawing.Size(1099, 136);
             this.groupControl1.TabIndex = 12;
             // 
             // ViewGeneralInventory
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(14F, 29F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(2977, 1546);
+            this.ClientSize = new System.Drawing.Size(1099, 582);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupControl1);
-            this.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "ViewGeneralInventory";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ViewGeneralInventory";

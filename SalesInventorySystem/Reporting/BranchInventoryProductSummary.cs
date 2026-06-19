@@ -24,7 +24,11 @@ namespace SalesInventorySystem.Reporting
 
         private async void simpleButton1_Click(object sender, EventArgs e)
         {
-           await ExecuteAsync();
+            simpleButton1.Enabled = false;
+            Cursor = Cursors.WaitCursor;
+            await ExecuteAsync();
+            Cursor = Cursors.Default;
+            simpleButton1.Enabled = true;
         }
 
         private async Task ExecuteAsync()
@@ -104,70 +108,6 @@ namespace SalesInventorySystem.Reporting
                 //}));
             }
         }
-        //void execute()
-        //{
-        //    SqlConnection con = Database.getConnection();
-        //    con.Open();
-        //    try
-        //    {
-        //        SqlCommand com = null;
-
-        //        // Instead of stored procedure, query the view directly
-        //        string query = "SELECT * FROM view_InventoryProductsSummary";
-        //        com = new SqlCommand(query, con);
-        //        //com.Parameters.AddWithValue("@parmdate", dateEdit1.Text);
-        //        com.CommandType = CommandType.Text;  // important: it's now a text query
-
-        //        SqlDataAdapter adapter = new SqlDataAdapter(com);
-        //        DataTable table = new DataTable();
-
-        //        pivotGridControl1.Fields.Clear();
-        //        adapter.Fill(table);
-        //        pivotGridControl1.DataSource = table;
-
-        //        PivotGridField fieldCategory = new PivotGridField("Category", PivotArea.RowArea);
-        //        PivotGridField fieldProduct = new PivotGridField("Description", PivotArea.RowArea);
-        //        fieldProduct.Caption = "PRODUCT NAME";
-
-        //        PivotGridField fieldBranch = new PivotGridField("BranchName", PivotArea.ColumnArea);
-        //        fieldBranch.Caption = "BRANCH NAME";
-
-        //        PivotGridField fieldQty = new PivotGridField("Qty", PivotArea.DataArea);
-        //        fieldQty.CellFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
-        //        fieldQty.CellFormat.FormatString = "n2";
-
-        //        pivotGridControl1.Fields.AddRange(new PivotGridField[] { fieldCategory, fieldProduct, fieldBranch, fieldQty });
-
-        //        fieldCategory.AreaIndex = 0;
-        //        fieldProduct.AreaIndex = 1;
-        //        pivotGridControl1.BestFit(fieldProduct);
-        //        // 1. Data Cells: Clean, readable, standard size
-        //        pivotGridControl1.Appearance.Cell.Font = new Font("Segoe UI", 9f, FontStyle.Regular);
-
-        //        // 2. Column and Row Headers (The gray areas): Slightly larger and Bold
-        //        pivotGridControl1.Appearance.HeaderArea.Font = new Font("Segoe UI", 8.75f, FontStyle.Bold);
-        //        pivotGridControl1.Appearance.FieldValue.Font = new Font("Segoe UI", 8.75f, FontStyle.Bold);
-
-        //        // 3. Grand Totals: Keep the same size as data, but make them Bold
-        //        pivotGridControl1.Appearance.GrandTotalCell.Font = new Font("Segoe UI", 9f, FontStyle.Bold);
-        //        pivotGridControl1.Appearance.TotalCell.Font = new Font("Segoe UI", 9f, FontStyle.Bold);
-
-        //        // Optional but highly recommended: Center the column headers for a cleaner look
-        //        pivotGridControl1.Appearance.HeaderArea.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-        //        // 5. SKINNING
-        //        UserLookAndFeel.Default.Style = LookAndFeelStyle.Skin;
-        //        UserLookAndFeel.Default.SkinName = "Office 2019 Colorful";
-        //    }
-        //    catch (SqlException ee)
-        //    {
-        //        XtraMessageBox.Show(ee.ToString());
-        //    }
-        //    finally
-        //    {
-        //        con.Close();
-        //    }
-        //}
-
         private void simpleButton2_Click(object sender, EventArgs e)
         {
             pivotGridControl1.ShowRibbonPrintPreview();

@@ -53,7 +53,6 @@
             // 
             // Detail
             // 
-            this.Detail.HeightF = 100F;
             this.Detail.Name = "Detail";
             this.Detail.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100F);
             this.Detail.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft;
@@ -67,7 +66,6 @@
             this.xrLabel11,
             this.xrLabel3,
             this.xrPictureBox1});
-            this.TopMargin.HeightF = 100F;
             this.TopMargin.Name = "TopMargin";
             this.TopMargin.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100F);
             this.TopMargin.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft;
@@ -125,7 +123,7 @@
             // 
             // xrPictureBox1
             // 
-            this.xrPictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("xrPictureBox1.Image")));
+            this.xrPictureBox1.ImageSource = new DevExpress.XtraPrinting.Drawing.ImageSource("img", resources.GetString("xrPictureBox1.ImageSource"));
             this.xrPictureBox1.LocationFloat = new DevExpress.Utils.PointFloat(117.5F, 3.708336F);
             this.xrPictureBox1.Name = "xrPictureBox1";
             this.xrPictureBox1.SizeF = new System.Drawing.SizeF(97.91666F, 92.58333F);
@@ -133,7 +131,6 @@
             // 
             // BottomMargin
             // 
-            this.BottomMargin.HeightF = 100F;
             this.BottomMargin.Name = "BottomMargin";
             this.BottomMargin.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100F);
             this.BottomMargin.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft;
@@ -160,7 +157,6 @@
             this.xrdispatchno.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
             this.xrdispatchno.SizeF = new System.Drawing.SizeF(152.7082F, 17.08332F);
             this.xrdispatchno.StylePriority.UseFont = false;
-            this.xrdispatchno.Text = "999999";
             // 
             // xrLabel6
             // 
@@ -230,7 +226,6 @@
             this.ReportFooter.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
             this.xrpreparedby,
             this.xrLabel4});
-            this.ReportFooter.HeightF = 100F;
             this.ReportFooter.Name = "ReportFooter";
             // 
             // xrpreparedby
@@ -263,7 +258,7 @@
             this.BottomMargin,
             this.ReportHeader,
             this.ReportFooter});
-            this.Version = "15.1";
+            this.Version = "19.2";
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
 
         }

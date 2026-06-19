@@ -37,14 +37,14 @@ namespace SalesInventorySystem.Orders
             {
                 //Database.display("SELECT * FROM view_ForReceivingSTS WHERE InitiatingBranch='" + Login.assignedBranch + "' and Status='FOR DELIVERY' and EffectivityDate between '" + txtdatefromforrcvng.Text + "' and '" + txtdatetoforrcvng.Text + "' ORDER BY PONumber DESC", gridControlForReceiving, gridViewForReceiving);
                 string query = "SELECT * FROM view_ForReceivingSTS WHERE InitiatingBranch='" + Login.assignedBranch + "' and Status='FOR DELIVERY' and EffectivityDate between '" + txtdatefromforrcvng.Text + "' and '" + txtdatetoforrcvng.Text + "'  ORDER BY PONumber DESC ";
-                HelperFunction.ShowWaitAndDisplay(query, gridControlForReceiving, gridViewForReceiving, "Please wait", "Populating data into the database...");
+                HelperFunction.ShowWaitAndDisplayNonAsync(query, gridControlForReceiving, gridViewForReceiving, "Please wait", "Populating data into the database...");
                 gridViewForReceiving.Focus();
             }
             else if (tabMain.SelectedTabPage.Equals(tabMyRequest))
             {
                 //Database.display("SELECT * FROM view_MyRequestSTS WHERE InitiatingBranch='" + Login.assignedBranch + "' and EffectivityDate between '"+datefrom.Text+"' and '"+dateto.Text+"' ", gridControlMyReq, gridViewMyReq);
                 string query = "SELECT * FROM view_MyRequestSTS WHERE InitiatingBranch='" + Login.assignedBranch + "' and EffectivityDate between '" + datefrom.Text + "' and '" + dateto.Text + "' ";
-                HelperFunction.ShowWaitAndDisplay(query, gridControlMyReq, gridViewMyReq, "Please wait", "Populating data into the database...");
+                HelperFunction.ShowWaitAndDisplayNonAsync(query, gridControlMyReq, gridViewMyReq, "Please wait", "Populating data into the database...");
                 gridViewMyReq.Focus();
             }
         }
@@ -53,7 +53,7 @@ namespace SalesInventorySystem.Orders
         {
             //Database.display("SELECT * FROM view_MyRequestSTS WHERE InitiatingBranch='" + Login.assignedBranch + "' and EffectivityDate between '" + datefrom.Text + "' and '" + dateto.Text + "' ", gridControlMyReq, gridViewMyReq);
             string query = "SELECT * FROM view_MyRequestSTS WHERE InitiatingBranch='" + Login.assignedBranch + "' and EffectivityDate between '" + datefrom.Text + "' and '" + dateto.Text + "' ";
-            HelperFunction.ShowWaitAndDisplay(query, gridControlMyReq, gridViewMyReq, "Please wait", "Populating data into the database...");
+            HelperFunction.ShowWaitAndDisplayNonAsync(query, gridControlMyReq, gridViewMyReq, "Please wait", "Populating data into the database...");
             gridViewMyReq.Focus();
         }
 
@@ -165,7 +165,7 @@ namespace SalesInventorySystem.Orders
         {
             //Database.display("SELECT * FROM view_ForReceivingSTS WHERE InitiatingBranch='" + Login.assignedBranch + "' and Status='FOR DELIVERY' and EffectivityDate between '" + txtdatefromforrcvng.Text + "' and '" + txtdatetoforrcvng.Text + "'  ORDER BY PONumber DESC", gridControlForReceiving, gridViewForReceiving);
             string query = "SELECT * FROM view_ForReceivingSTS WHERE InitiatingBranch='" + Login.assignedBranch + "' and Status='FOR DELIVERY' and EffectivityDate between '" + txtdatefromforrcvng.Text + "' and '" + txtdatetoforrcvng.Text + "'  ORDER BY PONumber DESC ";
-            HelperFunction.ShowWaitAndDisplay(query, gridControlForReceiving, gridViewForReceiving, "Please wait", "Populating data into the database...");
+            HelperFunction.ShowWaitAndDisplayNonAsync(query, gridControlForReceiving, gridViewForReceiving, "Please wait", "Populating data into the database...");
             gridViewForReceiving.Focus();
         }
 
@@ -185,7 +185,7 @@ namespace SalesInventorySystem.Orders
             //Database.display("SELECT ProductNo,ProductName,BarcodeNo,Cost,QtyDelivered,QtyDelivered as ActualQty FROM DeliveryDetails with(nolock) WHERE PONumber='" + pono + "' ", askdh.gridControl1, askdh.gridView1);
             string query = "SELECT ProductNo,ProductName,BarcodeNo,Cost,QtyDelivered,QtyDelivered as ActualQty FROM DeliveryDetails with(nolock) WHERE PONumber='" + pono + "' ORDER BY ProductName ASC  ";
             //HelperFunction.ShowWaitAndDisplay(query, askdh.gridControl1, askdh.gridView1, "Please wait", "Populating data into the database...");
-            HelperFunction.ShowWaitAndDisplay(query, askdh.gridControlRcvd, askdh.gridViewRcvd, "Please wait", "Populating data into the database...");
+            HelperFunction.ShowWaitAndDisplayNonAsync(query, askdh.gridControlRcvd, askdh.gridViewRcvd, "Please wait", "Populating data into the database...");
 
             askdh.gridView1.Focus();
             askdh.ShowDialog(this);

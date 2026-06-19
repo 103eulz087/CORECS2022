@@ -161,7 +161,7 @@
             this.xrLabel1.SizeF = new System.Drawing.SizeF(354.5417F, 17.79167F);
             this.xrLabel1.StylePriority.UseFont = false;
             this.xrLabel1.StylePriority.UseTextAlignment = false;
-            this.xrLabel1.Text = "ENZO MEAT MARKET FOODS CORP.";
+            this.xrLabel1.Text = "ENZO MEAT MARKET FOODS CORP..";
             this.xrLabel1.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
             // 
             // xrLabel2
@@ -187,12 +187,11 @@
             // 
             // xrBarCode2
             // 
-            this.xrBarCode2.AutoModule = true;
             this.xrBarCode2.Font = new System.Drawing.Font("Arial", 8.75F);
             this.xrBarCode2.LocationFloat = new DevExpress.Utils.PointFloat(17.70833F, 50.66667F);
             this.xrBarCode2.Name = "xrBarCode2";
             this.xrBarCode2.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100F);
-            this.xrBarCode2.SizeF = new System.Drawing.SizeF(222.2916F, 98.4585F);
+            this.xrBarCode2.SizeF = new System.Drawing.SizeF(354.5416F, 102.2839F);
             this.xrBarCode2.StylePriority.UseFont = false;
             this.xrBarCode2.StylePriority.UsePadding = false;
             this.xrBarCode2.StylePriority.UseTextAlignment = false;
@@ -280,6 +279,7 @@
             this.PageHeight = 190;
             this.PageWidth = 400;
             this.PaperKind = System.Drawing.Printing.PaperKind.Custom;
+            this.ShowPrintMarginsWarning = false;
             this.Version = "19.2";
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
 
@@ -290,7 +290,6 @@
         private DevExpress.XtraReports.UI.DetailBand Detail;
         private DevExpress.XtraReports.UI.TopMarginBand TopMargin;
         private DevExpress.XtraReports.UI.BottomMarginBand BottomMargin;
-        private DevExpress.XtraReports.UI.XRLabel xrLabel1;
         public DevExpress.XtraReports.UI.XRLabel lblmanufdate;
         private DevExpress.XtraReports.UI.XRLabel xrLabel2;
         private DevExpress.XtraReports.UI.XRLabel xrLabel5;
@@ -305,5 +304,6 @@
         public DevExpress.XtraReports.UI.XRLabel xrLabel6;
         public DevExpress.XtraReports.UI.XRLabel xrsku;
         public DevExpress.XtraReports.UI.XRLabel xrLabel7;
+        public DevExpress.XtraReports.UI.XRLabel xrLabel1;
     }
 }

@@ -546,7 +546,11 @@ namespace SalesInventorySystem.Reporting
             }
             else
             {
-                await ExecuteAsync(); 
+                simpleButton1.Enabled = false;
+                Cursor = Cursors.WaitCursor;
+                await ExecuteAsync();
+                Cursor = Cursors.Default;
+                simpleButton1.Enabled = true;
             }
         }
 
@@ -577,6 +581,7 @@ namespace SalesInventorySystem.Reporting
 
         private async void simpleButton4_Click(object sender, EventArgs e)
         {// 1. Validate selections
+           
             if (string.IsNullOrEmpty(cmbFromMonth.Text) || string.IsNullOrEmpty(cmbFromYear.Text) ||
                 string.IsNullOrEmpty(cmbToMonth.Text) || string.IsNullOrEmpty(cmbToYear.Text))
             {
@@ -590,7 +595,11 @@ namespace SalesInventorySystem.Reporting
             }
             else
             {
+                simpleButton4.Enabled = false;
+                Cursor = Cursors.WaitCursor;
                 await ExecuteAsyncMonthly();
+                Cursor = Cursors.Default;
+                simpleButton4.Enabled = true;
             }
         }
 

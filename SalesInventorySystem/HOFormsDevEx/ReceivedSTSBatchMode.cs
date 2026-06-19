@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using DevExpress.XtraEditors;
 using DevExpress.XtraGrid.Views.Grid;
 using System.Data.SqlClient;
+using SalesInventorySystem.Classes;
 
 namespace SalesInventorySystem.HOFormsDevEx
 {
@@ -61,7 +62,7 @@ namespace SalesInventorySystem.HOFormsDevEx
             }
             catch (SqlException ex)
             {
-                XtraMessageBox.Show(ex.Message.ToString());
+                BigAlert.Show("ERROR", ex.Message, MessageBoxIcon.Error);
             }
             finally
             {
@@ -119,18 +120,7 @@ namespace SalesInventorySystem.HOFormsDevEx
                 inventoryItems.Columns.Add("SellingPrice", typeof(decimal));
                 inventoryItems.Columns.Add("IsScan", typeof(bool));
 
-                //foreach (int rowHandle in selectedRows)
-                //{
-                //    string productCode = gridViewRcvd.GetRowCellValue(rowHandle, "ProductNo").ToString();
-                //    string barcode = gridViewRcvd.GetRowCellValue(rowHandle, "BarcodeNo").ToString();
-                //    float qty = Convert.ToSingle(gridViewRcvd.GetRowCellValue(rowHandle, "ActualQty"));
-                //    decimal sellingPrice = Convert.ToDecimal(gridViewRcvd.GetRowCellValue(rowHandle, "SellingPrice"));
-                //    bool isScan = false; // Set this based on your logic or UI checkbox
-
-                //    inventoryItems.Rows.Add(productCode, barcode, qty, sellingPrice, isScan);
-                //}
-
-
+             
                 for(int i=0; i<= gridViewRcvd.RowCount-1;i++)
                 {
                     string productCode = gridViewRcvd.GetRowCellValue(i, "ProductNo").ToString();
@@ -167,7 +157,8 @@ namespace SalesInventorySystem.HOFormsDevEx
             }
             catch (SqlException ex)
             {
-                XtraMessageBox.Show("Error: " + ex.Message);
+                BigAlert.Show("ERROR", ex.Message, MessageBoxIcon.Error);
+
             }
         }
         private void simpleButton2_Click(object sender, EventArgs e)
@@ -189,7 +180,7 @@ namespace SalesInventorySystem.HOFormsDevEx
                     if (confirm)
                     {
                         ConfirmBranchReceivedOrder();
-                        XtraMessageBox.Show("Successfully Added!");
+                        BigAlert.Show("INVENTORY RECEIVED","ITEMS DELIVERED SUCCESSFULLY RECEIVED, PLEASE CHECK NOW YOUR INVENTORY!..",MessageBoxIcon.Information);
                         this.Close();
                     }
                     else
@@ -200,7 +191,7 @@ namespace SalesInventorySystem.HOFormsDevEx
                 else
                 {
                     ConfirmBranchReceivedOrder();
-                    XtraMessageBox.Show("Successfully Added!");
+                    BigAlert.Show("INVENTORY RECEIVED", "ITEMS DELIVERED SUCCESSFULLY RECEIVED, PLEASE CHECK NOW YOUR INVENTORY!..", MessageBoxIcon.Information);
                     this.Close();
                 }
             }

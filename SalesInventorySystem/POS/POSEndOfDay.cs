@@ -88,6 +88,53 @@ namespace SalesInventorySystem.POS
                 
         }
 
+        async void  uploadPOSZReadTransaction()
+        {
+            progressBar1.Value = 0;
+            progressBar1.Maximum = 100; // We use 0-100 percentage
+
+            // 1. Create the Progress handlers. 
+            // These run ON THE UI THREAD whenever the background thread calls .Report()
+            IProgress<int> progressHandler = new Progress<int>(p =>
+            {
+                progressBar1.Value = Math.Min(p, 100);
+            });
+
+            IProgress<string> statusHandler = new Progress<string>(msg =>
+            {
+                lblProgress.Text = msg;
+            });
+            try
+            {
+                //DateTime transDate = DateTime.Today;
+                string branchCode = Login.assignedBranch;
+                string machineName = Environment.MachineName;
+
+                PosDataUploader uploader = new PosDataUploader();
+
+                statusHandler.Report("Starting upload process...");
+
+                // 2. Pass the handlers into the background task!
+                await Task.Run(async () =>
+                {
+                    statusHandler.Report("Starting POSZReading Transaction upload...");
+                    await uploader.UploadTableToCloudAsync("POSZReadingTransactions", "DateExecute", Convert.ToDateTime(txttransactiondate.Text), branchCode, machineName, progressHandler, statusHandler);
+
+                });
+
+                MessageBox.Show("All end-of-day data uploaded seamlessly!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                lblProgress.Text = "Error during upload.";
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+
+            }
+        }
+
         void executeEOD()
         {
             //check if one or more cashier transaction is not yet closed
@@ -129,7 +176,8 @@ namespace SalesInventorySystem.POS
                     Thread.Sleep(100);
                     progressBarControl1.Position = 35;
                 }
-
+                // UPLOAD POSZREADING TRANSACTION TO CLOUD
+                uploadPOSZReadTransaction();
                 if (EODEmailConfirm) { sendMailNotificationEOD(txttransactiondate.Text); sendMailNotificationEODGroupSales(); }
                 progressBarControl1.Position = 80;
                 Thread.Sleep(1000);
@@ -535,7 +583,7 @@ namespace SalesInventorySystem.POS
                     $"FROM dbo.POSSalesSummary " +
                     $"Where BranchCode='{Login.assignedBranch}' " +
                     $"and CAST(DateOrder as date)='{txttransactiondate.Text}' AND MachineUsed='{GlobalVariables.computerName}' " +
-                    $"GROUP BY Description Order By Description ASC", gridControl2, gridView2);
+                    $"GROUP BY Description Order By SUM(SubTotal) DESC", gridControl2, gridView2);
 
                 string subject = "", body = "";
                 
@@ -836,7 +884,6 @@ namespace SalesInventorySystem.POS
         public async Task<bool> VerifySupervisorAnalysisAsync(string branchCode, DateTime shiftDate)
         {
             string rawConnString = Database.getConnectionString(@"AAITCRE\ConnSettingsServer");
-
             // Use a builder to inject a short timeout so it doesn't "hang"
             SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder(rawConnString);
             builder.ConnectTimeout = 5; // Fail fast after 5 seconds if no internet
@@ -1062,8 +1109,9 @@ namespace SalesInventorySystem.POS
             try
             {
                 //check linkedserver=1 IF TRUE it means SUPERVISOR DEDUCTION MATTER
-                bool islinked = Database.checkifExist("SELECT 1 FROM dbo.POSType WHERE linkedServerName='1'");
-                if(islinked)
+                //bool islinked = Database.checkifExist("SELECT 1 FROM dbo.POSType WHERE isLinkedServer=1");
+                bool isAutoDeduct = Database.checkifExist("SELECT 1 FROM dbo.POSType WHERE isAutoSystemDeduct=1");
+                if(!isAutoDeduct)
                 {
                     // 1. Check Cloud for Supervisor Approval
                     bool canProceed = await VerifySupervisorAnalysisAsync(Login.assignedBranch, Convert.ToDateTime(txttransactiondate.Text));

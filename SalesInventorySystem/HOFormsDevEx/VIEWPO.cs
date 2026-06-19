@@ -12,6 +12,7 @@ using DevExpress.XtraReports.UI;
 using System.Data.SqlClient;
 using DevExpress.XtraGrid.Views.Grid;
 using SalesInventorySystem.HOFormsDevEx;
+using DevExpress.XtraGrid;
 
 namespace SalesInventorySystem.HOFormsDevEx
 {
@@ -73,66 +74,66 @@ namespace SalesInventorySystem.HOFormsDevEx
 
             dateFromConfirmedProd.Text = HelperFunction.GetPreviousMonthSameDay(today).ToShortDateString();
             dateToConfirmedProd.Text = today.ToShortDateString();
-            filtertab();
+            //filtertab();
         }
-        private void filtertab()
-        {
-            //FOR APPROVAL
-            if (xtraTabControl1.SelectedTabPage.Equals(xtraTabPageForApproval))
-            {
-                if (tabControlForApproval.SelectedTab.Equals(forapproval))
-                {
-                    Database.display($"SELECT * FROM view_POSUMMARYREP WHERE Status='FOR APPROVAL' And OrderType='P' AND CAST(DateOrder as date) between '{datefromForApprovalProd.Text}' and '{dateToForApprovalProd.Text}'  ORDER BY ShipmentNo DESC", gridControl2, gridView2);
-                    //Database.display("SELECT * FROM POSUMMARY WHERE Status='FOR APPROVAL' ", gridControl2, gridView2);
-                }
-                else if (tabControlForApproval.SelectedTab.Equals(fordelivery))
-                {
-                    Database.display("SELECT * FROM view_POSUMMARYREP WHERE Status='FOR APPROVAL' And OrderType='S' ORDER BY ShipmentNo DESC", gridControl1, gridView1);
-                }
-            }
-            //APPROVED
-            else if (xtraTabControl1.SelectedTabPage.Equals(xtraTabPageApproved))
-            {
+        //private void filtertab()
+        //{
+        //    //FOR APPROVAL
+        //    if (xtraTabControl1.SelectedTabPage.Equals(xtraTabPageForApproval))
+        //    {
+        //        if (tabControlForApproval.SelectedTab.Equals(forapproval))
+        //        {
+        //            Database.display($"SELECT * FROM view_POSUMMARYREP WHERE Status='FOR APPROVAL' And OrderType='P' AND CAST(DateOrder as date) between '{datefromForApprovalProd.Text}' and '{dateToForApprovalProd.Text}'  ORDER BY ShipmentNo DESC", gridControl2, gridView2);
+        //            //Database.display("SELECT * FROM POSUMMARY WHERE Status='FOR APPROVAL' ", gridControl2, gridView2);
+        //        }
+        //        else if (tabControlForApproval.SelectedTab.Equals(fordelivery))
+        //        {
+        //            Database.display("SELECT * FROM view_POSUMMARYREP WHERE Status='FOR APPROVAL' And OrderType='S' ORDER BY ShipmentNo DESC", gridControl1, gridView1);
+        //        }
+        //    }
+        //    //APPROVED
+        //    else if (xtraTabControl1.SelectedTabPage.Equals(xtraTabPageApproved))
+        //    {
 
-                if (tabControlApproved.SelectedTab.Equals(tabPage1))
-                {
-                    Database.display($"SELECT * FROM view_POSUMMARYREP WHERE Status='FOR DELIVERY' And OrderType='P' AND CAST(DateOrder as date) between '{dateFromApprovedProd.Text}' and '{dateToApprovedProd.Text}' ORDER BY ShipmentNo DESC", gridControl3, gridView3);
-                    //Database.display("SELECT * FROM POSUMMARY WHERE Status='FOR APPROVAL' ", gridControl2, gridView2);
-                }
-                else if (tabControlApproved.SelectedTab.Equals(tabPage2))
-                {
-                    Database.display("SELECT * FROM view_POSUMMARYREP WHERE Status='FOR DELIVERY' And OrderType='S' ORDER BY ShipmentNo DESC", gridControl4, gridView4);
-                }
-            }
-            //FOR CONFIRMATION
-            else if (xtraTabControl1.SelectedTabPage.Equals(xtraTabPageForConfirmation))
-            {
+        //        if (tabControlApproved.SelectedTab.Equals(tabPage1))
+        //        {
+        //            Database.display($"SELECT * FROM view_POSUMMARYREP WHERE Status='FOR DELIVERY' And OrderType='P' AND CAST(DateOrder as date) between '{dateFromApprovedProd.Text}' and '{dateToApprovedProd.Text}' ORDER BY ShipmentNo DESC", gridControl3, gridView3);
+        //            //Database.display("SELECT * FROM POSUMMARY WHERE Status='FOR APPROVAL' ", gridControl2, gridView2);
+        //        }
+        //        else if (tabControlApproved.SelectedTab.Equals(tabPage2))
+        //        {
+        //            Database.display("SELECT * FROM view_POSUMMARYREP WHERE Status='FOR DELIVERY' And OrderType='S' ORDER BY ShipmentNo DESC", gridControl4, gridView4);
+        //        }
+        //    }
+        //    //FOR CONFIRMATION
+        //    else if (xtraTabControl1.SelectedTabPage.Equals(xtraTabPageForConfirmation))
+        //    {
 
-                if (tabControlForConfirmation.SelectedTab.Equals(tabPageForConfirmationProducts))
-                {
-                    Database.display($"SELECT * FROM view_POSUMMARYREP WHERE Status='FOR CONFIRMATION' And OrderType='P' AND CAST(DateOrder as date) between '{dateFromForConfirmProd.Text}' and '{dateToForConfirmProd.Text}'  ORDER BY ShipmentNo DESC", gridControlProductForConfirmation, gridViewProductForConfirmation);
-                }
-                else if (tabControlForConfirmation.SelectedTab.Equals(tabPageForConfirmationServices))
-                {
-                    Database.display("SELECT * FROM view_POSUMMARYREP WHERE Status='FOR CONFIRMATION' And OrderType='S' ORDER BY ShipmentNo DESC", gridControlServicesForConfirmation, gridViewServicesForConfirmation);
-                }
-            }
-            //CONFIRMED
-            else if (xtraTabControl1.SelectedTabPage.Equals(xtraTabPageConfirmed))
-            {
+        //        if (tabControlForConfirmation.SelectedTab.Equals(tabPageForConfirmationProducts))
+        //        {
+        //            Database.display($"SELECT * FROM view_POSUMMARYREP WHERE Status='FOR CONFIRMATION' And OrderType='P' AND CAST(DateOrder as date) between '{dateFromForConfirmProd.Text}' and '{dateToForConfirmProd.Text}'  ORDER BY ShipmentNo DESC", gridControlProductForConfirmation, gridViewProductForConfirmation);
+        //        }
+        //        else if (tabControlForConfirmation.SelectedTab.Equals(tabPageForConfirmationServices))
+        //        {
+        //            Database.display("SELECT * FROM view_POSUMMARYREP WHERE Status='FOR CONFIRMATION' And OrderType='S' ORDER BY ShipmentNo DESC", gridControlServicesForConfirmation, gridViewServicesForConfirmation);
+        //        }
+        //    }
+        //    //CONFIRMED
+        //    else if (xtraTabControl1.SelectedTabPage.Equals(xtraTabPageConfirmed))
+        //    {
 
-                if (tabControlConfirmed.SelectedTab.Equals(tabPageConfirmedProducts))
-                {
-                    Database.display($"SELECT * FROM view_POSUMMARYREP WHERE Status='CONFIRMED' And OrderType='P' AND CAST(DateOrder as date) between '{dateFromConfirmedProd.Text}' and '{dateToConfirmedProd.Text}' ORDER BY ShipmentNo DESC", gridControlConfirmedProducts, gridViewConfirmedProducts);
-                    //Database.display("SELECT * FROM POSUMMARY WHERE Status='FOR APPROVAL' ", gridControl2, gridView2);
-                }
-                else if (tabControlConfirmed.SelectedTab.Equals(tabPageConfirmedServices))
-                {
-                    Database.display("SELECT * FROM view_POSUMMARYREP WHERE Status='CONFIRMED' And OrderType='S' ORDER BY ShipmentNo DESC", gridControlConfirmedServices, gridViewServicesForConfirmation);
-                }
-            }
+        //        if (tabControlConfirmed.SelectedTab.Equals(tabPageConfirmedProducts))
+        //        {
+        //            Database.display($"SELECT * FROM view_POSUMMARYREP WHERE Status='CONFIRMED' And OrderType='P' AND CAST(DateOrder as date) between '{dateFromConfirmedProd.Text}' and '{dateToConfirmedProd.Text}' ORDER BY ShipmentNo DESC", gridControlConfirmedProducts, gridViewConfirmedProducts);
+        //            //Database.display("SELECT * FROM POSUMMARY WHERE Status='FOR APPROVAL' ", gridControl2, gridView2);
+        //        }
+        //        else if (tabControlConfirmed.SelectedTab.Equals(tabPageConfirmedServices))
+        //        {
+        //            Database.display("SELECT * FROM view_POSUMMARYREP WHERE Status='CONFIRMED' And OrderType='S' ORDER BY ShipmentNo DESC", gridControlConfirmedServices, gridViewServicesForConfirmation);
+        //        }
+        //    }
 
-        }
+        //}
 
         private void gridControl2_MouseUp(object sender, MouseEventArgs e)
         {
@@ -175,7 +176,7 @@ namespace SalesInventorySystem.HOFormsDevEx
             confi.ShowDialog(this);
             if (CONFIRMPO.isdone == true)
             {
-                filtertab();
+                //filtertab();
                 CONFIRMPO.isdone = false;
                 confi.Dispose();
             }
@@ -220,7 +221,8 @@ namespace SalesInventorySystem.HOFormsDevEx
                    , viewpod.gridControl2, viewpod.gridView2);
                 VIEWPODETAILS.isdone = false;
                 viewpod.Dispose();
-                filtertab();
+                //filtertab();
+                btnForApprovalProd.PerformClick();
             }
         }
 
@@ -240,7 +242,7 @@ namespace SalesInventorySystem.HOFormsDevEx
             addinv.ShowDialog(this);
             if (AddInventory.isdone == true)
             {
-                filtertab();
+                //filtertab();
                 AddInventory.isdone = false;
                 addinv.Dispose();
             }
@@ -263,7 +265,8 @@ namespace SalesInventorySystem.HOFormsDevEx
             uploadbatch.ShowDialog(this);
             if (HOForms.UPLOADINVENTORY.isdone == true)
             {
-                filtertab();
+                //filtertab();
+                btnForApprovalProd.PerformClick();
                 HOForms.UPLOADINVENTORY.isdone = false;
                 uploadbatch.Dispose();
             }
@@ -281,7 +284,8 @@ namespace SalesInventorySystem.HOFormsDevEx
             uploadbatch.ShowDialog(this);
             if (HOForms.UPLOADINVENTORY.isdone == true)
             {
-                filtertab();
+                //filtertab();
+                btnForApprovalProd.PerformClick();
                 HOForms.UPLOADINVENTORY.isdone = false;
                 uploadbatch.Dispose();
             }
@@ -289,7 +293,7 @@ namespace SalesInventorySystem.HOFormsDevEx
 
         private void xtraTabControl1_SelectedPageChanged(object sender, DevExpress.XtraTab.TabPageChangedEventArgs e)
         {
-            filtertab();
+            //filtertab();
         }
 
         private void gridView2_DoubleClick(object sender, EventArgs e)
@@ -321,31 +325,48 @@ namespace SalesInventorySystem.HOFormsDevEx
             {
                 string query = "spout_APAccounts";
                 SqlCommand com = new SqlCommand(query, con);
+
+                // Input parameters
                 com.Parameters.AddWithValue("@parmshipmentno", shipmentno);
                 com.Parameters.AddWithValue("@parmsupplierid", supplierid);
+
+                // Output parameters aligned with SQL procedure
                 com.Parameters.Add("@parminvoiceno", SqlDbType.VarChar, 50).Direction = ParameterDirection.Output;
                 com.Parameters.Add("@parminvoicedate", SqlDbType.VarChar, 20).Direction = ParameterDirection.Output;
-                com.Parameters.Add("@parmvatamount", SqlDbType.Money).Direction = ParameterDirection.Output;
-                com.Parameters.Add("@parmvatinputamount", SqlDbType.Money).Direction = ParameterDirection.Output;
-                com.Parameters.Add("@parmvatexemptamount", SqlDbType.Money).Direction = ParameterDirection.Output;
-                com.Parameters.Add("@parmactualcost", SqlDbType.Money).Direction = ParameterDirection.Output;
+                com.Parameters.Add("@parmvatamount", SqlDbType.Decimal).Direction = ParameterDirection.Output;
+                com.Parameters["@parmvatamount"].Precision = 10;
+                com.Parameters["@parmvatamount"].Scale = 2;
+
+                com.Parameters.Add("@parmvatinputamount", SqlDbType.Decimal).Direction = ParameterDirection.Output;
+                com.Parameters["@parmvatinputamount"].Precision = 10;
+                com.Parameters["@parmvatinputamount"].Scale = 2;
+
+                com.Parameters.Add("@parmvatexemptamount", SqlDbType.Decimal).Direction = ParameterDirection.Output;
+                com.Parameters["@parmvatexemptamount"].Precision = 10;
+                com.Parameters["@parmvatexemptamount"].Scale = 2;
+
+                com.Parameters.Add("@parmactualcost", SqlDbType.Decimal).Direction = ParameterDirection.Output;
+                com.Parameters["@parmactualcost"].Precision = 10;
+                com.Parameters["@parmactualcost"].Scale = 2;
 
                 com.CommandType = CommandType.StoredProcedure;
-                com.CommandText = query;
                 com.ExecuteNonQuery();
 
                 HOFormsDevEx.AddAPTransaction addap = new HOFormsDevEx.AddAPTransaction();
-                double vatamount = Convert.ToDouble(com.Parameters["@parmvatamount"].Value.ToString());
-                double vatexamount = Convert.ToDouble(com.Parameters["@parmvatexemptamount"].Value.ToString());
-                double vatinputamount = Convert.ToDouble(com.Parameters["@parmvatinputamount"].Value.ToString());
-                double totalamount = Convert.ToDouble(com.Parameters["@parmactualcost"].Value.ToString());
+
+                // Use decimal instead of double for money values
+                decimal vatamount = (com.Parameters["@parmvatamount"].Value == DBNull.Value) ? 0m : (decimal)com.Parameters["@parmvatamount"].Value;
+                decimal vatexamount = (com.Parameters["@parmvatexemptamount"].Value == DBNull.Value) ? 0m : (decimal)com.Parameters["@parmvatexemptamount"].Value;
+                decimal vatinputamount = (com.Parameters["@parmvatinputamount"].Value == DBNull.Value) ? 0m : (decimal)com.Parameters["@parmvatinputamount"].Value;
+                decimal totalamount = (com.Parameters["@parmactualcost"].Value == DBNull.Value) ? 0m : (decimal)com.Parameters["@parmactualcost"].Value;
+
                 addap.txtshipmentno.Text = shipmentno;
                 addap.txtsupplierid.Text = supplierid;
                 addap.txtsuppliername.Text = suppliername;
                 addap.txtinvoiceno.Text = com.Parameters["@parminvoiceno"].Value.ToString();
                 addap.txtinvoicedate.Text = com.Parameters["@parminvoicedate"].Value.ToString();
 
-                addap.txtvatamount.Text = HelperFunction.convertToNumericFormat(vatamount);// vatamount.ToString();
+                addap.txtvatamount.Text = HelperFunction.convertToNumericFormat(vatamount);
                 addap.txtvatexamount.Text = HelperFunction.convertToNumericFormat(vatexamount);
                 addap.txtvatinputamount.Text = HelperFunction.convertToNumericFormat(vatinputamount);
                 addap.txttotalamount.Text = HelperFunction.convertToNumericFormat(totalamount);
@@ -355,13 +376,60 @@ namespace SalesInventorySystem.HOFormsDevEx
                 {
                     HOFormsDevEx.AddAPTransaction.isdone = false;
                     addap.Dispose();
-                    filtertab();
+                    //filtertab();
+                    btnForConfirmProd.PerformClick();
                 }
             }
             catch (SqlException ex)
             {
                 XtraMessageBox.Show(ex.Message.ToString());
             }
+
+            //try
+            //{
+            //    string query = "spout_APAccounts";
+            //    SqlCommand com = new SqlCommand(query, con);
+            //    com.Parameters.AddWithValue("@parmshipmentno", shipmentno);
+            //    com.Parameters.AddWithValue("@parmsupplierid", supplierid);
+            //    com.Parameters.Add("@parminvoiceno", SqlDbType.VarChar, 50).Direction = ParameterDirection.Output;
+            //    com.Parameters.Add("@parminvoicedate", SqlDbType.VarChar, 20).Direction = ParameterDirection.Output;
+            //    com.Parameters.Add("@parmvatamount", SqlDbType.Money).Direction = ParameterDirection.Output;
+            //    com.Parameters.Add("@parmvatinputamount", SqlDbType.Money).Direction = ParameterDirection.Output;
+            //    com.Parameters.Add("@parmvatexemptamount", SqlDbType.Money).Direction = ParameterDirection.Output;
+            //    com.Parameters.Add("@parmactualcost", SqlDbType.Money).Direction = ParameterDirection.Output;
+
+            //    com.CommandType = CommandType.StoredProcedure;
+            //    com.CommandText = query;
+            //    com.ExecuteNonQuery();
+
+            //    HOFormsDevEx.AddAPTransaction addap = new HOFormsDevEx.AddAPTransaction();
+            //    double vatamount = Convert.ToDouble(com.Parameters["@parmvatamount"].Value.ToString());
+            //    double vatexamount = Convert.ToDouble(com.Parameters["@parmvatexemptamount"].Value.ToString());
+            //    double vatinputamount = Convert.ToDouble(com.Parameters["@parmvatinputamount"].Value.ToString());
+            //    double totalamount = Convert.ToDouble(com.Parameters["@parmactualcost"].Value.ToString());
+            //    addap.txtshipmentno.Text = shipmentno;
+            //    addap.txtsupplierid.Text = supplierid;
+            //    addap.txtsuppliername.Text = suppliername;
+            //    addap.txtinvoiceno.Text = com.Parameters["@parminvoiceno"].Value.ToString();
+            //    addap.txtinvoicedate.Text = com.Parameters["@parminvoicedate"].Value.ToString();
+
+            //    addap.txtvatamount.Text = HelperFunction.convertToNumericFormat(vatamount);// vatamount.ToString();
+            //    addap.txtvatexamount.Text = HelperFunction.convertToNumericFormat(vatexamount);
+            //    addap.txtvatinputamount.Text = HelperFunction.convertToNumericFormat(vatinputamount);
+            //    addap.txttotalamount.Text = HelperFunction.convertToNumericFormat(totalamount);
+
+            //    addap.ShowDialog(this);
+            //    if (HOFormsDevEx.AddAPTransaction.isdone == true)
+            //    {
+            //        HOFormsDevEx.AddAPTransaction.isdone = false;
+            //        addap.Dispose();
+            //        filtertab();
+            //    }
+            //}
+            //catch (SqlException ex)
+            //{
+            //    XtraMessageBox.Show(ex.Message.ToString());
+            //}
             finally
             {
                 con.Close();
@@ -386,12 +454,12 @@ namespace SalesInventorySystem.HOFormsDevEx
 
         private void tabControlForConfirmation_SelectedIndexChanged(object sender, EventArgs e)
         {
-            filtertab();
+            //filtertab();
         }
 
         private void tabControlConfirmed_SelectedIndexChanged(object sender, EventArgs e)
         {
-            filtertab();
+            //filtertab();
         }
 
         private void gridView3_EditFormPrepared(object sender, EditFormPreparedEventArgs e)
@@ -403,37 +471,117 @@ namespace SalesInventorySystem.HOFormsDevEx
         {
             
         }
+        private void LoadGrid(
+            string sql,
+            Action<SqlCommand> bindParams,
+            DevExpress.XtraGrid.GridControl grid,
+            DevExpress.XtraGrid.Views.Grid.GridView view,
+            string waitCaption = "Please wait",
+            string waitMessage = "Loading data...")
+        {
+
+            try
+            {
+                Cursor.Current = Cursors.WaitCursor;
+                this.UseWaitCursor = true;
+
+                using (var con = Database.getConnection())
+                using (var cmd = new SqlCommand(sql, con))
+                {
+                    cmd.CommandType = CommandType.Text;
+                    cmd.CommandTimeout = 120;
+
+                    bindParams?.Invoke(cmd);
+
+                    Database.display(cmd, grid, view);
+                }
+
+                view.Focus();
+                this.Activate();  // ✅ KEEP FORM FRONT
+            }
+            catch (SqlException ex)
+            {
+                XtraMessageBox.Show(ex.Message, "Database Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                this.UseWaitCursor = false;
+                Cursor.Current = Cursors.Default;
+            }
+
+        }
+
+        private void LoadPOByStatus(
+                            string status,
+                            DateTimePicker fromPicker,
+                            DateTimePicker toPicker,
+                            DevExpress.XtraGrid.GridControl grid,
+                            DevExpress.XtraGrid.Views.Grid.GridView view)
+        {
+            DateTime fromDate = fromPicker.Value.Date;
+            DateTime toDateExclusive = toPicker.Value.Date.AddDays(1);
+
+            const string sql = @"
+                        SELECT *
+                        FROM view_POSUMMARYREP
+                        WHERE Status = @status
+                          AND OrderType = 'P'
+                          AND DateOrder >= @fromDate
+                          AND DateOrder <  @toDateExclusive
+                        ORDER BY ShipmentNo DESC";
+
+            LoadGrid(sql, cmd =>
+            {
+                cmd.Parameters.Add("@status", SqlDbType.VarChar, 30).Value = status;
+                cmd.Parameters.Add("@fromDate", SqlDbType.DateTime).Value = fromDate;
+                cmd.Parameters.Add("@toDateExclusive", SqlDbType.DateTime).Value = toDateExclusive;
+            }, grid, view);
+        }
 
         private void btnForApprovalProd_Click(object sender, EventArgs e)
         {
-            //Database.display($"SELECT * FROM view_POSUMMARYREP WHERE Status='FOR APPROVAL' And OrderType='P' AND CAST(DateOrder as date) between '{datefromForApprovalProd.Text}' and '{dateToForApprovalProd.Text}' ORDER BY ShipmentNo DESC", gridControl2, gridView2);
-            string query = $"SELECT * FROM view_POSUMMARYREP WHERE Status='FOR APPROVAL' And OrderType='P' AND CAST(DateOrder as date) between '{datefromForApprovalProd.Text}' and '{dateToForApprovalProd.Text}' ORDER BY ShipmentNo DESC";
-            HelperFunction.ShowWaitAndDisplay(query, gridControl2, gridView2, "Please wait", "Populating data into the database...");
-            gridView2.Focus();
+
+            LoadPOByStatus("FOR APPROVAL", datefromForApprovalProd, dateToForApprovalProd, gridControl2, gridView2);
+
+            ////Database.display($"SELECT * FROM view_POSUMMARYREP WHERE Status='FOR APPROVAL' And OrderType='P' AND CAST(DateOrder as date) between '{datefromForApprovalProd.Text}' and '{dateToForApprovalProd.Text}' ORDER BY ShipmentNo DESC", gridControl2, gridView2);
+            //string query = $"SELECT * FROM view_POSUMMARYREP WHERE Status='FOR APPROVAL' And OrderType='P' AND CAST(DateOrder as date) between '{datefromForApprovalProd.Text}' and '{dateToForApprovalProd.Text}' ORDER BY ShipmentNo DESC";
+            //HelperFunction.ShowWaitAndDisplay(query, gridControl2, gridView2, "Please wait", "Populating data into the database...");
+            //gridView2.Focus();
         }
 
         private void btnApprovedProd_Click(object sender, EventArgs e)
         {
-            //Database.display($"SELECT * FROM view_POSUMMARYREP WHERE Status='FOR DELIVERY' And OrderType='P' AND CAST(DateOrder as date) between '{dateFromApprovedProd.Text}' and '{dateToApprovedProd.Text}'  ORDER BY ShipmentNo DESC", gridControl3, gridView3);
-            string query = $"SELECT * FROM view_POSUMMARYREP WHERE Status='FOR DELIVERY' And OrderType='P' AND CAST(DateOrder as date) between '{dateFromApprovedProd.Text}' and '{dateToApprovedProd.Text}'  ORDER BY ShipmentNo DESC";
-            HelperFunction.ShowWaitAndDisplay(query, gridControl3, gridView3, "Please wait", "Populating data into the database...");
-            gridView3.Focus();
+            LoadPOByStatus("FOR DELIVERY", dateFromApprovedProd, dateToApprovedProd, gridControl3, gridView3);
+
+            ////Database.display($"SELECT * FROM view_POSUMMARYREP WHERE Status='FOR DELIVERY' And OrderType='P' AND CAST(DateOrder as date) between '{dateFromApprovedProd.Text}' and '{dateToApprovedProd.Text}'  ORDER BY ShipmentNo DESC", gridControl3, gridView3);
+            //string query = $"SELECT * FROM view_POSUMMARYREP WHERE Status='FOR DELIVERY' And OrderType='P' AND CAST(DateOrder as date) between '{dateFromApprovedProd.Text}' and '{dateToApprovedProd.Text}'  ORDER BY ShipmentNo DESC";
+            //HelperFunction.ShowWaitAndDisplay(query, gridControl3, gridView3, "Please wait", "Populating data into the database...");
+            //gridView3.Focus();
         }
 
         private void btnForConfirmProd_Click(object sender, EventArgs e)
         {
+
+            LoadPOByStatus("FOR CONFIRMATION", dateFromForConfirmProd, dateToForConfirmProd,
+                    gridControlProductForConfirmation, gridViewProductForConfirmation);
+
             //Database.display($"SELECT * FROM view_POSUMMARYREP WHERE Status='FOR CONFIRMATION' And OrderType='P' AND CAST(DateOrder as date) between '{dateFromForConfirmProd.Text}' and '{dateToForConfirmProd.Text}'  ORDER BY ShipmentNo DESC", gridControlProductForConfirmation, gridViewProductForConfirmation);
-            string query = $"SELECT * FROM view_POSUMMARYREP WHERE Status='FOR CONFIRMATION' And OrderType='P' AND CAST(DateOrder as date) between '{dateFromForConfirmProd.Text}' and '{dateToForConfirmProd.Text}'  ORDER BY ShipmentNo DESC";
-            HelperFunction.ShowWaitAndDisplay(query, gridControlProductForConfirmation, gridViewProductForConfirmation, "Please wait", "Populating data into the database...");
-            gridViewProductForConfirmation.Focus();
+            //string query = $"SELECT * FROM view_POSUMMARYREP WHERE Status='FOR CONFIRMATION' And OrderType='P' AND CAST(DateOrder as date) between '{dateFromForConfirmProd.Text}' and '{dateToForConfirmProd.Text}'  ORDER BY ShipmentNo DESC";
+            //HelperFunction.ShowWaitAndDisplay(query, gridControlProductForConfirmation, gridViewProductForConfirmation, "Please wait", "Populating data into the database...");
+            //gridViewProductForConfirmation.Focus();
         }
 
         private void btnConfirmedProd_Click(object sender, EventArgs e)
         {
-            //Database.display($"SELECT * FROM view_POSUMMARYREP WHERE Status='CONFIRMED' And OrderType='P'  AND CAST(DateOrder as date) between '{dateFromConfirmedProd.Text}' and '{dateToConfirmedProd.Text}' ORDER BY ShipmentNo DESC", gridControlConfirmedProducts, gridViewConfirmedProducts);
-            string query = $"SELECT * FROM view_POSUMMARYREP WHERE Status='CONFIRMED' And OrderType='P'  AND CAST(DateOrder as date) between '{dateFromConfirmedProd.Text}' and '{dateToConfirmedProd.Text}' ORDER BY ShipmentNo DESC";
-            HelperFunction.ShowWaitAndDisplay(query, gridControlConfirmedProducts, gridViewConfirmedProducts, "Please wait", "Populating data into the database...");
-            gridViewConfirmedProducts.Focus();
+
+            LoadPOByStatus("CONFIRMED", dateFromConfirmedProd, dateToConfirmedProd,
+                    gridControlConfirmedProducts, gridViewConfirmedProducts);
+
+            ////Database.display($"SELECT * FROM view_POSUMMARYREP WHERE Status='CONFIRMED' And OrderType='P'  AND CAST(DateOrder as date) between '{dateFromConfirmedProd.Text}' and '{dateToConfirmedProd.Text}' ORDER BY ShipmentNo DESC", gridControlConfirmedProducts, gridViewConfirmedProducts);
+            //string query = $"SELECT * FROM view_POSUMMARYREP WHERE Status='CONFIRMED' And OrderType='P'  AND CAST(DateOrder as date) between '{dateFromConfirmedProd.Text}' and '{dateToConfirmedProd.Text}' ORDER BY ShipmentNo DESC";
+            //HelperFunction.ShowWaitAndDisplay(query, gridControlConfirmedProducts, gridViewConfirmedProducts, "Please wait", "Populating data into the database...");
+            //gridViewConfirmedProducts.Focus();
         }
 
         private void toolStripMenuItem9_Click(object sender, EventArgs e)
@@ -451,7 +599,7 @@ namespace SalesInventorySystem.HOFormsDevEx
 
         private void tabControlApproved_SelectedIndexChanged(object sender, EventArgs e)
         {
-            filtertab();
+            //filtertab();
         }
 
         private void editPurchaseOrderToolStripMenuItem_Click(object sender, EventArgs e)

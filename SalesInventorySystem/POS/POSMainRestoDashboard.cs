@@ -17,6 +17,9 @@ namespace SalesInventorySystem.POS
 {
     public partial class POSMainRestoDashboard : Form
     {
+        // 1. Create an in-memory cache for your products at the class level
+        private DataTable cachedProducts = new DataTable();
+
         public static string seniorcontrolno = "", seniorname = "";
         string totalamountstr = "";
         private delegate void SetTextDeleg(string text);
@@ -41,8 +44,61 @@ namespace SalesInventorySystem.POS
         public POSMainRestoDashboard()
         {
             InitializeComponent();
+            LoadInitialData();
         }
+        // Call this method ONCE when your POS Form loads (e.g., inside Form_Load)
+        public void LoadInitialData()
+        {
+            // Enable scrolling
+            flowLayoutPanel1.AutoScroll = true;
+            flowLayoutPanel2.AutoScroll = true;
 
+            // Wrap your connection in a 'using' statement to prevent memory/connection leaks
+            using (SqlConnection con = Database.getConnection())
+            {
+                con.Open();
+
+                // 2. Load ALL relevant products for this branch into memory ONCE
+                // Added Parameterization (@BranchCode) to prevent SQL Injection
+                string prodQuery = "SELECT ProductCategoryCode, ProductCode, Description FROM Products WHERE BranchCode = @BranchCode";
+                using (SqlCommand com = new SqlCommand(prodQuery, con))
+                {
+                    com.Parameters.AddWithValue("@BranchCode", Login.assignedBranch);
+                    using (SqlDataAdapter adapter = new SqlDataAdapter(com))
+                    {
+                        adapter.Fill(cachedProducts); // Store products in RAM
+                    }
+                }
+
+                // 3. Load Categories and create buttons
+                string catQuery = "SELECT ProductCategoryID, Description FROM ProductCategory WHERE ProductCategoryID IN (SELECT ProductCategoryCode FROM Products WHERE ProdType IN ('1','3'))";
+                using (SqlCommand com = new SqlCommand(catQuery, con))
+                using (SqlDataReader reader = com.ExecuteReader())
+                {
+                    flowLayoutPanel1.Controls.Clear();
+                    CategoryBtns.Clear();
+
+                    while (reader.Read())
+                    {
+                        Button btn = new Button();
+                        btn.Text = reader["Description"].ToString();
+
+                        // IMPORTANT: Store the Category ID in the Tag property so we don't have to look it up later!
+                        btn.Tag = reader["ProductCategoryID"].ToString();
+
+                        btn.TextAlign = ContentAlignment.MiddleCenter;
+                        btn.BackColor = Color.MediumSeaGreen;
+                        btn.FlatStyle = FlatStyle.Popup;
+                        btn.Width = 102;
+                        btn.Height = 40;
+
+                        btn.Click += this.ButtonFoodCategory_Click;
+                        CategoryBtns.Add(btn);
+                        flowLayoutPanel1.Controls.Add(btn);
+                    }
+                }
+            }
+        }
         void updateOR()
         {
             int refnumber = IDGenerator.getIDNumber("BatchSalesSummary", "BranchCode='" + Login.assignedBranch + "'", "ReferenceNo", 1); //IDGenerator.getOrderNumber();
@@ -65,7 +121,7 @@ namespace SalesInventorySystem.POS
             updateTransactionNo(); //generate Transaction Number
 
             panelroomnum.Visible = false;
-            displayCategory();
+            //displayCategory();
             refreshView();
             lbltableno.Text = "";
 
@@ -237,11 +293,56 @@ namespace SalesInventorySystem.POS
         }
         private void ButtonFoodCategory_Click(System.Object sender, System.EventArgs e)
         {
+
             //selectedCategory = (sender as Button).Text;
-            //displayItems();
-            selectedCategory = (sender as Button).Text;
-            productcategorycode = Database.getSingleQuery("ProductCategory", "Description='" + selectedCategory + "'", "ProductCategoryID");
-            displayProducts();
+            //productcategorycode = Database.getSingleQuery("ProductCategory", "Description='" + selectedCategory + "'", "ProductCategoryID");
+            //displayProducts();
+            Button clickedBtn = sender as Button;
+
+            // Safety check 1: Did a button actually trigger this?
+            if (clickedBtn == null) return;
+
+            selectedCategory = clickedBtn.Text;
+
+            // Safety check 2: Does the button actually have a Tag assigned?
+            if (clickedBtn.Tag == null)
+            {
+                XtraMessageBox.Show($"Error: No Category ID found for '{clickedBtn.Text}'. Please check how this button was generated.");
+                return; // Stop the code right here so it doesn't crash
+            }
+
+            // Now it is safe to convert to string
+            string categoryCode = clickedBtn.Tag.ToString();
+
+            displayProductsFromCache(categoryCode);
+        }
+        void displayProductsFromCache(string categoryCode)
+        {
+            flowLayoutPanel2.Controls.Clear();
+            ItemBtns.Clear();
+
+            // 4. Filter the cached DataTable in-memory (blazing fast compared to SQL)
+            DataView filteredView = new DataView(cachedProducts);
+            filteredView.RowFilter = $"ProductCategoryCode = '{categoryCode}'";
+
+            foreach (DataRowView row in filteredView)
+            {
+                Button btn = new Button();
+                btn.Text = row["Description"].ToString();
+
+                // Store ProductCode in Tag in case you need it for addOrder() later
+                btn.Tag = row["ProductCode"].ToString();
+
+                btn.TextAlign = ContentAlignment.MiddleCenter;
+                btn.BackColor = Color.MediumSeaGreen;
+                btn.FlatStyle = FlatStyle.Popup;
+                btn.Width = 100;
+                btn.Height = 40;
+
+                btn.Click += this.ButtonFoodMenu_Click;
+                ItemBtns.Add(btn);
+                flowLayoutPanel2.Controls.Add(btn);
+            }
         }
 
         void displayProducts()
@@ -272,25 +373,48 @@ namespace SalesInventorySystem.POS
 
         private void ButtonFoodMenu_Click(System.Object sender, System.EventArgs e)
         {
-            selectedProductName = (sender as Button).Text;
-            if (raddinein.Checked == true)
+            //selectedProductName = (sender as Button).Text;
+            //if (raddinein.Checked == true)
+            //{
+            //    if (String.IsNullOrEmpty(lbltableno.Text))
+            //    {
+            //        XtraMessageBox.Show("Please Select Table # First!");
+            //        return;
+            //    }
+            //    else
+            //    {
+            //        addOrder();
+            //    }
+            //}
+            //else if(radtkeout.Checked==true)
+            //{ addOrder(); }
+            //else
+            //{
+            //    XtraMessageBox.Show("Please Select DINE-IN OR TAKEOUT");
+            //    return;
+            //}
+            Button clickedBtn = sender as Button;
+            if (clickedBtn == null) return;
+
+            selectedProductName = clickedBtn.Text;
+            // string selectedProductCode = clickedBtn.Tag.ToString(); // You can now use this for addOrder() if needed!
+
+            if (raddinein.Checked)
             {
                 if (String.IsNullOrEmpty(lbltableno.Text))
                 {
                     XtraMessageBox.Show("Please Select Table # First!");
                     return;
                 }
-                else
-                {
-                    addOrder();
-                }
+                addOrder();
             }
-            else if(radtkeout.Checked==true)
-            { addOrder(); }
+            else if (radtkeout.Checked)
+            {
+                addOrder();
+            }
             else
             {
                 XtraMessageBox.Show("Please Select DINE-IN OR TAKEOUT");
-                return;
             }
         }
 

@@ -1025,7 +1025,7 @@
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "VIEWPO";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "VIEWPO";
+            this.Text = "View Purchase Order";
             this.Load += new System.EventHandler(this.VIEWPO_Load);
             this.tabControlForApproval.ResumeLayout(false);
             this.forapproval.ResumeLayout(false);

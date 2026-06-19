@@ -65,7 +65,7 @@ namespace SalesInventorySystem
                 string transno = "";// m.barStaticCashierTransNo.Caption;
 
                 //ALREADY LOGIN
-                bool isUserExistToday = Database.checkifExist("SELECT TOP(1) isOpen FROM SalesTransactionSummary WHERE BranchCode='" + Login.assignedBranch + "' " +
+                bool isUserExistToday = Database.checkifExist("SELECT 1 FROM SalesTransactionSummary WHERE BranchCode='" + Login.assignedBranch + "' " +
                     "AND TransactionDate='" + transdate.Trim() + "' " +
                     "AND isOpen='1' " +
                     "AND CashierTransNo='" + transno + "'"); //UserID='" + Login.isglobalUserID + "'

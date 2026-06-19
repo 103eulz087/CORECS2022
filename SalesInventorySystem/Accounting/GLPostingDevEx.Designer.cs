@@ -91,11 +91,11 @@
             this.comboBoxEdit1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.comboBoxEdit1.Properties.Items.AddRange(new object[] {
-            "2017",
-            "2018",
-            "2019",
-            "2020",
-            "2021"});
+            "2025",
+            "2026",
+            "2027",
+            "2028",
+            "2029"});
             this.comboBoxEdit1.Size = new System.Drawing.Size(222, 22);
             this.comboBoxEdit1.TabIndex = 26;
             // 

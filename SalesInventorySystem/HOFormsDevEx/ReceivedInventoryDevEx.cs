@@ -34,7 +34,7 @@ namespace SalesInventorySystem.HOFormsDevEx
             if (tabControl1.SelectedTab.Equals(NewShipment))
             {
                 //Database.display("SELECT * FROM view_ReceivedShipment WHERE Status='FOR DELIVERY' ORDER BY ShipmentNo DESC", gridControl2, gridView2);
-                string query = $"SELECT * FROM view_ReceivedShipment WHERE Status='FOR DELIVERY' ORDER BY ShipmentNo DESC ";
+                string query = $"SELECT * FROM view_ReceivedShipment WHERE Status='FOR DELIVERY' AND BranchCode='{Login.assignedBranch}' ORDER BY ShipmentNo DESC ";
                 HelperFunction.ShowWaitAndDisplay(query, gridControl2, gridView2, "Please wait", "Populating data into the database...");
                 gridView2.Focus();
 

@@ -46,6 +46,9 @@
             this.simpleButton3 = new DevExpress.XtraEditors.SimpleButton();
             this.simpleButton4 = new DevExpress.XtraEditors.SimpleButton();
             this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
+            this.chcklinktopo = new DevExpress.XtraEditors.CheckEdit();
+            this.txtpo = new DevExpress.XtraEditors.SearchLookUpEdit();
+            this.gridView4 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.txtbatchid = new DevExpress.XtraEditors.TextEdit();
             this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
             this.txtinvoiceno = new DevExpress.XtraEditors.TextEdit();
@@ -80,9 +83,6 @@
             this.cancelLineToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.txtpo = new DevExpress.XtraEditors.SearchLookUpEdit();
-            this.gridView4 = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.chcklinktopo = new DevExpress.XtraEditors.CheckEdit();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).BeginInit();
             this.xtraTabControl1.SuspendLayout();
             this.xtraTabPage1.SuspendLayout();
@@ -99,6 +99,9 @@
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
             this.groupControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chcklinktopo.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtpo.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtbatchid.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtinvoiceno.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtrefno.Properties)).BeginInit();
@@ -123,9 +126,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtbrcodesum.Properties)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.contextMenuStrip2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtpo.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.chcklinktopo.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // xtraTabControl1
@@ -318,6 +318,40 @@
             this.groupControl1.Name = "groupControl1";
             this.groupControl1.Size = new System.Drawing.Size(1314, 196);
             this.groupControl1.TabIndex = 450;
+            // 
+            // chcklinktopo
+            // 
+            this.chcklinktopo.Location = new System.Drawing.Point(754, 64);
+            this.chcklinktopo.Name = "chcklinktopo";
+            this.chcklinktopo.Properties.Caption = "Link to PO";
+            this.chcklinktopo.Size = new System.Drawing.Size(94, 24);
+            this.chcklinktopo.TabIndex = 474;
+            this.chcklinktopo.CheckedChanged += new System.EventHandler(this.chcklinktopo_CheckedChanged);
+            // 
+            // txtpo
+            // 
+            this.txtpo.Enabled = false;
+            this.txtpo.Location = new System.Drawing.Point(577, 63);
+            this.txtpo.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtpo.Name = "txtpo";
+            this.txtpo.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtpo.Properties.Appearance.Options.UseFont = true;
+            this.txtpo.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.txtpo.Properties.DisplayMember = "SupplierName";
+            this.txtpo.Properties.NullText = "";
+            this.txtpo.Properties.PopupView = this.gridView4;
+            this.txtpo.Properties.ValueMember = "SupplierName";
+            this.txtpo.Size = new System.Drawing.Size(171, 24);
+            this.txtpo.TabIndex = 473;
+            this.txtpo.EditValueChanged += new System.EventHandler(this.txtpo_EditValueChanged);
+            // 
+            // gridView4
+            // 
+            this.gridView4.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
+            this.gridView4.Name = "gridView4";
+            this.gridView4.OptionsSelection.EnableAppearanceFocusedCell = false;
+            this.gridView4.OptionsView.ShowGroupPanel = false;
             // 
             // txtbatchid
             // 
@@ -696,40 +730,6 @@
             this.toolStripMenuItem1.Text = "ErrorCorrect";
             this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
             // 
-            // txtpo
-            // 
-            this.txtpo.Enabled = false;
-            this.txtpo.Location = new System.Drawing.Point(577, 63);
-            this.txtpo.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.txtpo.Name = "txtpo";
-            this.txtpo.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtpo.Properties.Appearance.Options.UseFont = true;
-            this.txtpo.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.txtpo.Properties.DisplayMember = "SupplierName";
-            this.txtpo.Properties.NullText = "";
-            this.txtpo.Properties.PopupView = this.gridView4;
-            this.txtpo.Properties.ValueMember = "SupplierName";
-            this.txtpo.Size = new System.Drawing.Size(171, 24);
-            this.txtpo.TabIndex = 473;
-            this.txtpo.EditValueChanged += new System.EventHandler(this.txtpo_EditValueChanged);
-            // 
-            // gridView4
-            // 
-            this.gridView4.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
-            this.gridView4.Name = "gridView4";
-            this.gridView4.OptionsSelection.EnableAppearanceFocusedCell = false;
-            this.gridView4.OptionsView.ShowGroupPanel = false;
-            // 
-            // chcklinktopo
-            // 
-            this.chcklinktopo.Location = new System.Drawing.Point(754, 64);
-            this.chcklinktopo.Name = "chcklinktopo";
-            this.chcklinktopo.Properties.Caption = "Link to PO";
-            this.chcklinktopo.Size = new System.Drawing.Size(94, 24);
-            this.chcklinktopo.TabIndex = 474;
-            this.chcklinktopo.CheckedChanged += new System.EventHandler(this.chcklinktopo_CheckedChanged);
-            // 
             // PostExpenseDevExFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
@@ -740,6 +740,7 @@
             this.Name = "PostExpenseDevExFrm";
             this.Text = "PostExpenseDevExFrm";
             this.Load += new System.EventHandler(this.PostExpenseDevExFrm_Load);
+            this.Shown += new System.EventHandler(this.PostExpenseDevExFrm_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).EndInit();
             this.xtraTabControl1.ResumeLayout(false);
             this.xtraTabPage1.ResumeLayout(false);
@@ -757,6 +758,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).EndInit();
             this.groupControl1.ResumeLayout(false);
             this.groupControl1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chcklinktopo.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtpo.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtbatchid.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtinvoiceno.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtrefno.Properties)).EndInit();
@@ -782,9 +786,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtbrcodesum.Properties)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
             this.contextMenuStrip2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.txtpo.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.chcklinktopo.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }

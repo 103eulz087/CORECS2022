@@ -34,7 +34,7 @@ namespace SalesInventorySystem.Reporting
         private void searchLookUpEdit1_EditValueChanged(object sender, EventArgs e)
         {
             suppkey = SearchLookUpClass.getSingleValue(searchLookUpEdit1, "SupplierKey");
-            Database.display("SELECT ProductCode,Barcode,ProductName,Cost,AvailableQty" +
+            Database.display("SELECT * " +
                 " FROM func_viewPurchaseOrder('" + Login.assignedBranch + "','" + suppkey + "')", gridControl2, gridView2);
         }
         void print()

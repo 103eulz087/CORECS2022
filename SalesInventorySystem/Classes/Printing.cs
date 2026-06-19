@@ -1291,34 +1291,34 @@ namespace SalesInventorySystem
                 {
                     addD = "";
                 }
-                details += HelperFunction.PrintLeftText(gridview.Rows[i].Cells["Particulars"].Value.ToString()) + Environment.NewLine;
+                details += HelperFunction.PrintLeftText56(gridview.Rows[i].Cells["Particulars"].Value.ToString()) + Environment.NewLine;
                 string a = "  - " + gridview.Rows[i].Cells["Qty"].Value + " @ " + gridview.Rows[i].Cells["UnitPrice"].Value;
                 double cleanbalance = 0.0;
                 cleanbalance = Convert.ToDouble(gridview.Rows[i].Cells["Amount"].Value) + Convert.ToDouble(gridview.Rows[i].Cells["Discount"].Value);
 
                 // string b = " " + gridview.Rows[i].Cells["Amount"].Value + addV;
                 string b = " " + HelperFunction.convertToNumericFormat(cleanbalance) + addV;
-                details += HelperFunction.PrintLeftRigthText(a, b) + Environment.NewLine;
+                details += HelperFunction.PrintLeftRigthText56(a, b) + Environment.NewLine;
                 if (Convert.ToDouble(gridview.Rows[i].Cells["Discount"].Value.ToString()) > 0)
                 {
-                    details += HelperFunction.PrintLeftRigthText(addD, "(" + gridview.Rows[i].Cells["Discount"].Value.ToString() + ")") + Environment.NewLine;
+                    details += HelperFunction.PrintLeftRigthText56(addD, "(" + gridview.Rows[i].Cells["Discount"].Value.ToString() + ")") + Environment.NewLine;
                 }
             }
-            details += HelperFunction.PrinttoRight("----------") + Environment.NewLine;
+            details += HelperFunction.PrinttoRight56("----------") + Environment.NewLine;
             if (Convert.ToDouble(peritemdiscount) > 0)
             {
-                details += HelperFunction.PrintLeftRigthText("TOTAL DISCOUNT:", peritemdiscount) + Environment.NewLine;
+                details += HelperFunction.PrintLeftRigthText56("TOTAL DISCOUNT:", peritemdiscount) + Environment.NewLine;
             }
-            details += HelperFunction.PrintLeftRigthText("TOTAL DUE:", total) + Environment.NewLine;
-            details += HelperFunction.PrinttoRight("==========") + Environment.NewLine;
+            details += HelperFunction.PrintLeftRigthText56("TOTAL DUE:", total) + Environment.NewLine;
+            details += HelperFunction.PrinttoRight56("==========") + Environment.NewLine;
 
             if (paytype == "Credit")
             {
-                details += HelperFunction.PrintLeftRigthText("TENDERED:", HelperFunction.convertToNumericFormat(Convert.ToDouble(POS.POSConfirmPaymentResto.netamountpayable))) + Environment.NewLine + Environment.NewLine;
-                details += HelperFunction.PrintLeftRigthText("CHANGE  :", "0.00") + Environment.NewLine + Environment.NewLine;
+                details += HelperFunction.PrintLeftRigthText56("TENDERED:", HelperFunction.convertToNumericFormat(Convert.ToDouble(POS.POSConfirmPaymentResto.netamountpayable))) + Environment.NewLine + Environment.NewLine;
+                details += HelperFunction.PrintLeftRigthText56("CHANGE  :", "0.00") + Environment.NewLine + Environment.NewLine;
             }
-            details += HelperFunction.PrintLeftRigthText("TENDERED:", cash) + Environment.NewLine;
-            details += HelperFunction.PrintLeftRigthText("CHANGE  :", change) + Environment.NewLine + Environment.NewLine;
+            details += HelperFunction.PrintLeftRigthText56("TENDERED:", cash) + Environment.NewLine;
+            details += HelperFunction.PrintLeftRigthText56("CHANGE  :", change) + Environment.NewLine + Environment.NewLine;
 
             if (paytype == "Credit")
             {
@@ -1328,12 +1328,12 @@ namespace SalesInventorySystem
                 cardtype = rox["CCType"].ToString();
                 cardrefno = rox["CCPaymentReferenceNo"].ToString();
                 string last4 = Database.getSingleResultSet($"SELECT RIGHT(CCNumber,4) FROM POSCreditCardTransactions WHERE ReferenceNo='{ordercode}'");
-                details += HelperFunction.createDottedLine() + Environment.NewLine;
-                details += HelperFunction.PrintLeftText("PAYMENT TYPE: Credit Card") + Environment.NewLine;
-                details += HelperFunction.PrintLeftText("Card Number: XXXX-XXXX-XXXX-" + last4) + Environment.NewLine;
-                details += HelperFunction.PrintLeftText("Card Type: " + cardtype) + Environment.NewLine;
-                details += HelperFunction.PrintLeftText("Reference No.: " + cardrefno) + Environment.NewLine;
-                details += HelperFunction.createDottedLine() + Environment.NewLine;
+                details += HelperFunction.createDottedLine56() + Environment.NewLine;
+                details += HelperFunction.PrintLeftText56("PAYMENT TYPE: Credit Card") + Environment.NewLine;
+                details += HelperFunction.PrintLeftText56("Card Number: XXXX-XXXX-XXXX-" + last4) + Environment.NewLine;
+                details += HelperFunction.PrintLeftText56("Card Type: " + cardtype) + Environment.NewLine;
+                details += HelperFunction.PrintLeftText56("Reference No.: " + cardrefno) + Environment.NewLine;
+                details += HelperFunction.createDottedLine56() + Environment.NewLine;
             }
             if (paytype == "Merchant")
             {
@@ -1343,12 +1343,12 @@ namespace SalesInventorySystem
                 MerchantName = rox["MerchantName"].ToString();
                 VoucherCode = rox["VoucherCode"].ToString();
                 //string last4 = Database.getSingleResultSet($"SELECT RIGHT(CCNumber,4) FROM POSCreditCardTransactions WHERE ReferenceNo='{ordercode}'");
-                details += HelperFunction.createDottedLine() + Environment.NewLine;
-                details += HelperFunction.PrintLeftText("PAYMENT TYPE: Merchant " + MerchantName) + Environment.NewLine;
-                //details += HelperFunction.PrintLeftText("Card Number: XXXX-XXXX-XXXX-" + last4) + Environment.NewLine;
-                details += HelperFunction.PrintLeftText("VoucherCode: " + VoucherCode) + Environment.NewLine;
-                details += HelperFunction.PrintLeftText("Reference No.: " + ReferenceNo) + Environment.NewLine;
-                details += HelperFunction.createDottedLine() + Environment.NewLine;
+                details += HelperFunction.createDottedLine56() + Environment.NewLine;
+                details += HelperFunction.PrintLeftText56("PAYMENT TYPE: Merchant " + MerchantName) + Environment.NewLine;
+                //details += HelperFunction.PrintLeftText56("Card Number: XXXX-XXXX-XXXX-" + last4) + Environment.NewLine;
+                details += HelperFunction.PrintLeftText56("VoucherCode: " + VoucherCode) + Environment.NewLine;
+                details += HelperFunction.PrintLeftText56("Reference No.: " + ReferenceNo) + Environment.NewLine;
+                details += HelperFunction.createDottedLine56() + Environment.NewLine;
             }
 
             string pathfile = System.IO.File.ReadAllText(Application.StartupPath + "\\FOOTER.txt");
@@ -1425,7 +1425,7 @@ namespace SalesInventorySystem
             string discountamount = rows["DiscountAmount"].ToString();
             double discpercent = Convert.ToDouble(discountpercentage) * 100;
             double totalvatitems = 0.0;
-            double newdiscitems = 0.0;
+            
             for (int i = 0; i <= gridview.RowCount - 1; i++)
             {
                 string addV = "";

@@ -157,9 +157,37 @@ namespace SalesInventorySystem.POS
 
         }
 
+        private void btn4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btn5_Click(object sender, EventArgs e)
+        {
+
+        }
+
         private void button4_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnc_Click(object sender, EventArgs e)
+        {
+            txtamounttender.Text = "";
+            txtamounttender.Focus();
+        }
+
+        // Example: assign this handler to all number buttons (0–9)
+        private void NumberButton_Click(object sender, EventArgs e)
+        {
+            // Cast sender back to Button
+            Button btn = sender as Button;
+            if (btn != null)
+            {
+                // Append the button's text (digit) to the tender amount textbox
+                txtamounttender.Text += btn.Text;
+            }
         }
 
         void checkZeroRated()
@@ -228,9 +256,20 @@ namespace SalesInventorySystem.POS
             }
         }
 
+
         public POSConfirmPaymentResto()
         {
             InitializeComponent();
+            btn0.Click += NumberButton_Click;
+            btn1.Click += NumberButton_Click;
+            btn2.Click += NumberButton_Click;
+            btn3.Click += NumberButton_Click;
+            btn4.Click += NumberButton_Click;
+            btn5.Click += NumberButton_Click;
+            btn6.Click += NumberButton_Click;
+            btn7.Click += NumberButton_Click;
+            btn8.Click += NumberButton_Click;
+            btn9.Click += NumberButton_Click;
         }
 
         private void POSConfirmPaymentResto_Load(object sender, EventArgs e)
@@ -416,7 +455,7 @@ namespace SalesInventorySystem.POS
                     paymenttype = "Credit";
                     invno = txtinvoiceno.Text;
                     //update as of 04142020
-                    Database.ExecuteQuery("INSERT INTO dbo.POSCreditCardTransactions VALUES('" + lbltranscode.Text + "','" + lblorderno.Text + "','" + Login.assignedBranch + "','" + DateTime.Now.ToString() + "','" + POSPaymentDetails.creditcardname + "','" + POSPaymentDetails.creditcardnum + "','" + POSPaymentDetails.creditcardtype + "','" + POSPaymentDetails.creditcardexpirydate + "','" + POSPaymentDetails.creditcardbankname + "','" + POSPaymentDetails.creditcardmerchant + "','" + POSPaymentDetails.creditcardrefno + "','" + txtamountpayable.Text + "','0','" + DateTime.Now.ToString() + "',' ','" + Login.Fullname + "','" + GlobalVariables.computerName + "','"+lblcashiertransno.Text+"')");
+                    Database.ExecuteQuery("INSERT INTO dbo.POSCreditCardTransactions VALUES('" + lbltranscode.Text + "','" + lblorderno.Text + "','" + Login.assignedBranch + "','" + DateTime.Now.ToString() + "','" + POSPaymentDetails.creditcardname + "','" + POSPaymentDetails.creditcardnum + "','" + POSPaymentDetails.creditcardtype + "','" + POSPaymentDetails.creditcardexpirydate + "','" + POSPaymentDetails.creditcardbankname + "','" + POSPaymentDetails.creditcardmerchant + "','" + POSPaymentDetails.creditcardrefno + "','" + txtamountpayable.Text + "','0','" + DateTime.Now.ToString() + "',' ','" + Login.Fullname + "','" + GlobalVariables.computerName + "','"+lblcashiertransno.Text+"','0')");
                     //update as of 04142020
                 }
                 else if (radmerchant.Checked.Equals(true))

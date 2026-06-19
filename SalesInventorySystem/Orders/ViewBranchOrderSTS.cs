@@ -34,7 +34,7 @@ namespace SalesInventorySystem.Orders
 
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            tabfilter();
+            //tabfilter();
         }
 
         private void gridControl1_KeyDown(object sender, KeyEventArgs e)
@@ -147,24 +147,83 @@ namespace SalesInventorySystem.Orders
          
         private void simpleButton1_Click(object sender, EventArgs e)
         {
-            string query = "SELECT * FROM view_BranchOrderSTS WHERE isProcess = '0' AND Status='APPROVED' and EffectivityDate >= '" + datefrompending.Text + "' and EffectivityDate <= '" + datetopending.Text + "' and BranchCode='" + Login.assignedBranch + "' Order by PONumber DESC";
-            HelperFunction.ShowWaitAndDisplay(query, gridControl1, gridView1, "Please wait", "Populating data into the database...");
-            gridView1.Focus();
+            //string query = "SELECT * FROM view_BranchOrderSTS WHERE isProcess = '0' AND Status='APPROVED' and EffectivityDate >= '" + datefrompending.Text + "' and EffectivityDate <= '" + datetopending.Text + "' and BranchCode='" + Login.assignedBranch + "' Order by PONumber DESC";
+            //HelperFunction.ShowWaitAndDisplay(query, gridControl1, gridView1, "Please wait", "Populating data into the database...");
+            //gridView1.Focus();
+
+            DateTime fromDate = datefrompending.Value.Date;
+            DateTime toDateExclusive = datetopending.Value.Date.AddDays(1);
+            string branchCode = Login.assignedBranch;
+
+            const string sql = @"
+                SELECT *
+                FROM view_BranchOrderSTS
+                WHERE isProcess = 0
+                  AND Status = 'APPROVED'
+                  AND EffectivityDate >= @fromDate
+                  AND EffectivityDate <  @toDateExclusive
+                  AND BranchCode = @branchCode
+                ORDER BY PONumber DESC";
+
+            LoadGrid(sql, cmd =>
+            {
+                cmd.Parameters.Add("@fromDate", SqlDbType.DateTime).Value = fromDate;
+                cmd.Parameters.Add("@toDateExclusive", SqlDbType.DateTime).Value = toDateExclusive;
+                cmd.Parameters.Add("@branchCode", SqlDbType.VarChar, 10).Value = branchCode;
+            }, gridControl1, gridView1);
+
+
         }
 
-        
+
         private void simpleButton2_Click(object sender, EventArgs e)
         {
-            string query = "SELECT * FROM view_ForDeliverySTS WHERE Status='REJECTED' and DateAdded >= '" + datefromrej.Text + "' and DateAdded <= '" + datetorej.Text + "'";
-            HelperFunction.ShowWaitAndDisplay(query, gridControl3, gridView3, "Please wait", "Populating data into the database...");
-            gridView3.Focus();
+            //string query = "SELECT * FROM view_ForDeliverySTS WHERE Status='REJECTED' and DateAdded >= '" + datefromrej.Text + "' and DateAdded <= '" + datetorej.Text + "'";
+            //HelperFunction.ShowWaitAndDisplay(query, gridControl3, gridView3, "Please wait", "Populating data into the database...");
+            //gridView3.Focus();
+
+            DateTime fromDate = datefromrej.Value.Date;
+            DateTime toDateExclusive = datetorej.Value.Date.AddDays(1);
+
+            const string sql = @"
+                    SELECT *
+                    FROM view_ForDeliverySTS
+                    WHERE Status = 'REJECTED'
+                      AND DateAdded >= @fromDate
+                      AND DateAdded <  @toDateExclusive
+                    ORDER BY DateAdded DESC";
+
+            LoadGrid(sql, cmd =>
+            {
+                cmd.Parameters.Add("@fromDate", SqlDbType.DateTime).Value = fromDate;
+                cmd.Parameters.Add("@toDateExclusive", SqlDbType.DateTime).Value = toDateExclusive;
+            }, gridControl3, gridView3);
+
         }
 
         private void simpleButton3_Click(object sender, EventArgs e)
         {
-            string query = "SELECT * FROM view_ForDeliverySTS WHERE Status='FOR DELIVERY' and DateAdded >= '" + datefromfordev.Text + "' and DateAdded <= '" + datetofordev.Text + "'";
-            HelperFunction.ShowWaitAndDisplay(query, gridControl2, gridView2, "Please wait", "Populating data into the database...");
-            gridView2.Focus();
+            //string query = "SELECT * FROM view_ForDeliverySTS WHERE Status='FOR DELIVERY' and DateAdded >= '" + datefromfordev.Text + "' and DateAdded <= '" + datetofordev.Text + "'";
+            //HelperFunction.ShowWaitAndDisplay(query, gridControl2, gridView2, "Please wait", "Populating data into the database...");
+            //gridView2.Focus();
+
+            DateTime fromDate = datefromfordev.Value.Date;
+            DateTime toDateExclusive = datetofordev.Value.Date.AddDays(1);
+
+            const string sql = @"
+                        SELECT *
+                        FROM view_ForDeliverySTS
+                        WHERE Status = 'FOR DELIVERY'
+                          AND DateAdded >= @fromDate
+                          AND DateAdded <  @toDateExclusive
+                        ORDER BY DateAdded DESC";
+
+            LoadGrid(sql, cmd =>
+            {
+                cmd.Parameters.Add("@fromDate", SqlDbType.DateTime).Value = fromDate;
+                cmd.Parameters.Add("@toDateExclusive", SqlDbType.DateTime).Value = toDateExclusive;
+            }, gridControl2, gridView2);
+
         }
 
         private void gridView1_RowCellStyle(object sender, RowCellStyleEventArgs e)
@@ -270,37 +329,110 @@ namespace SalesInventorySystem.Orders
             openBranchOrder("STS");
         }
 
-        private void tabfilter()
-        {
-            if (tabMain.SelectedTabPage.Equals(tabForApproval))
-            {
-                Database.display("SELECT * FROM view_BranchOrderSTS WHERE isProcess = '0' AND Status='APPROVED' and DateApproved >= '" + datefrompending.Text + "' and DateApproved <= '" + datetopending.Text + "' ORDER BY PONumber DESC", gridControl1, gridView1);
-                gridView1.Focus();
-            }
+        //private void tabfilter()
+        //{
+        //    if (tabMain.SelectedTabPage.Equals(tabForApproval))
+        //    {
+        //        Database.display("SELECT * FROM view_BranchOrderSTS WHERE isProcess = '0' AND Status='APPROVED' and DateApproved >= '" + datefrompending.Text + "' and DateApproved <= '" + datetopending.Text + "' ORDER BY PONumber DESC", gridControl1, gridView1);
+        //        gridView1.Focus();
+        //    }
            
-            else if (tabMain.SelectedTabPage.Equals(tabRejected))
-            {
-                Database.display("SELECT * FROM view_ForDeliverySTS WHERE Status='REJECTED' and DateAdded >= '" + datefromrej.Text + "' and DateAdded <= '" + datetorej.Text + "'", gridControl3, gridView3);
-                gridView3.Focus();
-            }
-            else if (tabMain.SelectedTabPage.Equals(tabForDelivery))
-            {
-                Database.display("SELECT * FROM view_ForDeliverySTS WHERE Status='FOR DELIVERY' and DateAdded >= '" + datefromfordev.Text + "' and DateAdded <= '" + datetofordev.Text + "'", gridControl2, gridView2);
-                gridView2.Focus();
-            }
-        }
+        //    else if (tabMain.SelectedTabPage.Equals(tabRejected))
+        //    {
+        //        Database.display("SELECT * FROM view_ForDeliverySTS WHERE Status='REJECTED' and DateAdded >= '" + datefromrej.Text + "' and DateAdded <= '" + datetorej.Text + "'", gridControl3, gridView3);
+        //        gridView3.Focus();
+        //    }
+        //    else if (tabMain.SelectedTabPage.Equals(tabForDelivery))
+        //    {
+        //        Database.display("SELECT * FROM view_ForDeliverySTS WHERE Status='FOR DELIVERY' and DateAdded >= '" + datefromfordev.Text + "' and DateAdded <= '" + datetofordev.Text + "'", gridControl2, gridView2);
+        //        gridView2.Focus();
+        //    }
+        //}
 
         private void batchModeToolStripMenuItem_Click(object sender, EventArgs e)
         {
             openBranchOrderBatchMode("STS");
         }
+        private void LoadGrid(
+                string sql,
+                Action<SqlCommand> bindParams,
+                DevExpress.XtraGrid.GridControl grid,
+                DevExpress.XtraGrid.Views.Grid.GridView view)
+            {
+                try
+                {
+                    Cursor.Current = Cursors.WaitCursor;
+                    this.UseWaitCursor = true;
 
+                    using (var con = Database.getConnection())
+                    using (var cmd = new SqlCommand(sql, con))
+                    {
+                        bindParams(cmd);
+                        Database.display(cmd, grid, view);
+                    }
+
+                    view.Focus();
+                }
+                finally
+                {
+                    this.UseWaitCursor = false;
+                    Cursor.Current = Cursors.Default;
+                }
+            }
         void display()
         {
-            Database.display("SELECT * FROM view_BranchOrderSTS WHERE isProcess = '0' AND Status='APPROVED' and DateApproved >= '" + datefrompending.Text + "' and DateApproved <= '" + datetopending.Text + "'", gridControl1, gridView1);
-            Database.display("SELECT * FROM view_ForDeliverySTS WHERE Status='FOR DELIVERY' and DateAdded >= '" + datefromfordev.Text + "' and DateAdded <= '" + datetofordev.Text + "'", gridControl2, gridView2);
-            Database.display("SELECT * FROM view_ForDeliverySTS WHERE Status='REJECTED' and DateAdded >= '" + datefromfordev.Text + "' and DateAdded <= '" + datetofordev.Text + "' ", gridControl3, gridView3);
+            DateTime pendingFrom = datefrompending.Value.Date;
+            DateTime pendingTo = datetopending.Value.Date.AddDays(1);
+
+            DateTime deliveryFrom = datefromfordev.Value.Date;
+            DateTime deliveryTo = datetofordev.Value.Date.AddDays(1);
+
+            // 1️⃣ APPROVED – NOT PROCESSED
+            const string sqlApproved = @"
+                SELECT *
+                FROM view_BranchOrderSTS
+                WHERE isProcess = 0
+                  AND Status = 'APPROVED'
+                  AND DateApproved >= @fromDate
+                  AND DateApproved <  @toDate
+                ORDER BY DateApproved DESC";
+
+            LoadGrid(sqlApproved, cmd =>
+            {
+                cmd.Parameters.Add("@fromDate", SqlDbType.DateTime).Value = pendingFrom;
+                cmd.Parameters.Add("@toDate", SqlDbType.DateTime).Value = pendingTo;
+            }, gridControl1, gridView1);
+
+            // 2️⃣ FOR DELIVERY
+            const string sqlForDelivery = @"
+                SELECT *
+                FROM view_ForDeliverySTS
+                WHERE Status = @status
+                  AND DateAdded >= @fromDate
+                  AND DateAdded <  @toDate
+                ORDER BY DateAdded DESC";
+
+            LoadGrid(sqlForDelivery, cmd =>
+            {
+                cmd.Parameters.Add("@status", SqlDbType.VarChar, 20).Value = "FOR DELIVERY";
+                cmd.Parameters.Add("@fromDate", SqlDbType.DateTime).Value = deliveryFrom;
+                cmd.Parameters.Add("@toDate", SqlDbType.DateTime).Value = deliveryTo;
+            }, gridControl2, gridView2);
+
+            // 3️⃣ REJECTED
+            LoadGrid(sqlForDelivery, cmd =>
+            {
+                cmd.Parameters.Add("@status", SqlDbType.VarChar, 20).Value = "REJECTED";
+                cmd.Parameters.Add("@fromDate", SqlDbType.DateTime).Value = deliveryFrom;
+                cmd.Parameters.Add("@toDate", SqlDbType.DateTime).Value = deliveryTo;
+            }, gridControl3, gridView3);
         }
+        //void display()
+        //{
+        //    Database.display("SELECT * FROM view_BranchOrderSTS WHERE isProcess = '0' AND Status='APPROVED' and DateApproved >= '" + datefrompending.Text + "' and DateApproved <= '" + datetopending.Text + "'", gridControl1, gridView1);
+        //    Database.display("SELECT * FROM view_ForDeliverySTS WHERE Status='FOR DELIVERY' and DateAdded >= '" + datefromfordev.Text + "' and DateAdded <= '" + datetofordev.Text + "'", gridControl2, gridView2);
+        //    Database.display("SELECT * FROM view_ForDeliverySTS WHERE Status='REJECTED' and DateAdded >= '" + datefromfordev.Text + "' and DateAdded <= '" + datetofordev.Text + "' ", gridControl3, gridView3);
+        //}
 
         void openHRIOrder()
         {

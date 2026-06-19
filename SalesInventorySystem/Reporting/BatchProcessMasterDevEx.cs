@@ -17,7 +17,7 @@ namespace SalesInventorySystem.Reporting
     public partial class BatchProcessMasterDevEx : DevExpress.XtraEditors.XtraForm
     {
         object value = null;
-        public static string shipmentno = "",suppliername="",invoinceno="", supplierid = "";
+        public static string shipmentno = "",suppliername="",invoinceno="", supplierid = "",datereceived="";
         public BatchProcessMasterDevEx()
         {
             InitializeComponent();
@@ -143,17 +143,17 @@ namespace SalesInventorySystem.Reporting
         {
             shipmentno = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "ShipmentNo").ToString();
             supplierid = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "SupplierID").ToString();
-            invoinceno = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "InvoiceNo").ToString();
+            invoinceno = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "InvoiceNo").ToString(); 
 
             CarcassReports carrep = new CarcassReports();
             carrep.Show();
-            if (carrep.radgroup.Checked == true)
+            if (carrep.radgroup.Checked == true) //GROUP
             {
                 carrep.gridControl1.BeginUpdate();
                 carrep.gridView1.GroupSummary.Clear();
                 carrep.gridView1.Columns.Clear();
                 carrep.gridControl1.DataSource = null;
-                Database.display("SELECT DateReceived,Description,SUM(Quantity) as Quantity,Cost From dbo.TempInventory with(nolock) WHERE ShipmentNo='" + shipmentno + "' and Branch='"+Login.assignedBranch+"' and isSource=1 and isProcess=0 GROUP BY DateReceived,Description,Cost", carrep.gridControl1, carrep.gridView1);
+                Database.display($"SELECT * FROM dbo.func_viewInventoryReceivingReport_Group('{shipmentno}','{Login.assignedBranch}') ", carrep.gridControl1, carrep.gridView1);
                 GridView viewz = carrep.gridControl1.FocusedView as GridView;
                 viewz.SortInfo.ClearAndAddRange(new GridColumnSortInfo[] {
                 new GridColumnSortInfo(viewz.Columns["Description"],DevExpress.Data.ColumnSortOrder.Ascending)
@@ -173,9 +173,11 @@ namespace SalesInventorySystem.Reporting
                 //    "FROm TempInventoryBatchUpload " +
                 //    "WHERE ShipmentNo='" + shipmentno + "' " +
                 //    "and isSource=1 ORDER BY Description,PalletNo,Cost", carrep.gridControl1, carrep.gridView1);
-                Database.display("SELECT SequenceNumber,DateReceived,Barcode,Description,Quantity,Cost " +
-                    "From dbo.TempInventory with(nolock) WHERE ShipmentNo='" + shipmentno + "' " +
-                    "and Branch='" + Login.assignedBranch + "' and isProcess=0 ORDER BY Description ASC", carrep.gridControl1, carrep.gridView1);
+                Database.display($"SELECT * FROM dbo.func_viewInventoryReceivingReport_Detail('{shipmentno}','{Login.assignedBranch}') ", carrep.gridControl1, carrep.gridView1);
+
+                //Database.display("SELECT SequenceNumber,DateReceived,Barcode,Description,Quantity,Cost " +
+                //    "From dbo.TempInventory with(nolock) WHERE ShipmentNo='" + shipmentno + "' " +
+                //    "and Branch='" + Login.assignedBranch + "' and isProcess=0 ORDER BY Description ASC", carrep.gridControl1, carrep.gridView1);
 
                 GridView view = carrep.gridControl1.FocusedView as GridView;
                 view.SortInfo.ClearAndAddRange(new GridColumnSortInfo[] {

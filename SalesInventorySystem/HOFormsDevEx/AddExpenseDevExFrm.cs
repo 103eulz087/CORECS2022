@@ -31,6 +31,7 @@ namespace SalesInventorySystem.HOFormsDevEx
             populateBranches();
             populateBranches2();
             table = new DataTable();
+            table.Columns.Add("Particulars");
             table.Columns.Add("AccountCode");
             table.Columns.Add("AccountTitle");
             table.Columns.Add("Debit");
@@ -71,6 +72,7 @@ namespace SalesInventorySystem.HOFormsDevEx
         private void simpleButton3_Click(object sender, EventArgs e)
         {
             DataRow newRow = table.NewRow();
+            newRow["Particulars"] = "";
             newRow["Debit"] = 0;
             newRow["Credit"] = 0;
             table.Rows.Add(newRow);
@@ -86,76 +88,56 @@ namespace SalesInventorySystem.HOFormsDevEx
             if (e.Column.FieldName == "Credit")
                 e.RepositoryItem = spincredit;
         }
-
+        
         private void simpleButton4_Click(object sender, EventArgs e)
         {
+
             try
             {
-                if (txtrefno.Text == "" || txtremakrs.Text == "" || txtexpname.Text == "")
+                if (string.IsNullOrWhiteSpace(txtrefno.Text) ||
+                    string.IsNullOrWhiteSpace(txtremakrs.Text))
                 {
                     XtraMessageBox.Show("Please Input All Valid Fields");
+                    return;
                 }
-                else if (Convert.ToDouble(lbltotaldebit.Text) != Convert.ToDouble(lbltotalcredit.Text))
+
+                if (Convert.ToDecimal(lbltotaldebit.Text) != Convert.ToDecimal(lbltotalcredit.Text))
                 {
                     XtraMessageBox.Show("Debit / Credit must Equal");
+                    return;
                 }
-                else
+
+                var dt = BuildExpenseDetailsTVP();
+
+                using (SqlConnection con = Database.getConnection())
                 {
-                    for (int i = 0; i <= gridView1.RowCount - 1; i++)
+                    con.Open();
+
+                    using (SqlCommand cmd = new SqlCommand("spu_PostExpenseV2", con))
                     {
-                        acctcode = gridView1.GetRowCellValue(i, "AccountCode").ToString();
-                        accttitle = gridView1.GetRowCellValue(i, "AccountTitle").ToString();
-                        deb = gridView1.GetRowCellValue(i, "Debit").ToString();
-                        cred = gridView1.GetRowCellValue(i, "Credit").ToString();
-                        Database.ExecuteQuery("INSERT INTO TempTicketDetails VALUES ('" + txtbrcode.Text + "','" + txtexpdate.Text + "','0','" + txtticketno.Text + "','" + txtbrcode.Text + "','" + acctcode + "','" + accttitle + "','" + deb + "','" + cred + "','0')");
+                        cmd.CommandType = CommandType.StoredProcedure;
+
+                        cmd.Parameters.AddWithValue("@ExpenseDetails", dt);
+                        cmd.Parameters.AddWithValue("@BranchCode", txtbrcode.Text);
+                        cmd.Parameters.AddWithValue("@ReferenceNumber", txtrefno.Text);
+                        cmd.Parameters.AddWithValue("@InvoiceNo", txtinvoiceno.Text);
+                        cmd.Parameters.AddWithValue("@SupplierID", txtvendor.Text);
+                        cmd.Parameters.AddWithValue("@ExpenseDate", txtexpdate.DateTime);
+                        cmd.Parameters.AddWithValue("@Remarks", txtremakrs.Text);
+                        cmd.Parameters.AddWithValue("@User", Login.Fullname);
+                        //cmd.Parameters.AddWithValue("@Mode", batchmode.Checked ? "BATCH" : "SINGLE");
+
+                        cmd.ExecuteNonQuery();
                     }
-                    Database.ExecuteQuery("INSERT INTO TempTicketMaster VALUES ('" + txtbrcode.Text + "'" +
-                        ",'" + txtexpdate.Text + "'" +
-                        ",'0'" +
-                        ",'" + txtticketno.Text + "'" +
-                        ",'" + txtbrcode.Text + "'" +
-                        ",' '" +
-                        ",'" + txtremakrs.Text + "'" +
-                        ",'" + Login.Fullname + "'" +
-                        ",'" + DateTime.Now.ToShortDateString() + "'" +
-                        ",'*'" +
-                        ",' '" +
-                        ",'Approved'" +
-                        ",'*'" +
-                        ",' '" +
-                        ",'Approved'" +
-                        ",'PENDING'" +
-                        ",'" + txtremakrs.Text + "'" +
-                        ",' '" +
-                        ",'" + txtvendor.Text + "')");
-                    Database.ExecuteQuery("INSERT INTO ExpenseMaster " +
-                        "VALUES('1' "+ // TRN_SEQ_NO
-                        ",'" + txtbrcode.Text + "'" + // BranchCode
-                        ",'" + Classes.Suppliers.getSupplierID(txtvendor.Text) + "'" + // SupplierID
-                        ",'" + txtrefno.Text + "'" + // ReferenceNumber
-                        ",'" + txtinvoiceno.Text + "'" + // InvoiceNo
-                        ",'" + txtexpname.Text + "'" + // ExpenseName
-                        ",'" + txtexpdate.Text + "'" + // ExpenseDate
-                        ",'" + textBox4.Text + "'" + // Amount
-                        ",'" + txtremakrs.Text + "'" + // Remarks
-                        ",'UNPAID'" + // Status
-                        ",'" + textBox4.Text + "'" + // Balance
-                        ",0" + // AmountPaid
-                        ",0" + // EWTAmount
-                        ",0" + // DiscountAmount
-                        ",0" + // OffsetAmount
-                        ",0)" // isErrorCorrect
-                        , "Successfully Added!");
-                    postExpense();
-                    XtraMessageBox.Show("Successfully Added!");
-                    this.Close();
                 }
+
+                XtraMessageBox.Show("Successfully Added!");
+                this.Close();
             }
-            catch(SqlException ex)
+            catch (Exception ex)
             {
-                XtraMessageBox.Show(ex.Message.ToString());
+                XtraMessageBox.Show(ex.Message);
             }
-            
         }
 
         void postExpense()
@@ -309,7 +291,31 @@ namespace SalesInventorySystem.HOFormsDevEx
             Database.displaySearchlookupEdit("select SupplierID,SupplierName FROM Supplier", txtvendor, "SupplierID", "SupplierID");
         }
 
+        private DataTable BuildExpenseDetailsTVP()
+        {
+            var dt = new DataTable();
 
+            dt.Columns.Add("BranchCode", typeof(string));
+            dt.Columns.Add("AccountCode", typeof(string));
+            dt.Columns.Add("AccountTitle", typeof(string));
+            dt.Columns.Add("Debit", typeof(decimal));
+            dt.Columns.Add("Credit", typeof(decimal));
+            dt.Columns.Add("Particulars", typeof(string));
+
+            for (int i = 0; i < gridView1.RowCount; i++)
+            {
+                dt.Rows.Add(
+                    txtbrcode.Text,
+                    gridView1.GetRowCellValue(i, "AccountCode"),
+                    gridView1.GetRowCellValue(i, "AccountTitle"),
+                    Convert.ToDecimal(gridView1.GetRowCellValue(i, "Debit") ?? 0),
+                    Convert.ToDecimal(gridView1.GetRowCellValue(i, "Credit") ?? 0),
+                    gridView1.GetRowCellValue(i, "Particulars")
+                );
+            }
+
+            return dt;
+        }
 
     }
 }

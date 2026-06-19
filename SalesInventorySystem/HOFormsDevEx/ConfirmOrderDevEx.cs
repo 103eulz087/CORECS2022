@@ -53,6 +53,7 @@ namespace SalesInventorySystem.HOFormsDevEx
                 com.Parameters.AddWithValue("@parmdevno", txtdevno.Text);
                 com.Parameters.AddWithValue("@parmpono", txtpono.Text);
                 com.Parameters.AddWithValue("@preparedby", Login.Fullname);
+                com.Parameters.AddWithValue("@parmzerorated", chckboxzerorated.Checked);
                 com.Parameters.AddWithValue("@parmmachinename", GlobalVariables.computerName);
                 com.CommandType = CommandType.StoredProcedure;
                 com.CommandTimeout = 180;

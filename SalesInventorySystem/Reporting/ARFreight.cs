@@ -39,7 +39,7 @@ namespace SalesInventorySystem.Reporting
         void display()
         {
             //Database.display("SELECT * FROM ClientChargeSalesSummary WHERE DateAdded Between '"+txtdatefrom.Text+"' AND '"+txtdateto.Text+"'",gridControl1,gridView1);
-            Database.GridMasterDetail("SELECT * FROM view_ClientChargeSalesSummary WHERE DateAdded Between '" + txtdatefrom.Text + "' AND '" + txtdateto.Text + "'", "Select * FROM view_ClientChargeSalesDetails", "ClientChargeSalesSummary", "ClientChargeSalesDetails", "ChargeNo", "ChargeNo", "ClientChargeDetails", gridControl1, "");
+            //Database.GridMasterDetail("SELECT * FROM view_ClientChargeSalesSummary WHERE DateAdded Between '" + txtdatefrom.Text + "' AND '" + txtdateto.Text + "'", "Select * FROM view_ClientChargeSalesDetails", "ClientChargeSalesSummary", "ClientChargeSalesDetails", "ChargeNo", "ChargeNo", "ClientChargeDetails", gridControl1, "");
         }
 
         private void simpleButton2_Click(object sender, EventArgs e)
@@ -67,7 +67,7 @@ namespace SalesInventorySystem.Reporting
 
         private void ARFreight_Load(object sender, EventArgs e)
         {
-            Database.GridMasterDetail("SELECT * FROM view_ClientChargeSalesSummary WHERE DateAdded Between '" + DateTime.Now.ToShortDateString() + "' AND '" + DateTime.Now.ToShortDateString() + "'", "Select * FROM view_ClientChargeSalesDetails", "ClientChargeSalesSummary", "ClientChargeSalesDetails", "ChargeNo", "ChargeNo", "ClientChargeDetails", gridControl1, "");
+            //Database.GridMasterDetail("SELECT * FROM view_ClientChargeSalesSummary WHERE DateAdded Between '" + DateTime.Now.ToShortDateString() + "' AND '" + DateTime.Now.ToShortDateString() + "'", "Select * FROM view_ClientChargeSalesDetails", "ClientChargeSalesSummary", "ClientChargeSalesDetails", "ChargeNo", "ChargeNo", "ClientChargeDetails", gridControl1, "");
             Classes.DevXGridViewSettings.ShowFooterTotal(gridView1, "TotalAmount");
             Classes.DevXGridViewSettings.ShowFooterTotal(gridView1, "Balance");
             Classes.DevXGridViewSettings.ShowFooterTotal(gridView1, "AmountPaid");

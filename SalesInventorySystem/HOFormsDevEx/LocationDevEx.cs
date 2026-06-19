@@ -21,6 +21,7 @@ namespace SalesInventorySystem.HOFormsDevEx
 
         private void LocationDevEx_Load(object sender, EventArgs e)
         {
+             
             disablefields();
             display();
             btnadd.Enabled = false;

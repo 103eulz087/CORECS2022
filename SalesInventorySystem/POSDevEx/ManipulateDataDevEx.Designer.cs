@@ -33,6 +33,9 @@
             this.gridControl2 = new DevExpress.XtraGrid.GridControl();
             this.gridView3 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.groupControl3 = new DevExpress.XtraEditors.GroupControl();
+            this.simpleButton2 = new DevExpress.XtraEditors.SimpleButton();
+            this.txtClosestDiff = new DevExpress.XtraEditors.TextEdit();
+            this.txtClosestAccumulated = new DevExpress.XtraEditors.TextEdit();
             this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
             this.labelControl5 = new DevExpress.XtraEditors.LabelControl();
             this.textEdit1 = new DevExpress.XtraEditors.TextEdit();
@@ -62,6 +65,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridView3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl3)).BeginInit();
             this.groupControl3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtClosestDiff.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtClosestAccumulated.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit1.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtcalcres.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtcttrto.Properties)).BeginInit();
@@ -77,21 +82,21 @@
             // 
             this.groupControl4.Controls.Add(this.gridControl2);
             this.groupControl4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupControl4.Location = new System.Drawing.Point(0, 303);
-            this.groupControl4.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.groupControl4.Location = new System.Drawing.Point(0, 194);
+            this.groupControl4.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.groupControl4.Name = "groupControl4";
-            this.groupControl4.Size = new System.Drawing.Size(2724, 1030);
+            this.groupControl4.Size = new System.Drawing.Size(1589, 659);
             this.groupControl4.TabIndex = 3;
             // 
             // gridControl2
             // 
             this.gridControl2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridControl2.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
-            this.gridControl2.Location = new System.Drawing.Point(3, 45);
+            this.gridControl2.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.gridControl2.Location = new System.Drawing.Point(2, 28);
             this.gridControl2.MainView = this.gridView3;
-            this.gridControl2.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.gridControl2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.gridControl2.Name = "gridControl2";
-            this.gridControl2.Size = new System.Drawing.Size(2718, 982);
+            this.gridControl2.Size = new System.Drawing.Size(1585, 629);
             this.gridControl2.TabIndex = 1;
             this.gridControl2.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView3});
@@ -104,8 +109,6 @@
             this.gridView3.Appearance.HeaderPanel.Options.UseFont = true;
             this.gridView3.Appearance.Row.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gridView3.Appearance.Row.Options.UseFont = true;
-            this.gridView3.DetailHeight = 547;
-            this.gridView3.FixedLineWidth = 3;
             this.gridView3.GridControl = this.gridControl2;
             this.gridView3.Name = "gridView3";
             this.gridView3.OptionsView.ColumnAutoWidth = false;
@@ -119,6 +122,9 @@
             // 
             this.groupControl3.Appearance.Font = new System.Drawing.Font("Arial", 9.25F);
             this.groupControl3.Appearance.Options.UseFont = true;
+            this.groupControl3.Controls.Add(this.simpleButton2);
+            this.groupControl3.Controls.Add(this.txtClosestDiff);
+            this.groupControl3.Controls.Add(this.txtClosestAccumulated);
             this.groupControl3.Controls.Add(this.simpleButton1);
             this.groupControl3.Controls.Add(this.labelControl5);
             this.groupControl3.Controls.Add(this.textEdit1);
@@ -142,19 +148,54 @@
             this.groupControl3.Controls.Add(this.labelControl10);
             this.groupControl3.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupControl3.Location = new System.Drawing.Point(0, 0);
-            this.groupControl3.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.groupControl3.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.groupControl3.Name = "groupControl3";
-            this.groupControl3.Size = new System.Drawing.Size(2724, 303);
+            this.groupControl3.Size = new System.Drawing.Size(1589, 194);
             this.groupControl3.TabIndex = 4;
+            // 
+            // simpleButton2
+            // 
+            this.simpleButton2.Appearance.Font = new System.Drawing.Font("Arial", 10.25F);
+            this.simpleButton2.Appearance.Options.UseFont = true;
+            this.simpleButton2.Location = new System.Drawing.Point(559, 160);
+            this.simpleButton2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.simpleButton2.Name = "simpleButton2";
+            this.simpleButton2.Size = new System.Drawing.Size(92, 22);
+            this.simpleButton2.TabIndex = 50;
+            this.simpleButton2.Text = "Test";
+            this.simpleButton2.Visible = false;
+            this.simpleButton2.Click += new System.EventHandler(this.simpleButton2_Click);
+            // 
+            // txtClosestDiff
+            // 
+            this.txtClosestDiff.EditValue = "0";
+            this.txtClosestDiff.Location = new System.Drawing.Point(805, 109);
+            this.txtClosestDiff.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtClosestDiff.Name = "txtClosestDiff";
+            this.txtClosestDiff.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9.75F);
+            this.txtClosestDiff.Properties.Appearance.Options.UseFont = true;
+            this.txtClosestDiff.Size = new System.Drawing.Size(117, 28);
+            this.txtClosestDiff.TabIndex = 49;
+            // 
+            // txtClosestAccumulated
+            // 
+            this.txtClosestAccumulated.EditValue = "0";
+            this.txtClosestAccumulated.Location = new System.Drawing.Point(682, 110);
+            this.txtClosestAccumulated.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtClosestAccumulated.Name = "txtClosestAccumulated";
+            this.txtClosestAccumulated.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9.75F);
+            this.txtClosestAccumulated.Properties.Appearance.Options.UseFont = true;
+            this.txtClosestAccumulated.Size = new System.Drawing.Size(117, 28);
+            this.txtClosestAccumulated.TabIndex = 48;
             // 
             // simpleButton1
             // 
             this.simpleButton1.Appearance.Font = new System.Drawing.Font("Arial", 10.25F);
             this.simpleButton1.Appearance.Options.UseFont = true;
-            this.simpleButton1.Location = new System.Drawing.Point(620, 179);
-            this.simpleButton1.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.simpleButton1.Location = new System.Drawing.Point(362, 115);
+            this.simpleButton1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.simpleButton1.Name = "simpleButton1";
-            this.simpleButton1.Size = new System.Drawing.Size(158, 104);
+            this.simpleButton1.Size = new System.Drawing.Size(92, 67);
             this.simpleButton1.TabIndex = 47;
             this.simpleButton1.Text = "Reset";
             this.simpleButton1.Click += new System.EventHandler(this.simpleButton1_Click);
@@ -163,54 +204,55 @@
             // 
             this.labelControl5.Appearance.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelControl5.Appearance.Options.UseFont = true;
-            this.labelControl5.Location = new System.Drawing.Point(906, 177);
-            this.labelControl5.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.labelControl5.Location = new System.Drawing.Point(528, 113);
+            this.labelControl5.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.labelControl5.Name = "labelControl5";
-            this.labelControl5.Size = new System.Drawing.Size(39, 36);
+            this.labelControl5.Size = new System.Drawing.Size(23, 21);
             this.labelControl5.TabIndex = 46;
             this.labelControl5.Text = "Hit:";
             // 
             // textEdit1
             // 
             this.textEdit1.EditValue = "0";
-            this.textEdit1.Location = new System.Drawing.Point(958, 172);
-            this.textEdit1.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.textEdit1.Location = new System.Drawing.Point(559, 110);
+            this.textEdit1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.textEdit1.Name = "textEdit1";
             this.textEdit1.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9.75F);
             this.textEdit1.Properties.Appearance.Options.UseFont = true;
-            this.textEdit1.Size = new System.Drawing.Size(200, 50);
+            this.textEdit1.Size = new System.Drawing.Size(117, 28);
             this.textEdit1.TabIndex = 45;
+            this.textEdit1.EditValueChanged += new System.EventHandler(this.textEdit1_EditValueChanged);
             // 
             // labelControl4
             // 
             this.labelControl4.Appearance.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelControl4.Appearance.Options.UseFont = true;
-            this.labelControl4.Location = new System.Drawing.Point(78, 246);
-            this.labelControl4.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.labelControl4.Location = new System.Drawing.Point(45, 157);
+            this.labelControl4.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.labelControl4.Name = "labelControl4";
-            this.labelControl4.Size = new System.Drawing.Size(77, 36);
+            this.labelControl4.Size = new System.Drawing.Size(46, 21);
             this.labelControl4.TabIndex = 44;
             this.labelControl4.Text = "Result:";
             // 
             // txtcalcres
             // 
             this.txtcalcres.EditValue = "0";
-            this.txtcalcres.Location = new System.Drawing.Point(168, 240);
-            this.txtcalcres.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.txtcalcres.Location = new System.Drawing.Point(98, 154);
+            this.txtcalcres.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtcalcres.Name = "txtcalcres";
             this.txtcalcres.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9.75F);
             this.txtcalcres.Properties.Appearance.Options.UseFont = true;
-            this.txtcalcres.Size = new System.Drawing.Size(274, 50);
+            this.txtcalcres.Size = new System.Drawing.Size(160, 28);
             this.txtcalcres.TabIndex = 43;
             // 
             // btncalc
             // 
             this.btncalc.Appearance.Font = new System.Drawing.Font("Arial", 10.25F);
             this.btncalc.Appearance.Options.UseFont = true;
-            this.btncalc.Location = new System.Drawing.Point(452, 179);
-            this.btncalc.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.btncalc.Location = new System.Drawing.Point(264, 115);
+            this.btncalc.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btncalc.Name = "btncalc";
-            this.btncalc.Size = new System.Drawing.Size(158, 104);
+            this.btncalc.Size = new System.Drawing.Size(92, 67);
             this.btncalc.TabIndex = 42;
             this.btncalc.Text = "Calculate";
             this.btncalc.Click += new System.EventHandler(this.btncalc_Click);
@@ -218,108 +260,108 @@
             // txtcttrto
             // 
             this.txtcttrto.EditValue = "0";
-            this.txtcttrto.Location = new System.Drawing.Point(332, 185);
-            this.txtcttrto.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.txtcttrto.Location = new System.Drawing.Point(194, 118);
+            this.txtcttrto.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtcttrto.Name = "txtcttrto";
             this.txtcttrto.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9.75F);
             this.txtcttrto.Properties.Appearance.Options.UseFont = true;
-            this.txtcttrto.Size = new System.Drawing.Size(110, 50);
+            this.txtcttrto.Size = new System.Drawing.Size(64, 28);
             this.txtcttrto.TabIndex = 41;
             // 
             // labelControl3
             // 
             this.labelControl3.Appearance.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelControl3.Appearance.Options.UseFont = true;
-            this.labelControl3.Location = new System.Drawing.Point(288, 189);
-            this.labelControl3.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.labelControl3.Location = new System.Drawing.Point(168, 121);
+            this.labelControl3.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.labelControl3.Name = "labelControl3";
-            this.labelControl3.Size = new System.Drawing.Size(35, 36);
+            this.labelControl3.Size = new System.Drawing.Size(20, 21);
             this.labelControl3.TabIndex = 40;
             this.labelControl3.Text = "To:";
             // 
             // txtcttrfrom
             // 
             this.txtcttrfrom.EditValue = "0";
-            this.txtcttrfrom.Location = new System.Drawing.Point(168, 185);
-            this.txtcttrfrom.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.txtcttrfrom.Location = new System.Drawing.Point(98, 118);
+            this.txtcttrfrom.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtcttrfrom.Name = "txtcttrfrom";
             this.txtcttrfrom.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9.75F);
             this.txtcttrfrom.Properties.Appearance.Options.UseFont = true;
-            this.txtcttrfrom.Size = new System.Drawing.Size(110, 50);
+            this.txtcttrfrom.Size = new System.Drawing.Size(64, 28);
             this.txtcttrfrom.TabIndex = 39;
             // 
             // labelControl2
             // 
             this.labelControl2.Appearance.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelControl2.Appearance.Options.UseFont = true;
-            this.labelControl2.Location = new System.Drawing.Point(46, 189);
-            this.labelControl2.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.labelControl2.Location = new System.Drawing.Point(27, 121);
+            this.labelControl2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.labelControl2.Name = "labelControl2";
-            this.labelControl2.Size = new System.Drawing.Size(106, 36);
+            this.labelControl2.Size = new System.Drawing.Size(65, 21);
             this.labelControl2.TabIndex = 38;
             this.labelControl2.Text = "Ctr From:";
             // 
             // progressBar1
             // 
-            this.progressBar1.Location = new System.Drawing.Point(1170, 61);
-            this.progressBar1.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.progressBar1.Location = new System.Drawing.Point(682, 39);
+            this.progressBar1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(488, 97);
+            this.progressBar1.Size = new System.Drawing.Size(285, 62);
             this.progressBar1.TabIndex = 37;
             // 
             // txtgoal
             // 
             this.txtgoal.EditValue = "0";
-            this.txtgoal.Location = new System.Drawing.Point(958, 115);
-            this.txtgoal.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.txtgoal.Location = new System.Drawing.Point(559, 74);
+            this.txtgoal.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtgoal.Name = "txtgoal";
             this.txtgoal.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9.75F);
             this.txtgoal.Properties.Appearance.Options.UseFont = true;
-            this.txtgoal.Size = new System.Drawing.Size(200, 50);
+            this.txtgoal.Size = new System.Drawing.Size(117, 28);
             this.txtgoal.TabIndex = 28;
             // 
             // labelControl1
             // 
             this.labelControl1.Appearance.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelControl1.Appearance.Options.UseFont = true;
-            this.labelControl1.Location = new System.Drawing.Point(886, 123);
-            this.labelControl1.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.labelControl1.Location = new System.Drawing.Point(517, 79);
+            this.labelControl1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.labelControl1.Name = "labelControl1";
-            this.labelControl1.Size = new System.Drawing.Size(58, 36);
+            this.labelControl1.Size = new System.Drawing.Size(35, 21);
             this.labelControl1.TabIndex = 27;
             this.labelControl1.Text = "Goal:";
             // 
             // txtnewtotalamount
             // 
             this.txtnewtotalamount.EditValue = "0";
-            this.txtnewtotalamount.Location = new System.Drawing.Point(958, 64);
-            this.txtnewtotalamount.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.txtnewtotalamount.Location = new System.Drawing.Point(559, 41);
+            this.txtnewtotalamount.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtnewtotalamount.Name = "txtnewtotalamount";
             this.txtnewtotalamount.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9.75F);
             this.txtnewtotalamount.Properties.Appearance.Options.UseFont = true;
-            this.txtnewtotalamount.Size = new System.Drawing.Size(200, 50);
+            this.txtnewtotalamount.Size = new System.Drawing.Size(117, 28);
             this.txtnewtotalamount.TabIndex = 26;
             this.txtnewtotalamount.Visible = false;
             // 
             // txtvariance
             // 
             this.txtvariance.EditValue = "0";
-            this.txtvariance.Location = new System.Drawing.Point(216, 115);
-            this.txtvariance.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.txtvariance.Location = new System.Drawing.Point(126, 74);
+            this.txtvariance.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtvariance.Name = "txtvariance";
             this.txtvariance.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9.75F);
             this.txtvariance.Properties.Appearance.Options.UseFont = true;
-            this.txtvariance.Size = new System.Drawing.Size(200, 50);
+            this.txtvariance.Size = new System.Drawing.Size(117, 28);
             this.txtvariance.TabIndex = 25;
             // 
             // labelControl13
             // 
             this.labelControl13.Appearance.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelControl13.Appearance.Options.UseFont = true;
-            this.labelControl13.Location = new System.Drawing.Point(98, 122);
-            this.labelControl13.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.labelControl13.Location = new System.Drawing.Point(57, 78);
+            this.labelControl13.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.labelControl13.Name = "labelControl13";
-            this.labelControl13.Size = new System.Drawing.Size(104, 36);
+            this.labelControl13.Size = new System.Drawing.Size(63, 21);
             this.labelControl13.TabIndex = 24;
             this.labelControl13.Text = "Variance:";
             // 
@@ -327,10 +369,10 @@
             // 
             this.btnanalyze.Appearance.Font = new System.Drawing.Font("Arial", 10.25F);
             this.btnanalyze.Appearance.Options.UseFont = true;
-            this.btnanalyze.Location = new System.Drawing.Point(428, 114);
-            this.btnanalyze.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.btnanalyze.Location = new System.Drawing.Point(250, 73);
+            this.btnanalyze.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnanalyze.Name = "btnanalyze";
-            this.btnanalyze.Size = new System.Drawing.Size(446, 52);
+            this.btnanalyze.Size = new System.Drawing.Size(260, 33);
             this.btnanalyze.TabIndex = 21;
             this.btnanalyze.Text = "Update Changes";
             this.btnanalyze.Click += new System.EventHandler(this.btnanalyze_Click);
@@ -338,33 +380,33 @@
             // txttargetsales
             // 
             this.txttargetsales.EditValue = "0";
-            this.txttargetsales.Location = new System.Drawing.Point(674, 64);
-            this.txttargetsales.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.txttargetsales.Location = new System.Drawing.Point(393, 41);
+            this.txttargetsales.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txttargetsales.Name = "txttargetsales";
             this.txttargetsales.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9.75F);
             this.txttargetsales.Properties.Appearance.Options.UseFont = true;
-            this.txttargetsales.Size = new System.Drawing.Size(200, 50);
+            this.txttargetsales.Size = new System.Drawing.Size(117, 28);
             this.txttargetsales.TabIndex = 20;
             // 
             // txtrefundamount
             // 
             this.txtrefundamount.EditValue = "0";
-            this.txtrefundamount.Location = new System.Drawing.Point(216, 64);
-            this.txtrefundamount.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.txtrefundamount.Location = new System.Drawing.Point(126, 41);
+            this.txtrefundamount.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtrefundamount.Name = "txtrefundamount";
             this.txtrefundamount.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9.75F);
             this.txtrefundamount.Properties.Appearance.Options.UseFont = true;
-            this.txtrefundamount.Size = new System.Drawing.Size(200, 50);
+            this.txtrefundamount.Size = new System.Drawing.Size(117, 28);
             this.txtrefundamount.TabIndex = 19;
             // 
             // labelControl11
             // 
             this.labelControl11.Appearance.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelControl11.Appearance.Options.UseFont = true;
-            this.labelControl11.Location = new System.Drawing.Point(428, 68);
-            this.labelControl11.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.labelControl11.Location = new System.Drawing.Point(250, 44);
+            this.labelControl11.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.labelControl11.Name = "labelControl11";
-            this.labelControl11.Size = new System.Drawing.Size(230, 36);
+            this.labelControl11.Size = new System.Drawing.Size(137, 21);
             this.labelControl11.TabIndex = 15;
             this.labelControl11.Text = "Target Z-Reset Sale:";
             // 
@@ -372,10 +414,10 @@
             // 
             this.labelControl10.Appearance.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelControl10.Appearance.Options.UseFont = true;
-            this.labelControl10.Location = new System.Drawing.Point(24, 68);
-            this.labelControl10.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.labelControl10.Location = new System.Drawing.Point(14, 44);
+            this.labelControl10.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.labelControl10.Name = "labelControl10";
-            this.labelControl10.Size = new System.Drawing.Size(189, 36);
+            this.labelControl10.Size = new System.Drawing.Size(113, 21);
             this.labelControl10.TabIndex = 14;
             this.labelControl10.Text = "Refund Amount:";
             // 
@@ -392,12 +434,12 @@
             // 
             // ManipulateDataDevEx
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(2724, 1333);
+            this.ClientSize = new System.Drawing.Size(1589, 853);
             this.Controls.Add(this.groupControl4);
             this.Controls.Add(this.groupControl3);
-            this.Margin = new System.Windows.Forms.Padding(6, 7, 6, 7);
+            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "ManipulateDataDevEx";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ManipulateDataDevEx";
@@ -410,6 +452,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.groupControl3)).EndInit();
             this.groupControl3.ResumeLayout(false);
             this.groupControl3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtClosestDiff.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtClosestAccumulated.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit1.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtcalcres.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtcttrto.Properties)).EndInit();
@@ -452,5 +496,8 @@
         private DevExpress.XtraEditors.LabelControl labelControl5;
         public DevExpress.XtraEditors.TextEdit textEdit1;
         private DevExpress.XtraEditors.SimpleButton simpleButton1;
+        public DevExpress.XtraEditors.TextEdit txtClosestAccumulated;
+        public DevExpress.XtraEditors.TextEdit txtClosestDiff;
+        private DevExpress.XtraEditors.SimpleButton simpleButton2;
     }
 }

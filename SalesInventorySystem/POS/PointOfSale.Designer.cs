@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
             this.lblmovdiscount = new DevExpress.XtraEditors.LabelControl();
             this.labelControl26 = new DevExpress.XtraEditors.LabelControl();
@@ -177,7 +177,7 @@
             this.panelControl1.Controls.Add(this.txtOrderNo);
             this.panelControl1.Controls.Add(this.labelControl3);
             this.panelControl1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelControl1.Location = new System.Drawing.Point(0, 587);
+            this.panelControl1.Location = new System.Drawing.Point(0, 646);
             this.panelControl1.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
             this.panelControl1.Name = "panelControl1";
             this.panelControl1.Size = new System.Drawing.Size(1133, 118);
@@ -867,7 +867,7 @@
             this.panelControl2.Location = new System.Drawing.Point(859, 0);
             this.panelControl2.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
             this.panelControl2.Name = "panelControl2";
-            this.panelControl2.Size = new System.Drawing.Size(274, 587);
+            this.panelControl2.Size = new System.Drawing.Size(274, 646);
             this.panelControl2.TabIndex = 1;
             // 
             // chckZeroRated
@@ -1267,8 +1267,8 @@
             this.MydataGridView1.AllowUserToAddRows = false;
             this.MydataGridView1.AllowUserToDeleteRows = false;
             this.MydataGridView1.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.MydataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.MydataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
             this.MydataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.MydataGridView1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.MydataGridView1.BackgroundColor = System.Drawing.Color.White;
@@ -1284,13 +1284,13 @@
             this.MydataGridView1.ReadOnly = true;
             this.MydataGridView1.RowHeadersVisible = false;
             this.MydataGridView1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.MydataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.MydataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle4;
             this.MydataGridView1.RowTemplate.DefaultCellStyle.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.MydataGridView1.RowTemplate.Height = 30;
             this.MydataGridView1.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.MydataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.MydataGridView1.Size = new System.Drawing.Size(859, 419);
+            this.MydataGridView1.Size = new System.Drawing.Size(859, 478);
             this.MydataGridView1.TabIndex = 4;
             // 
             // panelControl6
@@ -1372,7 +1372,7 @@
             // 
             this.panel2.Controls.Add(this.panelControl6);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel2.Location = new System.Drawing.Point(0, 535);
+            this.panel2.Location = new System.Drawing.Point(0, 594);
             this.panel2.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(859, 52);
@@ -1385,14 +1385,14 @@
             this.panel3.Location = new System.Drawing.Point(0, 116);
             this.panel3.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(859, 419);
+            this.panel3.Size = new System.Drawing.Size(859, 478);
             this.panel3.TabIndex = 11;
             // 
             // PointOfSale
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1133, 705);
+            this.ClientSize = new System.Drawing.Size(1133, 764);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panelControl4);

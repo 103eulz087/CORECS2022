@@ -967,13 +967,13 @@
             this.contextMenuStripForDelivery.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.printDeliveryReceiptToolStripMenuItem});
             this.contextMenuStripForDelivery.Name = "contextMenuStrip2";
-            this.contextMenuStripForDelivery.Size = new System.Drawing.Size(215, 58);
+            this.contextMenuStripForDelivery.Size = new System.Drawing.Size(141, 30);
             // 
             // printDeliveryReceiptToolStripMenuItem
             // 
             this.printDeliveryReceiptToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("printDeliveryReceiptToolStripMenuItem.Image")));
             this.printDeliveryReceiptToolStripMenuItem.Name = "printDeliveryReceiptToolStripMenuItem";
-            this.printDeliveryReceiptToolStripMenuItem.Size = new System.Drawing.Size(214, 26);
+            this.printDeliveryReceiptToolStripMenuItem.Size = new System.Drawing.Size(140, 26);
             this.printDeliveryReceiptToolStripMenuItem.Text = "Print STS";
             this.printDeliveryReceiptToolStripMenuItem.Click += new System.EventHandler(this.printDeliveryReceiptToolStripMenuItem_Click);
             // 

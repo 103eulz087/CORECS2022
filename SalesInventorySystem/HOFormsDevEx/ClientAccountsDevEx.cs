@@ -142,7 +142,7 @@ namespace SalesInventorySystem.HOFormsDevEx
 
         private void button1_Click(object sender, EventArgs e)
         {
-            double getTotalPayments = 0.0, getTotalCredit = 0.0;
+            double getTotalCredit = 0.0;
             //for (int i = 0; i <= gridView2.RowCount - 1; i++)
             //{
             //    if (gridView2.GetRowCellValue(i, "TransCode").ToString() == "PYMT")
@@ -220,7 +220,7 @@ namespace SalesInventorySystem.HOFormsDevEx
 
         private void simpleButton2_Click(object sender, EventArgs e)
         {
-            double getTotalPayments = 0.0, getTotalCredit = 0.0;
+            double getTotalCredit = 0.0;
             //for (int i = 0; i <= gridView2.RowCount - 1; i++)
             //{
             //    if (gridView2.GetRowCellValue(i, "TransCode").ToString() == "PYMT")

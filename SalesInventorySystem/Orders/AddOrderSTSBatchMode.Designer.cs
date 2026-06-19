@@ -214,7 +214,6 @@
             this.txtgroup.Name = "txtgroup";
             this.txtgroup.Size = new System.Drawing.Size(147, 27);
             this.txtgroup.TabIndex = 76;
-            this.txtgroup.Visible = false;
             // 
             // labelControl12
             // 
@@ -225,7 +224,6 @@
             this.labelControl12.Size = new System.Drawing.Size(50, 18);
             this.labelControl12.TabIndex = 75;
             this.labelControl12.Text = "Group:";
-            this.labelControl12.Visible = false;
             // 
             // radothers
             // 
@@ -236,7 +234,6 @@
             this.radothers.TabIndex = 28;
             this.radothers.Text = "Other Branch";
             this.radothers.UseVisualStyleBackColor = true;
-            this.radothers.Visible = false;
             this.radothers.CheckedChanged += new System.EventHandler(this.radothers_CheckedChanged);
             // 
             // panelControl3
@@ -247,7 +244,6 @@
             this.panelControl3.Name = "panelControl3";
             this.panelControl3.Size = new System.Drawing.Size(412, 53);
             this.panelControl3.TabIndex = 74;
-            this.panelControl3.Visible = false;
             // 
             // txtbranch
             // 
@@ -261,6 +257,7 @@
             this.txtbranch.Properties.PopupView = this.searchLookUpEdit1View;
             this.txtbranch.Size = new System.Drawing.Size(260, 24);
             this.txtbranch.TabIndex = 28;
+            this.txtbranch.EditValueChanged += new System.EventHandler(this.txtbranch_EditValueChanged);
             // 
             // searchLookUpEdit1View
             // 
@@ -299,7 +296,6 @@
             this.radho.TabStop = true;
             this.radho.Text = "Head Office";
             this.radho.UseVisualStyleBackColor = true;
-            this.radho.Visible = false;
             this.radho.CheckedChanged += new System.EventHandler(this.radho_CheckedChanged);
             // 
             // labelControl5
@@ -311,7 +307,6 @@
             this.labelControl5.Size = new System.Drawing.Size(88, 18);
             this.labelControl5.TabIndex = 26;
             this.labelControl5.Text = "Request To:";
-            this.labelControl5.Visible = false;
             // 
             // labelControl3
             // 
