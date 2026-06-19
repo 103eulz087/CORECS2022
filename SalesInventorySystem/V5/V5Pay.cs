@@ -7,7 +7,7 @@ using System.Text;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Microsoft.Web.WebView2.Core;
+//using Microsoft.Web.WebView2.Core;
 using DevExpress.XtraEditors;
 using Newtonsoft.Json;
 using System.Net.Http;
@@ -30,113 +30,113 @@ namespace SalesInventorySystem.V5
             InitializeComponent();
             //#InitializeWebView();
         }
-        async public Task InitializeWebView()
-        {
-            await webView21.EnsureCoreWebView2Async(null);
-            webView21.WebMessageReceived += WebView_WebMessageReceived;
-            webView21.NavigationCompleted += WebView_NavigationCompleted;
-            //
-            /*
-                var referenceId = "TndPY2NoMndtd1c2WWZPU2";
-                var amount = 100;
-               var form = new V5Pay();
-               await form.InitializeWebView();
-               await form.CreatePayment(referenceId, amount);
-               await form.showDailog();
-               form.receipt
-            */
-        }
-        async public Task CreatePayment()
-        {
-            var responseText = await GetResponse(this.referenceId, this.amount);
-            if (responseText != null)
-            {
-                var responseData = JsonConvert.DeserializeObject<ResponseData>(responseText);
-                if (responseData != null)
-                {
-                    if (responseData.Status == "ok")
-                    {
-                        await webView21.CoreWebView2.AddScriptToExecuteOnDocumentCreatedAsync(responseData.Script);
-                        webView21.CoreWebView2.Navigate(responseData.RedirectUrl);
-                        return;
-                    }
-                    //responseData.Status = "error";
-                }
-            }
-            this.FailPayment("failed api response");
-            //failed/error process for api not response either no internet-connection or api-no-response
-        }
-        private void WebView_WebMessageReceived(object sender, CoreWebView2WebMessageReceivedEventArgs e)
-        {
-            string data = e.TryGetWebMessageAsString();
-            var responseData = JsonConvert.DeserializeObject<V5ResponseData>(data);
-            if (responseData != null)
-            {
-                this.receipt = responseData;
-                //https://api-doc.v5pay.com/#/en-us/common/appendix?id=payin-order-status
-                if (responseData.OrderStatus == 2) 
-                {
-                    //
-                    //#MessageBox.Show($"Data from Web: {data}");
-                    // POS.SucessPayment(reference, amount);
-                    this.Hide();
-                    parent.SucessPayment(this);
-                    this.Dispose();
-                    // successfull process include process save to database
-                    //--code here
-                    // this.hide();
-                    // perform print-receipt
-                    return;
-                }
-            }
-            this.FailPayment("failed payment");
-            //failed message
-            //#MessageBox.Show($"Data from Web: {data}");
-        }
-        private void WebView_NavigationCompleted(object sender, CoreWebView2NavigationCompletedEventArgs e)
-        {
-            if (e.IsSuccess)
-            {
-                // The page loaded successfully!
-            }
-            else
-            {
-                var errorStatus = e.WebErrorStatus;
-                if (e.WebErrorStatus == CoreWebView2WebErrorStatus.HostNameNotResolved | e.WebErrorStatus == CoreWebView2WebErrorStatus.Disconnected)
-                {
-                    //failed message
-                    this.FailPayment("failed internet connection");
-                }
-            }
-        }
-        private void FailPayment(string message)
-        {
-            this.Hide();
-            this.failed = true;
-            parent.FailPayment(this, message);
-            this.Dispose();
-        }
-        public async Task<string> GetResponse(string referenceId, double amount)
-        {
-            string result = null;
-            try
-            {
-                using (var client = new HttpClient())
-                {
-                    var url = $"https://x-payment.uat-ph.com/app/v1/payment/create?referenceId={referenceId}&amount={amount}";
-                    var response = await client.GetAsync(url);
-                    result = await response.Content.ReadAsStringAsync();
-                }
-            }
-            catch (HttpRequestException e)
-            {
-                //# Console.WriteLine($"Network error: {e.Message}");
-            }
-            catch (TaskCanceledException e)
-            {
-                //# Console.WriteLine("The request timed out.");
-            }
-            return result;
+        //async public Task InitializeWebView()
+        //{
+        //    await webView21.EnsureCoreWebView2Async(null);
+        //    webView21.WebMessageReceived += WebView_WebMessageReceived;
+        //    webView21.NavigationCompleted += WebView_NavigationCompleted;
+        //    //
+        //    /*
+        //        var referenceId = "TndPY2NoMndtd1c2WWZPU2";
+        //        var amount = 100;
+        //       var form = new V5Pay();
+        //       await form.InitializeWebView();
+        //       await form.CreatePayment(referenceId, amount);
+        //       await form.showDailog();
+        //       form.receipt
+        //    */
+        //}
+        //async public Task CreatePayment()
+        //{
+        //    var responseText = await GetResponse(this.referenceId, this.amount);
+        //    if (responseText != null)
+        //    {
+        //        var responseData = JsonConvert.DeserializeObject<ResponseData>(responseText);
+        //        if (responseData != null)
+        //        {
+        //            if (responseData.Status == "ok")
+        //            {
+        //                await webView21.CoreWebView2.AddScriptToExecuteOnDocumentCreatedAsync(responseData.Script);
+        //                webView21.CoreWebView2.Navigate(responseData.RedirectUrl);
+        //                return;
+        //            }
+        //            //responseData.Status = "error";
+        //        }
+        //    }
+        //    this.FailPayment("failed api response");
+        //    //failed/error process for api not response either no internet-connection or api-no-response
+        //}
+        //private void WebView_WebMessageReceived(object sender, CoreWebView2WebMessageReceivedEventArgs e)
+        //{
+        //    string data = e.TryGetWebMessageAsString();
+        //    var responseData = JsonConvert.DeserializeObject<V5ResponseData>(data);
+        //    if (responseData != null)
+        //    {
+        //        this.receipt = responseData;
+        //        //https://api-doc.v5pay.com/#/en-us/common/appendix?id=payin-order-status
+        //        if (responseData.OrderStatus == 2) 
+        //        {
+        //            //
+        //            //#MessageBox.Show($"Data from Web: {data}");
+        //            // POS.SucessPayment(reference, amount);
+        //            this.Hide();
+        //            parent.SucessPayment(this);
+        //            this.Dispose();
+        //            // successfull process include process save to database
+        //            //--code here
+        //            // this.hide();
+        //            // perform print-receipt
+        //            return;
+        //        }
+        //    }
+        //    this.FailPayment("failed payment");
+        //    //failed message
+        //    //#MessageBox.Show($"Data from Web: {data}");
+        //}
+        //private void WebView_NavigationCompleted(object sender, CoreWebView2NavigationCompletedEventArgs e)
+        //{
+        //    if (e.IsSuccess)
+        //    {
+        //        // The page loaded successfully!
+        //    }
+        //    else
+        //    {
+        //        var errorStatus = e.WebErrorStatus;
+        //        if (e.WebErrorStatus == CoreWebView2WebErrorStatus.HostNameNotResolved | e.WebErrorStatus == CoreWebView2WebErrorStatus.Disconnected)
+        //        {
+        //            //failed message
+        //            this.FailPayment("failed internet connection");
+        //        }
+        //    }
+        //}
+        //private void FailPayment(string message)
+        //{
+        //    this.Hide();
+        //    this.failed = true;
+        //    parent.FailPayment(this, message);
+        //    this.Dispose();
+        //}
+        //public async Task<string> GetResponse(string referenceId, double amount)
+        //{
+        //    string result = null;
+        //    try
+        //    {
+        //        using (var client = new HttpClient())
+        //        {
+        //            var url = $"https://x-payment.uat-ph.com/app/v1/payment/create?referenceId={referenceId}&amount={amount}";
+        //            var response = await client.GetAsync(url);
+        //            result = await response.Content.ReadAsStringAsync();
+        //        }
+        //    }
+        //    catch (HttpRequestException e)
+        //    {
+        //        //# Console.WriteLine($"Network error: {e.Message}");
+        //    }
+        //    catch (TaskCanceledException e)
+        //    {
+        //        //# Console.WriteLine("The request timed out.");
+        //    }
+        //    return result;
         }
         public class ResponseData
         {
@@ -215,5 +215,5 @@ namespace SalesInventorySystem.V5
     "sysCountryCode": "PH"
 }
     */
-    }
+    //}
 }

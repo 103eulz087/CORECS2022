@@ -197,7 +197,7 @@ namespace SalesInventorySystem
                     if(radioButton1.Checked==true)
                     {
                         actualqty = gridView3.GetRowCellValue(i, "ActualQty").ToString();
-                        percentagePerPart = Convert.ToDouble(actualqty) / Convert.ToDouble(txttotalavailableqty.Text);/// Convert.ToDouble(sourceAvailable);
+                        percentagePerPart = Convert.ToDouble(actualqty) / Convert.ToDouble(txttotalavailableqty.Text); /// Convert.ToDouble(sourceAvailable);
                         sourceAmountPerPart = percentagePerPart * sourceTotalAmount;
                         totalActualQuantity += Convert.ToDouble(gridView3.GetRowCellValue(i, "ActualQty").ToString());
                         newcostkg = sourceAmountPerPart / Convert.ToDouble(actualqty);

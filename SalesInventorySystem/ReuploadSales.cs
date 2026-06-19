@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using DevExpress.XtraEditors;
 using System.Threading;
 using System.Data.SqlClient;
+  
 
 namespace SalesInventorySystem
 {
@@ -148,5 +149,9 @@ namespace SalesInventorySystem
             //    com.ExecuteNonQuery();
             //con.Close();
         }
+
+
+ 
     }
 }
+
