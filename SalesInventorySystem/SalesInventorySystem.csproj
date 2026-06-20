@@ -692,6 +692,8 @@
     <Compile Include="Classes\ScannedAsset.cs" />
     <Compile Include="Classes\SearchLookUpClass.cs" />
     <Compile Include="Classes\SoundPlayer.cs" />
+    <Compile Include="Classes\StockOutItem.cs" />
+    <Compile Include="Classes\StockOutService.cs" />
     <Compile Include="Classes\Suppliers.cs" />
     <Compile Include="Classes\User.cs" />
     <Compile Include="Classes\Utilities.cs" />

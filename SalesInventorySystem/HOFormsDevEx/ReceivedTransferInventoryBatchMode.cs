@@ -11,6 +11,7 @@ using DevExpress.XtraEditors;
 using DevExpress.XtraGrid.Views.Grid;
 using System.Data.SqlClient;
 using DevExpress.XtraReports.UI;
+using SalesInventorySystem.Classes;
 
 namespace SalesInventorySystem.HOFormsDevEx
 {
@@ -18,36 +19,79 @@ namespace SalesInventorySystem.HOFormsDevEx
     {
         int totalreceive = 0;
         public static bool isdone = false;
+        object categorycode = null;
         public ReceivedTransferInventoryBatchMode()
         {
             InitializeComponent();
         }
-        
+
+        //void ConfirmBranchReceivedOrder()
+        //{
+        //    SqlConnection con = Database.getConnection();
+        //    con.Open();
+        //    try
+        //    {
+
+        //        string query = "sp_ConfirmBranchReceivedTransferInventory";
+        //        SqlCommand com = new SqlCommand(query, con);
+
+        //        com.Parameters.AddWithValue("@parmtransno", txtshipmentno.Text);
+        //        com.Parameters.AddWithValue("@parmbranchcode", Login.assignedBranch);
+        //        com.Parameters.AddWithValue("@preparedby", Login.Fullname);
+        //        com.CommandType = CommandType.StoredProcedure;
+        //        com.CommandText = query;
+        //        com.ExecuteNonQuery();
+        //    }
+        //    catch (SqlException ex)
+        //    {
+        //        XtraMessageBox.Show(ex.Message.ToString());
+        //    }
+        //    finally
+        //    {
+        //        con.Close();
+        //    }
+        //}
         void ConfirmBranchReceivedOrder()
         {
-            SqlConnection con = Database.getConnection();
-            con.Open();
-            try
+            if (string.IsNullOrEmpty(txtcategory.Text))
             {
+                XtraMessageBox.Show("Please select a Category.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            else if(txtcategory.Text== "Return to Supplier" && string.IsNullOrEmpty(labelsupplier.Text))
+            {
+                XtraMessageBox.Show("Please select a Supplier.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
-                string query = "sp_ConfirmBranchReceivedTransferInventory";
-                SqlCommand com = new SqlCommand(query, con);
-               
-                com.Parameters.AddWithValue("@parmtransno", txtshipmentno.Text);
-                com.Parameters.AddWithValue("@parmbranchcode", Login.assignedBranch);
-                com.Parameters.AddWithValue("@preparedby", Login.Fullname);
-                com.CommandType = CommandType.StoredProcedure;
-                com.CommandText = query;
-                com.ExecuteNonQuery();
-            }
-            catch (SqlException ex)
-            {
-                XtraMessageBox.Show(ex.Message.ToString());
-            }
-            finally
-            {
-                con.Close();
-            }
+
+                using (SqlConnection con = Database.getConnection())
+                {
+                    try
+                    {
+                        con.Open();
+
+                        using (SqlCommand com = new SqlCommand("sp_ConfirmBranchReceivedTransferInventory", con))
+                        {
+                            com.CommandType = CommandType.StoredProcedure;
+
+                            com.Parameters.Add("@parmtransno", SqlDbType.VarChar).Value = txtshipmentno.Text;
+                            com.Parameters.Add("@parmbranchcode", SqlDbType.VarChar).Value = Login.assignedBranch;
+                            com.Parameters.Add("@preparedby", SqlDbType.VarChar).Value = Login.Fullname;
+
+                        // ✅ NEW
+                            com.Parameters.Add("@category", SqlDbType.VarChar).Value = categorycode.ToString();//txtcategory.Text;
+                            com.Parameters.Add("@remarks", SqlDbType.VarChar).Value = txtremarks.Text ?? "";
+                            com.Parameters.Add("@suppliername", SqlDbType.VarChar).Value = txtsupplier.Text ?? "";
+
+                        com.ExecuteNonQuery();
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        XtraMessageBox.Show("Error: " + ex.Message);
+                    }
+                }
         }
 
         private void executeTransfer()
@@ -177,26 +221,9 @@ namespace SalesInventorySystem.HOFormsDevEx
             if (confirmRcv)
             {
                 executeTransfer();
-                if (totalorders != totalreceive)
-                {
-                    bool confirm = HelperFunction.ConfirmDialog("The System found out that there are remaining items in OrderDetails that you do not receive.. Are you sure you want to Continue", "Dscrepancy");
-                    if (confirm)
-                    {
-                        ConfirmBranchReceivedOrder();
-                        XtraMessageBox.Show("Successfully Added!");
-                        this.Close();
-                    }
-                    else
-                    {
-                        return;
-                    }
-                }
-                else
-                {
-                    ConfirmBranchReceivedOrder();
-                    XtraMessageBox.Show("Successfully Added!");
-                    this.Close();
-                }
+                ConfirmBranchReceivedOrder();
+                XtraMessageBox.Show("Successfully Added!");
+                this.Close();
             }
             else
             {
@@ -245,6 +272,41 @@ namespace SalesInventorySystem.HOFormsDevEx
 
         private void ReceivedTransferInventoryBatchMode_Load(object sender, EventArgs e)
         {
+            populateReceiveCategoryMaster();
+            populateSupplier();
+        }
+        void populateReceiveCategoryMaster()
+        {
+            Database.displaySearchlookupEdit("SELECT CategoryCode,Description FROM dbo.ReceiveCategoryMaster ", txtcategory, "Description", "Description");
+        }
+        void populateSupplier()
+        {
+            Database.displaySearchlookupEdit("SELECT SupplierKey,SupplierName FROM dbo.Supplier ", txtsupplier, "SupplierName", "SupplierName");
+        }
+
+        private void txtcategory_EditValueChanged(object sender, EventArgs e)
+        {
+            categorycode = SearchLookUpClass.getSingleValue(txtcategory, "CategoryCode");
+            if (categorycode.ToString() == "2")
+            {
+                txtsupplier.Enabled = true;
+                BigAlert.Show("SELECT SUPPLIER", "You need to select a Supplier, this will not be ADDED to INVENTORY", MessageBoxIcon.Warning);
+            }
+            else if((string)categorycode != "1")
+            {
+                BigAlert.Show("WARNING", "This will not be ADDED to INVENTORY", MessageBoxIcon.Warning);
+            }
+            //string category = cmbCategory.Text;
+
+            //if (category != "TransferStock")
+            //{
+            //    lblWarning.Text = "⚠ This will NOT be added to inventory!";
+            //    lblWarning.Visible = true;
+            //}
+            //else
+            //{
+            //    lblWarning.Visible = false;
+            //}
 
         }
     }

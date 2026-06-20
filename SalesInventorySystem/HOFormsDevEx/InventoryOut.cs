@@ -11,35 +11,42 @@ using DevExpress.XtraEditors;
 using System.Data.SqlClient;
 using DevExpress.XtraReports.UI;
 using SalesInventorySystem.POS;
+using SalesInventorySystem.Classes;
 
 namespace SalesInventorySystem.HOFormsDevEx
 {
     public partial class InventoryOut : DevExpress.XtraEditors.XtraForm
     {
-        object pcode, desc, barcode, isvat, cost;
+        // Product data object - more type-safe than loose object variables
+        private StockOutItem _currentItem;
         public InventoryOut()
         {
             InitializeComponent();
+            _currentItem = new StockOutItem();
         }
 
+        /// <summary>
+        /// Inserts the current stock out item into the database
+        /// </summary>
         void OutInventory()
         {
-            Database.ExecuteQuery("INSERT INTO dbo.StockOutDetails (ID,BranchCode,DateReceived,ProductCode,Description,Barcode,Quantity,Cost,TotalCost,isVat,isDone,DateEncode,EncodeBy) " +
-                "VALUES('" + txtbatchid.Text + "'" +
-                $",'{txtbrcode.Text}'" +
-                $",'{txtdatein.Text}'" +
-                $",'{pcode.ToString()}'" +
-                $",'{desc.ToString()}'" +
-                $",'{barcode.ToString()}'" +
-                $",'{txtqty.Text}'" +
-                $",'{cost.ToString()}'" +
-                $",'0'" +
-                $",'{isvat.ToString()}'" +
-                $",'0'" +
-                $",'{DateTime.Now.ToShortDateString()}'" +
-                $",'{Login.isglobalUserID}')", "Succesfully Added");
-            //doFIFO();
-            
+            // Ensure we have a valid item to insert
+            if (_currentItem == null || _currentItem.TotalCost <= 0)
+            {
+                XtraMessageBox.Show("Invalid item data. Please ensure all fields are populated.", "Error");
+                return;
+            }
+
+            // Use the service layer to insert the item
+            string errorMessage;
+            if (StockOutService.InsertStockOutItem(_currentItem, out errorMessage))
+            {
+                XtraMessageBox.Show("Successfully Added", "Success");
+            }
+            else
+            {
+                XtraMessageBox.Show("Failed to add item: " + errorMessage, "Error");
+            }
         }
 
         void doFIFO()
@@ -115,14 +122,15 @@ namespace SalesInventorySystem.HOFormsDevEx
 
         void loadData()
         {
-            Database.displaySearchlookupEdit("SELECT BranchCode,BranchName FROM Branches ORDER BY BranchCode", txtbrcode, "BranchCode", "BranchCode");
-            Database.displaySearchlookupEdit("Select a.ProductCode,a.Description,a.Barcode,b.Description as Category,c.Cost,b.isVat " +
-                "FROM Products as a " +
-                "INNER JOIN ProductCategory as b " +
-                "ON a.ProductCategoryCode=b.ProductCategoryID " +
-                "INNER JOIN Inventory as c " +
-                "ON a.ProductCode=c.Product AND a.BranchCode=c.Branch " +
-                "WHERE a.BranchCode='" + Login.assignedBranch + "' and c.Available > 0 ", txtproduct, "Description", "Description");
+            Database.displaySearchlookupEdit("SELECT BranchCode,BranchName FROM Branches ORDER BY BranchCode", txtbrcode, "BranchName", "BranchName");
+           
+            //Database.displaySearchlookupEdit("Select a.ProductCode,a.Description,a.Barcode,b.Description as Category,c.Available,c.Cost,b.isVat " +
+            //    "FROM Products as a " +
+            //    "INNER JOIN ProductCategory as b " +
+            //    "ON a.ProductCategoryCode=b.ProductCategoryID " +
+            //    "INNER JOIN Inventory as c " +
+            //    "ON a.ProductCode=c.Product AND a.BranchCode=c.Branch " +
+            //    "WHERE a.BranchCode='" + Login.assignedBranch + "' and c.Available > 0 and c.isWarehouse=1", txtproduct, "Description", "Description");
             Database.displayComboBoxItems("SELECT Description FROM dbo.StockOutCategory", "Description", txtcategory);
         }
 
@@ -266,8 +274,35 @@ namespace SalesInventorySystem.HOFormsDevEx
 
         private void cancelLineToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Database.ExecuteQuery($"DELETE FROM dbo.StockOutDetails WHERE BranchCode='{txtbrcode.Text}' AND ID='{txtbatchid.Text}' AND ProductCode='{pcode}'", "Successfully Deleted");
-            display();
+            string pcode = _currentItem?.ProductCode;
+            if (string.IsNullOrWhiteSpace(pcode))
+            {
+                XtraMessageBox.Show("No product selected to delete");
+                return;
+            }
+
+            string errorMessage;
+            if (StockOutService.DeleteStockOutItem(txtbatchid.Text, txtbrcode.Text, pcode, out errorMessage))
+            {
+                XtraMessageBox.Show("Successfully Deleted", "Success");
+                display();
+            }
+            else
+            {
+                XtraMessageBox.Show("Failed to delete: " + errorMessage, "Error");
+            }
+        }
+
+        private void txtbrcode_EditValueChanged(object sender, EventArgs e)
+        {
+            object branchCodeValue = SearchLookUpClass.getSingleValue(txtbrcode, "BranchCode");
+            if (branchCodeValue != null)
+            {
+                _currentItem.BranchCode = branchCodeValue.ToString();
+                Database.displaySearchlookupEdit(
+                    $"SELECT * FROM dbo.funcview_populateProductsForStockOut('{branchCodeValue.ToString()}') ", 
+                    txtproduct, "Description", "Description");
+            }
         }
 
         private void simpleButton1_Click_1(object sender, EventArgs e)
@@ -340,41 +375,95 @@ namespace SalesInventorySystem.HOFormsDevEx
         private void btnadd_Click(object sender, EventArgs e)
         {
             btnnew.Enabled = false;
-            if (String.IsNullOrEmpty(txtbatchid.Text) || String.IsNullOrEmpty(txtdatein.Text) || String.IsNullOrEmpty(txtproduct.Text))
+
+            // Validate input
+            if (string.IsNullOrEmpty(txtbatchid.Text) || 
+                string.IsNullOrEmpty(txtdatein.Text) || 
+                string.IsNullOrEmpty(txtproduct.Text))
             {
-                XtraMessageBox.Show("No Empty Fields");
+                XtraMessageBox.Show("No Empty Fields", "Validation Error");
                 return;
-            }
-            else if (Convert.ToDouble(txtqty.Text) > Convert.ToDouble(txtavailable.Text))
-            {
-                XtraMessageBox.Show("Must not Greater than Available Quantity");
-                return;
-            }
-            else if (Convert.ToDouble(txtqty.Text) <= 0)
-            {
-                XtraMessageBox.Show("Quantity must not less than or equal to zero");
-                return;
-            }
-            else
-            {
-                OutInventory();
-                display();
-                clear();
             }
 
+            // Validate quantity
+            if (!decimal.TryParse(txtqty.Text, out decimal quantity))
+            {
+                XtraMessageBox.Show("Quantity must be a valid number", "Validation Error");
+                return;
+            }
+
+            if (!decimal.TryParse(txtavailable.Text, out decimal available))
+            {
+                XtraMessageBox.Show("Available quantity is invalid", "Validation Error");
+                return;
+            }
+
+            if (quantity > available)
+            {
+                XtraMessageBox.Show("Quantity must not be greater than available quantity", "Validation Error");
+                return;
+            }
+
+            if (quantity <= 0)
+            {
+                XtraMessageBox.Show("Quantity must be greater than zero", "Validation Error");
+                return;
+            }
+
+            // Populate the StockOutItem with all required information
+            _currentItem.BatchID = txtbatchid.Text;
+            _currentItem.DateOut = txtdatein.Text;
+            _currentItem.Quantity = quantity;
+            _currentItem.EncodedBy = Login.isglobalUserID;
+            _currentItem.DateEncoded = DateTime.Now.ToShortDateString();
+
+            // Calculate the total cost before insertion
+            _currentItem.CalculateTotalCost();
+
+            // Insert the item
+            OutInventory();
+
+            // Refresh the display and clear the form
+            display();
+            clear();
         }
 
         private void txtproduct_EditValueChanged(object sender, EventArgs e)
         {
+            // Populate product details from the SearchLookUp
+            object productCode = SearchLookUpClass.getSingleValue(txtproduct, "ProductCode");
+            object description = SearchLookUpClass.getSingleValue(txtproduct, "Description");
+            object barcode = SearchLookUpClass.getSingleValue(txtproduct, "Barcode");
+            object available = SearchLookUpClass.getSingleValue(txtproduct, "Available");
+            object cost = SearchLookUpClass.getSingleValue(txtproduct, "Cost");
+            object isVat = SearchLookUpClass.getSingleValue(txtproduct, "isVat");
 
-            pcode = SearchLookUpClass.getSingleValue(txtproduct, "ProductCode");
-            desc = SearchLookUpClass.getSingleValue(txtproduct, "Description");
-            barcode = SearchLookUpClass.getSingleValue(txtproduct, "Barcode");
-            cost = SearchLookUpClass.getSingleValue(txtproduct, "Cost");
-            isvat = SearchLookUpClass.getSingleValue(txtproduct, "isVat");
-            double totalqty = Database.getTotalSummation2("Inventory", $"Available > 0 AND Branch='{txtbrcode.Text}' AND Product='{pcode}'", "Available");
-            txtavailable.Text = totalqty.ToString();
-            //totalcost = Convert.ToDouble(txtqty.Text) * Convert.ToDouble(cost);
+            // Update the current item with product information
+            if (productCode != null) _currentItem.ProductCode = productCode.ToString();
+            if (description != null) _currentItem.Description = description.ToString();
+            if (barcode != null) _currentItem.Barcode = barcode.ToString();
+            if (cost != null && decimal.TryParse(cost.ToString(), out decimal costValue))
+            {
+                _currentItem.Cost = costValue;
+            }
+            if (isVat != null && bool.TryParse(isVat.ToString(), out bool isVatValue))
+            {
+                _currentItem.IsVat = isVatValue;
+            }
+
+            // Display available quantity
+            if (available != null)
+            {
+                txtavailable.Text = available.ToString();
+                // Pre-fill quantity with available amount
+                if (decimal.TryParse(available.ToString(), out decimal availableQty))
+                {
+                    txtqty.Text = availableQty.ToString();
+                    _currentItem.Quantity = availableQty;
+                    // Calculate total cost immediately
+                    _currentItem.CalculateTotalCost();
+                }
+            }
         }
 
         private void labelControl7_Click(object sender, EventArgs e)

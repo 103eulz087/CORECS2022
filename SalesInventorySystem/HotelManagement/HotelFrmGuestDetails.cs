@@ -8,9 +8,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DevExpress.XtraEditors;
-using AForge.Video.DirectShow;
-using AForge.Imaging.Filters;
-using AForge.Video;
+//using AForge.Video.DirectShow;
+//using AForge.Imaging.Filters;
+//using AForge.Video;
 using System.Data.SqlClient;
 using System.IO;
 using System.Drawing.Imaging;
@@ -19,9 +19,9 @@ namespace SalesInventorySystem.HotelManagement
 {
     public partial class HotelFrmGuestDetails : DevExpress.XtraEditors.XtraForm
     {
-        VideoCaptureDevice videoSource;
-        FilterInfoCollection videoDevices;
-        ResizeNearestNeighbor size = new ResizeNearestNeighbor(100, 100);
+        //VideoCaptureDevice videoSource;
+        //FilterInfoCollection videoDevices;
+        //ResizeNearestNeighbor size = new ResizeNearestNeighbor(100, 100);
         string photofilename;
         Bitmap imagepic;
         byte[] myPicbyte;
@@ -38,14 +38,14 @@ namespace SalesInventorySystem.HotelManagement
 
         void loadCameraDevices()
         {
-            txtlistofcams.Items.Add(HelperFunction.getDevices());
-            videoDevices = new FilterInfoCollection(FilterCategory.VideoInputDevice);
-            foreach (FilterInfo device in videoDevices)
-            {
-                txtlistofcams.Items.Add(device.Name);
-            }
-            txtlistofcams.SelectedIndex = 0;
-            videoSource = new VideoCaptureDevice();
+            //txtlistofcams.Items.Add(HelperFunction.getDevices());
+            //videoDevices = new FilterInfoCollection(FilterCategory.VideoInputDevice);
+            //foreach (FilterInfo device in videoDevices)
+            //{
+            //    txtlistofcams.Items.Add(device.Name);
+            //}
+            //txtlistofcams.SelectedIndex = 0;
+            //videoSource = new VideoCaptureDevice();
         }
 
         private void btnbrowse_Click(object sender, EventArgs e)
@@ -61,41 +61,41 @@ namespace SalesInventorySystem.HotelManagement
 
         private void btnstartcam_Click(object sender, EventArgs e)
         {
-            if (videoSource.IsRunning)
-            {
-                videoSource.Stop();
-                pictureBox1.Image = null;
-                pictureBox1.Invalidate();
-            }
-            else
-            {
-                videoSource = new VideoCaptureDevice(videoDevices[txtlistofcams.SelectedIndex].MonikerString);
-                //videoSource.NewFrame += VideoSource_NewFrame1;
-                //videoSource.NewFrame += new NewFrameEventHandler(VideoSource_NewFrame1);
-                videoSource.NewFrame += new NewFrameEventHandler(VideoSource_NewFrame);
-                videoSource.Start();
-            }
+            //if (videoSource.IsRunning)
+            //{
+            //    videoSource.Stop();
+            //    pictureBox1.Image = null;
+            //    pictureBox1.Invalidate();
+            //}
+            //else
+            //{
+            //    videoSource = new VideoCaptureDevice(videoDevices[txtlistofcams.SelectedIndex].MonikerString);
+            //    //videoSource.NewFrame += VideoSource_NewFrame1;
+            //    //videoSource.NewFrame += new NewFrameEventHandler(VideoSource_NewFrame1);
+            //    videoSource.NewFrame += new NewFrameEventHandler(VideoSource_NewFrame);
+            //    videoSource.Start();
+            //}
         }
         public static Image resizeImage(Image imgToResize, Size size)
         {
             return (Image)(new Bitmap(imgToResize, size));
         }
 
-        private void VideoSource_NewFrame(object sender, AForge.Video.NewFrameEventArgs eventArgs)
-        {
-            pictureBox1.Image = (Bitmap)eventArgs.Frame.Clone();
-        }
+        //private void VideoSource_NewFrame(object sender, AForge.Video.NewFrameEventArgs eventArgs)
+        //{
+        //    pictureBox1.Image = (Bitmap)eventArgs.Frame.Clone();
+        //}
 
         private void btncapture_Click(object sender, EventArgs e)
         {
-            pictureBox1.Image = (Bitmap)pictureBox1.Image.Clone();
-            imagepic = (Bitmap)pictureBox1.Image.Clone();
+            //pictureBox1.Image = (Bitmap)pictureBox1.Image.Clone();
+            //imagepic = (Bitmap)pictureBox1.Image.Clone();
 
-            imagepic = size.Apply(imagepic);
-            resizeImage(imagepic, new Size(10, 10));
-            photofilename = txtfname.Text + "_photo" + ".jpg";
-            imagepic.Save(photofilename);
-            videoSource.Stop();
+            //imagepic = size.Apply(imagepic);
+            //resizeImage(imagepic, new Size(10, 10));
+            //photofilename = txtfname.Text + "_photo" + ".jpg";
+            //imagepic.Save(photofilename);
+            //videoSource.Stop();
         }
 
         private void simpleButton1_Click(object sender, EventArgs e)

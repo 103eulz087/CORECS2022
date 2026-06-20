@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using DevExpress.XtraEditors;
 using System.Data.SqlClient;
-using AForge.Video.DirectShow;
-using AForge.Imaging.Filters;
-using AForge.Video;
+//using AForge.Video.DirectShow;
+//using AForge.Imaging.Filters;
+//using AForge.Video;
 using System.IO;
 using System.Drawing.Imaging;
 using DevExpress.XtraGrid.Views.Grid;
@@ -24,9 +24,9 @@ namespace SalesInventorySystem.HOFormsDevEx
         string lastincno = "";
         public string tagnnumber = "";
         public static bool isdone = false,istagnoExist=false;
-        VideoCaptureDevice videoSource;
-        FilterInfoCollection videoDevices;
-        ResizeNearestNeighbor size = new ResizeNearestNeighbor(100, 100);
+        //VideoCaptureDevice videoSource;
+        //FilterInfoCollection videoDevices;
+        //ResizeNearestNeighbor size = new ResizeNearestNeighbor(100, 100);
         string photofilename;
         Bitmap imagepic;
         byte[] myPicbyte;
@@ -39,7 +39,7 @@ namespace SalesInventorySystem.HOFormsDevEx
         private void GenInventoryDevEx_Load(object sender, EventArgs e)
         {
             //populateItems();
-            loadCameraDevices();
+            //loadCameraDevices();
         }
         void populateItems()
         {
@@ -58,17 +58,17 @@ namespace SalesInventorySystem.HOFormsDevEx
             return code;
         }
 
-        void loadCameraDevices()
-        {
-            txtlistofcams.Items.Add(HelperFunction.getDevices());
-            videoDevices = new FilterInfoCollection(FilterCategory.VideoInputDevice);
-            foreach (FilterInfo device in videoDevices)
-            {
-                txtlistofcams.Items.Add(device.Name);
-            }
-            txtlistofcams.SelectedIndex = 0;
-            videoSource = new VideoCaptureDevice();
-        }
+        //void loadCameraDevices()
+        //{
+        //    txtlistofcams.Items.Add(HelperFunction.getDevices());
+        //    videoDevices = new FilterInfoCollection(FilterCategory.VideoInputDevice);
+        //    foreach (FilterInfo device in videoDevices)
+        //    {
+        //        txtlistofcams.Items.Add(device.Name);
+        //    }
+        //    txtlistofcams.SelectedIndex = 0;
+        //    videoSource = new VideoCaptureDevice();
+        //}
 
         void clear()
         {
@@ -326,19 +326,19 @@ namespace SalesInventorySystem.HOFormsDevEx
 
         private void btnstartcam_Click(object sender, EventArgs e)
         {
-            if (videoSource.IsRunning)
-            {
-                videoSource.Stop();
-                pictureBox1.Image = null;
-                pictureBox1.Invalidate();
-            }
-            else
-            {
-                videoSource = new VideoCaptureDevice(videoDevices[txtlistofcams.SelectedIndex].MonikerString);
-                //videoSource.NewFrame += VideoSource_NewFrame1;
-                videoSource.NewFrame += new NewFrameEventHandler(VideoSource_NewFrame1);
-                videoSource.Start();
-            }
+            //if (videoSource.IsRunning)
+            //{
+            //    videoSource.Stop();
+            //    pictureBox1.Image = null;
+            //    pictureBox1.Invalidate();
+            //}
+            //else
+            //{
+            //    videoSource = new VideoCaptureDevice(videoDevices[txtlistofcams.SelectedIndex].MonikerString);
+            //    //videoSource.NewFrame += VideoSource_NewFrame1;
+            //    videoSource.NewFrame += new NewFrameEventHandler(VideoSource_NewFrame1);
+            //    videoSource.Start();
+            //}
         }
 
         private void VideoSource_NewFrame1(object sender, AForge.Video.NewFrameEventArgs eventArgs)
@@ -348,14 +348,14 @@ namespace SalesInventorySystem.HOFormsDevEx
 
         private void btncapture_Click(object sender, EventArgs e)
         {
-            pictureBox1.Image = (Bitmap)pictureBox1.Image.Clone();
-            imagepic = (Bitmap)pictureBox1.Image.Clone();
+            //pictureBox1.Image = (Bitmap)pictureBox1.Image.Clone();
+            //imagepic = (Bitmap)pictureBox1.Image.Clone();
             
-            imagepic = size.Apply(imagepic);
-            resizeImage(imagepic, new Size(10, 10));
-            photofilename = txtmodel.Text + "_photo" + ".jpg";
-            imagepic.Save(photofilename);
-            videoSource.Stop();
+            //imagepic = size.Apply(imagepic);
+            //resizeImage(imagepic, new Size(10, 10));
+            //photofilename = txtmodel.Text + "_photo" + ".jpg";
+            //imagepic.Save(photofilename);
+            //videoSource.Stop();
         }
         public static Image resizeImage(Image imgToResize, Size size)
         {
